@@ -1,0 +1,251 @@
+<html><head><title>PingAnsi v1.33 - Ansi Emulation for Turbo Pascal v5+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для поддержки ANSI графики в паскаль-программах. Исправлен ряд ошибок.<br><font color=#666666> The PingAnsi unit provides partial Ansi emulation for Turbo Pascal versions 5.x and  higher. (version 4 does not support procedural types). Some routines may be handled in a non-standard way.</font>">
+<meta name="keywords" content="pascal, sources, source code, ansi_133, ansi, ANSI-Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ANSI-Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ansi_133
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PingAnsi v1.33 - Ansi Emulation for Turbo Pascal v5+</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:231/62.58@fidonet">Ping Hansen</a></TD>
+<TD class=black align='right'>23.08.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для поддержки ANSI графики в паскаль-программах.
+Исправлен ряд ошибок.<br><font color=#666666>
+The PingAnsi unit provides partial Ansi emulation for Turbo
+Pascal versions 5.x and  higher. (version 4 does not support
+procedural types). Some routines may be handled in a non-standard
+way.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ansi_133.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>19k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PingAnsi v1.33 (c) CopyRight 1990 P.H.Rankin Hansen.
+Musica v1.00 (c) CopyRight 1990 P.H.Rankin Hansen.
+PoorMan v1.00 (Public Domain)
+
+The  PingAnsi  unit  provides  partial  Ansi  emulation for Turbo
+Pascal  versions  5.x  and  higher.  (version  4 does not support
+procedural types). Some routines may be handled in a non-standard
+way.
+
+The Musica unit implements the Play statement known from Basic.
+
+The  PoorMan unit  implements replacements  for the  few routines
+from Turbo Power Professional  needed to compile PingAnsi without
+access to the  Turbo Power units. It is  recommended that You use
+the original Turbo Power toolbox partly due to the limitations in
+the  standard Crt  unit, partly  because the  Turbo Power  units,
+IMHO, are really good.
+
+Released in Denmark on August 23rd 1990.
+
+By  using this  material You  assume FULL  responsibility for ANY
+consequences  -  direct  or  indirect  -  thereof.
+
+Any dispute  regarding this material shall  be setteled by Danish
+law and in a Danish Court.
+
+(Sigh!)
+
+This source may  NOT be used by Lawyers,  Politicians or, persons
+engaged in  any other form  of terrorism. Otherwise  the usage is
+free.
+
+This source may be freely distributed as long as no fee is
+charged.
+
+
+
+                        Acknowlegdements:
+
+The  text file  device driver  mechanism was  suggested by Robert
+Mashlan (1:147/34.33)
+
+The so called 'Ansi'-music is due to steady prompting and lots of
+small hints from Dan Wulff, Dragons Lair (2:231/57.0)
+
+The routines  in PoorMan vere modified  from routines supplied by
+Robert Mashlan  (1:147/34.33) and Trevor  Carlsen (3:690/644) for
+this purpose.
+
+Thanks to Dan Wulff and Dale Barnes for discovering the errors.
+
+In creating the  units I have used Turbo  Pascal 5.5 Professional
+(Borland),  Turbo  Analyst  5.04  and  Turbo Professional Toolbox
+5.07 (Turbo Power).
+
+The units were  written to end the steady  stream of questions in
+the  international  Pascal  echo  about  how  to  implement  Ansi
+emulation with turbo Pascal. Sofar it looks like it has increased
+the number.
+
+
+
+                         Using the units:
+
+(This is a preliminary document and NOT complete ! )
+
+First  let  me  make  one  thing  prefectly  clear.  If You issue
+grabtimer function in  the Musica unit, the 8253  timer 0 will be
+re-programmed to a 1 ms period. Therefore Interrupt 8 occurs 1000
+times a second  instead of 18.2 times. The  original interrupt is
+called only once every 55  interrupts and the system is therefore
+operating like usual. If You  have other routines that re-program
+timer 0 the result will propably be less than impressing. Keep in
+mind that problems may also occur  if a TSR with memory-swap pops
+up on top  of the interrupt handler. You  can normalize the timer
+and release the interrupt using the procedure ReleaseTimer.
+
+First  You have  to decide  how You  are going  to use the units.
+There are  four conditionals (TurboPower, Small,  BBS and, Music)
+that govern the function of PingAnsi.
+
+TurboPower   governs   wether   the   TurboPower   units  or  the
+replacements are to be used.
+
+The  conditional  'Small'  defines  wether  the  Text File device
+driver should be included. The  Device driver will  be slower for
+single  characters, but  presumably  faster  for strings.  If You
+define  'Small' the  driver part   will be  left out.  Wether You
+include  the  text  file  driver  will  have  NO influence on the
+AnsiWrite function, only on the size of the compiled unit.
+
+The  conditional  'BBS'  defines  wether  the  hook BBSHook(Char)
+should be called as well as AnsiWrite during writes. Use this for
+echoing all Write(Ansi,......) to e.g. the ComPort or a log file.
+
+The  conditional 'Music'  defines wether  the Ansi  parser should
+check for so called Ansi music. Please note that this is NOT part
+of the Ansi  specs., but the name sticks and  I have been _asked_
+to implement  it. I have  interfaced the procedure  PlayHook(St :
+String) wich, using the Musica unit, can be used to implement the
+Play  statement  known  from  Basic.  Musica  supports background
+buffering of music.
+
+
+
+                             HOOKS:
+
+Several hooks besides BBSHook are implemented.
+
+ReplyHook     : Procedure(St : String);
+
+ReplyHook  is  a  hook  for  implementing  Your own Device Status
+Report  procedure. It  defaults to  a procedure  that places  the
+response in  the keyboard buffer,  but can be  redirected to e.g.
+sending the report to the comport.
+
+  KeyHook     : Procedure(St : String);
+
+KeyHook   is  a   hook   for   implementing  Your   own  KeyBoard
+Re-assignment. You could  use this in a comms.  program to report
+attempts to re-assign Your keyboard.
+
+  WriteHook   : Procedure(Ch : Char);
+
+WriteHook is a Hook for handling control chars i.e. Ord(Ch) &lt; $20
+
+  PlayHook : Procedure(Tone, Duration : word);
+
+This hook is for implementing 'Ansi' music.
+
+
+
+                           VARIABLES:
+
+Several variables have been interfaced:
+
+Ansi is the name of the Text file device driver.
+
+Wrap is  set to true  if cursor should  wrap at the  screen edge.
+Defaults to true.
+
+ReportedX are ReportedY the reported  cursor location issued by a
+parsed  position  report.  i.e.  if  the  string  #27[#;#R is run
+through the parser.
+
+
+
+                    PROCEDURES AND FUNCTIONS:
+
+Procedure AnsiWrite(Ch : Char);
+
+This is the main routine.
+
+Function In_Ansi : Boolean;
+
+Returns true if a ansi sequence is pending.
+
+Procedure AssignAnsi(Var f : Text);
+
+This is used like AssignCrt. It  resets the driver. The driver is
+automatically assigned  to the file  Ansi at startup,  but You're
+the boss...
+
+You handle the Text file device driver like any other write:
+
+Write(Ansi,whatever....
+
+
+
+                             Musica:
+
+This unit can be used as a  standalone unit as it does not depend
+on the PingAnsi unit.
+
+Const
+  WaitForEmpty : boolean = True;
+
+Governs the  behavior of the  procedure that places  the motes in
+the background buffer. If set to true and the PlayBuffer is full,
+stuff  will wait  until space  is awailable  before returning. If
+false and the PlayBuffer is full, stuff will discard the note and
+return (buffer overrun).
+
+Procedure Play(St : String);
+
+Implements the parsing of the play strings.
+
+Function PlayBufferEmpty : boolean;
+
+Returns true if the background buffer  is empty. You can use this
+to prevent certain  events from taking place until  the music has
+finished.
+
+e.g.
+
+                While Not PlayBufferEmpty do {};
+                Exit;
+
+Function PlayBufferFull : boolean;
+
+Returns true if  the background buffer is Full.  You can use this
+to  prevent  buffer  overrun  (if  WaitForEmpty  is  false) or to
+prevent  the  system  from  beeing  'locked'  (if WaitForEmpty is
+True).
+
+Function GrabTimer : Boolean;
+
+Installs the background handler and sets up ExitProc to unload it
+upon exit. If  it returns false the handler  was not instaled due
+to an incompatible timer mode.
+
+Procedure ReleaseTimer;
+
+Uninstalls the background handler.
+
+
+                     CONTACTING THE AUTHOR:
+
+Please  direct  any   comments,  corrections,  modifications  via
+netmail to:
+
+           Ping Hansen - FidoNet address: 2:231/62.58
+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

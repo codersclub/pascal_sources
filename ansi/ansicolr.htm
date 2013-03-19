@@ -1,0 +1,73 @@
+<html><head><title>ANSIColor 1.0 - Color Unit for ANSI Output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль AnsiColr предназначен для упрощения задания цвета текста и цвета фона при формировании ANSI-строк. Любая комбинация цветов формируется за счет вызова функции, имеющей имя типа &quot;СинийНаБелом&quot;. <br><font color=#666666> This unit allows the programmer to specify screen colors with easily rememberable names like &quot;RedOnBlue&quot;. It have the ANSI escape sequence for that combination to be the output.</font>">
+<meta name="keywords" content="pascal, sources, source code, ansicolr, ansi, ANSI-Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ANSI-Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ansicolr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ANSIColor 1.0 - Color Unit for ANSI Output</TD>
+<TD nowrap class=black>&nbsp;The Paradigm BBS</TD>
+<TD class=black align='right'>18.12.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль AnsiColr предназначен для упрощения задания
+цвета текста и цвета фона при формировании ANSI-строк.
+Любая комбинация цветов формируется за счет вызова
+функции, имеющей имя типа "СинийНаБелом". <br><font color=#666666>
+This unit allows the programmer to specify screen
+colors with easily rememberable names like "RedOnBlue".
+It have the ANSI escape sequence for that combination
+to be the output.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ansicolr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{*********************************************************}
+{*                   ANSICOLR.PAS 1.0                    *}
+{*            Copyright (c) э сETATech э 1991.           *}
+{*                 All rights reserved.                  *}
+{*********************************************************}
+{ Wed  12-18-1991 v1.0                                    }
+{ This unit is patterned after the TurboPower OPCOLOR     }
+{ unit.  OPCOLOR allows the programmer to specify screen  }
+{ colors with easily rememberable names like "RedOnBlue". }
+{ I wanted a way to specify the same type of color        }
+{ definitions, but have the ANSI escape sequence for that }
+{ combination to be the output.  Hopfully this unit will  }
+{ accomplish this task making ANSI colors easier for the  }
+{ programmer.                                             }
+{                                                         }
+{ The naming conventions of ANSICOLR are similar to that  }
+{ of OPCOLOR except that all names begin with a lower     }
+{ case "a" (ie. aRedOnBlack).  This will return the ANSI  }
+{ escape code that will enable this color combination.    }
+{ All low intensity forground combinations start by       }
+{ setting the previous colors off, then define the new    }
+{ color set.  To get a color set with the foreground set  }
+{ to blink, just preface the color combination with "ab"  }
+{ (ie. abRedOnBlue).  Each low intensity color combination}
+{ is 10 char., each high intensity color set is 12 char.  }
+{ and each blinking color set is 14 char. long.           }
+{                                                         }
+{ I retain the copyright for this unit, but release it for}
+{ public use with no royalties required.  You may use it  }
+{ in any program that it would be of assistance to you.   }
+{ In the same regard, I offer NO WARANTEE what so ever    }
+{ either express or implied.                              }
+{                                                         }
+{ If you come up with enhancements or changes to this unit}
+{ I would appreciate knowing about them as I would like to}
+{ keep the unit up to date.  I can be reached at the      }
+{ places listed below:                                    }
+{                                                         }
+{ сETATech Computer Consulting           The Paradigm BBS }
+{ P. O. Box 566742                           404/671-1581 }
+{ Atlanta, GA  30356-6013                  1200-19200 HST }
+{*********************************************************}
+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

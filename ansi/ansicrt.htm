@@ -1,0 +1,107 @@
+<html><head><title>ANSI Alternate to CRT unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для замены CRT с поддержкой ANSI. <br><font color=#666666> ANSI Alternate to CRT unit. Uses standard ANSI calls for all cursor placement, color attribute changes, etc., and Interrupt 21h DOS calls for everything else. No ROM BIOS calls at all.  Should work on any MS-DOS computer with ANSI support.</font>">
+<meta name="keywords" content="pascal, sources, source code, ansicrt, ansi, ANSI-Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ANSI-Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ansicrt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ANSI Alternate to CRT unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:CIS 72466,212">Rick Housh</a></TD>
+<TD class=black align='right'>28.05.1988</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для замены CRT с поддержкой ANSI. <br><font color=#666666>
+ANSI Alternate to CRT unit.
+Uses standard ANSI calls for all cursor placement, color attribute
+changes, etc., and Interrupt 21h DOS calls for everything else.
+No ROM BIOS calls at all.  Should work on any MS-DOS computer with ANSI
+support.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ansicrt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+<PRE>
+  Unit AnsCrt;
+  {By Rick Housh - CIS PIN 72466,212
+   ANSI Alternate to CRT unit}
+   Uses standard ANSI calls for all cursor placement, color
+   attribute changes, etc., and Interrupt 21h DOS calls for
+   everything else. No ROM BIOS calls at all.
+   Should work on any MS-DOS computer with ANSI support.}
+(*******************************************************************)
+{ The variable TextAttr is maintained, although not used.
+  Just for the curious. It serves no purpose. The variable CheckBreak
+  is supported.
+  None of the other variables are supported, as almost all have to do
+  with various aspects of direct screen writing, which is not supported.
+
+  None of the Crt Mode constants are supplied.  All of the Text Color
+  constants are supported.
+
+  It is possible to do much more with ANSI actually, than with many of
+  Turbo's standard CRT procedures, but no extras were implemented, in
+  the interest of compatibility with Turbo.
+
+  There is one major limitation.  The window procedure is not supported.
+  In the interest of universal compatibility Textmode is also not
+  supported, although it could be.
+
+  The following CRT unit functions and procedures are supported as
+  follows:
+    AssignCrt      :   Not supported
+    ClrEol         :   Fully supported
+    ClrScr         :   Fully supported
+    Delay          :   Not supported
+    DelLine        :   Not supported
+                       (Could easily be, but never used it)
+    GotoXY         :   Fully supported
+    HighVideo      :   Fully supported
+    InsLine        :   Not Supported    (See DelLine)
+    LowVideo       :   Fully supported
+    NoSound        :   Not supported
+    Sound          :   Not supported
+    TextBackground :   Fully supported
+    TextColor      :   Fully supported
+    TextMode       :   Not supported
+    Window         :   Not supported
+    KeyPressed     :   Fully supported
+    NormVideo      :   Fully supported
+    ReadKey        :   Fully supported
+    WhereX         :   Fully supported
+    WhereY         :   Fully supported
+
+ Those miscellaneous functions which are not supported are almost
+ all available in Carley Phillip's CRTI unit, available in this DL
+ as CRTI.ARC. Combine some of these and some of those in one unit
+ if you need the Sound, NoSound, Delay, etc. If you do this however,
+ you will lose some of the MS-DOS generic nature of these routines,
+ which depend only on DOS and ANSI, and require no IBM compatibility.
+ Under NO circumstances may this unit be used in combination with the
+ standard CRT unit. It is a replacement. The Graph, Graph3 and Turbo3
+ units are not compatible with this unit and should not be used either.
+
+ This unit supplies one unit not available in CRT, the GetKey function.
+ Most of the time I just want a character returned. I am not interested
+ in function keys, etc.  GetKey does just that.  It first flushes the
+ keyboard, in case you accidentally pressed something, ignores function
+ keys, and returns the value of the keypress as a character. Where the
+ variable ch is a character, the appropriate syntax would be:
+    ch := GetKey;
+ It will then wait for the key.
+
+        This program is dedicated to the public domain.
+        No copyright is claimed.
+        I would be interested in reports.
+                    Rick Housh
+                    5811 W. 85th Terr.
+                    Overland Park, KS 66207
+                    Tel. 913/341-7592
+                    Compuserve PIN #72466,212
+
+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

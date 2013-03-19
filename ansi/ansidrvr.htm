@@ -1,0 +1,1057 @@
+<html><head><title>Turbo Pascal ANSI Drivers Version 1.12</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор модулей для вывода ANSI-графики на консоль, в COM-порт, или в модем. Удобен для разработки DOOR-GAME в BBS.<br><font color=#666666> The routines in this package are intended to replace the Turbo Pascal (v5.0 or greater) CRT unit. The procedures and functions provided in the ANSI unit mirror many of the CRT unit functions but, instead of going directly to the screen or through the BIOS, these functions go through a user-defined text file device driver like console, serial port and modem.</font>">
+<meta name="keywords" content="pascal, sources, source code, ansidrvr, ansi, ANSI-Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ANSI-Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ansidrvr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Pascal ANSI Drivers Version 1.12</TD>
+<TD nowrap class=black>&nbsp;Kevin Dean</TD>
+<TD class=black align='right'>03.05.92</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор модулей для вывода ANSI-графики на консоль, в COM-порт,
+или в модем. Удобен для разработки DOOR-GAME в BBS.<br><font color=#666666>
+The routines in this package are intended to replace the Turbo
+Pascal (v5.0 or greater) CRT unit. The procedures and functions
+provided in the ANSI unit mirror many of the CRT unit functions
+but, instead of going directly to the screen or through the BIOS,
+these functions go through a user-defined text file device driver
+like console, serial port and modem.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ansidrvr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>47k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Turbo Pascal ANSI Drivers
+Version 1.12
+Copyright (c) 1990 by Not So Serious Software
+
+Original concept by Ian Silver
+Design and implementation by Kevin Dean
+
+Turbo Pascal is a registered trademark of Borland International Inc.
+Coke is a registered trademark of Coca-Cola Ltd.
+
+
+
+
+                                 Introduction
+                            "What you're getting."
+
+----------------------------------------------------------------------
+December 1989 (exam time)
+
+Ian  : "Kev, is there any way to get the Turbo Pascal CRT unit to
+go to the modem?"
+
+Kevin: "No.  The CRT unit goes straight to the video hardware.
+What are you trying to do?"
+
+Ian  : "I'm writing a game as a door for a BBS and I need video
+control. What I really need is a good driver that will talk
+nicely to a COM port - unlike DOS."
+
+Kevin: "I wish you wouldn't keep doing this to me, Silver.  You
+always come up with interesting ideas for me to implement when I
+don't have the time."
+
+Ian  : "Anyhow, we do need this, here ... have a Coke."
+(Gratuitous bribery)
+
+Kevin:  "Silver, you don't _need_ it; you want it for writing a
+game ... ok, maybe you _do_ need it."
+
+        - And thus a project was born.
+
+---------------------------------------------------------------------
+
+   The routines in this package are intended to replace the Turbo
+Pascal CRT unit (Turbo Pascal Version 5.0 or greater).  The
+procedures and functions provided in the ANSI unit mirror many of
+the CRT unit functions but, instead of going directly to the
+screen or through the BIOS, these functions go through a
+user-defined text file device driver.  For more information on
+text file device drivers, please read Chapter 15, "Inside Turbo
+Pascal", of the Turbo Pascal reference manual.  No knowledge of
+text file device drivers is needed to use the three ANSI
+interface units (ANSICON, ANSICOM, and CONCOMIO) provided.
+
+   The ANSICON unit provides an ANSI interface to the MS-DOS
+console and the MS-DOS device driver ANSI.SYS.  One application
+of this unit is in Turbo Pascal programs that would be portable
+to generic MS-DOS environments, (e.g.  environments that would be
+incompatible with the CRT unit) while still maintaining full
+control of the cursor and the video attributes.
+
+   The ANSICOM unit provides an ANSI interface to a modem or
+serial device.  One application (already in use as a door on a
+bulletin board system) is in text video games that would be
+played by remote over a phone line.
+
+   The CONCOMIO unit incorporates both the ANSICON and ANSICOM
+units and gets input from the console, serial port, or both and
+sends output to the console, serial port, or both.  It does this
+by chaining to the required input and output functions in the
+other units.
+
+   Keep in mind that these drivers are mutually exclusive; you
+cannot use more than one in any one program since each takes over
+the standard input and output files and only one unit can have
+control of those files.  Only the last of these units in your
+"uses" clause will actually have control.
+
+
+
+
+                                   Warranty
+                     "Legalese - better safe than sorry."
+
+   Kevin Dean (hereafter referred to as "the author") makes no
+warranty of any kind, expressed or implied, including, without
+limitation, any warranties of merchantability and/or fitness for
+a particular purpose.  The author shall not be liable for any
+damages, whether direct, indirect, special, or consequential
+arising from a failure of this program to operate in the manner
+desired by the user.  The author shall not be liable for any
+damage to data or property which may be caused directly or
+indirectly by use of the program.
+
+   In no event will the author be liable to the user for any
+damages, including any lost profits, lost savings, or other
+incidental or consequential damages arising out of the use or
+inability to use the program, or for any claim by any other
+party.
+
+
+
+
+                                 Registration
+                          "Capitalism at its finest."
+
+   A lot of late nights and Cokes went into the creation of these
+routines.  If you're going to use them regularly and would like
+to show your appreciation (or at least help me in the upkeep of
+my caffeine and sugar habit), please send a donation ($20
+suggested) to:
+
+                                  Kevin Dean
+                         Fairview Mall P.O. Box 55074
+                           1800 Sheppard Avenue East
+                              Willowdale, Ontario
+                               CANADA    M2J 5B9
+                           CompuServe ID: 76336,3114
+
+These drivers may come to you as part of the DoorLib package; if
+you register DoorLib with its author, you will automatically be
+registered for these drivers as well and no further payment will
+be required.
+
+
+
+
+                              Program Development
+                  "How to write your very own ANSI programs."
+
+   Development of programs using these units may be done with the
+units themselves or with the CRT unit.  You may use any of the
+standard CRT constants, procedures, functions, or variables with
+the following exceptions:
+
+ Constants       Procedures      Functions        Variables
+ ---------       ----------      ---------       -----------
+   BW40           DelLine         all CRT         CheckSnow
+   BW80           InsLine        functions       DirectVideo
+   Mono            Sound            are           LastMode
+   CO40           NoSound        available         WindMin
+   CO80           TextMode                         WindMax
+  Font8x8          Window
+    C40
+    C80
+
+   If you develop your program using the CRT unit, just replace
+the "uses CRT;" clause at the top of all your source files
+with either "uses ANSI, ANSICON;", "uses ANSI, ANSICOM;", or
+"uses ANSI, CONCOMIO;" depending on whether you want your output
+to go through the standard DOS ANSI device driver, through a
+serial port to a remote terminal, or both.
+
+
+
+
+                              The ANSI I/O Driver
+                          "The heart of the system."
+
+----------------------------------------------------------------------
+December 1989 (Christmas time, time for rest and relaxation)
+
+Ian  : "Ok, I've got the game finished, well... at least I think
+it's finished.  How's that ANSI driver coming along?"
+----------------------------------------------------------------------
+
+   The ANSI I/O driver is a generic ANSI driver designed to
+interface to any text file device driver.  For more information
+on text file device drivers, please read Chapter 15, "Inside
+Turbo Pascal", of the Turbo Pascal reference manual.
+
+   The best tutorial you can get in writing your own ANSI unit
+interface is by looking at the code for the three drivers
+included with this package.  The structure of the code is the
+same in all cases, but for simplicity the best one to look at is
+ANSICON.PAS.
+
+
+   The ANSI unit defines the following types:
+
+    type
+      IOFunc = function(var F : Text) : integer;
+
+            This is a function declaration of the text file device
+    driver interface to the Open, InOut, Flush, and Close
+    functions in Turbo Pascal.
+
+
+    type
+      IOFunctions =
+        record
+        NextOpen, NextInOut, NextFlush, NextClose : pointer
+        end;
+
+            This is a record of the linked I/O functions that are
+    called by the ANSI text file device drivers.  These functions
+    actually handle the input from and output to the system.  The
+    I/O functions in ANSI.PAS simply do the necessary character
+    interpretation necessary, e.g. update the cursor position
+    variables or change the screen color.
+
+            When a call is made to the AssignANSI procedure
+    (below), this record is passed as a parameter.  This record is
+    stored in the UserData field of the file variable, and you
+    should not modify that field unless the modification merely
+    changes one of the pointers.
+
+            The field NextOpen should point to the Open function
+    written for your text file device.  It is not necessary to
+    have an Open function defined for your device driver; if none
+    exists (NextOpen = nil) it will be ignored and the open
+    request (through a Reset or Rewrite) will proceed normally.
+
+            The field NextInOut should point to the InOut function
+    written for your text file device.  If you do not assign a
+    value to the InOut function when you call AssignANSI,
+    (NextInOut = nil), you must be sure to assign a value to it
+    when the file is opened, i.e. when your Open function is
+    called.  The Open function for ANSICON.PAS looks like this:
+
+            function ConsoleOpen(var F : Text) : integer;
+
+            begin
+            with TextRec(F) do
+              if Mode = fmInput then
+                IOFunctions(UserData).NextInOut := @ConsoleIn
+              else
+                IOFunctions(UserData).NextInOut := @ConsoleOut;
+
+            ConsoleOpen := 0
+            end;
+
+    Here the NextInOut pointer is assigned to a procedure to
+    handle either input or output depending on the mode in which
+    the file is opened.  If no InOut function is defined, then any
+    calls to Read or ReadLn will return an I/O result of 161
+    (device read fault) and any calls to Write or WriteLn will
+    return an I/O result of 160 (device write fault).
+
+            The NextFlush function flushes the input or output
+    buffer if necessary.  It is called at the end of every read or
+    write and so you are strongly advised to define it; if you do
+    not, you will have to wait until the output buffer (128
+    characters) is full before it is written to the screen.  At
+    the very least it should chain to the output function defined
+    for the current file.  The following is the Flush function
+    from ANSICON.PAS:
+
+            function ConsoleFlush(var F : Text) : integer;
+
+            begin
+            with TextRec(F) do
+              if Mode = fmInput then
+                { Ignore flush request }
+                ConsoleFlush := 0
+              else
+                { Chain to F's default output routine }
+                ConsoleFlush := IOFunc(InOutFunc)(F)
+            end;
+
+    I advise against calling your own output function directly
+    from the flush function because by doing so you may bypass the
+    ANSI output function.  This will prevent the internal cursor
+    position from being updated and may affect your colors as
+    well.
+
+            The NextClose function is called when a text file is
+    closed.  It is not necessary to define this function unless
+    you have to do some cleanup before closing the file.
+
+            Please remember that these functions in the I/O chain
+    are treated just like any other text file device driver; if
+    the return code is non-zero, then Turbo Pascal will signal an
+    I/O error which you must check to ensure success.
+
+
+The ANSI unit defines the following character constants:
+
+    const
+      NUL = #0;     { The NUL character }
+      BRK = #3;     { Ctrl-C }
+      BEL = #7;     { Bell }
+      BS = #8;      { BackSpace }
+      TAB = #9;     { Tab }
+      LF = #10;     { Line feed }
+      FF = #12;     { Form feed }
+      CR = #13;     { Carriage return }
+      EOF_ = #26;   { End-of-file marker }
+      ESC = #27;    { Escape }
+
+
+---------------------------------------------------------------------
+January 1990
+
+Ian  : "Kev, the colors are all messed up.  I do wish you'd get a
+color monitor."
+Kevin: "Ok, I'll look into it."
+Ian  : "I looked at your code, the bug is right in this routine."
+Kevin: "No, there's no problem there.  I'm checking something
+else here ..."
+Ian  : "I tell you, the bug is right here!"
+Kevin: "No, that's not it.  Give me a few minutes ..."
+Ian  : "If you say so."
+
+(half an hour later)
+
+Kevin: "You're right.  That code you were looking at _was_ the
+problem."
+Ian  : &lt;grin&gt;
+--------------------------------------------------------------------
+
+  The ANSI unit defines the following video constants:
+
+          const
+            Black = 0;
+            Blue = 1;
+            Green = 2;
+            Cyan = 3;
+            Red = 4;
+            Magenta = 5;
+            Brown = 6;
+            LightGray = 7;
+            DarkGray = 8;
+            LightBlue = 9;
+            LightGreen = 10;
+            LightCyan = 11;
+            LightRed = 12;
+            LightMagenta = 13;
+            Yellow = 14;
+            White = 15;
+            Blink = 128;
+
+
+  The ANSI unit defines the following constants:
+
+    const
+      On = true;
+      Off = false;
+
+            These are passed to the ANSIStatus procedure to turn
+    the ANSI control sequences on or off (default is On).
+
+
+  The ANSI unit defines the following variables:
+
+    var
+      WrapAround : boolean;
+
+            True if the cursor wraps around from one line to the
+    next when it reaches the end of a line.  Default value is
+    true.
+
+
+    var
+      MaxX, MaxY : byte;
+
+            These hold the screen dimensions.  MaxX is the maximum
+    number of columns (default 80) and MaxY is the maximum number
+    of rows (default 25).  Values of 0 mean no maximum.  These
+    variables are used in part to determine the current cursor
+    position.
+
+
+    var
+      TabLength : byte;
+
+            This is the distance between tab stops.  Default value
+    is 8.
+
+
+    var
+      TextAttr : byte;
+
+            This defines the current screen color.  It is
+    compatible with the TextAttr variable in the CRT unit.
+    Default value is LightGray.
+
+
+    var
+      ANSIFile : Text;
+
+            This is the file to which all ANSI control sequences
+    are written.  It must be explicitly assigned to a device or
+    file and opened before your program is run.  Once you have
+    assigned and opened this file it is advised that you make an
+    explicit call to either GotoXY or ClrScr to fix the cursor in
+    a known position.  The internal mechanisms have no way of
+    knowing what the initial position is.
+
+
+    var
+      CheckEOF : boolean;
+
+            This variable is used by text file device drivers
+    linked to the ANSI output routines.  If true, the driver
+    should check for the end-of-file marker (Ctrl-Z) when reading
+    from its device and signal end of file if found.  Default
+    value is false.
+
+
+    var
+      CheckBreak : boolean;
+
+            This variable is used by text file device drivers
+    linked to the ANSI output routines.  If true, the driver
+    should check for Ctrl-Break or Ctrl-C when reading from its
+    device and signal a break if found.  Default value is true.
+
+
+  The ANSI unit defines the following procedures and functions:
+
+    function Redirected : boolean;
+
+            This function returns true if either the standard
+    input or standard output has been redirected.  This may be
+    useful in conjunction with the ANSICON or CONCOMIO units if
+    you want to guarantee that input will come from the keyboard
+    and output will go to the screen.
+
+
+    procedure ANSIStatus(Status : boolean);
+
+            Status is either On or Off (defined above).  If On,
+    ANSI control sequences are used as normal.  If Off, all ANSI
+    control sequences are ignored; the output is in teletype mode.
+    Default mode is On.
+
+
+    procedure AssignANSI(var F : Text; IOChain : IOFunctions);
+
+            This assigns the file F to the ANSI text file device.
+    The parameter IOChain must contain a record of valid I/O chain
+    functions as described above.
+
+
+    procedure ClrEol;
+
+            Sends the ANSI control sequence to clear to the end of
+    the current line.
+
+
+    procedure ClrScr;
+
+            Sends the ANSI control sequence to clear the screen.
+
+
+    procedure Delay(MS : word);
+
+            Delays program execution for MS milliseconds.
+
+
+    procedure GotoXY(X, Y : byte);
+
+            Sends the ANSI control sequence to position the cursor
+    at (X, Y).  If X is not in the range 1 .. MaxX or Y is not in
+    the range 1 .. MaxY then this request is ignored.  If MaxX and
+    MaxY are both 0, no check is made and the procedure positions
+    the cursor blindly.
+
+
+    function WhereX : byte;
+
+            Returns the current X position of the cursor.  Since
+    the internal mechanisms have no way of knowing what the
+    initial cursor position is, this function is unreliable unless
+    you make an explicit call to either GotoXY or ClrScr to fix the
+    cursor in a known position.
+
+
+    function WhereY : byte;
+
+            Returns the current Y position of the cursor.  Since
+    the internal mechanisms have no way of knowing what the
+    initial cursor position is, this function is unreliable unless
+    you make an explicit call to either GotoXY or ClrScr to fix the
+    cursor in a known position.
+
+
+    procedure HighVideo;
+
+            Turns on high video by setting the high video bit of
+    TextAttr.
+
+
+    procedure LowVideo;
+
+            Turns on low video by resetting the high video bit of
+    TextAttr.
+
+
+    procedure NormVideo;
+
+            Resets TextAttr to the original color at startup
+    (LightGray).
+
+
+    procedure TextBackground(Color : byte);
+
+            Changes the text background to Color.
+
+
+    procedure TextColor(Color : byte);
+
+            Changes the text foreground to Color; the text
+    background is not affected.
+
+
+   Where any of the above constants, variables, procedures, or
+functions have the same name as in the CRT unit, the
+functionality is the same.
+
+   This is a bare minimum replacement for the CRT unit.  Certain
+variables, procedures, and functions cannot be handled by the
+ANSI unit because they are too tightly bound to the particular
+device.  Two such functions, for example, are KeyPressed and
+ReadKey; these cannot be unbound from the device and so the ANSI
+unit does not implement them.  It is up to you to create these
+missing variables, procedures, and functions if you need them.
+The ANSICON, ANSICOM, and CONCOMIO units provided implement some
+of these missing functions.  They are described in the following
+sections.
+
+
+
+
+                          The ANSICON Console Driver
+   "How to make your keyboard and screen look like any other terminal."
+
+   The ANSICON console driver takes all input from the standard
+input device (the console) and sends all output to the standard
+output device (the console) via the ANSI.SYS device driver.  To
+uses this unit, make sure you have the statement
+"DEVICE=ANSI.SYS" in your CONFIG.SYS file; for more information
+on the CONFIG.SYS file, please see your DOS manual.
+
+   This unit can be used with the ANSI unit as a replacement for
+the Turbo Pascal CRT unit.  Programs developed using these units
+may be ported to generic MS-DOS environments where the CRT unit
+may not be compatible.
+
+   When you include the ANSICON unit in your program, it
+automatically assigns the standard input and output files and the
+ANSI file to the ANSICON I/O functions.
+
+
+   The ANSICON unit defines the following procedures and functions:
+
+      procedure AssignCON(var F : Text);
+
+              This assigns the file F to the console by defining its
+      I/O chain functions and then assigning the file to the ANSI
+      device above.
+
+
+      function KeyPressed : boolean;
+
+              Returns true if a key is waiting in the keyboard
+      buffer.
+
+
+      function ReadKey : char;
+
+              Reads the next key from the keyboard buffer.
+
+
+   Where any of the above constants, variables, procedures, or
+   functions have the same name as in the CRT unit, the
+   functionality is the same.
+
+
+
+
+                       The ANSICOM Communications Driver
+  "How to make any other terminal look like your keyboard and screen."
+
+----------------------------------------------------------------------
+January 1990 (back to university, second term)
+
+Ian  : "Four assignments eh?  That's a tough break ... so how's
+that code coming along?"
+Kevin: "SILVER!!!"
+----------------------------------------------------------------------
+
+   The ANSICOM communications driver takes all input from and
+sends all output to a single modem or serial device.  The driver
+is interrupt-driven, which means that data can be received and
+transmitted while the computer is engaged doing something else.
+The advantage of this unit is that it treats your modem almost
+exactly the same way as the Turbo Pascal CRT unit treats your
+keyboard and screen.
+
+   When developing programs that will use the ANSICOM unit, it is
+best to design them using either the Turbo Pascal CRT unit or the
+ANSICON unit provided with this package.  In this way, you can
+fully design, test, and debug your program on your own machine
+before committing it to the serial port.
+
+   When you include the ANSICOM unit in your program, it
+automatically assigns the standard input and output files and the
+ANSI file to the ANSICOM I/O functions.
+
+
+-------------------------------------------------------------------
+Kevin: "I finally figured out why the error handler was not
+working properly.  Not only had I failed to declare it as a far
+procedure, but it was going through infinite recursion: the halt
+procedure in the error handler called the flush procedure to
+flush the output file, which in turn called the error handler
+(because the error had not been cleared), which in turn called
+halt ... system go whiirrrrrrrrrrrrr ..."
+
+Ian  : "Oh lovely.  We should work for the government ...
+perpetual job creation."
+--------------------------------------------------------------------
+
+   The ANSICOM unit defines the following types:
+
+    type
+      ErrorProc = procedure(var Error : word);
+
+            This is the communications error handling procedure.
+    Your error handling procedure must be of the above type and
+    must be declared as a far procedure (use the {$F+} compiler
+    directive).  The parameter error will have one or more of the
+    following flags set: ReceiveOverrun, TransmitOverrun,
+    ParityError, FramingError, BreakDetect, CommTimeOut,
+    NoCarrier, or CtrlBreak.  These are described below.  If your
+    error procedure is to return control to the communications
+    routines, you may want to clear some or all of the error
+    flags so that you don't have to handle that error the next
+    time the procedure is called.  To clear all error flags set
+    Error equal to NoCommError (0).
+
+            To test for a communications error, mask the Error
+    parameter with one or more of the above flags.  For example,
+
+            { Halt if lost carrier }
+            if Error and NoCarrier &lt;&gt; 0 then
+              begin
+              ReleaseCOM;
+              halt(1)
+              end;
+
+            { Ignore parity and framing errors }
+            if Error and (ParityError or FramingError) &lt;&gt; 0 then
+              Error := Error and not (ParityError or FramingError);
+
+            If you want to send an error message to the console
+    (not the serial port), you will have to open the console as a
+    file since the ANSICOM driver redirects the standard output
+    file to the modem.  Thus:
+
+            Assign(ConF, 'CON');
+            Rewrite(ConF);
+
+            if Error and NoCarrier &lt;&gt; 0 then
+              begin
+              WriteLn(ConF, 'Error : No carrier');
+              ReleaseCOM;
+              halt(1)
+              end;
+
+
+   The ANSICOM unit defines the following constants:
+
+    const
+      Init = true;
+      NoInit = false;
+
+            These constants are used when installing the
+    communications routines.  If the modem is to be initialized,
+    i.e. its baud rate and data format has yet to be set up, then
+    use Init in the call to InitCOM.  If the modem is already
+    initialized or on-line, use NoInit in the call to InitCOM to
+    prevent the modem from losing the connection.
+
+
+    const
+      SyncTransmit = true;
+      AsyncTransmit = false;
+
+            These constants are used when installing the
+    communications routines.  Synchronous transmission means that
+    the program output (through Write or WriteLn) waits until all
+    characters have been transmitted before returning control to
+    the program.  This approach is advised when writing
+    interactive programs such as video games; use the SyncTransmit
+    constant when initializing the modem.  If you don't want to
+    wait for the output to be transmitted, use AsyncTransmit and
+    control will be returned to your program while the ANSICOM
+    unit takes care of the transmission in the background.
+
+
+    const
+      NoCommError = $0000;
+
+            No communications error.
+
+
+    const
+      ReceiveOverrun = $0001;
+
+            Either a character arrived over the modem before the
+    ANSICOM unit had a chance to remove the previous character or
+    the receive buffer is full (your program is not reading the
+    data as it comes across the line).
+
+
+    const
+      TransmitOverrun = $0002;
+
+            The transmission buffer is full.  This error occurs
+    only in asynchronous transmission when you write more to the
+    modem than it can handle in that length of time.
+
+
+    const
+      ParityError = $0004;
+      FramingError = $0008;
+
+            Data arriving over the modem has somehow been
+    corrupted.  The character or characters affected were lost in
+    transmission.
+
+
+    const
+      BreakDetect = $0010;
+
+            The remote modem is requesting that you break the
+    connection.  Suggested action is to disconnect the modem with
+    a call to the Disconnect procedure.
+
+
+    const
+      CommTimeOut = $0020;
+
+            The modem timed-out (the remote modem has probably
+    gone off-line).
+
+
+    const
+      NoCarrier = $0040;
+
+            The modem has lost the carrier signal.
+
+
+    const
+      CtrlBreak = $0080;
+
+            A Ctrl-C character has been received and CheckBreak
+    (above) is true.
+
+
+    const
+      NotOnline = $0100;
+
+            You are trying to read from the communications port
+    without having initialized the communications routines.
+
+
+   The ANSICOM unit defines the following functions and procedures:
+
+    function InitCOM(COMPort : byte; Baud : integer; Bits : byte;
+      Parity : char; Stop : byte; Init : boolean; Sync : boolean;
+      Error : pointer) : integer;
+
+            This initializes the modem, installs the
+    communications interrupt, sets the desired transmission
+    synchronization, and installs a user-defined error handler.
+
+            The parameters are:
+
+                    COMPort - Port number from 1 to 4
+                    Baud    - Desired baud rate
+                    Bits    - Number of data bits (5 to 8)
+                    Parity  - Parity type ('E'ven, 'O'dd, 'M'ark,
+                              'S'pace, or 'N'one)
+                    Stop    - Number of stop bits (1 or 2; to get
+                              1.5 stop bits for 5 data bits, use
+                              2 stop bits)
+                    Init    - Use the constants Init to initialize
+                              the modem with the given data format
+                              or NoInit if the modem has already
+                              been initialized.
+                    Sync    - Use the constants SyncTransmit for
+                              synchronous transmission or
+                              AsyncTransmit for asynchronous
+                              transmission (described above)
+                    Error   - Pointer to a user-defined error
+                              handler of the type ErrorProc
+                              (defined above) or nil if no error
+                              handler is desired
+
+            This function returns 0 if successful or 1 if not
+    (invalid COM port number or data format).
+
+
+    function SetBaud(Baud : integer; Bits : byte; Parity : char;
+      Stop : byte) : integer;
+
+            This function is useful if you want to change the data
+    format on the fly, for example if the modem, previously
+    initialized at 2400 baud, connects at 1200.  To use this
+    function, you must first have initialized it using the InitCOM
+    function.
+
+            The parameters are:
+
+                    Baud    - Desired baud rate
+                    Bits    - Number of data bits (5 to 8)
+                    Parity  - Parity type ('E'ven, 'O'dd, 'M'ark,
+                              'S'pace, or 'N'one)
+                    Stop    - Number of stop bits (1 or 2; to get
+                              1.5 stop bits for 5 data bits, use
+                              2 stop bits)
+
+            This function returns 0 if successful or 1 if not
+    (modem not previously initialized or invalid data format).
+
+
+    procedure Disconnect;
+
+            Disconnects the modem by turning off the carrier.
+
+
+    procedure ReleaseCOM;
+
+            Releases the modem by resetting the modem state to its
+    initial configuration.  If the modem was initialized (by
+    specifying Init in InitCOM) then it is disconnected.
+
+
+    procedure AssignCOM(var F : Text);
+
+            This assigns the file F to the modem by defining its
+    I/O chain functions and then assigning the file to the ANSI
+    device above.
+
+
+    function KeyPressed : boolean;
+
+            Returns true if a key is waiting in the modem input
+    buffer.
+
+
+    function ReadKey : char;
+
+            Reads the next key from the modem input buffer.
+
+
+   Where any of the above constants, variables, procedures, or
+   functions have the same name as in the CRT unit, the
+   functionality is the same.
+
+
+
+
+                The CONCOMIO Console and Communications Driver
+              "How to make your keyboard and screen look like any
+                        other terminal and vice versa."
+
+------------------------------------------------------------------
+February 1990
+
+Kevin: "There.  Done.  Documented.  It's all yours."
+Ian  : "Great!  Now, is there any way to get the output to go to
+both the console and the modem and to get input from both as
+well?"
+Kevin: "(sigh) Alright ... give me another hour ... (grumble,
+grumble)"
+------------------------------------------------------------------
+
+   The CONCOMIO driver takes its input from the console, the
+communications port, or both, depending on how CONCOMIO has been
+configured.  To use this unit, you must have ANSI.SYS installed
+in your CONFIG.SYS file (see ANSICON documentation above).
+
+   When you include the CONCOMIO unit in your program, it
+automatically assigns the standard input and output files and the
+ANSI file to the CONCOMIO I/O functions.
+
+   All types, constants, variables, procedures, and functions
+defined in ANSICOM are also defined in CONCOMIO (with the
+exception of AssignCOM).  As before, you must initialize the
+modem, install an error handler, etc.  In addition to the stuff
+declared in ANSICOM, CONCOMIO has its own declarations described
+below.
+
+   The CONCOMIO uses both the ANSICON and ANSICOM units to handle
+the input and output.  The sole purpose of this unit is to direct
+the input and output calls to the correct handlers.
+
+   Communications error handlers for the CONCOMIO unit function
+exactly the same way as they do for the ANSICOM unit.
+However, since the console is part of the CONCOMIO routines, you
+do not need to open the console as a separate file; instead, set
+the variable ActiveOutput := ConsoleActive.  The variable
+ActiveOutput and constant ConsoleActive are described below.
+
+
+   The CONCOMIO unit defines the following constants:
+
+    const
+      NoneActive = $0000;
+
+            No text file device driver is active for this
+    operation (input or output, see below).
+
+
+    const
+      ConsoleActive = $0001;
+
+            The console device driver is active for this operation
+    (input or output, see below).
+
+
+    const
+      CommActive = $0002;
+
+            The communications device driver is active for this
+    operation (input or output, see below).
+
+
+    const
+      BothActive = ConsoleActive or CommActive;
+
+            Both the console and communications device drivers are
+    active for this operation (input or output, see below).
+
+
+   The CONCOMIO unit defines the following variables:
+
+    var
+      ActiveInput : word;
+
+            This is the active input device.  Valid values are
+    NoneActive (no input allowed), ConsoleActive (input from
+    console only allowed), CommActive (input from modem only
+    allowed), and BothActive (input from both console and modem
+    allowed).
+
+            If the value is NoneActive, any Read or ReadLn
+    operation will return an I/O result of 161 (device read
+    fault).
+
+
+    var
+      ActiveOutput : word;
+
+            This is the active output device.  Valid values are
+    NoneActive (no output allowed), ConsoleActive (output to
+    console only allowed), CommActive (output to modem only
+    allowed), and BothActive (output to both console and modem
+    allowed).
+
+            If the value is NoneActive, any Write or WriteLn
+    operation will return an I/O result of 160 (device write
+    fault).
+
+
+   The CONCOMIO unit defines the following procedures and functions:
+
+    procedure AssignCONCOM(var F : Text);
+
+            This assigns the file F to the console and the modem
+    by defining its I/O chain functions and then assigning the
+    file to the ANSI device above.
+
+
+    function KeyPressed : boolean;
+
+            Returns true if a key is waiting in the keyboard or
+    modem buffer, depending on the value of ActiveInput.
+
+
+    function ReadKey : char;
+
+            Reads the next key from the keyboard or modem buffer,
+    depending on the value of ActiveInput.
+
+
+   Where any of the above constants, variables, procedures, or
+functions have the same name as in the CRT unit, the
+functionality is the same.
+
+   When using the CONCOMIO unit, you must be sure to initialize
+the modem using the InitCOM() call since CONCOMIO does in fact
+use the modem.
+
+   WARNING: By default, the CONCOMIO startup routine sets
+CheckBreak to false.  This is because a Ctrl-Break in the ANSICON
+driver generates INT 23h, the Ctrl-Break interrupt, and does not
+allow the communications routines to do any cleanup.  When this
+happens, the communications interrupt in the ANSICOM driver may
+not be properly released and your computer may be left in an
+unknown state.
+
+
+
+
+                             Demonstration Programs
+                             "Cut-and-paste code."
+
+   The files DEMOCON.EXE (source DEMOCON.PAS), DEMOCOM.EXE
+(source DEMOCOM.PAS), and DEMOBOTH.EXE (source DEMOBOTH.PAS)
+demonstrate simple applications of the ANSICON or ANSICOM units
+or both respectively.  These programs handle line-oriented input
+and output and some simple color and screen control.
+
+   To run DEMOCON, just type DEMOCON at the DOS prompt.  After
+you enter your name, a box showing your name, current colors, and
+the cursor position will be displayed.  The colors will change
+randomly.
+
+   To run DEMOCOM, your modem must be on-line to a remote
+terminal.  The baud rate at which it is connected is really
+immaterial since your modem will not be initialized by the
+DEMOCOM program itself.  However, you must be connected at 8 data
+bits.  The remote terminal will see exactly the same thing that
+you saw in the DEMOCON program.
+
+   To run DEMOBOTH, your modem must be on-line to a remote
+terminal.  The baud rate at which it is connected is really
+immaterial since your modem will not be initialized by the
+DEMOBOTH program itself.  However, you must be connected at 8
+data bits.  In this case, both the remote terminal and your
+screen will display the same thing and each will have the ability
+to enter data.</PRE>
+<!--#include virtual="/t_footer.htm"-->
