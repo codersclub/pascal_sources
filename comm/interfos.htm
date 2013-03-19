@@ -1,0 +1,71 @@
+<html><head><title>Fossil rev.5 Functions Calls</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль для работы с Fossil драйвером с поддержкой ANSI графики.<br><font color=#666666> Functions calls derived from the fossil revision 5 documentation and will work with any proper fossil driver (X00, BNU, OPUSCOMM)</font>">
+<meta name="keywords" content="pascal, sources, source code, interfos, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;interfos
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fossil rev.5 Functions Calls</TD>
+<TD nowrap class=black>&nbsp;Nowhere Fast</TD>
+<TD class=black align='right'>12.05.92</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль для работы с Fossil драйвером
+с поддержкой ANSI графики.<br><font color=#666666>
+Functions calls derived from the fossil revision 5 documentation
+and will work with any proper fossil driver (X00, BNU, OPUSCOMM)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="interfos.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">10/91 - Bug fix : the number of the comm port was not being
+passed to the FOSSIL driver routines correctly.  Also simplified
+FOSSIL.PAS and inkey routine(s).
+
+07/91 - This ZIP contains Turbo Pascal code which I hope will be
+useful to game authors.  This code in a modification of Jeff
+Garzik's INTERFAC.PAS, which is an upgrade of Wayne Bell's
+COMMON.PAS.
+
+I have modified the code to (1) use real ANSI instead of WWIV
+ANSI, and (2) optionally use a FOSSIL driver.  Many more BBS
+systems will be able to run WWIV games if they are capable of
+using a FOSSIL driver.  WWIV sysops will be able to run the games
+the way they always have.  (A FOSSIL driver is an easy way to do
+modem I/O.  I will explain in detail later if anybody is
+interested.)  I also optimized some of the code while I was at
+it.
+
+This code is syntax compatible with INTERFAC.PAS, and therefore
+very similar to COMMON.PAS, so I hope that games can use this TPU
+with little or no modification.  The one thing that is important
+when not using WWIV interrupts is that all loops which do user
+input or output must exit when the user hangs up.  So, instead of
+  repeat c := inkey;
+    done := c in ['A'..'Z'];
+  until done;
+it should be
+  repeat c := inkey;
+    done := c in ['A'..'Z'];
+  until done or hangup;
+
+This code is dedicated to the public domain in the hopes that we
+can eventually put together a WWIV doors developers kit in a
+couple of languages.  It should be easy to add support for
+reading PCBOARD.SYS, DORINFO1.DEF, etc.
+
+The posts will consist of the following:
+
+(1) FOSSIL.PAS, modem I/O routines which should be compiled into
+    FOSSIL.TPU.
+(2) ANSI.PAS, my routines for doing real ANSI.  This is an
+    include file for...
+(3) WWIV.PAS, which should be compiled into WWIV.TPU.
+
+Nowhere Fast, 1@7310</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

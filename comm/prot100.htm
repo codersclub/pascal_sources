@@ -1,0 +1,77 @@
+<html><head><title>File Transfer Protocol Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль поддержки протоколов передачи файлов: ASCII, XmodemChkSum, XmodemCRC, Xmodem1K, Ymodem, MegaLink,YmodemG. Плюс модули для расчета CRC и работы с Fossil драйвером.">
+<meta name="keywords" content="pascal, sources, source code, prot100, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;prot100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;File Transfer Protocol Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:270/101.15">Eric J. Givler</a></TD>
+<TD class=black align='right'>13.03.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль поддержки протоколов передачи файлов:
+ASCII, XmodemChkSum, XmodemCRC, Xmodem1K, Ymodem, MegaLink,YmodemG.
+Плюс модули для расчета CRC
+и работы с Fossil драйвером.</TD><TD class=black colspan=2 align='right'><br><A HREF="prot100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>36k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PROT v0.01  (not good enough for a 1.00 ya know)
+03-13-93
+Eric J. Givler
+
+Credits to Jack M. Wierda and Steve Freeman for some protocol code
+for xmodem checksum I found years ago.
+
+Well, here it is!  People were complaining about protocols and I
+tried writing them a few years back.  The code is not very clean as
+these were the FIRST (and I mean FIRST) programs I ever tried to write
+in pascal.
+
+We (you and I) definitely have some work ahead of us to get this stuff
+to be more 'user friendly'.  NOTE: I only wrote more SEND routines
+because when I was writing my BBS, users only cared that downloads
+worked! &lt;grin&gt;  Anyone interested in helping complete the Receive
+functions, can contact me at the address below.
+
+The code is NOT being released into the Public Domain.  You may use
+the code FREELY, just give credit.  The code will continue to be
+updated based on outlines discussed below and will always be released
+in FULL SOURCE FORM for FREE.
+
+If modifications or enhancements are made, I would like to see them.
+Please send them in the form of actual PASCAL source to the address
+listed below.  As long as I see some form of suggestions for
+enhancements in the Fidonet pascal echo or via snail-mail (US Post
+office), I will continue to support these functions and make changes
+as necessary.
+
+I want to make it clear that I am not a Pascal 'guru' by any means.
+I like to play around.  If you think things can be implemented
+better, I'd like to know how, and PLEASE, PRETTY PLEASE, supply the
+code.  I'd like to learn something too!
+
+I'm sure you'll learn from reading the code how some of the
+protocols actually work.
+
+Enough said....
+
+If you have any comments, I'm at: 1:270/101.15
+
+Eric J. Givler
+4784 Sweetbrier Terrace
+Harrisburg, PA 17111-3615
+USA
+
+I'll post my new address and voice number in the Fido Pascal echo
+after I move in a few weeks.  If you want to send any form of monetary
+contribution, I won't refuse it.  A suggested contribution is $5.
+Maybe I'll be able to afford the TP 7.0 upgrade!  Have fun.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

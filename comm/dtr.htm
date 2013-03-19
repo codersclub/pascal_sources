@@ -1,0 +1,89 @@
+<html><head><title>DTR Control Unit and Hangup Routine</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль TP6.0 для управления сигналом DTR (Data Terminal Ready) модема плюс две утилиты для работы с DTR.<br><font color=#666666> A Turbo Pascal 6.0 unit for DTR control plus a little utility to drop or raise DTR plus a utility that will hang up the modem, by dropping the DTR.</font>">
+<meta name="keywords" content="pascal, sources, source code, dtr, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dtr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DTR Control Unit and Hangup Routine</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:bergerong@aol.com">Marc Boutet</a></TD>
+<TD class=black align='right'>04.07.92</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль TP6.0 для управления сигналом DTR (Data Terminal Ready)
+модема плюс две утилиты для работы с DTR.<br><font color=#666666>
+A Turbo Pascal 6.0 unit for DTR control plus
+a little utility to drop or raise DTR plus
+a utility that will hang up the modem, by dropping the DTR.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="dtr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">1. Included in the archive:
+
+DTRCTRL.PAS    A Turbo Pascal 6.0 unit for DTR control with
+DTRCTRL.TPU    sources so you can compile this with another
+               version of Turbo Pascal
+
+DTR.PAS        A little utility to drop or raise DTR with Turbo
+DTR.EXE        Pascal sources
+
+HANGUP.PAS     A utility that will hang up the modem,
+HANGUP.EXE     by dropping the DTR, pausing and raising the DTR
+
+2. Usage of the DTRCTRL unit:
+
+Two functions can be used in this unit:
+
+ - DTRControl (COMPort: Byte; DTR: Boolean);
+     You just have to specify for which COMPort you want to
+     change the DTR State, and the DTR option is: TRUE = Raise
+     DTR, FALSE = Drop DTR
+
+ - DTRState (COMPort: Byte);
+     Returns TRUE if the DTR of the specified COMPort is ON
+     (Raised) and FALSE if the DTR is OFF (Dropped)
+
+3. Other programs in the archive:
+
+You can get the information about their usage by typing the name
+of the EXE file without specifying any parameter.
+
+4. Specifications:
+
+If you want to use the DTR as a hangup utility, you have to
+configure the modem so when the DTR is off, it hangs up. With
+lots of modems, you configure it by typing: AT &D2.
+
+5. Using the unit in your programs
+
+There is no fee when you want to use this unit in your programs.
+The only thing you have to do is to SHARE YOUR KNOWLEDGE with
+other computer users!  If you have problems or questions with
+serial port and modem programming (or other topics), you can
+contact me:
+
+ - VIA Mail:
+       Les Logiciels de Marque inc.
+       a/s Marc Boutet
+       974 Senneterre
+       Sainte-Foy, QuВbec, Canada
+       G1X 3Y3
+
+ - VIA America On-Line: BERGERONG
+
+ - VIA BBS: (418) 651-1394 or (418) 651-7662, login on user:
+   SUPPORT password: DTR
+
+ - VIA Phone: (418) 653-1881
+
+It will also be a pleasure for me to know that you use my units,
+so let me know!
+
+Good success!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

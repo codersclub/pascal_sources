@@ -1,0 +1,76 @@
+<html><head><title>TpLink v1.4 - Serial Interface for TP5.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль для работы с последовательным портом и пример создания простейшей программы-терминала. Ассемблерные исходники НЕ приведены, только OBJ файл.<br><font color=#666666> Serial Communication Unit and Mini-Terminal Sample. No Assembler code included (only .OBJ)</font>">
+<meta name="keywords" content="pascal, sources, source code, tplink14, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tplink14
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TpLink v1.4 - Serial Interface for TP5.0</TD>
+<TD nowrap class=black>&nbsp;Stefan Graf</TD>
+<TD class=black align='right'>31.07.1990</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль для работы с последовательным портом
+и пример создания простейшей программы-терминала.
+Ассемблерные исходники НЕ приведены, только OBJ файл.<br><font color=#666666>
+Serial Communication Unit and Mini-Terminal Sample.
+No Assembler code included (only .OBJ)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tplink14.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">(********************************************************************)
+(*                                                                  *)
+(*  Unit SeriellInterface                                           *)
+(*                                                                  *)
+(********************************************************************)
+(*                                                                  *)
+(* Programmierer ........ Stefan Graf / 4600 Dortmund 1 / BRD       *)
+(*                                                                  *)
+(* Programmiersprache ... Turbo-Pascal 5.0                          *)
+(*                                                                  *)
+(* Projekt .............. Verwaltung der ser. Schnittstellen im IBM *)
+(*                                                                  *)
+(* Erststellt am ........ 02.07.89                                  *)
+(*                                                                  *)
+(* letzte Оnderung am ... 31.07.90                                  *)
+(*                                                                  *)
+(* Revision ............. 1.14                                      *)
+(*                                                                  *)
+(********************************************************************)
+(*                                                                  *)
+(* Beschreibung:                                                    *)
+(*                                                                  *)
+(* Programmierung und Verwaltung von bis zu 8 seriellen             *)
+(* Schnittstellen im IBM XT/AT/386.                                 *)
+(* Alle Schnittstellen kФnnen bei Bedarf mit einer interrupt-       *)
+(* gesteuerten Empfangsroutinen betrieben werden.                   *)
+(* Die erweiterten Interrupt's des AT's oder der 386 werden         *)
+(* unterstБtzt.                                                     *)
+(********************************************************************)
+(* Programm MiniTerm                                                *)
+(*                                                                  *)
+(********************************************************************)
+(*                                                                  *)
+(* Programmierer ........ Stefan Graf / 4600 Dortmund 1 / BRD       *)
+(*                                                                  *)
+(* Programmiersprache ... Turbo-Pascal 5.0                          *)
+(*                                                                  *)
+(* Erststellt am ........ 02.10.89                                  *)
+(*                                                                  *)
+(* letzte Оnderung am ... 06.01.90                                  *)
+(*                                                                  *)
+(********************************************************************)
+(*                                                                  *)
+(* Beschreibung:                                                    *)
+(*                                                                  *)
+(* Test- und Demoprogramm fБr die Unit SeriellInterface.            *)
+(* Terminal-Programm fБr die serielle Schnittstelle bei 02F8h mit   *)
+(* IRQ3.                                                            *)
+(********************************************************************)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

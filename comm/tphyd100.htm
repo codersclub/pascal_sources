@@ -1,0 +1,102 @@
+<html><head><title>TP-Hydra 1.00 - Hydra bidirectional protocol</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Реализация на TP6 двунаправленного протокола передачи файлов <b>Hydra</b>. <br><font color=#666666> This is TP-Hydra 1.00, a Turbo Pascal 6.0 implementation of the Hydra bidirectional file transfer protocol. It is a port from the Hydracom 1.08 C sources by Adam Blake of Wandoo Valley Software (Comunique terminal package) and Arjen Lentz of LENTZ SOFTWARE-DEVELOPMENT (Hydra co-design and HydraCom).</font>">
+<meta name="keywords" content="pascal, sources, source code, tphyd100, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tphyd100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TP-Hydra 1.00 - Hydra bidirectional protocol</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:283/512">Arjen Lentz</a></TD>
+<TD class=black align='right'>29.11.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Реализация на TP6 двунаправленного протокола передачи файлов
+<b>Hydra</b>. <br><font color=#666666>
+This is TP-Hydra 1.00, a Turbo Pascal 6.0 implementation
+of the Hydra bidirectional file transfer protocol.
+It is a port from the Hydracom 1.08 C sources by Adam Blake
+of Wandoo Valley Software (Comunique terminal package)
+and Arjen Lentz of LENTZ SOFTWARE-DEVELOPMENT (Hydra co-design and HydraCom).</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tphyd100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>30k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">I (AGL) specifically participated in this effort to provide a
+freely available Pascal source of Hydra, aiding further integration
+of the protocol in programs.
+The stuff works, and was used in the Communique 2.10 release which
+supports Hydra internally.
+
+So, here we are....
+
+
+    Couple of things you have to know when including Hydra in your own
+    program:
+
+    The buffers are NEVER flushed or cleared, not even if errors occur.
+    Only for an abort, just before the cancel sequence is sent.
+
+    New data packets are only put in the transmit buffer if there are
+    less bytes in that buffer than the maximum block length. This will
+    keep the transmit buffer always full enough, but leave the Hydra
+    code free to process incoming data.
+
+    To enable maximum throughput without losing characters or slowing
+    down transmission, FORCE your program to use async buffers with a
+    minimum size of 4096 bytes each.
+    Of course you can't directly set the size of those buffers if you
+    use a FOSSIL driver. That's why The-Box Mailer and HydraCom call
+    the FOSSIL information function, and print a warning message if
+    either of the buffers is less than 4095 (yes 4095, the OS/2 VX00
+    reports 4095 instead of 4096 ;-)
+    Please don't argue, just do it. Alll this has been tried & tested.
+    Larger buffers are  okidoki, but generally will not improve
+    performance of either transfer direction....
+
+    Depending on the system, you may need to lower RTS during disk
+    access to prevent losing incoming data. DOS keeps interrupts
+    disabled rather (too) long....
+    X00 and VX00 have extended FOSSIL functions supporting this.
+    If you use your own async stuff, make sure they can do it too.
+
+    A general note, important not just for Hydra:
+    Add timers to your lowlevel byte/block transmit functions, and
+    the flush output buffer routine.
+    Some (mail)sessions have been observed to just die, while the
+    program stays online. Carrier is still present, and braindead
+    timers in the highlevel code don't go off because the program
+    is stuck in a lower level, waiting for some bytes to be passed
+    to the FOSSIL or async code.
+    This can happen because of hardware handshake problems, modem
+    retraining, whatever. In any case, it happens....
+    So it's in that lowlevel code that you need to add your timeout;
+    something in the order of a minute will do fine. No need to pass
+    back an error code, your high level timers should take care of
+    the rest.
+
+    Refer to HYDRA.DOC (HYDRA001.ZIP and FSC-0072.A01) for the original
+    Hydra specs....
+
+    Do read LICENSE.DOC before you grab the sources, and don't forget
+    to mention what needs to be mentioned in your docs and (C) screens.
+
+    Well, have fun, and integrate Hydra into your software soon!
+    Please don't wait for someone else to do it first?
+    This stuff was sent directly to developers of mailer, BBS and
+    terminal software, those who were already aware of this source
+    becoming available and in fact eagerly waiting for it.
+    Won't tell you who they are to give them a fair chance of working
+    on their programs without being harrassed about when they will
+    release something with Hydra, but.... they are some biggies ;-)
+    Better you hurry up too!
+
+    Arjen Lentz
+    FidoNet 2:283/512
+    BBS/FAX +31-33-633916
+    arjen_lentz@f512.n283.z2.fidonet.org</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

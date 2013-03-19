@@ -1,0 +1,330 @@
+<html><head><title>PibTerm V4.1.3 - Host Terminal Emulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эмулятор ASCII, ANSI терминала с поддержкой функций &quot;хоста&quot;. Своего рода маленькая BBS с поддержкой протоколов передачи файлов XModem, Xmodem 1K, WXModem, YModem, Telink, SEALink, ZModem, Kermit.<br><font color=#666666> This archive contain TURBO Pascal routines which implement a terminal emulation and host communications program called PibTerm.</font>">
+<meta name="keywords" content="pascal, sources, source code, pibter41, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pibter41
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PibTerm V4.1.3 - Host Terminal Emulator</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:pib@nuacc.acns.nwu.edu">Phil Burns</a></TD>
+<TD class=black align='right'>23.03.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Эмулятор ASCII, ANSI терминала с поддержкой функций "хоста".
+Своего рода маленькая BBS с поддержкой протоколов
+передачи файлов XModem, Xmodem 1K, WXModem, YModem,
+Telink, SEALink, ZModem, Kermit.<br><font color=#666666>
+This archive contain TURBO Pascal routines which implement
+a terminal emulation and host communications program called
+PibTerm.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="pibter41.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>565k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">INTRODUCTION TO PIBTERM V4.1 SOURCE CODE
+========================================
+
+The four archive libraries
+
+     PIBT41S1
+     PIBT41S2
+     PIBT41S3
+     PIBT41S3
+
+contain TURBO Pascal routines which implement a terminal
+emulation and host communications program called PibTerm.
+
+This is version 4.1.3 of PibTerm, released March 23, 1988.
+
+
+DOCUMENTATION AND EXECUTABLE VERSION
+====================================
+
+The files PIBT41S1.ARC through PIBT41S4.ARC contain only the
+source to PibTerm version 4.1.  The ready-to-use executable
+version and configuration files are available in the archive
+files PIBT41E1.ARC, PIBT41E2.ARC, and PIBT41E3.ARC.  The
+documentation is available in the archive files PIBT41D1.ARC,
+PIBT41D2.ARC, and PIBT41D3.ARC.
+
+Nearly all of the source to PibTerm is included.  The only
+missing routines are those which commercial code written by
+others.  However, you will still be able to compile PibTerm in
+its entirety because the missing code is supplied in .TPU
+(object) form.
+
+
+COMPILING PIBTERM
+=================
+
+First of all, you'll need about 7 megabytes of free disk space to
+compile all of PibTerm.  You'll also need Turbo Pascal version
+4.0.
+
+PibTerm v4.1 is broken up into a number of UNITs.  The main
+program of each unit has the extension ".PAS".  Most of the
+subsidiary modules have the extension ".MOD".
+
+One part of PibTerm is not included in source form, but only as a
+.TPU file.  This is the overlay manager:
+
+     OVERMGR.TPU   --- The Overlay Manager code
+
+The Overlay Manager code is from TurboPower software.
+
+The source for the full-screen editor is provided in encrypted
+source form.  This encrypted source will compile, but is quite
+unintelligible otherwise.  The editor is based upon commercial
+code written by Sammy Mitchell.
+
+PibTerm runs as an overlayed program.  The Overlay Manager from
+TurboPower software is needed to build the overlayed version of
+PibTerm.  While you don't need the Overlay Manager to compile
+PibTerm, I recommend that you purchase it, since otherwise the
+resulting PibTerm executable will require close to 500K to
+execute.
+
+You can get the Overlay Manager from:
+
+     TurboPower Software
+     3109 Scotts Valley Drive
+     Suite 122
+     Scotts Valley, CA  95066
+     (408) 438 8608       (information)
+     (800) 538 8157 x830  (orders outside California)
+     (800) 672 3470 x830  (orders inside California)
+
+The file MAKEPT41.BAT contains a batch file which will compile
+and create the overlayed version of PibTerm, assuming that you
+have Turbo Pascal v4.0, the TurboPower Overlay Manager, and
+Microsoft's EXEPACK.EXE program.
+
+
+WHAT DOES WHAT
+==============
+
+The name of each .PAS file indicates what functions the routines
+which comprise it perform.  Here's a list:
+
+  GLOBROUT.PAS    --- Contains global routines used by many
+                      sections of PibTerm.  The code to implement
+                      DOS jumps (&lt;ALT&gt;J) and to hang up the phone
+                      (&lt;ALT&gt;H) is included here.
+  GLOBTYPE.PAS    --- Global variable declarations.
+  PIBASYNC.PAS    --- Asynchronous I/O routines.
+  PIBMTASK.PAS    --- Multitasker interfaces.
+  PIBTERM.PAS     --- Main program.
+  PIBTIMER.PAS    --- Time and date routines.
+  PT4ASCI.PAS     --- Ascii (non-protocol) transfers.
+  PT4ANSI.PAS     --- Ansi/VT100 terminal emulation.
+  PT4CISB.PAS     --- Compuserve B protocol.
+  PT4DIAL.PAS     --- Dialing management (&lt;ALT&gt;D).
+  PT4DISPC.PAS    --- Displays character in terminal emulation
+                      mode.
+  PT4EDIT.PAS     --- Text editor (&lt;ALT&gt;F subset).
+  PT4GENRT.PAS    --- General non-ANSI terminal emulation.
+  PT4GOSSI.PAS    --- Gossip mode.
+  PT4HOST.PAS     --- Host mode   (&lt;ALT&gt;W).
+  PT4INIT.PAS     --- Initialization.
+  PT4KERM.PAS     --- Kermit file transfers.
+  PT4PATCH.PAS    --- Patches overlay path at initialization.
+  PT4SCRI.PAS     --- Script parser (&lt;ALT&gt;G).
+  PT4SETP.PAS     --- Set Parameters processor (&lt;ALT&gt;P).
+  PT4T4010.PAS    --- Tek 4010 emulation.
+  PT4TERM.PAS     --- General terminal emulation support.
+                      This includes the script/command execution
+                      code (EXECUTC1.MOD, EXECUTC2.MOD).
+  PT4UPDWN.PAS    --- Central file transfer switching.  Handles
+                      &lt;ALT&gt;R and &lt;ALT&gt;S.
+  PT4UTIL.PAS     --- Main utilities like file manipulation
+                      (&lt;ALT&gt;F),
+                      Keyboard key setting (&lt;ALT&gt;K),
+                      Review buffer display (&lt;ALT&gt;V),
+                      Set translate table (&lt;ALT&gt;T),
+                      Display help (&lt;ALT&gt;I),
+                      Fast change of terminal params (&lt;ALT&gt;N),
+                      Time display (&lt;ALT&gt;Y),
+                      Area codes (&lt;ALT&gt;Z).
+
+  PT4VIEW.PAS     --- File viewer (&lt;ALT&gt;F subset).
+  PT4XMOD.PAS     --- Xmodem family file transfers.  Includes
+                      Xmodem, Xmodem 1K, Ymodem, Telink, WXModem,
+                      SEALink, etc.
+  STRINGMA.PAS    --- String manipulation routines.
+
+
+The following files are also included with the PibTerm source
+proper:
+
+  CNFUPDAT.PAS    --- Updates pre-v4.1 files to v4.1 specs.
+  GENPARM.PAS     --- Generates code for insertion into
+                      PARMDAT.GLO and SETDEFAU.MOD.
+  PARMDAT.DEF     --- The input to GENPARM.PAS.
+  PIBT.OSP        --- Overlay structure for PibTerm.
+  PACK.PAS        --- .EXE file compressor written by Kim Kokkonen
+                      which you can use as a substitute for
+                      EXEPACK.EXE.  PACK.EXE does not compress as
+                      well as EXEPACK.EXE.
+
+
+RESTRICTIONS ON USE
+===================
+
+You may also make unlimited copies of the program and distribute
+these copies as you desire FOR NON-COMMERCIAL APPLICATIONS ONLY,
+except that I, Philip R. Burns, reserve the sole right to
+distribute the program for profit.  You may request a duplication
+charge, not to exceed $16 per copy for the complete source
+archive (assuming you need to have four diskettes to hold the
+four archive files).
+
+You should distribute the program without any changes you have
+made, and then a SEPARATE version with any changes you've made.
+You should clearly mark the changes in some sort of documentation
+file, as well as in the source files you change.  I also suggest
+that you add a line to the initial output of PibTerm indicating
+your name and the date of your modification.
+
+You may use the source code and modify it as you please for
+NON-COMMERCIAL APPLICATIONS ONLY.  You may NOT use the code in
+developing commercial applications without my permission.
+
+I encourage you to extend this program and add interesting new
+features.  I also encourage you to upload these changes to your
+local BBSs in order to share your work with others.  What I do
+NOT want is for you to rip off this code as if it were yours and
+sell it for a profit.  That's not nice.
+
+
+ADDRESSES FOR ELECTRONIC LETTER BOMBS
+=====================================
+
+You may leave me messages on the following BBSs:
+
+      Gene Plantz's BBS                (312) 882 4145
+      Ron Fox's BBS                    (312) 940 6496
+      Northwestern Univerity OPUS BBS  (312) 491 3892
+
+Gene's BBS is registration only ($25 a year) and well worth it.
+Ron's BBS is essentially open, and also worth calling.
+
+The Northwestern University BBS is run by my colleague Roger
+Safian.  You can use the OPUS/FIDONET remote mail/networking
+facility to send me messages from another OPUS local to your
+dialing area.  The net address of Roger's OPUS BBS system is
+115/419.
+
+For all three BBS systems, my user name is PHILIP BURNS.
+
+CompuServe users can reach me at:
+
+       72437,62
+
+University users can reach me at:
+
+      PIB@NUACC.BITNET         (BITNET)
+      PIB@NUACC.ACNS.NWU.EDU   (ARPANET)
+
+PLEASE, no voice calls!  I WILL NOT RETURN any long distance
+phone calls about PibTerm.  I can't afford to.
+
+I prefer that you send me mail electronically.  I will nearly
+always reply without 24 hours to messages left on the academic
+networks, CompuServe, or the Plantz or NU OPUS BBS systems
+mentioned above.  I may take several weeks to reply to US Mail,
+which is a LOT more bother for me to deal with.  I am not a
+commercial enterprise, and I have NO clerical support whatever
+from anyone else.
+
+
+THE FUTURE OF PIBTERM
+=====================
+
+This will be the last major version of PibTerm for some time,
+perhaps forever.  While it's been educational for me to work on
+PibTerm, and the program has solved a number of problems locally
+at Northwestern University, I can't afford to support remote
+users.
+
+Suggestions are always welcome, of course, should I ever become
+motivated to work on the program again in the future.  I will
+post maintenance releases from time to time.
+
+Thanks,
+Phil "Pib" Burns.
+
+February 28, 1988.
+Revised March 18, 1988.
+Revised March 23, 1988.
+
+BUGS FIXED IN V4.1.1
+====================
+
+Since the original release of PibTerm v4.1 on February 26, 1988,
+a few bugs have been brought to my attention.  These bugs have
+been fixed in this source release.
+
+   (1) Time/date of files trashed in Ymodem and Kermit transfers.
+   (2) Invoking command line mode when script active fails.
+   (3) Command line mode eats up large amounts of heap space
+       every time a command is issued.
+   (4) VT100 delete character function leaves cursor in wrong
+       place.
+   (5) When directory changed during DOS jump, capture file is
+       reopened in wrong subdirectory.
+   (6) Hitting &lt;ALT&gt;key at &lt;ALT&gt;I simply exits the menu rather
+       than executing the desired command.
+
+BUGS FIXED IN V4.1.2
+====================
+
+   (1) &lt;ALT&gt;F, P)rint a file doesn't work.
+   (2) Status line foreground/background colors reversed at
+       &lt;ALT&gt;P.
+   (3) ".CNF" not added to configuration file names when it
+       should be, particularly at &lt;ALT&gt;P, R)ead and W)rite.
+   (4) Autodownload for Kermit and Zmodem made more robust
+       against false starts because of line noise.  Also, auto
+       Zmodem download will no longer start when Zmodem upload
+       should be started instead.
+
+
+BUGS FIXED IN V4.1.3
+====================
+
+   (1) &lt;ALT&gt;F, V)iew a file was using up a large block of memory
+       that it doesn't release.
+   (2) &lt;ALT&gt;P, O)dds and ends, d) date format setting was screwed
+       up.
+   (3) &lt;ALT&gt;Y always issued message indicating that the dialing
+        session timer was being reset even when it was not.
+   (4) &lt;ALT&gt;P, O)dds and ends, f) script search order setting
+       did not work properly.
+   (5) &lt;ALT&gt;P, C)ommunications, g) Add line feeds to outgoing CRs
+       didn't work.
+   (6) "Suspend" script command didn't work.
+   (7) Several problems with Ascii uploads:
+       (a)  A spurious extra null (or blank) line was added to
+            the file at the end of the transfer.
+       (b)  If the final line in a file to be sent did not end in
+            a CR/LF sequence, that line was ignored.
+       (c)  Characters were dropped because of a buffering error.
+   (8) The size of each file transferred using a file transfer
+       protocol is now written to the log files.
+   (9) Several problems with Gossip mode:
+       (a) Gossip character mode was not working -- keyboard
+           input was intermixed with remote system output in top
+           window instead of appearing in bottom window.
+       (b) Dialing a system with a different terminal type from
+           within Gossip mode resulted in bogus doubling of
+           characters from remote system in display.
+       (c) Time not initially displayed on status line in Gossip
+           mode.
+  (10) Kermit and ZModem autodownload improvements added to
+       gossip mode and Tek 4010 mode.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,166 @@
+<html><head><title>ASYNC v2.03 - Communication Library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека для работы с COM портами. Включает в себя коммуникационный модуль, модуль таймера, программу для проверки статуса портов и простой эмулятор терминала.">
+<meta name="keywords" content="pascal, sources, source code, async203, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;async203
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ASYNC v2.03 - Communication Library</TD>
+<TD nowrap class=black>&nbsp;Mark Schultz</TD>
+<TD class=black align='right'>09.08.93</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека для работы с COM портами. Включает в себя
+коммуникационный модуль, модуль таймера, программу для проверки
+статуса портов и простой эмулятор терминала.</TD><TD class=black colspan=2 align='right'><br><A HREF="async203.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>91k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">ASYNC v2.03  08/09/93
+
+Quick notes regarding this library:
+
+This library is still "beta" and not fully qualified.  Although I
+have tested most of the routines in this unit, I cannot give any firm
+assurance that everything here will work, as I still have to add some
+finishing touches.
+
+I apologize for the lack of documentation.  I don't plan on attacking
+that task until (1). I'm sure of the calling conventions of all the
+routines, and (2). I get time to do the documentation properly.  You
+will find some terse documentation in the file "ASYNC.FN" as well as
+in the ASYNC source itself.  The source is pretty well documented,
+although I don't have all of the procedure/function headers written
+(by this I mean the comments intended to go inside the starred boxes
+preceeding each subroutine).
+
+There are a number of global variables (typically prefixed by "C_")
+that you may wish to take note of.  You will find these described in
+ASYNC.PAS.  Of particular importantce to you, there are two boolean
+arrays: C_RcvWait[] and C_XmitWait[].  By setting C_RcvWait[ComPort]
+= TRUE, procedures ComRead and ComBlockRead will suspend execution
+until at least one character is present in the buffer.  This applies
+to any other unit procedure that makes use of one of these routines
+(such as ComReadln).  Setting this flag to FALSE will cause these
+routines to return with an error code (in C_Error) if the buffer is
+empty.  ComReadCh will return a null (ASCII 00h) in this event.
+
+C_XmitWait[ComPort], if set to TRUE, will cause ComWriteCh and
+ComBlockWrite to suspend execution if there is no space left in the
+transmit buffer, waiting for space to open up before resuming.  This
+applies to any other procedure in the unit that makes use of
+ComWriteCh or ComBlockWrite (such as ComWrite).  Setting
+C_XmitWait[ComPort] to FALSE will override this feature, causing the
+C_Error variable to return a nonzero result.  If this happens, the
+character(s) to be transmitted will be discarded.
+
+C_Error, as mentioned above, returns a non-zero error code if any one
+of several possible error conditions is detected.  Error checking and
+handling has changed significantly from the 1.xx version of the ASYNC
+unit.  You will find a complete listing of possible error codes at
+the end of the ASYNC.FN file.  These error returns are also
+conveniently defined as constants in ASYNC.PAS.
+
+Please DO NOT upload this library onto BBS's or information services!
+Since it is not complete and I do not have the documentation for it
+written yet I would rather wait until these tasks are complete before
+I "formally" release it for public consumption.
+
+I would appreciate your comments on the functionality and workability
+of this unit.  If you find any problems or would like to offer
+suggestions as to changes and improvements, I'd be glad to listen.
+You may contact me at the following locations:
+
+
+My address:
+-----------------------------
+Mark Schultz
+2211 S. 14th St.
+Wisconsin Rapids, WI  54494
+(715) 423-3706
+
+After 7:00 pm CST on weekdays
+Usually available all day on weekends
+
+- or -
+
+Work address
+-----------------------------
+Best Power Technology
+Rt. 1 Hwy. 80 / POB 280
+Necedah, WI  54646
+(608) 565-7200
+(608) 565-7424  BBS
+(608) 565-2679  FAX
+
+9:00am - 6:00pm CST M-F
+
+
+-- Special thanks to Meyer Moqute for help in debugging --
+
+
+Your disk should contain the following files:
+======================================================================
+
+ASYNC.PAS......Constant and type declarations, UNIT procedure/function
+               headers.  Compile this file if you wish to regenerate
+               ASYNC.TPU.
+ASYNC.ASM......The 8088 assembly source code.  Contains the ASYNC ISR
+               and code for time-critical and often-called
+               procedures.
+ASYNC.OBJ......The assembled object code of ASYNC.ASM
+ASYNC.TPU......Ready-to-USE unit file.  Compiled with BP V7.0
+ASSIGN.INC.....ASYNC include file.
+               Source for procdures and functions that provide a
+               TP-standard text file driver that is compatable with
+	       READ/READLN and WRITE/WRITELN.
+BUFFER.INC.....ASYNC include file.
+               Source for procedures and functions that deal with
+               buffer management.
+HANDSHK.INC....ASYNC include file.
+               Source for procedures and functions that configure
+               ASYNC's handshaking options.
+INIT.INC.......ASYNC include file.
+               Source for procedures and functions used to
+               initialize, open and close ports.
+IO.INC.........ASYNC include file.
+               Source for procedures and functions that perform
+               basic input/output operations.
+IOLINE.INC.....ASYNC include file.
+               Source for procedures and functions that allow reading
+               and setting RS-232 control signals.
+PLEDIT.INC.....ASYNC include file.
+               Source for procedures and functions that add, change
+               or remove hardware port definitions.
+TIMER.PAS......Interrupt-driven timer UNIT.  Required by ASYNC and used
+               for most timing-driven operations.  May also be used
+	       seperately from ASYNC.
+TIMER.ASM......Assembly source, generates TIMER.OBJ when assembled;
+               required by TIMER.PAS.
+TIMER.OBJ......The assembled object code for TIMER.ASM; used by the
+               TIMER unit.
+TIMER.TPU......Ready-to-USE unit file.  Compiled with BP v7.0, all
+               debug options and error checking disabled.
+DUMBTERM.PAS...Source for a short demonstration program that shows
+               the usage of the basic ASYNC services in a simple
+               terminal application.
+DUMBTERM.EXE...Ready-to-run version of DUMBTERM.PAS, compiled with
+               BP v7.0.
+PORTTEST.PAS...Another demo program, shows how the ASYNC global
+               variables can be used to determine system COM port
+               configuration.
+PORTTEST.EXE...Ready-to-run version of PORTTEST.PAS, compiled with
+	       BP v7.0
+ASYNC.FN.......Quick description of each procedure & function in the
+	       ASYNC unit.  Sorry, this is all that's available for
+	       documentation at this time.
+DESCRIPT.ION...4DOS/NDOS compatable file descriptions for all of the
+               files described above.
+README.TXT.....This file.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

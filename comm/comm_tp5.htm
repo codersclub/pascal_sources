@@ -1,0 +1,83 @@
+<html><head><title>Comm_TP4 v.1.50 - RS-232 Support</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для работы с RS-232. Не поддерживает работу с несколькими портами одновременно. <br><font color=#666666> Comm_TP4 Ver. 1.50 - RS-232 Support for IBM Compatibles. Public domain serial port routines which support RS-232 under Turbo Pascal. Allows to use as many COM ports as you want at the same time. Designed to be relatively simple and easy to use </font>">
+<meta name="keywords" content="pascal, sources, source code, comm_tp5, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;comm_tp5
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Comm_TP4 v.1.50 - RS-232 Support</TD>
+<TD nowrap class=black>&nbsp;Kevin R. Bulgrien</TD>
+<TD class=black align='right'>15.11.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для работы с RS-232.
+Не поддерживает работу с несколькими портами одновременно. <br><font color=#666666>
+Comm_TP4 Ver. 1.50 - RS-232 Support for IBM Compatibles.
+Public domain serial port routines
+which support RS-232 under Turbo Pascal.
+Allows to use as many COM ports as you want at the same time.
+Designed to be relatively simple and easy to use </font></TD><TD class=black colspan=2 align='right'><br><A HREF="comm_tp5.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>30k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    Comm_TP4.PAS Ver. 1.50 - RS-232 Support for IBM Compatibles
+
+                         (c) Copyright, 1989
+                          Kevin R. Bulgrien
+                           November,  1989
+
+                      c/o LeTourneau University
+                        Microcomputer Services
+                            P.O. Box 7001
+                          Longview, TX 75607
+
+INTRODUCTION
+
+This utility is an answer to the many public domain serial port
+routines which I have acquired in the quest for good RS-232 support
+under Turbo Pascal. Unlike the others, this one works.
+Not only does it work, but it also allows you to use as many COM
+ports as you want at the same time.  Designed to be relatively
+simple and easy to use, I hope many will benefit from it.
+
+This code only works under Turbo Pascal versions 4.0 and 5.x.
+For functionally equivalent routines that work under Turbo Pascal
+3.0, look for COMM_TP3.  Also, a Turbo C version called COMM_TC2
+is available.  While it was written for Turbo C 2.0, it will
+probably also work for lower versions as well.  Additionally, I
+am in in the process of developing a Turbo Assembler version
+called Comm_TA1.
+
+The following files must all be present whenever this package is
+distributed:
+
+         COMM_TP4.PAS  -  Turbo 4.0 & 5.x compatible TPU source code
+         COMM_TP4.DOC  -  Documentation for the TPU source code
+         COMM_TTY.PAS  -  Demo terminal emulator which uses COMM_TP4
+
+
+FEATURES
+
+ - Easily expandable interrupt routine
+ - Interrupt driven send and receive routines
+ - Carrier Detect monitoring for modem support
+ - Turbo Pascal 4.0 & 5.x compatible TPU source code
+ - Convenient TPU format keeps your code uncluttered
+ - Easy to customize for your hardware, and software requirements
+ - Uninstalls the interrupt handlers on abnormal program termination
+ - Number of COM ports limited only by buffer sizes & Turbo memory 
+   limits
+ - A TPU which handles 4 ports can be less than 8K in size
+ - Easy to use even if you don't understand how it works
+ - All COM ports handled concurrently in the background
+ - Example TTY and port setup routines included
+ - Optional error checking and error messages
+ - Extensive documentation for software use
+ - Heavily documented source code</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

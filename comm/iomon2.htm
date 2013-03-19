@@ -1,0 +1,89 @@
+<html><head><title>IOMON 2.0 - Protected mode I/O port monitor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Резидентная программа для слежения за вводом-выводом через последовательные порты. Работает в защищенном режиме. <br><font color=#666666> IO Monitor 80386 control program watches COM ports acting as a line monitor. Originally in Programmers Journal, modified by Terry Hughes of TurboPower Software, containing the full ASM, C, & PAS source and executable for a 386 control program TSR with a new report program converts the memory buffer to an Ascii report. </font>">
+<meta name="keywords" content="pascal, sources, source code, iomon2, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;iomon2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;IOMON 2.0 - Protected mode I/O port monitor</TD>
+<TD nowrap class=black>&nbsp;Rick Knoblaugh</TD>
+<TD class=black align='right'>10.06.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Резидентная программа для слежения за вводом-выводом
+через последовательные порты. Работает в защищенном режиме. <br><font color=#666666>
+IO Monitor 80386 control program watches COM ports acting
+as a line monitor. Originally in Programmers Journal,
+modified by Terry Hughes of TurboPower Software,
+containing the full ASM, C, & PAS source and executable
+for a 386 control program TSR with a new report program
+converts the memory buffer to an Ascii report. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="iomon2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>34k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">IOMON - Protected mode I/O port monitor
+---------------------------------------
+IOMON is a protected mode I/O monitor written by Rick Knoblaugh and
+published in an article in Programmer's Journal (volume 9, number 5).
+The program files for IOMON are copyright 1991 ASMicro and distributed
+here with their permission.
+
+IORPT is a reporting program that reads the memory resident data buffer
+maintained by IOMON and produces several reports. IORPT was written by
+Terry Hughes of TurboPower Software and is released to the public
+domain.
+
+Version 2.0
+10/92
+
+
+Overview
+--------
+IOMON and IORPT can be used to monitor and report on the serial port I/O
+performed by any communications program. As you might guess by their
+names, IOMON does the monitoring and IORPT does the reporting.
+
+This combination of programs can add some powerful and convenient
+debugging capabilites to your toolbox. Previously, if you wanted to
+monitor the exchange of data in a serial link you needed a data scope or
+an extra PC (and cables) equipped with data scope-like software. While
+there will still probably be times when only a data scope will do, IOMON
+and IORPT make it possible to monitor many such communication exchanges
+directly on one of the participating machines.
+
+IOMON is a memory resident monitor that tracks all accesses to a
+specified range of I/O ports. As presented here, its intended purpose is
+to monitor the range of I/O ports that belong to a UART. The tremendous
+utility of such a program is that it can monitor communications programs
+as they run, without interfering with them, and note all serial data
+input and output as well as modem and line control performed by that
+program.
+
+IOMON was originally published in Programmer's Journal as a general
+purpose I/O port monitor. We've made one small modification to it to
+allow the its information buffer to be truly circular (as published, the
+buffer was cleared everytime it wrapped).
+
+We've supplied the file IOMON.EXE executable file as well as the source
+code files distributed with the Programmer's Journal article (with our
+small modification). For more information about how IOMON works we
+suggest you read Rick Knoblaugh's article on the program in Programmer's
+Journal 9.5.
+
+IORPT is a reporting program that reads IOMON's memory resident data
+buffer and produces two reports -- a "trace" and "audit" report. The
+trace report is identical to the Tracing facility provided by Async
+Professional. The audit report is similar to Async Professional's event
+logging report except that it lacks a time stamp.
+
+Note that while IOMON is a general purpose I/O monitor, IORPT assumes
+that IOMON is currently being used to monitor the UART ports of COM
+port. Running IORPT while IOMON is monitoring some non-UART port
+addresses will give unpredictable results.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

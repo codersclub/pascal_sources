@@ -1,0 +1,78 @@
+<html><head><title>Simple Communication Module</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для работы с коммуникационными портами COM1...COM4 со скоростью до 115200 бод. Простая терминальная программа, напоминающая chat. Приведена распайка нуль-модемного кабеля.">
+<meta name="keywords" content="pascal, sources, source code, communic, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;communic
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Simple Communication Module</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexfru@chat.ru">Alex Frounze</a></TD>
+<TD class=black align='right'>22.01.1999</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для работы с коммуникационными портами COM1...COM4
+со скоростью до 115200 бод. Простая терминальная программа,
+напоминающая chat. Приведена распайка нуль-модемного кабеля.</TD><TD class=black colspan=2 align='right'><br><A HREF="communic.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        -= In Russian =-
+
+COM.PAS    Модуль для работы с коммуникационными портами COM1...COM4.
+ZMODEM.PAS Простая терминальная программа, напоминающая chat. Через нее
+           могут болтать два человека, сидящих за разными компьютерами,
+           соединенными нуль-модемным кабелем.
+
+                                                  Автор: Фрунзе Алексей
+
+                        -= In English =-
+
+COM.PAS    Communcation ports COM1...COM4 programming unit.
+ZMODEM.PAS Simple terminal program resembling chat. You must connect
+           2 computers via z-modem cable and run ZMODEM on each computer.
+           You can chat with another human after the port selection.
+
+                                              Author: Alexei A. Frounze
+
+              Нуль-модемный кабель (Z-modem cable)
+
+           Кабель с двумя 9-ти контактными штекерами
+               (Cable with two 9-pin connectors)
+              +--------+               +--------+
+              | RxD  2 +-------+  +----+ 2  RxD |
+              +--------+   +---|--+    +--------+
+              | TxD  3 +---+   +-------+ 3  TxD |
+              +--------+               +--------+
+              | Gnd  5 +---------------+ 5  Gnd |
+              +--------+               +--------+
+
+           Кабель с двумя 25-ти контактными штекерами
+              (Cable with two 25-pin connectors)
+              +--------+               +--------+
+              | RxD  3 +-------+  +----+ 3  RxD |
+              +--------+   +---|--+    +--------+
+              | TxD  2 +---+   +-------+ 2  TxD |
+              +--------+               +--------+
+              | Gnd  5 +---------------+ 5  Gnd |
+              +--------+               +--------+
+
+           Кабель с 9-ти и 25-ти контактными штекерами
+            (Cable with 9-pin and 25-pin connectors)
+              +--------+               +--------+
+              | RxD  2 +-------+  +----+ 3  RxD |
+              +--------+   +---|--+    +--------+
+              | TxD  3 +---+   +-------+ 2  TxD |
+              +--------+               +--------+
+              | Gnd  5 +---------------+ 5  Gnd |
+              +--------+               +--------+
+             9-ти (9-pin)            25-ти (25-pin)
+
+Homepage: http://www.chat.ru/~alexfru
+E-mail  : alexfru@chat.ru</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

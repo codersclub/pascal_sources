@@ -1,0 +1,83 @@
+<html><head><title>Serial - Fossil driver interface for TP5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Интерфейсный модуль для работы с последовательным портом через Fossil драйвер. В качесте бонуса приведен модуль AnsiView. <br><font color=#666666> SERIAL is a unit written to take advantage of many of the FOSSIL drivers out on the market such as X00.SYS or BNU.COM. If the system does not detect a FOSSIL driver in memory, then it resorts to standard interrupt driven serial I/O without the ability to open up more than one port at a time.</font> <b>ANSIView</b> unit included.">
+<meta name="keywords" content="pascal, sources, source code, fsserial, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fsserial
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Serial - Fossil driver interface for TP5</TD>
+<TD nowrap class=black>&nbsp;Marcos R. Della</TD>
+<TD class=black align='right'>29.06.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Интерфейсный модуль для работы с последовательным портом через
+Fossil драйвер. В качесте бонуса приведен модуль AnsiView. <br><font color=#666666>
+SERIAL is a unit written to take advantage of many of the FOSSIL drivers
+out on the market such as X00.SYS or BNU.COM.
+If the system does not detect a FOSSIL driver in memory,
+then it resorts to standard interrupt driven serial I/O
+without the ability to open up more than one port at a time.</font>
+<b>ANSIView</b> unit included.</TD><TD class=black colspan=2 align='right'><br><A HREF="fsserial.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">SERIAL.PAS - 14 Jan 91
+             15 Jan 91 (Last Modification)
+
+                    By Marcos R. Della
+                       5084 Rincon Ave.
+                       Santa Rosa, CA 95409
+
+                       CIS: 71675,765
+
+This unit is designed to allow the user to use a FOSSIL driver for
+a serial unit that is event-driven aware.  To do this, the input
+from the modem is given an event status number just like the mouse or
+keyboard.  All input is then routed directly through the event driver
+for all your dialogs to use.  The output to the modem is in the form
+of a series of events that you can use or direct calls via an object.
+Note that these calls are the basics and do not halt for buffer
+overruns in either Tx or Rx.  Your application program will have to
+monitor the serCarrier and serTxBuffer events to keep track if there
+is a carrier or if there is room in the TX buffer for more to be
+sent.
+
+Note that this unit was written to take advantage of many of the
+FOSSIL drivers out on the market such as X00.SYS or BNU.COM.  If
+the system does not detect a FOSSIL driver in memory, then it
+resorts to standard interrupt driven serial I/O without the ability
+to open up more than one port at a time. (Currently... This may
+change in the future)
+
+
+ANSIVIEW.PAS - 24 January 1991
+
+                    By Marcos R. Della
+                       5084 Rincon Ave.
+                       Santa Rosa, CA 95409
+
+                       CIS: 71675,765
+
+This Unit was written so that I had something that reminded me of the
+original WRITELN and WRITE statments of pascal where I was working
+with the screen and there were various definate controls I had using
+the GOTOXY and CLRSCR routines.  Under TVision, you no longer have
+these controls and need to learn a completely different way of getting
+info on the screen.
+
+AnsiView was written to give you some of these old methods while still
+using the TVision platform. That is, your screen is a scroll window of
+your size choosing (You can define a screen 128,2048 and use the gotoxy
+to get to anywhere on that screen!)  Also if you turn on the ANSI
+option, the driver will recognise ANSI controls (For reading those ANSI
+files directly and displaying them!)
+
+Because this is also a TVision enviroment, your screen will also be
+saved if you do a desktop save! Wonderful stuff eh?</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

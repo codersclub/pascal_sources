@@ -1,0 +1,395 @@
+<html><head><title>FOSSIL Rev 5 Interface Library v1.20</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Интерфейсная библиотека для работы с Fossil - драйвером Rev 5.0. Написано полностью на ассемблере, подключается к программам как на Паскале, так и на С.<br><font color=#666666> The source and objects contained in this archive are a simple FOSSIL interface library for any full Revision 5 specification FOSSIL driver implimentation for MS-DOS on an 8088 through 80386.  It is small and compact, having been written in assembly using large model, pascal style calling conventions.  It may therefore be used with any brand of C, Pascal, Modular 2 or other high level language supporting MicroSoft object file format interfacing.</font>">
+<meta name="keywords" content="pascal, sources, source code, flib120, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;flib120
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FOSSIL Rev 5 Interface Library v1.20</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:3:632/348@Fidonet">David Nugent</a></TD>
+<TD class=black align='right'>21.02.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Интерфейсная библиотека для работы с Fossil - драйвером Rev 5.0.
+Написано полностью на ассемблере, подключается к программам
+как на Паскале, так и на С.<br><font color=#666666>
+The source and objects contained in this archive are a simple FOSSIL
+interface library for any full Revision 5 specification FOSSIL driver
+implimentation for MS-DOS on an 8088 through 80386.  It is small and
+compact, having been written in assembly using large model, pascal
+style calling conventions.  It may therefore be used with any brand
+of C, Pascal, Modular 2 or other high level language supporting
+MicroSoft object file format interfacing.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="flib120.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>27k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">------------------------------------
+Rev 5 FOSSIL Interface Library v1.20
+by David Nugent, 3:632/348@Fidonet
+------------------------------------
+
+The source and objects contained in this archive are a simple
+FOSSIL interface library for any full Revision 5 specification
+FOSSIL driver implimentation for MS-DOS on an 8088 through 80386.
+It is small and compact, having been written in assembly using
+large model, pascal style calling conventions.  It may therefore
+be used with any brand of C, Pascal, Modular 2 or other high
+level language supporting MicroSoft object file format
+interfacing.
+
+The example(s) provided are for the C language.  It has been
+tested fully with both MicroSoft C v5.10 and Turbo C v1.50 &
+v2.00.  The C source file included originally used a proprietary
+C library and has been 'converted' by hand to use either MSC or
+Turbo C library functions; this has not, however, been tested.
+The functions it contains are examples of how to send and receive
+via the FOSSIL driver and demonstrate some of the functions
+within the library.
+
+No extensive documentation will be provided here.  That means,
+unfortunately, that I can't say "RTFM" in case of problems;
+instead, I'll say "UTSL", or "Use the Source, Luke!".  :-)  A
+copy of the draft Revision 5 FOSSIL Specification by Rick Moore
+would be more than handy.  I haven't gone into any great lengths
+in discussing the interface where this is adequately covered in
+that document.
+
+These routines are public domain.  They should be error free;
+I've been using them for some months.  They must be assembled
+using either Borland's TASM v1.0 or MASM v5.10 or probably later
+versions (if available) of either of these products.  These
+source files utilise the advanced high level language interfacing
+capability of these assemblers.  Conversion to other assemblers
+or earlier versions of MASM would be difficult, but not
+impossible, but you should be well versed in how MASM 5.10 does
+its HLL "PROC" stuff; this produces quite a bit of entry and exit
+code not apparent from just looking at the source.
+
+NOTE:  While large model has been used in assembling these files,
+you are still able to use small, medium or whatever other model
+you like if you #include the file fossil.h in your C files.
+Since it contains fully prototyped functions, near to far pointer
+and calling conversion is automatically carried out.  The library
+is also compatible with "Tiny" (.COM) model since no segment
+references are made whatsoever - however you should include the
+"_FOSSIL" code segment in the code combine class and group in
+order to place this code in the same physical segment as the rest
+of the executable.
+
+
+
+fos_api.asm	  \
+fos_blk.asm	   \
+fos_buf.asm	    \
+fos_chio.asm	     \	 Assembler source
+fos_ctl.asm	      |    for FOSSIL
+fos_kbd.asm	     /	   Interface
+fos_spc.asm	    /
+fos_time.asm	   /
+fos_vid.asm	  /
+
+flibobj.zip		Object files
+
+fossil.inc		Used by the ASM files above
+
+fossil.lib		TC library file
+
+flib.pas		TP source for Fossil unit
+flib.tpu		TP 5.0 Fossil unit
+
+makefile		NDMAKE compatible makefile C
+
+fossil.h		Generic C include file
+
+tcconfig.tc	  \	Very simple dumb terminal
+term.c		   |	program written in C.
+term.h		  /
+
+term.pas		Similar dumb terminal in TP5.x
+
+
+---------
+FUNCTIONS
+---------
+
+Apologies to the non-C users.  Its been some time since I've used
+either Pascal or Modular 2 (in fact any language other than
+assembler or C!), since I find C fullfils my own personal and
+professional programming requirements more than adequately.
+
+Thanks to Phil MacKay, source for a Pascal unit is included.  The
+Pascal interface has not been thoroughly tested at this time, but
+enough for at least the "dumb" terminal example provided to work.
+The unit provides all the necessary functions and procedure
+declarations.
+
+
+
+--- int pascal far ComPortStat (int port);
+
+   Returns COM port status for the selected port, which must be
+   initialised (see ComPortInit).  For the meanings of the bit
+   flags refer to the Rev 5 FOSSIL spec.
+
+
+--- int pascal far ComRxChar (int port);
+
+   Receive a character from a port.  This will wait for a
+   character to be received, if none is available when called.
+   Important, you would be well advised NOT to call this unless
+   you were sure that there in fact is a character available; use
+   ComPortStat or ComRxPeek to see if there is first.
+
+
+--- int pascal far ComRxPeek (int port);
+
+   See if a character is available from the modem.  Returns the
+   character if available or -1 if not.  This does not take the
+   received character out of the buffer, and will be returned
+   again by executing ComRxChar.
+
+
+--- int pascal far ComKbPeek (void);
+
+   See if a character has been typed at the local keyboard.
+   Returns the character (actually the character plus the IBM
+   scan code times 256, so you can easily distinguish between '+'
+   and Grey'+').  This call does not flush the key, which will be
+   available again by calling ComKbChar.
+
+
+--- int pascal far ComKbChar (void);
+
+   Get a character from the keyboard.  If none is available, it
+   waits until a key has been hit.
+
+
+--- int pascal far ComPortInit (int port, void far *flagptr,
+                                struct finfo far *infoptr);
+
+	Initialise a port for FOSSIL (bufferred and interrupt
+	driven) processing.  If flagptr is used (it points to a
+	byte location), the value at that memory location will be
+	incremented once every time a ^C is entered at the local
+	keyboard (automagically).  If the third parameter is left
+	as zero, it will be ignored.  Otherwise, it should be the
+	memory address of a structure/record to return the FOSSIL
+	driver's revision number and maximum function call number
+	(useful for testing a minimum standard - the maximum
+	function number of a FOSSIL revision 5 compatible driver
+	is 1B hex, or 27 decimal).
+	This function returns a value hex 1954 if a FOSSIL driver
+	is installed.  Otherwise you would be well advised to not
+	continue!
+
+
+--- void pascal far ComPortDeInit (int port);
+
+	This should be called to deinitialise the communcations port
+	and disable interrupt processing on the port.  This would
+	turn off hardware communications interrupts and route all
+	communcations calls to the usual BIOS (or equivalent).
+
+
+--- int pascal far ComPortSet (int port, unsigned parms);
+
+	Set baud rate and communcations parameters on the given COM
+	port.  See the rev 5 FOSSIL documentation for details.  The
+	"parms" parameters contains the required bit pattern.
+
+
+--- int pascal far ComSetDtr (int port, int state);
+
+	Allows control of the modem DTR signal.  Dropping DTR for a
+	short period (say &gt; .5 sec) will force a modem to hang up
+	in most cases (modem willing).
+
+
+--- void pascal far ComFlowCtl (int port, unsigned mask);
+
+	Allows the application to control flow control protocols
+	used at the interrupt service level.  In other words, it
+	allows you to switch off and on XON/XOFF (or ^S/^Q) and
+	CTS/RTS handshaking.  If running a high speed modem with
+	the FOSSIL driver 'locked' at a particular baud rate, you
+	may find that CTS/RTS handshaking cannot be controlled
+	since this is automatically provided in these circumstances.
+	An additional flag (see FOSSIL spec) allows finer control
+	over the FOSSIL's transmitter.
+
+
+--- int pascal far ComBrkChk (int port, unsigned mask);
+
+	Sets or resests ^C/^K checking (from remote).  If enabled,
+	the FOSSIL automatically makes ^C and ^K 'transparent'
+	from the remote (as are flow control XON and XOFFs), but
+	instead sets the flag returned by this call.
+
+
+--- void pascal far ComTxBrk (int port, int flag);
+
+	Sets (transmits) or resets the break signal line in the
+	modems signal.  This signal is often used for special
+	processing or override sifnalling between local and remote
+	systems.
+
+
+--- void pascal far ComDrvInfo (int port, void far *buf, int sz);
+
+	Returns a structure containing information about the currently
+	installed FOSSIL driver.  See FOSSIL Rev 5 specification for
+	this structure.
+
+
+--- int pascal far ComTxChar (int port, unsigned char chr);
+
+	Unconditionally transmits a character, or rather places the
+	character into the FOSSIL's transmit queue.  If there is no
+	room in the transmit buffer, this call will wait until there
+	is.  It is recommended that this call should either be
+	avoided (use the "no wait" version instead) or be used when
+	there is guaranteed to be room, since there is a risk of this
+	call "hanging" the machine waiting for the buffer to make
+	room, and there is no check for a 'stuck' transmitter.  Use
+	ComPortStat to determine if there is room.
+
+
+--- int pascal far ComTxChrNW (int port, unsigned char chr);
+
+	Attempt to transmit a character if there is room in the
+	transmit buffer.  This call does not wait if there is no
+	room available.  Returns 1 if character was accepted,
+	0 if not and another value indicates an error (port number
+	incorrect etc.).
+
+
+--- void pascal far ComRxPurge (int port);
+
+	Purge the receive buffer, discarding any characters received.
+
+
+--- void pascal far ComTxFlush (int port);
+
+	Flush the transmit buffer by waiting until it is empty.  On
+	return, the transmit buffer is guaranteed to be empty.
+
+
+--- void pascal far ComTxPurge (int port);
+
+	Purge the transmit buffer, discarding any characters placed
+	in the TX buffer but not yet sent.
+
+
+--- int pascal far ComRxBlk (int port, char far *buf, int cnt);
+
+   Receive a block of data.  This call attempts to receive 'cnt'
+   number of bytes to the address 'buf'; it returns the number of
+   bytes actually received, which can be zero (if not is
+   available).  Using this method is much faster than individual
+   character fetches (lower overhead) and is far preferred in
+   high speed communications or intense activity (such as during
+   file transfers).
+
+
+--- int pascal far ComTxBlk (int port, char far *buf, int cnt);
+
+	Transmit a block of data, returning the number of bytes
+	used.  Since the FOSSIL's transmit buffer may not have
+	sufficient room, transmission of the complete block is
+	never guaranteed.  This call has significantly less
+	overhead than individual character transmit, and should
+	be used in preference at least in high speed situations
+	or at peariods of intense activity (such as file transfers).
+
+
+--- void pascal far ComSetCur (int col, int row);
+
+	Set cursor to the given row and column.  Row and column
+	numbers are zero based.
+
+
+--- void pascal far ComGetCur (int far *row, int far *col);
+
+	Returns the cursor position rwo and column to the words
+	pointed to by 'row' and 'column'.
+
+
+--- void pascal far ComWrAnsi (unsigned char ch);
+
+	Write a character with ANSI support at the currrent cursor
+	location. (local)
+
+
+--- void pascal far ComWrChar (unsigned char ch);
+
+	Write a character without ANSI support at the current cursor
+	location. (local)
+
+
+--- void pascal far ComCdWatch (int port, int flag);
+
+	Enable (if flag = 1) or disable (if flag = 0) carrier detect
+	watchdog.  If carrier is lost while enabled, the machine will
+	reboot.
+
+
+--- void pascal far ComReboot (int flag);
+
+	Reboot (warm if flag = 0, cold if flag = 1).
+
+
+--- void pascal far ComTimer (int port, struct tinfo far *t);
+
+	Returns the system timer information.  See the definition
+	of the structure tinfo in fossil.h for its structure.
+
+
+--- int pascal far ComInstFunc (int flag, int far (*func)());
+
+	Hook (where flag = 1) or unhook (flag = 0) a background
+	function linked into the sytem timer chain.  The function
+	in question (whose address is given by 'func') should
+	not rely on any register settings etc. and should save all
+	CPU registers and restore them before returning with a
+	far return.
+
+
+--- int pascal far ComInstAPI (int code,
+                               void far (*entry)(void));
+--- int pascal far ComDeInstAPI (int code,
+                                 void far *(entry)(void));
+
+	These functions install or uninstall a multiplex appendage
+	to FOSSIL, allowing the calls to INT14H to be extended.
+	VFOSSIL is such an appendage.
+
+
+==================================
+HISTORY
+==================================
+
+Mid '89		First 'release'; largely working version for C
+		language only
+Late '89	First support for Pascal (Turbo 5.0) added, TPU
+		and almost working example ...
+Feb '90		Fixed several bugs resulting from Pascal support;
+		the source must now be compiled specifically for
+		the language with the following MASM/TASM defines:
+
+	/DLANG_C	Forces C calling conventions (if you use
+			this, be sure to remote 'pascal' from the
+			function declarations in FOSSIL.H)
+	/DLANG_PAS	Forces segment definition to be what TP
+			5.0/5.5 requires, and uses all the Pascal
+			necessaries
+	&lt;none&gt;		By default, Pascal calling conventions are
+			used (as defined in FOSSIL.H), but the objs
+			and .LIB are suitable for C; MSC 5.x, TC
+			2.0 or ZTC.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

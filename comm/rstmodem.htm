@@ -1,0 +1,88 @@
+<html><head><title>RstModem v1.1 - Reset Modem without Turn Off</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для сброса и инициализации &quot;зависшего&quot; модема без его выключения. <br><font color=#666666> Hangs up and resets your modem without turning it off, or sends a specified command to modem. Includes Turbo Pascal Source Code. </font>">
+<meta name="keywords" content="pascal, sources, source code, rstmodem, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rstmodem
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RstModem v1.1 - Reset Modem without Turn Off</TD>
+<TD nowrap class=black>&nbsp;Frank Longmore</TD>
+<TD class=black align='right'>18.01.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для сброса и инициализации
+"зависшего" модема без его выключения. <br><font color=#666666>
+Hangs up and resets your modem without turning it off,
+or sends a specified command to modem.
+Includes Turbo Pascal Source Code. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="rstmodem.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         RSTMODEM.EXE Ver. 1.1
+                                  by
+                            Frank Longmore
+
+   USAGE: RSTMODEM (comm port #) [OPTIONAL MODEM COMMAND]
+
+          * comm port must be "1" or "2" only
+          * optional modem command must not contain spaces
+
+What with all the experimenting I've done with BBS software, various
+modems, and countless combinations of "initialization strings",
+I've gotten the modem into a semi-permanent state of confusion many
+times.  Since it's quite an inconvenience to "power down" an internal
+modem, and time consuming to fire up a "comm" program just to send
+reset commands to the modem, I wrote this program.
+
+If no command line parameters are specified, the program will ask
+which comm port is to be initialized and then proceed with
+initializing that comm port.
+
+If the first (or only) command line parameter is the number "1" or
+"2", the program will proceed with initializing that comm port.
+
+The program will then initialize the specified comm port at 1200 Baud,
+even parity, seven data bits, and one stop bit. If no other command
+line parameter is present, It will then send the following strings
+to the modem:
+  ATH0 &lt;CR&gt;                 {hangs up the modem if it was "off-hook"}
+  delay of 800 milliseconds.{to allow for modem response time}
+  AT&F &lt;CR&gt;                 {resets modem to all factory settings}
+  delay of 800 milliseconds.{to allow for modem response time}
+  ATZ  &lt;CR&gt;                 {resets modem}
+  delay of 800 milliseconds.{to allow for modem response time}
+
+Alternatively, if a second command line parameter is used, the modem
+reset strings described above are NOT sent, and the second command
+line parameter IS sent (after initializing the specified comm port
+as described above).
+
+In either case, (0, 1, or 2 command line parameters), the program will
+then read the specified comm port for input characters received from
+the modem, and will display them on the screen.
+
+Trying to reset a comm port which is not communicating with a modem
+will cause some unpredictable characters to be displayed and may
+produce unpredictable results.
+
+RSTMODEM was written in Turbo Pascal 4.0. The async routines which
+actually initialize the comm ports and setup and restore the
+interrupts were written by Kevin R. Bulgrien.  The source code is
+included in the "ZIP" file.
+
+It should run on any kind of a P.C., but it will only reset a modem
+on Comm1 or Comm2 (not Comm3 or Comm4).
+
+RSTMODEM is free, I do not want anything for it.  But there is no
+guarantee of any kind expressed or implied, as they say.
+If you have any comments or have made any improvements, you could
+reach me on Compuserve or Genie.
+
+                                   -- Frank Longmore 4/2/91</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

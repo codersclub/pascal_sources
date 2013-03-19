@@ -1,0 +1,56 @@
+<html><head><title>Toggling the 16550 Fifo Buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для переключения статуса буфера UART. Работает совместно с фоссил-драйвером.<br><font color=#666666> This program will toggle the state of a 16550 UART's FIFO buffer. It only seems to work with the Fossil driver X00.SYS version 1.09b. By toggling the buffer ON, even 4.77 Mhz PC's are able to receive files at a fixed rate of 19,200 baud without error. The code uses portions of the 'Turbo Professional' library. It will not compile without it.</font>">
+<meta name="keywords" content="pascal, sources, source code, 16550s13, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;16550s13
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Toggling the 16550 Fifo Buffer</TD>
+<TD nowrap class=black>&nbsp;David Kirschbaum</TD>
+<TD class=black align='right'>29.03.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для переключения статуса буфера UART.
+Работает совместно с фоссил-драйвером.<br><font color=#666666>
+This program will toggle the state of a 16550 UART's FIFO buffer.
+It only seems to work with the Fossil driver X00.SYS version 1.09b.
+By toggling the buffer ON, even 4.77 Mhz PC's are able to receive
+files at a fixed rate of 19,200 baud without error.
+The code uses portions of the 'Turbo Professional' library. It
+will not compile without it.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="16550s13.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">16550 - A TPBoard utility for toggling the 16550's FIFO buffer
+
+USAGE:  16550 [1-4] [on/off/?]
+
+     Where '1' thru '4' is the COM port,  'on' or 'off' will toggle
+     the FIFO buffer's state, and '?' will show it's status. Turning
+     the buffered mode on is guaranteed to lock up your system if you
+     are using OpusCom, and may cause problems with other programs.
+     It WILL work with X00 version 1.09b, TPBoard, and ProComm Plus.
+
+Toad Hall Tweak, 19 Apr 90
+  Removed "Turbo Professional" compile requirements,
+  other tweaks.
+  No functional changes.
+
+v1.3, 29 Mar 91
+  Finally found some code (on the FIDO Assembly Language echo)
+  to identify 16550-family UARTs.
+  Threw in a new function so we only go fiddling FIFO buffers of the
+  16550 UART.  (Does a 16450 have a FIFO buffer?)
+
+  Sorry, no way to test this myself, being the owner of a mere 8250.
+  (Well, it *does* identify that 8250 anyway!)
+
+  David Kirschbaum
+  Toad Hall</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,79 @@
+<html><head><title>ASYNC12 - Interrupt-driven asyncronous communication</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль для работы с COM портами. Поддерживает до 4х портов одновременно и скорость до 115200 бод. <br><font color=#666666> ASYNC v1.2 - Turbo Pascal communication UNIT that will fully implement interrupt-driven serial communications on a fully PC-compatible computer (those machines that use the 8250 or equivalent UART mapped at the standard addresses). Full simultaneous buffering for both input and output with variable buffer sizes for each port is provided. Unlike many other libraries of a similar nature, up to 4 ports may be active simultaneously (easily modified for more)</font>">
+<meta name="keywords" content="pascal, sources, source code, async12, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;async12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ASYNC12 - Interrupt-driven asyncronous communication</TD>
+<TD nowrap class=black>&nbsp;Mark Schultz</TD>
+<TD class=black align='right'>14.06.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль для работы с COM портами.
+Поддерживает до 4х портов одновременно
+и скорость до 115200 бод. <br><font color=#666666>
+ASYNC v1.2 - Turbo Pascal communication UNIT
+that will fully implement interrupt-driven serial communications
+on a fully PC-compatible computer (those machines that use the 8250
+or equivalent UART mapped at the standard addresses).
+Full simultaneous buffering for both input and output
+with variable buffer sizes for each port is provided.
+Unlike many other libraries of a similar nature,
+up to 4 ports may be active simultaneously (easily modified for more)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="async12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>29k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              &lt;b&gt;ASYNC12&lt;/b&gt;
+     Asyncronous Serial Communications Package for Turbo Pascal V5.0
+                          Version 1.2 - 06/14/89
+                Copyright (C) 1989, Rising Edge Data Services
+
+ASYNC12 is a full-featured Turbo Pascal UNIT that provides
+interrupt-driven serial communication PC-compatable computers
+utilizing standard serial port hardware (INS 8250's or equivalent).
+Unlike similar offerings for Pascal programmers, ASYNC12 supports
+full input and output buffering for up to 4 ports operating
+CONCURRENTLY, with optional full hardware and/or software
+handshaking.  In addition, key high-demand subroutines as well as
+the interrupt driver are implimented in assembly language for maximum
+performance.
+Baud rates to 115200 are supported, as well as non-standard rates
+and all possible wordsize/parity/stopbit combinations allowed by
+the 8250 UART.
+
+Features -- Version 1.2
+=======================
+
+*  Supports up to 4 ports simultaneously.
+*  Completely interrupt driven I/O for greatest efficiency.
+*  Assembly language used for interrupt driver and key high-performance
+   procedures and functions maximize throughput.
+*  Created as a Turbo Pascal UNIT for ease of use.
+*  Tight, well-commented, structured code for ease of modification/
+   enhancement.
+   Includes both Pascal and Assembly source.
+*  Supports both hardware (RTS/CTS) and software (XON/XOFF) handshaking,
+   at user's option.
+*  28 procedures and functions in all to minimize programmer design time.
+
+You may reach me in following ways:
+
+Via US Mail:                      Via Modem
+------------------------          ---------------------------
+Mark L. Schultz                   Best Power Technology BBS
+Rising Edge Data Services         Necedah, WI  USA
+201 Liberty St. Apt. #4           User namp: Mark Schultz (or SYSOP)
+Mauston, WI  USA 53948            Phone: (608) 565-7424
+Voice: (608) 847-4287
+
+I can also be reached at
+Exec-PC multiuser BBS based in Milwaukee, WI USA
+Phone: 414-964-5160.  Username: Best Power</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

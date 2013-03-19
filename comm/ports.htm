@@ -1,0 +1,38 @@
+<html><head><title>Установка параметров COM порта</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Пример установки параметров RS232 посредством программирования портов.">
+<meta name="keywords" content="pascal, sources, source code, ports, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ports
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Установка параметров COM порта</TD>
+<TD nowrap class=black>&nbsp;Евгений Мисник</TD>
+<TD class=black align='right'>09.11.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Пример установки параметров RS232
+посредством программирования портов.</TD><TD class=black colspan=2 align='right'><br><A HREF="ports.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Eugene A. Misnik" &lt;root@corvet.vernet.lv&gt;
+
+&gt;              Мужики!!!
+&gt;    Подскажите как програмно определить максимальную возможную
+&gt;скорость COM-порта и установить ее. А то по всем книжкам
+&gt;говориться что BIOS (Int14h.0) может инициализировать лишь
+&gt;от 150 до 9600.
+
+  Максимальную скорость до 115200 можно выставить, если программироать
+порт непосредственно по его адресам, а не через прерывание.
+
+---
+
+                        Eugene Misnik (root@corvet.vernet.lv)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

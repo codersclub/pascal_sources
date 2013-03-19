@@ -1,0 +1,58 @@
+<html><head><title>IBMCom v3.0 - Communication Unit for IBM PC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простой коммуникационный модуль для работы с COM портами по прерываниям. Приведен пример - эмулятор терминала. <br><font color=#666666> This unit is the communications port interrupt driver for the IBM-PC. It handles handles all low-level i/o through the serial port. Simple test program for IBMCOM added. Acts like a dumb terminal at a fixed speed and with no commands except for Alt-X, to exit the program. It tests the most important parts - receiving and sending characters.</font>">
+<meta name="keywords" content="pascal, sources, source code, ibmcom31, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ibmcom31
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;IBMCom v3.0 - Communication Unit for IBM PC</TD>
+<TD nowrap class=black>&nbsp;Wayne E. Conrad</TD>
+<TD class=black align='right'>02.01.89</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простой коммуникационный модуль для работы с
+COM портами по прерываниям. Приведен пример - эмулятор терминала. <br><font color=#666666>
+This unit is the communications port interrupt driver for the IBM-PC.
+It handles handles all low-level i/o through the serial port.
+Simple test program for IBMCOM added. Acts like a dumb terminal at a fixed
+speed and with no commands except for Alt-X, to exit the program.
+It tests the most important parts - receiving and sending characters.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ibmcom31.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">UNIT ibmcom;
+
+{Version 3.0}
+
+{This unit is the communications port interrupt driver for the IBM-PC.
+It handles handles all low-level i/o through the serial port.  It is
+installed by calling com_install.  It deinstalls itself automatically
+when the program exits, or you can deinstall it by calling com_deinstall.
+
+Donated to the public domain by Wayne E. Conrad, January, 1989.
+If you have any problems or suggestions, please contact me at my BBS:
+
+    Pascalaholics Anonymous
+    (602) 484-9356
+    2400 bps
+    The home of WBBS
+    Lots of source code
+}
+
+PROGRAM ibmcomt;
+
+{Simple test program for IBMCOM.  Acts like a dumb terminal at a fixed
+speed and with no commands except for Alt-X, to exit the program.
+Obviously, it doesn't test all of IBMCOM, but it tests the most
+important parts -- receiving and sending characters.}
+
+{Read a key from the keyboard.  If it's an ordinary key, the ascii code
+is returned in ch1 and ch2 is #0.  If it's a function key, ch1 is 0 and
+the scan code is in ch2.}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

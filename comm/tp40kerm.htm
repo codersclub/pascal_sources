@@ -1,0 +1,82 @@
+<html><head><title>KERMIT File Transfer Protocol v1.1a for TP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Реализация протокола передачи файлов KERMIT для Turbo Pascal. Кроме собственно протокола включает в себя модули для работы с COM портами, расчета CRC и низкоуровневые функции DOS.">
+<meta name="keywords" content="pascal, sources, source code, tp40kerm, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tp40kerm
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;KERMIT File Transfer Protocol v1.1a for TP</TD>
+<TD nowrap class=black>&nbsp;Terje Mathisen</TD>
+<TD class=black align='right'>04.02.1988</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Реализация протокола передачи файлов KERMIT для Turbo Pascal.
+Кроме собственно протокола включает в себя модули для работы
+с COM портами, расчета CRC и низкоуровневые функции DOS.</TD><TD class=black colspan=2 align='right'><br><A HREF="tp40kerm.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>81k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">NOTES ON THIS IMPLEMENTATION OF KERMIT
+
+Capabilities:
+
+     * Wild card transfer
+     * (Limited) Talk to server (GET, SEND, LOGOUT)
+     * (Limited) Server operation
+     * 1 and 2-byte checksums, and 3-byte CRC
+     * 31 packet sliding window
+     * 9024 maximum packet length
+     * Any legal baud rate from 2 to 115200
+     * Attribute packets (File creation and size)
+
+     * Non-standard high-speed option which can transfer full
+       8-bit binary data in the 'D' packets.
+     * Automatic handling of file name collisions:
+       Default values:
+       - No attribute packet (i.e. no date transferred):
+         Rename the file.
+       - Old file (received-file.date &lt;= existing-file.date)
+         Skip the file.
+       - New file (rec.date &gt; exist.date)
+         Rename existing file to .BAK,
+         Give new file the original name
+     * Save most parameters on a setup file.
+     * Can talk to IBM 370's trough protocol emulators when
+       logged in as a VT100 terminal on the emulator.
+
+   * To save a particular setup, hit F5(Save). A small file with
+     the name KERMIT.INI will be created. If you need more than
+     one setup, the easiest is to rename the setup file. You may
+     then start the program as KERMIT /I=&lt;SetupFile&gt;. If no setup-
+     file was given, the default KERMIT.INI will be used. Under
+     DOS 3+, the .INI file will be looked for in the directory
+     where KERMIT.EXE was found.
+
+   * Start-up commands:
+        The following commands may be given on the command line:
+        - Server
+        - Send &lt;filespec&gt;
+        - Get  &lt;filespec&gt;
+        - Receive
+        If a command is given, it will be executed, and the program
+        will then exit.
+
+   * Features I am working on:
+          VT100 emulation
+          Keyboard macro's
+          Script capabilities (Command line interface)
+
+I hope to get some feedback on what I should put into this
+program, and on how it works on different PC's.
+Please send BIX-mail to TerjeM.
+
+    Terje Mathisen
+    Norsk Hydro Data
+    Norway</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

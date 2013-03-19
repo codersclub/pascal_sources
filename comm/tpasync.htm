@@ -1,0 +1,203 @@
+<html><head><title>Async Manager v2.01 for Turbo PASCAL 5.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль для работы с двумя COM портами одновременно на скорости до 56000 бод.<br><font color=#666666> The Turbo PASCAL Async Manager may access either COM1 or COM2, or both simultaneously. It is capable of up to 56,000 baud, and supports any normally combination of data bits, stop bits and parity.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpasync, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpasync
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Async Manager v2.01 for Turbo PASCAL 5.5</TD>
+<TD nowrap class=black>&nbsp;Kaleb Axon</TD>
+<TD class=black align='right'>23.01.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль для работы с двумя COM портами
+одновременно на скорости до 56000 бод.<br><font color=#666666>
+The Turbo PASCAL Async Manager may access either COM1 or COM2, or
+both simultaneously. It is capable of up to 56,000 baud, and
+supports any normally combination of data bits, stop bits and
+parity.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpasync.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Turbo PASCAL Async Manager        version 2.01
+
+Copyright 1986-1990 by Kaleb Axon. All Rights Reserved.
+
+
+For use with Turbo PASCAL 4.0
+                          5.0
+                          5.5
+
+(Originally written in Turbo PASCAL 3.01)
+
+The only requirement for freely incorporating this code into your
+own programs is that the author of this code be given due credit
+wherever is most appropriate (program's opening screen, copyright
+page or introduction of manual, etc).
+
+Information on updates and new releases to add to your library of
+Turbo PASCAL source will be released from time to time via the
+PASCAL net-mail echo, or you may drop me a note with your name
+and address (sent to the address below).
+
+If you have any questions or comments, please direct them to:
+
+      Kaleb Axon
+      1841 W. Katella St.
+      Springfield, MO 65807
+
+
+The purpose of this unit is to provide access to the serial ports
+from Turbo PASCAL.
+
+
+
+GENERAL FEATURES AND LIMITATIONS
+
+
+The Turbo PASCAL Async Manager may access either COM1 or COM2, or
+both simultaneously. It is capable of up to 56,000 baud, and
+supports any normally combination of data bits, stop bits and
+parity.
+
+The TPAsync unit must NEVER be overlaid under any circumstances.
+When running in a multi-tasking environment, any program using
+the TPAsync unit must be defined as non-swappable; that is to
+say, it must be present and in the exact same location in memory
+at all times.
+
+
+
+PRIMARY FUNCTIONS
+
+
+These are the functions that are most often used. In fact, these
+are the only functions I originally used in my own programming. A
+reasonably decent program could be developed using these
+functions. Once these primary functions are covered, we will go
+on to discuss the extended functions.
+
+----------
+The AsyncOpen function opens an async port for access by your
+program, and sets up an input buffer. The handle may be 1 or 2.
+The handle is used in future calls to indicate which serial port
+to access. Note that the handle need not be the same as the com
+port. For example, COM1 could be opened using handle #2, and COM2
+could be opened using handle #1. This may seem odd, but for my
+purposes, it was originally a good idea, and I never saw any need
+to change it. The function returns true if the operation was
+successful, or false if it failed.
+
+  function AsyncOpen(Handle   : byte;
+                     ComPort  : integer;
+                     BaudRate : word;
+                     Parity   : char;
+                     DataBits : integer;
+                     StopBits : integer)
+                   : boolean;
+
+----------
+The AsyncSend procedure sends one character to the specified
+serial port.  Output is not buffered.
+
+  procedure AsyncSend(Handle : byte;
+                      Ch     : char);
+
+----------
+The AsyncBufferRead function reads one character from the
+specified serial port if one is available. If a character was
+successfully read, the function returns true; otherwise, it
+returns false.
+
+  function AsyncBufferRead(    Handle : byte;
+                           var C      : char)
+                         : boolean;
+
+----------
+The AsyncBufferClose procedure closes the specified serial port.
+
+  procedure AsyncClose(Handle : byte);
+
+EXTENDED FUNCTIONS
+
+
+The AsyncSendString procedure sends a string to the specified
+serial port.  Output is not buffered.
+
+  procedure AsyncSendString(Handle : byte;
+                            S      : string);
+
+----------
+The AsyncBufferCheck function returns true if a character is
+currently available from the specified serial port for input via
+the AsyncBufferRead function.
+
+  function AsyncBufferCheck(Handle : byte) : boolean;
+
+----------
+The Carrier function returns true if the CD (Carrier Detect) pin
+on the specified serial port is hot.
+
+  function Carrier(Handle : byte) : boolean;
+
+----------
+The AsyncChange procedure changes the baud rate, data bits,
+parity and stop bits for the specified serial port without
+actually closing the port or clearing the input buffer.
+
+  procedure AsyncChange(Handle   : byte;
+                        BaudRate : word;
+                        Parity   : char;
+                        DataBits : integer;
+                        StopBits : integer);
+
+----------
+The AsyncCloseKeepDTR procedure closes the specified serial port,
+but does not drop the DTR line. AsyncClose causes the carrier to
+be dropped on most machines, and AsyncCloseKeepDTR will avoid
+dropping the carrier.
+
+  procedure AsyncCloseKeepDTR(Handle : byte);
+
+
+SAMPLE PROGRAM
+
+{ This program does not implement all the features of the Turbo
+  PASCAL Async Manager, but should give a general idea as to how it
+  is used. }
+
+program Sample;
+uses
+  Crt,
+  TPAsync;
+
+var
+  Ch         : char;
+  OldCarrier : boolean;
+
+begin
+  if AsyncOpen(1,1,2400,'N',8,1) then
+  begin
+    WriteLn('COM1 opened successfully; press Ctrl-6 to exit.');
+    repeat
+      if AsyncBufferRead(1,Ch) then
+        Write(Ch);
+      if KeyPressed then
+      begin
+        Ch := ReadKey;
+        if Ch &lt;&gt; ^^ then
+          AsyncSend(1,Ch);
+      end else
+        Ch := ^@;
+    until Ch = ^^;
+    AsyncClose(Ch);
+  end else
+    WriteLn('Couldn''t open COM1!');
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

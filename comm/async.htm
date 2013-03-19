@@ -1,0 +1,67 @@
+<html><head><title>Async - Multi-Port Serial Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный многопортовый коммуникационный модуль. Поддерживает до 4х портов (два одновременно), скорость до 110000 бод.<br><font color=#666666> A multi-port serial unit that supports baudrates up to 110,000</font>">
+<meta name="keywords" content="pascal, sources, source code, async, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;async
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Async - Multi-Port Serial Unit</TD>
+<TD nowrap class=black>&nbsp;Patrick Hunlock</TD>
+<TD class=black align='right'>19.10.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный многопортовый коммуникационный модуль.
+Поддерживает до 4х портов (два одновременно), скорость до 110000 бод.<br><font color=#666666>
+A multi-port serial unit that supports baudrates up to 110,000</font></TD><TD class=black colspan=2 align='right'><br><A HREF="async.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This unit was written by Patrick Hunlock, 10/19/1994
+
+Copyright @ 1994 by Patrick Hunlock - all rights reserved
+
+Software License Agreement: If you use this unit you are bound by
+it's terms.
+
+you may use this unit in your programs without royalties. if you use
+this unit my name and the copyright notice must appear beneath your
+name and copyright notice even if you have made significant
+alterations to the source code in this unit.  this source code may
+only be transmitted via the telephone system.
+it may not be distributed on any magnetic, optical, or any future
+computer media format without prior consent of the copyright
+holder.  no charge may ever be levied for the receipt of this source
+code other than normal phone charges and/or normal connect charges on
+a bbs which charges for access.  any charges above and beyond what
+would be considered normal access charges to download this source is
+considered a sale of this source code which is expressly prohibited
+by this license agreement.
+you may distribute this source code via the telephone system (i.e.
+bbs or computer network) in it's original form only, you may not add
+or subtract to/from it in any way shape or form.
+
+This ASYNC unit implements a COMPLETE multi-port serial interface
+wrapped in a turbo pascal object.  Baud rates up to 110,000 are
+supported.  Up to four ports may be opened at a time, up to two ports
+may be active at any given time (four can be active so long as they
+do not share interrupts).
+
+Some considerations.  A com port which shares the same interrupt as
+a serial mouse will over-ride the mouse driver for the duration of
+the program.  If you have a mouse on Com1, avoid using Com3 in your
+program.
+
+Likewise if you have a mouse on Com2, avoid using Com4 in your
+program. A mouse on a BUS card will not be affected by this unit.
+Default addresses for the 4 com ports dictate that com1 & com3, and
+com2 & com4 share an interrupt on the system bus.  As such while you
+can open both ports, make sure that only - ONE of the ports on the
+shared interrupt has been .ENABLED at any one time.
+See the .ENABLE and .DISABLE procedures for more information.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

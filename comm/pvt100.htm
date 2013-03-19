@@ -1,0 +1,72 @@
+<html><head><title>PVT100 - VT100 emulator for TP6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эмулятор терминала VT100 для TP6.0. <br><font color=#666666> PVT100 is a translation into pascal (tp 6.0) of CVT100 a VT100 emulator written in C by Jerry Joplin. </font>">
+<meta name="keywords" content="pascal, sources, source code, pvt100, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pvt100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PVT100 - VT100 emulator for TP6.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:desliem@umoncton.ca">Michel Deslierres</a></TD>
+<TD class=black align='right'>10.10.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Эмулятор терминала VT100 для TP6.0. <br><font color=#666666>
+PVT100 is a translation into pascal (tp 6.0)
+of CVT100 a VT100 emulator written in C by Jerry Joplin. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pvt100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>44k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PVT100 is actually a translation into pascal (tp 6.0) of
+CVT100 a VT100 emulator written in C by Jerry Joplin. This
+translation was "homework" for me as I wanted to learn how to
+write a small communication package. I was impressed with the
+fact that CVT100 was Windows and DesqView aware. While I did
+compile PVT100 and did use it to communicate with an HP3000
+running HP-UX, I cannot vouch for the accuracy of the
+emulator.
+
+Joplin does mention in his documentation that he had a
+problem with the colour routines he used. The problem did not
+go away during the translation unfortunately. In the Heath 19
+emulator that I eventually wrote I decided to avoid the whole
+issue. The screen is not updated when colours are changed and
+only new text written to the screen use the new colours.
+
+For the most part the translation was done in a rather
+mechanical fashion and the resulting code is not the best
+pascal code. I believe that the pascal units correspond quite
+well to Joplin's c modules except for a few routines that may
+have been moved to reduce the amount of circular references
+between units. I left the mutual calls between KEYIO and
+VTSETUP as it looked like to much work to remove.
+
+This is the dependancy tree of the programme.
+
+             PVT100
+             +-FILEIO (1)
+             | +-DEFINES (6)
+             +-COMIO (2)
+             +-VIDIO (3)
+             +-KEYIO (5)
+             | +-VTSETUP (4)
+             +-VTTIO (7)
+
+COMIOTES.PAS is a small programme I used to debug COMIO.
+
+PVT100 can be compiled by Turbo Pascal version 6.0. It may
+not work with earlier versions because procedural types are
+used.
+
+What follows is Jerry Joplin's documentation.
+
+Hope this is useful.
+
+Michel Deslierres        dВpartement d'Вconomie
+desliem@umoncton.ca       UniversitВ de Moncton</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,59 @@
+<html><head><title>Device driver for IBM 5150 PC's serial port (AUX)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Драйвер последовательного порта для IBM 5150.<br><font color=#666666> Device driver for IBM 5150 PC serial port.</font>">
+<meta name="keywords" content="pascal, sources, source code, io5150, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;io5150
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Device driver for IBM 5150 PC's serial port (AUX)</TD>
+<TD nowrap class=black>&nbsp;J. Eric Roskos</TD>
+<TD class=black align='right'>23.08.1984</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Драйвер последовательного порта для IBM 5150.<br><font color=#666666>
+Device driver for IBM 5150 PC serial port.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="io5150.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Device driver for IBM 5150 PC's serial port (AUX).
+By J. Eric Roskos
+Public Domain, may not be sold for profit.
+
+This driver is initialized by calling AuxInit, and MUST be
+deactivated by calling AuxOff before the program exits (or a sub-
+sequent serial interrupt will cause the system to hang).
+It uses serial interrupts, and thus works considerably better than
+the standard AUX device driver supplied with the IBM PC.
+
+Once AuxInit is called, you can read and write to the predefined
+Turbo Pascal file "Aux" to access the serial port.  The procedure
+AuxSt returns True if a character is presently available at the
+serial port, equivalent to the KeyPressed procedure for the console.
+You don't have to (and shouldn't) call any of the other procedures
+in this file other than AuxInit, AuxOff, and AuxSt.
+
+Presently, only input is done via interrupts; output is via
+conventional polling, and a write to the serial port will cause
+a busy-wait until any previous character is completely transmitted.
+The input buffer's size is defined by the constant BUFSIZ below,
+which must be a power of 2 (or the wrap-around algorithm won't work).
+The serial port is presently initialized to 1200 baud; if you want
+to set it via the MODE command of DOS instead, you can comment out
+the statements indicated below.
+
+If the input buffer becomes full, a ^S is sent to the remote machine;
+a ^Q is then sent when it empties sufficiently to resume.  This
+is indeed used at 1200 baud if a number of escape sequences are
+sent in succession.
+
+Only the top 24 lines of the screen are used, in order to comply with
+most standard terminals.  However, for this to work you have to
+compile the program with Turbo Pascal version 2.0 or later, and use
+an IBM PC version of the compiler (not the generic MS-DOS version).</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

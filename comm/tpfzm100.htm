@@ -1,0 +1,71 @@
+<html><head><title>TPFZM v1.0 - ZMODEM File Transfer Unit for TP5.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль, реализующий протокол передачи файлов ZModem с поддержкой Fossil драйвера. Приведен только TPU5 модуль, исходника нет.<br><font color=#666666> ZMODEM Unit with Fossill Support.</font> TPU5.5 only :(">
+<meta name="keywords" content="pascal, sources, source code, tpfzm100, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpfzm100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPFZM v1.0 - ZMODEM File Transfer Unit for TP5.5</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:18/41">David Rye</a></TD>
+<TD class=black align='right'>11.04.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль, реализующий протокол передачи файлов ZModem
+с поддержкой Fossil драйвера.
+Приведен только TPU5 модуль, исходника нет.<br><font color=#666666>
+ZMODEM Unit with Fossill Support.</font>
+TPU5.5 only :(</TD><TD class=black colspan=2 align='right'><br><A HREF="tpfzm100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>21k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">     This unit is a translation of some Zmodem code I ran across.
+It was made for use with a multitude of units including it's own
+serial port driver routines.  Conversion to the use of the FOSSIL
+driver included some hand written assembly FOSSIL interface routines
+while trying to read the German than the documentation was in.  In
+addition to the assembly, I removed it's need for multiple support
+units so that you only need the FZM.TPU file to get it working.
+This unit has NOT been tested very extensively and any bug reports,
+bricks, donations or fan mail can be sent to me in the following
+ways.
+
+     David Rye                     Signal-7
+     201 Brantley Rd.         OR   (904) 659-2337   3/12/2400 Baud
+     Grandin, FL 32138             10:00 P.M.  - 5:00 A.M.  EST ONLY!
+
+     In addition, netmail to me at either 1:18/41 or 1:208/2 will
+find it's way to me.
+
+     Special thanks to Gary Lagier for his help with all the Turbo
+Pascal stuff.  He's made life a lot easier for many TP programmers.
+
+     Also, special thanks to John Traphofner, my Alpha Guinnea Pig.
+It takes guts to run a strange man's code on your system.
+
+
+     The use of the unit is easy.  It has two procedures, they follow.
+
+     To receive a file or file with Zmodem call this procedure.
+PROCEDURE ZR (path : STRING;             { Path for the file(s) }
+              baudrate : LONGINT;        { Baudrate to receive at }
+              port  : WORD;              { Port to receive from }
+              VAR failedflag : BOOLEAN); { TRUE if no errors }
+
+
+     To send a file with Zmodem call this procedure.
+PROCEDURE ZS (filename : STRING;     { Path and filename }
+              baudrate : LONGINT;    { Baudrate to send at }
+              port  : WORD;          { Port to send from }
+              lastfile : BOOLEAN;    { TRUE if only sending 1 file }
+              VAR fehler : WORD);    { Failed if &lt;&gt; 0 }
+
+     You must call these procedures with the FOSSIL driver for the
+specified port already 'hot', in other words, the port must be open
+already.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

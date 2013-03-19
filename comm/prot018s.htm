@@ -1,0 +1,138 @@
+<html><head><title>PROT018 - The Protocol Engine for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека поддержки коммуникационных протоколов Xmodem, Xmodem-1k, Ymodem Batch, YmodemG Batch, Zmodem (Crc16/Crc32), Sealink, Yapp (a packet radio protocol) для BP7. Приведены доки, примеры, TPU-шки (5.5...7.0), исходников протоколов нет, но есть исходник коммуникационного модуля. <br><font color=#666666> Protocol Engine is  a set of software routines that take all the hard work out of writing  communication software. In this one easy-to-use Turbo Pascal (versions 5, 5.5, 6, 7 and Borland Pascal 1.0) Unit are ALL the procedures and functions required to transfer files from one computer to another. Various methods of error checking are available, that are fully compatible with the standard protocols used by conventional terminal programs. Included: Docs, Samples and TPU5.0, 5.5, 6.0, 7.0 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, prot018s, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;prot018s
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PROT018 - The Protocol Engine for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:3:690/660">Mark Dignam</a></TD>
+<TD class=black align='right'>03.02.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека поддержки коммуникационных протоколов
+Xmodem, Xmodem-1k, Ymodem Batch, YmodemG Batch, Zmodem (Crc16/Crc32),
+Sealink, Yapp (a packet radio protocol) для BP7.
+Приведены доки, примеры, TPU-шки (5.5...7.0),
+исходников протоколов нет, но есть исходник коммуникационного модуля. <br><font color=#666666>
+Protocol Engine is  a set of software routines
+that take all the hard work out of writing  communication software.
+In this one easy-to-use Turbo Pascal (versions 5, 5.5, 6, 7
+and Borland Pascal 1.0) Unit are ALL the procedures and functions
+required to transfer files from one computer to another.
+Various methods of error checking are available,
+that are fully compatible with the standard protocols
+used by conventional terminal programs.
+Included: Docs, Samples and TPU5.0, 5.5, 6.0, 7.0 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="prot018s.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>164k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Copyright  1993 Mark Dignam and Mick Howland - Omen  Computer  Services
+         Perth Omen Bulletin Board System - 3:690/660@fidonet
+
+                 The Protocol Engine for Turbo Pascal.
+                            version 0.18
+
+   The EASY way to get your Turbo Pascal programs to transfer files!
+
+
+
+What is a Protocol Engine?
+
+It  is  a set of software routines that take all the hard work  out  of
+writing  communication software.  In this one easy-to-use Turbo  Pascal
+(versions  5,  5.5,  6,  7 and Borland Pascal 1.0)  Unit  are  ALL  the
+procedures  and functions required to transfer files from one  computer
+to  another. Various methods of error checking are available, that  are
+fully  compatible  with  the standard protocols  used  by  conventional
+terminal programs.
+
+
+Objectives.
+
+Protocol Engine has been to designed to fufill two major objectives:
+
+a)  It  is very easy to use  for even the novice programmer.  This  was
+achieved  by  using  a small linked array of strings  to  transfer  the
+filenames  between  the main program and the unit and  then  calling  a
+simple Boolean function for each different method.
+
+b)  It has a low DataSegment overhead , while retaining large  Transmit
+and Receive buffers. It is suitable for Binkley/FrontDoor transfers and
+high  speed modem links. The current DataSegment use is less  than  5k,
+while still having up to 15k disk buffering.
+
+
+Features.
+
+The  Protocol  Engine has support for Xmodem, Xmodem  with  1k  Blocks,
+Ymodem Batch, YmodemG Batch, Zmodem (both Crc16 and Crc32), Sealink and
+Yapp (a packet radio protocol).
+
+When  using  Zmodem method of transferring files, the  Protocol  Engine
+fully  supports crash recovery in both send and receive modes.  In  all
+batch modes, there is the option to overwrite or create a new file when
+receiving.
+
+Since  Protocol  Engine requires an asynchronous unit  to  handle  high
+speed  communications, a Comm unit is included with full  source  code.
+This unit is a modified version of the Public Domain ASYNC4. It handles
+both Fossil and Non_Fossil environments with ease at speeds upto  38400
+baud.
+
+The Protocol Engine also has "external hooks" defined to allow the  end
+programmer  to link in their own code into the Protocol  Engine.  These
+hooks will be called when certain events happen, as the Protocol Engine
+is  being executed. This allows the end user to further  customize  the
+look of the Engine, and insert more features into their own software.
+
+
+Contents of this Archive.
+
+ANSI_DRV.PAS   Source Code for a Ansi Screen Unit
+PROTCOMM.PAS   A Half Decent Comms Unit.
+
+The  first two Files are support source code for the  Protocol  Engine.
+Users  are  free  to use these files as they wish. The  Ansi  unit  was
+written for another project. It may or may not have bugs - it works for
+me!  The  Comms unit is a very modified version of ASYNC4  with  Fossil
+Support and internal 16650 support.
+
+TERM.EXE   A quick Terminal program written using the Protocol Engine.
+TERM.PAS   The source code for the above program.
+
+This demo program shows the use of the Protocol Engine. It has  all  of
+the  transfer  protocols in it, along with Ansi and  Doorway  emulation
+modes.
+
+The  next  three files are the Turbo Pascal units. The numbers  in  the
+extension  field are for the relevant version of Turbo Pascal. To  use:
+copy the version that relates to your compiler to Proteng.tpu!
+
+PROTENG.50S     Protocol Engine for Turbo Pascal 5.0
+PROTENG.55S     Protocol Engine for Turbo Pascal 5.5
+PROTENG.60S     Protocol Engine for Turbo Pascal 6.0
+PROTENG.70S     Protocol Engine for Turbo Pascal 7.0 and
+                         Borland Pascal 1.0
+
+PROTENG.DOC     This Document!
+LICENSE.FRM     License Form - for registration.
+PROTMAP.DOC     State Table of all the protocols.
+
+
+Contacting the Authors.
+
+For  any  further  details or the latest version, the  authors  may  be
+contacted at the Perth Omen BBS (3:690/660.0@fidonet) on +61-9-244-2111
+(multiline)  all  speeds upto v32, or by voice on  +61-9-244-1954  (any
+time between 0300GMT and 1600GMT).
+
+    Mark Dignam.
+    Mick Howland.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

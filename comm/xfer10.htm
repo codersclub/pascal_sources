@@ -1,0 +1,246 @@
+<html><head><title>Xfer v1.0 - Communication Program for TP5+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационная программа (19200 бод) с поддержкой протоколов Xmodem Checksum, Xmodem CRC, Xmodem 1K. Требуется модуль <a href="ibmcom31.htm">IBMCOM31</a>.<br><font color=#666666> This  program  provides full support for Xmodem Checksum, CRC, and 1K  file  transfers  for  the IBM PC and compatibles.</font>">
+<meta name="keywords" content="pascal, sources, source code, xfer10, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xfer10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Xfer v1.0 - Communication Program for TP5+</TD>
+<TD nowrap class=black>&nbsp;Andrew Bartels</TD>
+<TD class=black align='right'>20.01.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационная программа (19200 бод) с поддержкой протоколов
+Xmodem Checksum, Xmodem CRC, Xmodem 1K. Требуется модуль
+<a href="ibmcom31.htm">IBMCOM31</a>.<br><font color=#666666>
+This  program  provides full support for Xmodem Checksum, CRC,
+and 1K  file  transfers  for  the IBM PC and compatibles.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="xfer10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>33k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">XFER 1.0
+
+By Andrew Bartels
+
+A Product of Digital Innovations
+
+
+
+In  the  interest of programming, yes, please do distribute
+copies of this program and source code!
+
+This  program  is  placed  in the Public Domain, January, 1990,
+By Andrew Bartels.
+
+If there are any questions, you may contact me at:
+
+	Digital Innovations
+	Andrew Bartels
+	1859 East 8th Street
+	Mesa, AZ 85203-6649
+
+	(602) 827-1934   - Home
+	(602) 834-1565   - Work
+
+
+You  are  using this program at your own risk.  Neither the
+author nor  Digital  Innovations  is  responsible  for  any
+damages as a result  of  use, misuse, or failure to perform on
+the part of this program.
+
+
+This  source  code  will  compile  under  Turbo  Pascal  5 or
+5.5, Copyright (C) 1987, 1989 Borland International, Inc.
+
+Many  thanks  go  to  Wayne  Conrad of Pascalaholics Anonymous
+BBS (602-484-9356,  300/1200/2400  baud)  for  writing  the
+IBMCOM 3.0 unit  and  placing  it in the Public Domain.  Without
+IBMCOM, this program would not have been possible.
+
+
+This  program  provides full support for Xmodem Checksum, CRC,
+and 1K  file  transfers  for  the IBM PC and compatibles.  Great
+pains have  been  taken  to heavily document the code for clarity
+in the operations  that take place in an Xmodem transfer.  I
+realize that there  are  other much more sophisticated programs
+out there which support  Xmodem  **  AND  A BUNCH MORE PROTOCOLS
+**, which you all will  be  using  for  transfers with your
+terminal programs.  This program  does  not  intend  to  compete
+with these other protocol drivers.    Its  main  attraction is
+the fact that I have made the source  code  open  and available
+to all programmers to review. It is  dedicated  to  all  those
+fine individuals who once helped me with  questions  or  problems
+in  programming,  and I release the source  code  to  all  in
+hopes  that it may be of help to others attempting to support
+Xmodem.
+
+
+
+
+Use  of  this  program  is very simple.  The program is invoked
+by entering  a  command  line according to the following
+description:
+
+
+XFER [Port n] [Speed n] Command [Options] Path\File
+
+
+[Port n] :
+
+This  optional  parameter tells XFER which COM Port to use for
+the transfer.    This can be from 1 to 4.  If [port n] is
+omitted, the default port is 1.
+
+
+[Speed n] :
+
+This  optional parameter sets the speed of the transfer.  This
+can be  300,  600,  1200,  2400,  4800,  9600, or 19200 baud.  If
+this parameter  is  omitted,  the  current speed of the port
+being used becomes default.
+
+
+Command :
+
+This  parameter  indicates which operation to perform.  As of
+this version,  you  may  use  'sx'  to  send Xmodem, or 'rx' to
+receive Xmodem.   It is expected that other protocols will be
+supported in later versions.
+
+[Options] :
+
+These  consist  of  '-C'  for  CRC  mode  transfers,  and '-K'
+for support  of  Xmodem 1K transfers.  If no options are
+selected, the protocol becomes Xmodem Checksum, with 128 byte
+blocks.
+
+Path\File :
+
+This  parameter  determines  which file is to be sent or
+received.  Wild  cards  are  not permitted, as Xmodem transfers
+are not batch transfers.    As batch protocols become available,
+wild cards will be supported.
+
+
+
+
+When  exiting,  this  program  provides an error code which can
+be detected  by  ERRORLEVEL  in batch files.  The following are
+valid codes, followed by their meanings.
+
+
+Code    Definition
+---------------------------------------------------------------
+  0     No error occurred.  Transfer terminated normally.
+
+  1     Error opening file.  Possibly bad disk, or file
+        is not found.
+
+  2     Operator aborted transfer by pressing a key during
+        the transfer.
+
+  3     Remote computer cancelled transfer
+
+  4     Maximum number of timeouts or other block errors
+        has been exceeded (usually 10), and transfer is
+        aborting.
+
+  5     Block received out of sequence.  Protocol aborts
+        promptly under these conditions.
+
+  6     Timeout while waiting for final EOT from
+        transmitter.  Some implementations of Xmodem do
+        not wait for the final EOT to be ACK'd before
+        exiting, and thus will not re-send it when it is
+        NAK'd the first time.  This causes a timeout while
+        waiting for the second EOT, and not receiving one.
+        Nothing serious is wrong here, except that the
+        transmitter is not fully supporting the now
+        recognized Xmodem standard.  When this code is
+        received, it is nothing more than a warning,  and
+        should only be worried about if the file received
+        seems incomplete at the end.
+
+  7     No carrier.  Must have carrier to transfer.
+
+252     Invalid operation on command line.  The only valid
+        operations are SX (send Xmodem) and RX (receive
+        Xmodem).  Any others will cause this exit code.
+
+253   Invalid [Options] selected on command line.  Only
+        -C and -K are valid, any others will cause this
+        exit code.
+
+254     Invalid baud rate specified.  This is caused when
+        using [Speed n] to select a baud rate that is
+        other than 300, 600, 1200, 2400, 4800, 9600, and
+        19200.
+
+255     Invalid COM Port number.  This is caused by using
+        [Port n] to specify a COM port other than 1 - 4,
+        or when specifying a COM port that does not exist.
+        For example, specifying 'PORT 3' on a system that
+        only has two COM ports, will cause this error.
+
+---------------------------------------------------------------
+
+
+Examples of use:
+
+	Specify Xmodem Checksum send, COM1, current baud:
+		xfer sx myfile.zip
+
+	Specify Xmodem CRC send, COM1, current baud:
+		xfer sx -c myfile.zip
+
+	Specify Xmodem 1K send, COM1, current baud:
+		xfer sx -k myfile.zip      or
+		xfer sx -k -c myfile.zip
+
+	Specify Xmodem Checksum receive, COM1, current baud:
+		xfer rx myfile.zip
+
+	Specify Xmodem CRC or 1K receive, COM1, current baud:
+		xfer rx -c myfile.zip      or
+		xfer rx -c -k myfile.zip   or
+		xfer rx -k myfile.zip
+	*  Note that all three of these commands will receive
+	   Xmodem 1K or Xmodem CRC, whichever the xmitter decides
+	   to transmit.  As always, if the xmitter does not support
+	   CRC, the protocol will drop back to Xmodem Checksum.
+	   All Xmodem 1K transfers are assumed to be CRC by default
+	   (thus the third command line possibility is listed as
+	   an alternative to the second one).  It is possible to
+	   initiate an Xmodem Checksum 1K transfer if the xmitter
+	   forces a drop back to checksum, but then sends 1K
+	   blocks (this is not recommended due to the checksum
+	   being less accurate as block size increases).
+
+	Specify Xmodem Checksum send, COM2, current baud rate:
+		xfer port 2 sx myfile.zip
+
+	Specify Xmodem CRC send, COM4, at 9600 baud:
+		xfer port 4 speed 9600 sx -c myfile.zip
+
+
+Files in this archive:
+
+
+	XFER.PAS	Main source code file.  Contains
+			constant definitions, CRC calculation code
+			and command line parameter processing.
+
+	SXRX.INC	Include file for XFER.PAS.  Contains
+			functions to send and receive Xmodem.
+
+	XFER10.DOC	This documentation file.
+
+	XFER.EXE	The complete compiled version, in case you
+			don't have the IBMCOM unit or Turbo Pascal.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

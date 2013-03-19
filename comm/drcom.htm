@@ -1,0 +1,61 @@
+<html><head><title>DRCOM - Коммуникационная библиотека для BP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор резидентных драйверов и TPU7.0 модуль для одновременной работы с несколькими COM-портами. Приведены только: Pascal Interface, TPU7.0 and .COM">
+<meta name="keywords" content="pascal, sources, source code, drcom, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;drcom
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DRCOM - Коммуникационная библиотека для BP7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:root@kravb.krasnoyarsk.su">Dmitry I. Kuznetcov</a></TD>
+<TD class=black align='right'>17.03.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор резидентных драйверов и TPU7.0 модуль
+для одновременной работы с несколькими COM-портами.
+Приведены только: Pascal Interface, TPU7.0 and .COM</TD><TD class=black colspan=2 align='right'><br><A HREF="drcom.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Organization: Industrial Commercial Bank - Avtovazbank- the branch of
+Date: Thu, 17 Mar 94 10:57:20 +0000
+Subject: Работа с COM-портами
+
+Здравствуйте все!
+Тут просили работу с com-портами. Так я посылаю.
+Это я только что отладил, если что не будет получаться, пишите.
+Библиотека скомпилирована для работы в 7 паскале.
+
+Некоторые рекомендации по использованию библитеки коммуникации
+по последовательным портам DRC
+
+1. Работать с любыми функциями библиотеки можно только после того,
+   как выполнена функция InitData
+2. Заканчивать работу библиотеки необходимо вызовом функции DoneData
+   Связано это с перехватом некоторых аппаратных прерываний
+3. Умолчания на адреса портов и номера IRQ нет
+
+К сожалению я не могу привести сколько-нибудь полезного примера, т.к.
+я только что закончил написание этой библиотеки. Но те отладочные
+примеры, которые я писал показали высокую надежность работы
+коммуникации на достаточно высоких скоростях. В процессе пересылки
+блоков RCB можно даже кратковреммено разорвать связь, все равно после
+восстановления связи данные передаются корректно.
+На основе этой библиотеки я попозже сделаю почтовую систему.
+Драйвер коммуникации я разрабатывал для некоей уже рабочей банковской
+системы по обслуживанию вкладов населения. Если заинтересует, могу
+положить демонстрацию (она занимает около 600кб в архиве). На основе
+сети коммуникации встроенной прямо в программу и платы PCCOM8 или
+любой другой платы мультипорта я вяжу до 8-16 машин в сеть типа
+"звезда".
+
+Я сгенерил несколько вариантов резидентного драйвера на 1,2,4,8,10,16
+портов, но, если надо, можно и на любое другое.
+
+Александр Чебоксаров. (root@kravb.krasnoyarsk.su)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

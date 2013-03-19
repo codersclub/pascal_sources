@@ -1,0 +1,71 @@
+<html><head><title>CommUnit v1.02 - Low Level Communication Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простая коммуникационная программа, использующая низкоуровневые ассемблерные функции для работы с COM портом на скоростях от 50 до 115200 бод.">
+<meta name="keywords" content="pascal, sources, source code, communit, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;communit
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CommUnit v1.02 - Low Level Communication Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/724.35">Night Linker</a></TD>
+<TD class=black align='right'>15.01.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простая коммуникационная программа, использующая
+низкоуровневые ассемблерные функции для работы с COM портом
+на скоростях от 50 до 115200 бод.</TD><TD class=black colspan=2 align='right'><br><A HREF="communit.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Serial Port Low/Mid level programming by Integral Adept
+ Thanx for: R. Jourdain & other.
+ Greets to: MNU & ALP
+
+                 СТАHЦИЯ           +њћ ћ                       .
+   +- +- +---- +- +- +- +- +---- +- +-њћ ћ                       .
+   | -+  |  |  | -+  | -+  |  |  | ++           |      .            
+   |  |  | -+     |  |  |  | -+  | +          --+--          .      
+                                      +њћ ћ     |     .             .
++---- +---- +---- +---- +- +- +---- +- +-њћ ћ                  .
+|     | -+  | -+  +--   | -+  |  |  | ++           .      .          
+| --- | -+  ++ |  +--   |  |  | -+  | +          .                  
+                                                        .
+   2:5020/724.35@Fidoњћ ћ                              FIDONET _1
+   2:5020/661.18@Fidoњћ ћ                              FIDONET _2
+   39:241/3.5@AmigaNetњћ ћ                             AMIGANET
+   Night.Linker@p35.f724.n5020.z2.fidonet.orgњћ ћ      INTERNET
+
+######## Описание пpоцедуp pаботы с сеpиальным поpтом #############
+
+-- I_HANDLER -------------------------------------------------------
+Пpоцедуpа получает управление при возникновении прерывания.
+Она забирает байт из порта и кладет его в буфер. Буфер кольцевой -
+т.е. при заполнении он начинает заполняться сначала.
+
+--- SETPARM ---------------------------------------------------------
+Пpоцедуpа устанавливает параметры обмена: скорость, вид контроля по
+четности, число битов данных и число стоповых битов
+
+--- PORTON ----------------------------------------------------------
+Пpоцедуpа porton переводит порт в рабочий режим. Подменяет вектор
+прерывания, разрешает прерывания от порта и выставляет сигналы
+готовности терминала и запроса на передачу.
+
+--- PORTOFF ---------------------------------------------------------
+Пpоцедуpа portoff переводит порт в из рабочего режима в обычное
+состояние для MS-DOS (обратная к porton). Запрещает прерывания от
+порта, востанавливает обработчик прерываний и маскирует сигналы MCR.
+
+--- PORTIN ----------------------------------------------------------
+Пpоцедуpа portin выбирает один байт из кольцевого буфера и записывает
+его в пеpеменную from. Если буфер пуст, from:word=256
+
+--- PORTOUT ---------------------------------------------------------
+Пpоцедуpа portout посылает байт ch в линию. Возвращает 0 в from при
+нормальном завершении. При ошибке возвращается 1</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

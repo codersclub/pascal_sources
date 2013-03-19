@@ -1,0 +1,103 @@
+<html><head><title>SIO v1.03 - Serial I/O Tutorial Toolkit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль для работы с последовательными портами. Поддерживает все известные типы UART. <br><font color=#666666> SerialIO 1.03 - Serial communication unit. Supports INS8250, NS16450, NS16550, NS16550A and compatible UART chips.</font>">
+<meta name="keywords" content="pascal, sources, source code, sio103, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sio103
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SIO v1.03 - Serial I/O Tutorial Toolkit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:Dado.Colussi@Helsinki.FI">Dado Colussi</a></TD>
+<TD class=black align='right'>29.11.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль для работы
+с последовательными портами. Поддерживает все известные
+типы UART. <br><font color=#666666>
+SerialIO 1.03 - Serial communication unit.
+Supports INS8250, NS16450, NS16550, NS16550A and compatible UART chips.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sio103.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>40k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">     (* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *)
+     (*                                                           *)
+     (*                       SerialIO 1.03                       *)
+     (*                                                           *)
+     (*                    This unit works with                   *)
+     (*                         - INS8250                         *)
+     (*                         - NS16450                         *)
+     (*                         - NS16550                         *)
+     (*                         - NS16550A and                    *)
+     (*                   compatible UART chips.                  *)
+     (*                                                           *)
+     (*      Copyright (c) 1994 by Gian Donato "Dado" Colussi     *)
+     (*            E-mail: gcolussi@kruuna.helsinki.fi            *)
+     (*                                                           *)
+     (*             THE AUTHOR TAKES NO RESPONSIBILITY            *)
+     (*          OF ANY KIND OF PHYSICAL OR MENTAL DAMAGE         *)
+     (*                    CAUSED BY THIS CODE                    *)
+     (*           OR PROGRAMS/UNITS DELIVERED WITH THIS.          *)
+     (*                                                           *)
+     (* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *)
+
+*** RIGHTS
+----------
+
+              You are free to
+                - take copies of SerialIO and programs/units
+                  delivered with it
+                - deliver it in public or private networks
+                - add your own code
+                - use it in your commercial or non-commercial
+                  programs
+
+                AS LONG AS THE NAME OF THE ORIGINAL AUTHOR IS
+                MENTIONED IN THE CODE AND PROGRAMS USING SERIALIO
+                AS IT IS IN THE ORIGINAL SOURCE OF SERIALIO!!!
+
+                If you decide to change the code of SerialIO or
+                some unit/program delivered with it, remember to
+                comment the code lines that will be changed. In
+                other words: do NOT delete a line of code!
+                Remember also to write detailed explanations what
+                changes have been done, why and by who (name and
+                e-mail).
+
+
+*** PURPOSE
+-----------
+
+                The purpose of SerialIO is not to be a fast
+                serial I/O tool-kit but to be some kind of source
+                to those programmers who don't know very much
+                about hardware programming but are intrested in
+                it. I hope that this piece of human work would
+                help that people to understand how to make
+                programs that use for example interrupts, UART or
+                some other chips.
+
+
+*** CONTACT
+-----------
+
+                In the case you have found a bug or you just have
+                in your mind something that is in close relation
+                to SerialIO, please contact me by sending e-mail.
+                There are not only one or two, but several things
+                that still make me hesitate... If you feel, that
+                you have a better solution to some problem, let
+                me know it too.
+
+
+On Saturday 22 October 1994 in Espoo, Finland
+
+&lt;a href="mailto:Dado.Colussi@Helsinki.FI"&gt;Dado.Colussi@Helsinki.FI&lt;/a&gt;
+		University of Helsinki, Finland
+&lt;a href="http://www.helsinki.fi/~gcolussi"&gt;http://www.helsinki.fi/~gcolussi&lt;/a&gt;
+	Department of Computer Science</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

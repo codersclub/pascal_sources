@@ -1,0 +1,149 @@
+<html><head><title>PCL4P v4.0 - Personal Communications Library for TP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационная библиотека для работы с последовательными портами COM1..CO10 и мультипортовкой DigiBoard/8 на скорости до 115200 бод. Одновременная работа с четырьмя портами. Включает в себя терминальную программу с поддержкой протоколов ASCII, XMODEM, YMODEM, YMODEM-G. Приведены все паскальные исходники и документация. Ассемблерный код не приведен, только OBJ файл. <br><font color=#666666>  PCL4P v4.0 is an asynch communications library supporting COM1-COM10 to 115200 baud, 4 ports concurrently, DigiBoard PC/8, INS16550, interrupt driven, RTS/CTS flow control. Includes a terminal program with ASCII, XMODEM, YMODEM, YMODEM-G protocols. </font>">
+<meta name="keywords" content="pascal, sources, source code, pcl4p40, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pcl4p40
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PCL4P v4.0 - Personal Communications Library for TP</TD>
+<TD nowrap class=black>&nbsp;MarshallSoft Computing</TD>
+<TD class=black align='right'>25.10.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационная библиотека для работы с последовательными портами
+COM1..CO10 и мультипортовкой DigiBoard/8 на скорости до 115200 бод.
+Одновременная работа с четырьмя портами.
+Включает в себя терминальную программу с поддержкой
+протоколов ASCII, XMODEM, YMODEM, YMODEM-G.
+Приведены все паскальные исходники и документация.
+Ассемблерный код не приведен, только OBJ файл. <br><font color=#666666> 
+PCL4P v4.0 is an asynch communications library
+supporting COM1-COM10 to 115200 baud,
+4 ports concurrently, DigiBoard PC/8,
+INS16550, interrupt driven, RTS/CTS flow control.
+Includes a terminal program with ASCII, XMODEM, YMODEM, YMODEM-G
+protocols. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pcl4p40.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>63k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 *** SHAREWARE DOCUMENTATION ***
+
+
+The Personal Communications Library for Turbo Pascal (PCL4P) is an
+asynchronous   communications  library  designed  for  experienced
+software developers programming in Turbo Pascal, version  4.0  and
+up. The PCL features:
+
+  o 32 communications and support functions.
+  o Support for the high performance INS16550 UART.
+  o Supports hardware (RTS/CTS) flow control.
+  o Interrupt driven receiver and transmitter (optional).
+  o Supports 300 baud to 115,200 baud.
+  o Supports the DigiBoard PC/4 and PC/8.
+  o Supports COM1 through COM4 (through COM10 with DigiBoard).
+  o Adjustable receive queues from 8 bytes to 32 KB.
+  o Control-BREAK error exit.
+  o 18 communications error conditions trapped.
+  o Allows 4 ports to run concurrently (10 with DigiBoard).
+  o Complete modem control & status.
+  o Written in assembly language for small size & high speed.
+  o Terminal program featuring ASCII (with XON/XOFF), XMODEM, YMODEM,
+    and YMODEM-G.
+
+  Why should you buy PCL4P ? I can give you several good reasons.
+
+    COMPLETE - PCL4P is complete since it provides absolute control
+               of the serial ports (including the high  performance
+               INS16550).
+
+     COMPACT - PCL4P  is  very compact  at  less  than  6  KB. Your
+               application doesn't carry a lot of excess code.
+
+        FAST - PCL4P is fast since it will  run  at  38400  baud  on
+               even  slow  8088 PCs (4.77 MHZ) and at 115200 baud on
+               most everything else.
+
+     SUPPORT - If you get stuck,  you talk  to  the programmer  that
+               wrote the code, not a  person  hired  to  answer  the
+               phone.
+
+         BBS - A BBS is  available  (2400  baud  N81)  in  order  to
+               provide immediate support as necessary.
+
+  NEWSLETTER - One  year  subscription  to  the  MSC  newsletter
+               discusses communications  problems  and  solutions
+               (published quarterly).
+
+       PRICE - You get PCL4P for a very reasonable price !
+
+    UPGRADES - Once you buy PCL4P, you can always update to  the  most
+               recent  version  for  little  more  than  the  cost  of
+               sending it out to you.
+
+Several  example  programs ( source code ) are provided along with
+the small model library and makefiles for each  of  the  supported
+compilers.  The example programs are:
+
+(1)  SIMPLE  is an extremely simple terminal emulator program.  It
+is provided as the smallest and easiest to understand  example  of
+communications programming using PCL4P.
+
+(2)  TERM  is  a  more  capable terminal emulator than SIMPLE.  It
+functions as a dumb terminal emulator but can exchange files using
+XMODEM (Standard XMODEM, XMODEM-CRC,  and  XMODEM-1K)  and  YMODEM
+(standard  and  YMODEM-G)  communication protocols. TERM will also
+send an initialization string to your Hayes compatible modem.
+
+The shareware distribution does not include the source code to the
+library, but all example code is included.
+
+For more information, refer to the Personal Communications Library
+Users  Manual  (  PCL4P.USR  ) and Personal Communications Library
+Reference Manual ( PCL4P.REF ), which are part of PCL4P32.ZIP.
+
+A  C version of the library ( PCL4C ) is also available.
+
+
+                 *** Registration ***
+
+
+The shareware version of PCL4P.LIB is provided  so  that  you  may
+personally  determine  the usefulness of the product for yourself.
+If you can use  the  Personal  Communications  Library  for  Turbo
+Pascal  ,  please  register your use with us. Send $55 plus $3 S&H
+($6 outside of North America) to:
+
+                  MarshallSoft Computing, Inc.
+                  Post Office Box  4543
+                  Huntsville AL 35815
+
+                  Voice  205-881-4630
+                  FAX    205-881-4630
+                  BBS    205-880-9748
+
+  The registered package includes:
+
+  o  Assembler source code for the library.
+  o  Printed Users Manual.
+  o  Printed Reference Manual.
+  o  Telephone, FAX, BBS support for one year.
+  o  EXAMPORT -- Free utility which displays  a  detailed  formatted
+     report  for  any  serial port. For example, to display a report
+     for COM1, type "EXAMPORT 1".
+
+PCL4P.ASM is the source code for the library. The source  code  is
+copyrighted  by MarshallSoft Computing, Inc. The user is granted a
+license to use the PCL4P object code in his own application  only.
+PCL4P.ASM  is  not  shareware and may not be sold or given away to
+anyone.
+
+The registered user will receive the latest version  of  PCL4P  by
+return  mail.  A 5.25" diskette is provided unless a 3.5" diskette
+is requested.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

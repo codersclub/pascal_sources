@@ -1,0 +1,125 @@
+<html><head><title>OOBPLUS - CompuServe B-protocol Objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный интерфейс для работы с &quot;Би&quot;-протоколом (в том числе с B-Plus) через последовательный порт. Протокол поддерживает передачу GIF файлов. <br><font color=#666666> OOBPLUS - CompuServe B protocol objects (c) Steve Sneed 1991.<br> Includes Compuserve transport protocols codes and On/Offline GIF viewer for VGA GIF pictures, some utilities etc. with full source codes. </font>">
+<meta name="keywords" content="pascal, sources, source code, oobplus, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;oobplus
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OOBPLUS - CompuServe B-protocol Objects</TD>
+<TD nowrap class=black>&nbsp;Steve Sneed</TD>
+<TD class=black align='right'>06.11.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный интерфейс для работы
+с "Би"-протоколом (в том числе с B-Plus) через последовательный порт.
+Протокол поддерживает передачу GIF файлов. <br><font color=#666666>
+OOBPLUS - CompuServe B protocol objects
+(c) Steve Sneed 1991.<br>
+Includes Compuserve transport protocols codes
+and On/Offline GIF viewer for VGA GIF pictures,
+some utilities etc. with full source codes. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="oobplus.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>68k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 OOBPLUS - CompuServe B protocol objects
+                     Copyright (c) Steve Sneed 1991
+                           All rights reserved
+
+
+   The CompuServe Information Service (CIS) is the largest and most
+popular system of its type in the world, with over 1,000,000 members
+in the US and abroad.  CIS provides several "special" capabilities,
+such as the ability to display graphics in real time and the ability
+to encapsulate the entire online session within a protocol for
+improved data integrity and management. Many of these special
+capabilities are based on CompuServe's own transport protocol,
+the "B" protocol.  Because of the size and number of users of CIS
+today, any communications program should provide support for at least
+the basic File Transfer Protocol (FTP) portions of the B protocol.
+OOBPLUS makes providing that support simple.
+
+   The OOBPLUS unit provides a set of objects for B protocol.
+Derived from Async Professional's AbstractProtocol object, OOBPLUS
+provides a "plug-in" interface for both the B series protocol's FTP
+services, and the special version for use with CompuServe's GIF
+graphics image display services.
+
+   There are three distinct species of B protocol in use today:
+
+"Classic" B: The original B protocol. This version defines a protocol
+similar in some ways to the XMODEM protocol but with special
+consideration for the packet-switcher network CIS uses to connect
+users to their hosts.
+
+"Quick" B: Quick B (QB) is a major enhancement over Classic B.
+While maintaining backwards compatibility with Classic B it adds
+"send-ahead" technology (the ability to send more than one packet
+before receiving an acknowledgement), a larger 1K packet size for
+better thruput with higher speed modems, and 16-bit CRC blockchecking.
+
+"BPlus": BPlus (B+) is a superset of QB, or more correctly, QB is a
+subset of B+.
+
+   B+ is not a file transfer protocol in the typical sense.  It is a
+"Transport Level" protocol, and as such can be used to provide protocol
+error trapping and data management to an entire online session which may
+include file transfer sub-sessions.  The full B+ specification defines
+multiple "layers" of protocol support, the lowest being the "Transport
+Layer".  The transport layer provides the basic data packetization, flow
+control and error handling.
+
+   HMI NOTE: This new version of OOBPLUS now specifically includes the
+modifications nessessary to support the special HMI version of B+.  However,
+because no documentation has been made publicly available by CompuServe on
+the exact format or usage of HMI, what's here has been arrived at by
+experimentation and may require modification as more information on HMI
+becomes available.
+
+
+   OOBPLUS implements the B protocols in a layered fashion, just as the CIS
+hosts.  An abstract parent object handles the basic flow management and
+packetization chores, while child objects implement the specific FTP and
+GIF receive services.  A hierarchial diagram:
+
+AbstractProtocol
+  +-- (...other derived APRO protocols...)
+  +-- BPProtocol             {abstract BPlus parent}
+        +-- BPProtoFTP             {File Transfer services}
+        +-- BPProtoGIF             {GIF receive/decode services}
+
+
+OOBPLUS and GIF
+---------------
+
+   GIF data may come from a single file, the serial port, as a piece
+of a file from database-type storage, etc., and may be sent to the
+screen, a printer, or some other output device, so it makes sense to
+isolate the process of getting the stream's raw data and outputting
+the processed image data from the decoder's inner workings.
+Doing so also makes implementing a GIF decoder thru a protocol much
+easier.  The demo decoders' kernel (DEGIF.PAS) names two procedure
+pointers, one to a function which returns the next byte of raw data
+and one that does something with a processed raster line of display
+data, and refers only to these proc pointers for source and
+destination.  Various "shells" can then be wrapped around the decoder
+to implement the routines for a particular decoder's needs.
+
+
+   I can be contacted via CIS at User ID# 70007,3574. I frequent
+several forums at least once a day, especially IBMCOM, PCVENB
+(TurboPower's section 6), BPROGA and PICS.  The TurboPower folks
+will be happy to help you as well, but to help keep their support
+headaches in check I hope you'll contact me first; they may need
+to forward questions to me anyway. 
+US Mail will reach me at:
+
+     Ozarks West Software
+     14150 Gleneagle Dr.
+     Colorado Springs, CO  80921</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,132 @@
+<html><head><title>Serio - Simple Serial Interface Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простейший интерфейс для COM портов. Приводится пример использования - простейший терминал.<br><font color=#666666> Simple serial interface routines for Turbo Pascal.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpserio2, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpserio2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Serio - Simple Serial Interface Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:russell@alpha3.ersys.edmonton.ab.ca">Russell Schulz</a></TD>
+<TD class=black align='right'>07.05.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простейший интерфейс для COM портов.
+Приводится пример использования - простейший терминал.<br><font color=#666666>
+Simple serial interface routines for Turbo Pascal.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpserio2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Serio
+
+use at your own risk, and at your own liability
+
+using the routines:
+
+functions:
+
+:   xkeypressed
+
+    returns TRUE if a character is ready on the current device, FALSE
+    otherwise
+
+:   xreadkey
+
+    returns first character waiting on current device -- blocks
+    until a character is ready
+
+procedures:
+
+:   portengage;
+
+    engages a port for further use
+
+:   portdisengage;
+
+    disengages a port when no longer in use
+
+:   portspeed(speed);
+
+    set speed (baud rate) of port
+
+:   xwrites(s);
+
+    writes string s to current device
+
+:   xwritei(i);
+
+    writes integer i to current device
+
+:   xwriteiw(i,w);
+
+    writes integer i to current device, right-justified to width w
+
+:   xwritess(s,s);
+
+    writes strings to current device
+
+:   xwritesss(s,s,s);
+
+    writes strings to current device
+
+:   xwriteln;
+
+    writes newline to current device
+
+:   xwritelns(s);
+
+    writes string s and newline to current device
+
+:   xwritelnss(s,s);
+
+    writes strings and newline to current device
+
+:   xwritelnsss(s,s,s);
+
+    writes strings and newline to current device
+
+:   xgotoxy(x,y);
+
+    goes to column x, row y (both start at 1, top left corner)
+
+:   xwritexy(x,y,s);
+
+    goes to column x, row y, writes strings s
+
+:   xclreol;
+
+    clears to end of line
+
+:   xclreolxy(x,y);
+
+    goes to column x, row y, clears to end of line
+
+:   xclrscr;
+
+    clears entire screen, possibly going to column 1, row 1
+
+:   xreadlns(s,maxlen,keepcurrent);
+
+    reads string into s, maximum length maxlen -- will start with
+    current value if keepcurrent is true, will start with empty
+    string otherwise
+
+:   xreadlnsp(s,maxlen,keepcurrent);
+
+    reads string into s, maximum length maxlen -- will start with
+    current value if keepcurrent is true, will start with empty
+    string otherwise -- can terminate with Return or Space
+
+:   xhighvideo;
+
+    switches to high video/reverse/other color
+
+:   xlowvideo;
+
+    switches to low video/not-reverse/original color</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

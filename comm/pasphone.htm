@@ -1,0 +1,77 @@
+<html><head><title>PasPhone - Dial the Phone Number with a Modem</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль и программа для дозвона по указанному телефонному номеру. Для управления модемом используется прерывание INt 14h. <br><font color=#666666> This Turbo Pascal unit accepts user input  to dial  Hayes  compatible  modems.   The  phone number  may be numeric or alpha (acronyms) or a mix of both. Bios interrupt $14 is used  to send  characters  to  the  serial  port.  The interrupt will return information in register AH, and AL if  your  interested  in  checking them.   A  good  bios services reference will contain the return  codes  This  unit  should work on IBM pc's and compatibles.</font>">
+<meta name="keywords" content="pascal, sources, source code, pasphone, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pasphone
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PasPhone - Dial the Phone Number with a Modem</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71620.2211@compuserv.com">Ed Cuneo</a></TD>
+<TD class=black align='right'>29.07.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль и программа для дозвона по указанному телефонному номеру.
+Для управления модемом используется прерывание INt 14h. <br><font color=#666666>
+This Turbo Pascal unit accepts user input  to
+dial  Hayes  compatible  modems.   The  phone
+number  may be numeric or alpha (acronyms) or
+a mix of both. Bios interrupt $14 is used  to
+send  characters  to  the  serial  port.  The
+interrupt will return information in register
+AH, and AL if  your  interested  in  checking
+them.   A  good  bios services reference will
+contain the return  codes  This  unit  should
+work on IBM pc's and compatibles.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="pasphone.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This simple unit accepts user input to dial Hayes compatible modems.
+The phone number may be numeric or alpha (acronyms) or a mix of both.
+It is an extension of something I downloaded with no ID attached.
+Bios interrupt $14 is used to send characters to the serial port.
+The interrupt will return information in register ah, and al if
+your interested in checking them. A good bios services reference
+will contain the return codes
+This should work on IBM pc's and compatibles.
+If you have trouble communicating with the serial port, check and
+change as needed the value assigned to register 'dl' as noted.
+It selects the COM port which is connected to the modem
+Number formats accepted are:
+   1)  aaa-aaaa
+   2)  (aaa) aaa-aaaa
+   3)  aaa-aaa-aaaa
+   4)  1-aaa-aaa-aaaa
+   5)  1-aaa-aaaa
+All other formats are rejected as invalid numbers.
+The proc will insert a leading '1' prolog if necessary.
+Communications ports 1 through 4 are valid.
+
+After the modem dials and is off hook:
+1. To activate the phone, pickup the phone and press [Enter].
+2. If you leave the phone on the cradle and press a key, the
+   modem will hang up and the program will continue.
+3. If the phone is off the cradle and you press a key, the
+   program will continue, and you will have control of the
+   phone.
+
+
+I added a few accessory routines to illustrate usage
+
+{====================================}
+{ Any helpful suggestion contact:    }
+{ Ed Cuneo                           }
+{ Renaissance Software and Systems   }
+{ 1428 Dauphin Lane                  }
+{ Orlando, Fl   32803-1802           }
+{ Voice (407) 896-1206               }
+{ Renaissance' BBS (407) 894-6293    }
+{ CompuServ ID:        71620,2211    }
+{ Programmer's Corner ID:    1011    }
+{====================================}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

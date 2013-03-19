@@ -1,0 +1,81 @@
+<html><head><title>TVCOM 1.0 - Using Async Professional with TVision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированная коммуникационная программа для BP7, демонстрирующая совместную работу TurboVision и коммуникационного пакета Async Professional.<br><font color=#666666> TVCOM - a program that demonstrates one way of using Async Professional within a Turbo Vision program.</font>">
+<meta name="keywords" content="pascal, sources, source code, tvcom, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tvcom
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TVCOM 1.0 - Using Async Professional with TVision</TD>
+<TD nowrap class=black>&nbsp;Terry Hughes</TD>
+<TD class=black align='right'>06.12.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированная коммуникационная программа для BP7,
+демонстрирующая совместную работу TurboVision и коммуникационного
+пакета Async Professional.<br><font color=#666666>
+TVCOM - a program that demonstrates one way of using Async Professional
+within a Turbo Vision program.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tvcom.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This program provides a TTerminalWindow object derived from TWindow.
+The interior of this object is derived TTerminal. Such an object offers
+a handy way of adding text to the end of a scroller and navigating
+(using cursor keys or mouse) around the scroller.
+
+We also derive a new application object from TApplication called
+TComApp. The actual application, TMyApp is then derived from TComApp.
+In your programs, you might want to consolidate TComApp and TMyApp
+into one object.
+We broke it into two objects in case you wanted to move TComApp and
+TTerminalWindow objects into their own units.
+
+Serial port output is handled by TTerminalWindow's interior. Whenever
+it receives a evKeyDown message it sends that character to the serial
+port with PutChar.
+
+Serial port input is handled by TComApp's Idle method. Each time that
+method is called (which is once for every generated message) it checks
+the com port for characters waiting in the input buffer. If it finds
+that a character is ready, it will retreive that character, format an
+event record with a custom event code of evComChar and passes that
+event directly to the TTerminalWindow's HandleEvent method. It will
+process up to 10 characters each time Idle is called (speeding things
+up a bit whenever a large block of characters arrives at the serial
+port).
+
+TTerminalWindow's TInterior is the object that actually processes the
+evComChar event. To do so, it calls TTerminal's CharWrite method to
+add that character to the end of the scroller buffer and display it.
+
+Note this is a rather "bare bones" implementation. The TTerminal
+ancestor of TTerminalWindow's interior doesn't have the necessary
+methods to easily add terminal emulation (which would need to modify
+colors, position the cursor anywhere within the scroller buffer, etc.).
+To add emulation, you'll either need to add methods to
+TTerminalWindow's interior, or perhaps, choose a different ancestor
+than Turbo Vision's TTerminal.
+
+Additionally, this example gives little consideration to performance.
+You may want to consider processing characters in blocks rather than
+generating an event for each character. That is, the TComApp Idle
+method would collect a block of input characters, place a pointer to
+that block in the event record's InfoPtr field, and have the
+TTerminalWindow's HandleEvent method process that entire block at once.
+
+Released to the public domain
+
+Written by Terry Hughes, TurboPower Software
+Version 1.0 - 6-10-91
+  initial release
+
+1.01 - 8-24-92 : wasn't releasing comport memory when terminal window 
+                 closed
+1.02 - 12-5-92 : updated for BP7</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

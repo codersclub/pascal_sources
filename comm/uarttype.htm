@@ -1,0 +1,188 @@
+<html><head><title>UARTType 1.0 - UART Type Detector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Два варианта программы для определения типа установленного UART. (на паскале и на ассемблере). Распознает 4 распространенных вида чипов. <br><font color=#666666> This is a routine to detect the type of UART. Detects 8250, 16450, 16550 and 16550A chips. Included Asm and Pas sources</font>">
+<meta name="keywords" content="pascal, sources, source code, uarttype, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;uarttype
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;UARTType 1.0 - UART Type Detector</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:382/17.0">Yousuf Khan</a></TD>
+<TD class=black align='right'>21.03.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Два варианта программы для определения типа установленного UART.
+(на паскале и на ассемблере).
+Распознает 4 распространенных вида чипов. <br><font color=#666666>
+This is a routine to detect the type of UART.
+Detects 8250, 16450, 16550 and 16550A chips.
+Included Asm and Pas sources</font></TD><TD class=black colspan=2 align='right'><br><A HREF="uarttype.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">.FROM: Yousuf Khan  Area # 17 (Assembly Language )
+.TO: Y'ALL          21 Mar 91
+.SUBJECT: *.pas to *.asm
+
+Well it seems the impossible has happened to me: I now understand
+Assembler more than I understand Pascal. So I found this routine,
+written in TurboPascal, that detects what type of UART you have
+running. I haven't used TP in 3 years+, so I need a translation
+of this pascal code to assembler, if you will:
+
+xword:=MemW[BIOSdseg : 2 * i - 2];
+Writeln('$', hex(xword, 4));
+xbyte2:=Port[xword + 2];
+Port[xword + 2]:=$C1;
+for temp:=1 to 2 do;
+xbyte3:=Port[xword + 2];
+Port[xword + 2]:=xbyte2;
+case ((xbyte3 and $C0) shr 6) of
+0: begin
+     xbyte2:=Port[xword + 7];
+     Port[xword + 7]:=$FA;
+     for temp:=1 to 2 do;
+     if Port[xword + 7] = $FA then begin
+       Port[xword + 7]:=$AF;
+       for temp:=1 to 2 do;
+       if Port[xword + 7] = $AF then begin
+         Port[xword + 7]:=xbyte2;
+         Write('16450')
+       end
+       else
+         Write('8250')
+     end
+     else
+       Write('8250')
+   end;
+1: Write('???');
+2: Write('16550');
+3: Write('16550A')
+
+This is of course a routine to detect the type of UART. There are
+certain things I'm having trouble understanding. BIOSdseg, is this a
+variable or a built-in TPascal function? $C0 & $C1, what are these?
+
+Yousuf Khan
+
+ * Origin: To never lose characters again (1:163/215.6)
+----------------------------------------------------------------------
+.FROM: Scott Canion Area # 17 (Assembly Language )
+.TO:	Yousuf Khan    21 Mar 91
+.SUBJECT: Re: *.pas to *.asm
+
+On 19-Mar-91, sources inform us that Yousuf Khan @ 1:163/215.6 said:
+
+ YK&gt; Well it seems the impossible has happened to me: I now understand
+ YK&gt; Assembler more than I understand Pascal.
+
+Thanks for the pascal code, Yousuf, it is very helpful.
+Here is the assembly version.  I tried to keep the variables close
+to the pascal source.  Are you sure you have programmed in Pascal
+before? :-)
+
+================== beginning of program =============================
+
+title "UART Detector"
+page 60, 132
+
+; comments -- the WRITE function is left up to your own implementation
+
+; constants
+
+BIOSdseg	equ	40h		; data segment for BIOS
+i		equ	1		; COM PORT (1-4)
+
+        .model  tiny    ; tiny model (.COM)
+        .code
+        org     100h    ; .COM files start at 100h
+
+entry:
+        jmp     start   ; jump to start of progarm
+
+; variables
+
+xword   dw      ?
+xbyte2  db      ?
+xbyte3  db      ?
+
+jmp_table   dw      uart_8250_or_16450, uart_unknown, uart_16550, uart_16550a
+
+; ------------------------ MAIN ------------------------------
+
+start   proc
+        mov     ax, BIOSdseg
+        mov     es, ax          ; move bios data segment into ES
+        mov     dx, es:[2*i-2]  ; get offset for serial port
+        mov     xword, dx       ; xword := serial port base address
+        add     dx, 2           ; dx := dx + 2
+        in      al, dx          ; al := port [dx]
+        mov     xbyte2, al      ; xbyte2 := al
+        mov     al, 0c1h        ; al := $C1
+        out     dx, al          ; port [dx] := al
+        in      al, dx          ; al := port [dx]
+        and     al, 0c0h        ; al := (al AND $C0)
+        mov     cl, 5           ; cl := 5
+        shr     al, cl          ; al := (al shr 5) (5 for word jmp)
+        mov     ah, 0           ; ah := 0
+        mov     bp, ax          ; bp := ax (al)
+        mov     al, xbyte2      ; al := xbyte2
+        out     dx, al          ; port [dx] := al
+        jmp     cs:[jmp_table+bp]
+
+uart_8250_or_16450:
+        mov     dx, xword       ; dx := xword
+        add     dx, 7           ; dx := dx + 7
+        in      al, dx          ; al := port [dx]
+        mov     xbyte2, al      ; xbyte2 := al
+        mov     al, 0fah        ; al := $FA
+        out     dx, al          ; port [dx] := al
+        in      al, dx          ; al := port [dx]
+        cmp     al, 0fah        ; if (al &lt;&gt; $FA)
+        jne     uart_16450      ; then uart is 16450
+        mov     al, 0afh        ; al := $AF
+        out     dx, al          ; port [dx] := al
+        in      al, dx          ; al := port [dx]
+        cmp     al, 0afh        ; if (al &lt;&gt; $AF)
+        jne     uart_8250       ; then uart is 8250
+        mov     al, xbyte2      ; else al := xbyte2
+        out     dx, al          ; port [dx] := al
+        jmp     uart_16450      ; uart is 16450
+
+uart_8250:
+        write   "8250"          ; display "8250"
+        jmp     exit
+
+uart_16450:
+        write   "16450"         ; display "16450"
+        jmp     exit
+
+uart_unknown:
+        write   "???"           ; display "unknown"
+        jmp     exit
+
+uart_16550:
+        write   "16550"         ; display "16550"
+        jmp     exit
+
+uart_16550a:
+        write   "16550A"        ; display "16550A"
+        jmp     exit
+
+exit:
+        mov     ax, 4c00h
+        int     21h             ; exit to DOS
+start   endp                    ; end of proc
+
+END     entry                   ; end of program
+
+====================== end of program ===============================
+
+--- QM v1.00
+ * Origin: Scott's Excellent BBS HST/V.32bis (1:382/17.0)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,52 @@
+<html><head><title>TPZ - ZMODEM protocol for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коммуникационный модуль с поддержкой протокола ZModem. Все комментарии и документация на немецком. <br><font color=#666666> Serial communication module and File-transfer module for ZMODEM protocol. Based on TP-ZMODEM by Philip R. Burn and J.R.Louvau</font>">
+<meta name="keywords" content="pascal, sources, source code, tpz, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpz
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPZ - ZMODEM protocol for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Stefan Graf</TD>
+<TD class=black align='right'>19.05.1990</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Коммуникационный модуль с поддержкой протокола ZModem.
+Все комментарии и документация на немецком. <br><font color=#666666>
+Serial communication module and File-transfer module for ZMODEM protocol.
+Based on TP-ZMODEM by Philip R. Burn and J.R.Louvau</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpz.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>31k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hallo Pascal-Freund !
+
+Ich habe meinen Pascal-Compiler so gepatcht, dass er bei F9 (Make)
+Units mit der Fileendung .U sucht. So fallen diese besser zwischen
+den Hauptprogrammen (.PAS) auf.  Wenn Du das nicht gemacht hast,
+dann solltest Du jetzt mal eben REN *.U *.PAS eingeben.
+
+                           ZMODEM fБr Turbo-Pascal
+
+                       Copywrite (c) by Stefan Graf 1990
+
+DatenБbertragung Бber die serielle Schnittstelle mit dem ZMODEM-
+Protokoll.
+Als Grundlage diente der Sourcecode TPZ.PAS von Philip R. Burn's
+PIPTERM. Die Unit ist in vielen Teilen Бberarbeitet und auf hohe
+Transferraten getrimmt worden.
+In diversen Test's wurde mit 115200 Baud eine Ъbertragungsrate
+von mehr als 5 kByte's pro Sekunde erreicht.
+
+Das Handling der ser. Schnittstelle erfolgt Бber die Unit
+SERIELLINTERFACE.
+
+Die Transferroutinen erzeugen selber keinerlei Statusmeldungen.
+Diese Бbernehmen zwei, vom Benutzter zu erstellende parameterlose
+PROCEDUREN, die den aktuellen Status des Transfer's ausgeben.
+Diese Daten werden in der Variablen der Unit TRANSDATA abgelegt.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

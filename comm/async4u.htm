@@ -1,0 +1,99 @@
+<html><head><title>Async4u - Communication Unit for TP4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модификация коммуникационной библиотеки ASYNC в виде модуля для TP4.<br><font color=#666666> This is a faithful translation of the famous ASYNC.INC by Michael Quinlan into a Turbo 4.0 unit.  No extra frills, no modification of types, nothing fancy.</font>">
+<meta name="keywords" content="pascal, sources, source code, async4u, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;async4u
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Async4u - Communication Unit for TP4</TD>
+<TD nowrap class=black>&nbsp;Tom R.Donnelly</TD>
+<TD class=black align='right'>04.03.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модификация коммуникационной библиотеки ASYNC в виде
+модуля для TP4.<br><font color=#666666>
+This is a faithful translation of the famous ASYNC.INC by
+Michael Quinlan into a Turbo 4.0 unit.  No extra frills,
+no modification of types, nothing fancy.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="async4u.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{----------------------------------------------------------------}
+{                         ASYNC4U.PAS                            }
+{                                                                }
+{ This is a faithful translation of the famous ASYNC.INC by      }
+{ Michael Quinlan into a Turbo 4.0 unit.  No extra frills,       }
+{ no modification of types, nothing fancy.  But with this code   }
+{ you should be able to delete your $I ASYNC.INC directive,      }
+{ add a USES ASYNC4U statement, and recompile your existing      }
+{ program.  If you want to add support for more ports, other     }
+{ computers, or change to use the new data types, all good ideas,}
+{ go right ahead. With this you don't have to.                   }
+{                               Scott Gurvey, November 29 1987   }
+{                                                                }
+{ I have taken the liberty of modifying Scott's original         }
+{ translation to make use of some of TURBO 4's nicer features.   }
+{ To wit: The procedure that initializes this unit's variables   }
+{ has been moved to the startup initialization section of the    }
+{ unit, removing the need to call ASYNC_INIT.                    }
+{ The unit now defines an ExitProc routine that will call        }
+{ ASYNC_CLOSE whenever a termination occurs.  The procedure      }
+{ ASYNC_CLOSE may still be explicitly called.  However, if an    }
+{ abnormal termination should occur, the system won't be left    }
+{ with interrupt handlers active.                                }
+{                                Tom R. Donnelly, March 4, 1988  }
+{----------------------------------------------------------------}
+{                                                                }
+{                         ASYNC.INC                              }
+{                                                                }
+{ Async Communication Routines                                   }
+{ by Michael Quinlan                                             }
+{ with a bug fixed by Scott Herr                                 }
+{ made PCjr-compatible by W. M. Miller                           }
+{ Highly dependant on the IBM PC and PC DOS 2.0                  }
+{                                                                }
+{ Moved Async_init into Unit Initialization Section              }
+{ Setup ExitProc to call Async_close, to reset ports and         }
+{ vectors                                                        }
+{ based on the DUMBTERM program by CJ Dunford in the January     }
+{ 1984 issue of PC Tech Journal.                                 }
+{                                                                }
+{ Entry points:                                                  }
+{                                                                }
+{   Async_Init                 (Moved to unit initialization)    }
+{     Performs initialization.                                   }
+{                                                                }
+{   Async_Open(Port, Baud : Integer;                             }
+{              Parity : Char;                                    }
+{              WordSize, StpBits : Integer) : Boolean            }
+{     Sets up interrupt vector, initialies the COM port for      }
+{     processing, sets pointers to the buffer.                   }
+{     Returns FALSE if COM port not installed.                   }
+{                                                                }
+{   Async_Buffer_Check(var C : Char) : Boolean                   }
+{     If a character is available, returns TRUE and moves the    }
+{       character from the buffer to the parameter               }
+{     Otherwise, returns FALSE                                   }
+{                                                                }
+{   Async_Send(C : Char)                                         }
+{     Transmits the character.                                   }
+{                                                                }
+{   Async_Send_String(S : LStr)                                  }
+{     Calls Async_Send to send each character of S.              }
+{                                                                }
+{   Async_Close                                                  }
+{     Turn off the COM port interrupts.                          }
+{     **MUST** BE CALLED BEFORE EXITING YOUR PROGRAM; otherwise  }
+{     you will see some really strange errors and have to re-boot}
+{     (Note: The **MUST** restriction no longer applies.         }
+{     This unit will hook itself into the ExitProc chain to      }
+{     automatically close the com ports, if still open at)       }
+{      termination.                                              }
+{----------------------------------------------------------------}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

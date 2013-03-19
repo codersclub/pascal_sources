@@ -1,0 +1,70 @@
+<html><head><title>Модуль для COM-порта для TP 6.0 (TPU+Sample)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль предназначен для работы с COM-портом и включает в себя драйвер прерывания для IBM-PC. (TPU6.0 only)">
+<meta name="keywords" content="pascal, sources, source code, spcom, comm, Коммуникация ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Коммуникация</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;spcom
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Модуль для COM-порта для TP 6.0 (TPU+Sample)</TD>
+<TD nowrap class=black>&nbsp;Сергей Перевозник</TD>
+<TD class=black align='right'>04.01.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль предназначен для работы с COM-портом и
+включает в себя драйвер прерывания для IBM-PC. (TPU6.0 only)</TD><TD class=black colspan=2 align='right'><br><A HREF="spcom.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  hacker@police.chernigov.ua (Sergey V. Perevoznik)
+Organization: Police Departement of Chernigov region
+
+  {*********************************************************}
+  {*                    SPCOM.PAS 6.00                     *}
+  {*        Copyright (c) HelpSoft Laboratory 1992.        *}
+  {*                 All rights reserved.                  *}
+  {                   Перевозник Сергей                    *}
+  {*  Этот модуль предназначен для работы с COM-портом и   *}
+  {*    включает в себя драйвер прерывания для IBM-PC.     *}
+  {* Драйвер устанавливается вызовом процедуры com_install.*}
+  {*********************************************************}
+
+
+
+UNIT SpCom;
+{ Работа с COM-портом}
+
+{*********************** Введение *************************}
+
+{  IBM PC может содержать   до четырех последовательных пор-
+тов,  также называемых адаптерами     RS-232C. В PS/2 (кроме
+моделей 25 и 30) может быть  до восьми таких адаптеров.    В
+MS-DOS    последовательные     порты называются COMX , где X
+номер порта. Работать с     последовательными портами  можно
+как     с использованием базовой  системы вводавывода - BIOS
+(Basic Input-Output System), так и непосредственно     через
+использование     аппаратных прерываний. В BIOS для работы с
+последовательными портами выделено специальное    прерывание
+int14  (Здесь и далее числа даны   в 16-ричной системе счис-
+ления). С помощью этого прерывания можно      установить па-
+раметры  порта, проверить статус порта, принять или передать
+байт данных. Но при работе через BIOS    программа    должна
+обрабатывать  данные со скоростью неменьшей         чем ско-
+рость их  поступления, т.к. в  IBM PC не поддерживается  ап-
+паратная  буферизация данных проходящих через       последо-
+вательный порт. Работа с использованием int14 возможна   при
+передаче данных со скоростями до   300 бод. При больших ско-
+ростях неизбежна потеря данных.  При работе на скоростях бо-
+льше 300 бод приходится организовывать программную буфериза-
+цию принимаемых, а в отдельных случаях и  передаваемых  дан-
+ных.  Это можно сделать при   использовании прерываний кото-
+рые могут генерироваться последовательными портами.
+}
+
+{===========================================================}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
