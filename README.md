@@ -1,4 +1,4 @@
 pascal_sources
 ==============
 
-The site pascal.sources.ru content archive
+This is a content archive of our site pascal.sources.ru
