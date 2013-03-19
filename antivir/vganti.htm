@@ -1,0 +1,394 @@
+<html><head><title>Антивирус VGANTI</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Приведено описание вируса AIDC и программы для его обнаружения.">
+<meta name="keywords" content="pascal, sources, source code, vganti, antivir, Антивирусные программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Антивирусные программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vganti
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Антивирус VGANTI</TD>
+<TD nowrap class=black>&nbsp;Валерий Гражданкин</TD>
+<TD class=black align='right'>22.11.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Приведено описание вируса AIDC
+и программы для его обнаружения.</TD><TD class=black colspan=2 align='right'><br><A HREF="vganti.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                            V G A n t i
+                            ___________
+                                              Создателю
+                                                вируса
+                                                 "AIDC"
+                                                  посвящается.
+
+      Причиной, побудившей меня написать VGAnti, послужило то,
+что  в  Курском политехническом ( где я учусь ) появился новый
+вирус.  Кто и когда его занес в институт - остается только га-
+дать,  хотя  я  не исключаю,  что он написан одним из наиболее
+грамотных наших студентов ( а большинство студентов КПИ на это
+не способна по причине отсуствия элементарных знаний Ассембле-
+ра и работы MSDOS).  С чего содрали этот вирус мне  судить  не
+приходится,   но  некоторое  философское  начало  в  структуре
+присуствует.
+      Короче распространился он быстро,  и кто-то из студентов
+завез вирус на работу к моему другу Польшинскому Юре. И в один
+прекрасный  день  на  дисплее  при  запуске какой-то программы
+высветилось "AIDS" и машина  зависла.  Хватились  туда-сюда  :
+большинство  программ  заражено.  Что возможно восстановили из
+архивов,  но кое-что ценное хранилось на жестком диске в одном
+экземпляре. Это и стало основной причиной моих усилий.
+      Конечно не мне тягаться с Лозинским и другими ассами, но
+на  данный  момент  ни  AIDSTEST,  ни  SOS ,  ни SCAN не ловят
+"AIDS",  так что,  как говорится,  не от хорошей жизни я коря-
+чился.
+
+      Теперь несколько слов о вирусе.  Не для создателей фагов
+( они с вирусом,  думаю,  и без моих советов разберуться  )  а
+просто для любопытных.
+
+
+      Вирус "AIDS"
+      ____________
+
+      Вирус имеет длину 552 байта,  и именно на это количество
+      байт удлинняется зараженная программа. При запуске зара-
+      женной программы вирус проверяет себя на наличие в памя-
+      ти,  и если его там еще нет - инициализируется. При этом
+      он  пересылает себя в старшие адреса памяти и "отрезает"
+      у ДОС 1К ОЗУ. Перехватывается 21H прерывание ДОС функция
+      3EH. Заражение происходит только при закрытии файла. За-
+      ражаются только EXE файлы, если младшие два байта длинны
+      больше  2800H.  После  каждого 8-го заражения файл пога-
+      нится : в начало записывается кусок вируса, выдающий ду-
+      рацкую заставку.  В том что вирус советского происхожде-
+      ния у меня нет сомнений, причем писал его человек, абсо-
+      лютно  не сведующий в медицине,  так как "AIDS" написано
+      как "AIDC". При каждом заражении вирус случайным образом
+      кодирует часть своего тела.  Записывается всегда в конец
+      файла.  Косвенным признаком наличия вируса служат  буквы
+      "шв" в окрестности 500 байт от конца файла.  Год написа-
+      ния вируса - 1990, т.к. именно эта цифра проставляется в
+      контрольной  сумме  зараженного файла и служит признаком
+      заражения.  Но кроме зтой маленькой слабости в вирусе не
+      содержится никакой саморекламы.
+
+
+
+      Надеюсь, мой  маленький вклад в дело борьбы с заразой не
+пропадет и мой VGAnti поможет кому-нибудь сохранить свои прог-
+раммы.
+
+                                    Валера Гражданкин.
+                                    1991 год.
+
+_____________________________________________________________________
+
+                               Адрес для отзывов и замечаний:
+
+                                    305018 г.Курск-18 пр.Кула-
+                                    кова д.7 кв.5
+
+
+    P.S.
+        1.VGAnti может дать сбой если атрибут проверяемого фай-
+            ла "Read only".  Я это конечно исправлю, но сейчас
+            некогда. Извиняюсь.
+        2.AIDSTEST 157 и  SOS обезвреживают этот вирус,
+        но не вакцинируют файл.
+
+                                               22.11.91 г.
+
+
+
+{&gt; Cut here. FileName= VGANTI.PAS }
+{************************************}
+{*    Turbo Pascal 4.0 - 6.0        *}
+{*   Свободно для использования     *}
+{*         и модификации            *}
+{*----------------------------------*}
+{*  Автор:  Гражданкин Валерий      *}
+{*             г.Курск              *}
+{*           VGSoft Inc.            *}
+{************************************}
+
+{*=======================================================*}
+{*   P.S. Неудачен алгоритм построения дерева каталога : *}
+{*                может не хватить памяти                *}
+{*=======================================================*}
+
+program VGAnti;
+uses Dos, CRT {, AidsTst };
+const
+     Len=10;
+     AidsDat:array[0..len-1] of byte=
+     ($FA, $80, $FC, $3E, $75, $3, $E8, $5, $0, $EA );
+type
+    ByteArr = array [0..65534] of byte;
+
+    PPath = ^PathRec;
+    PathRec = record
+             Path : PathStr;
+             Next : PPath;
+    end;
+
+var Vec1o, Vec1s, Vec2o, Vec2s:word;
+    I: integer;
+    Buf, Buf1: ^ByteArr;
+    Result, AIP : word;
+    AOfs, VirOfs, VirLoc : longint;
+    Vakcin : boolean;
+    VS : string[20];
+    FPath : PathStr;
+    Sr:SearchRec;
+    DiskName : String[2];
+    F:file;
+    Trees, PTree1 : PPath;
+
+Procedure NextToSpis(Var PS: PPath; LPath: PathStr; Var Sr: SearchRec);
+var P1 :PPath;
+begin
+   While DosError=0 do
+   begin
+      New(P1);
+      P1^.Next:=PS;
+      PS:=P1;
+      PS^.Path:=DiskName+LPath+'\'+Sr.Name;
+      FindNext(Sr);
+   end;
+end;
+
+procedure MakeTree( Var PTree: PPath);
+label 10, 20, 30;
+type
+   PDKats = ^DKats;
+   DKats = record
+        Name : String[14];
+        Path : PathStr;
+        Level : word;
+        Pred  : PDKats;
+        Right : PDKats;
+        Left  : PDKats;
+   end;
+
+var
+   Sr, KSr : SearchRec;
+
+   SP, LPath : PathStr;
+
+   TekKat   : PDKats;
+   WorkKat, OldLeft, OldPred  : PDKats;
+
+   P1, P2 : PPath;
+   CurLevel:word;
+   CurPath :PathStr;
+   IsOne   :Boolean;
+begin
+
+   While PTree&lt;&gt;nil do
+   begin
+      P1:=PTree;
+      PTree:=PTree^.Next;
+      Dispose(P1);
+   end;
+
+   FindFirst(DiskName+'\*.EXE', Archive, Sr);
+   NextToSpis(PTree,'', Sr);
+
+
+   SP:='';
+   CurLevel:=1;
+   CurPath :='\';
+
+   New(TekKat);
+   TekKat^.Pred:=nil;
+   TekKat^.Left:=nil;
+   TekKat^.Right:=nil;
+   TekKat^.Level:=0;
+   TekKat^.Name:='';
+   TekKat^.Path:='\';
+   FindFirst(DiskName+'\*.*', Directory, KSr);
+   OldLeft:=TekKat;
+   OldPred:=nil;
+   IsOne:=false;
+
+10:
+   IsOne:=false;
+   while DosError=0 do
+   begin
+      if (KSr.Name&lt;&gt;'.') and (KSr.Name&lt;&gt;'..')
+                         and (KSr.Attr=Directory) then
+         begin
+            IsOne:=true;
+            New(WorkKat);
+            WorkKat^.Pred:=OldPred;
+            WorkKat^.Left:=OldLeft;
+            WorkKat^.Right:=nil;
+            WorkKat^.Name:=KSr.Name;
+            WorkKat^.Level:=CurLevel;
+            if CurPath='\' then WorkKat^.Path:=CurPath+KSr.Name
+            else WorkKat^.Path:=CurPath+'\'+KSr.Name;
+            TekKat:=WorkKat;
+            OldLeft:=TekKat;
+            OldPred:=nil;
+{              Writeln(DiskName+TekKat^.Path);}
+
+            FindFirst(DiskName+TekKat^.Path+'\*.EXE', Archive, Sr);
+            NextToSpis(PTree,TekKat^.Path, Sr);
+
+         end;
+         FindNext(KSr);
+     end;
+     If IsOne then
+     begin
+20:
+        CurPath:=TekKat^.Path;
+        FindFirst(DiskName+CurPath+'\*.*', Directory, KSr);
+        if DosError=0 then
+        begin
+           OldLeft:=nil;
+           OldPred:=TekKat;
+           goto 10;
+        end;
+     end;
+30:
+     if TekKat^.Left&lt;&gt;nil then
+     begin
+        TekKat:=TekKat^.Left;
+        if TekKat^.Right&lt;&gt;nil then Dispose(TekKat^.Right);
+        Goto 20;
+     end;
+     if TekKat^.Pred&lt;&gt;nil then
+     begin
+        TekKat:=TekKat^.Pred;
+        if TekKat^.Right&lt;&gt;nil then Dispose(TekKat^.Right);
+        Goto 30;
+     end;
+end;
+begin
+   writeln;
+   writeln('VGAnti версия 1.0, автор В.Гражданкин.');
+   writeln('(C) VGSoft, май, 1991 г.');
+   writeln;
+   writeln('Средство против вируса "AIDS"');
+   writeln;
+
+{     AidsControl(129,21,14);}
+
+   Vakcin :=false;
+   Vec1o:=MemW[0:$A];
+   Vec1s:=MemW[0:$C];
+   Vec2o:=MemW[0:$84];
+   Vec2s:=MemW[0:$86];
+   I:=0;
+   While (I&lt;len) and (Mem[Vec2s:Vec2o+I]=AidsDat[I]) do inc(I);
+   if I&gt;=Len then
+   begin
+      Writeln('Вирус "AIDS" в памяти Вашей машины !!!');
+      MemW[0:$84]:=MemW[Vec2s:Vec2o+Len];
+      MemW[0:$86]:=MemW[Vec2s:Vec2o+Len+2];
+      writeln('Деятельность вируса блокирована .');
+      inc(MemW[0:$413]);
+      writeln('Вирус из памяти удален.');
+      writeln;
+   end;
+   if paramcount&lt;1 then
+   begin
+     writeln('Это моя первая антивирусная программа, так что не',
+             ' обижайтесь,');
+     writeln('если она что-нибудь не так исправит. Пока VGAnti находит ');
+     writeln('только "AIDS" и излечивает от него. Файлы, испорченные',
+             ' вирусом,');
+     writeln('после запуска выдают на экран заставку и машина зависает.');
+     writeln('Такие файлы легко обнаружить самому, они исправлению не',
+             ' подлежат');
+     writeln('и их надо уничтожить. ');
+     writeln;
+     writeln('Формат запуска : VGAnti Диск /V');
+     writeln('Например       : VGAnti C: /V');
+     writeln('Флажок /V указывает на вакцинирование файлов (если',
+             ' возможно)');
+     writeln('от повторного заражения "AIDS"');
+     exit;
+   end;
+   DiskName:=ParamStr(1);
+   DiskName[2]:=':';
+   DiskName[1]:=UpCase(DiskName[1]);
+   if paramcount&gt;1 then
+   begin
+      VS:=ParamStr(2);
+      if (VS='/v') or (VS='/V') then Vakcin:=true;
+   end;
+
+
+   TRees:=nil;
+   MakeTree(Trees);
+
+   GetMem(Buf, $1A);
+   GetMem(Buf1, 10000);
+
+   while Trees&lt;&gt;nil do
+   begin
+     Assign(F, Trees^.Path);
+     {$I-}
+     reset(F,1);
+     {$I+}
+     if IOResult&lt;&gt;0 then
+     begin
+        writeln('Ошибка ввода-вывода : ненормальное завершение .');
+        exit;
+     end;
+     GotoXY(1, WhereY);
+     ClrEol;
+     write(Trees^.Path);
+     BlockRead(F, Buf^, $1A, Result);
+     if (Buf^[$13]=$19) and(Buf^[$12]=$90) then
+     begin
+        write(' - заражен "AIDS"');
+        AOfs:=(Buf^[8]+Buf^[9]*256)*16;
+        AIP:=Buf^[$14]+Buf^[$15]*256;
+        VirOfs:=(Buf^[$16]+Buf^[$17]*256);
+        VirLoc:=AOfs+AIP+VirOfs*16;
+        Seek(F, VirLoc);
+        BlockRead(F, Buf1^, 1000, Result);
+        Buf^[$14]:=Buf1^[10];
+        Buf^[$15]:=Buf1^[11];
+        Buf^[$16]:=Buf1^[3];
+        Buf^[$17]:=Buf1^[4];
+        VirOfs:=VirLoc-$FF;
+        AIP:=(VirOfs-AOfs) mod 512;
+        Buf^[2]:=Lo(AIP);
+        Buf^[3]:=Hi(AIP);
+        AIP:=trunc(VirOfs/512);
+        if AIP*512&lt;VirOfs then inc(AIP);
+        Buf^[4]:=Lo(AIP);
+        Buf^[5]:=Hi(AIP);
+        If Vakcin then
+           Buf^[$12]:=1 else Buf^[$12]:=0;
+        Buf^[$13]:=0;
+        Seek( F, 0);
+        BlockWrite(F, Buf^, $1A, Result);
+        Seek(F, VirLoc-$FF);
+        Truncate(F);
+        write(' : вылечен');
+        if Buf^[$12] = 1 then writeln(' и вакцинирован')
+        else writeln;
+     end;
+     close(F);
+     PTree1:=Trees;
+     Trees:=Trees^.Next;
+     Dispose(PTree1);
+   end;
+   FreeMem(Buf, $1A);
+   FreeMem(Buf1, 10000);
+   gotoXy(1,WhereY);
+   ClrEol;
+   writeln('Работа закончена .');
+end.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->
