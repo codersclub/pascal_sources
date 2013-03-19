@@ -1,0 +1,83 @@
+<html><head><title>CRC-32 Calculating Unit for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для расчета CRC32, использующий полином <br> X^32+X^26+X^23+X^22+X^16+X^12+X^11+X^10+X^8+X^7+X^5+X^4+X^2+X^1+X^0">
+<meta name="keywords" content="pascal, sources, source code, crc32bp, crc, Контрольные Суммы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Контрольные Суммы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crc32bp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRC-32 Calculating Unit for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;J.R.Louvau</TD>
+<TD class=black align='right'>17.04.1988</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для расчета CRC32, использующий полином <br>
+X^32+X^26+X^23+X^22+X^16+X^12+X^11+X^10+X^8+X^7+X^5+X^4+X^2+X^1+X^0</TD><TD class=black colspan=2 align='right'><br><A HREF="crc32bp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Converted to Turbo Pascal (tm) V4.0 March, 1988 by J.R.Louvau
+Copyright (C) 1986 Gary S. Brown.  You may use this program, or
+code or tables extracted from it, as desired without restriction.
+
+First, the polynomial itself and its table of feedback terms.  The
+polynomial is
+X^32+X^26+X^23+X^22+X^16+X^12+X^11+X^10+X^8+X^7+X^5+X^4+X^2+X^1+X^0
+Note that we take it "backwards" and put the highest-order term in
+the lowest-order bit.  The X^32 term is "implied"; the LSB is the
+X^31 term, etc.  The X^0 term (usually shown as "+1") results in
+the MSB being 1.
+
+Note that the usual hardware shift register implementation, which
+is what we're using (we're merely optimizing it by doing eight-bit
+chunks at a time) shifts bits into the lowest-order term.  In our
+implementation, that means shifting towards the right.  Why do we
+do it this way?  Because the calculated CRC must be transmitted in
+order from highest-order term to lowest-order term.  UARTs transmit
+characters in order from LSB to MSB.  By storing the CRC this way,
+we hand it to the UART in the order low-byte to high-byte; the UART
+sends each low-bit to hight-bit; and the result is transmission bit
+by bit from highest- to lowest-order term without requiring any bit
+shuffling on our part.  Reception works similarly.
+
+The feedback terms table consists of 256, 32-bit entries.  Notes:
+
+    The table can be generated at runtime if desired; code to do so
+    is shown later.  It might not be obvious, but the feedback
+    terms simply represent the results of eight shift/xor opera-
+    tions for all combinations of data and CRC register values.
+
+    The values must be right-shifted by eight bits by the "updcrc"
+    logic; the shift must be unsigned (bring in zeroes).  On some
+    hardware you could probably optimize the shift in assembler by
+    using byte-swap instructions.
+    polynomial $edb88320
+
+Use a type LONGINT variable to store the crc value.
+Initialise the variable to $FFFFFFFF before running the crc routine.
+VERY IMPORTANT!!!! -&gt; This routine was developed for data communications
+and returns the crc bytes in LOW to HIGH order, NOT byte reversed!
+To turn the valu into a 'normal' LONGINT, you must reverse the bytes!
+e.g.
+
+VAR
+   l, crc: LONGINT;
+   list: ARRAY[0..1023] OF BYTE;
+   counter: INTEGER;
+
+BEGIN
+   crc := $FFFFFFFF;                           (* initialise  *)
+   FillChar(list,SizeOf(list),1);              (* dummy array *)
+   FOR counter := 0 TO (Pred(SizeOf(list))) DO (* run thru    *)
+      crc := UpdC32(buf[counter],crc);         (* finding crc *)
+   FOR counter := 1 TO 4 DO                    (* reverse     *)
+      l := (l SHL 8) OR BYTE(crc);             (* the bytes   *)
+   (* l now contains the 'normalized' crc *)
+
+FUNCTION UpdC32(octet: BYTE; crc: LONGINT) : LONGINT;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

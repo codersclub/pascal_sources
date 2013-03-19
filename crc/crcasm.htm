@@ -1,0 +1,81 @@
+<html><head><title>CRC16, CRC32 and CRC/ARC functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Три оптимизированные по скорости функции для вычисления CRC16 и CRC32. <br><font color=#666666> Three speed-optimized assembler functions to compute a CRC:<br> CRC16 - used by the XModem protocol,<br> CRC32 - used by PKZIP and Forsberg's ZModem,<br> CRC/ARC - used by SEA's ARC utility.</font>">
+<meta name="keywords" content="pascal, sources, source code, crcasm, crc, Контрольные Суммы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Контрольные Суммы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crcasm
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRC16, CRC32 and CRC/ARC functions</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:CIS: 76067,747">Edwin T. Floyd</a></TD>
+<TD class=black align='right'>29.10.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Три оптимизированные по скорости функции
+для вычисления CRC16 и CRC32. <br><font color=#666666>
+Three speed-optimized assembler functions to compute a CRC:<br>
+CRC16 - used by the XModem protocol,<br>
+CRC32 - used by PKZIP and Forsberg's ZModem,<br>
+CRC/ARC - used by SEA's ARC utility.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="crcasm.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This unit provides three speed-optimized functions to compute
+(or continue computation of) a Cyclic Redundency Check (CRC).
+These routines are contributed to the public domain
+(with the limitations noted by the original authors in the
+TASM sources).  Please see TESTCRC.PAS for example usage.
+
+Each function takes three parameters:
+
+InitCRC - The initial CRC value.  This may be the recommended
+initialization value if this is the first or only block to be checked,
+or this may be a previously computed CRC value if this is a
+continuation.
+
+InBuf - An untyped parameter specifying the beginning of the memory
+area to be checked.
+
+InLen - A word indicating the length of the memory area to be checked.
+If InLen is zero, the function returns the value of InitCRC.
+
+The function result is the updated CRC.  The input buffer is scanned
+under the limitations of the 8086 segmented architecture, so the
+result will be in error if InLen &gt; 64k - Offset(InBuf).
+
+These conversions were done on 10-29-89 by:
+
+  Edwin T. Floyd [76067,747]
+  #9 Adams Park Court
+  Columbus, GA 31909
+  (404) 576-3305 (work)
+  (404) 322-0076 (home)
+
+Interface
+
+Function UpdateCRC16(InitCRC: Word; Var InBuf; InLen : Word) : Word;
+{ I believe this is the CRC used by the XModem protocol.
+  The transmitting end should initialize with zero, UpdateCRC16 for
+  the block, Continue the UpdateCRC16 for two nulls, and append the
+  result (hi order byte first) to the transmitted block.
+  The receiver should initialize with zero and UpdateCRC16 for the
+  received block including the two byte CRC. The result will be zero
+  (why?) if there were no transmission errors. (I have not tested
+  this function with an actual XModem implementation, though I
+  did verify the behavior just described.  See TESTCRC.PAS.) }
+
+Function UpdateCRCArc(InitCRC: Word; Var InBuf; InLen: Word) : Word;
+{ This function computes the CRC used by SEA's ARC utility.
+  Initialize with zero. }
+
+Function UpdateCRC32(InitCRC: LongInt; Var InBuf;
+                     InLen: Word): LongInt;
+{ This function computes the CRC used by PKZIP and Forsberg's ZModem.
+  Initialize with high-values ($FFFFFFFF), and finish by inverting
+  all bits (Not). }</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

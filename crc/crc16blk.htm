@@ -1,0 +1,72 @@
+<html><head><title>CRC-16 for Memory Block</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Ассемблерная функция для подсчета CRC16 в блоке памяти">
+<meta name="keywords" content="pascal, sources, source code, crc16blk, crc, Контрольные Суммы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Контрольные Суммы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crc16blk
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRC-16 for Memory Block</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:50/340.7">Aleksey Polushkin</a></TD>
+<TD class=black align='right'>25.05.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Ассемблерная функция для подсчета CRC16 в блоке памяти</TD><TD class=black colspan=2 align='right'><br><A HREF="crc16blk.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT -------------------------------------------- It's interesting -
+ Msg  : 111 of 200                    Addr                        Date
+ From : Aleksey Polushkin    2:50/340.7                       25.05.97
+ Subj : CRC-16
+----------------------------------------------------------------------
+Hello Alex!
+
+Thu May 22 1997 12:33, Ivan Tihonov wrote:
+
+ IT&gt;&gt; Смешно конечно, но может кто кинет сабж на паскале?
+
+Я вот пользyюсь такой пpоцедypой для подсчета ЦРЦ16 в блоке памяти:
+
+Aleksey
+
+---
+ * Origin:  ---  HЛО над Вологдой  ---  (2:50/340.7)
+
+{&gt; Cut here. FileName= CRC16BLK.PAS }
+{ Counting 16-bit CRC in memory block /TP7.0/ }
+Function MemCRC(PMem:pointer; Size:word):word; assembler;
+asm
+   mov ax,word ptr PMem+2;
+   mov es,ax;
+   mov di,word ptr PMem;
+   mov dx,Size;
+   mov bx,0FFFFh;
+   or  dx,dx;
+   jz  @L3;
+@CNT:
+   mov ah,es:[di];
+   mov cx,8;
+@L1:
+   mov al,bl;
+   xor al,ah;
+   shr al,1;
+   jnc @L2;
+   xor bx,4002h;
+   stc;
+@L2:
+   rcr bx,1;
+   shr ah,1;
+   loop @L1;
+   inc di;
+   dec dx;
+   jnz @CNT;
+@L3:
+   mov ax,bx;
+end;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
