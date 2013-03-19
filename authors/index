@@ -1,0 +1,277 @@
+<html><head><title>Pascal.Sources.Ru: Authors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<META name=keywords content="russian, pascal, sources, source, code, collection, free, freeware, русские, паскаль, паскальные, исходники, коллекция, авторы, паскальных, исходников">
+<META name=description content="Authors of Russian Pascal source code collection.&#10; Авторские странички в коллекции паскальных исходников.">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head>
+<BODY><center>
+
+<!--#include virtual="/t_hmenu2.htm"-->
+
+<TD class=silver width=35%> <!--#exec cgi="/cgi-bin/onetimep.cgi" --> </TD></TR></TABLE></TD></TR></TABLE></FORM>
+
+<TABLE cellSpacing=0 cellpadding=5 width=97% border=0>
+<tr><td valign='top' width=200>
+
+<!--#include virtual="/t_lmenu2.htm"-->
+<td valign='top'>
+<p class='title'>Авторские страницы
+<br><img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+</p>
+
+<TABLE cellSpacing=0 cellpadding=0 width=100% border=0>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="andriano.htm" target="_top">Сергей Андрианов</A></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A HREF="mailto:2:5017/13.40">Sergey Andrianov</A></TD>
+</TR>
+<TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор множества статей в журнале <a href="http://www.pcworld.ru/">"Мир ПК"</a>,<br>
+касающихся программирования железа, графики, звука...<br>
+Его часто можно встретить в fido-конференциях DEMO.DESIGN, 
+<br>SU.PASCAL.MODULA.ADA и др.<br>
+Здесь подобраны статьи Сергея, относящиеся к программированию на Паскале.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="andriano.htm">Список статей подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+<!--img-->
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="ostashev.htm">Виктор Осташев</A></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A HREF="mailto:v_ostashev@chat.ru">Victor Ostashev</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор многих полезных библиотек различного назначения,<br>
+один из "старожилов" fido-конференции SU.PASCAL.MODULA.ADA<br>
+Здесь подобраны паскальные исходники Виктора, публиковавшиеся
+в различных телеконференциях и помещенные на его страничке.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="ostashev.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="vbodrov.htm">Вадим Бодров</A></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A HREF="mailto:vbodrov@hotmail.com">Vadim Bodrov</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор многих полезных исходников различного назначения,<br>
+один из наиболее осведомленных программеров в TMT Pascal.<br>
+Здесь подобраны паскальные исходники Вадима, вошедшие в коллекцию<br>
+Russian SWAG и помещенные на его страничке.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="vbodrov.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader href="wagner.htm">Виктор Вагнер</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:vitus@ice.ru">Victor Wagner</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор множества статей в теле-конференциях,<br>
+внес огромный личный вклад в коллекцию RSWAG.<br>
+Здесь подобраны паскальные исходники Виктора, публиковавшиеся<br>
+в различных телеконференциях и помещенные на его страничке.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="wagner.htm" TARGET=_top>Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="solar.htm" TARGET=_top>Solar Designer</A></td>
+<TD class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:solar at openwall.com">Solar Designer</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Здесь подобраны авторские паскальные исходники на разные темы,
+<br>вошедшие в коллекцию <b>Russian SWAG</b>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="solar.htm" TARGET=_top>Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="beloshis.htm" TARGET=_top>Дмитрий Белошистов</A></td>
+<TD class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:torin@scm.com.ua">Dmitry Beloshistov</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Здесь подобраны паскальные исходники,
+<br>вошедшие в коллекцию <b>Russian SWAG</b>.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="beloshis.htm" TARGET=_top>Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="kalinins.htm" target="_top">Иван Калининский</A></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A HREF="mailto:vdm_wrc@beep.ru">Ivan Kalininskiy</A></TD>
+</TR>
+<TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Графика, Аудио, Демо-дизайн, библиотеки общего назначения... <br>
+Здесь подобраны статьи Ивана, относящиеся к программированию
+<br>на Паскале.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="kalinins.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+<!--img-->
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="revich.htm" target="_top">Юрий Ревич</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:yurarevich@mtu-net.ru">Yura Revich</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+GUI - библиотеки для DOS.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="revich.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="frounze.htm" target="_top">Алексей Фрунзе</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:alexfru@chat.ru">Alex Frounze</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+21 исходник на разные темы, в основном - графика.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="frounze.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="coolsoft.htm" target="_top">Иван Поляков</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:cooler@tut.by">Ivan Polyacov</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Графика, игры, Демо, Интро, Sound.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="coolsoft.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="wozza.htm" target="_top">Евгений Загидуллин</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:wozza@yandex.ru">Eugene Zagidullin</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Графика, Sound, Hacker's tricks.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="wozza.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="amonster.htm" target="_top">Алексей Монастыренко</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:aamonster@mail.ru">Alexey Monastyrenko</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Графика, Демо-дизайн<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="amonster.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="raven.htm" target="_top">Дмитрий Суходоев</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:raven66@mail.ru">Dmitry Suhodoev</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Fido-технологии, Plugins for FAR, Virtual Pascal
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="raven.htm">Список исходников подробнее...</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<A class=subheader HREF="sk.htm">Сергей Коровкин</A></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:sk@fido.irk.ru">sk</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор многочисленного софта для Fido, в том числе FastUUE и skMHL.
+<br>коМодератор телеконференций RU.PASCAL.* и RU.VP
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="sk.htm">Список исходников подробнее...</A></td>
+</TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF=-->Александр Ведякин<!--/A--></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:boss@piafi.ru">Alexandr Vedyakin</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Многоплатформенные программы для FIDO и Internet
+<br>&nbsp;&nbsp;&nbsp;<b>URL</b>:&nbsp;&nbsp;&nbsp;
+<A HREF="http://www.piafi.ru" target="_top">www.piafi.ru</A>
+</TD><TD class=blackb align=center width=20px>
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF=-->Александр Петросян<!--/A--></td>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:paf@design.ru">PAF</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Работа с аппаратурой, графика и др.
+<br>&nbsp;&nbsp;&nbsp;<b>URL</b>:&nbsp;&nbsp;&nbsp;
+<A HREF="http://www.design.ru/~paf" target="_top">www.design.ru/~paf/</A></TD>
+</TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF="mailto:"-->Александр Бойченко<!--/A--></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:shurik@metaljars.kiev.ua">Civilizator</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Игры, ФИДО-софт
+<br>&nbsp;&nbsp;&nbsp;<b>URL</b>:&nbsp;&nbsp;&nbsp;
+<A HREF="http://www.chat.ru/~civilztr/" target="_top">www.chat.ru/~civilztr/</A></TD>
+</TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF="mailto:"-->Булат Сиразетдинов<!--/A--></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:Bulat@aibes.ksu.ras.ru">Bulat Sirazetdinov</A></TD>
+</TR>
+<TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор идеи и технологии "разборки" оригинального формата SWAG
+</TD><TD class=blackb align=center width=20px>
+<!--img-->
+</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF="-->Михаил Юрьев<!--/A--></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF=mailto:rhc@mail.ru">Misha Youriev</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Автор самой 1й странички RSWAG (rswag.seagull.rinet.ru)<br>
+КоМодератор конференции RU.HTML.CHAINIK
+<br>&nbsp;&nbsp;&nbsp;<b>URL</b>:&nbsp;&nbsp;&nbsp;
+<A HREF="http://rhc.msk.ru" TARGET=_top>http://rhc.msk.ru</A></TD>
+</TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80%>&nbsp;
+<!--A class=subheader HREF=-->Сергей Николаев<!--/A--></TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;
+<A HREF="mailto:woo@rambler.ru?Subject=About RSWAG">Sergey Nikolaev</A></TD>
+</TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Оказал неоценимую помощь в оформлении странички
+<br>&nbsp;&nbsp;&nbsp;<b>URL</b>:&nbsp;&nbsp;&nbsp;
+<A HREF="http://belinks.nm.ru" TARGET=_top>http://belinks.nm.ru</A></TD>
+</TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colspan=2><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+</table></td></tr>
+</TABLE></BODY></HTML>

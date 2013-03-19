@@ -1,0 +1,163 @@
+<html><head><title>Pascal.Sources.Ru - STRMVIEW</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="keywords" content="pascal, sources, dmitry, beloshitov, дмитрий, белошитов, программы, strmview ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<p align=left>&nbsp;&nbsp;&nbsp;<a class=blueb href="../authors.htm">Авторские страницы</a> &nbsp;&gt;&gt;
+<a class=blueb href="index.htm">&nbsp;&nbsp;<b>Программы Дмитрия Белошистова </b></a>
+</p>
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=50% nowrap>&nbsp;
+StrmView - Модуль для работы с потоками в Turbo Vision
+</TD>
+<TD width=15% nowrap>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="/img/mail.gif">&nbsp;&nbsp;&nbsp;<A class=blackb href="mailto:torin@scm.com.ua">Dmitry Beloshistov</A></TD>
+<TD class=blackb width=6%>28.03.2001</TD></TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+Модуль StrmView предназначен для работы с пользовательскими базами данных <br>
+(типизированными файлами) - просмотр/редактирование и т.п.<br>
+В отличие от большинства остальных модулей компилируетс
+с использованием только стандартных модулей TV.
+</TD>
+<TD class=blackb><A HREF="strmview.zip"><img border=0 align=middle src="/img/dsk.gif"></A>&nbsp;
+5k</TD></TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:10px">
+>VV>  А для StrmView желательно бы компилирующий примерчик,
+>VV>  с приложенной небольшой базейкой,
+>VV>  или с созданием оной :)
+
+DB> Значит так.. Делаем по шагам.
+DB> Пишем любую базу данных File of ...... Забиваем ее несколькими записями...
+DB> Пишем наследника от TStreamViewer где переопределяем GetText.
+DB> function TStreamViewer.GetText(Item: LongInt; MaxLen: Integer): String;
+DB> var Rec: ..... user record .......
+DB>       S:String;
+DB> begin
+DB>   S.Seek(Item*RecSize);
+DB>   S.Read(Rec,SizeOf(.... user record ....));
+DB>   S:= ... переводим поля записи в строку .......
+DB>  if Length(S)>MaxLen then S[0]:=Char(Lo(MaxLen));   {это не обязательно, но
+DB> для чистоты эксперимента ;))) }
+DB>  GetText:=S;
+DB> end;
+
+
+DB> Затем в основной программе:
+DB> var SV:TStreamViewer;
+DB> .......
+DB> R.Assign(1,1,50,20);
+DB> SV.Init(R,1,SizeOf( .... user record ....),nil,'MyFile.Dat',True,$FFFE); -
+DB> проинициализировали обьект
+
+DB> Далее вставляем в приложение и наслаждаемся жизнью ;)))))
+
+
+------------------------------------------------------------------------------
+                     Модуль TStreamIndicator
+------------------------------------------------------------------------------
+Модуль написан для организации работы с пользовательскими базами данных (те же
+самые типизированные файлы данных) с использованием Turbo Vision.
+Содержит 2 обьекта - TStreamIndicator и TStreamViewer.
+TStreamIndicator - обьект для отображения позиции в потоке.
+TStreamViewer - обьект по работе с потоком.
+
+                     Поля и методы обьектов.
+                   --------------------------
+
+  PStreamIndicator=^TStreamIndicator;
+  TStreamIndicator=object(TView)
+                    Cur,Max:Longint;
+                    Constructor Init(var Bounds:TRect; AMax:longint);
+                    Procedure Draw; virtual;
+                    Procedure SetCurValue(ACur:Longint);
+                    Procedure SetMaxValue(AMax:Longint);
+                   end;
+
+  Cur,         текущая запись в потоке
+  Max:Longint; общее число записей в потоке
+  Constructor Init(var Bounds:TRect; AMax:longint); - конструктор.
+              Параметры - область отображения и число записей.
+  Procedure Draw; virtual; - процедура рисовани
+  Procedure SetCurValue(ACur:Longint); установка текущей позиции
+  Procedure SetMaxValue(AMax:Longint); установка максимального кол-ва записей
+
+
+  PStreamViewer = ^TStreamViewer;
+  TStreamViewer = object(TView)
+    VScrollBar: PScrollBar;
+    NumCols: Integer;
+    TopItem: longint;
+    Focused: longint;
+    Range: longint;
+    RecSize:Word;
+    NumRecs:Longint;
+    Status:integer;
+    Modify:boolean;
+    S:TBufStream;
+    constructor Init(var Bounds:TRect; ANumCols,ARecSize:Word;
+                     AVScrollBar:PScrollBar; FileName:String;
+                     AModify:boolean; BufSize:Word);
+    Destructor Done; virtual;
+    procedure ChangeBounds(var Bounds: TRect); virtual;
+    procedure Draw; virtual;
+    procedure FocusItem(Item: LongInt); virtual;
+    function GetPalette: PPalette; virtual;
+    function GetText(Item:Longint; MaxLen: Integer): String; virtual;
+    function IsSelected(Item:Longint): Boolean; virtual;
+    procedure HandleEvent(var Event: TEvent); virtual;
+    procedure SelectItem(Item: Longint); virtual;
+    procedure SetRange(ARange: longint);
+    procedure SetState(AState: Word; Enable: Boolean); virtual;
+    procedure PutRec(RecNumber:Longint; var Rec);
+    procedure GetRec(RecNumber:longint; var Rec);
+    Procedure AppendRec(var Rec);
+  private
+    procedure FocusItemNum(Item: longint); virtual;
+  end;
+
+  VScrollBar: PScrollBar; - обьект полосы скроллинга.
+  NumCols: Integer;       - число колонок
+  TopItem: longint;       - верхний элемент (индекс) в окне
+  Focused: longint;       - выбранный элемент (индекс)
+  Range: longint;         - диапазон
+  RecSize:Word;           - размер записи
+  NumRecs:Longint;        - число записей
+  Status:integer;         - состояние для потока
+  Modify:boolean;         - флаг модификации
+  S:TBufStream;           - рабочий поток
+  constructor Init(var Bounds:TRect; ANumCols,ARecSize:Word;
+                   AVScrollBar:PScrollBar; FileName:String;
+                   AModify:boolean; BufSize:Word); - конструктор.
+  Параметры: Bounds:TRect;            - границы для отображени
+             ANumCols,                - число колонок
+             ARecSize:Word;           - размер записи
+             AVScrollBar:PScrollBar;  - полоса скроллинга
+             FileName:String;         - имя файла базы данных
+             AModify:boolean;         - может ли модифицироватьс
+             BufSize:Word             - размер буфера для потока
+  Destructor Done; virtual;           - деструктор
+  procedure ChangeBounds(var Bounds: TRect);  - изменение границ отображени
+  procedure Draw; - процедура рисовани
+  procedure FocusItem(Item: LongInt); - выбрать элемент с заданным индексом
+  function GetPalette: PPalette; - получить палитру для отображени
+  function GetText(Item:Longint; MaxLen: Integer): String; получить текст дл
+           отображени
+  function IsSelected(Item:Longint): Boolean; - проверка на то,  что элемент
+           выбран
+  procedure HandleEvent(var Event: TEvent); - обработка сообщений
+  procedure SelectItem(Item: Longint); - выбрать элемент
+  procedure SetRange(ARange: longint); - установить диапазон
+  procedure SetState(AState: Word; Enable: Boolean); - состояние окна
+  procedure PutRec(RecNumber:Longint; var Rec); - изменить запись
+  procedure GetRec(RecNumber:longint; var Rec); - получить запись
+  Procedure AppendRec(var Rec); - добавить запись в конец
+  procedure FocusItemNum(Item: longint); - выбрать элемент
+
+WBR Dmitry Beloshistov AKA [-=BDS=-]
+e-mail: torin@scm.com.ua
+</PRE></TD></TR>
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+</TABLE></BODY></HTML>

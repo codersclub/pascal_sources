@@ -1,0 +1,422 @@
+<html><head><title>Pascal.Sources.Ru - FTYPE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="keywords" content="pascal, sources, dmitry, beloshitov, дмитрий, белошитов, программы, FTYPE ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<p align=left>&nbsp;&nbsp;&nbsp;<a class=blueb href="../authors.htm">Авторские страницы</a> &nbsp;&gt;&gt;
+<a class=blueb href="index.htm">&nbsp;&nbsp;<b>Программы Дмитрия Белошистова </b></a>
+</p>
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=50% nowrap>&nbsp;
+FTYPE - Модули для работы с макросами и файлами
+</TD>
+<TD nowrap width=25%>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="/img/mail.gif">&nbsp;&nbsp;&nbsp;<A class=blackb href="mailto:torin@scm.com.ua">Dmitry Beloshistov</A></TD>
+<TD class=blackb width=6%>27.03.2001</TD></TR><TR vALign=top><TD class=black colSpan=2><p style="margin-left:20px">
+FType - утилитка обработки файлов, делает список файлов каталога с
+определением их типа.<br>
+Определение типа файла ведется согласно правилам/макросам,<br>
+которые берутся из конфига.
+Вообще-то сама FType достаточно примитивна.<br>
+Более ценными, на мой взгляд, являются модули FaFuncs, FManage, Macro...<br>
+А утилитка FType - что-то вроде демки ;)))))
+</TD>
+<TD class=blackb><A HREF="ftype.zip"><img border=0 align=middle src="/img/dsk.gif"></A>&nbsp;
+31k</TD></TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:10px">
+            Краткое описание функций и процедур модуля FaFuncs.
+      ==============================================================
+
+function Lowcase(C:Char):Char;
+
+ Переводит символ в нижний регистр. Работает только для английских символов.
+ Пример использования: LowCase('A') = 'a'
+
+Function FillStrChar(Ch:Char; Num:integer):String;
+ Возвращает строку длиной Num, состоящую из символов Ch.
+ Пример использования: FillStrChar('#',5)='#####'
+
+function Spaces(Num:integer):String;
+ Возвращает строку пробелов требуемой длины.
+ Пример использования: Spaces(5) = '     '
+
+Function DelCharStr(S:String; Chs:TCharSet):String;
+ Удаляет из строки все символы, входящие во множество Chs.
+ Пример использования: DelCharStr('AABBCCDD',['A','B'])='CCDD'
+
+Function ChangeFileExt(FileName,NewExt:String):String;
+ Заменяет расширение у имени файла на новое.
+ Пример использования: ChangeFileExt('FILE.DAT','TXT')='FILE.TXT'
+
+function BakFile(FileName:String):String;
+ Меняет расширение у имени файла на '.BAK'
+ Пример использования: BakFile('FILE.DAT')='FILE.BAK'
+
+function Bool(x : boolean):integer;
+ Преобразует BOOLEAN в число. В некоторых случаях полезно.
+ Пример использования: Bool(True)=1  Bool(FALSE)=0
+
+function UnBool(x:integer):boolean;
+ Обратное преобразование числа в BOOLEAN
+ Пример использования: UnBool(1)=TRUE UnBool(0)=FALSE
+
+Function LeftTrimDelim(S:String;Delim:TCharSet):String;
+ Удаляет в начале строки все символы, входящие во множество Delims.
+ Пример использования: LeftTrimDelim(' AAAA    ',[' '])='AAAA   '
+
+Function RightTrimDelim(S:String; Delim:TCharSet):String;
+ Тоже самое, но символы удаляются в конце строки.
+ Пример использования: RightTrimDelim('   AAAA ',[' '])='    AAAA'
+
+Function TrimDelim(S:String; Delim:TCharSet):String;
+ Тоже самое, но символы удаляются в начале и конце строки.
+ Пример использования: TrimDelim('.,..,AAAA.,.,..,',[',','.'])='AAAA'
+
+Function Trim(S:String):String;
+ Удаление начальных и конечных пробелов в строке.
+ Пример использования: Trim(' AAAA      ')='AAAA'
+
+Function LeftTrim(S:String):String;
+ Удаление пробелов слева (в начале строки).
+ Пример использования: LeftTrim('  AAAAAA  ')='AAAAAA  '
+
+Function RightTrim(S:String):String;
+ Удаление пробелов справа (в конце строки).
+ Пример использования: RightTrim('  AAAAAA  ')='  AAAAAA'
+
+Function FirstWord(S:String; Delims:TCharSet):String;
+ Вытаскивает из строки первое слово. Разделители слов передаются в Delims.
+ Пример использования: FirstWord(' AAA BBB CCC ',[' '])='AAA'
+
+Function GetFirstWord(var S:String; Delims:TCharSet):String;
+ То же самое, но в добавок слово удаляется из строки.
+ Пример использования: GetFirstWord(' AAA BBB CCC ',[' '])='AAA' S='BBB CCC'
+
+Function LastWord(S:String; Delims:TCharSet):String;
+ Вытаскивает из строки последнее слово.
+ Пример использования: LastWord(' AAA BBB CCC ',[' '])='CCC'
+
+Function GetLastWord(var S:String; Delims:TCharSet):String;
+ То же самое, но с удалением последнего слова из строки.
+ Пример использования: GetLastWord('AAA BBB CCC',[' ']='CCC' S='AAA BBB'
+
+
+Function LastPos(SubStr,Str:String):integer;
+ Нахождение последнего вхождения подстроки в строку. Написана в противовес Pos(),
+ которая ищет первое вхождение.
+ Пример использования: LastPos('CC','AACCBBCC')=7
+
+
+Function ReplaceChar(S:String; OldChar,NewChar:char):String;
+ Заменяет все символы OldChar в строке на NewChar.
+ Пример использования: ReplaceChar('AAAAAA','A','B')='BBBBBB'
+
+Function DelDupCh(S:String; DupCh:Char):String;
+ Удаление дублирующихся символов из строки.
+ Пример использования: DelDupCh('AABBAABB','A')='ABBABB'
+
+Function DelSpace(S:String):String;
+ Удаление всех робелов в строке.
+ Пример использования: DelSpace(' a b c d ff')='abcdff'
+
+Function DelDupeSpace(S:String):String;
+ Удаление двойных пробелов в строке.
+ Пример использования: DelDupSpace(' a     b c d ff')=' a b c d ff'
+
+Function DelSubStr(SubStr,S:String):String;
+ Удаление подстроки из строки.
+ Пример использования: DelSubStr('AA','AABBCCDD')='BBCCDD'
+
+Function ReplaceStr(S:String; OldSubStr,NewSubStr:String):string;
+ Замена подстроки на новую.
+ Пример использования: ReplaceStr('AABBCCDD','BB','ff')='AAffCCDD'
+
+Function LeftStr(S:String; Len:integer):String;
+ Возвращает начальную часть строки заданной длины.
+ Пример использования: LeftStr('12345678',5)='12345'
+
+Function RightStr(S:String; Len:integer):String;
+ Возвращает конечную часть строки заданной длины.
+ Пример использования: RightStr('12345678',5)='45678'
+
+function LeftPad(S:String; Len:integer):String;
+ Дополняет строку пробелами слева до заданной длины.
+ Пример использования: LeftPad('AAA',5)='  AAA'
+
+function RightPad(S:String; Len:integer):String;
+ Дополняет строку пробелами справа до заданой длины.
+ Пример использования: RightPad('AAA',5)='AAA  '
+
+function FnxTrm(S:String):boolean;
+ Проверка на то, что строка либо пустая,  либо состоит из одних пробелов.
+ Пример использования: FnxTrm('  ')=True FnxTrm(' a ')=FALSE
+
+function StrToInt(S:String):longint;
+ Перевод строки в целое число. При неудаче возвращает MaxLongInt.
+ Пример использования: StrToInt('123')=123
+
+function IntToStr(L:Longint):String;
+ Перевод целого числа в строку.
+ Пример использования: IntToStr(123)='123'
+
+Function MidStr(S:String; FirstPos,Len:integer):String;
+ Возвращает подстроку начиная с заданной позиции и заданной длины.
+ Пример использования: MidStr('ABCDDEFG',4,2)='DD'
+
+Function ModifyStr(S:String; FirstPos,Len:integer; NewStr:String):String;
+ Заменяет подстроку в строке начиная с заданной позиции.
+ Пример использования: ModifyStr('ABCDE',2,3,'GG')='AGGE'
+
+Function ValidStr(S:String; ValidChars:TCharSet):boolean;
+ Проверка на то,  что строка состоит только из заданных символов.
+ Пример использования: ValidStr('ABC',['A'..'C'])=True
+                       ValidStr('ABC',['A','B'])=False
+
+Function ValidStrS(S,ValidChars:String):boolean;
+ Аналогично, но сомволы передаются в строке.
+ Пример использования: ValidStrS('ABCA','ABC')=True
+                       ValidStrS('ABC','AB')=False
+
+Function IntToHex(hex:Longint):string;
+ Перевод целого числа в 16-ю систему счисления.
+ Пример использования: IntToHex(255)='FF'
+
+function HexToInt(HexStr:String):longint;
+ Перевод из 16-й системы счисления в 10-ю.
+ Пример использования: HexToInt('FF')=255
+
+function IntToBin(Bin:Longint):String;
+ Перевод целого числа в 2-ю систему счисления.
+ Пример использования:  IntToBin(5)='101'
+
+Function BinToInt(BinS:String):longint;
+ Перевод из 2-й системы счисления в 10-ю.
+ Пример использования: BinToInt('101')=5
+
+Function LeadZero(S:String; Len:integer):String;
+ Дополнение строки слева пробелами до заданной длины.
+ Пример использования: LeadZero('123',5)='00123'
+
+function Fnsz(N:Longint):String;
+ Перевод целого в строку и дополнение строки "0" если ее длина меньше 2.
+ Пример использования: Fnsz(5)='05'
+
+function Lz(N:Longint):String;
+ Аналогично. Просто другое название. (Пришлось ввести для совместимости с
+ моими старыми исходниками)
+ Пример использования: lz(5)='05'
+
+Function PrintUsing(Mask:String; Number:Real):String;
+ Форматирование строки с использованием маски.
+ Пример использования: PrintUsing('#,###.##',12345.67)='1,2345.67'
+
+Function UpperCase(S:string):String;
+ Перевод строки в верхний регистр. Работает для английских букв.
+ Пример использования: UpperCase('aaaaa')='AAAAA'
+
+Function RUpCase(Ch: Char): Char;
+ Перевод русских символов в верхний регистр.
+ Пример использования: RUpCase('ы')='Ы'
+
+Function RUpperStr(s:string):String;
+ Перевод строки в верхний регистр. Работает как для русских так и для анг-
+ лийских букв
+ Пример использования: RUpperStr('ыыы')='ЫЫЫ'
+
+Function RLowCase(Ch:Char):Char;
+ Перевод русских символов в нижний регистр.
+ Пример использования: RLowCase('Ы')='ы'
+
+Function RLowStr(S:String):String;
+ Перевод строки в нижний регистр.
+ Пример использования: RLowStr('ЫЫЫ')='ыыы'
+
+Function LowStr(s:string):String;
+ Перевод строки в нижний регистр. Работает для английских букв.
+ Пример использования: LowStr('AABBCC')='aabbcc'
+
+Function DelComment(s:string):String;
+ Удаляет из строки все, что находится после CommentChar.
+ Пример использования: DelComment('MyValue=0 ; comment string') = 'MyValue=0'
+
+Function cntrs(s:string; Len:integer):string;
+ Центрирование строки.
+ Пример использования: cntrs('a',3)=' a '
+
+Function DeTab(s:string; TabSize:Byte):string;
+ Перевод табуляции в пробелы.
+
+Function DLS(S:string):string;
+ Удаление последнего слэша в имени директории.
+ Пример использования:  DLS('C:\WORK\')='C:\WORK'
+
+Function just(S:String;Len,LRC:longint):string;
+ Выпавнивание строки. Строка дополняется до необходимой длины пробелами.
+ Пример использования: just('a',3,1) = '  a'
+                       just('a',3,2) = 'a  '
+                       just('a',3,3) = ' a '
+
+Function FilterStr(S:String;FilterChars:TCharSet;ReplaceChar:Char):String;
+ Замена всех символов строки, входящих во множество FilterChars на опред.
+ символ.
+ Пример использования: FilterStr(' A A A A ',[' '],'.')='.A.A.A.A.'
+
+function XltStr(S:String; SourTable,DestTable:Integer):String;
+ Перевод строки в другую кодовую таблицу.
+
+Procedure XltBuf(var Buffer:PXltBuffer;NChars:Word;SourTable,DestTable:integer);
+ Перевод массива символов в другую кодовую таблицу.
+
+Function OemToAnsi(S:String):String;
+ Перевод строки  DOS -> WIN
+
+Function AnsiToOem(S:String):String;
+ Перевод строки WIN -> DOS
+
+Function OemToKoi(S:String):String;
+ Перевод строки DOS -> KOI8r
+
+Function KoiToOem(S:String):String;
+ Перевод строки KOI8r -> DOS
+
+Function ConvertStr(S,SourceChars,DestChars:String):String;
+ Замена всех подстрок в строке на новые.
+ Пример использования: ConvertStr('ABCD','AB','EF')='EFCD'
+
+Function DetectCodePage(S:String):Integer;
+ Определение кодовой страницы для строки.
+
+Function UpWordFirstCh(S:String; Delims:TCharSet):String;
+ Перевод первого символа каждого слова в верхний регистр.
+ Пример использования: UpWordFirtsCh('aa bb cc')='Aa Bb Cc'
+
+Function WordCount(S:String; Delims:TCharSet):integer;
+ Подсчет числа слов в строке.
+ Пример использования: WordCount('AA BB CC',[' '])=3
+
+Function WordPos(S:String; WordNum:integer; Delims:TCharSet):integer;
+ Определение позиции слова в строке.
+ Пример использования: WordPos('AA BB',2,[' '])=3
+
+Function ExtractWord(S:String; WordNum:integer; Delims:TCharSet):String;
+ Извлечение слова из строки.
+ Пример использования: ExtractWord('AA BB CC',2,[' '])='BB'
+
+Function PercentStr(Cur,Max:Longint; EmptyCh,FillCh:Char; Len:byte):String;
+ Строка в виде Progress Bar.
+ Пример использования: PercentStr(50,100,'.','#',10)='#####.....');
+
+Function FloatToStr(R:Real):String;
+ Перевод дробного числа в строку.
+ Пример использования: FloatToStr(1.234) = '1.234'
+
+Function StrToFloat(S:String):Real;
+ Перевод строки в дробное число.
+ Пример использования: StrToFloat('1.234') = 1.234
+
+            Краткое описание функций и процедур модуля FManage
+      ==============================================================
+
+function ValidFileName(var FileName: PathStr): Boolean;
+ Проверка на корректность имени файла.
+
+function IsDirName(DirName: string): boolean;
+ Проверка на то, что это имя директории.
+function IsFileName(FileName: string): boolean;
+ Проверка на то, что это имя файла.
+function FileExist(FileName: string): Boolean;
+ Проверка существования файла.
+function DirExist(DirName: string): Boolean;
+ Проверка существования директории.
+procedure Fdel(FileName: string; Var ErrCode: byte);
+ Удаление файла.
+procedure FDelAll(var ErrCode:byte);
+ Удаленеи всех файлов текущего каталога.
+procedure Frename(SourceFile,TargetFile: string; Var ErrCode: byte);
+ Переименование файла.
+procedure Unique(Path: String; Var FileName: String);
+ Возвращает уникальное имя файла.
+Function Drives:string;
+ Возвращает строку из букв активных дисков в системе.
+Procedure CopyFile(Source,Target:String;var Er:byte);
+ Копирует файл Source в Target.
+Procedure AppendFile(Source,Target:string; var Er:Byte);
+ Дополняет (дописывает в конец) содержимое Target в Source.
+Function GetFileSize(FileName:String):longint;
+ Возвращает размер файла.
+Function GetCurDrive:char;
+ Возвращает имя (букву) текущего диска.
+Procedure SetCurDrive(Drive:Char);
+ Устанавливает текущий диск.
+Function NumOfCD:Word;
+ Возвращает число подключенных CD.
+Function CDPresent:boolean;
+ Проверка наличия CD в системе.
+Function CDDrives:string;
+ Возвращает строку дисков CD.
+Procedure DelTreeFiles(Path:String);
+ Удаление файлов в текущем каталоге и во всех вложенных подкаталогах.
+Procedure FDelAllDir(var Er:byte);
+ Удаление всех файлов.
+Procedure DelTreeDirs(Path:String);
+ Удаление дерева каталогов.
+Function NetPresent:boolean;
+ Проверка на наличие сети (Novell)
+Function IsRemoteDrive(DrvNum:byte):boolean;
+ Проверка на то,  что диск является удаленным.
+Function DrvType(Drv:Char):byte;
+ Возвращает тип диска.
+Procedure GetFileDate(FName:String; var D,M,Y:Word);
+ Возвращает дату создания файла.
+Procedure GetFileTime(FName:String; var H,M,S:Word);
+ Возвращает время создания файла.
+Function NewFileExt(FName,NewExt:String):string;
+ Заменяет расширение файла на новое.
+Function GetFileExt(s:string):string;
+ Возвращает расширение файла.
+Function IsFNameChar(Ch:Char):boolean;
+ Проверка на то,  что символ может быть в имени файла.
+Procedure FFSplit(S:String; var D,N,E:String);
+ Аналог FSplit. Более корректно работает с длинными именами.
+Function ExtrName(S:String):string;
+ Возвращает имя файла.
+Function ExtrPath(S:String):string;
+ Возвращает путь к файлу.
+Function GetLongName(ShortName:String):string;
+ Возвращает длинное имя по короткому.
+Function MakeDir(s:String):word;
+ Создает каталог.
+Function GetCurDir(Drive:byte; var Dir:String):word;
+ Возвращает текущий каталог.
+Function GetShortName(s:String):string;
+ Возвращает короткое имя файла по длинному.
+Function SetArchAttr(FileName:String):Word;
+ Устанавливает для файла атрибут "архивный" и возвращает старый атрибут.
+Procedure SetFileAttr(FileName:String; Attr:word);
+ Установка атрибутов для файла.
+Function IsReservedFile(FileName:String):boolean;
+ Проверка на то, что имя файла не является зарезервированным именем DOS.
+Function GetBootDrive:byte;
+ Возвращает номер загрузочного диска.
+Function GetBootDriveCh:Char;
+ Возвращает имя загрузочного диска.
+Function TempFileNameDec:String;
+ Возвращает временное имя файла в 10-й системе счисления.
+Function TempFileNameHex:String;
+ Возвращает временное имя файла в 16-й системе счисления.
+
+
+-------------------------------------------------------------------------------
+Все пожелания и предложения на e-mail ;)))))))
+
+
+WBR Dmitry Beloshistov AKA [-=BDS=-]
+e-mail: torin@scm.com.ua
+</PRE></TD></TR>
+<TR class=subheader><TD colSpan=3><IMG height=2 src="/img/1x1.gif" width=1></td></tr>
+</TABLE></BODY></HTML>
