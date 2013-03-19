@@ -1,0 +1,199 @@
+<html><head><title>DVFMT - Оболочка для VFormat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для форматирования дискет. Что-то недалеко от SF из Norton Utility, только умеет форматировать на любую плотность без драйвера "800".  Full-screen environment for VFormat from Alexander V. Sessa'>
+<meta name="keywords" content="pascal, sources, source code, dvfmt, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dvfmt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DVFMT - Оболочка для VFormat</TD>
+<TD nowrap class=black>&nbsp;Dimon Kalintsew</TD>
+<TD class=black align='right'>22.01.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для форматирования дискет.
+Что-то недалеко от SF из Norton Utility,
+только умеет форматировать на любую плотность без драйвера "800". <br>
+Full-screen environment for VFormat from Alexander V. Sessa</TD><TD class=black colspan=2 align='right'><br><A HREF="dvfmt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>94k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">***********************D*E*K**S*o*f*t*W*o*r*k*s******************************
+********************S*m*a*r*t*y**S*o*f*t*W*a*r*e*****************************
+
+        DVFMT PROGRAM BASED ON VFORMAT.PAS PUBLIC DOMAIN SOURCE CODE.
+                 ORIGINAL CODE FOR VFORMAT WAS NOT CHANGED.
+                  DVFMT IS A FREEWARE AND IT'S SOURCE CODE
+                  COULD BE GOT FROM AUTHOR WITHOUT ANY FEE.
+  (I HOPE I'LL DOWNLOAD IT TO JV DIALOGUE BBS WHEN I'LL GOT MY MODEM BACK)
+
+PLEASE, SEND BUG REPORTS ON ADDRESS BELOW:
+Dimon E. Kalintsew, Chkalowsk, Leninabadskaya oblast, 735737, UIS.
+Voice phone (377-71)594-97.
+
+Notes:
+
+1) DVFMT CANNOT accept command string.
+2) Some unusable computers may not work correctly with this program.
+3) Some Disk-Cache programs may not be compatible with this program.
+
+*****************************************************************************
+*****************************************************************************
+**********    Here is original text for vforead.me file  ********************
+*****************************************************************************
+*****************************************************************************
+
+              VFORMAT - Format Disks with higher Capacity
+                   and Protection from Boot-Viruses
+
+	 based on Christoph H. Hochsttter's FDFORMAT Ver. 1.20
+
+
+LICENSE
+-------
+
+This program is a public-domain product for private and educational use. You
+may freely copy and use it without any charge. You may feel free to send me
+some money anyway.
+
+This program must not be sold for profit. An adaequate fee may be requested
+for copying, shipping and handling when redistributing this program.
+
+
+COMMENTS AND PROBLEMS
+---------------------
+
+Comments, improvements, suggestions and problems may be sent to the Authors
+
+(of FDFORMAT):
+Christoph H. Hochsttter    E-Mail: BITNET:   HOCHSTAE@DMRHRZ11
+Carl-Strehl-Strasse 20              INTERNET: HOCHSTAE%DMRHRZ11@CUNYVM.CUNY.EDU
+D-3550 Marburg                      UUCP:     DMRHRZ11.BITNET!HOCHSTAE
+Germany
+
+(of VITAMIN-B Boot-Viruses Protection):
+Alexander V. Sessa
+Festivalnij per. 12, 54
+320130 Dniepropetrovsk
+USSR
+
+
+PROGRAM USAGE
+-------------
+
+VFORMAT formats Disks in many different MSDOS formats. It does the follwing
+things.
+
+1) Formatting of 720 kB Disks in an AT 1.2 MB drive
+2) significantly increasing the storage of your diskettes (e.g. Using 1.44 MB
+   on HD-5,"-Disks)
+
+If you want to format a 720 kB Disk in an AT-drive, then type
+
+          VFORMAT &lt;drive&gt;: T80 S9
+
+If you want to increase the storage of your disks, then type
+
+          VFORMAT &lt;drive&gt;: T41 S10          (for 360 kB-Drives)
+          VFORMAT &lt;drive&gt;: T82 S10          (for 720 kB-Drives)
+          VFORMAT &lt;drive&gt;: T82 S18          (for 1.2 MB-Drives)
+          VFORMAT &lt;drive&gt;: T82 S21          (for 1.44 MB-Drives)
+
+Always add a P at the end of the command, when using a PS/2 Computer.
+
+Some Computers cannot use Disks with higher capacity without the TSR
+800.COM installed. If so, simply type the Command 800 before using
+VFORMAT or a Disk with higher Capacity.
+
+The exact description of the VFORMAT Command Syntax is:
+
+          VFORMAT &lt;drive&gt;: [options]
+
+Options are:
+
+Tnn   : Format nn Tracks
+Snn   : Format nn Sectors per Track
+Hn    : Format n Heads
+P     : Special option for PS/2 Computers
+V     : Do not verify the diskette (and save 33% time)
+Gnnn  : Use a GAP-Length of nnn (*)
+Inn   : Use an interleave Factor of nn (*)
+Bnnn  : Use a BIOS-Disk-Descriptor Byte of nnn (not on XT) (*)
+Cn    : Use n sectors per Cluster (1 or 2) (*)
+Dnnn  : Use nnn Root Directory Entries (*)
+Fnn   : Shift sectors on adjacent tracks with a distance of nn sectors (*)
+
+Options with (*) are adjusted to the best value automatically. You may
+do some experimenting with it.
+
+- Reducing the GAP-Length may speed up the disk perfomance
+- Reducing the Root Directory Entries brings you additional storage
+
+
+The following table shows you, what Options are correct for specified formats:
+
+Options       Storage on Disk  Allowed in Disk-Drives
+------------  ---------------  -------------------------------
+T40 S9        360 kByte        360 kB, 720 kB, 1.2 MB, 1.44 MB
+T41 S10       410 kByte        360 kB, 720 kB, 1.2 MB, 1.44 MB
+T80 S9        720 kByte        720 kB, 1.2 MB, 1.44 MB
+T82 S10       820 kByte        720 kB, 1.2 MB, 1.44 MB
+T82 S15       1.2 MByte        1.2 MB, 1.44 MB
+T80 S18       1.44 MByte       1.2 MB(!), 1.44 MB
+T82 S18       1.46 MByte       1.2 MB, 1.44 MB
+T82 S21       1.76 MByte       1.44 MB
+
+IF YOUR VFORMATTED DISK SAID: " Virus sterilized. Cure BOOT? " -
+--------------------------------------------------------------
+
+it is detected BOOT VIRUS on your diskette -
+press any key (except "n") for curing diskette, or
+press "n" key for keeping virus for researching.
+
+You may identify virus by next boot-vaccine messages:
+
+Int08-ХХХ0:0887 - LIBERTY (file-boot virus)
+Int17-ХХХ0:0BF2
+Int1C-ХХХ0:0A44
+Int13-ХХХ0:07EF
+
+Int08-ХХХ0:01CE - JOSHI
+Int09-ХХХ0:010A
+Int13-ХХХ0:04FA
+
+Int08-ХХХ0:027B - DISK KILLER
+Int13-ХХХ0:028F
+
+Int09-ХХХ0:04D9 - DEN ZUK
+Int13-ХХХ0:0526
+
+Int09-ХХХ0:035D * FORM (Int09 hooked only on 18'th of mounth!)
+Int13-ХХХ0:0346
+
+Int1C-ХХХ0:051A * KEYDROP (Int1C hooked only after warm reboot!)
+Int13-ХХХ0:0592
+
+Int13-ХХХ0:7CD0 - BALL (Ping-Pong, Italian)
+
+Int13-ХХХ0:0276 - BRAIN/ASHAR
+
+Int13-ХХХ0:0095 - PRINT SCREEN (Abs-1)
+
+Int13-ХХХ0:0015 * STONED (Marijuana) and its variations
+
+Int13-ХХХ0:7D38 * LOVECHILD b3
+
+here ХХХ0 - is memory segment of virus.
+* - marked viruses infect hard disk before start of vaccined boot -
+use VITAMINB.EXE utility for hard disk protection!
+
+Have fun using this program.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

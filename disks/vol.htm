@@ -1,0 +1,127 @@
+<html><head><title>VOL 1.01 - MS-DOS Disk Volume Label Setup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This small programm allows the manipulation of MS-DOS Disk Volume Labels.'>
+<meta name="keywords" content="pascal, sources, source code, vol, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vol
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VOL 1.01 - MS-DOS Disk Volume Label Setup</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71330.2705@compuserv.com">Vernon E. Davis</a></TD>
+<TD class=black align='right'>08.07.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This small programm allows the manipulation of
+MS-DOS Disk Volume Labels.</TD><TD class=black colspan=2 align='right'><br><A HREF="vol.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Program ..............:  VOL.PAS
+Version ..............:  1.01
+Implementation .......:  Turbo Pascal v4.x, v5.x
+Author ...............:  Vernon E. Davis
+                      :  17 South Centre Street
+                      :  Merchantville, NJ 08109
+                      :  CompuServe [71330,2705]
+References ...........:  MS-DOS Encyclopedia (Microsoft Press)
+Purpose ..............:  To allow the manipulation of
+                      :  MS-DOS Disk Volume Labels.
+Type Declarations ....:  Two User Types Defined ...
+                      :  TYPE  Drive = Byte;
+                      :    The value of Drive corresponds to disk location.
+                      :    ( 1 = A:   2 = B:   3 = C:   4 = D:  etc. )
+                      :  TYPE  VolumeName  = String[11];
+                      :    Spaces allowed. Functions do not check for
+                      :    invalid characters other than period ( . ).
+                      :    Functions do convert all input to uppercase.
+Function Declarations :  Four Functions Available ...
+
+   Function ADDVOL(Drive; VolumeName) : Boolean;
+      This function allows the addition of a New Volume Label on
+      a disk that does not have one.
+      Returns:
+         FALSE if
+           1. Drive is less than 1 ( A: ) or greater than 26 ( Z: ).
+           2. Drive is an invalid specification.
+           3. Volume Label already exists.
+           4. Error in adding New Volume Label.
+         TRUE if
+           1. New Volume Label has been added.
+
+   Function CHGVOL(Drive; VolumeName) : Boolean;
+      This function changes the current Volume Label to that of the
+      New Volume Label.
+      Returns:
+         FALSE if
+           1. Drive is less than 1 ( A: ) or greater than 26 ( Z: ).
+           2. Drive is an invalid specification.
+           3. No Volume Label exists.
+           4. Error in changing Volume Label.
+         TRUE if
+           1. Volume Label has been changed.
+
+   Function DELVOL(Drive) : Boolean;
+      This function allows the deletion of a Volume Label.
+      Returns:
+         FALSE if
+           1. Drive is less than 1 ( A: ) or greater than 26 ( Z: ).
+           2. Drive is an invalid specification.
+           3. No Volume Label exists.
+           4. Error in deleting Volume Label.
+         TRUE if
+           1. Volume Label has been deleted.
+
+   Function GETVOL(Drive) : VolumeName;
+      This function returns the Volume Label string.
+      Returns:
+         NULL if
+           1. Drive is less than 1 ( A: ) or greater than 26 ( Z: ).
+           2. Drive is an invalid specification.
+           3. No Volume Label exists.
+           4. Error in reading Volume Label.
+         !NULL if
+           1. Volume Label has been read.
+
+See the accompanying program, VOLTEST.PAS, for actual code.</PRE></TD></TR>
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+</TABLE></center>
+&nbsp;&nbsp;&nbsp;<!--TopList COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<a href="http://top.list.ru/jump?from=127702"'+
+' target=_top><img src="http://top.list.ru/counter'+
+'?id=127702;t=69;js='+js+a+';rand='+Math.random()+
+'" alt="TopList"'+' border=0 height=31 width=38></a>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><a
+target=_top href="http://top.list.ru/jump?from=127702"><img
+src="http://top.list.ru/counter?js=na;id=127702;t=69"
+border=0 height=31 width=38
+alt="TopList"></a></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--TopList COUNTER-->
+<!-- SpyLOG f:0211 -->
+<script language="javascript"><!--
+Mu="u3215.14.spylog.com";Md=document;Mnv=navigator;Mp=1;
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+My="";
+My+="<a href='http://"+Mu+"/cnt?cid=321514&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+My+="<img src='http://"+Mu+"/cnt?cid=321514&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+My+="</a>";Md.write(My);//--></script><noscript>
+<a href="http://u3215.14.spylog.com/cnt?cid=321514&f=3&p=1" target="_blank">
+<img src="http://u3215.14.spylog.com/cnt?cid=321514&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+<!-- SpyLOG  -->
+</BODY></HTML>

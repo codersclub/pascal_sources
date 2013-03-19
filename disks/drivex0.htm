@@ -1,0 +1,97 @@
+<html><head><title>DRIVExx 1.01 - Block Devices Tools</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='DRIVExx is a collection of tools, written in Turbo Pascal v6, for dealing with block devices in a DOS environment. The tools available here will allow any Pascal programmer who uses disk I/O to gain that extra measure of control over his or her application. At the very least they will have the ability to prevent access of a phantom drive so their nice user interface won't get overwritten by non-interceptable DOS messages like "Insert a disk..." Shareware. Included: Docs, samples and <b>TPU6.0 only :( </b>'>
+<meta name="keywords" content="pascal, sources, source code, drivex0, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;drivex0
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DRIVExx 1.01 - Block Devices Tools</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71160.1045@compuserv.com">Charles B. Little</a></TD>
+<TD class=black align='right'>01.11.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">DRIVExx is a collection of tools, written in Turbo Pascal v6,
+for dealing with block devices in a DOS environment.
+The tools available here will allow any Pascal programmer
+who uses disk I/O to gain that extra measure of control
+over his or her application. At the very least they will have the ability
+to prevent access of a phantom drive so their nice user interface won't get
+overwritten by non-interceptable DOS messages like "Insert a disk..."
+Shareware. Included: Docs, samples and <b>TPU6.0 only :( </b></TD><TD class=black colspan=2 align='right'><br><A HREF="drivex0.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">(********************************************************************)
+(*                           UNIT DRIVExx                           *)
+(*                                                                  *)
+(*                           Version 1.01                           *)
+(*                                                                  *)
+(*             Copyright (C) 1991 by NativSoft Computing            *)
+(*                                                                  *)
+(*                         1155 College Ave                         *)
+(*                         Adrian, MI 49221                         *)
+(*                          (517) 265-6080                          *)
+(*                         CIS [71160,1045]                         *)
+(*                                                                  *)
+(*                Written by:  Charles B. Little, Ph.D.             *)
+(*                   Version:  1.01                                 *)
+(*             Revision Date:  1 November 1991                      *)
+(*                  Language:  Turbo Pascal v6                      *)
+(*                                                                  *)
+(*                        ALL RIGHTS RESERVED                       *)
+(*                                                                  *)
+(********************************************************************)
+
+
+INTRODUCTION:
+
+DRIVExx is a collection of tools, written in Turbo Pascal v6, for dealing
+with block devices in a DOS environment.  To the best of our knowledge, no
+such tools exist in any "professional" programming toolboxes, in any
+programming language.  The tools available here will allow any Pascal
+programmer who uses disk I/O to gain that extra measure of control over his
+or her application.  At the very least they will have the ability to
+prevent access of a phantom drive so their nice user interface won't get
+overwritten by non-interceptable DOS messages like "Insert a disk..."
+
+While it may not be the last word on the subject, DRIVExx works.  And just
+about everything you'd want your applications to know about drives is
+available WITHOUT ACCESSING THEM!  The only exceptions to hitting drives
+are functions DiskWasChanged and GETDPB:  DiskWasChanged will hit a drive
+ONLY if the drive supports changeline detection, and GETDPB will hit the
+disk only if you tell it to.  Naturally, it is perfectly safe for GETDPB to
+hit a removable drive that does not have a disk in it.
+
+Much of the required information is available only in undocumented DOS
+functions and data structures.  Wherever a documented function will return
+the same information, however, the undocumented function is still used as a
+redundancy check.  Indeed, the source code for DRIVExx is probably at least
+50% longer than need be due to extensive interlocking redundancy checking.
+
+All of the features of DRIVExx are demonstrated in the demo program
+DRVDEMO.PAS.  The only exception to this is function MakeActive, whose
+description below should make clear why it is impractical to include it in
+DRVDEMO.
+
+
+If you like it and find it useful you may distribute DRIVExx freely as long
+as all files in the original LZH file are distributed.  Those files are:
+
+         DRIVExx.TXT  (this file)
+         DRIVExx.TPU  size = 20528, date = 11/1/91, time = 6:00pm
+         DRVDEMO.PAS  size = 10034, date = 11/1/91, time = 6:00pm
+
+
+                                                    NativSoft Computing
+                                                    1155 College Ave.
+                                                    Adrian, MI  49221</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

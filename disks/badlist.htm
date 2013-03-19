@@ -1,0 +1,61 @@
+<html><head><title>Быстрый контроль дискет</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='BADLIST ver.1.0 for TP6.0. Программа для быстрого контроля физического состояния дискет и отметки плохих и сомнительных секторов в FAT.'>
+<meta name="keywords" content="pascal, sources, source code, badlist, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;badlist
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Быстрый контроль дискет</TD>
+<TD nowrap class=black>&nbsp;Максим Шарий</TD>
+<TD class=black align='right'>05.11.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">BADLIST ver.1.0 for TP6.0.
+Программа для быстрого контроля физического состояния дискет
+и отметки плохих и сомнительных секторов в FAT.</TD><TD class=black colspan=2 align='right'><br><A HREF="badlist.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  +-----------------------+
+                  |   BADLIST  ver. 1.0   |
+                  +-----------------------+
+
+     Программа BADLIST предназначена для быстрого  контороля  физического
+состояния  дискет, а не для попыток восстановления информации, потерянной
+из-за дефектов дискет. Она не переносит  содержимое  хороших  секторов  в
+сбойных кластерах в новые кластеры (насколько я понимаю, делать это имеет
+смысл только для текстовых файлов), зато работает с дискетами любого фор-
+мата и быстрее, чем Norton Disk Doctor.
+    Главное  преимущество  BADLIST  в  том,  что она отмечает кластер как
+сбойный после первой ошибки  чтения!  Благодаря  этому  все  сомнительные
+кластеры  отмечаются как сбойные, что исключает ситуацию типа "записал, а
+прочитать записанное не могу". (Разумеется, за один прогон программы  мо-
+гут быть найдены не все сомнительные сектора).
+    Таким  образом, использование BADLIST минимизирует вероятность потери
+информации из-за физических дефектов дискет.  Для  дискет  нестандартного
+формата может потребоваться использование соответствующето драйвера.
+
+Использование: BADLIST drive output [c]
+параметры:
+drive   - имя проверяемого диcковода
+output  - имя  файла, в который будет помещен список найденных дефектных
+          секторов
+с       - необязательный параметр. Если он присутствует, то найденные
+          дефектные сектора будут отмечены в FAT.
+
+Примеры:
+badlist  a:  bad.a
+badlist  b:  prn  c
+
+                              Шарий Максим Борисович.
+                              340005, г.Донецк, ул.Речная 4-34.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

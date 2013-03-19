@@ -1,0 +1,83 @@
+<html><head><title>DDS - Disk Drive Summary Utility</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Утилита DDS выдает информацию о всех активных дисках (за исключением виртуальных): количество байт на сектор, секторов в кластере, количество кластеров, емкость диска и количество свободного пространства.  DDS shows a disk drive summary of all active drives, including bytes/sector, sectors/cluster, number of clusters, bytes capacity, bytes available, and working directory. SUBSTituted "virtual" drives are not shown.'>
+<meta name="keywords" content="pascal, sources, source code, dds, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dds
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DDS - Disk Drive Summary Utility</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73257.3527@compuserv.com">Earl F. Glynn</a></TD>
+<TD class=black align='right'>04.07.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Утилита DDS выдает информацию о всех активных дисках
+(за исключением виртуальных): количество байт на сектор,
+секторов в кластере, количество кластеров, емкость диска
+и количество свободного пространства. <br>
+DDS shows a disk drive summary of all active drives,
+including bytes/sector, sectors/cluster, number of clusters,
+bytes capacity, bytes available, and working directory.
+SUBSTituted "virtual" drives are not shown.</TD><TD class=black colspan=2 align='right'><br><A HREF="dds.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">               DDS:  Disk Drive Summary in Turbo Pascal
+
+                                  by
+
+                             Earl F. Glynn
+                           Overland Park, KS
+                         Compuserve 73257,3527
+
+
+DDS shows a disk drive summary of all active drives, including
+bytes/sector, sectors/cluster, number of clusters, bytes
+capacity, bytes available, and working directory.  SUBSTituted
+"virtual" drives are not shown.
+
+Information about the Disk Parameter Block and what I have termed
+the "Drive Array" was found in the public domain program
+SYSID.PAS by Steve Grant, Long Beach, CA.  I prefer to use
+RECORDs and pointers to access this information instead of the
+MEM and MEMW Turbo Pascal "arrays".
+
+DDS does not work well if logical drives A and B are both active
+and are the same physical drive.  The DOS prompt(s) may interfere
+with the output.
+
+DDS is very useful on machines with DOS 3.3 and large disk
+drives.  For example, the IBM Model 80-111 has hard drives C, D,
+E and F under DOS 3.3.  DDS will quickly summarize information
+about all drives, including RAM disks.
+
+
+File          D e s c r i p t i o n
+------------  ---------------------------------------
+DDS.PAS       Disk Drive Summary source program.
+DDS.EXE       Execute DDS &gt; DDS.OUT to create output.
+DDS.OUT       Sample DDS output.
+DDS.DOC       This file.
+
+
+
+    Sample of DDS output:
+---------------------------------------------------------------
+Disk Drive Summary (Version 1, July 1989)
+                                           Root Dir
+      Bytes/                B y t e s      Entries     Working
+Drive Cluster Clusters Capacity Available Max Current Directory
+----- ------- -------- -------- --------- --- ------- ---------
+  A     1024      713    730112  offline  112 offline A:\
+  C     2048    16339  33462272  5031936  512     30  C:\TP\LIB
+  D     4096     2170   8888320   851968  512     11  D:\DEMO
+  E is LASTDRIVE</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

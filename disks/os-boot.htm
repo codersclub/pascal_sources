@@ -1,0 +1,56 @@
+<html><head><title>OS-BOOT - Загрузчик различных OS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Загрузчик различных операционных систем с жесткого диска.  Multiple OS-loader from the fixed disk'>
+<meta name="keywords" content="pascal, sources, source code, os-boot, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;os-boot
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OS-BOOT - Загрузчик различных OS</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Стефанков</TD>
+<TD class=black align='right'>12.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Загрузчик различных операционных систем с жесткого диска. <br>
+Multiple OS-loader from the fixed disk</TD><TD class=black colspan=2 align='right'><br><A HREF="os-boot.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{ LIBRARY               SYSTEM UTILITIES                                }
+{ MODULE                MULTIPLE-OPERATING-SYSTEMS-LOADER               }
+{ FILE NAME             OS-BOOT.PAS                                     }
+{ PURPOSE               OS-loader from the fixed disk                   }
+{ VERSION               1.30                                            }
+{ DATE                  18-Oct-93                                       }
+{ COMPANY               Freelance Software Engineer                     }
+{ ADDRESS               Isakowskogo str, 4-2-30                         }
+{                       Moscow, 123181                                  }
+{                       USSR                                            }
+{                       Tel. 007 (095) 944-6304                         }
+{ COPYRIGHT NOTICE      Copyright (C) 1987-1993, Dmitry Stefankov       }
+{ RESTRICTED RIGHTS     AVAILABLE ONLY FOR FREE DISTRIBUTION,           }
+{                       NOT FOR COMMERCIAL PURPOSE                      }
+{ COMPUTER              IBM PC or compatible                            }
+{ OPERATING SYSTEM      MS/PC-DOS Version 3.30 or higher                }
+{ COMPILER              Turbo Pascal Version 6.0                        }
+{                       (Borland International Inc.)  or compatible     }
+{ ASSEMBLY LANGUAGE     Microsoft MASM 5.10 or compatible               }
+{ ARGUMENTS             None                                            }
+{ RETURN                See error return codes definitions              }
+{ DESCRIPTION           1. Read Master Boot Record.                     }
+{                       1a. If our loader present then copy some info   }
+{                           by user confirming                          }
+{                       2. Extract the Partition Table from it and      }
+{                          link with new loader code.                   }
+{                       3. Install a new Master Boot Record if user     }
+{                           wants it                                    }
+{-----------------------------------------------------------------------}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

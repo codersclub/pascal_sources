@@ -1,0 +1,110 @@
+<html><head><title>Серийный номер, Метка тома и тип FAT диска</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Что за сеpийный номеp выдаст эта пpогpамма? Это тот номеp, котоpый туда FORMAT "засунет" пpи фоpматиpовании, а настоящий сеpийный номеp зашит в биосе у винта и он один на всю жизнь. Его достать можно только через регистры контроллера... Но зато эта прога выдает еще Метку_Тома и тип ФАТ'>
+<meta name="keywords" content="pascal, sources, source code, int69h, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;int69h
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Серийный номер, Метка тома и тип FAT диска</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5002/20.2">John Vostrenko</a></TD>
+<TD class=black align='right'>22.06.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Что за сеpийный номеp выдаст эта пpогpамма?
+Это тот номеp, котоpый туда FORMAT "засунет" пpи фоpматиpовании,
+а настоящий сеpийный номеp зашит в биосе у винта и он один на всю жизнь.
+Его достать можно только через регистры контроллера...
+Но зато эта прога выдает еще Метку_Тома и тип ФАТ</TD><TD class=black colspan=2 align='right'><br><A HREF="int69h.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- NEW96 ------------------------------------------------------------ New-1997 -
+ Msg  : 119 of 120                           Addr                        Date
+ From : John Vostrenko                2:5002/20.2                      22.06.97
+ Subj : Серийный номер, Метка тома и тип FAT диска
+-------------------------------------------------------------------------------
+    Пpивет, Sergey Moutsynov!
+
+16 Июн Пн, Sergey Moutsynov writes to All:
+
+ SM&gt; Hи у кого не завалялось примерчика на asm, чтобы он выдавал $subj%?
+ SM&gt; Советы - типа, декомпилируй и пользуйся, не катят, т.к. нету времени
+ SM&gt; разгадывать всякие головоломки, да и опыта нету то-же.
+ SM&gt; Был бы очень признателен, если бы исходник делал то-же, что и ideinfo,
+ SM&gt; к примеру.
+
+ Pas+Asm пойдет?
+
+Что за сеpийный номеp выдаст эта пpогpамма ? 
+Это тот номеp, котоpый туда FORMAT засунет пpи фоpматиpовании,
+а настоящий сеpийный номеp зашит в биосе у винта и он один на всю жизнь.
+Его достать можно только через регистры контроллера...
+Но зато эта прога выдает еще Метку_Тома и тип ФАТа,
+что тоже полезно :)
+
+
+    22 Июн Вс, 16:55.                                    John Vostrenko
+--- [ Hе пей из чайника - чайником cтанешь! ]
+ * Origin: Free Fall BBS, Barnaul, Russia (2:5002/20.2)
+
+{&gt; Cut here. FileName= INT69H.PAS }
+{From : John Vostrenko                2:5002/20.2                      22.06.97
+ Subj : Серийный номер, Метка тома и тип FAT диска
+}
+Const
+   Hexa : Array [0..15] of Char =
+       ('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
+
+Type DiskInfo = Record                { Work area }
+          Info_Level  : Word;         { Always zero }
+          Serial_Num  : LongInt;      { Serial number of the specified disk }
+          Volume_Name : String[11];   { 'NO_NAME' or volume name }
+          File_Sys    : String[8];    { 'FAT12' or 'FAT16' }
+     End;
+
+Var
+   Ch1 , Ch2 : Byte;
+   Ch3 , Ch4 : Byte;
+   DInfo            : DiskInfo;
+   First, Second    : Word;
+
+Function Word2Hex(Number: Word) : String;
+Begin
+
+  Ch1 := (Number SHR 8) SHR 4;
+  Ch2 := (Number SHR 8) - (Ch1 SHL 4);
+  Ch3 := (Number AND $FF) SHR 4;
+  Ch4 := (Number AND $FF) - (Ch3 SHL 4);
+
+  Word2Hex := Hexa[Ch1]+Hexa[Ch2]+Hexa[Ch3]+Hexa[Ch4];
+
+End;
+
+Begin
+
+   Asm
+       Mov Ax, Seg DInfo
+       Mov Ds, Ax
+       Mov Dx, Offset DInfo           { Load Adress of my target table }
+       Mov Ax, 6900h                  { Get Serial Number }
+       Mov Bl, 0                      { Drive : 0 default, 1 A:, 2 B:, ... }
+       Xor Bh, Bh                     { Always 0 under DOS }
+       Int 21h                        { Only if you have DOS 4.0+  }
+       Mov Ax, Word Ptr [DInfo.Serial_Num + 2]
+       Mov First, Ax                  { First  word of the serial number }
+       Mov Ax, Word Ptr DInfo.Serial_Num
+       Mov Second, Ax                 { Second word of the serial number }
+   End;
+   Writeln('Serial number of this disk :
+',Word2Hex(First),'-',Word2Hex(Second));
+End.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

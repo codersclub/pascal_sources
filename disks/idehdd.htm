@@ -1,0 +1,126 @@
+<html><head><title>Серийный номер IDE винта</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Получение серийного номера ШВУ-винчестера'>
+<meta name="keywords" content="pascal, sources, source code, idehdd, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;idehdd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Серийный номер IDE винта</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5024/7.77">Serg Karpov</a></TD>
+<TD class=black align='right'>23.06.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Получение серийного номера ШВУ-винчестера</TD><TD class=black colspan=2 align='right'><br><A HREF="idehdd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- NEW96 ------------------------------------------------------------ New-1997 -
+ Msg  : 120 of 120                           Addr                        Date
+ From : Serg Karpov                   2:5024/7.77                      23.06.97
+ Subj : Серийный номер IDE винта
+-------------------------------------------------------------------------------
+                     Hello Sergey!
+
+Monday June 16 1997 09:30, Sergey Moutsynov wrote to All:
+
+ SM&gt; Hello All!
+
+ SM&gt; Hи у кого не завалялось примерчика на asm, чтобы он выдавал $subj%?
+ SM&gt; Советы - типа, декомпилируй и пользуйся, не катят, т.к. нету времени
+ SM&gt; разгадывать всякие головоломки, да и опыта нету то-же.
+ SM&gt; Был бы очень признателен, если бы исходник делал то-же, что и ideinfo,
+ SM&gt; к примеру.
+
+
+ Пользуйся, а на ассемблер сам переведешь... если надо...
+
+ SM&gt; Sergey
+
+            I wish You success!
+                   Serg Karpov .
+
+
+      Monday June 23 1997 11:01
+--- GEcho 1.11+/GoldED
+ * Origin: Союз ЛАЦЕПУПОВ ... Вступайте ... (2:5024/7.77)
+
+
+{&gt; Cut here. FileName= IDEHDD.PAS }
+{From : Serg Karpov                   2:5024/7.77                      23.06.97
+ Subj : Серийный номер IDE винта
+}
+uses CRT;
+Type
+ TIdeInfo = Record
+    Config    : word;
+    CylsTotal : word;
+    Unused    : word;
+    HeadTotal : word;
+    BPT       : word;
+    BPS       : word;
+    SPT       : word;
+    Vendor    : Array[0..2]  of word;
+    Serial    : Array[1..20] of char;
+    BufType   : word;
+    BufSize   : word;
+    ECC       : word;
+    Revision  : Array[1..8]  of char;
+    Model     : Array[1..40] of char;
+ end;
+ var
+   InfoArray : Array[0..255] of word;
+   IdeInfo   : TIdeInfo absolute InfoArray;
+   NumDisk   : byte;
+   Count     : byte;
+
+
+procedure GetIDEInfo( Drive : byte );
+var
+  I : byte;
+
+  begin
+    FillChar( InfoArray, sizeof(InfoArray), 0 );
+
+    while ( Port[$1F7] and $80 &lt;&gt; 0 ) do;
+
+    Port[$3F6] := 2;
+    Port[$1F6] := $A0 + ( Drive shl 4);
+    Port[$1F7] := $EC;
+
+    while ( Port[$1F7] and $80 &lt;&gt; 0 ) do;
+
+    for I := 0 to 255 do InfoArray[I] := Swap( PortW[$01F0] );
+
+  end;
+
+
+begin
+  ClrScr;
+  NumDisk := Mem[$40:$75];
+  for Count :=1 to NumDisk do
+  begin
+    GetIdeInfo( Count - 1 );
+    Writeln('Serial number     : ',IdeInfo.Serial           );
+    Writeln('Revision          : ',IdeInfo.Revision         );
+    Writeln('Model HDD         : ',IdeInfo.Model            );
+    Writeln;
+    Writeln('Total cylinders   : ',Swap(IdeInfo.CylsTotal):8);
+    Writeln('Total heads       : ',Swap(IdeInfo.HeadTotal):8);
+    Writeln('Sectors per track : ',Swap(IdeInfo.SPT):8      );
+    Writeln('Byte per sector   : ',Swap(IdeInfo.BPS):8      );
+    Writeln('Byte per track    : ',Swap(IdeInfo.BPT):8      );
+    Writeln('Size of buffer    : ',Swap(IdeInfo.BufSize):8  );
+
+
+  end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

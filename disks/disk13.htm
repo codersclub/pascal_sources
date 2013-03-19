@@ -1,0 +1,376 @@
+<html><head><title>Disk13IO - Direct Disk (Int 13h) I/O Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для прямой работы с секторами диска с помощью прерывания Int 13h.  Sector Input/Output (Interrupt $13) Unit for Turbo Pascal 5.0:  - reset drive system  - get results of last Int$13 operation  - read absolute disk sectors  - write absolute disk sectors  - verify absolute disk sectors (CRC check)  - format a floppy disk'>
+<meta name="keywords" content="pascal, sources, source code, disk13, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;disk13
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Disk13IO - Direct Disk (Int 13h) I/O Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71121.1404@compuserv.com">Kurt H. Diesch</a></TD>
+<TD class=black align='right'>21.11.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для прямой работы с секторами диска с помощью
+прерывания Int 13h. <br>
+Sector Input/Output (Interrupt $13) Unit for Turbo Pascal 5.0: <br>
+- reset drive system <br>
+- get results of last Int$13 operation <br>
+- read absolute disk sectors <br>
+- write absolute disk sectors <br>
+- verify absolute disk sectors (CRC check) <br>
+- format a floppy disk</TD><TD class=black colspan=2 align='right'><br><A HREF="disk13.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Program:     DISK13IO.TPU
+
+Description: Sector I/O (Interrupt $13) Unit for Turbo Pascal 5.0
+
+Author:      Kurt Diesch
+             Applied Micro Systems Technology
+             PO Box 1596, Welch Ave. Station
+             Ames, Iowa  50010
+             (515) 292-0426   CIS [71121,1404]
+             Member - Association of Shareware Professionals
+
+
+Copyright 1988 AMST, all rights reserved.
+
+
+                          PROGRAM USE
+
+DISK13IO.TPU is a Turbo Pascal 5.0 unit designed to allow
+programmers to add disk sector I/O (interrupt $13) routines into
+their programs.  The routines in DISK13IO will only operate on
+floppy disks.  The entire unit is self-contained, including
+advanced error checking and error recovery.  Functions available
+through DISK13IO include:
+
+   ResetDrives    ( reset disk drive system after an I/O error )
+
+   GetDiskStatus  ( get results of last Int $13 operation )
+
+   ReadSectors    ( read absolute disk sectors)
+
+   WriteSectors   ( write absolute disk sectors )
+
+   VerifySectors  ( verify absolute disk sectors (CRC check) )
+
+   FormatDisk     ( format a floppy disk in drive A or B,
+                    all disk sizes)
+
+
+
+
+To use the DISK13IO.TPU routines, place the DISK13IO declaration
+in the interface section of your program or unit.  For example, a
+unit heading in your program might appear as follows:
+
+   unit DISKTEST;
+   interface
+   uses Crt,Dos,DISK13IO;
+
+
+The DISK13IO routines occasionally must perform some screen I/O
+to report errors or to indicate the status of the format
+operation.  DISK13IO will automatically save the current window
+setting, screen contents, and cursor location and restore these
+settings after the screen I/O is done.  When screen output is
+necessary, a box will appear in the center of the screen.  The
+foreground and background colors of the output box are controlled
+by a global variable of type byte called "Disk13IOAttr".  This
+variable initially assumes the value of the Turbo variable
+"TextAttr" when your controlling program starts.  (See your Turbo
+manual for a discussion of TextAttr in the section of the Turbo
+Crt unit).  You can change the foreground and background colors
+of the display window by setting Disk13IOAttr in the same way you
+would change TextAttr.  The location of the output window cannot
+be altered.
+
+
+                   +------------------------+
+                   |                        |
+                   |  SAMPLE OUTPUT WINDOW  |
+                   |                        |
+                   |                        |
+                   +------------------------+
+
+
+The remainder of this documentation describes each of the
+routines in DISK13IO.TPU.  Each routine is descibed with input
+and output parameters.  For a complete discussion of these
+routines, consult a DOS Technical Reference manual or a book such
+as Norton's Programmer's Guide to the IBM PC & PS/2.
+
+
+**************************  IMPORTANT  *************************
+
+IT IS THE RESPONSIBILITY OF THE PROGRAMMER TO ENSURE THAT ALL
+PARAMETERS PASSED TO THE DISK13IO.TPU ROUTINES ARE WITHIN
+ACCEPTABLE RANGES.  ALSO BE SURE YOU DO NOT USE THE WRITESECTORS
+FUNCTION UNLESS YOU UNDERSTAND WHAT YOU ARE DOING.  THE FORMAT
+DISK ROUTINE WILL CHECK TO MAKE SURE THAT YOU SPECIFY DRIVE A OR
+B AND WILL NOT ALLOW FORMATTING OF ANY OTHER DRIVES.  ALL OF
+THESE ROUTINES WILL ONLY OPERATE ON DRIVES A OR B.
+
+****************************************************************
+
+
+procedure ResetDrives (Drive:byte);
+-----------------------------------
+
+Input:   Drive : byte     Drive to reset (0=A, 1=B, ...)
+                          IBM documentation indicates that this
+                          call will reset the entire disk system.
+                          Other references indicate that only the
+                          specified drive is reset.  Output:
+                          none
+
+
+
+function GetDiskStatus : byte;
+------------------------------
+
+Input:   none
+
+Output:  Returns the error code generated by the last
+         Interrupt $13 operation.  The DISK13IO routines use this
+         function internally to check for errors, and if you call
+         this routine after using a DISK13IO routine, you will
+         get the same error code as the DISK13IO routine last
+         processed.  If no error occurred, this function will
+         return 0.
+
+
+
+function ReadSectors (see below) : boolean;
+-------------------------------------------
+
+Input:   Quiet : boolean  True to suppress error messages
+         DType : byte     Drive type
+                          (1=360K 5-1/4  2=1.2M 5-1/4 )
+                          (3=720K 3-1/2  4=1.44M 3-1/2)
+         Drive : byte     Drive to read from (0=A, 1=B)
+         Track : byte     Track number to read (0...)
+         Side  : byte     Side to read (0 or 1 for floppy disks)
+         SSect : byte     Starting sector to read (1...)
+         NSect : byte     Number of sectors to read
+                          (1... DO NOT USE 0!)
+         var Buffer       Variable to store data
+                          (512 bytes/sector read)
+
+Output:  True if operation was successful, otherwise false.
+         Data read from sectors will be contained in Buffer if
+         the operation was successful.
+
+
+
+function WriteSectors (see below) : boolean;
+--------------------------------------------
+
+Input:   Quiet : boolean  True to suppress error messages
+         DType : byte     Drive type
+                          (1=360K 5-1/4  2=1.2M 5-1/4 )
+                          (3=720K 3-1/2  4=1.44M 3-1/2)
+         Drive : byte     Drive to write to (0=A, 1=B)
+         Track : byte     Track number to write (0...)
+         Side  : byte     Side to write
+                          (0 or 1 for floppy disks)
+         SSect : byte     Starting sector to write (1...)
+         NSect : byte     Number of sectors to write
+                          (1... DO NOT USE 0!)
+         var Buffer       Variable with data
+                          (512 bytes/sector to write)
+
+Output:  True if operation was successful, otherwise false.
+
+
+
+function VerifySectors (see below) : boolean;
+---------------------------------------------
+
+Input:   Quiet : boolean  True to suppress error messages
+         DType : byte     Drive type
+                          (1=360K 5-1/4  2=1.2M 5-1/4 )
+                          (3=720K 3-1/2  4=1.44M 3-1/2)
+         Drive : byte     Drive to verify (0=A, 1=B)
+         Track : byte     Track number to verify (0...)
+         Side  : byte     Side to verify
+                          (0 or 1 for floppy disks)
+         SSect : byte     Starting sector to verify (1...)
+         NSect : byte     Number of sectors to verify
+                          (1... DO NOT USE 0!)
+
+Output:  True if operation was successful, otherwise false.
+
+
+
+function FormatDisk (see below) : boolean;
+------------------------------------------
+
+Input:   DType  : byte        Drive type
+                              (1=360K 5-1/4  2=1.2M 5-1/4 )
+                              (3=720K 3-1/2  4=1.44M 3-1/2)
+         Drive  : byte        Drive to format (0=A, 1=B)
+         MaxBad : byte        Maximum allowable bad sectors
+                              from verify
+         VLabel : string[11]  Optional volume label
+         Verify : boolean     True forces verify with bad
+                              sector marking
+         ShowRes: boolean     True shows final format results
+
+
+Output:  True if format operation was successful, otherwise
+         false. As the format process takes place, a text window
+         will appear as shown below to indicate the progress of
+         the disk format.  If the Verify option is on, FormatDisk
+         will mark bad sectors on the disk.  Unlike DOS FORMAT,
+         FormatDisk only marks the bad sectors, not a whole track
+         at a time.
+
+                   +-------------------------+
+                   |   AMST DISK FORMATTER   |
+                   |                         |
+                   |   Formatting Track xx   |
+                   |                         |
+                   +-------------------------+
+
+                alternating with (if Verify=True)
+
+                   +-------------------------+
+                   |   AMST DISK FORMATTER   |
+                   |                         |
+                   |   Verifying Track  xx   |
+                   |       Bad Sectors xxx   |
+                   +-------------------------+
+
+                              then
+
+                   +-------------------------+
+                   |   AMST DISK FORMATTER   |
+                   |                         |
+                   |   Writing FAT info...   |
+                   |                         |
+                   +-------------------------+
+
+                  and finally (if ShowRes=True)
+
+                   +-------------------------+
+                   | xxxxxxx bytes total     |
+                   | xxxxxxx marked as bad   |
+                   | xxxxxxx bytes available |
+                   | **** press any key **** |
+                   +-------------------------+
+
+
+Following is an short program to demonstrate how you to use
+DISK13IO.TPU in your programs to format a disk.
+
+(AUTHOR'S NOTE: I don't really program this way!!!).
+
+
+{========= EXAMPLE DISK FORMAT PROGRAM ================}
+
+Program DiskFormat;
+Uses Crt,Dos,DISK13IO;
+const
+  CR  = #13;
+  ESC = #27;
+var
+  DriveNumber,
+  DriveType    : byte;
+  UserChoice   : char;
+begin
+  ClrScr;
+  Writeln('TEST DISK FORMAT PROGRAM');
+  Writeln;
+  Write('Enter drive letter (A or B, [Esc] to Exit): ');
+  repeat
+    UserChoice:=UpCase(Readkey);
+    if UserChoice = ESC then Halt;
+  until UserChoice in ['A','B'];
+  Writeln;
+  Writeln;
+  DriveNumber := Ord(UserChoice)-65;
+  Writeln('  1 = 360K 5-1/4"    3 = 720K  3-1/2"');
+  Writeln('  2 = 1.2M 5-1/4"    4 = 1.44M 3-1/2"');
+  Writeln;
+  Write('Enter drive type ([Esc] to Exit): ');
+  repeat
+    UserChoice:=Readkey;
+    if UserChoice = ESC then Halt;
+  until UserChoice in ['1'..'4'];
+  DriveType:=Ord(UserChoice)-48;
+  Writeln;
+  Writeln;
+  Write('Insert blank disk in drive ',
+        Chr(DriveNumber+65),
+        ' and press [Return] ([Esc] to abort)');
+  repeat
+    UserChoice:=Readkey;
+    if UserChoice = ESC then Halt;
+  until UserChoice=CR;
+  if FormatDisk(DriveType,DriveNumber,0,
+                'TEST VOLUME',True,True) then ;
+end.
+
+{=============================================================}
+
+
+
+DISK13IO.TPU will handle all errors as they occur by placing an
+error message on the screen and giving the user the option of
+retrying the operation, or aborting the current operation.  If
+the user aborts, control will be returned to your parent program.
+For example:
+
+                   +-------------------------+
+                   |                         |
+                   | Drive not ready         |
+                   | A)bort or R)etry        |
+                   |                         |
+                   +-------------------------+
+
+In addition to "A", the [Esc] key also serves to abort after an
+error.
+
+
+
+                      TECHNICAL INFORMATION
+
+DISK13IO.TPU is written entirely in Turbo Pascal 5.0.  There is
+no inline assembly code, and the entire program was written using
+AMST developed routines.  I use these routines in many of my
+programs, (custom, shareware, and personal).  The entire unit is
+self-contained and does not rely on any other units (except Crt
+and DOS in the Turbo library).
+
+DISK13IO.TPU has been tested on the following equipment:
+
+    AMT-286 with one 360K and one 1.44M drive
+    AMT-286 with one 1.2M drive
+    Zenith Z-248 with one 360K and one 1.2M drive
+    Zenith Z-159 with one 360K drive
+    Zenith Z-183 with one 720K drive
+    Zenith Z-181 with two 720K drives
+
+If you have any problems with the program, call or write AMST
+with a description of the problem.
+
+
+
+Kurt Diesch
+Friday, October 28, 1988
+11:30 a.m.
+Ames, Iowa
+Copyright 1988, All rights reserved.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

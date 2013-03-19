@@ -1,0 +1,82 @@
+<html><head><title>Как улучшить работу SpeedDisk'а</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для резервирования места под оглавления каталогов и неизменяемые файлы, позволяющая оптимизировать по времени работу утилиты Norton Speed Disk.'>
+<meta name="keywords" content="pascal, sources, source code, ssd, disks, Дисковые Программы и Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дисковые Программы и Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ssd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Как улучшить работу SpeedDisk'а</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:rabets@icph20.sherna.msk.su">Василий Рабец</a></TD>
+<TD class=black align='right'>12.11.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для резервирования места
+под оглавления каталогов и неизменяемые файлы,
+позволяющая оптимизировать по времени работу утилиты Norton Speed Disk.</TD><TD class=black colspan=2 align='right'><br><A HREF="ssd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>25k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">На одном из моих дисков почти нет файлов, которые изменяются в
+процессе работы. На нем 20 Mb занимают совершенно не изменяемые
+файлы (DOS, Tech Help!, NG и т.п.) и только 1 Mb - периодически
+дополняемый директорий Tools с разной мелочью во множестве под-
+директориев. Мне казалось, что если с помощью нортоновского
+Speed Disk'а разместить неизменяемые 20 Mb в начале диска, то
+при повторных оптимизациях будет очень быстро перекомпоновы-
+ваться лишь оставшийся 1 Mb директория Tools. Однако почти
+всегда Speed Disk начинал нудно перемещать весь диск. Наконец я
+понял, что неизменяемые 20 Mb нужно разместить не в самом нача-
+ле диска, а оставить место для оглавлений вновь создаваемых
+подкаталогов, и написал для этого программку !DirRoom. Теперь
+этот диск всегда оптимизируется за несколько секунд!
+    Вот эта программка и составляет суть представленного здесь
+материала, хотя основной объем занимают разные сопутствующие
+вещи.
+                          Содержание:
+
+    read.me - это текст.
+    Speed_SD.txt - текст "Speed SpeeDisk, или Как улучшить работу SpeeDisk'а"
+    !DIRROOM\
+             !DirRoom.exe - программка для резервирования места под
+                            оглавления каталогов
+             !DirRoom.doc - документация к ней
+             !DirRoom.pas, DirRunit.pas - исходный текст на Turbo Pascal 6.0
+             source.doc - комментарии к исходному тексту.
+        BAT\
+             SSD.bat (Speed SpeeDisk) - файл для запуска SpeeDisk'а с
+                     предшествующим запуском !DirRoom и другими сопутствующими
+                     действиями
+             SSD.doc - документация к нему.
+
+Размер файла  !DirRoom.exe - 7935 байт.
+
+
+         12-11-92                    В.С. Рабец
+
+                           e-mail:   rabets@icph20.sherna.msk.su
+
+                           Адрес:    142 432
+                                     Московская обл.
+                                     Ногинский р-н
+                                     п. Черноголовка
+                                     Школьный б-р, 18, кв. 241
+                                     Рабцу В.С.
+
+Сл. телефоны (связь очень плохая):
+
+    черноголовский -          19-16
+    Код:
+    из Москвы и Моск. области 2-517
+    из других городов       096-517
+
+    московский (зв. только из Москвы) - 524-50-33</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
