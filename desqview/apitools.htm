@@ -1,0 +1,389 @@
+<html><head><title>DESQview 2.0 API Tools</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор инструментальных средств для разработки программ, совместимых с DesqView 2.0. Включает в себя ряд утилит и интерфейсные библиотеки для ASM/C/TP.<br><font color=#666666> Using the DESQview 2.0 API, a program can use all the DESQview 2.0 menu functions available to the user as well as the power-packed capabilities built into DESQview--multitasking, windowing, intertask communications, mailboxes, shared programs, memory management, mousing, data transfer, menu-building, and help.</font>">
+<meta name="keywords" content="pascal, sources, source code, apitools, desqview, Интерфейс к DesqView ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Интерфейс к DesqView</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;apitools
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DESQview 2.0 API Tools</TD>
+<TD nowrap class=black>&nbsp;QuarterDeck</TD>
+<TD class=black align='right'>01.10.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор инструментальных средств для разработки программ,
+совместимых с DesqView 2.0. Включает в себя ряд утилит
+и интерфейсные библиотеки для ASM/C/TP.<br><font color=#666666>
+Using the DESQview 2.0 API, a program can use all the DESQview
+2.0 menu functions available to the user as well as the
+power-packed capabilities built into DESQview--multitasking,
+windowing, intertask communications, mailboxes, shared programs,
+memory management, mousing, data transfer, menu-building, and
+help.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="apitools.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>151k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             Introducing DESQview 2.0 API Tools
+
+                 Bringing new power to DOS.
+
+            For us, it's an unveiling of pleasure.
+
+In the DESQview 2.0 view of the world there are three kinds of
+DOS programs.
+
+There's the DESQview-oblivious program, such as 1-2-3 or AutoCAD,
+written with no consideration of DESQview, but still compatible
+with DESQview.
+
+There's the DESQview-aware program. It has been modified slightly
+so that it runs efficiently in DESQview and concurrently with
+other programs. Paradox, dBASEIII, and WordPerfect are
+DESQview-aware.
+
+Then there's the DESQview-specific program, like the DESQview
+Datebook.  It's written to take advantage of DESQview's power.
+We've kept the knowledge of how to write DESQview-specific
+programs under wraps too long.  But if you look closely, you'll
+discover DESQview 2.0 behind ICL North America's point of sale
+system, MCI International's communication workstation, and
+Strawberry Software's market research program, A-Cross, to name
+only a few.
+
+
+             For you, a cornucopia of treasure.
+
+Hidden deep inside DESQview 2.0 is a powerful API (Application
+Program Interface) that lets programs control and interact with
+DESQview and with other programs running in DESQview. For MIS and
+DP departments building workstation solutions, the DESQview 2.0
+API provides enormous benefits. For it brings OS/2 capabilities
+(and even OS/2 look and feel if desired) to DOS.
+
+Using the DESQview 2.0 API, a program can use all the DESQview
+2.0 menu functions available to the user as well as the
+power-packed capabilities built into DESQview--multitasking,
+windowing, intertask communications, mailboxes, shared programs,
+memory management, mousing, data transfer, menu-building, and
+help.
+
+So DOS programs can now act alone or together. Either within a
+window or hidden behind one, they can do chores in silence or in
+chorus, all the while utilizing the full power of DESQview, all
+the while bringing you treasures you only dreamed 'til now were
+possible.
+
+
+             The inner power of DESQview
+
+A program taking advantage of the DESQview 2.0 API can display
+information in windows and control the color, dimensions,
+position and ordering of windows on the screen.
+
+It can disable, limit or enhance the standard DESQview user
+interface.  Which means that you can have DESQview-like menus in
+your program.  Or menu bars and pull-down menus. Or IBM SAA-like
+menus.
+
+It can let DESQview handle all keyboard and mouse input to menus
+and forms--yet still process keyboard and mouse input directly
+when necessary.
+
+It can schedule processing after a certain time interval or at a
+certain time. It can spawn subtasks for performing background
+operations such as printing, recalculating, and communicating. It
+can communicate between the various tasks in the system.
+
+
+                       Multitasking
+
+DESQview supports true multitasking of existing DOS programs in
+addition to programs written specifically for DESQview. So a user
+can run multiple programs (Lotus 1-2-3, dBASE III and others) and
+DESQview-specific programs (DESQview Datebook, Calculator, your
+own program) concurrently.  So a user can switch to whichever
+program needs  input and switch away while the program
+recalculates or sorts in background.
+
+Under DESQview, each program runs in its own "virtual machine",
+thinking it has exclusive access to DOS, the keyboard, etc.
+DESQview calls these virtual machines "processes".
+
+DESQview calls the portion of a process that keeps track of which
+instruction to execute next and what the register contents are  a
+"task" (or "thread"). Every  program running under DESQview
+consists, initially, of a single process running a single task.
+
+DESQview-specific programs may create additional tasks within
+their own processes and additional processes. Additional tasks
+allow a portion of your program, the part that controls the
+printer for example, to be run in background. Additional
+processes allow whole new programs to be loaded and run
+concurrently.
+
+
+                   Presentation Management
+
+Because DESQview lets you run more than one program at a time,
+DESQview provides a way to view more than one program at a time
+on the screen.  DESQview does this by mapping each program into
+its own "window" and by managing the display of multiple windows
+on the screen.
+
+To DESQview, windows are rectangular areas of displayable
+information.  They may be moved, resized, colored, and reordered
+by either the user or by your program.  Everything that is
+displayed on the screen under DESQview is displayed in a window.
+
+Multiple windows are not only useful for displaying several
+programs simultaneously, but may also be used within a single
+program to display menus, help screens, error messages. DESQview
+provides facilities for storing complete descriptions of such
+windows, (known by DESQview as "panels"), on disk or in your
+program and displaying them with a single call to the API. These
+panels may be as simple as one-line error messages or as complex
+as data entry forms with multiple-choice and data entry fields.
+
+Once a panel has been displayed, your program can ask DESQview's
+"field manager" to process all user input to the panel including
+mousing and data entry editing. The field manager returns the
+results to your program in a simple, field-oriented format,
+independent of the appearance of the panel.
+
+The use of panels and the field manager not only simplifies the
+job of programming an application, but gives a consistency to the
+user interface that makes the learning of new applications
+easier.
+
+
+                   Intertask Communications
+
+So that DESQview-specific programs can rapidly exchange
+information, DESQview provides a wide range of intertask
+communications facilities.  These facilities allow several
+concurrently running tasks to exchange information or signals, to
+lock access to common resources, to share common code and data,
+and to interrupt each other to handle critical events. These
+tasks can be in either the same or in different processes.
+
+Intertask communication is the key to building complex
+applications in a multitasking environment. Let's say, for
+example, you are building a point of sale system, that handles a
+dozen cash registers for a department store. Using DESQview you
+could break your application up into fourteen tasks; one for each
+of the cash registers, one to handle access to the pricing data-
+base, and one to track sales and generate management reports. The
+cash register tasks would process keystrokes from the clerk until
+an item price is needed. They would then send a message to the
+database task requesting the price. The database task would log
+the sale and return the price to the sender of the request.
+Meanwhile, the store manager could interact with the reporting
+task to monitor sales, clerk performance, etc.
+
+
+                      Data Transfer
+
+DESQview supports two types of user-initiated data transfer. The
+first type, called Mark and Transfer, lets a user mark text in
+any window and transfer that text to any other application. The
+application receiving the data can be DESQview-oblivious, seeing
+the data as normal keyboard input.
+
+More sophisticated transfers are possible between
+DESQview-specific applications that support the DESQview Scissors
+command. When the user marks data in such an application,
+DESQview notifies the application that data has been requested
+and lets the application determine exactly what data to supply.
+The application may supply anything including text, formulas, or
+even graphics images. When the user instructs DESQview to Paste
+the data into another application, that application is also
+notified so that the data can be handled appropriately.
+
+The applications involved in a Scissors transfer can even use
+DESQview's intertask communication facilities to setup a
+"hot-link" between themselves so that subsequent changes to the
+data are automatically reflected in both applications.
+
+
+                         Memory Management
+
+Programs running under DOS are typically given all of a PC's
+memory to do with as they please. In a multitasking environment,
+memory must be managed so that more than one program can be
+loaded at a time and so that no single program is given more
+memory than it needs. DESQview provides this management in a way
+that adapts to the type of memory hardware available on your PC.
+
+If your PC has 640K of conventional memory, DESQview is able to
+multitask as many programs as will fit in memory at the same
+time. Additional programs can be loaded but will cause the least
+recently used programs to be suspended and swapped to disk to
+make room in memory for the new ones.
+
+If you have EMS 3.2 (Lotus-Intel-Microsoft Expanded Memory),
+DESQview will swap programs to expanded memory instead of to
+disk. This is so much faster than swapping to disk that the swap
+time is almost not noticeable.
+
+If you have EMS 4.0 or EEMS (AST-Quadram-Ashton Tate Enhanced
+Expanded Memory) or a 386-based PC with an EMS 4.0 driver,
+DESQview can actually multitask as many programs as will fit in
+conventional and expanded memory. This can be as high as
+32-Megabytes worth of programs. DESQview can also run a large
+part of itself in expanded memory, giving a much larger maximum
+program size.
+
+
+                     Customization
+
+Although DESQview is best known for its ability to run
+off-the-shelf software concurrently, DESQview is an ideal
+platform for developing customized vertical market applications
+and workstations. In addition to providing multitasking and
+windowing services, DESQview can be customized to provide the
+user interface appropriate to a particular application.
+
+This customization can take the form of restricting access to
+certain DESQview menus, taking special action when certain menu
+items are selected, or, in the extreme, disabling all access to
+DESQview menus and providing the entire user interface as part of
+the application.
+
+In this latter case, the only part of DESQview that the user sees
+is a copyright screen during start-up.
+
+
+                       Portability
+
+DESQview with its entire API runs on 8088, 8086, 80286 and 80386
+PCs as well as the IBM Personal System/2s. This means that an
+application that you write to be DESQview-specific can run on any
+PC from a laptop dual-floppy PC to the very latest 386-based PC.
+It can even run over a network on a diskless PC. Thus, the market
+for your DESQview-specific application extends to the entire base
+of existing and future DOS PCs.
+
+
+                  DESQview 2.0 API Tools
+
+Quarterdeck is developing a full set of tools to assist
+developers in creating DESQview-specific programs and
+workstations.  The first five of these tools are:
+
+
+               DESQview API Reference Manual
+
+This is the primary source of information about the DESQview API.
+It contains all you need to know to write assembly language
+programs that take full advantage of DESQview's capabilities.
+The Reference manual comes with an include file containing
+symbols and macros to aid you in development.  AVAILABLE NOW!
+
+
+                 DESQview API C Library
+
+The DESQview API C Library provides C Language interfaces for the
+entire set of API functions.  It supports the Lattice C, Metaware
+C, Microsoft C, and Turbo C compilers for all memory models.
+Included with the C Library package is a copy of the API
+Reference Manual and source code for the library.  AVAILABLE NOW!
+
+
+               DESQview API Pascal Library
+
+The DESQview API Pascal Library provides Pascal Language
+interfaces for the entire set of API functions.  It supports the
+Turbo Pascal 4.0 and 5.0 compilers.  Included with the Pascal
+Library package is a copy of the API Reference Manual and source
+code for the library.  AVAILABLE OCTOBER 88
+
+
+                  DESQview API Debugger
+
+The DESQview API Debugger is an interactive tool that enables the
+API programmer to trace and single step through API calls from
+several concurrently running DESQview-specific programs.  Trace
+information is reported symbolically along with the program
+counter, registers, and stack at the time of the call.  Trace
+conditions can be specified so that only those callls of interest
+are reported.  AVAILABLE NOW!
+
+
+                DESQview API Panel Designer
+
+The DESQview API Panel Designer is an interactive tool to aid you
+in designing windows, menus, help screens, error messages, and
+forms.  It includes an editor that lets you construct an image of
+your panel using simple commands to enter, edit, copy, and move
+text as well as draw lines and boxes.  You can then define the
+characteristics of the window that will contain the panel, such
+as its position, size, and title.  Finally, you can specify the
+locations and types of fields in the panel.
+
+The Panel Designer automatically generates all the DESQview API
+data streams necessary to display and take input from your panel.
+These data streams may be grouped together into panel libraries
+and stored on disk or as part of your program.  AVAILABLE OCTOBER
+88
+
+
+             DESQview API Pulldown Menu Manager
+
+The DESQview API Pulldown Menu Manager is an interactive tool to
+aid you in designing pulldown menus. This DESQview API tool
+assists you in giving your DOS program an OS/2-like look and
+feel.
+
+
+                  System Requirements
+
+Personal Computers: IBM PC, PC-XT, PC-AT and Personal System/2
+and 8088-, 8086-, 80286-, 80386-based personal computers that are
+100% compatible with the IBM Personal computer.
+
+Video Displays: monochrome, color graphics (CGA), enhanced color
+graphics (EGA), video graphics array (VGA) of the IBM Personal
+System/2, Hercules Memory; available separately: Micro Display
+Systems Genius video driver
+
+640K memory recommended
+
+Expanded Memory (optional): Intel AboveBoard and compatibles
+(EMS 3.2)
+
+Expanded Memory Specification 4.0 and Enhanced Expanded Memory
+(optional): AST RAMpage and EMS 4.0 boards; recommended for power
+users wishing to multitask beyond 640K or to run programs larger
+than 435K
+
+Disk: Two diskette drives or one diskette drive and a hard drive
+
+Mouse (optional): PC Mouse, IBM Mouse, Microsoft Mouse and
+Microsoft Mouse compatibles
+
+Communication port (required for DESQview Link)
+Modem (for Auto-dialer and DESQview Link): Hayes Smartmodem or
+compatible
+
+Operating System: PC-DOS 2.0-4.0; MS-DOS 2.0-3.3
+
+DESQview memory overhead: 640K PC's and 8088 & 80286 PC's without
+expanded memory: 145K; 80286 PC's with extended memory: 85K; 8088
+& 80286 PC's with enhanced expanded memory or 80386 PC's: 40K for
+PC's with EGA/VGA displays; 0-10K for PC's with monochrome or CGA
+displays
+
+DESQview Companions memory requirements: Datebook: 55K;
+Calculator: 30K; Notepad: 35K; Link: 80K; Quarterdeck Expanded
+Memory Manager-386: 1.5K; Quarterdeck Expanded Memory
+Manager-50/60: 16K
+
+Media: DESQview and DESQview Companions available on either 5 1/4
+inch or 3 1/2 inch floppy diskette</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
