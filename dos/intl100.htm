@@ -1,0 +1,109 @@
+<html><head><title>INTL 1.0 - Country Info Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='INTL.PAS is a Turbo/Borland Pascal unit to obtain country specific info on the PC running your application.'>
+<meta name="keywords" content="pascal, sources, source code, intl100, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;intl100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;INTL 1.0 - Country Info Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:tba@m.dia.dk">Thomas Bargholz</a></TD>
+<TD class=black align='right'>12.09.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">INTL.PAS is a Turbo/Borland Pascal unit
+to obtain country specific info on the PC
+running your application.</TD><TD class=black colspan=2 align='right'><br><A HREF="intl100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{****************************************}
+{*            INTL.PAS 1.00             *}
+{*                                      *}
+{*       Author : Thomas Bargholz       *}
+{*    Written : September 12th, 1994    *}
+{*                                      *}
+{*    Donated to the Public Domain      *}
+{****************************************}
+
+This unit gives you access to the country info on the PC running your
+application.
+
+In CountryInfoRec the parameters return the following info:
+
+CountryCode returns a code that indentifies the country. The possible
+country code are:
+$001 : US
+$002 : Canadien-French
+$003 : Latin America
+$01F : Netherlands
+$020 : Belgium
+$021 : France
+$022 : Spain
+$024 : Hungary
+$026 : Yugoslavia
+$027 : Italy
+$029 : Switzerland
+$02A : Tjekia (Czechoslovakia)
+$02B : Austria
+$02C : UK
+$02D : Denmark
+$02E : Sweden
+$02F : Norway
+$030 : Poland
+$031 : Germany
+$037 : Brazil
+$03D : International English (Australia in DR-DOS 5)
+$051 : Japan
+$052 : Korea
+$056 : China
+$058 : Taiwan
+$05A : Turkey
+$15F : Portugal
+$162 : Iceland
+$166 : Finland
+$311 : Middle East/Saudi Arabia
+$3CC : Israel
+
+DateFormat returns a code for the type of date to display:
+0 : US (mm-dd-yy)
+1 : Europe (dd-mm-yy)
+2 : Japan (yy-mm-dd)
+
+TimeFormat returns a code for the type of time to display:
+0 : 12h clock
+1 : 24h clock
+
+DateSeparator returns the char used to separate the different parts of
+a date. E.g "-" (dd-mm-yy) or "/" (dd/mm/yy)
+
+TimeSeparator returns the char used to separate the different parts of
+a clock. E.g "." (hh.mm.ss) or ":" (hh:mm:ss)
+
+CurrencySymbol is the symbol for the countrys currency.
+
+ThousandSeparator is the char that separates the thousand in the numbers.
+E.g "," (1,000) or "." (1.000)
+
+DecimalSeparator is the char that separates the decimal in the numbers.
+E.g "," (7,5) or "." (7.5)
+
+DigitsAfterDecimal is the number of digits after decimal in the countrys
+currency.
+
+If you have any comments, suggestions or bug reports, please contact me:
+
+e-mail    : tba@m.dia.dk
+snail mail: Thomas Bargholz
+            Smallegade 20, 3 tv.
+            DK-2000 Frederiksberg
+            Denmark</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,79 @@
+<html><head><title>Executer - пример запуска задач по условию</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='AGE - calculate age of file in days and return it as ERRORLEVEL'>
+<meta name="keywords" content="pascal, sources, source code, age, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;age
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Executer - пример запуска задач по условию</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>06.01.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">AGE - calculate age of file in days and return it as ERRORLEVEL</TD><TD class=black colspan=2 align='right'><br><A HREF="age.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Vitus B. Wagner &lt;vitus@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+    Идея  Executer просто носится в воздухе. Так, например в Speed Disk
+который был приведен в качестве примера, данная возможность просто встроена.
+Тем не менее отдельный executer тоже вещь полезная, так как бывают процедуры
+которые требуют запуска bat-файла или программы, не обладающей такими возмож
+ностями управления собственным запуском, как NDD или AdInfo.
+
+    Однако, предложенная уважаемым root@agrres.tula.su реализация обладает
+рядом недостатков.
+
+    Во-первых, большой размер программы
+
+    Во-вторых, неэкономное расходование дискового пространства - требуется
+целый кластер на винчестере для хранения всего лишь даты
+
+    В-третьих - черезмерно узкая область применения.
+
+    В-четвертых, посылая программу в группу comp.lang.pascal было бы неплохо
+предоставить исходный текст, что сильно облегчило бы ее анализ, а также
+помогло тем, кто еще не умеет писать такие вещи левой ногой за пять минут.
+
+    Что же касается собственно executer то тут есть несколько более интерес-
+ных решений. Во-первых, все это можно реализовать только средствами команд-
+ного языка DOS (пример можно найти в коллекции Batch-евских трюков
+Batch Tricks 39 - файл tsbat39.arj есть на многих московских BBS), но это
+тема для другой телеконференции.
+
+     Во-вторых, для контроля даты последнего выполнения программы можно
+воспользоваться датой создания/изменения какого-нибудь файла, например
+Image.dat в случае SpeedDisk. Если же программа такого файла не создает, то
+можно воспользоваться пустым файлом, специально для этой цели созданным, благо
+файл нулевой длины кластера не занимает. Для создания пустого файла
+из Pascal рекомендую последовательность
+
+  Assign(F,FileName);
+  Rewrite(F);
+  Close(F);
+
+  а дату поставит операционная система.
+  Для запуска программы удобнее воспользоваться Dos-овской командой
+  if ErrorLevel - это значительно упрощает программу, и к тому же не занимает
+  память самим executer'ом.
+
+Привожу свою программу, предназначенную для этой цели. Она называется
+age и возвращает в качестве ErrorLevel возраст указанного в командной строке
+файла в днях.
+
+   Использовать ее в качестве Executer можно так:
+     age c:image.dat
+     if errorlevel 7 Speedisk c:
+(Dos будет считать условие выполненным, если ErrorLevel &gt;= 7)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

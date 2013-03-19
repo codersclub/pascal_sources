@@ -1,0 +1,303 @@
+<html><head><title>Определение типа OS, откуда нас запустили</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Подборка функций для определения типа OS'>
+<meta name="keywords" content="pascal, sources, source code, checkos, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;checkos
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Определение типа OS, откуда нас запустили</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:468/74.40">Mike Gorchak</a></TD>
+<TD class=black align='right'>06.08.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Подборка функций для определения типа OS</TD><TD class=black colspan=2 align='right'><br><A HREF="checkos.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 123 of 204                           Addr                        Date
+ From : Mike Gorchak                  2:468/74.40                      06.08.97
+ Subj : Определение типа OS, откуда нас запустили
+-------------------------------------------------------------------------------
+                            Buenos dias, Denis.
+
+ Сербая пиво и размазывая всех уродов по стенке в дюке, написал как-то
+ Denis Penkin к All. А мне тоже интересно, вот и вмешался. ;)
+
+ DP&gt;    Вот тут сабж надо выдумать. Кто может помочь?
+ DP&gt;    Желательно на асм, но... :)
+
+Вот тебе: то, что на асм'е, то из SARC'а, то что на паскале, то из SWAG'а:
+
+[]-------- Кут от хере из CHKDESQ.INC -------[]
+; После вызова CheckDesqVers вы получите в BX версию :
+;
+;  BH - старший номер версии ( до точки ) .
+;  BL - младший номер версии ( после точки ) .
+;
+; Если DesQView не найден то получите в BX=0000h .
+;
+;    (C) 1995 Synthesis Software Ltd.    By Mikhail Gorchak .
+
+CheckDesqVers Proc Near
+  Pushf
+  Push ax
+  Push cx
+  Push dx
+  Mov ax,2B01h
+  Xor bx,bx
+  Mov cx,4445h
+  Mov dx,5351h
+  Int 21h
+  Pop dx
+  Pop cx
+  Pop ax
+  Popf
+  Ret
+  Endp
+[]--------  и до хере из CHKDESQ.INC  -------[]
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.
+
+[]-------- Кут от хере из CHKVC.INC -------[]
+; После вызова ChkVC вы получите в AH число :
+;  0FFh - Volkov Commander не был загружен .
+;  000h - VC уже был ранее загружен .
+;
+;    (C) 1995 Synthesis Software Ltd.    By Mikhail Gorchak .
+
+ChkVC  Proc Near
+  Pushf
+  Push cx
+  Push dx
+  Push bx
+  Push es
+  Mov cx,5643h
+  Mov dx,4F4Dh
+  Mov ax,2B00h
+  Int 21h
+  Mov ah,al
+  Pop es
+  Pop bx
+  Pop dx
+  Pop cx
+  Popf
+  Ret
+  Endp
+[]--------  и до хере из CHKVC.INC  -------[]
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.
+
+[]-------- Кут от хере из CHKWIN.INC -------[]
+; После вызова CheckWindows вы получите в AH число :
+;  0FFh - MicroSoft Windows в памяти не найдено .
+;  000h - Windows есть в памяти .
+;
+;    (C) 1995 Synthesis Software Ltd.    By Mikhail Gorchak .
+
+CheckWindows Proc Near
+  Pushf
+  Push ax
+  Mov ax,160Ah
+  Int 2Fh
+  Or ax,ax
+  Jz _WinFound
+  Pop ax
+  Mov ah,0FFh
+  Popf
+  Ret
+_WinFound: Pop ax
+  Xor ah,ah
+  Popf
+  Ret
+  Endp
+[]--------  и до хере из CHKWIN.INC  -------[]
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.
+
+[]-------- Кут от хере из CHKWINV.INC -------[]
+; Вызывать после проверки Windows'а в памяти .
+; После вызова CheckWinVersion вы получите в BX версию :
+;
+;  BH - старший номер версии ( до точки ) .
+;  BL - младший номер версии ( после точки ) .
+;
+; Если Windows не обнаружен , то в BX=0000h , т.е. 0.00 версия .
+;
+;    (C) 1995 Synthesis Software Ltd.    By Mikhail Gorchak .
+
+CheckWinVersion Proc Near
+  Pushf
+  Push ax
+  Mov ax,1600h
+  Int 2Fh
+  Mov bx,0200h
+  Cmp al,01h
+  Jz _DetectedWin
+  Cmp al,0FFh
+  Jz _DetectedWin
+  Cmp al,00h
+  Jz _OneMoreDetWin
+  Cmp al,80h
+  Jnz _HardVersionWin
+_OneMoreDetWin: Mov ax,4680h
+  Int 2Fh
+  Mov bx,0300h
+  Or ax,ax
+  Jz _DetectedWin
+  Xor bx,bx
+  Jmp Short _DetectedWin
+_HardVersionWin:Mov bx,ax
+  Xchg bl,bh
+_DetectedWin: Pop ax
+  Popf
+  Ret
+  Endp
+[]--------  и до хере из CHKWINV.INC  -------[]
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.
+
+[]-------- Кут от хере из FINDWIN.PAS -------[]
+{
+
+BB&gt;   What code can I use to detect all three of the following:
+
+BB&gt;  1.  : DPMI
+BB&gt;  2.  : DeskView
+BB&gt;  3.  : Windows
+BB&gt;  4.  : OS/2
+
+
+Detecting Windows ...
+}
+
+{   Copyright (C) 1991 by: NativSoft Computing
+                           1155 College Ave.
+                           Adrian, MI, 49221
+                           CIS 71160,1045
+
+    Based on information published in an article
+    by Ben Myers of Spirit of Performance, Inc.
+    (Dr. Dobb's Journal, #172, January, 1991, pg 116)
+
+    Compiled with Turbo Pascal v6.
+
+    Modified by Tom Clark.  Changed Errorlevel values.
+
+    Return Errorlevel 0 if Windows not running,
+                      1 if Windows 2.x,
+                      2 if Windows 3 real or standard mode,
+                      3 if Windows 3 enhanced mode.
+
+}
+
+program findwin;
+
+var t     : byte;
+    valu  : word;
+
+
+BEGIN
+
+  {Inline assembler or macro is necessary to make the multiplex (2Fh) call
+   because Turbo Pascal only *fakes* INTR procedure -- i.e., this DOESN'T
+   work:           var regs : registers;
+                     ...
+                   regs.ax := $1600;
+                   intr($2F,regs);
+                   valu := regs.al
+}
+
+  ASM
+    MOV AX, 1600h
+    INT 2Fh
+    MOV valu, AX
+  END;
+
+  case lo(valu) of
+    $01,$FF : t := 1;  {win/386, ver 2.xx running}
+    $00,$80 : begin    {Enhanced, WIN/386, or WIN ver 2.xx NOT RUNNING
+                            ... so, test for real or standard win 3.x }
+                ASM
+                  MOV AX, 4680h
+                  INT 2Fh
+                  MOV valu, AX
+                END;
+
+                if valu = 0 then t := 2 {real or standard win 3.x running}
+                else t := 0;            {apparently NO WIN is running}
+              end;
+    else t := 3;  {enhanced win 3.x running}
+  end; {case}
+
+END.
+[]--------  и до хере из FINDWIN.PAS  -------[]
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.
+
+[]-------- Кут от хере из WIN3XINF.PAS -------[]
+{***********************************************************************}
+PROGRAM Win3XInf;       {  Simple Detection routines for Windows 3.X    }
+                        {  Last Updated April 28/93, Greg Estabrooks    }
+
+FUNCTION Win3X :BOOLEAN;  ASSEMBLER;
+                {  Routine to determine if Windows is currently running }
+ASM
+  Mov AX,$4680                          {  Win 3.x Standard check       }
+  Int $2F                               {  Call Int 2F                  }
+  Cmp AX,0                              {  IF AX = 0 Win in real mode   }
+  JNE @EnhancedCheck                    {  If not check for enhanced mode}
+  Mov AL,1                              {  Set Result to true           }
+  Jmp @Exit                             {  Go to end of routine         }
+@EnhancedCheck:                         {  Else check for enhanced mode }
+  Mov AX,$1600                          {  Win 3.x Enhanced check       }
+  Int $2F                               {  Call Int 2F                  }
+  Cmp AL,0                              {  Check returned value         }
+  Je @False                             {  If not one of the below it   }
+  Cmp AL,$80                            {  is NOT installed             }
+  Je @False
+  Mov AL,1                              {  Nope it must BE INSTALLED    }
+  Jmp @Exit
+@False:
+  Mov AL,0                              {  Set Result to False          }
+@Exit:
+END;{Win3X}
+
+FUNCTION WinVer :WORD;  ASSEMBLER;
+                {  Returns a word containing the version of Win Running }
+                {  Should only be used after checking for Win installed }
+                {  Or value returned will be meaning less               }
+ASM
+  Mov AX,$1600                     {    Enhanced mode check             }
+  Int $2F                          {    Call Int 2F                     }
+END;{WinVer}
+
+BEGIN
+  IF Win3X THEN                         {  If it is running say so      }
+   BEGIN
+    Writeln('Windows is Running! ');    {  Now display version running  }
+    Writeln('Version Running is : ',Lo(WinVer),'.',Hi(WinVer));
+   END
+  ELSE                                  {  If not 'Just say NO!'        }
+    Writeln('Windows is not Running!');
+END.
+{***********************************************************************}
+[]--------  и до хере из WIN3XINF.PAS  -------[]
+
+
+Have a nice day, with best wishes & regards, Mike !
+                           [Team OS/2 forever]         -=Splinter Station=-
+Nos habebit humus !                                         2:468/74.40
+
+--- Голый старик, который орет без перерыва целых 3.00.Alpha5+ дня :)
+ * Origin: -=- Я сильный, но легкий -=- (2:468/74.40)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

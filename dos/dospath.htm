@@ -1,0 +1,90 @@
+<html><head><title>Расширение модуля DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Определение пути, из которого запускалась программа, и пути для временных файлов, если таковой установлен в системе'>
+<meta name="keywords" content="pascal, sources, source code, dospath, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dospath
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Расширение модуля DOS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:v_ostashev@chat.ru">Victor Ostashev</a></TD>
+<TD class=black align='right'>04.12.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Определение пути, из которого запускалась программа,
+и пути для временных файлов,
+если таковой установлен в системе</TD><TD class=black colspan=2 align='right'><br><A HREF="dospath.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{+--------------------------+
+ |   НЕБОЛЬШОЕ РАСШИРЕНИЕ   |
+ |       МОДУЛЯ DOS         |
+ |                          |
+ | 04.12.94 02:52           |
+ |                          |
+ +--------------------------+
+Автор:  Виктор Осташев
+Fido:   2:5020/1194
+E-mail: v_ostashev@chat.ru
+WWW:    http://ostashev.newmail.ru}
+
+{$D-; $L-; $N-}
+
+unit DOSPATH;
+
+interface
+
+procedure DosShell;
+
+{Выход в ДОС}
+
+
+procedure StartPath(var Path:string);
+
+{Определение пути, из которого
+ запускалась программа}
+
+
+procedure TempPath(var Path:string);
+
+{Определение пути временных файлов,
+ если таковой установлен в системе}
+
+
+implementation
+
+uses DOS;
+
+procedure DosShell;
+   begin
+      SwapVectors;
+      Exec(GetEnv('COMSPEC'),'');
+      SwapVectors;
+   end;
+
+procedure StartPath;
+   var S1,S2: string[10];
+   begin
+      FSplit(ParamStr(0),Path,S1,S2);
+   end;
+
+procedure TempPath;
+   begin
+      Path:=GetEnv('TEMP');
+      if Path='' then Path:=GetEnv('TMP');
+      if (Path&lt;&gt;'') and (Path[Length(Path)]&lt;&gt;'\') then Path:=Path+'\';
+   end;
+
+
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

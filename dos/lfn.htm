@@ -1,0 +1,81 @@
+<html><head><title>LFN v1.0 - Long File Name Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для поддержки работы с длинными именами файлов в DOS-окне под Win95. Приведены 3 примера использования. This unit provides Pascal routines that access most of the functions of the Win32 API for long file names. It can be used from real mode and protected mode DOS applications in a Win95 DOS box, or from 16-bit Windows applications running within Win95. Requires Borland Pascal 7.0 or Delphi to compile.'>
+<meta name="keywords" content="pascal, sources, source code, lfn, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;lfn
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LFN v1.0 - Long File Name Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76004.2611@CompuServ.com">Kim Kokkonen</a></TD>
+<TD class=black align='right'>15.11.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для поддержки работы с длинными именами файлов
+в DOS-окне под Win95. Приведены 3 примера использования.<br>
+This unit provides Pascal routines that access most of the
+functions of the Win32 API for long file names. It can be used from
+real mode and protected mode DOS applications in a Win95 DOS box, or
+from 16-bit Windows applications running within Win95. Requires
+Borland Pascal 7.0 or Delphi to compile.</TD><TD class=black colspan=2 align='right'><br><A HREF="lfn.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Notes:
+  This unit provides Pascal routines that access most of the
+  functions of the Win32 API for long file names. It can be used from
+  real mode and protected mode DOS applications in a Win95 DOS box, or
+  from 16-bit Windows applications running within Win95. Requires
+  Borland Pascal 7.0 or Delphi to compile.
+
+  Error codes are returned as the function result of each routine. You
+  must ensure that the result is zero before proceeding in your
+  application. If you're writing an application that runs under
+  previous versions of DOS or Windows, you need to fall back to the
+  older DOS services when the Win32 services fail. "Unsupported
+  function" is indicated by an error code whose value is greater than
+  255.
+
+  LFN supports complete filenames up to 254 characters max (not
+  counting length byte or null terminator, but counting drive letter
+  and path). Win95 actually allows names up to 259 characters.
+
+  LFNParamCount and LFNParamStr work like the standard runtime library
+  functions ParamCount and ParamStr, except that they honor quotes (")
+  to delimit parameters that contain spaces. They search only the 128
+  bytes of command line data in the prefix segment, not the additional
+  overflow information stored in the environment.
+
+  The comment after each routine in the interface section below
+  provides information about what it does. Many of the functions
+  parallel those from the Turbo Pascal runtime library and work as
+  much as possible like the short filename RTL versions.
+
+  The example programs EXLFN.PAS, EXLFNP.PAS, and SDIR.PAS show how to
+  use many of the functions.
+
+  See a Win32 API manual for additional details about each function.
+
+  Routines that look like they could be "assembler" cannot be because
+  they need the compiler to make a copy of the strings passed to them,
+  to ensure space for null-terminating the string.
+
+  The "stc" before each int $21 is needed to ensure the operating
+  system returns with carry set when an unsupported function call is
+  made.
+
+  Kim Kokkonen, TurboPower Software Co.
+  CompuServe 76004,2611
+
+  May be distributed freely, but not sold as a programmer's tool.
+
+  Version 1.0, 10/3/95</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

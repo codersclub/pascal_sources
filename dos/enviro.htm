@@ -1,0 +1,50 @@
+<html><head><title>GetEnvStr - Get Environment Function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция GetEnvStr возвращает значение указанной переменной из окружения.  GetEnvStr - This function takes a SET parameter and returns the string value associated with that parameter.'>
+<meta name="keywords" content="pascal, sources, source code, enviro, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;enviro
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GetEnvStr - Get Environment Function</TD>
+<TD nowrap class=black>&nbsp;Paul Heitner</TD>
+<TD class=black align='right'>07.11.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция GetEnvStr возвращает значение указанной
+переменной из окружения. <br>
+GetEnvStr - This function takes a SET parameter
+and returns the string value associated with that parameter.</TD><TD class=black colspan=2 align='right'><br><A HREF="enviro.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">	Written Jan 1988 by Paul Heitner, Bramalea, Ontario.
+	Placed in the Public Domain.  The author disclaims any
+	responsibility for possible adverse consequences resulting
+	from the use of this code.
+
+  GetEnvStr - This function takes a SET parameter and returns the
+  string value associated with that parameter.
+
+  Input requirements are:
+        Valid SET parameter in UpperCase (like 'COMSPEC')
+
+  Outputs are:
+        The value of the supplied SET parameter in a String type if the
+        parameter exists in the environment, else a null string if the
+		parameter cannot be found.  If given a null string parameter
+		GetEnvStr will return a null string.
+
+  credits:
+    -  Bela Lubkin
+    -  Stuart Fuller
+	-  Paul Heitner (Turbo Pascal 4.0 version)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

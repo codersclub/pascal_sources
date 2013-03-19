@@ -1,0 +1,154 @@
+<html><head><title>SetPath - Replace the Global MS-DOS Enviroment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа, демонстрирующая технологию поиска и замены переменных окружения. В качестве примера изменяется переменная PATH.  This program shows how to find the global MS-DOS enviroment. As an example, this program will update the PATH= string in the global enviroment to the string passed as a parameter.'>
+<meta name="keywords" content="pascal, sources, source code, setpath, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;setpath
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SetPath - Replace the Global MS-DOS Enviroment</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71401.747@compuserv.com">David Dubois</a></TD>
+<TD class=black align='right'>28.04.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа, демонстрирующая технологию поиска и замены
+переменных окружения. В качестве примера изменяется
+переменная PATH. <br>
+This program shows how to find the global MS-DOS enviroment.
+As an example, this program will update the PATH= string in
+the global enviroment to the string passed as a parameter.</TD><TD class=black colspan=2 align='right'><br><A HREF="setpath.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              Program: SetPath
+              Author: David Dubois
+                      Zelkop Software
+                      Halifax, N.S.
+CompuServe User I.D.: 71401,747
+                Date: 1988.04.27
+
+I hereby dedicate this knowledge to the public domain. Feel free
+to use it, but if you do, please mention my name. There are no
+guarantees, and in fact, I wouldn't bet a dollar that it will
+work every time.
+
+I just figured this all out in the last couple of hours, so
+please excuse the sparse documentation. I hope to upload
+something more concrete in the near future.
+
+This program shows how to find the global MS-DOS enviroment.
+
+As an example, this program will update the PATH= string in the
+global enviroment to the string passed as a parameter.
+
+On normal circumstances, a program can only work with its own
+copy of the DOS enviroment. The purpose of this program is to
+break that barrier.
+
+THINGS YOU MAY NOT HAVE KNOWN
+
+Every program that is run gets its own Program Segment Prefix
+(PSP).  This is an area of memory that COMMAND.COM uses to
+communicate information to the program. For example, one such bit
+of information is the segment address of the program's copy of
+the enviroment.
+
+At offset $16 of the PSP you can find the segment address of the
+parent program's PSP.
+
+In COMMAND.COM's PSP, this segment actually points to itself.
+
+Therefore, we can find COMMAND.COM's PSP by tracing the line
+back, until we get to a program whose PSP's parent is itself.
+
+"Aha!", you say, "so we just look at COMMAND.COM's PSP to see
+where its enviroment is." Sorry, it's not that simple.
+Understandably, COMMAND.COM treats its own PSP a little
+differently than its children's. Particularly, where usually one
+can find the segment address of the enviroment, one instead finds
+zeros. Hmmm ...
+
+Here comes the shaky part:
+
+The thing to realize, is since the size of the enviroment is not
+set in stone, COMMAND.COM has to dynamically allocate the memory
+for it. This is done with the standard DOS memory allocation
+calls. Therefore, somewhere, nearby, there must be memory
+allocation block with the global enviroment in it. (This is shaky
+logic step #1).
+
+A memory allocation block starts on a segment boundary. The first
+byte is either a $4D (letter M) or a $5A (letter Z). It will be
+$5A only if this is the last memory that has been allocated. In
+this program I have assumed that the block we're looking for
+won't be the last. (That is shaky logic step #2.) The next two
+bytes are the segment of the PSP that allocated the memory. This
+we are pretty sure we know. The next two bytes are a bonus: a
+word describing the number of paragraphs that were allocated. If
+we can find what we are looking for, this should be the size of
+the enviroment.
+
+Let's look for such a block. Starting at COMMAND.COM's PSP
+segment, we look through segment boundaries until we find a
+match. We will assume that such a block will be found. (Shaky
+logic step #3) Even, worse we will assume that the first such
+block we find is the enviroment block.  (Finally, shaky logic
+step #4).
+
+Assuming that the great spirit of PC-dom is working in our favor
+today, and all of these assumptions turn out to be true, we are
+all set. The enviroment itself starts at the next segment
+boundary (as is the nature of DOS allocated memory blocks) and we
+know the size of the enviroment.  Now we can have our way.
+
+REPLACING THE PATH
+
+This part was written in hurry. I was anxious to share the
+information so far described with all our friends. I haven't put
+in proper checks to make sure that overflow does not occur. If
+that happens, some of the strings will become truncated, but I
+don't think smoke will start coming out the back of the machine.
+Perhaps in the near future I will clean it up and release a new
+version. I won't go too deeply into an explanation.
+
+Essentially it starts with a blank, NewEnv, the same size as the
+old enviroment. It copies in the new PATH, then it copies the old
+enviroment, filtering out any old PATH. Then fills the rest, if
+any with zeros. I added two zeros onto the end as a safety
+measure. Then copy the new over the old.
+
+COMMENTS, SUGGESTIONS, CURSES
+
+That this works at all is based on experimental, rather than
+properly documented, evidence. There are no guarantees. But then,
+its free.
+
+I'm open to any comments or suggestions that anyone out there
+might have. Specifically, I'd be interested to know if it works
+on your machine, or if it doesn't work on your machine. If it
+doesn't work, can you find an alternate solution for your
+machine, or find out what, specifically, is wrong with my
+assumptions? Can anyone out there find any documentation that
+would guarantee my assumptions are true? Can any of you prove
+Fermat's last conjecture?
+
+You can write me at
+
+                    David Dubois
+                    Zelkop Software
+                    P.O. Box 5177
+                    Armdale, N.S.
+                    Canada
+                    B3L 4M7
+
+or you if you're on CompuServe you can EasyPlex me at 71401,747,
+or leave a message on the Borland's Programmer A Forum (GO BPROGA).</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

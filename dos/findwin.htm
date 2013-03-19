@@ -1,0 +1,59 @@
+<html><head><title>FindWin - Check for MS Windows Version</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Простая программа для определения версии Windows. Определяет Win2, Win3, Win/386 A quick and dirty program to detect and report whether any version of Microsoft Windows (tm) is running.'>
+<meta name="keywords" content="pascal, sources, source code, findwin, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;findwin
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FindWin - Check for MS Windows Version</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71160.1045@compuserv.com">NativSoft</a></TD>
+<TD class=black align='right'>09.02.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Простая программа для определения версии Windows.
+Определяет Win2, Win3, Win/386<br>
+A quick and dirty program to detect and report whether
+any version of Microsoft Windows (tm) is running.</TD><TD class=black colspan=2 align='right'><br><A HREF="findwin.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Copyright (C) 1991 by: NativSoft Computing
+                       1155 College Ave.
+                       Adrian, MI, 49221
+                       (517) 265-6080
+                       CIS 71160,1045
+
+
+A quick and dirty program to detect and report whether any version
+of Microsoft Windows (tm) is running.
+
+Based on information published in an article
+by Ben Myers of Spirit of Performance, Inc.
+(Dr. Dobb's Journal, #172, January, 1991, pg 116)
+
+ALTINTR was adapted from a public domain procedure
+found in INFOPLUS by ANDREW ROSSMAN.  This procedure
+is necessary because TP only FAKES an INT!!  The normal
+TP construct, INTR($2F,regs), therefore fails to detect
+Windows running in enhanced mode.  With TP6's BASM the required
+code can be inserted directly into the body of the program.
+
+Compile with Turbo Pascal v5.5 (requires REALINT.OBJ) or
+Turbo Pascal v6 (requires conditional define "ver6")
+
+This program is released to the public domain and is provided
+"as is" without any warranty of any kind, either expressed or
+implied, including, but not limited to, the implied warranties
+or merchantability and fitness for a particular reason.  The
+entire risk as to the quality and performance of the program
+is with the user.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

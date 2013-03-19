@@ -1,0 +1,82 @@
+<html><head><title>4HIST 1.0 - 4DOS Command History duplicate deleter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='4HIST; Free 4DOS utility: command history duplicate entry deleter v1.00. 4HIST removes all superfluous lines from the current 4DOS command history list. W/ PASCAL source. Supercedes HISTU.BTM, and can be used for other purposes.'>
+<meta name="keywords" content="pascal, sources, source code, 4hist, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;4hist
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;4HIST 1.0 - 4DOS Command History duplicate deleter</TD>
+<TD nowrap class=black>&nbsp;David Daniel Anderson</TD>
+<TD class=black align='right'>08.09.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">4HIST; Free 4DOS utility: command history
+duplicate entry deleter v1.00.
+4HIST removes all superfluous lines from the current 4DOS
+command history list. W/ PASCAL source.
+Supercedes HISTU.BTM, and can be used for other purposes.</TD><TD class=black colspan=2 align='right'><br><A HREF="4hist.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                   4HIST.BTM
+           Free 4DOS utility: command history duplicate entry deleter
+                       Version 1.00 - September 08, 1993
+                                    (c) 1993
+                                       by
+                             David Daniel Anderson
+                                   Reign Ware
+
+
+
+4HIST removes all superfluous lines from the current 4DOS command history
+list.  A tiny batch file is included to automate processing.
+
+Usage: 4HIST file [/i (ignore case)]
+
+4HIST can be run from the command line or via a batch file (4H.BTM is
+included for this purpose).
+
+4HIST takes one or two parameters.  The first must be the name of the file
+containing the command history list.  You can produce this file in 4DOS by
+entering:  HISTORY &gt;file  (use "HISTORY /R file" to read the list back into
+memory).
+
+The second parameter is optional.  It is a slash followed by the letter
+"i" or "I".  This parameter instructs 4HIST to ignore case when
+determining duplicates, which slows 4HIST down considerably.  Default is
+to only recognize -exact- duplicates.
+
+See the included batch file 4H.BTM for an example of how to use 4HIST.
+
+4HIST provides some basic information about the data being processed:
+
+1) It displays a "twirling bar" which pulses once for each command entry
+   processed.  The faster the bar twirls, the faster 4HIST is working.
+2) When done, it tells how many commands existed prior to processing, and
+   how many exist afterwards.
+3) When done, it tells how many bytes the commands used in the 4DOS memory
+   allocation before processing, and how many they will use afterwards.
+   NOTE: this figure is -not- the same as the file size.  This is because
+   in a file, both a carriage return -and- a line feed are appended to
+   each line, but in RAM, only one is needed.
+
+
+NOTE: This program may work, with modifications, with other command
+      history programs. I can not, and probably will not, test it.
+      However, if you can and do, I would appreciate hearing how it
+      performs.  I will distribute any modified copies you send me
+      (on disk or simply a printed source listing).
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+4DOS (r) is a registered trademark of JP Software Inc.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,295 @@
+<html><head><title>InfoPlus v1.0 - Check for System Parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для проверки различных параметров компьютера и операционной системы. Генерирует 18 страниц отчета.  A system description for DOS-based PC/XT/AT- and PS/2-class machines. It generates 18 screens of information about the host system and runs under DOS versions 3.0 and later:  - Machine & ROM Identification;  - CPU Identification;  - RAM Identification;  - Memory Block Listing;  - Video Identification;  - Video Information;  - Keyboard & Mouse Information;  - Parallel/Serial Port Information;  - DOS Information;  - Multiplex Programs;  - Environment Variables;  - Device Drivers;  - DOS Drive Information;  - BIOS Drive Information;  - Partition Table Listing;  - Boot info & DOS drive parameters; '>
+<meta name="keywords" content="pascal, sources, source code, infoplus, dos, Окружение OS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Окружение OS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;infoplus
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;InfoPlus v1.0 - Check for System Parameters</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:andyross@ddsw1.MCS.COM">Andrew Rossmann</a></TD>
+<TD class=black align='right'>25.06.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для проверки различных параметров компьютера
+и операционной системы. Генерирует 18 страниц отчета. <br>
+A system description for DOS-based PC/XT/AT- and PS/2-class machines.
+It generates 18 screens of information about the host system and
+runs under DOS versions 3.0 and later: <br>
+- Machine & ROM Identification; <br>
+- CPU Identification; <br>
+- RAM Identification; <br>
+- Memory Block Listing; <br>
+- Video Identification; <br>
+- Video Information; <br>
+- Keyboard & Mouse Information; <br>
+- Parallel/Serial Port Information; <br>
+- DOS Information; <br>
+- Multiplex Programs; <br>
+- Environment Variables; <br>
+- Device Drivers; <br>
+- DOS Drive Information; <br>
+- BIOS Drive Information; <br>
+- Partition Table Listing; <br>
+- Boot info & DOS drive parameters; <br></TD><TD class=black colspan=2 align='right'><br><A HREF="infoplus.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>67k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">INFOPLUS
+
+Version 1.0, released into the Public Domain.
+
+By Andrew Rossmann, 6/25/90
+
+Originally based on Steve Grant's Public Domain SYSID 4.4.
+
+Usage:  [d:][path]INFOPLUS
+
+A system description for DOS-based PC/XT/AT- and PS/2-class machines.
+SYSID generates 18 screens of information about the host system and
+runs under DOS versions 3.0 and later.
+
+My primary sources of ideas in SYSID were Ray Duncans "Advanced MS-DOS"
+and Terry Dettman's "DOS Programmer's Reference."  The ideas of Prakash
+Chandra,Terje Mathisen,Bob Smith, and others appear in various places.
+
+Some of the techniques SYSID uses are not documented or officially
+supported by either IBM or Microsoft.  Where possible I have followed
+the undocumented routine with a comment describing my source for the
+technique.
+
+        INFOPLUS.PAS       - Main file source code
+        PAGE_xx.INC        - Each of the pages
+        INFOPLUS.ASM       - assembly language procedures
+
+  Using INFOPLUS is easy. Just use the PGUP and PGDN keys to move from page
+to page. HOME and END will move to the first and last pages, respectively.
+If you hit ENTER, you can then type in the page you want to go to. Hit ESC
+to end the program. Some pages won't fit all on one screen, for that you hit
+the DOWN ARROW key to get more information.
+
+
+Changes by Andrew Rossmann v 1.0 (6/25/90)
+All:    Due to confusions with Steve Grant continuing to release
+        new versions, I am renaming my version to INFOPLUS.
+        The documentation for SYSID 4.4 states that the source and
+        object code are public domain. SG's newer versions are
+        copywritten, and no longer contain source code. All
+        of my versions WILL ALWAYS continue to contain the source
+        code, and WILL ALWAYS be public domain!! Like FRACTINT, I
+        hope for this program to slowly grow as people add their own
+        ideas.
+All:    Changed colors to blue background, with text of LightGray
+        and LightCyan.
+        You now press the DOWN ARROW key to continue a long screen.
+         This lets you move to another page without looking at all
+         the information.
+        A title telling what is on the page appears at the bottom.
+Page 0: New page, shows contents of each page. HOME always goes here.
+        Also, this eliminates the chance that scanning the ROM could
+        lock up the program, preventing its use. If that happens, you
+        can just go to another page directly.
+Page 2: The V20/V30 should be correctly detected.
+Page 3: Added detection of XMS, DPMI (untested) and VCPI.
+        DPMI detection is tentative, since it's still in the formative
+        stages. Windows 3.0 is the first program to support it.
+        Under EMS 4, handle names will be listed (not all programs
+         give their handles names.)
+Page 9: Added count of FCB's (File Control Blocks.)
+        Added count of Dos STACKS (DOS 4 only.)
+Page 10:Added detection of DOS (should always be YES!!)
+        Added detection of JP Software's 4DOS (and other info on it.)
+        Added detection of CD-ROM extensions.
+Page 13:For default drive, tells what type it is, if it is removable,
+        has doorlock detection, is JOIN'd, or SUBST'd (and shows the
+        true path.)
+Page 17:New page, just thanks you for using INFOPLUS, and gives
+        some places I can be reached.
+
+  --------------------------
+The following are my versions of SYSID. It's very likely that some
+of these version numbers may overlap Steve Grant's!!
+
+Changes by Andrew Rossmann (5/28/90) v 5.1
+Page 2: Corrected bug in 386 detection code actually in SYSID.ASM.
+          This bug could cause lock-ups or exception errors on
+          386, 386SX, or 486 systems.
+
+Changes by Andrew Rossmann (1/19/90) v 5.0
+Page 9: Added buffer count (and read-ahead) for DOS 4!
+Page 15:Added several more partition types.
+
+
+Changes by Andrew Rossmann (12/31/89) v 4.8
+Page 2: Added recognition (I hope) of the '486. This involved
+        replacing the code that detects the 286/386 with newer
+        code by Robert Collins.
+Page 5: Added the extended modes of the Paradise VGA boards.
+        (Considering that the CRT unit forces the screen into a
+        standard text mode at startup, most of the entries are
+        sort of useless right now.)
+Page 15:Added Disk Manager, Speedstore, Split (?), and GB (?) to
+        the recognized partition types.
+        Corrected some erroneous numbers in the starting cylinder
+        and sector.
+
+Changes by Andrew Rossmann (9/30/89) v 4.7
+All:    Re-compiled under Turbo Pascal 5.5.
+Page 9: Reduced the number of files to 255 due to a potential bug
+        under DOS 3.30.
+Page 10:Added a few extra programs to the multiplex listings. Some of
+        these will probably only be recognized under DOS 4 or newer.
+
+Changes by Andrew Rossmann (7/2/89) v 4.6
+Page 9: Under DOS 3.30 or newer, use a new DOS function call to set
+        up space for up to 256 files. The number of total files
+        available will now be closer to the FILES= setting, instead
+        of being stuck at the 20 that is the default size.
+
+Changes by Andrew Rossmann (6/7/89)
+        Changed the version to 4.5.
+ALL:    Pressing &lt;ENTER&gt; will bring up a 'Page no.=&gt;' prompt. You
+        can then type in the number of the page you want to jump to.
+Page 9: Added OEM (Original Equipment Manufacturer) Serial number to
+        list. Not everyone uses this. Put file handle table sizes
+        on one line.
+        Changed current time to conform to the format of the current
+        country code, including 12-hour format.
+Page16: Corrected more DOS4 errors in the Dos Disk Parameter Block
+        listings. It seems the number of sectors per FAT has grown
+        from 1 byte to 1 word. This pushed the sector # of directory,
+        address of device header, media descriptor, access check,
+        and next block pointer up 1 byte.
+
+Changes by Andrew Rossmann (6/3/89):
+        I upped the letter to 'V'.
+Page 9: Added 'Boot disk was'. This will display which disk drive
+        was used to boot the computer under DOS 4. Under DOS 3,
+        this will always display (unknown).
+        I changed the file used to figure out the number of available
+        file handles from COMMAND.COM to the program itself. This is
+        because COMMAND.COM may not always be available (especially
+        if you are on floppies.) It's more likely the program itself
+        will be available. This uses a DOS 3 or 4 feature that lets
+        a program know it's full pathname. (ParamStr(0) in TP5).
+Page10: Added extra information about the APPEND command under DOS
+        4. Will display which switches are active, and the path
+        currently in use.
+Page15: Added several parition types, including 'Big DOS-16' (DOS 4
+        partitions &gt;32M), XENIX, NOVELL, PCIX, CP/M, and BBT.
+Page16: Modified the DISKREAD portion of SYSID.ASM for use under
+        DOS 4. Will now correctly read disks with partitions &gt;32M.
+        Disks &gt;32M under Compaq DOS 3.31 will probably not work.
+
+Changes by Andrew Rossmann (5/29/89):
+        I named this version 4.44U for 'U'pdated. Don't know of any
+        newer versions.
+Page 1: The search for the Copyright message in ROM has been
+        expanded to start at F000:C000 instead of F000:E000. This
+        test had returned nothing on my Tandy 1000SX. This may
+        cause longer waits on other machines. NOTE: the CPUID
+        routine does not detect my V20. It returns an unknown type.
+        I have no idea why, and I would like to know why. (I also
+        have an 8087 if that makes any difference.)
+Page 7: If you had a mouse, some information about your keyboard
+        ended up scrolling off the screen. Some related info
+        has been put on 1 line to prevent scrolling.
+Page 9: The method to find the number of available file handles
+        had a minor problem. It used the COMSPEC environment
+        variable to continuously open COMMAND.COM until an error
+        occurred, presumably a 'Too Many open files' error. BUT,
+        the files were opened as untyped files, which have a
+        default FileMode = 2 (read/write). If your copy of
+        COMMAND.COM was read-only (for virus protection), an
+        error 5 (Access denied) occured, and 0 available handles
+        was shown. This is fixed by setting FileMode:=0 (Read only)
+        before opening files.
+        The printer echo status is supported under DOS 4.
+        The number of buffers is still unknown as I am unable to
+        figure it out. Since DOS 4 can have a huge number of
+        buffers, and even put them in EMS memory, finding out their
+        count may be difficult.
+Page13: Information about a floppy now supports the parameters
+        for 3.5" drives, and displays number of tracks.
+Page16: Now supports DOS 4.0 and Compaq DOS 3.31 with partitions
+        &gt;32M (maybe others if they follow the same format.)
+        If you have a disk formatted under DOS 4, the boot
+        record section will display the volume label, serial number,
+        and FAT type of the disk.
+
+
+Known bugs:
+1) Page 2: The CPU test for interrupts of multi-prefix string
+instructions is reliable only on machines whose clock speeds are
+less than about 15 MHz.  The 8086 and 8088 are the only CPU's that
+don't handle such interrupts correctly, however, and they aren't
+(to my knowledge) ever run at anything like 15 MHz.  (This 15 MHz
+limit assumes that the timer tick interrupt occurs at the standard
+rate of 18.2 Hz.  SYSID could check that, too, I suppose.)
+2) Page 5: The description of foreground color will not mention the
+blinking attribute, even if it was enabled before you invoked
+SYSID.
+3) Page 10: SYSID used to report incorrectly the statuses of some of
+the executable files which use the "multiplex interrupt" (INT
+2FH).  I have commented these status checks out of the source
+code, determined to do battle with them another day.  Can anyone
+supply the correct INT 2FH functions for these files?  Or are some
+of them red herrings that simply check INT 2FH to see if *other*
+files have been loaded (e.g. APPEND/ASSIGN)?
+4)      The error beep sometimes fails to sound when you press PgDn
+while on the last page (or PgUp while on the first page).  I have no
+idea why. (!!corrected in version 4.5)
+
+Both the source and object code of SYSID are hereby released into the
+public domain.  Neither version carries any warranty, expressed or
+implied, of merchantability or fitness for a particular purpose.
+
+Comments, suggestions, and questions may be addressed to:
+        BIXMail: sjgrant
+        CompuServe: 71101,706
+
+Steve Grant
+Long Beach, CA
+January 13, 1989
+
+-----------------------
+
+My computer is a Tandy 1000SX running MS-DOS 4.01 and a Paradise VGA+.
+Compiled under Turbo Pascal 5.5 and Turbo Assembler 2.00.
+Much of the additional info came from Ray Duncan's "Advanced MSDOS
+Programming" second edition (a must get book for anyone interested
+in low-level stuff.) Also, additional information on the DOS 4 boot
+sector format came from "The Norton Troubleshooter." A book that
+comes with The Norton Utilities 4.5. Even more information comes from
+Ralf Brown's interrupt list, which lists hundreds of goodies. It's
+available via BBS's, and resides on SIMTEL20 and many other public
+access UNIX sites.
+  Additional information on XMS and DPMI came from the book 'Extending
+DOS' by Ray Duncan (and others.)
+  Information on additional partition values came from numerous people
+of which I never wrote down their names!!
+
+Andrew Rossmann
+Wheeling, IL
+
+
+Central Command, 1-708-359-9346 (1200/2400)
+                 1-708-359-9396 (HST 14.4)
+DDSW1 BBS, 1-708-808-7300 (6 lines),
+           1-708-808-7306 (Telebit PEP only!!)
+Igloo BBS, 1-708-272-5912 or 1-708-272-5917 (Telebit PEP)
+RCS Defender BBS, 1-708-390-6603
+
+Unix Mail:
+andyross@ddsw1.MCS.COM, or &lt;well-connected&gt;!ddsw1!andyross
+        -or-
+andyross@igloo.UUCP</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
