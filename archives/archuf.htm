@@ -1,0 +1,53 @@
+<html><head><title>О методе упаковки Хаффмана</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="В статье подробно рассматриваются алгоритмы, производящие сжатие без потерь, т.е. допускающие восстановление исходной информации &quot;байт в байт&quot;: Running, LZW, Huffman. Приведен пример программы сжатия/распаковки по методу Хаффмана.">
+<meta name="keywords" content="pascal, sources, source code, archuf, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;archuf
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;О методе упаковки Хаффмана</TD>
+<TD nowrap class=black>&nbsp;Vladimir Kononov</TD>
+<TD class=black align='right'>12.03.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">В статье подробно рассматриваются алгоритмы, производящие сжатие без потерь,
+т.е. допускающие восстановление исходной информации "байт в байт":
+Running, LZW, Huffman.
+Приведен пример программы сжатия/распаковки по методу Хаффмана.</TD><TD class=black colspan=2 align='right'><br><A HREF="archuf.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">N.B.  Здесь рассматриваются только алгоритмы производящие сжатие без
+      потерь, т.е. допускающие восстановление исходной информации
+      "байт в байт".
+
+ Running -  Это самый простой из  методов упаковки информации.
+Предположите что Вы имеете строку текста, и в конце строки стоит
+40 пробелов. Налицо явная избыточность имеющейся информации.
+Проблема сжатия этой строки решается  очень просто - эти  40
+пробелов ( 40 байт ) сжимаются в 3 байта с помощью упаковки их по
+методу повторяющихся символов (running)...
+
+ LZW   -   История  этого алгоритма начинается с опубликования в мае
+1977 г. Дж. Зивом ( J. Ziv ) и А. Лемпелем ( A. Lempel ) статьи в
+журнале "Информационные теории" под названием "IEEE Trans".
+В последствии этот алгоритм  был доработан Терри А. Велчем
+(Terry A. Welch) и в окончательном варианте отражен в статье
+"IEEE Compute" в июне 1984 . В этой статье  описывались  подробности
+алгоритма и некоторые  общие проблемы с которыми можно столкнуться
+при его реализации. Позже этот алгоритм  получил  название - LZW
+(Lempel - Ziv - Welch)...
+
+ Huffman - Сначала кажется что создание файла меньших  размеров из
+исходного без  кодировки  последовательностей или исключения повтора
+байтов будет  невозможной  задачей. Но  давайте  мы заставим себя
+сделать несколько умственных  усилий  и  понять  алгоритм Хаффмана
+( Huffman ). Потеряв не так много времени мы приобретем знания и
+дополнительное место на дисках...
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

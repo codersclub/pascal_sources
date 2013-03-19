@@ -1,0 +1,53 @@
+<html><head><title>UnZip 1.0 - Decompress Zipped Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="рограмма для разЗИПовки заЗИПованных файлов. <br><font color=#666666> Routine for decompressing zipped files. </font>">
+<meta name="keywords" content="pascal, sources, source code, unzip, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;unzip
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;UnZip 1.0 - Decompress Zipped Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stefan.goehler@gmx.de">Stefan Goehler</a></TD>
+<TD class=black align='right'>11.10.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">рограмма для разЗИПовки заЗИПованных файлов. <br><font color=#666666>
+Routine for decompressing zipped files. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="unzip.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>27k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Author   : Stefan Goehler,Germany (only the extended version)
+Version  : official 1.0
+Task     : Decompress Zipped files
+Copyright: Do what u want to do with this, but mention me!
+
+Converted to Turbo Pascal (tm) V4.0 March, 1988 by J.R.Louvau
+COPYRIGHT (C) 1986 Gary S. Brown.  You may use this program, or
+code or tables extracted from it, as desired without restriction.
+****** 
+This unit isn't very fast. That's because most parts are not written in
+asm. I think I'll rewrite the LZW-Part to asm the next time. But since
+LZW is not really used in this time, because the huffmann compression
+returns better results, I don't know if this would be a good idea.
+Further extensions: maybe I write a unit to handle Zipfiles instead this
+whole program. Please note that directories in the Zipfiles won't be
+written, so that a dir. already has to exist. I will remove this
+limitation in the next weeks.
+******
+my homepage: http://www.geocities.com/SiliconValley/Bay/9553
+^^^note that you can get there always the actual version of this unit
+if you have additions, tips or sth. else, mail to stefan.goehler@gmx.de
+******
+the following files you should get with this Proggy:
+strprocs.pas : a unit which contains some stringprocedures
+inflate .pas : a unit which inflates huffmann compression
+crc32   .pas : 32 bit crc checking for the huffmann compression
+******
+History
+Version 1.0  : first public availible Version (Oct. 10th 1997)
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

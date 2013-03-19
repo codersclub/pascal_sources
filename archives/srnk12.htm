@@ -1,0 +1,118 @@
+<html><head><title>Shrink v1.2 - Multi File ZIP Compressor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для упаковки нескольких файлов в ZIP архив по методу &quot;shrink&quot;. <br><font color=#666666> Compress a set of input files into a Zip file using Lempel-Ziv-Welch (LZW) compression techniques (the &quot;shrink&quot; method). </font>">
+<meta name="keywords" content="pascal, sources, source code, srnk12, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;srnk12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Shrink v1.2 - Multi File ZIP Compressor</TD>
+<TD nowrap class=black>&nbsp;R.P.Byrne</TD>
+<TD class=black align='right'>11.03.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для упаковки нескольких файлов в ZIP архив по методу
+"shrink". <br><font color=#666666>
+Compress a set of input files into a Zip file using Lempel-Ziv-Welch
+(LZW) compression techniques (the "shrink" method). </font></TD><TD class=black colspan=2 align='right'><br><A HREF="srnk12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>30k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Shrink v1.2 (C) Copyright 1989 by R. P. Byrne
+
+The Shrink program included in this package is a Turbo Pascal (v5.0)
+implementation of a ZIP archive maker.  The archives produced by the
+Shrink program are compatible with those created by PKWare's PKZIP
+program.
+
+At this time, only two of the six compression methods used by PKZIP
+have been implemented.  Input files are compressed using the
+"shrinking" method. If shrinking does not produce a file smaller than
+the original, the input file will be "stored" into the ZIP archive
+with no compression applied.
+
+The syntax for the Shrink program is:
+
+   Shrink [d:][\path\]zipname[.zip] [[d:][\path\]filespec [...]]
+
+where 'zipname' is the name of the ZIP file to be created, and
+'filespec' epresents a DOS file specification (wildcards are allowed)
+limiting the files to be included in the archive.
+
+The only command line parameter that is required is the name of the
+ZIP file to be processed.  If no filename extension is supplied,
+'.ZIP' is assumed.  If no outpath is specified, the current
+drive/subdirectory will be used. If no filespec(s) are entered,
+'*.*' will be assumed.
+
+Examples:
+
+*  Create a ZIP archive called OneFile.Zip that contains all '.pas'
+   files in the subdirectory e:\work:
+
+               Shrink OneFile.Zip e:\work\*.pas
+
+*  Create a ZIP archive called OneFile.Zip that contains all files in
+   the current subdirectory:
+
+               Shrink OneFile
+
+---------------------------------------------------------------------
+
+                             LICENSE
+
+---------------------------------------------------------------------
+
+  The SHRINK source and binaries ("software") are copyrighted.
+However, I am distributing this software for free and you are
+licensed to use this software without any charge.
+
+  Redistribution of this software is encouraged.  Please do share it
+with your friends, upload it to bulletin board systems, etc.  However,
+as I am making this software available for free, you must do the same.
+You are not permitted by this license to request or accept any
+remuneration of any kind for this software.  This prohibition extends
+to including my software with any other product or service for which
+money is charged.
+
+  The only exceptions to this "don't charge for what I'm giving away
+for free" restriction are as follows:
+
+  (1) Bulletin board systems or other electronic information services
+are permitted to make this software available for download and charge
+their customary fees, if any, for access to the service.
+
+  (2) Users groups and other not-for-profit organizations that
+distribute this software may charge a reasonable fee to cover
+duplication and related costs.
+
+  (3) There may be other situations not covered by this license where
+some charge for distribution would be appropriate.  Contact me and
+we'll talk about it.  But, this license does not authorize any such
+distribution without express, written permission from me in advance.
+
+  You may distribute modified copies of my source and resulting
+executables (including programs derived from mine in other languages
+or for other operating systems) so long as you do so for free and
+pursuant to a license no more restrictive than this one.
+You must state that your software was derived from mine.
+But, please take credit for your improvements and blame for your
+mistakes by making it as clear as possible what changes you have made.
+
+  Except as provided above, if you do wish to charge for my software
+or for any software derived from mine, then you must contact me for
+prior permission. In short, if you're going to ask for money, then
+we're going to share in whatever you receive.  That's only fair.
+
+  This software is distributed without warranties of any kind, express
+or implied, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.
+
+                                                         rpb
+                                                       03/11/89
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

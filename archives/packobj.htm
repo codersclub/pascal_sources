@@ -1,0 +1,180 @@
+<html><head><title>PACKOBJ - Turbo Pascal Compressing Data Objitizer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="<b>PACKOBJ</b>  - программа для сжатия бинарных файлов по алгоритму LZW и преобразования их в .OBJ файл, который может быть включен внутрь Вашей паскальной программы и распакован при выполнении. <br><font color=#666666> It is a program that takes binary data as input, compresses it using a fast LZW algorithm and converts it to an .OBJ file that you can link in a Turbo Pascal (TP) program, version 4.0 or later. TPUNPACK.PAS is the TP unit that takes care of decompressing the data. </font>">
+<meta name="keywords" content="pascal, sources, source code, packobj, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;packobj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PACKOBJ - Turbo Pascal Compressing Data Objitizer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:500/12.10956">Wilbert van Leijen</a></TD>
+<TD class=black align='right'>07.05.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px"><b>PACKOBJ</b> 
+- программа для сжатия бинарных файлов по алгоритму LZW
+и преобразования их в .OBJ файл, который может быть включен
+внутрь Вашей паскальной программы и распакован при выполнении. <br><font color=#666666>
+It is a program that takes binary data as input,
+compresses it using a fast LZW algorithm and converts it to an .OBJ file
+that you can link in a Turbo Pascal (TP) program, version 4.0 or later.
+TPUNPACK.PAS is the TP unit that takes care of decompressing the data. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="packobj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>30k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        PACKOBJ.DOC  --  The Turbo Pascal Compressing Data Objitizer
+
+                        By Wilbert van Leijen
+
+Introduction
+------------
+
+PACKOBJ is a program that takes binary data as input, compresses
+it using a fast LZW algorithm and converts it to an .OBJ file that
+you can link in a Turbo Pascal (TP) program, version 4.0 or later.
+TPUNPACK.PAS is the TP unit that takes care of decompressing the data.
+
+The PACKOBJ.EXE program and the Turbo Pascal TPUNPACK unit are
+distributed as Shareware. If you use them, you are kindly asked to
+register this product.  The fee for becoming a Registered User of
+PACKOBJ/TPUNPACK is $15.-- or $25. (that's twentyfive Dutch guilders).
+Just send a cheque or money order to the author.  My address is
+mentioned at the bottom of this document.
+
+Upon registration, you will become a disk with:
+-  the source code of the PACKOBJ utility and UNPACK routine
+-  3 different customised TP 6.0 Runtime libraries (SYSTEM.TPU):
+   one 'Regular Version': 100% compatible with Borland's, but with
+   many code enhancements and improved 'smart linking';
+   one 'Regular 286 Version', with 286 code throughout, aborts
+   automatically when an attempt is made to run a program on an
+   XT-class system; and one 'STUB Version', designed especially for
+   crafting ultra compact utilities and TSR programs.
+
+The STUB version of SYSTEM.TPU was used to compile PACKOBJ.
+STUB is a limited version of the runtime library in the following
+respects: it does not support overlays and virtual methods;
+it doesn't automatically open/close the text files Input and Output
+(they are pre-declared, however); it doesn't take over any interrupts;
+and it passes control to DOS to do the allocation and deallocation of
+data structures on the heap.  STUB will be accompanied with guidelines
+for developers.  As a rule, if you're not deeply into object oriented
+programming, the majority of your TP programs will benefit from STUB.
+Example: the minimum .EXE size of a program created with STUB
+('begin end.') is only 224 bytes.
+
+Using PACKOBJ
+-------------
+
+PACKOBJ's command line is akin to BINOBJ, a utility shipped with every
+version of Turbo Pascal since 4.0.  BINOBJ expects you to specify an
+input file, an output file and an exported identifier.  PACKOBJ wants
+you to tell it:
+
+-  the name of the input file; this file can be of any type, whether
+   it is an ASCII document, a picture bitmap or whatever.
+   The only limitation here is that it must be smaller than 64 kByte;
+-  the name of the output file; this will hold the compressed result
+   and is linkable in a TP program;
+-  an exported identifier or 'public name': this is the symbol that
+   must be specified in order to link the .OBJ file in your TP program.
+
+Unlike BINOBJ, the PACKOBJ utility will declare not one but two
+public names. And unlike BINOBJ too, these two public names are
+callable by your program, i.e. you don't have to pass a pointer
+to it to access your data.
+
+The public names exported by PACKOBJ are of the format:
+
+   Funtion PublicNameSIZE : Integer; Far; External;
+   Procedure UNPACKPublicName(Var buffer); Far; External;
+
+The PublicNameSIZE will return the size of the unpacked image.
+This is handy if you want to know how many bytes you'll have to
+allocate on the heap to hold the result in 'buffer'.
+
+UNPACKPublicName does not do any unpacking.  Rather, it pushes a few
+parameters on the stack and performs a far call to UNPACK.  UNPACK is
+the interfaced procedure of unit TPUNPACK.
+
+Note that you must attach the pseudo-type 'Far' to the declaration in
+your declaration or alternatively, enable the compiler directive
+{$F+ }.
+Failure to do so will most likely crash your program or the entire
+system.
+
+Sample usage:
+   PACKOBJ joltcola.PIC joltcola JoltCola
+
+This will take JOLTCOLA.PIC as input, writes JOLTCOLA.OBJ as output.
+It will declare the procedure 'UNPACKJoltCola' and function
+'JoltColaSIZE' public.
+
+Suppose you have JOLTCOLA.PIC.  This is the raw bitmap of a VGA mode
+13h picture of a cola brand, loved by weary programmers because it
+promises 'Twice the Caffeine'.  The picture is 64 kByte big, but we
+can put the squeeze on this.
+
+In this case, JoltColaSIZE returns the size of the raw, uncompressed
+bitmap: 65520 bytes.  For a straight dump of the picture to the VGA
+display however, calling JoltColaSIZE is not needed: the VGA memory
+is already there, and unaccessible by TP's heap manager anyway.
+
+Using TPUNPACK
+--------------
+
+UNPACKJoltCola calls a Far routine by the name of UNPACK. This routine
+is exported by unit TPUNPACK and it takes care of the actual
+decompression of the information. TPUNPACK is entirely written in
+assembler and optimised for speed.  Hence, it uses no more than a
+mere 474 bytes of code space.
+
+Please note that UNPACK's stack requirements are somewhat less modest.
+You must reserve 29 kByte of stack space to allow room for UNPACK's
+work space.
+
+The deal is here that you must include 'uses TpUnpack' under the
+program header of your TP application and, specify a memory
+allocation directive to allow for 32 kByte or more of stack space.
+Example:
+
+   {$M 32768, 0, 0 }           { Allocate 32k stack space, no heap }
+
+Do not call UNPACK by your application -- unless you know exactly
+what you're doing.  UNPACK will be called by the loader code of any
+.OBJ file created by PACKOBJ.
+
+Running the demo
+----------------
+
+In order to compile and run the demo, you must have the following:
+-  Turbo Pascal, version 4.0 or later
+-  A VGA display.  (Any VGA display will do.)
+
+What you must do:
+-  Make TPC.EXE, the Turbo Pascal command line compiler, accessible
+   on the DOS path
+-  Run JOLTCOLA.BAT
+
+Trade Marks
+-----------
+
+Turbo Pascal is Copyrighted by Borland International.
+PACKOBJ and TPUNPACK are Copyright 1991-92 by Wilbert van Leijen,
+Amsterdam, The Netherlands.
+
+Author
+------
+
+Wilbert van Leijen
+Marathonweg 72-2
+NL-1076 TM Amsterdam
+The Netherlands
+
+Wilbert van.Leijen at Fidonet 2:500/12.10956
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

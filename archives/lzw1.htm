@@ -1,0 +1,90 @@
+<html><head><title>DOUGPACK - interpretation of the LZW algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль DOUGPACK использует интерпретацию алгоритма LZW для сжатия и распаковки файлов. Приведен пример использования. <br><font color=#666666> The DOUGPACK unit implements an interpretation of the LZW algorithm. Included is a simple 1 file compression program as a demonstration on how to use this unit. </font>">
+<meta name="keywords" content="pascal, sources, source code, lzw1, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;lzw1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DOUGPACK - interpretation of the LZW algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dwebb@binkley.cs.mcgill.ca">Douglas P. Webb</a></TD>
+<TD class=black align='right'>19.05.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль DOUGPACK использует интерпретацию алгоритма LZW
+для сжатия и распаковки файлов. Приведен пример использования. <br><font color=#666666>
+The DOUGPACK unit implements an interpretation of the LZW algorithm.
+Included is a simple 1 file compression program as a demonstration
+on how to use this unit. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="lzw1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>11k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{-------------------------------------------------------------------}
+{-----  Turbo Pascal DOUGPACK unit written by Douglas Webb    ------}
+{-------------------------------------------------------------------}
+{-----  DISCLAIMER:  There shall be no guarantee of the       ------}
+{-----   suitability of this software for any purpose.  The   ------}
+{-----   author shall not be liable for any damages arrising  ------}
+{-----   from the use of this software.                       ------}
+{-------------------------------------------------------------------}
+
+
+This unit was written to demonstrate how LZW compression can be used
+to compress files. It's ability to do so depends highly on the type
+of data being compressed.  Text files may compress to 30-50% their
+original size, .EXE files to 60-80% of their original size, database
+files to 20-40% of their original size, and unpatterned data may
+actually increase in size.
+
+This incarnation of the algorithm is optimized for speed, as much as
+is possible in a high level language like pascal, and to a lesser
+degree at this experimental stage, flexibility, not readability.
+
+CRC assembly language routines were furnished by:
+       Edwin T. Floyd [76067,747]
+
+This unit allows the user to compress data using a variation on the
+standard LZW compression format, or conversely to decompress data
+that was previously compressed by this unit.
+This unit makes a few assumptions:
+   1) Data being compressed is being sent to a file.
+   2) Data being decompressed is coming from a file.
+There are however a number of options as to where the compressed data
+is coming from, and the decompressed data is going.
+
+In fact it requires that you pass the "Compress" procedure a
+procedural parameter of type 'GetBytesProc' (declared below) which
+will accept 3 parameters and act in every way like a 'BlockRead'
+procedure call. Compress will ask for data in chunks of 4K or so at
+a time. Your procedure should return the data to be compressed:
+
+  GetBytesProc = PROCEDURE(VAR DTA; NBytes:WORD; VAR Bytes_Got:WORD);
+
+DTA is the start of a memory location where the information returned
+should be.  NBytes is the number of bytes requested.
+The actual number of bytes returned must be passed in Bytes_Got
+(if there is no more data then 0 should be returned).
+
+"Decompress" requires a procedural parameter of type 'PutBytesProc'
+which will accept 3 parameters, and must act in every way like a
+'BlockWrite' procedure call.  It must accept the decompressed data
+and do something with it.
+
+  GetBytesProc = PROCEDURE(VAR DTA; NBytes:WORD; VAR Bytes_Got: WORD);
+
+Don't forget that as procedural parameters they must be compiled in
+the 'F+' state to avoid a catastrophe.
+
+
+Unpleasant NOTE: My provisions for maintaining a CRC for the
+compressed file seem to get into trouble if you try to
+compress/decompress multiple runs of data successively.
+You'll get a warning that the CRC is bad when in fact results appear
+to indicate that this is not so. So you may have to ignore the CRC
+unless you can figure out how it's broken.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

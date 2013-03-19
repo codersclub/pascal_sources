@@ -1,0 +1,64 @@
+<html><head><title>ZipDate - Изменение даты ZIP-архивов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для установки даты создания ZIP файла в соответствии с датой создания упакованных внутри файлов. <br><font color=#666666> ZipDate v1.0 by Christopher Hall, slightly corrected for ignore the folders creation date</font>">
+<meta name="keywords" content="pascal, sources, source code, zipdate, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;zipdate
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ZipDate - Изменение даты ZIP-архивов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:rswag at tvcom.ru">Валерий Вотинцев</a></TD>
+<TD class=black align='right'>11.06.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для установки даты создания ZIP файла
+в соответствии с датой создания упакованных внутри файлов. <br><font color=#666666>
+ZipDate v1.0 by Christopher Hall,
+slightly corrected for ignore the folders creation date</font></TD><TD class=black colspan=2 align='right'><br><A HREF="zipdate.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">      Hi!
+
+      Предлагаю вашему вниманию программу, которая изменяет дату
+зазипованного файла на самую последнюю дату, найденную в архиве.
+Автор программы - Кристофер Холл. Мне эта программа в свое время очень
+пригодилась. Но у нее был один недостаток: При перепаковке архивов
+создаются директории с текущей датой, и именно эта дата и подставлялась
+в дату .ZIP файла :-(. Поэтому пришлось подкорректировать программу:
+теперь она, извините, плюет на даты создания директориев. В учет
+принимаются только даты ФАЙЛОВ.
+
+
+                              ZipDate v1.0
+
+                            Christopher Hall
+                             P.O. Box 26025
+                         Austin, Tx  78755-0025
+
+                           FidoNet 1:382/29.4
+                          CompuServe 72150,752
+
+                       Just a little corrected
+                         by Valery Votintsev
+                         vot@infolink.tver.su
+
+This is a quick little utility that will scan all your ZIP files and set
+the date stamp of the file to the latest date of any file contained
+within the ZIP.  (confused?)
+
+Calling Syntax is:  ZipDate filespec
+
+  eg.  ZipDate *.Zip
+
+Credits:  Most of the Zip file functions were adapted from the Zipper
+Unit written by Tom Guinther - Thanks Tom!
+
+The source is included here for those interested.  Please send any
+comments to Chris Hall c/o PC Network at the above BBS number.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

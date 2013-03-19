@@ -1,0 +1,191 @@
+<html><head><title>Zip2Obj - The Turbo Pascal ZIPfile Data Objitizer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="<b>ZIP2OBJ</b> - Программа для вытаскивания файлов из ZIP архивов и преобразования их в .OBJ файл, подключаемый к программе. <b>XZIP.PAS</b> - собственно модуль для распаковки ZIP файла.  <br><font color=#666666> It is a program that extracts a file from a ZIPped archive and converts it to a .OBJ file that you can link to a Turbo Pascal program, version 6.0 or later.">
+<meta name="keywords" content="pascal, sources, source code, zip2obj, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;zip2obj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Zip2Obj - The Turbo Pascal ZIPfile Data Objitizer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:500/12.10956">Wilbert van Leijen</a></TD>
+<TD class=black align='right'>12.11.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px"><b>ZIP2OBJ</b>
+- Программа для вытаскивания файлов из ZIP архивов и преобразования их
+в .OBJ файл, подключаемый к программе.
+<b>XZIP.PAS</b>
+- собственно модуль для распаковки ZIP файла.  <br><font color=#666666>
+It is a program that extracts a file from a ZIPped archive
+and converts it to a .OBJ file that you can link to a Turbo Pascal program,
+version 6.0 or later.</TD><TD class=black colspan=2 align='right'><br><A HREF="zip2obj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>37k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        ZIP2OBJ.DOC  --  The Turbo Pascal ZIPfile Data Objitizer
+
+                        By Wilbert van Leijen
+
+Introduction
+------------
+
+ZIP2OBJ is a program that extracts a file from a ZIPped archive and
+converts it to a .OBJ file that you can link to a Turbo Pascal (TP)
+program, version 6.0 or later.
+XZIP.PAS is the TP 6.0 unit that takes care of exploding the compressed
+data.
+
+The ZIP2OBJ.EXE program and the Turbo Pascal XZIP.PAS unit are
+distributed as Shareware.  If you use them, you are kindly asked to
+register this product.  The fee for becoming a Registered User of
+ZIP2OBJ/XZIP is $10.--or $20.--
+(that's twenty Dutch guilders).  Just send a cheque or money order
+to the author.  My address is mentioned at the bottom of this document.
+
+Upon registration, you will become a disk with:
+-  the source code of ZIP2OBJ
+-  3 different customised TP 6.0 Runtime libraries (SYSTEM.TPU):
+   one 'Regular Version': 100% compatible with Borland's, but with many
+   code enhancements and improved 'smart linking';
+   one 'Regular 286 Version', with 286 code throughout, aborts
+   automatically when an attempt is made to run a program on an XT-class
+   system; and one 'STUB Version', designed especially for crafting
+   ultra compact utilities and TSR programs.
+
+The STUB version of SYSTEM.TPU was used to compile ZIP2OBJ.  STUB is a
+limited version of the runtime library in the following respects:
+it does not support overlays and virtual methods; it doesn't
+automatically open/close the text files Input and Output (they are
+pre-declared, however); it doesn't take over any interrupts;
+and it passes control to DOS to do the allocation and deallocation
+of data structures on the heap.  STUB will be accompanied with
+guidelines for developers.  As a rule, if you're not deeply into
+object oriented programming, the majority of your TP programs
+will benefit from STUB.  Example: the minimum .EXE size of a program
+created with STUB ('begin end.') is only 224 bytes.
+
+Using ZIP2OBJ
+-------------
+
+ZIP2OBJ's command line is akin to BINOBJ, a utility shipped with
+every version of Turbo Pascal since 4.0.  BINOBJ expects you to
+specify an input file, an output file and an exported identifier.
+  ZIP2OBJ wants you to tell it:
+-  an input file: this must be a .ZIP archive, created with PKZIP,
+   version 1.01 or later;
+-  an entry in the .ZIP archive: this is the file that will be
+   converted to an .OBJ file;
+-  an exported identifier or 'public name': this is the symbol that
+   must be specified in order to link the .OBJ file to your TP program.
+
+Unlike BINOBJ, the ZIP2OBJ utility will declare not one but two public
+names.  And unlike BINOBJ too, these two public names are callable by
+your program, i.e. you don't have to pass a pointer to it to access
+your data.
+
+There are some restrictions to the kind and the size of the entry in
+the .ZIP archive.
+In order for ZIP2OBJ to succeed, the following conditions must be met:
+-  the file to be converted must be IMPLODED.
+-  the original (uncompressed) size of the file must not exceed 65520
+   bytes, since that's the maximum size of a structure that can be
+   allocated in TP.
+
+Notes:
+-  PKZIP version 1.1 has a command line switch (-ei), forcing a file
+   to be imploded.
+-  If the file is too big, try breaking it up in multiple files and
+   compress them separately.
+
+Sample usage:
+
+Suppose you have BOGEY.ZIP, with BOGEY.BIN as an entry in this archive.
+(This is what we will do in the demo).  BOGEY.BIN is the raw bitmap of
+a VGA mode 13h (320 by 200 with, in this case: 32 shades of gray)
+picture of Humphrey Bogart - for those of you unfamiliar with phrases
+like 'Play it again, Sam' or 'Wiseguy': a Hollywood actor from the
+'40s and '50s.
+
+To compress BOGEY.BIN, run PKZIP:
+  PKZIP BOGEY BOGEY.BIN
+
+Next, to convert BOGEY.BIN to an TP linkable .OBJ file, run ZIP2OBJ:
+  ZIP2OBJ BOGEY BOGEY.BIN Bogey
+
+ZIP2OBJ will lift BOGEY.BIN from BOGEY.ZIP, and write out BOGEY.OBJ.
+BOGEY.OBJ has not only compressed data in it.  It also has 32 bytes of
+loader code in front:
+
+   Function BogeySize : Word; Far; External;
+   Procedure ExplodeBogey(Var buffer); Far; External;
+
+Note that the names of routines exported by ZIP2OBJ are always of the
+format &lt;public_name&gt;SIZE and EXPLODE&lt;public_name&gt;.  And do not forget
+to attach the 'Far' pseudo-type to the declaration - or alternatively,
+to enable the Force FAR calls flag with {$F+} - in your TP application
+or your program will crash.
+
+In this case, BogeySize returns the size of the raw, uncompressed
+bitmap: 65520 bytes. This information is useful if you want to know
+beforehand the exact amount of heap space to be reserved for the full
+Bogey (by a call to GetMem).  For a straight dump of the picture to
+the VGA display however, calling BogeySize is not needed: the VGA
+memory is already there, and unaccessible by TP's heap manager anyway.
+
+Using XZIP
+----------
+
+ExplodeBogey calls a Far routine by the name of Explode.  This routine
+is exported by unit XZIP and it takes care of the actual explosion of
+the compressed information.  XZIP is entirely written in TP's Built-In
+Assembler (BASM), and is highly optimised: using no more than 935
+bytes of code space, 10 kByte of stack space and 3 kByte of global data.
+
+The deal is here that you must include 'uses XZip' under the program
+header of your TP application.
+
+Do not call Explode by your application -- unless you know exactly what
+you're doing.  Explode will be called by the loader code of any .OBJ
+file created by ZIP2OBJ.
+
+Trade Marks
+-----------
+
+PKZIP and PKUNZIP are Copyrighted by Phil Katz.
+Turbo Pascal is Copyrighted by Borland International.
+ZIP2OBJ and XZIP are Copyright 1991 by Wilbert van Leijen,
+Amsterdam, The Netherlands.
+
+Archive contents
+----------------
+
+The following files should be present in the archive:
+
+BOGEY.PAS          Demo program
+CONWRITE.ASM       Write to Console routine using DOS call 6
+CONWRITE.OBJ
+GETBOGEY.EXE       Writes BOGEY.BIN to disk
+GETBOGEY.PAS
+VGABIOS.ASM        VGA support routines, used by program BOGEY
+VGABIOS.OBJ
+VGABIOS.PAS
+XZIP.PAS           Explodes IMPLODED data
+ZIP2OBJ.DOC        Documentation on how to use ZIP2OBJ and XZIP
+ZIP2OBJ.EXE        Converts an IMPLODED file to an .OBJ file
+
+
+Author
+------
+
+Wilbert van Leijen
+Marathonweg 72-2
+NL-1076 TM Amsterdam
+The Netherlands
+
+Wilbert van.Leijen at Fidonet 2:500/12.10956
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

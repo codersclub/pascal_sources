@@ -1,0 +1,53 @@
+<html><head><title>Splay - Splay Tree data compression algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Splay  - Ассемблерный модуль для сжатия древовидных структур данных и Pascal - интерфейс к нему. <br><font color=#666666> Contains the TASM source for Splay Tree data compression and Pascal interface for it. It implements fast, efficient and deceptively simple single-pass algorithm for data compression and expansion. It includes OOP version and OBJ files and TASM code for pre-compression string packing. </font>">
+<meta name="keywords" content="pascal, sources, source code, splay, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;splay
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Splay - Splay Tree data compression algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76665,3145">Paul O'Nolan</a></TD>
+<TD class=black align='right'>02.05.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Splay  - Ассемблерный модуль для сжатия древовидных структур данных
+и Pascal - интерфейс к нему. <br><font color=#666666>
+Contains the TASM source for Splay Tree data compression
+and Pascal interface for it.
+It implements fast, efficient and deceptively simple single-pass
+algorithm for data compression and expansion. It includes OOP version and
+OBJ files and TASM code for pre-compression string packing. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="splay.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TASM version of Douglas Jones' Splay Tree data compression technique.
+See Communications of the Association for Computing Machinery,
+August 1988.
+
+This code implements a FAST, efficient and deceptively simple single
+pass algorithm for data compression and expansion. To use as a unit
+with a Turbo Pascal program: compile SPLAY.PAS and include
+"Uses SPLAY" in your program or unit's interface section.
+You will have to elaborate the stubs provided for data I/O -- 
+the getbyte and writebyte procedures.
+
+The splay prefix algorithm is locally adaptive. It will progressively
+reduce the number of bits used to represent a character repeated in
+the source document to a point where the character may be represented
+by a single bit. On small files it can achieve results better than or
+close to those obtained with slower and more complicated methods.
+I have found it particularly useful in circumstances where it's
+possible to pack data before compression.
+
+Paul O'Nolan
+CIS 76665,3145
+2nd May 1989
+
+Nassau Dillenburgstraat 39, 2596 AC The Hague, The Netherlands
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

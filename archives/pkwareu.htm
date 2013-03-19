@@ -1,0 +1,124 @@
+<html><head><title>PKWareU - PKWare ZIP viewer unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для просмотра содержимого ZIP архивов (TPU only!).<br><font color=#666666> PKWareU - is a PKWare ZIP viewer unit. It allows acess to key fields inside PKWare's ZIPed type files. Samples and TPU6 included only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, pkwareu, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pkwareu
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PKWareU - PKWare ZIP viewer unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ts_az@hotmail.com">Terry Sansom</a></TD>
+<TD class=black align='right'>17.10.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для просмотра содержимого ZIP архивов (TPU only!).<br><font color=#666666>
+PKWareU - is a PKWare ZIP viewer unit.
+It allows acess to key fields inside PKWare's ZIPed type files.
+Samples and TPU6 included only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pkwareu.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>34k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PKWareU
+
+Version    1.0a  October 1993.
+
+  For Borland Turbo Pascal Version 5.5, may not work with other
+  versions.
+
+BACKGROUND
+
+  This unit came out of a need to access files inside zipped files
+  in another program which I was writing at the time.  I have tested it
+  with version 1 and 2 of PKZIP'd files, and it seems to work correctly.
+
+YOUR RIGHTS
+
+  Feel free to distribute this package, in whole only.
+
+  This package must contain the following before distribution..
+
+                README.TXT  - This little manual.
+                MANUAL.DOC  - Reference manual for PKWAREU
+                PKWAREU.TPU - Compiled Pascal unit
+                PKWAREU.INC - Interface section of PKWAREU.TPU.
+                PKDEMO1.PAS - Source for demo 1.
+                PKDEMO1.EXE - Executable demo 1.
+                PKDEMO2.PAS - Source for demo 2.
+                PKDEMO2.EXE - Executable demo 2.
+
+
+PURPOSE
+
+  Very simply, to allow us Turbo Pascal programmers access to
+  the details, not the compressed data, inside PKWARE's zipped
+  archives.
+
+USE
+
+  Use as you would any other Pascal unit.
+
+  Several routines are available for you to use.  I limited the
+  number for call-able routines so the information would not be
+  overwhelming.  I hope you find these routines usfeul, considering
+  the limited scope of this unit.
+
+  Please note that in these routines I do very little in the way of
+  heap checking and IO errors.  I did this for two reasons.  First
+  it allows YOU the freedom to handle erros as YOU wish, not as I would
+  have you deal with them.  Second. I find that there are already
+  many good tools to aid Pascal programers, but functinality reduced
+  due to someone else adding fruitless robustness, which only adds
+  program bulk and slowing exicution speed  (TechnoJocks Turbo Toolbox
+  comes to mind).
+
+  NOTE: You are responsible for opening and closing the ZIP File.
+  It must be assigned to the File variable "Zipfile", which is
+  declared in the interface of the PKwareU.  See the demos for
+  how this is done.
+
+
+TYPES, VARS, and CONSTS
+
+  See PKWAREU.INC for details of types used.  If you have the
+  source code you can actually change them!
+
+CONTACT
+
+  If you would like the source code to this unit please contact me.
+  I charge a small fee for my time, and do not want the code
+  released to the public domain.
+
+  You can use the unit "as is" in any program donated to the pubic
+  domain! We will discuss PKWAREU uses in programs for money
+  (shareware or business ventures) if you contact me.
+
+    Terry Sansom,
+    9102 83 Ave
+    Edmonton, Alberta
+    CANADA
+    T6C 1B7
+
+    e-mail: ts_az@hotmail.com
+    Or on Compuserve my number is [70574,3205]
+
+The LEGAL stuff:
+
+  Terry Sansom makes NO warranty for this product, and is not liable
+  for damages caused by the use of, or inability to use, this product.
+
+  All terms mentioned in this package that are known to be trademarks
+  or service marks are listed below.  I can not attest to the accuracy
+  of this information.  If a mistake exists please contact me for
+  corrections.  In addition the use of a term in this package should
+  not be regarded as affecting the validity of any trademark or service
+  mark.
+
+  MS-DOS is a trademark of Microsoft Corporation.
+  PKZIP, PKUNZIP, PKWARE are registered trademarks of PKWARE Inc.
+  Turbo Pascal is a registered trademark of Borland International, Inc.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

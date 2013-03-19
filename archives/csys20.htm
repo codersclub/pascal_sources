@@ -1,0 +1,124 @@
+<html><head><title>CompSys v2.0 - OOP Compressed Files Explorer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный инструмент для просмотра заголовков архивированных файлов. Поддерживает форматы ARJ, Pkzip, Squeeze, HYPER, DWC, ZOO, ARC, ARC7, PAK, LHarc, LHA, LA, ICE, RAR, SIT. Компилируется TP7, VP1, SP1. <br><font color=#666666> CompSys is an toolbox for examining compressed files. Using it, you can look into compressed files for the contained filenames, check for security envelopes (if available) check out selfextractors and even a Mac compressed fileformat! Compatible with SpeedPascal 1.0, VirtualPascal 1.0 and TurboPascal.</font>">
+<meta name="keywords" content="pascal, sources, source code, csys20, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;csys20
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CompSys v2.0 - OOP Compressed Files Explorer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:gerhard@frappe.iaf.nl">Gerhard Hoogterp</a></TD>
+<TD class=black align='right'>11.07.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный инструмент для просмотра
+заголовков архивированных файлов. Поддерживает форматы
+ARJ, Pkzip, Squeeze, HYPER, DWC, ZOO, ARC, ARC7, PAK, LHarc,
+LHA, LA, ICE, RAR, SIT. Компилируется TP7, VP1, SP1. <br><font color=#666666>
+CompSys is an toolbox for examining compressed files.
+Using it, you can look into compressed files for the contained
+filenames, check for security envelopes (if available) check out
+selfextractors and even a Mac compressed fileformat!
+Compatible with SpeedPascal 1.0, VirtualPascal 1.0 and TurboPascal.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="csys20.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>65k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        -=( CompSys/oops )=-
+
+      Copyright (C) 1994-1996 LiveSystems, ALL RIGHTS RESERVED.
+
+What is it:
+===========
+
+  CompSys is an toolbox for examining compressed files.
+  Using it, you can look into compressed files for the contained
+  filenames, check for security envelopes (if available) check out
+  selfextractors and even a Mac compressed fileformat!
+
+  I wrote two of these systems before, but was never really satisfied.
+  This version is the first one for which I feel confident enough to
+  release it as shareware.
+
+  But before we go into details, here's an overview of the compressors
+  that CompSys can handle:
+
+
+  Compressor  | Recognised | SelfExtr.| Sec.Env.| FileExtra field
+--------------+------------+----------+---------+-------------------
+ARJ           |   YES      |   YES    | YES     |
+Pkzip/Pkunzip |   YES      |   YES    | YES     |
+Squeeze       |   YES      |   YES    | YES     | Volume Label
+HYPER         |   YES      |   N/A    | N/A     |
+DWC           |   YES      |   YES    | N/A     |
+ZOO           |   YES      |   YES    | N/A     | Deleted files
+              |            |          |         |
+ARC           |   YES      |   NO?    | N/A     |
+ARC7          |   YES      |   NO?    | N/A     |
+PAK           |   YES      |   YES    | NO      |
+              |            |          |         |
+LHarc         |   YES      |   YES    | N/A     |
+LHA           |   YES      |   YES    | N/A     |
+LA            |   YES      |   YES    | N/A     |
+ICE        (1)|   YES      |   YES    | N/A     |
+RAR           |   YES      |   YES    | YES     | Locked, Solid,
+              |            |          |         | Authenticity info
+              |            |          |         |
+SIT        (2)|   YES      |   N/A    | N/A     | MacBin info
+
+
+
+  (1) As ICE was a hack of LHarc I guess the LHarc code can handle
+      these files too..
+  (2) MacIntosch StuffIt format
+
+
+Shareware.
+==========
+
+  This utility is shareware.  That is, if you use the sourcecode you
+  have to register.  There are a number of ways to register depending
+  on the kind of program you use this source in:
+
+ - A Freeware or public domain program.
+   You can use this code for free.  A copy of your program would be
+   appriciated.
+
+ - A Shareware program
+   A maximal registered copy of your program with all the advantages a
+   registered user would have.
+
+ - A full commercial program.
+   Please contact me.  If your program is of any use for me I will
+   probably also request a version as payment.
+
+
+
+Disclaimer.
+===========
+
+  The usual disclaimer.  I'm not responsible for whatever you conclude
+  out of the information this program generates and for whatever
+  happens to you due to using this source.  Use it on your own risk.
+
+My address:
+===========
+
+  My address is:
+
+    Gerhard Hoogterp
+    HengeloseStraat 256
+    7521 AM Enschede
+    The Netherlands
+
+
+  For questions and information you can send mail to:
+
+    Fidonet:  2:283/7.33
+              2:282/100.5
+    Internet: gerhard@frappe.iaf.nl
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

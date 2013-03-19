@@ -1,0 +1,46 @@
+<html><head><title>PACK 1.0 - Reduce the Size of EXE Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Упаковщик исполняемых EXE файлов.  Работает примерно так же, как ExePack и SpMaker. <br><font color=#666666> PACK reduces the size of EXE files by packing the EXE header table into a smaller structure. PACK works in a manner similar to EXEPACK (from Microsoft) and SPMAKER (from Realia). </font>">
+<meta name="keywords" content="pascal, sources, source code, pack, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pack
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PACK 1.0 - Reduce the Size of EXE Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72457.2131@Compuserve.com">Kim Kokkonen</a></TD>
+<TD class=black align='right'>17.01.1987</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Упаковщик исполняемых EXE файлов. 
+Работает примерно так же, как ExePack и SpMaker. <br><font color=#666666>
+PACK reduces the size of EXE files by packing the EXE header table
+into a smaller structure. PACK works in a manner similar to EXEPACK
+(from Microsoft) and SPMAKER (from Realia). </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pack.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PACK reduces the size of EXE files by packing the EXE header table
+into a smaller structure. It does so by using its own fixup relocator,
+and building a table of fixups without redundant segment
+information as occurs in the DOS standard format.
+
+PACK will also report how much space it could save by run-length
+encoding repeated byte sequences. To see this effect, set the
+constant ShowRLEeffect to True. PACK does not actually implement
+this kind of packing at this time.
+
+PACK works in a manner similar to EXEPACK (from Microsoft) and
+SPMAKER (from Realia).
+
+After compiling, just enter PACK to get directions for usage.
+
+Version 1.0.
+Written 11/87, Kim Kokkonen, TurboPower Software.
+Compuserve 72457,2131.
+Released to the public domain.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

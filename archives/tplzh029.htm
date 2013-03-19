@@ -1,0 +1,367 @@
+<html><head><title>TPLZH v0.29 - Huffman Compression Engine</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для архивирования по алгоритму Хаффмана (LZH). Компилируется BP7 (real/protected mode).<br><font color=#666666> Huffman Compression Engine v0.29 IBM Version. DPMI mode now supported Borland help files included with this release.</font>">
+<meta name="keywords" content="pascal, sources, source code, tplzh029, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tplzh029
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPLZH v0.29 - Huffman Compression Engine</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:JoeJared@webworldinc.com">Joe Jared</a></TD>
+<TD class=black align='right'>29.10.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для архивирования по алгоритму Хаффмана (LZH).
+Компилируется BP7 (real/protected mode).<br><font color=#666666>
+Huffman Compression Engine v0.29 IBM Version.
+DPMI mode now supported Borland help files
+included with this release.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tplzh029.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>28k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">-----------------------------------------------------------------
+Discription          : Huffman Compression Engine w/TP
+                     : interface. IBM Version
+Platforms            : Atari ST/TT/Jaguar, and IBM (Dos/DPMI)
+
+Author               : Joe Jared 1:304/10.3@fidonet.org
+
+
+Topics:
+- What's new
+- How to use this utility in your programs
+- Legalities and distribution limitations
+- Version history: Refer to TPLZH.HST
+- Support
+-----------------------------------------------------------------
+V0.29 (TPLZH028.zip)
+Added Borland help files for use with Borland's IDE
+Thanks to D.J. Murdoch
+
+V0.28 (TPLZH028.zip)
+Added DPMI interface
+
+-----------------------------------------------------------------
+- Implementation: (IBM)
+
+  The following is a basic structure of how the engine operates:
+
+  ( Your program ) -------------+
+            |                   +---( Your program )
+            |           +---&gt;(Your procedure for handling input
+            |           |    buffer) These must be far procedures
+            |           | +-&gt;(Your procedure for handling output
+            v           | |    buffer)
+           (Huffman Compression Engine)
+
+  It's generally a good idea to have some sort of display related
+  function in each of your iobuffer routines, and especially
+  during initial setup.  In the examples, position progress
+  reports keep the user from being bored.
+
+Memory requirements:
+         Memory requirements are as follows:
+         {$M Stack, Minheap, Maxheap}
+         {$M 1024, 56000, 56000}
+
+         (Lzhasm.obj)
+         Note: This does not include sample program space.
+         Code space: 3693 bytes.
+         Data space: 12 bytes
+
+         The stack is probably higher than necessary, but heap
+         memory is definitely accurate. (Some space is currently
+         reserved for updates so there are no hassles
+         Approximately 700 bytes)
+
+         This unit is overlayable, and is designed to operate
+         best when overlayed.  (With minimum usage of data
+         segment, it makes sense to overlay the engine, because
+         its entire process can be contained in an overlay.)
+
+
+  The following system variables are available for your interface
+to play with:
+  Routines available in the engine:
+  Public Decode, Encode  ; Encode for compression, Decode for
+                         ; decompression.
+
+EXTERN  LZHMemSeg : WORD     ; Heap pointer to LZH Structure.
+(Note: No offset, because the engine expects to have an
+ Addr:0000h)
+
+Note that both of these are FAR pointers to procedures.
+EXTERN WriteFromBuffer : FAR PTR ; External buffer handling.
+EXTERN ReadToBuffer    : FAR PTR ; External buffer handling.
+
+EXTERN   LZHERROR      : WORD    ; Errorlevel return
+                                   {Future use}
+
+(Offset into LZHMem^. allocation)
+Text_Buf  equ 0        ; array[0..N + F - 2] of byte;
+                       ; 5155 bytes
+; Text_buf is not a buffer you should care about.
+; It's placed in the top of the segment because it's most used.
+; The following are variables you should care about.
+count         Equ Text_Buf +N+F           ;
+textsize      Equ Count+4                 ; LongInt = 0;
+textsize      Equ count +4                ; LongInt = 0;
+codesize      equ textsize +4             ; LongInt = 0;
+inptr         equ codesize +4             ; Word
+inend         equ inptr+2                 ; word
+outptr        equ inend+2                 ; Word
+outend        equ outptr+2                ; Word
+Ebytes        equ outend+2                ; LongInt = 0;
+Inbuf         equ Ebytes+4                ; IObuf
+Outbuf        equ Inbuf +2800h            ; IObuf
+
+
+-----------------------------------------------------------------
+
+- Interfacing to Turbo Pascal:
+
+
+type
+
+  IObuf = array[0..$2800-1] of byte; {These buffers are
+                                      now FIXED!}
+
+  LZHRec = Record       {Segment:0 aligned}
+                 WorkSpace1     : Array [0..N+F-1] of byte;
+                 count          : LongInt;
+                 textsize       : LongInt;
+                 codesize       : LongInt;
+                 inptr,inend,outptr,outend    : Word;
+                 Ebytes         : Longint;
+                 inbuf,outbuf   : IObuf;
+                 {Buffersize and position are critical}
+                 WorkSpace      : Array [0..$76c3] of byte;
+                 {LZHASM work space} {Some space reserved}
+                 End;
+
+ {$L LZHASM}
+
+
+
+var
+   WriteFromBuffer,
+   ReadToBuffer: Procedure;
+
+   These variables should "point" to your procedures for reading
+   and writing of LZH compressed data.  Before calling any LZH
+   Functions, you must have the following lines of code in your
+   routine, or some function thereof:
+
+   {$F+}
+   Myprocwrite
+   {$F-}
+   begin
+   (Your procedure for handling data from LZHMem^.Inbuff)
+   end;
+
+   {$F+}
+   Myprocread
+   {$F-}
+   begin
+   (Your procedure for handling data from LZHMem^.Outbuff)
+   end;
+
+
+   Your startup for your program should have:
+
+   WriteFromBuffer := Myprocwrite;
+   ReadToBuffer := Myprocread;
+
+   The actual procedure type MUST be a far Call, but the data
+   within the procedure may be near.
+
+  IObuf = array[0..$2800-1] of byte; {These buffers are now FIXED!}
+
+  For your reference, precede all variables with "LZHMem^.".
+
+  LZHRec = Record
+         count          : LongInt; {LZHMEM^.Count}
+        Current position of compression of input data.  This
+        counter will continue to count, until encode or decode is
+        called again.
+
+         textsize       : LongInt;
+         Size of input text data
+
+         codesize       : LongInt;
+         Size of output code data.
+
+        These variables are available to provide user interface
+        for ratios.
+
+         inptr,inend,outptr,outend    : Word;
+
+        Inptr points to the position of valid data in your input
+        buffer as does outptr for your output buffer.  These are
+        counters to determine where in the appropriate buffer to
+        place the next byte of data, and how much of your buffer
+        is valid data.  (See example LZ.PAS for details of
+        implementation).
+
+
+        inend, Outend:
+
+        These variables point to the last valid byte in the
+        appropriate buffer.  You MUST set these values to the
+        pointer. You can adjust the size that the engine thinks
+        it has by adjusting these values. (From 0..10239]
+        (Again see LZ.PAS for details)
+
+
+
+         Ebytes         : Longint;
+         EBytes is a count of total bytes to compress.  You MUST
+         set this variable to the total number of bytes you wish
+         to compress.
+
+
+         inbuf,outbuf        : IObuf;
+         These are input/output buffers for the compression
+         engine.  In previous versions, these were separate from
+         LZHMem^, but it seemed more practical to have one call
+         to allocate memory. If someone complains loud enough
+         I'll "Put em back" to separate independent pointers.
+
+
+         WorkSpace           : Array [0..$8657] of byte;
+         {LZHASM work space}
+         This variable array is work space for LZHASM.OBJ.
+         Please do not adjust it or change the data while encode
+         or decode is active. If you wish to keep the space
+         active on your heap, you can use it in between runs for
+         other things.
+
+         End;
+
+
+   LZHMem: ^LZHRec;
+   LZHMemSeg       : WORD;
+
+        Notice that there is no offset variable.  This is
+        intentional, and the reason is simple:  SPEED!
+        In LZH.PAS, there is a sample routine for allocating
+        memory that is segment:0 aligned.  The difference in
+        memory allocated using this method is up to 32 bytes.
+        (For allocations of 55k, who cares!)
+
+   procedure Encode ; compresses data
+   procedure Decode;  decompresses data
+   Procedure InitLZH; Segment:0 aligned memory allocation
+   Procedure DInitLZH; Memory de-allocation.
+
+        (Pay attention to this section in future versions)
+        The proper sequence is as follows:
+
+        Set writetobuffer and readfrombuffer to point to your
+        procedures for handling of buffer data.  Make sure that
+        at bare minimum, that the procedure "call" is of far
+        type.  loops within the procedure may be near type.
+
+        {$F+}
+         Procedure YourProc;
+         {$F-}
+
+        InitLzh
+
+        If compressing:
+        Set LZHMEM^.Ebytes to the size of the data you wish to
+        compress.
+        (If compressing)
+
+        Call encode to compress, or decode to decompress.
+
+        The memory buffers will have the decompressed data, and
+        your procedures will then process the data as buffers are
+        filled.
+
+-----------------------------------------------------------------
+-Legalities:
+
+-Compression of this archive:
+
+    As far as compression type is concerned, I could personally
+    care less, as long as the software used to re-compress is
+    freely available.  Please to not re-compress this archive
+    with crippleware, and do not add useless banner files.
+
+    The contents of this archive should contain the following: +
+    means compatible with language v x.xx and higher.
+
+    .model small,pascal
+    LZHASM.OBJ   -=&gt; The huffman compression object file
+
+    TPLZH.HST    -=&gt; Version history
+    TPLZH.DOC    -=&gt; This document.
+
+    LZ.PAS       -=&gt; Sample TP 6.0+ version
+    LZH.PAS      -=&gt; Base unit for all pascal platforms
+
+    LZO.PAS      -=&gt; OOPS examples for TP 6.0+
+    TESTLZO.PAS  -=&gt; OOPS examples for TP 6.0+
+
+    LZ.exe       -=&gt; Compiled Lz.pas using Turbo Pascal 7.0
+
+    Anything additional shall be considered twit behavior.
+
+
+    If this object is used in any utility you write for public or
+    commercial use, please give credit to the following people in
+    your documentation or credits banner (as applicable):
+
+    (These people always)
+    Haruyasu YOSHIZAKI  : Original lharc program.
+    Kenji RIKITAKE      : English translation to C
+    Peter Sawatzki      : Pascal interface(TP 5.0+}
+    Wayne Sullivan      : Pascal interface(TP 5.0+)
+
+    Joe Jared           : Assembler optimization {TP 5.0+}
+                        : Assembler routines for 680x0 machines.
+                        : Interface to Atari ST/TT/Jaguar
+                        : Dos Protected mode interface
+
+    (These people as appropriate)
+    Andres Cvitkovich   : Object Oriented version (TP 5.5+)
+
+
+    D.J. Murdoch        : For his excellent SCANHELP utility
+
+-Distribution
+
+    No fee may be charged for distribution of this package, and
+    it CANNOT be sold for any reason.  All code is property of
+    the developers listed for their part in the project.
+
+    Exceptions:  The disk this program is on, may be sold for the
+    cost of the disk.  (Not to exceed $1.00)+exact mail costs if
+    mailed.
+
+    CD-ROM distribution.
+    Unrestricted, but please either download or freq the latest
+    prior to distribution.
+
+    Whether in a shareware or commercial package, no additional
+    charges may be added for the use of this "module".
+
+    This is a MILITANTLY FREEWARE implementation of huffman
+    compression.
+
+
+-Support
+
+        For basic support, please read all examples first, and
+        send me either netmail to 1:103/400.1 or send to
+        Joe.Jared@sasbbs.com.  If you are developing an alternate
+        interface other than those listed, please do contact me,
+        as I am looking forward to your additions to this file.
+
+-----------------------------------------------------------------</PRE>
+<!--#include virtual="/t_footer.htm"-->

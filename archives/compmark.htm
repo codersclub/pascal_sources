@@ -1,0 +1,135 @@
+<html><head><title>CompMark - Splay Tree Adaptive Data Compression</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Адаптивный алгоритм сжатия данных и использованием дерева &quot;срезов&quot; по модели Маркова. Метод похож на метод Хаффмана, но использует только один проход и не требует сохранения дерево кодов в сжатом файле. Компилируется Turbo Pascal 4.0, 5.5.<br><font color=#666666> Adaptive data compression using &quot;Splay&quot; tree with Markov model. This is a method somewhat similar to Huffman encoding (SQZ), but which is locally adaptive. It therefore requires only a single pass over the uncompressed file, and does not require storage of a code tree with the compressed file. It is characterized by code simplicity and low data overhead. Compression efficiency is not as good as recent ARC implementations, especially for large files. However, for small files, the efficiency of SPLAY approaches that of ARC's squashing technique.</font>">
+<meta name="keywords" content="pascal, sources, source code, compmark, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;compmark
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CompMark - Splay Tree Adaptive Data Compression</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76067.747@compuserv.com">Edwin Floyd</a></TD>
+<TD class=black align='right'>27.12.89</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Адаптивный алгоритм сжатия данных и использованием
+дерева "срезов" по модели Маркова. Метод похож на метод Хаффмана,
+но использует только один проход и не требует сохранения
+дерево кодов в сжатом файле. Компилируется Turbo Pascal 4.0, 5.5.<br><font color=#666666>
+Adaptive data compression using "Splay" tree with Markov
+model. This is a method somewhat similar to Huffman encoding (SQZ),
+but which is locally adaptive. It therefore requires only a
+single pass over the uncompressed file, and does not require
+storage of a code tree with the compressed file.
+It is characterized by code simplicity and low data
+overhead. Compression efficiency is not as good as recent ARC
+implementations, especially for large files. However, for small files, the
+efficiency of SPLAY approaches that of ARC's squashing technique.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="compmark.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">COMPMARK.PAS - Adaptive data compression using "Splay" tree with
+Markov model.  This algorithm was originally implemented in
+Pascal on the IBM PC by Kim Kokkonen [72457,2131], TurboPower
+Software, 8-16-88.  &lt;a href="splay.htm"&gt;splay.htm&lt;/a&gt;
+
+His documentation follows:
+
+"Based on an article by Douglas W. Jones, 'Application of Splay
+Trees to Data Compression', in Communications of the ACM, August
+1988, page 996.
+
+"This is a method somewhat similar to Huffman encoding (SQZ), but
+which is locally adaptive. It therefore requires only a single
+pass over the uncompressed file, and does not require storage of
+a code tree with the compressed file. It is characterized by code
+simplicity and low data overhead. Compression efficiency is not
+as good as recent ARC implementations, especially for large
+files. However, for small files, the efficiency of SPLAY
+approaches that of ARC's squashing technique."
+
+I have re-implemented the algorithm in assembler with some
+changes:
+
+1. My intended use for this unit is to compress a relatively
+   small data buffer as one might wish to do before transmitting
+   it over a communications channel or storing it on disk.
+   Consequently, this unit compresses and decompresses an
+   in-memory buffer rather than a file.  InitCompress initially
+   balances the Splay tree[s] in the work area.  The work area
+   retains any tree adaptations done during compression or
+   expansion until InitCompress is called again.  Therefore, If
+   you wish to make each buffer independently expandable, you
+   must call InitCompress before each call to CompressData.
+   ExpandData will detect what you have done and automatically
+   call InitCompress where necessary.
+
+2. I run-length-encode the input before compressing it with the
+   Splay tree algorithm.  This improves the compression ratio
+   where the input contains long runs of duplicate characters.
+
+3. Kim's original implementation used a unique trailer character
+   to mark the end of data.  I store the pre-compressed data
+   length as the first word in the compressed data buffer and do
+   not use a unique trailer character.  This permits the
+   uncompressed length to be determined by inspection and,
+   because the ExpandBuffer routine stops when the output length
+   is achieved, transmission errors will be less likely to blow
+   out a buffer on the receiving end.  The "Bits" parameter from
+   InitCompress is also stored as the third byte in the buffer.
+
+4. I have implemented the "Markov modeling" technique outlined in
+   the Jones ACM reference.  You may (indirectly) indicate the
+   number of states in the InitCompress procedure.  The work area
+   size requirements are outlined in the comments on that proc.
+   InitCompress(0) should reproduce the compression behavior of
+   Kim's original SPLAY.PAS.  The work area is passed as a
+   parameter to the assembler primatives so they may be fully
+   re-entrant.
+
+5. I have added objects for management of compressed sequential
+   record files on disk (see below).
+
+Cautions:
+
+1. CompressData and ExpandData both read/write their input/output
+   under the constraints of the 8086 segmented archetecture and I
+   do not normalize the input/output pointers before starting.
+   Therefore, you should call these routines with normalized
+   pointers, and expect invalid output if the input/output length
+   exceeds 64k minus Ofs(Dest).
+
+2. The compressed output data may actually be longer than the
+   input data if the input already has high "entropy".
+   Compression typically increases the data entropy.  Multiple
+   compressions, therefore, are usually a waste of time.
+
+3. As indicated in the ACM reference, this compression technique
+   does not perform as well as LZW and its variations on large
+   text files.  It should be considered only where working
+   storage is very scarce and/or the data to be compressed is
+   expected to contain considerable redundency at the character
+   level.  The reference indicates that this algorithm can do
+   especially well with image files.
+
+This program is contributed to the public domain.
+Please report bugs to the author:
+
+Edwin T. Floyd [76067,747]
+#9 Adams Park Ct.
+Columbus, GA 31909
+404-576-3305 (work)
+404-322-0076 (home)
+
+History
+--------
+12-27-89 Added compressed sequential file objects
+12-07-89 Added 'cld' to compmark.asm, added auto-init detection
+         logic
+10-15-89 Initial Upload
+</PRE>
+<!--#include virtual="/t_footer.htm"-->
+y

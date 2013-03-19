@@ -1,0 +1,67 @@
+<html><head><title>Восстановление убитых файлов с помощью ZIP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа создает файл из всего свободного пространства на диске. После напускания на него PkZipFix можно восстановить удаленные нечаянно ZIP-архивы.">
+<meta name="keywords" content="pascal, sources, source code, restzip, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;restzip
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Восстановление убитых файлов с помощью ZIP</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:461/27">Dima Orlov</a></TD>
+<TD class=black align='right'>11.06.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа создает файл из всего свободного пространства на диске.
+После напускания на него PkZipFix можно восстановить
+удаленные нечаянно ZIP-архивы.</TD><TD class=black colspan=2 align='right'><br><A HREF="restzip.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT -------------------------------------------- It's interesting -
+ Msg  : 122 of 200                    Addr                        Date
+ From : Dima Orlov           2:461/27                         11.06.97
+ Subj : Восстановление убитых файлов с помощью ZIP
+----------------------------------------------------------------------
+Hello, Pavel Gulchouck !
+
+ &gt; Лично для меня нет проблемы распаковать какой-нибудь pah3, ain или
+ &gt; bsa. Hо паковать файл для других чем-то кроме zip-а (ну или tar+gzip
+ &gt; для чисто юниксовых применений) мне в голову не прийдет.
+
+И это правильно. BTW zip - один из самых восстанавливаемых при
+повреждениях форматов. Так недавно у меня грохнулся единственный
+экземпляр zip'а с сорцами одной программы, причем не просто грохнулся,
+а стал нулевой длины. Я запустил свою любимую программку free:
+
+Uses
+ Dos;
+var
+ f: File;
+begin
+ Assign(F,'free');
+ ReWrite(F, 1);
+ Seek(f,DiskFree(0));
+ asm
+  mov ah,$40
+  mov bx, word ptr f
+  mov cx,0
+  int 21h
+ end;
+ close(f);
+end.
+
+Которая все свободное место на винте превращает в файл с именем free.
+Потом на этот файл напустил pkzipfix, и получил здоровенный zip,
+в котором были файлы из всех относительно недавно грохнутых zip'ов,
+в том числе и искомые сорцы.
+
+С уважением, Дима Орлов
+
+--- [CONNECT Team]
+ * Origin: Electric BBS (0572) 477-177 (2:461/27)
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

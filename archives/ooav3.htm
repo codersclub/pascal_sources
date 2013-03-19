@@ -1,0 +1,119 @@
+<html><head><title>OOAV v3.0 - Object Oriented Archive Viewer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный просмотрщик содержимого архивных файлов Arj, Arc, Lzh, Zip, Zoo. <br><font color=#666666> Object Oriented Archive Viewer for Turbo Pascal 7.0 v.3 (c) by Edwin Groothuis, MavEtJu software. This unit let you peek into archives as if it were directories. With the commands FindFirst and FindNext you get all the information you need (name, size and date) for easy archive-handling. Currently the supported archivetypes are Zip, Arj, Arc, Lzh and Zoo,  but it's very easy to expand them.</font>">
+<meta name="keywords" content="pascal, sources, source code, ooav3, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ooav3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OOAV v3.0 - Object Oriented Archive Viewer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:edwing@stack.urc.tue.nl">Edwin Groothuis</a></TD>
+<TD class=black align='right'>12.06.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный просмотрщик содержимого архивных файлов
+Arj, Arc, Lzh, Zip, Zoo. <br><font color=#666666>
+Object Oriented Archive Viewer for Turbo Pascal 7.0 v.3
+(c) by Edwin Groothuis, MavEtJu software.
+This unit let you peek into archives as if it were directories.
+With the commands FindFirst and FindNext you get all the information
+you need (name, size and date) for easy archive-handling.
+Currently the supported archivetypes are Zip, Arj, Arc, Lzh and Zoo, 
+but it's very easy to expand them.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ooav3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>11k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  ђђђђђђ+   ђђђђђђ+   ђђђђђ+  ђђ+   ђђ+
+                 ђђ+---ђђ+ ђђ+---ђђ+ ђђ+--ђђ+ ђђ|   ђђ|
+                 ђђ|   ђђ| ђђ|   ђђ| ђђђђђђђ| ђђ|   ђђ|
+                 ђђ|   ђђ| ђђ|   ђђ| ђђ+--ђђ| +ђђ+ ђђ++
+                 +ђђђђђђ++ +ђђђђђђ++ ђђ|  ђђ|  +ђђђђ++
+                  +-----+   +-----+  +-+  +-+   +---+
+        Object Oriented Archive Viewer for Turbo Pascal 7.0 v. 3
+
+This unit let you peek into archives as if it were directories.
+With the commands FindFirst and FindNext you get all the information
+you need (name, size and date) for easy archive-handling.
+Currently the supported archivetypes are Zip, Arj, Arc, Lzh and Zoo,
+but it's very easy to expand them.
+
+FileName        : OOAV3.ZIP
+Magicname       : OOAV
+Available via   : -
+Size            : 10 Kb
+Shareware-price : FREE
+
+Object-Oriented Archive-viewer, version 3
+-----------------------------------------
+This Object-Oriented Archive-viewer (OOAV) is copyright (c) by
+Edwin Groothuis, MavEtJu software. You are free to use it
+if you agree with these three rules:
+
+  1. You tell me you're using this unit.
+
+  2. You give me proper credit in the documentation. (Like:
+     "This program uses the Object-Oriented Archive-viewer
+     (c) Edwin Groothuis, MavEtJu software".
+
+  3. If you make Archive-objects for other archive-types, don't
+     hesitate to inform me so I can add them to the unit and
+     redistribute it!
+
+   That's all!
+
+How to use this unit:
+---------------------
+(see also the file ArchTest.pas)
+
+  - Declare a variable Arch of the | var Arch:TArchive;
+    type TArchive                  | begin
+  - Call it's constructor          |   Arch.Init;
+  - Tell the unit which file you   |   if not Arch.Name('TEST.ZIP')
+    want to view. This function    |   then begin
+    returns a boolean. If this     |     writeln('TEST.ZIP is not
+    boolean is false, then the     |              a valid archive');
+    file couldn't be identified    |     exit;
+    as a valid archive.            |   end;
+  - Just like the dos-functions    |   Arch.FindFirst(sr);
+    FindFirst and FindNext, you    |   while sr.Name&lt;&gt;'' do
+    can search through the archive.|   begin
+    The parameter you give with it |     writeln(sr.Name);
+    is one of the SearchRec-type.  |     Arch.FindNext(sr);
+    If there are no more files in  |   end;
+    this archive, sr.Name will be  |
+    empty. Valid fields are        |
+    sr.Name, sr.Size and sr.Time   |
+  - Call the destructor            |   Arch.Done;
+                                   | end;
+                                   |
+  - You can call the function      |
+    IdentifyArchive() to see what  |
+    kind of archive you're dealing |
+    with.                          |
+
+What if you want to add more archive-types
+------------------------------------------
+ - Add the unit name in the second Uses-statement.
+ - Find out how to identify it and add that algoritm
+   to the IdentifyArchive()-function. Please choose a
+   unique and no-nonsens character to return.
+ - Add it to the IdentifyArchive()-case in TArchive.Name.
+ - Create a FindFirst-method and FindNext-method for this
+   object.
+ - That's it! Simple, isn't it? (If it isn't, please see the
+   files ZipView, ArjView and others for examples ;-)
+
+Author:
+-------
+  Edwin Groothuis          email:
+  Johann Strausslaan 1     edwing@stack.urc.tue.nl
+                           (valid until 10-94)
+  5583ZA Aalst-Waalre      Edwin_Groothuis@p1.f205.n284.z2.gds.nl
+  The Netherlands          2:284/205.1@fidonet
+                           115:3145/102.1@pascal-net
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

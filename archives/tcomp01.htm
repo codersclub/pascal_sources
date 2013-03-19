@@ -1,0 +1,596 @@
+<html><head><title>Turbo Compressor v0.1 - File Archiver</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простая программа для упаковки и распаковки нескольких файлов в один архив.<br><font color=#666666> This is a simple file compression program written in Turbo Pascal 5.5.  The program does no more than compress and decompress files. But this is a good way of starting and learning how the file compression is done.</font>">
+<meta name="keywords" content="pascal, sources, source code, tcomp01, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tcomp01
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Compressor v0.1 - File Archiver</TD>
+<TD nowrap class=black>&nbsp;Toupao Chieng</TD>
+<TD class=black align='right'>01.01.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простая программа для упаковки и распаковки нескольких файлов
+в один архив.<br><font color=#666666>
+This is a simple file compression program written in Turbo Pascal
+5.5.  The program does no more than compress and decompress
+files. But this is a good way of starting and learning how the
+file compression is done.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tcomp01.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{ Turbo Compressor ver 0.1 }
+{ by Toupao Chieng }
+{ Dec 31, 1990, 3:27pm }
+
+program TCCompress(Input, Output);
+(*
+  This is a simple file compression program written in Turbo
+  Pascal 5.5.  The program does no more than compress and
+  decompress files. But this is good way of starting and learning
+  how file compression is done in Pascal (for beginning
+  programmers who are interested in how a program works, like
+  me!).
+
+  Notes: *The program is kind of slow, but it works. It also
+          can't store all the files in a single archive like
+          PKZIP or PKPAK.
+
+         *The compression is not so great either!...
+
+         *There is no display indicator, so don't assume your
+          system is lock if your compressing/decompressing big
+          files.
+
+  Others: *Bug reports are also welcome to the author...
+
+        (Toupao Chieng, Clovis West High School Computer Club.)
+
+         Have fun...
+*)
+
+uses
+   Dos;
+
+const
+    NumOfChars = 256;
+    NumOfSyms = NumOfChars + 1;
+    MaxFreq = 16383;
+    Adaptive: Boolean = True;
+    CodeValueBits = 16;
+    EOFSymbol = NumOfChars + 1;
+    BufSize = $A000;
+    HdrLen: Integer = 32;
+    FreqTable: array [0..NumOfSyms + 1] of Word =
+      (0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 124, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1236, 1, 21, 9,
+       3, 1, 25, 15, 2, 2, 2, 1, 79, 19, 60, 1, 15, 15, 8, 5, 4,
+       7, 5, 4, 4, 6, 3, 2, 1, 1, 1, 1, 1, 24, 15, 22, 12, 15,
+       10, 9, 16, 16, 8, 6, 12, 23, 13, 11, 14, 1, 14, 28, 29, 6,
+       3, 11, 1, 3, 1, 1, 1, 1, 1, 3, 1, 491, 85, 173, 232, 744,
+       127, 110, 293, 418, 6, 39, 250, 139, 429, 446, 111, 5,
+       388, 375, 531, 152, 57, 97, 12, 101, 5, 2, 1, 2, 3, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+type
+    BufPtr = ^Buffer;
+    Buffer = array [1..BufSize] of Byte;
+    CodeValue = Longint;
+    FileRecPtr = ^FileRec;
+    FileRec = record
+        Name: String [14];
+        Next: FileRecPtr;
+    end;
+
+var
+    CharToIndex: array [0..NumOfChars] of Integer;
+    IndexToChar: array [0..NumOfSyms + 1] of Integer;
+    CumFreq: array [0..NumOfSyms] of Integer;
+    OrigFileSize, ByteCnt: Real;
+    IFile, OFile: File;
+    EOFile, Decompression: Boolean;
+    InBufPtr, OutBufPtr: BufPtr;
+    Symbol, InBufCnt,InBufPos, OutBufPos: Word;
+    BitBuffer, BitsToGo: Byte;
+    Low, High: Codevalue;
+    BitsToFollow, FileIndex,
+    TopValue, FirstQrtr,
+    Half, ThirdQrtr: Longint;
+    FileListHead, FP: FileRecPtr;
+    Int, FileCount, HdrCnt: Integer;
+    Ch, GarbageBits, Bite: Byte;
+    Mode: Char;
+    OutFileName, Header: String;
+    Value: CodeValue;
+
+procedure BuildList(FParam: String);
+var
+    FP: FileRecPtr;
+    S: String;
+    SR: SearchRec;
+begin
+    FindFirst(FParam, AnyFile, SR);
+    while DosError = 0 do begin
+        New(FP);
+        FP^.Name := SR.Name;
+        FP^.Next := FileListHead;
+        FileListHead := FP;
+        Inc(FileCount);
+        FindNext(SR);
+    end;
+end; { BuildList }
+
+procedure LoadFiles;
+var
+    I: Integer;
+begin
+    FileListHead := nil;
+    FileCount := 0;
+    for I := 1 to ParamCount do
+        BuildList(ParamStr(I));
+    if FileListHead = nil then begin
+        Writeln(^G'No matching files found.');
+        Halt;
+    end else begin
+        if Decompression then
+            Writeln(FileCount, ' file(s) to decompress.')
+        else
+            Writeln(FileCount,' file(s) to compress.');
+    end;
+end; { LoadFiles }
+
+function Exist(FileName: String): Boolean;
+var
+    Inf: SearchRec;
+begin
+    FindFirst(FileName, AnyFile, Inf);
+    Exist := (DosError = 0);
+end; { Exist }
+
+procedure StartModel;
+var
+    I: Integer;
+begin
+    for I := 0 to NumOfChars - 1 do begin
+        CharToIndex[I] := I + 1;
+        IndexToChar[I + 1] := I;
+    end;
+    if not Adaptive then begin
+        CumFreq[NumOfSyms] := 0;
+        for I := NumOfSyms downto 1 do
+            CumFreq[I - 1] := CumFreq[I] + FreqTable[I];
+        if CumFreq[0] &gt; MaxFreq then begin
+            Writeln(^G'Cumulative frequency count too high.');
+            Halt;
+        end;
+    end else begin
+        for I := 0 to NumOfSyms do begin
+            FreqTable[I] := 1;
+            CumFreq[I] := NumOfSyms - I;
+        end;
+        FreqTable[0] := 0;
+    end;
+end; { StartModel }
+
+procedure UpdateModel(Symbol: Integer);
+var
+    I: Integer;
+    C1, C2: Integer;
+begin
+    if not Adaptive then begin
+    end else begin
+        if CumFreq[0] = MaxFreq then begin
+            C1 := 0;
+            for I := NumOfSyms downto 0 do begin
+                FreqTable[I] := (FreqTable[I] + 1) shr 1;
+                CumFreq[I] := C1;
+                C1 := C1 + FreqTable[I];
+            end;
+        end;
+        I := Symbol;
+        while FreqTable[I] = FreqTable[I - 1] do
+            Dec(I);
+        if I &lt; symbol then begin
+            C1 := IndexToChar[I];
+            C2 := IndexToChar[Symbol];
+            IndexToChar[I] := C2;
+            IndexToChar[Symbol] := C1;
+            CharToIndex[C1] := Symbol;
+            CharToIndex[C2] := I;
+        end;
+        Inc(FreqTable[I]);
+        while I &gt; 0 do begin
+            Dec(I);
+            Inc(CumFreq[I]);
+        end;
+    end;
+end; { UpdateModel }
+
+procedure Initialize;
+var
+    I: Integer;
+    Temp: String;
+begin
+  if ParamCount = 0 then begin
+    Writeln('COMPRESS version 0.1 (12/31/90) by Toupao '
+           +'Chieng C.W. H.S. C.C.');
+    Writeln('usage: COMPRESS [{-|/}option] [filename...]');
+    Writeln;
+    Writeln('option: /d = decompress file(s)');
+    Writeln;
+    Writeln('example:');
+    Writeln('           {  file compression }');
+    Writeln('  COMPRESS myfile.pas bgidemo.pas tcalc.pas');
+    Writeln('  COMPRESS *.pas *.exe');
+    Writeln;
+    Writeln('           {  file decompression }');
+    Writeln('  COMPRESS /d myfile.tcc bgidemo.tcc tcalc.tcc');
+    Writeln('  COMPRESS /d *.tcc');
+    Writeln;
+    Writeln('You may copy and distribute this program if '
+           +'you''d like...');
+    Writeln('See COMPRESS.PAS (source) for some notes on the '
+           +'program...');
+    Halt;
+  end else begin
+    Decompression := False;
+    for I := 1 to ParamCount do begin
+      Temp := ParamStr(I);
+      if Temp[1] in ['-','/'] then begin
+        if Not (UpCase(Temp[2]) in ['C','D']) then begin
+          if Not Exist(Temp) then begin
+              Writeln(^G'ERROR: Illegal option (',Temp[2],')');
+              Halt;
+          end;
+        end else begin
+          if UpCase(Temp[2]) = 'D' then
+              Decompression := True;
+        end;
+      end;
+    end;
+  end;
+end; { Initialize }
+
+procedure SetCompressor;
+begin
+    TopValue := $FFFE;
+    FirstQrtr := (TopValue div 4) + 1;
+    Half := 2 * FirstQrtr;
+    ThirdQrtr := 3 * FirstQrtr;
+    Adaptive := True;
+    New(InBufPtr);
+    New(OutBufPtr);
+    EOFile := False;
+    StartModel;
+end; { SetCompressor }
+
+procedure SetDecompressor;
+begin
+
+    TopValue := $FFFE;
+    FirstQrtr := (TopValue div 4) + 1;
+    Half := 2 * FirstQrtr;
+    ThirdQrtr := 3 * FirstQrtr;
+    New(InBufPtr);
+    New(OutBufPtr);
+    OutBufPos := 1;
+    EOFile := False;
+    StartModel;
+end; { SetDecompressor }
+
+procedure FillInputBuf;
+begin
+    if Eof(IFile) then
+        EOFile := True
+    else begin
+        BlockRead(IFile, InBufPtr^, BufSize, InBufCnt);
+    end;
+    InBufPos := 1;
+end; { FillInputBuf }
+
+procedure WriteOutBuf;
+begin
+    if OutBufPos &gt; 1 then begin
+        BlockWrite(OFile, OutBufPtr^, OutBufPos - 1);
+        OutBufPos := 1;
+    end;
+end; { WriteOutBuf }
+
+procedure StoreByte(B: Byte);
+begin
+    OutBufPtr^[OutBufPos] := B;
+    Inc(OutBufPos);
+    if OutBufPos &gt; BufSize then WriteOutBuf;
+end; { StoreByte }
+
+function GetByte: Byte;
+begin
+    if not EOFile then begin
+        GetByte := InBufPtr^[InBufPos];
+        if InBufPos = InBufCnt then
+            FillInputBuf
+        else
+            Inc(InBufPos);
+    end;
+end; { GetByte }
+
+procedure StartOutputingBits;
+begin
+    BitBuffer := 0;
+    BitsToGo := 8;
+    ByteCnt := 0;
+end; { StartOutputingBits }
+
+procedure OutputBit(B: Byte);
+begin
+    BitBuffer := BitBuffer shr 1;
+    if B = 0 then
+        BitBuffer := BitBuffer and $7F
+    else
+        BitBuffer := BitBuffer or $80;
+    Dec(BitsToGo);
+    if BitsToGo = 0 then begin
+        StoreByte(BitBuffer);
+        BitsToGo := 8;
+        ByteCnt := ByteCnt + 1;
+    end;
+end; { OutputBit }
+
+procedure StartEncoding;
+begin
+    Low := 0;
+    High := TopValue;
+    BitsToFollow := 0;
+    OrigFileSize := 0;
+end; { StartEncoding }
+
+function InputBit: Word;
+var
+    T: Word;
+begin
+    if BitsToGo = 0 then begin
+        BitBuffer := GetByte;
+        if EOFile then begin
+            Inc(GarbageBits);
+            if GarbageBits &gt; CodeValueBits - 2 then begin
+                Writeln(^G'Bad input file.');
+                Halt;
+            end;
+        end;
+        BitsToGo := 8;
+    end;
+    T := BitBuffer and $01;
+    BitBuffer := BitBuffer shr 1;
+    Dec(BitsToGo);
+    InputBit := T;
+end; { InputBit }
+
+procedure StartDecoding;
+var
+    I: Byte;
+begin
+    I := GetByte;
+    Mode := Chr(I);
+    if UpCase(Mode) = 'A' then
+        Adaptive := True
+    else
+        Adaptive := False;
+    Value := 0;
+    for I := 0 to CodeValueBits - 1 do begin
+        Value := 2 * Value + InputBit;
+    end;
+    Low := 0;
+    High := TopValue;
+end; { StartDecoding }
+
+procedure BitPlusFollow(B: Byte);
+begin
+    OutputBit(B);
+    while BitsToFollow &gt; 0 do begin
+        if B = 1 then
+            OutPutBit(0)
+        else
+            OutputBit(1);
+        Dec(BitsToFollow);
+    end;
+end; { BitPlusFollow }
+
+procedure EncodeSymbol(Sym: Word);
+var
+    Range: Longint;
+begin
+  Range := Longint((High - Low) + 1);
+  High := Low + (Range * CumFreq[Sym - 1]) div CumFreq[0] - 1;
+  Low := Low + (Range * CumFreq[Sym]) div CumFreq[0];
+  repeat
+    if High &lt; Half then begin
+      BitPlusFollow(0);
+    end else if Low &gt;= Half then begin
+      BitPlusFollow(1);
+      Low := Low - Half;
+      High := High - Half;
+    end else if (Low &gt;= FirstQrtr)
+            and (High &lt; ThirdQrtr) then begin
+      Inc(BitsToFollow);
+      Low := Low - FirstQrtr;
+      High := High - FirstQrtr;
+    end else Exit;
+    Low := 2 * Low;
+    High := 2 * High + 1;
+  until 0 &lt;&gt; 0;
+end; { EncodeSymbol }
+
+procedure DoneEncoding;
+begin
+    Inc(BitsToFollow);
+    if (Low &lt; FIrstQrtr) then
+        BitPlusFollow(0)
+    else
+        BitPlusFollow(1);
+end; { DoneEncodeing }
+
+procedure DoneOutputingBits;
+begin
+    BitBuffer := BitBuffer shr BitsToGo;
+    StoreByte(BitBuffer);
+    ByteCnt := ByteCnt + 1;
+end; { DoneOutputingBits }
+
+procedure Compress(F: String);
+const
+    HdrLen = 32;
+    Blanks = '                        ';
+var
+    OName: String;
+    FSize: String;
+    Header: String;
+    I: Byte;
+begin
+    Assign(IFile, F);
+    Reset(IFile, 1);
+    if Pos('.', F) &gt; 0 then
+        OName := Copy(F, 1, Pos('.', F)) + 'TCC'
+    else
+        OName := F + '.TCC';
+    Assign(OFile, OName);
+    Rewrite(OFile, 1);
+    FillInputBuf;
+    OutBufPos := 1;
+    StoreByte(Ord('A'));
+    Write('Compressing: ', F);
+    StartOutPutingBits;
+    StartEncoding;
+    Str(FileSize(IFile), FSize);
+    Header := F + '|' + FSize;
+    Header := Header +
+              Copy(Blanks, 1, HdrLen - Length(Header));
+    for I := 1 to Length(Header) do begin
+        Symbol := CharToIndex[Ord(Header[I])];
+        EncodeSymbol(Symbol);
+        UpdateModel(Symbol);
+    end;
+    repeat
+        Bite := GetByte;
+        OrigFileSize := OrigFileSize + 1;
+        if not EOFile then begin
+            Symbol := CharToIndex[Bite];
+            EncodeSymbol(Symbol);
+            UpdateModel(Symbol);
+        end;
+    until EOFile;
+    EncodeSymbol(EOFSymbol);
+    DoneEncoding;
+    DoneOutputingBits;
+    WriteOutBuf;
+    Close(IFile);
+    Close(OFile);
+    Writeln(' (', ((ByteCnt / OrigFileSize) * 100): 4: 2,
+            '%) done.');
+end; { Compress }
+
+function DecodeSymbol: Word;
+var
+    Range: Longint;
+    Cum: Word;
+    Sym: Word;
+    Done: Boolean;
+begin
+    Range := Longint((High - Low) + 1);
+    Cum := (((Value - Low) + 1) * CumFreq[0] - 1) div Range;
+    Sym := 1;
+    Done := False;
+    while CumFreq[Sym] &gt; Cum do
+        Inc(Sym);
+    High := Low + (Range * CumFreq[Sym - 1]) div CumFreq[0] - 1;
+    Low := Low + (Range * CumFreq[Sym]) div CumFreq[0];
+    repeat
+        if High &lt; Half then
+        else if (Low &gt;= Half) then begin
+            Value := Value - Half;
+            Low := Low - Half;
+            High := High - Half;
+        end else if (Low &gt;= FirstQrtr) and
+                    (High &lt; ThirdQrtr) then begin
+            Value := Value - FirstQrtr;
+            Low := Low - FirstQrtr;
+            High := High - FirstQrtr;
+        end else
+            Done := True;
+        if not Done then begin
+            Low := 2 * Low;
+            High := 2 * High + 1;
+            Value := 2 * Value + InputBit;
+        end;
+    until Done;
+    DecodeSymbol := Sym;
+end; { DecodeSymbol }
+
+procedure Decompress(F: String);
+begin
+    Assign(IFile, F);
+    Reset(IFile, 1);
+    FillInputBuf;
+    HdrCnt := 1;
+    BitsToGo := 0;
+    GarbageBits := 0;
+    ByteCnt := 0;
+    StartDecoding;
+    repeat
+        Symbol := DecodeSymbol;
+        if Symbol &lt;&gt; EOFSymbol then begin
+            Ch := IndexToChar[Symbol];
+            if HdrCnt &lt; HdrLen then begin
+                Header[HdrCnt] := Chr(Ch);
+                Inc(HdrCnt);
+            end else if HdrCnt = HdrLen then begin
+                Header[0] := Chr(HdrLen);
+                OutFileName := Copy(Header, 1,
+                                    Pos('|', Header) - 1);
+                Assign(OFile, OutFileName);
+                Rewrite(OFile, 1);
+                Writeln('Decompressing: ', OutFileName);
+                Inc(HdrCnt);
+            end else
+                StoreByte(Ch);
+            UpdateModel(Symbol);
+        end;
+    until EOFile;
+    WriteOutBuf;
+    Close(OFile);
+    Close(IFile);
+end; { Decompress }
+
+begin { main program }
+    Initialize;
+    Writeln('COMPRESS version 0.1 (12/31/90) by Toupao Chieng');
+    if Not Decompression then begin
+        LoadFiles;
+        FP := FileListHead;
+        repeat
+            SetCompressor;
+            Compress(FP^.Name);
+            FP := FP^.Next;
+        until FP = nil;
+    end else begin
+        LoadFiles;
+        FP := FileListHead;
+        repeat
+            SetDecompressor;
+            Decompress(FP^.Name);
+            FP := FP^.Next;
+        until FP = nil;
+    end;
+end. { TCCompress }
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

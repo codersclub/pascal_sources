@@ -1,0 +1,136 @@
+<html><head><title>UnZip 2.0 - Zipfile Extract Utility</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="<b>UnZip 2.0</b>  Компактная, легко портируемая утилита для распаковки ZIP архивов. <br><font color=#666666> It is a small Zipfile extract utility. It is written to be as small and portable as possible. Source code is provided in C and Turbo Pascal. </font>">
+<meta name="keywords" content="pascal, sources, source code, ccunzip, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ccunzip
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;UnZip 2.0 - Zipfile Extract Utility</TD>
+<TD nowrap class=black>&nbsp;Samuel H. Smith</TD>
+<TD class=black align='right'>09.09.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px"><b>UnZip 2.0</b> 
+Компактная, легко портируемая утилита для распаковки
+ZIP архивов. <br><font color=#666666>
+It is a small Zipfile extract utility.
+It is written to be as small and portable as possible.
+Source code is provided in C and Turbo Pascal. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="ccunzip.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>86k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                   UnZip
+
+                           Version 2.0, 09-09-89
+
+                           Zipfile Extract Utility
+
+                                 UnZip20.ZIP
+
+          Copyright (C) 1989 Samuel H. Smith;  ALL RIGHTS RESERVED
+
+
+'UnZip' is a small Zipfile extract utility.   It is written to be as
+small and portable as possible -- ideal as a starting point for handling
+.ZIP files in non-IBM environments.
+
+Source code is provided in C and Turbo Pascal.  If you port this program
+to a non-IBM system, I would appreciate a copy of the ported source and
+exec files.
+
+
+Usage
+-----
+   unz filename[.zip]           ;pascal language version
+   unzip filename[.zip]         ;C language version
+
+
+Revision history
+----------------
+
+3-3-89
+   Initial alpha test release.
+
+3-5-89
+   First fully operational release.  Does not implement CRC verification,
+   but should correctly unzip all compression methods.
+
+3-6-89
+   Corrected end-of-file detection in both shrink and reduce expanders.
+   Resulting files should now always have the correct size.  Added ".ZIP"
+   default to unzip.c to match calling conventions of unz.pas.
+
+3-8-89
+   Moved machine and operating-system specific code to a block starting
+   around line 180.  Added code to swap bytes on host machines that
+   store the high order bytes in lower address locations than the low
+   order bytes.
+
+3-15-89
+   Added CRC checking in UNZIP.C.  Speeded operation by about 150%.
+
+   I'm spending my time on the C version now and don't plan to do any
+   further work on the pascal.  If you're using the pascal version
+   please contact me.
+
+9-9-89
+   Addition of new "un-implode" logic to handle new compression format
+   included with PKZ101.
+
+4-5-90
+   Modifications to the Turbo Pascal version by John A. McKown .
+   CompuServe ID 72325,1705. These modifications are NOT supported by
+   Samuel Smith! 1. Added CRC checking. 2. Decreased average elapsed
+   time by around 35 percent. This was done by performance analysis
+   done with HotSpotter Version 5.50 by 3QC. Available from The
+   Programmer's Connection. Yes - this was a mini-ad. HotSpotter is
+   GREAT!
+   Mr. Smith's original code is still in this package by his request.
+
+
+
+LICENSE
+=======
+
+You may copy and distribute this program freely, provided that:
+    1)   No fee is charged for such copying and distribution, and
+    2)   It is distributed ONLY in its original, unmodified state.
+
+If you wish to distribute a modified version of this program, you MUST
+include the source code.
+
+If you modify this program, I would appreciate a copy of the new source
+code.  I am holding the copyright on the source code, so please don't
+delete my name from the program files or from the documentation.
+
+
+SUPPORT
+=======
+
+I work very hard to produce a software package of the highest quality
+and functionality.  I try to look into all reported bugs, and will
+generally fix reported problems within a few days.
+
+IN NO EVENT WILL I BE LIABLE TO YOU FOR ANY DAMAGES, INCLUDING ANY LOST
+PROFITS, LOST SAVINGS OR OTHER INCIDENTAL OR CONSEQUENTIAL DAMAGES
+ARISING OUT OF YOUR USE OR INABILITY TO USE THE PROGRAM, OR FOR ANY
+CLAIM BY ANY OTHER PARTY.
+
+If you have any questions, bugs, or suggestions, please contact me at:
+
+                  The Tool Shop BBS
+                  (602) 279-2673 (FREE LINE, USR 2400)
+                  (602) 264-3969 (HST 9600)
+                  (602) 270-0239 (HAYES 9600)
+
+The latest version is always available for downloading.
+
+Enjoy!     Samuel H. Smith
+           Author and Sysop of The Tool Shop.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,139 @@
+<html><head><title>Arcpak - Viewer for arc/pak/zip/lzh/arj/exe files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для BP7, позволяющий вызывать внешние архиваторы из вашей паскаль-программы. <br><font color=#666666>  Arcpak - is a unit for BP 7.0 that allows you to write programs that use archive utilities. Arcpak recognizes arc, pak, zip, lzh, arj, and exe files. It supports DOS and OS/2. Included: Docs, Samples and TPU6..7,TPW</font>">
+<meta name="keywords" content="pascal, sources, source code, arcpak, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;arcpak
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Arcpak - Viewer for arc/pak/zip/lzh/arj/exe files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:310/14.13">Peter Singer</a></TD>
+<TD class=black align='right'>04.11.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для BP7, позволяющий вызывать внешние архиваторы
+из вашей паскаль-программы. <br><font color=#666666> 
+Arcpak - is a unit for BP 7.0 that
+allows you to write programs that use
+archive utilities. Arcpak recognizes
+arc, pak, zip, lzh, arj, and exe files.
+It supports DOS and OS/2. Included: Docs, Samples and TPU6..7,TPW</font></TD><TD class=black colspan=2 align='right'><br><A HREF="arcpak.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>155k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This package should include:
+  ARCPAK2.TPU   For TP 7.0
+  ARCPAK2.TPP   For BP 7.0 (protected mode)
+  ARCPAK2.TPW   For BP 7.0 (windows mode)
+  ARCPAK2.TPO   For BP 7.0 ('OS/2 mode' patched version
+                            of c't magazine)
+  ARCPAK2.TP6   For TP 6.0 (rename it to arcpak2.tpu,
+                            last Version 4.3)
+                           (TP6 will not be longer supported!)
+
+   This is a Unit for TP 6.0 / BP 7.0 and requires just the DOS
+   unit. FV.EXE is writtem with it. It should help you to write
+   application software for archive compression files. Read
+   ARCPAK.DOC about the function and procedures availabel and which
+   parameters you have to pass. The constant PVers shows you always
+   the actual version of the Unit.
+   Just write in a Turbo Pascal program:
+              writeln (Pvers);
+   Current version should be 4.8. Some ideas are used from the
+   TurboProfessional toolbox.
+
+ ARCPAK2.DOC
+   Read this for information on procedures, function and further
+   enhancements. This is the interface part of the source code of
+   the unit.
+
+ FV.EXE  {FV.OS2: rename this to FV.exe if you run OS/2}
+   FV is required by 'LIST' to view arc, pak, zip ,lzh or arj files.
+   But you can also use it on the DOS command line. Simply type one
+   of the following:
+      FV *.*    { for current directory}
+      FV ..     { for parent directory }
+      FV a:\*.* { for root directory on drive A}
+      FV *.pak  { to show only PAK files }
+      FV *.pak  /C { to show comments of PAK files }
+      FV /S.com  { searches through all files and file
+                   names and comments stored in archives
+                   for the string '.COM'. With the /S switch
+                   you don't HAVE TO specify a drive or path.
+                   It DON'T search through the Zip or Pak -
+                   comment! }
+      FV a: /Sdoc { looks on drive A: for anything with the
+                    string 'DOC'}
+                  { The /S will skip all pathnames during
+                    search stored in archiv files }
+      FV a: /Sdoc /A { looks on drive A: and checking all files
+                       for the string 'DOC'}
+      FV *.* /D*.exe { checking all files in archives and DOS
+                       if they match *.EXE}
+      FV *.SDN /d*.doc /A { looks in all SDN files, if they
+                            are archives and if they match *.DOC}
+      FV *.* /sdoc /x   { search in all arc, pak, zip,lzh and
+                          exe (if they are selfextracting)
+                          files, if it find DOC}
+      FV *.* /G   { Displays resolution on GIF, LBM, PCX and
+                    BMP files }
+    FV don't shell to any program. It will be extended with any new
+    version of the arcpak unit. I'd rewrite it!! Get a short help by
+    passing any of the following: -?, /?, -h, /h, -Help, /help. It's
+    not case sensitive!
+
+ READ.ME
+    Hey! - You read it now!
+
+ REGISTER.DOC
+    Registration order form.
+
+***************** C A U T I O N **************************
+FV for OS/2 is currently not very well tested (only on FAT system).
+It's only limited tested on HPFS drives, there may be bucks!!
+
+----------------------------------------------------------
+The Arcpak unit and FV for OS/2 are SHAREWARE!
+It's neither public domain nor freeware!
+After a trial period of 30 day's you have to register!
+For registration please fill out the register.doc and send
+this with the money to the noted address.
+Tnx and please support the shareware concept, PSi.
+----------------------------------------------------
+I don't make any warranty to anything, except that your grandfather
+wasn't a snowman and I don't rape dogs in the public.
+----------------------------------------------------
+PSI is a unregistred inofficial trademark, with no liability or
+warranty to anything and anyone. PSI resided in Vienna/Austria and
+is just a shortening of my fore- and familyname.
+The source of any program is not available!
+For registration see Register.doc!
+--------------------------------------------------------------
+Last updates in one of these box's available:
+
+'Schnuffi's Box' (Erich Varga)
+Data: ++43-1-769-31-32, 9600/8/N/1 (Zyxel)
+'LaBamba BBS' (Werner Baar)
+Data: ++43-1-68-89-71,  9600/8/N/1 (SupraFax)
+'Just 4 Fun' (Gerhard Lustig)
+Data: ++43-1-714-94-50, 9600/8/N/1 (Zyxel)
+Location :   Austria, Vienna
+Schnuffi's Box:   2:310/13@fidonet.eur
+LaBamba BBS:      2:310/14@fidonet.eur
+Just 4 Fun:       2:310/15@fidonet.eur
+
+CIS: Forum: BPASCAL, Library 4 'Vintage Pascal'
+
+For bug comments, please send a message and/or the compressed file
+to via netmail to 'Peter Singer 2:310/14.13@fidonet.eur'
+or via CIS E-Mail to 'Peter Singer: 100024,1603'.
+The programm FV is public domain, anyone can put it in her/his BBS
+system but without (!!) changing the contents of this or the other
+files included in this package.
+Registered User's will get always the newest version.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

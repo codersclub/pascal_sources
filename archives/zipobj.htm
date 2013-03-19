@@ -1,0 +1,73 @@
+<html><head><title>ZipObj - ZIP Compression Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный модуль для упаковки ZIP архивов. Позволяет упаковывать несколько файлов и добавлять файлы в уже существующий архив. <br><font color=#666666> ZIP Compression object. Based on <a href=&quot;srnk12.htm&quot;>Shrink.Pas v1.2 by R.P.Byrne</a>. Compress using Lempel-Ziv-Welch (LZW) compression techniques (&quot;shrink&quot;). There are two main ways to use this object: zip a set of files or add files to a zip until it reaches a desired size. </font>">
+<meta name="keywords" content="pascal, sources, source code, zipobj, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;zipobj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ZipObj - ZIP Compression Object</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72371.1136@compuserv.com">Paul Peterson</a></TD>
+<TD class=black align='right'>13.07.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный модуль для упаковки ZIP архивов.
+Позволяет упаковывать несколько файлов и добавлять файлы в
+уже существующий архив. <br><font color=#666666>
+ZIP Compression object. Based on <a href="srnk12.htm">Shrink.Pas v1.2
+by R.P.Byrne</a>.
+Compress using Lempel-Ziv-Welch (LZW) compression techniques ("shrink").
+There are two main ways to use this object:
+zip a set of files or add files to a zip until it reaches
+a desired size. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="zipobj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">file zipobj.pas
+zip compression object
+=====================================================================
+flg dd-mmm-yy who : description -------------------------------------
+ 01 24-jun-91 prp : initial creation.
+end-of-change-log
+=====================================================================
+verbose description}
+code used here was originally from:
+ Shrink.Pas version 1.2  (C) Copyright 1989 by R. P. Byrne
+ Compress using Lempel-Ziv-Welch (LZW) compression techniques
+ ("shrink").
+ Modified greatly by PRP
+ There are two main ways to use this object:
+   1-to zip a set of files call:
+       init();
+       openoutfile();
+       buildfilelist();
+       repeat until not zipnext;
+       closeoutfile();
+       done();
+   2-to add files to a zip until it reaches a desired size:
+       init();
+       openoutfile();
+       repeat
+         addtozip()
+       until currentsize &gt; max_desired;
+       removelast;
+       closeoutfile();
+       done();
+ Hooks for displaying progress are provided.
+   The code from Shrink.pas was turned into a object and made function
+ but the following flaws exist:
+   1 - There was no attempt made to optimize the code.
+   2 - The inline code was not touched and thus needed kludges to get
+       it to work. See zptr and PutCharMeth below. Several variables
+       referenced by the inline code had to stay global. Also for some
+       reason this unit doesn't work if overlayed!
+   3 - For some reason this hangs on large files (and so does Shrink.pas).
+ Should any kind person have the time to correct these flaws I would sure
+ like to hear about it.
+   Paul Peterson (602)-778-2762, Summit Software Developers, 72371,1136
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

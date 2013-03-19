@@ -1,0 +1,104 @@
+<html><head><title>Crunch v1.0 - LZW 12 Bit File Archiver</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Файловый архиватор с использованием алгоритма LZW 12-bit. Работает из командной строки. <br><font color=#666666> This program create archive files using LZW 12-bit compression that are compatible with those produced by PKWare and SEA programs.</font>">
+<meta name="keywords" content="pascal, sources, source code, crunch10, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crunch10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Crunch v1.0 - LZW 12 Bit File Archiver</TD>
+<TD nowrap class=black>&nbsp;Richard Byrne</TD>
+<TD class=black align='right'>15.12.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Файловый архиватор с использованием алгоритма LZW 12-bit.
+Работает из командной строки. <br><font color=#666666>
+This program create archive files using LZW 12-bit compression
+that are compatible with those produced by PKWare and SEA
+programs.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="crunch10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>29k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Program Name:  Crunch
+
+    Usage:  Crunch outputfile[.arc] [inputfile [...]]
+
+  Purpose:  Create archive files using LZW 12-bit compression
+            that are compatible with those produced by PKWare and
+            SEA programs.
+
+
+Program Notes:
+
+*  This program does NOT update or freshen an archive.  It can
+   only be used to create NEW archives!
+
+*  If no input file specifications are provided on the command
+   line, the program assumes *.*
+
+*  Only two stowage methods are supported by this program...they
+   are
+
+    Crunching:  Input is first "packed" to remove repeated
+                character sequences and is then compressed using
+                12-bit LZW compression techniques.  Adaptive
+                resets of the algorithm's code table may also be
+                utilized.
+
+      Storing:  The input file is copied into the archive with no
+                compression applied.
+
+*  Files will be "stored" in the resulting archive if the
+   program's crunching routine does not produce a smaller result.
+
+*  13-bit "squashing" has not been implemented in this program.
+   It has been left as an exercise for the student (see the file
+   Squash.How for some hints on how to proceed).
+
+*  I originally wanted to release full Turbo Pascal source code
+   for the program.  Unfortunately, the "all TP" version was
+   slower than mollasses on a cold day.  I therefore re-coded
+   several routines within the program using inline assembler.
+   The asm stuff is heavily commented, but if it still looks like
+   gobbledygook to you, I apologize.  The intent was to release
+   this package as both an educational tool and as a program that
+   did useful work.  The only way that the second objective could
+   be realized was to replace certain critical routines with
+   something a little faster than what the TP compiler could
+   provide.
+
+*  Be careful...this TP 5.0 program was compiled with the "force
+   far calls" option turned ON.  The inline routines rely on this
+   fact. If you compile with this option turned OFF, the results
+   will be unpredictable.
+
+*  The author of the programs contained within CRUNCH10.ARC makes
+   no claim as to the correctness or suitability of these
+   programs for any particular purpose whatsoever.  If you use
+   these programs or the algorithms from which they were derived,
+   you must assume all responsibility for the consequences of
+   that use.
+
+*  The routines presented in Crunch.Pas were derived from the
+   lzcomp.asm and lzdcmp.asm programs written and released by Tom
+   Pfau back in 1985.  The programs in this archive are
+   yours...do with them what you will, but please note that
+   System Enhancements Associates (SEA) regards ARC as their
+   trademark.  Should you wish to use the Crunch source code in
+   your own program, I suggest you contact SEA for licensing
+   details and restrictions.  I WILL NOT ACCEPT any
+   responsibility for any legal problems that may arise as a
+   result of the use or misuse of the ARC processing code
+   contained in Crunch.  I do not have any agreement myself with
+   SEA;  SEA has indicated that public domain programs may
+   process .ARC files without any restrictions.
+
+
+                                          Richard P. Byrne (rpb)
+                                                12/15/88
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

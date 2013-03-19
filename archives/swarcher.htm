@@ -1,0 +1,102 @@
+<html><head><title>SWArcher - Чтение оглавлений архивных файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="SWArcher v1.00 beta -  это библиотека для Turbo Pascal 6.0 и выше, позволяющая читать оглавления архивов наиболее распространенных форматов. Архивы распознаются не по расширению, а по формату. SFX архивы распознаются для всех, кроме ZOO, который их и не создает. ">
+<meta name="keywords" content="pascal, sources, source code, swarcher, archives, Архивы и Архиваторы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Архивы и Архиваторы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;swarcher
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SWArcher - Чтение оглавлений архивных файлов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>04.04.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">SWArcher v1.00 beta - 
+это библиотека для Turbo Pascal 6.0 и выше,
+позволяющая читать оглавления архивов наиболее распространенных форматов.
+Архивы распознаются не по расширению, а по формату.
+SFX архивы распознаются для всех, кроме ZOO, который их и не создает. </TD><TD class=black colspan=2 align='right'><br><A HREF="swarcher.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>11k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                SWArcher
+                       Softweyr archiver interface
+                            version 1.00 beta
+                     Copyright (c) 1995 by SoftWeyr
+
+                                Введение
+
+    SWArcher это библиотека для Turbo Pascal 6.0 и выше, позволяющая
+читать оглавления  архивов наиболее распространенных форматов.
+В настоящее время поддерживаются форматы:
+  PKZIP - Ver 2.04g и ранее
+  ARJ   - Ver 2.41 и ранее
+  BSA   - Ver 1.95
+  ZOO
+  RAR   - Ver 1.50, но не 1.30
+  PKARC
+  LHA/LHICE/LHARC - все известные мне версии
+Все виды архивов распознаются не по расширению, а по формату.
+SFX архивы распознаются для всех кроме ZOO, который их и не создает.
+
+  При разработке использованы исходные тексты
+пакета OOAV, разработанного Edwin Groothuis, MavEtJu software.
+
+                            КАК ЭТО РАБОТАЕТ:
+
+1. Вы должны открыть файл с помощью процедуры OpenArchive
+
+function  OpenArchive( Name:string):PArchive;
+
+Которая возвращает указатель на объект типа TArchive или nil, если файл
+не существует, не читается или не относится к одному из распознаваемых
+типов.
+
+2. Вы должны вызывать метод FindNext полученного объекта до тех пор,
+пока он не вернет False.
+
+Function TArchive.FindNext(var sr:TArcRec):boolean;
+
+ В качестве параметра сей функции передается запись типа
+          TArcRec=Record
+                   Name:PathStr;
+                   Attr:Word;
+                   Time:LongInt;
+                   Size:LongInt;
+                   PackedSize:LongInt;
+                  end;
+
+Где Name -  полный  путь (если архив с  подкаталогами),
+Attr - атрибуты файла. Time - время создания в том же формате,
+что и в GetFTime, Size- размер неупакованного файла и
+PackedSize - соответственно.
+
+Файлы возвращаются в порядке их расположения в архиве.
+
+Если вам хочется иметь нечто,  что  работает  с неупакованной структурой
+каталогов так же, то есть объект TDosDir=object(TArchive).
+
+Если у вас архив не  в  файле,  а  в EMS или RAM и доступен как обьект -
+наследник от TStream, то вы можете создать объект для его  чтения явыным
+образом, передав указатель на поток его конструктору. В  этом случае вам
+придется явно указать  архив какого типа вы собираетесть читать, написав
+что-то вроде:
+
+MyArchive:=New(PZIPArchive,Init(MyStream))
+
+В качестве  демонстрационного  примера  к  пакету прилагается программка
+FileList.PAS создающая список  файлов на дискетах - что-то вроде борлан-
+довских FILELIST.DOC
+
+Sapienti sat. Если вам нужно больше информации - читайте исходники
+
+                Vitus Wagner
+
+                 E-Mail:vitus@agropc.msk.su
+                 FIDO:2:5020/358.5
+</PRE>
+<!--#include virtual="/t_footer.htm"-->
