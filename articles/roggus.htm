@@ -1,0 +1,244 @@
+<html><head><title>Рогатая гусеница - Статьи о Паскале - Pascal.Sources.Ru</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Этюды о бесполезной красоте. Этюд 1 - Рогатая гусеница. TMT Pascal.'>
+<meta name="keywords" content="tmt, pascal, sources, source code, article, graphics, графика, рогатая, гусеница ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Статьи о Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;Рогатая гусеница
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Этюды о бесполезной красоте - Рогатая гусеница</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;
+<A href="mailto:evgenij@aport.ru">Евгений Скляревский</A>
+</TD>
+<TD class=black align='right'>25.09.2001</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">
+<br>Этюды о бесполезной красоте.
+Этюд 1 - Рогатая гусеница.
+<br>О красоте тригонометрических функций и ее воплощении в графике на TMT Pascal.
+</TD><TD class=black colspan=2 align='right'><img border=0 align=middle src="../img/more.gif">
+<br>40k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+<div style="margin-left:50px">
+
+<h2>Этюды о бесполезной красоте</h2>
+
+<h1>Этюд первый. Рогатая гусеница</h1>
+
+<p align=right>
+<small>
+Автор: &nbsp;&nbsp;<B><A href="mailto:evgenij@aport.ru">Евгений 
+Скляревский</A></B>
+<br>
+<br>
+Оригинал статьи для Visual Basic: <a target=_blank href="http://www.hardnsoft.ru/magazine.php?issue=87&article=182&page=2">Журнал Hard'n'Soft</a>
+<br>
+<br>
+Адаптация для TMT Pascal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B><A href="mailto:rswag at sources.ru">Валерий
+Вотинцев</A></B>
+</small>
+</p>
+
+<p style="padding-left:50%;">
+<small>
+<I><B>Алиса и Синяя Гусеница долго смотрели друг на друга,
+не говоря ни слова. Наконец, Гусеница вынула кальян изо
+рта и медленно, словно в полусне, заговорила:
+<BR>- Ты: кто: такая? - спросила Синяя Гусеница.</B>
+<BR>Льюис Кэрролл. &laquo;Приключения Алисы в Стране Чудес&raquo;</I>
+</small>
+</p>
+
+<p ALIGN=justify>
+<p>Великий сказочник и математик сказал не всю 
+правду. Гусеница была не столько синяя, сколько рогатая, причем 
+рожек у нее было очень много, и в этом мы с вами скоро убедимся. Но 
+прежде поговорим о торе. Напомню, тор - это тело, образованное 
+вращением окружности вокруг оси, лежащей в плоскости этой окружности 
+и не пересекающей ее. Самые очевидные примеры тора - бублики и 
+камеры от велосипедного колеса. С тором, кстати, связано большое 
+количество занимательных задач. Добавим только пару высоконаучных 
+соображений. Если бы Земля была не шаром, а тором, то при ее 
+столкновении с огромным астероидом он с высокой вероятностью 
+пролетел бы в дырку. И еще: как было бы хорошо, если бы селекционеры 
+вывели арбуз в форме тора - его было бы удобно переносить, продев 
+руку в отверстие. Впрочем, нас сейчас тор интересует лишь как объект 
+для рисования.
+
+<p>Итак, компилируем приведенную ниже программу на TMT Pascal 3.50: 
+<pre>
+<I><font color="#008000">(***********************************************)</font></I>
+<I><font color="#008000">(* Рогатая гусеница                            *)</font></I>
+<I><font color="#008000">(* Автор алгоритма: Евгений Скляревский (VB)   *)</font></I>
+<I><font color="#008000">(* ------------------------------------------- *)</font></I>
+<I><font color="#008000">(* Адаптация для TMT Pascal:                   *)</font></I>
+<I><font color="#008000">(*      Валерий Вотинцев                       *)</font></I>
+<I><font color="#008000">(*   MS-DOS 32-bit protected mode              *)</font></I>
+<I><font color="#008000">(*   Win32 Console application                 *)</font></I>
+<I><font color="#008000">(*   Win32 GUI                                 *)</font></I>
+<I><font color="#008000">(***********************************************)</font></I>
+<B><font color="#0000FF">uses</font></B> CRT, Math, Graph;
+<B><font color="#0000FF">var</font></B>
+  i,j: integer;
+  t, s: extended;
+  ia,ja, RR, RR0, RR1: extended;
+  x, y, z: extended;
+  X1, Y1, X2, Y2, xx, yy: LongInt;
+  red, green, blue: byte;
+
+<B><font color="#0000FF">begin</font></B>
+  SetSVGAMode(800,600,16,LFBorBanked);  <I><font color="#008000">// Установка графического режима</font></I>
+  <B><font color="#0000FF">if</font></B> GraphResult&lt;&gt;grOk <B><font color="#0000FF">then</font></B> <B><font color="#0000FF">begin</font></B>       <I><font color="#008000">// Проверка результата</font></I>
+    Writeln(<font color="#FF0000">'Mode not supported..'</font>);
+    Halt(0);
+  <B><font color="#0000FF">end</font></B>;
+  xx := 400; <I><font color="#008000">// Начало по Х</font></I>
+  yy := 300; <I><font color="#008000">// Начало по Y</font></I>
+  RR := 260; <I><font color="#008000">// Радиус в плоскости XZ</font></I>
+  RR1 := 60; <I><font color="#008000">// Радиус &quot;тела&quot; тора</font></I>
+  <B><font color="#0000FF">For</font></B> i := 0 <B><font color="#0000FF">To</font></B> 719 <B><font color="#0000FF">do</font></B> <B><font color="#0000FF">begin</font></B>
+    ia := i / 2.0;               <I><font color="#008000">// Каждый шаг - пол-градуса</font></I>
+    <B><font color="#0000FF">For</font></B> j := 0 <B><font color="#0000FF">To</font></B> 719 <B><font color="#0000FF">do</font></B> <B><font color="#0000FF">begin</font></B>
+      ja := j / 2;               <I><font color="#008000">// Каждый шаг - пол-градуса</font></I>
+      t := ia * Pi / 180;        <I><font color="#008000">// Угловой параметр для большого круга</font></I>
+      s := ja * Pi / 180;        <I><font color="#008000">// Угловой параметр для малого круга</font></I>
+<I><font color="#008000">{1a}</font></I>  RR0 := RR1;
+<I><font color="#008000">{1b}</font></I>  <I><font color="#008000">{RR0 := RR1 + 60 * IntPower(Sin(2 * t),2);}</font></I>
+<I><font color="#008000">{1c}</font></I>  <I><font color="#008000">{RR0 := RR1 + 60 * IntPower(Sin(2 * t),2) +</font></I>
+              <I><font color="#008000">60 * IntPower(Sin(8 * s),24) * IntPower(Sin(16 * t),24);}</font></I>
+<I><font color="#008000">{1d}</font></I>  <I><font color="#008000">{RR0 := RR1 + 60 * IntPower(Sin(16 * s),24) * IntPower(Sin(32 * t),24);}</font></I>
+<I><font color="#008000">{1e}</font></I>  <I><font color="#008000">{RR0 := RR1 + 60 * IntPower(Sin(4 * s),24) * IntPower(Sin(8 * t),24);}</font></I>
+      X := RR * Cos(t) + RR0 * Cos(s);
+      Y := RR0 * Sin(s);
+<I><font color="#008000">{2a}</font></I>  z := RR * Sin(t) + RR0 * Cos(s);
+<I><font color="#008000">{2b}</font></I>  <I><font color="#008000">{z := RR * Sin(2 * t) + RR0 * Cos(s);}</font></I>
+      <I><font color="#008000">// Переводим координаты в плоскость экрана</font></I>
+      X1 := trunc(X - z * Cos(Pi / 3) * 0.5);
+      Y1 := trunc(Y - z * Sin(Pi / 3) * 0.5);
+
+      red := trunc(RR0 * 255) <B><font color="#0000FF">div</font></B> trunc(RR1 + 60); <I><font color="#008000">// Красный</font></I>
+      green := trunc(255 * ia / 10) <B><font color="#0000FF">mod</font></B> 255;       <I><font color="#008000">// Зеленый</font></I>
+      blue := trunc(0.1 * ia * ja) <B><font color="#0000FF">mod</font></B> 255;        <I><font color="#008000">// Синий</font></I>
+      <B><font color="#0000FF">if</font></B> (i = 0) <B><font color="#0000FF">and</font></B> (j = 0) <B><font color="#0000FF">then</font></B> <B><font color="#0000FF">begin</font></B>
+        red   := 0;       <I><font color="#008000">// Чтобы начальную линию</font></I>
+        green := 0;       <I><font color="#008000">// не было видно,</font></I>
+        blue  := 0;       <I><font color="#008000">// нарисуем ее черным цветом</font></I>
+      <B><font color="#0000FF">end</font></B>;
+      Line (X1 + xx, Y1 + yy, X2 + xx, Y2 + yy, RGBColor(red, green, blue));
+      X2 := X1;
+      Y2 := Y1;
+    <B><font color="#0000FF">end</font></B>;
+  <B><font color="#0000FF">end</font></B>;
+  ReadKey;            <I><font color="#008000">// Ждем нажатия клавиши</font></I>
+  CloseGraph;
+<B><font color="#0000FF">end</font></B>.
+</pre>
+
+В программе мы запустили два цикла: с 
+переменной <b>j</b> (угловой параметр <b>s</b> для прорисовки малого круга с 
+радиусом <b>RR1</b>) и переменной <b>i</b> (угловой параметр <b>t</b> для вращения малого 
+круга в плоскости XZ радиусом <b>RR</b>). Проекцию оси Z направим под углом 
+60 градусов к оси X, а для перевода объемной картинки в плоскость 
+экрана используем переменные <b>X1</b> и <b>Y1</b>.
+Если в приведенном тексте 
+программы мы оставим все как есть, то на экране появится обычный тор.
+<p>
+<CENTER><IMG src="roggus1.jpg">
+</CENTER>
+<BR>
+Обратите внимание на его расцветку, 
+она задается переменными <b>red, green</b> и <b>blue</b>.
+В приведенном примере 
+красный цвет пропорционален текущему радиусу малого круга и 
+проявляется только на <вздутиях> и рожках, зеленый пропорционален <b>i</b>, 
+что дает поперечные полосы, а синий зависит от произведения <b>i * j</b> и 
+проявляется в виде голубых полосок. 
+<p>
+Насмотревшись на скромный и унылый тор, подумаем, как 
+бы его деформировать.
+<br>При вычислении <b>z</b> умножим <b>t</b> на 2 в синусе.
+Это <перехлестнет> тор, и он приобретет форму восьмерки.
+<br>Для этого закомментируйте строку, помеченнную как <b>{2a}</b>,
+и раскомментируйте строку <b>{2b}</b>. 
+<p>
+<CENTER>
+<IMG src="roggus3.jpg">
+</CENTER>
+<BR>
+
+Теперь внесем <искажения> при вычислении <b>RR0</b> за счет
+добавления еще одного слагаемого:
+<pre>
+      RR0 = RR1 + 60&middot;Sin(2t)<sup>2</sup>
+</pre>
+
+Мы получим картинку с "утолщениями", явно претендующую 
+на то, чтобы Зигмунд Фрейд предлагал ее своим пациентам для 
+диагностики психических отклонений.
+<br>
+Закомментируйте строку <b>{1a}</b> и уберите комментарий со строки
+<b>{1b}</b>.
+<p>
+<CENTER>
+<IMG src="roggus2.jpg">
+</CENTER>
+<BR>
+Опыты со слагаемым 
+<b>RR1</b> наиболее эффектны - попробуйте поменять множитель при синусе 
+(60), множитель при <b>t</b> и показатель степени, в которую возводится 
+синус (второй параметр функции <b>IntPower</b>).
+Вы будете вознаграждены появлением на экране загадочных 
+существ. Однако подбираемся к главному - еще более усложним
+формулу вычисления для <b>RR0</b>, а именно добавим еще одно слагаемое
+с произведением синусов в разных степенях:
+<pre>
+      RR0 = RR1 + 60&middot;Sin(2t)<sup>2</sup> + 60&middot;(Sin(8s))<sup>24</sup>&middot;Sin(16t)<sup>24</sup>
+</pre>
+
+Чтобы "запустить" эту формулу, раскомментируйте строку <b>{1c}</b>.
+<center>
+<br><img src="roggus4.jpg"> 
+</center>
+
+<p>
+Первое слагаемое с <b>RR1</b> дает 
+уже рассмотренные нами утолщения "туловища", а вот второе - рожки на торе, или, 
+точнее, уже на гусенице. Причем множитель при <b>s</b> дает количество 
+рожек на малом круге, множитель при <b>t</b> - на большом круге, показатели 
+степени определяют плавность или крутизну рожек, а передний числовой 
+множитель (60) - их высоту.
+<br>Давайте сделаем нашу гусеницу "более лохматой". Для этого
+раскомментирум строку <b>{1d}</b>.
+
+<center>
+<br><img src="roggus5.jpg">
+</center>
+<p>
+Теперь уменьшим количество рожек вдоль длины тела гусеницы
+<br>(раскомментируйте строку <b>{1e}</b>).
+<p>
+Если показатель степени при синусе нечетный, то 
+отростки будут не только наружу, но и внутрь, придавая существам на 
+экране довольно мерзопакостную внешность. По правде говоря, наша 
+виртуальная гусеница получилась не столько с рожками, как было 
+заявлено, сколько с колючками. 
+<center>
+<br><img src="roggus6.jpg"> 
+</center>
+<p>
+
+</p>
+
+
+<!--#include virtual="/t_footer.htm"-->

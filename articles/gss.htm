@@ -1,0 +1,188 @@
+<html><head><title>Графика на WEB страничке - Статьи о Паскале - Pascal.Sources.Ru</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Этюды о бесполезной красоте. Этюд 2 - Графика на WEB страничке. TMT Pascal.'>
+<meta name="keywords" content="tmt, pascal, sources, source code, article, graphics, графика, screen, saver, паскаль">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Статьи о Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;Графика на WEB страничке
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Этюды о бесполезной красоте - Графика на WEB страничке</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;
+<A href="mailto:evgenij@aport.ru">Евгений Скляревский</A>
+</TD>
+<TD class=black align='right'>25.09.2001</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">
+<br>Этюды о бесполезной красоте.
+Этюд 2 - Графика на WEB страничке.
+<br>Об использовании тригонометрических функций для создания красивых
+графических заставок и скрин-сэйверов на TMT Pascal.
+</TD><TD class=black colspan=2 align='right'><img border=0 align=middle src="../img/more.gif">
+<br>60k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+<div style="margin-left:50px">
+
+<h2>Этюды о бесполезной красоте</h2>
+
+<h1>Этюд второй. Графика на WEB страничке</h1>
+
+<p>
+<div align=right><small>
+Автор: &nbsp;&nbsp;<B><A href="mailto:evgenij@aport.ru">Евгений 
+Скляревский</A></B>
+<br>
+<br>
+Оригинал статьи для Visual Basic: <a target=_blank href="http://www.hardnsoft.ru/magazine.php?issue=87&article=182&page=3">Журнал Hard'n'Soft</a>
+<br>
+<br>
+Адаптация для TMT Pascal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B><A href="mailto:rswag at sources.ru">Валерий
+Вотинцев</A></B>
+</small>
+</div>
+
+<p ALIGN=justify>
+<p>
+Завести 
+домашнюю страничку сейчас проще простого: &laquo;застолбил&raquo; имя на 
+бесплатном сервере (<A 
+href="http://www.boom.ru/">http://www.boom.ru/</A>, <A 
+href="http://www.narod.ru/">http://www.narod.ru/</A> или др.), 
+оформил сайт в Microsoft Word или FrontPage, скопировал файлы, 
+зарегистрировался везде, где только можно - и пожинай прелести 
+всемирной славы. Одна беда: никто, кроме автора и поисковых роботов, 
+на нее не заглядывает, потому как фотография типа &laquo;Мы с Толяном в 
+походе у костра&raquo; интересна только Толяну, а рекомендации по выбору 
+&laquo;Порше&raquo; в предыдущей версии игры Need for Speed могут привлечь 
+парочку фанатов, но повторно они уже не зайдут. Можно еще насобирать 
+в Сети афоризмов или советов по оформлению и продвижению сайтов, но 
+это только придаст страничке нафталиновый дух.
+
+<p>
+А вот что 
+сделает ваш сайт действительно оригинальным, так это галерея 
+компьютерной графики! Многие под этим понятием понимают 
+фантастические пейзажи, созданные в 3D MAX натягиванием текстур на 
+объемные тела с эффектной подсветкой. При всем уважении к 
+кропотливости такой работы мы пойдем путем чисто математическим. 
+
+<p>
+Скопируйте приведенную ниже программу в окно компилятора TMT Pascal
+и запустите программу.
+
+<pre>
+<I><font color="#008000">(***********************************************)</font></I>
+<I><font color="#008000">(* Screen Saver                                *)</font></I>
+<I><font color="#008000">(* Автор алгоритма: Евгений Скляревский (VB)   *)</font></I>
+<I><font color="#008000">(* ------------------------------------------- *)</font></I>
+<I><font color="#008000">(* Адаптация для TMT Pascal:                   *)</font></I>
+<I><font color="#008000">(*                  Валерий Вотинцев           *)</font></I>
+<I><font color="#008000">(*   MS-DOS 32-bit protected mode              *)</font></I>
+<I><font color="#008000">(*   Win32 Console application                 *)</font></I>
+<I><font color="#008000">(*   Win32 GUI                                 *)</font></I>
+<I><font color="#008000">(***********************************************)</font></I>
+<B><font color="#0000FF">uses</font></B> CRT, Graph;
+<B><font color="#0000FF">var</font></B>
+  x, y, ss, xmax, ymax, col: longint;
+  r, qx, qy, fi: extended;
+  coeff1, coeff2, coeff3, coeff4,coeff5, coeff6: extended;
+  ColDepth: word;
+  red, green, blue: byte;
+<B><font color="#0000FF">begin</font></B>
+  xmax     := 800;  <I><font color="#008000">// Разрешение по горизонтали</font></I>
+  ymax     := 600;  <I><font color="#008000">// Разрешение по вертикали</font></I>
+  ColDepth := 16;   <I><font color="#008000">// Максимальная глубина цвета (бит на пиксел)</font></I>
+  Coeff1   := 500;  <I><font color="#008000">// Начальные</font></I>
+  Coeff2   := 0.5;  <I><font color="#008000">//    коэффициенты</font></I>
+  Coeff3   := 1.95; <I><font color="#008000">//       для</font></I>
+  Coeff4   := 500;  <I><font color="#008000">//          формул</font></I>
+  Coeff5   := 1.5;
+  Coeff6   := 1.85;
+  r        := 282;
+  fi       := Pi / xmax * 2 + 0.001;
+  ss       := 0;   <I><font color="#008000">// Метод отрисовки &quot;торца&quot; цветной пластины</font></I>
+                   <I><font color="#008000">// ss = 0 -&gt;   торец не рисуется</font></I>
+                   <I><font color="#008000">// ss &gt; 1 -&gt;   &quot;толщина&quot; торца в пикселах</font></I>
+  <I><font color="#008000">// Установим графический режим</font></I>
+  SetSVGAMode(xmax,ymax,ColDepth,LFBorBanked);
+  <B><font color="#0000FF">if</font></B> GraphResult&lt;&gt;grOk <B><font color="#0000FF">then</font></B> <B><font color="#0000FF">begin</font></B>    <I><font color="#008000">// Проверка результата</font></I>
+    Writeln(</font><font color="#FF0000">'Mode not supported..'</font>);
+    Halt(0);
+  <B><font color="#0000FF">end</font></B>;
+<I><font color="#008000">{1}</font></I> <I><font color="#008000">{Randomize;}</font></I>
+<I><font color="#008000">{2}</font></I> <I><font color="#008000">{Repeat}</font></I>
+<I><font color="#008000">{3}</font></I> <I><font color="#008000">{r      := 8 + Random(1024);</font></I>
+    <I><font color="#008000">Coeff1 := 1 + Random(1000);</font></I>
+    <I><font color="#008000">Coeff2 := 0.01 + Random(5);</font></I>
+    <I><font color="#008000">Coeff3 := 0.01 + Random(5);</font></I>
+    <I><font color="#008000">Coeff4 := 1 + Random(1000);</font></I>
+    <I><font color="#008000">Coeff5 := 0.01 + Random(5);</font></I>
+    <I><font color="#008000">Coeff6 := 0.01 + Random(5);</font></I>
+<I><font color="#008000">}</font></I>
+    <B><font color="#0000FF">For</font></B> y := 0 <B><font color="#0000FF">To</font></B> pred(ymax) <B><font color="#0000FF">do</font></B> <B><font color="#0000FF">begin</font></B>
+      <B><font color="#0000FF">For</font></B> x := 0 <B><font color="#0000FF">To</font></B> pred(xmax) <B><font color="#0000FF">do</font></B> <B><font color="#0000FF">begin</font></B>
+        qx := r * (Sin(fi * x * y / Coeff1) - Coeff2 * Sin(Coeff3 * fi * y));
+        qy := r * (Sin(fi * y * x / Coeff4) - Coeff5 * Sin(Coeff6 * fi * x));
+        red   := trunc(Abs(qy)) <B><font color="#0000FF">Mod</font></B> 256;
+        green := trunc(Abs(qy + qx)) <B><font color="#0000FF">Mod</font></B> 256;
+        blue  := trunc(Abs(qx)) <B><font color="#0000FF">Mod</font></B> 256;
+        SetColor(RGBColor(red, green, blue));</font>
+        <B><font color="#0000FF">If</font></B> (ss &gt; 1) <B><font color="#0000FF">Then</font></B>
+           Line (x, y, x+ss, y+ss)</font>
+        <B><font color="#0000FF">else</font></B> PutPixel(x,y);
+        <B><font color="#0000FF">If</font></B> keypressed <B><font color="#0000FF">then</font></B> break;
+      <B><font color="#0000FF">end</font></B>;
+    <B><font color="#0000FF">end</font></B>;
+<I><font color="#008000">{4}</font></I> <I><font color="#008000">{until keypressed;}</font></I>   <I><font color="#008000">// Когда надоест - нажмем Any Key</font></I>
+  ReadKey;                <I><font color="#008000">// Считываем нажатую клавишу</font></I>
+  CloseGraph;
+<B><font color="#0000FF">end</font></B>.
+</pre>
+<p>
+Уверен, что ничего красивее вы на своем экране не 
+видели! Программа несложная. Объявляются два цикла: по <b>х</b> и <b>y</b> 
+проходятся все точки экрана. Рисуются они цветами, зависящими от 
+этих <b>x</b> и <b>y</b> самым причудливым образом,
+описанным переменными <b>qx</b> и <b>qy</b>.
+<p>
+<br>
+<CENTER>
+<IMG src="gss1.jpg" border=0 width=250 height=181>
+</CENTER>
+
+<p> 
+Попробуйте поменять параметры в этих переменных.
+Для этого просто уберите комментарии
+с блока операторов для вычисления случайных коэффициентов {3},
+и вы получите новые картины для своей галереи. 
+<p>
+<CENTER>
+<IMG src="gss2.jpg" border=0 width=250 height=180>
+</CENTER>
+
+<p>
+Если снять комментарии вокруг операторов <b>Repeat</b> {2} и
+<b>until keypressed</b> {4},
+то картины будут меняться автоматически случайным 
+образом, заставляя зрителей вскрикивать от восхищения.
+Чтобы при каждом запуске программы картины не повторялись,
+удалите комментарии и с процедуры <b>Randomize</b> {1}.
+<p>
+В таком виде программу можно использовать как &laquo;скринсейвер&raquo;
+или даже &laquo;генератор текстур&raquo;, и выложить ее на сайте в разделе
+&laquo;Мой софт&raquo; :)
+
+</p>
+
+
+<!--#include virtual="/t_footer.htm"-->
