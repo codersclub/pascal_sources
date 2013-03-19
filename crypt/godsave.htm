@@ -1,0 +1,119 @@
+<html><head><title>The "GodSave" Encryption Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Алгоритм шифрации <b>GodSave</b>, в отличие от прочих алгоритмов, использует не одну единственную функцию для криптования всего текста, а целое множество функций. К разным блока текста будут применяться разные функции в зависимости от содержимого блока и  секретного ключа. Приведен исходник на Паскале и описание  алгоритма [html]. <br><font color=#666666> The GodSave encryption algorithm does not employ a single encryption function, but rather it employs a very large family of different encryption functions and it chooses one of them every time it encrypts a new block of plaintext. The choice of which encryption function is applied depends both on the key and on the plaintext.</font>">
+<meta name="keywords" content="pascal, sources, source code, godsave, crypt, Криптография ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Криптография</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;godsave
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;The "GodSave" Encryption Algorithm</TD>
+<TD nowrap class=black>&nbsp;Dianelos Georgoudis</TD>
+<TD class=black align='right'>28.12.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Алгоритм шифрации <b>GodSave</b>, в отличие от прочих алгоритмов,
+использует не одну единственную функцию для криптования всего текста,
+а целое множество функций. К разным блока текста будут
+применяться разные функции в зависимости от содержимого блока и 
+секретного ключа. Приведен исходник на Паскале и описание 
+алгоритма [html]. <br><font color=#666666>
+The GodSave encryption algorithm does not employ a single encryption
+function, but rather it employs a very large family of different
+encryption functions and it chooses one of them every time it
+encrypts a new block of plaintext. The choice of which encryption
+function is applied depends both on the key and on the plaintext.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="godsave.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>49k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">1. INTRODUCTION
+
+Normal encryption algorithms, such as the IDEA encryption algorithm
+that is used by PGP, apply a single complex function to the
+plaintext and the key in order to produce the ciphertext. Since
+the algorithm is public this means that even though the data flow
+in the algorithm is unknown, the operations applied to this data
+flow are known. Any such encryption algorithm can by cryptanalysed
+and maybe broken. For example, we can be sure that there are a lot
+of smart people with a lot of expensive equipment trying to break
+IDEA right now, in fact it may have been broken already. If a
+commonly used encryption algorithm has already been broken by some
+agency we can be sure that the same agency will do all that they
+can in order to get it trusted and used by many organizations.
+
+The GodSave encryption algorithm which is described in this paper
+represents a departure from the normal approach. It does not employ
+a single encryption function, but rather it employs a very large
+family of different encryption functions and it chooses one of them
+every time it encrypts a new block of plaintext. The choice of which
+encryption function is applied depends both on the key and on the
+plaintext. With traditional encryption algorithms an attacker knows
+exactly what operations are applied to the plaintext and key.
+With GodSave what the algorithm does is variable so the attacker
+does not know what operations are applied to the plaintext and the
+key, even though the algorithm itself is public. By keeping secret
+not only the key but also what is done to the key and the plaintext
+the GodSave approach tries to maximize the security of the encryption
+algorithm, regardless of the current or future state of the art of
+cryptanalysis. Even more important, the GodSave algorithm can very
+easily be modified to produce non standard versions.
+
+The principal design criteria of GodSave encryption algorithm are:
+
+  A. What the algorithm does to the plaintext must be variable,
+     depending on both the key and the plaintext. Version 3 has
+     at least 2^1636 variations and when used at the level of
+     security recommended it has at least 2^1836 variations,
+     assuming a sufficiently large key is used. (By a "variation"
+     I mean a different sequence of computer operations that is
+     applied on the plaintext in order to encrypt it.)
+
+  B. The security of the algorithm is much more important than
+     its speed. Since the state of art of cryptanalysis is unknown,
+     it is best to assume the worst and use overkill at all levels
+     of the algorithm.
+
+     Many of the encryption algorithms used today are based on
+     developments from a time when computers were expensive and slow.
+     Many of these algorithms were relatively simple and designed to
+     be implemented in hardware. The design of the GodSave algorithm
+     takes full advantage of the power of modern technology and the
+     flexibility that a pure software implementation offers.
+     For example, the GodSave algorithm uses an encryption key of
+     256 bytes (2048 bits) which greatly enhances the security of
+     the algorithm.
+
+  C. Render a broad range of attacks virtually impossible even if at
+     the cost of increasing the size of the ciphertext. The GodSave
+     algorithm can combine the user key with a good organization-wide
+     master-key in order to defend against dictionary attacks, or
+     careless safeguarding of personal passwords. GodSave can also
+     randomize the key and/or the plaintext before encrypting.
+     When used at this level of security, GodSave will virtually
+     never apply the same encryption function twice or use the same
+     plaintext or key twice. The penalty you pay is an increase of
+     32 bytes in the size of the ciphertext per block encrypted and
+     an encryption/decryption rate of one kByte per second per MHz
+     when using a Pentium processor. These are limitations which
+     should be acceptable in most situations. Consult section 2.7
+     for more information about the speed of GodSave.
+
+The GodSave algorithm is implemented in Pascal and should be available
+in C by the time you read this. The source code contains some 8086
+assembly language routines for the definition of the 32 hash functions.
+These routines can easily be translated into other assembly languages.
+The GodSave interface is simple and flexible allowing the encryption
+of blocks of size between 16 bytes and 1024 bytes.
+
+Currently, GodSave does not include key distribution and user
+authentication utilities that are important for the creation of a
+distributed secure system. The RSA public key cryptography is well
+known, but patented, and possibly insecure because it depends on an
+unproved mathematical premise. Also, in many cases, e.g. closed
+organizations, there are other possibilities for solving the key
+distribution problem. For more ideas on this matter see section 4.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

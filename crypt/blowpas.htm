@@ -1,0 +1,92 @@
+<html><head><title>Blowfish v1.1 - Blowfish Encryption Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Реализация алгоритма шифрования BlowFish. Приведены исходники на Паскале, Ассемблере и С. <br><font color=#666666> Blowfish (Turbo) Pascal implementation of the Blowfish encryption algorithm as described in Dr Dobb's magazine of April 1994. Including sources of the unit, an programming example and the original C version, written by Bruce Schneier, the author of the algorithm.</font>">
+<meta name="keywords" content="pascal, sources, source code, blowpas, crypt, Криптография ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Криптография</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;blowpas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Blowfish v1.1 - Blowfish Encryption Algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:292/608.24">Erik Cumps</a></TD>
+<TD class=black align='right'>03.02.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Реализация алгоритма шифрования BlowFish.
+Приведены исходники на Паскале, Ассемблере и С. <br><font color=#666666>
+Blowfish (Turbo) Pascal implementation of the
+Blowfish encryption algorithm as described in
+Dr Dobb's magazine of April 1994. Including
+sources of the unit, an programming example
+and the original C version, written by Bruce
+Schneier, the author of the algorithm.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="blowpas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>32k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                 BLOWFISH.PAS
+
+                                 Version 1.1b
+
+                               31 December 1994
+
+Original  C  code  written  by  Bruce  Schneier,  translated to
+Turbo  Pascal with some additional changes  by Walter van Holst
+with some debugging help from  Erik Cumps. Since Bruce Schneier
+placed the algorithm  in the public  domain this implementation
+should be as well.
+
+The additional changes are as following:
+
+    - Left out the part of the key initialization routine which
+      loaded a data file containing a random  seed, exactly the
+      same random seed is included in an constant. This is done
+      to make it easier to use this source for another compiler
+      than Borland  Pascal or Turbo Pascal. In the case you are
+      using this code on another  platform than MS-DOS and/or a
+      compiler which is not compatible with Turbo Pascal you'll
+      have to rewrite the F function entirely and should take a
+      look at the InitBlowfish routine as well. Apart from this
+      only the LongInt type variable might be platform/compiler
+      dependent, the rest of this code is standard Pascal.
+
+      However, you should outcomment  any reference to the i386
+      asm code included with  this package. Since  Jeroen did a
+      nice job in commenting his code, it should be easy for an
+      experienced M68xxx  assembler programmer  to port it to a
+      Motorola  platform, again  apart from  the little and big
+      endian  story. I would strongly discourage any  effort to
+      port anything of this to a  processor  unable to handle 32
+      bits integers in one instruction.
+
+    - The original source  code in C as published in Dr. Dobb's
+      Journal of April 1994 used one variable containing the P-
+      array  and another variable containing  the four S-boxes.
+      In  this implementation  only the datatypes of  these two
+      are defined. This enables the user to initialize multiple
+      keys concurrently,  but requires  the calling routines to
+      have the used variables defined themselves.
+
+    - The three most used routines (the F function, BlowEncrypt
+      BlowDecrypt)  are also implemented in TASM  thanks to the
+      efforts of Jeroen Pluimers.  The optimization of the code
+      resulted in a  performance increase of about 6000% If you
+      use the compiler  directive $Define Include_Asm and  have
+      all the .OBJ files in the right directory the performance
+      should be at least 256 Kbit/s using an i386DX33 processor
+      or better.
+
+      The author of the Blowfish algorithm can be reached via the
+      internet  as schneier@chinet.com, the authors of  this unit
+      have the following Fidonet addresses:
+
+                               Erik Cumps       2:292/608.24
+                               Walter van.Holst 2:281/201.4
+                               Jeroen Pluimers  2:281/256
+
+      Thanks to John Lots for helping with the first steps to im-
+      plement crucial parts in i386 assembler.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

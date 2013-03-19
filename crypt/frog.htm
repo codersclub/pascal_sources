@@ -1,0 +1,104 @@
+<html><head><title>The FROG Encryption Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Алгоритм шифрования FROG использует нестандартный подход. Секретный ключ строится не как простая текстовая строка, а как <b>программа</b> с набором примитивных инструкций. Цель такого подхода - как можно сильнее усложнить жизнь дешифровальщику. Программа плюс описание алгоритма [html]. <br><font color=#666666> FROG is a new cipher with an unorthodox structure. Any symmetrical cipher's job is to conceal the plaintext's information through a computational process of confusion and diffusion. The basic idea behind the design of FROG is to conceal the definition of most of this process in a secret internal key. The actual encryption algorithm operates as an interpreter that regards the secret internal key as a program and executes it as if it were a series of primitive instructions.</font>">
+<meta name="keywords" content="pascal, sources, source code, frog, crypt, Криптография ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Криптография</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;frog
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;The FROG Encryption Algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dianelos@tecapro.com">Dianelos Georgoudis</a></TD>
+<TD class=black align='right'>02.07.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Алгоритм шифрования FROG использует нестандартный подход.
+Секретный ключ строится не как простая текстовая строка,
+а как <b>программа</b> с набором примитивных инструкций.
+Цель такого подхода - как можно сильнее усложнить жизнь
+дешифровальщику. Программа плюс описание алгоритма [html]. <br><font color=#666666>
+FROG is a new cipher with an unorthodox structure. Any symmetrical
+cipher's job is to conceal the plaintext's information through a
+computational process of confusion and diffusion. The basic idea
+behind the design of FROG is to conceal the definition of most of
+this process in a secret internal key. The actual encryption
+algorithm operates as an interpreter that regards the secret
+internal key as a program and executes it as if it were a series
+of primitive instructions.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="frog.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>122k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">B.1. Introduction
+
+FROG is a new cipher with an unorthodox structure. Any symmetrical
+cipher's job is to conceal the plaintext's information through a
+computational process of confusion and diffusion. The basic idea
+behind the design of FROG is to conceal the definition of most of
+this process in a secret internal key. The actual encryption
+algorithm operates as an interpreter that regards the secret
+internal key as a program and executes it as if it were a series
+of primitive instructions. The goal is to deny the attacker as much
+knowledge as possible about the actual process being performed and
+therefore defeat any attack, whether publicly known or not. The
+encryption and decryption operations used in FROG are extremely
+simple. All the complexity lies within the internal key the details
+of which are unknown to an attacker.
+
+FROG is very easy to implement (the reference C version has only
+about 150 lines of code). Much of the code needed to implement FROG
+is used to generate the secret internal key, the internal cipher
+itself is a very short piece of code. The implementation will run
+well on 8 bit processors because it uses only byte level
+instructions - the only arithmetic operation used is exclusive-OR
+and, optionally, 1 byte modulus. Also no bit specific operations
+are used. The algorithm is fairly fast, a version implemented using
+8086 assembler achieves processing speeds of over 2.2 Mbytes per
+second when run on a 200 MHz Pentium PC. A version implemented
+using Pentium specific assembler would run even faster.
+
+The FROG reference program included in this submission allows for
+user keys of any length between 5 bytes and 125 bytes (i.e. between
+40 bits and 1000 bits in multiples of 8 bits). The block size is
+defined as a constant and is set equal to 16 bytes which is the
+minimum requirement for AES. Nevertheless, this constant can be
+given any value (even odd values) between 8 and 128 bytes in which
+case the re-compiled code will encrypt blocks whose sizes vary from
+a minimum of 64 bits up to a maximum of 1024 bits.
+
+                        -------------
+
+Pascal reference implementation for the FROG symmetric block cipher
+submitted by TecApro to NIST as an AES candidate algorithm. This
+implementation of FROG is more flexible than the C and Java reference
+implementations submitted, because it permits the use of any block
+size between 8 bytes and 128 bytes.
+
+The full FROG documentation can be found in www.tecapro.com
+
+This code was written by Dianelos Georgoudis
+(email: dianelos@tecapro.com)
+in June 1998.
+
+This source code has three parts:
+
+A. Definition of the pure FROG algorithm.
+
+B. Implementation of the NIST specified API, including ECB, CBC,
+   and CFB 1-bit modes.
+
+C. Examples of use in ECB, CBC and CFB mode as well as code for the
+   creation of the Known Answer Tests and the Monte Carlo Tests,
+   as specified by NIST.
+
+This algorithm is put in the public domain.
+
+Disclaimer:
+TecApro is not responsible for any damage, direct or indirect,
+resulting from the use of this source code, and makes no claims about
+its fitness for any particular purpose. By using this software you are
+solely responsible for all consequences. *)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,172 @@
+<html><head><title>The IDEA Encryption Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Реализация на Паскале алгоритма шифрования &quot;IDEA&quot;. <br><font color=#666666> IDEAUNIT is a unit for Turbo/Borland Pascal that allows programmers to add powerful encryption technology to their programs easily.</font>">
+<meta name="keywords" content="pascal, sources, source code, ideaengl, crypt, Криптография ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Криптография</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ideaengl
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;The IDEA Encryption Algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:olistrut@aol.com">Oliver Strutynski</a></TD>
+<TD class=black align='right'>16.12.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Реализация на Паскале алгоритма шифрования "IDEA". <br><font color=#666666>
+IDEAUNIT is a unit for Turbo/Borland Pascal that allows
+programmers to add powerful encryption technology to their
+programs easily.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ideaengl.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">IDEA for Pascal
+===============
+
+IDEAUNIT is a unit for Turbo/Borland Pascal that allows programmers
+to add powerful encryption technology to their programs easily.
+
+If you have any comments or bug reports please send an eMail to
+either olistrut@geocities.com (preferred) or olistrut@aol.com.
+
+IDEAUNIT exports four routines that can be used for data encryption
+and decryption using the IDEA-Algorithm.
+
+The functions encryptFile and decryptFile provide an easy-to-use
+interface for encrypting entire files. They require three parameters
+and are to be called the following way:
+
+        PROGRAM idea_encryption;
+        USES IdeaUnit;
+
+        VAR ideaResult:Byte;
+            inFileName, outFileName, password: STRING;
+        BEGIN
+           { Get filenames and password first }
+           ideaResult:=encryptFile(inFileName, outFileName, password);
+           IF ideaResult&lt;&gt;0 then Writeln('IO-Error')
+        END. {idea_encryption}
+
+
+        PROGRAM idea_decryption;
+        USES IdeaUnit;
+
+        VAR ideaResult:Byte;
+            inFileName, outFileName, password: STRING;
+        BEGIN
+           { Get filenames and password first }
+           ideaResult:=decryptFile(inFileName, outFileName, password);
+           IF ideaResult&lt;&gt;0 then Writeln('IO-Error')
+        END.
+
+Both functions return 0 when executed successfully, if there is an
+file error they return the value of ioResult.
+encryptFile does not only encrypt the file and writes it to disk,
+it also writes a header to the file, indicating that the file was
+encrypted with the IDEA algorithm and also saving the file size of the
+input files.
+I have seen other implementations of the IDEA cypher that did not save
+any information about the file size but they couldn't restore the
+file size when decrypting files because IDEA always encrypts 64 bit
+blocks.
+However the header does not affect the security of the encryption.
+If you know of any standard file format for idea encrypted files
+please inform me so that I can include this in a future release of
+the unit.
+
+There are two more procedures that allow you to encrypt/decrypt a
+single block of data (data blocks for IDEA are 64 bit).
+
+They are called the following way:
+
+  encryptBlock(inBlock,
+               outBlock {both of type tblock64},
+               key {of type tkey128});
+  decryptBlock(inBlock,
+               outBlock {both of type tblock64},
+               key {of type tkey128});
+
+tBlock64 and tKey64 are defined in the unit. outBlock is a VAR
+parameter.
+tBlock64 is an Array[1..4] of word that should be filled with your
+data and tkey128 is an array[1..8] of word that is filled with your
+key. The encryption key and the decryption key are the same. If you
+already have word data you can simply fill the inBlock array with
+your data, otherwise (like if you have byte data) the data can be
+converted to a block in any way you like to, but be sure to use
+correct conversion in both ways. It would be best te check out your
+conversion (data-&gt;block and block-&gt;data) without encryption first
+and include encryption when your conversion works.
+
+If your are not sure how to do the conversion have a look at the
+procedures str2Block and Block2Str in the unit.
+
+The following example shows how to encrypt the word data (0,1,2,3)
+with the key (1,2,3,4,5,6,7,8) (64 bit data and a 128 bit key).
+
+PROGRAM encrypt_word_data;
+USES ideaunit;
+
+VAR block : tblock64;
+    i     : Byte;
+
+CONST key:tkey128=(1,2,3,4,5,6,7,8);
+
+BEGIN
+  WriteLn('IDEA-Encryption');
+  WriteLn('===============');
+  { Set data array }
+  block[1]:=0; block[2]:=1; block[3]:=2; block[4]:=3;
+  { encryption: source data is overwritten }
+  encryptBlock(block,block,key);
+  Write('Encrypted data:  ');
+  FOR i:=1 TO 4 DO
+      Write(block[i],'  ');
+  { decryption: encrypted data is overwritten }
+  decryptBlock(block,block,key);
+  Write('decrypted data:  ');
+  FOR i:=1 TO 4 DO
+      Write(block[i],'  ');
+END.
+
+
+LEGAL STUFF
+===========
+
+The IDEA-Unit is copyright (c) 1996 Oliver Strutynski
+olistrut@geocities.com or olistrut@aol.com
+For the newest version check out
+ http://members.aol.com/olistrut/idea.htm.
+This program and the sourcecode may be used freely for non
+commercial purposes.
+If you modify the source code please include a notice that is was
+derived from my original unit and include the link to the web site
+mentioned above. Also if you modify the source code, you have to make
+clear that the new unit is _NOT_ my original IDEA unit.
+If you want to redistribute this unit (like on an FTP server or a BBS
+please send me an eMail so that I can notice you if there are any
+changes to the unit.
+
+This has to be said:
+I assume no liability for damages resulting from the use of
+this software, even if the damage results from defects in this
+software, and I make no representations concerning the
+merchantability of this software or its suitability for any specific
+purpose.  It is provided "as is" without express or implied warranty
+of any kind.
+Because certain actions may delete files or render them
+unrecoverable, I assume no responsibility for the loss or
+modification of any data.
+
+Remember that the IDEA algorithm is patent protected by Ascom-Tech AG.
+No license fees are required for non-commerical use.  Commerical users
+should contact
+Ascom Systec AG, Dept CMVV, Gewerbepark, CH-5506, Magenwil,
+Switzerland, idea@ascom.ch
+
+
+---------------------------end of file------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
