@@ -1,0 +1,123 @@
+<html><head><title>Date 1.5 - Julian Date Conversion Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для работы с датами в Юлианском стиле. <br><font color=#666666> This unit allows for easy date manipulation via Julian Date conversion</font>">
+<meta name="keywords" content="pascal, sources, source code, date, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;date
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Date 1.5 - Julian Date Conversion Unit</TD>
+<TD nowrap class=black>&nbsp;David Gegenheimer</TD>
+<TD class=black align='right'>25.06.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для работы с датами в Юлианском стиле. <br><font color=#666666>
+This unit allows for easy date manipulation via Julian Date conversion</font></TD><TD class=black colspan=2 align='right'><br><A HREF="date.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  +----------------------------------+                  
+                  |             D A T E              |                  
+                  |              V 1.5               |                  
+                  |         David Gegenheimer        |                  
+                  +----------------------------------+                  
+                  |  Last Change Made  :  06/25/1992 |                  
+                  +----------------------------------+                  
+
+This unit is given freely, as is.  The author will not, and should not
+be held responsible for any damages incurred by its use/misuse.  The
+use of this unit should happen only after the user has examined its code
+and found that it meets his/her satisfaction.  The author would really
+appreciate hearing about any bugs in this unit that are found.  However,
+this unit cannot be modified and re-destributed by anyone except David
+Gegenheimer.  The reason being for this is mainly to protect myself. If
+someone modifies the code for the worse, and sends it out - I get the
+blame!.
+On the brighter side!   This code is free!  Please Send no Money!
+                   Use it in any program you like!
+
+If you have found any bugs, please write me at the following address, &
+tell me the bug, and what BBS you downloaded it from  so that I can send
+them an update! THANK YOU!
+
+                          David Gegenheimer
+                          600 Clayton Dr.
+                          Houma, La. 70364
+
+This unit allows for easy date manipulation via Julian Date conversion.
+The routines and their parameters are as follows:
+
+ Function  JulianDate (Day,Month,Year)
+         - Send it 3 Integers
+         - Returns a variable of type JDate
+         - Ex. AJDate := JulianDate (1,1,1992); (AJDate = 2448622)
+
+ Procedure CalendarDate (AJDate,Day,Month,Year)
+         - Send it a Julian Date, and 3 Integers
+         - Returns the Day,Month, & Year contained in the Julian Date
+         - Ex. CalendarDate (2448622,Day,Month,Year); (1/1/92)
+
+ Function  DayOfTheWeek (AJDate)
+         - Send it a Julian Date
+         - Returns an integer representing the Day of the Week
+         - (1 = Sunday, 2 = Monday, ... 6 = Friday, 7 = Saturday)
+         - Ex. TheDayOfTheWeek := DayOfTheWeek (A_Julian_Date);
+
+ Function  MonthAbrv (Month,Full)
+         - Send it an Integer and a Boolean variable
+         - Returns a String containing the month's name
+         - If Full is TRUE then the full months name is returned
+         - If Full is FALSE then a 3 character abbreviation is returned
+         - Ex. Mnth_Name := MonthAbrv (1,True);  (Mnth_Name = 'January')
+         - Ex. Mnth_Name := MonthAbrv (1,False); (Mnth_Name = 'Jan');
+
+ Function  ValidDate (Day,Month,Year)
+         - Send it 3 Integers
+         - Returns TRUE if a valid date or FALSE if an Invalid date
+         - Ex. GoodDate := ValidDate (2,31,1992); (GoodDate = False)
+         - Ex. GoodDate := ValidDate (1,30,1992); (GoodDate = True)
+
+ Procedure DrawCalendar (X,Y,Day,Month,Year,TopColor,BotColor,HiColor);
+         - Send it 6 Integers
+         - X,Y is the Upperleft corner of the calendar to be printed
+         - Day if not 0 will be Hilighted on the calendar;
+         - Month and Year describe the contents of the calendar
+         - TopColor is in the format: BackGround*16+ForeGround
+         - BotColor is in the format: BackGround*16+ForeGround
+         - HiColor  is in the format: BackGround*16+ForeGround
+         - Ex. DrawCalendar (35,10,1,1,1992,Red*16+Yellow,Blue*16+White)
+         - Result is:       January , 1992      &lt;-- Yellow on Red
+                         Su  M  T  W  H  F Sa   &lt;-- Yellow on Red
+                                   1  2  3  4   &lt;-- White on Blue
+                          5  6  7  8  9 10 11            .
+                         12 13 14 15 16 17 18            .
+                         19 20 21 22 23 24 25            .
+                         26 27 28 29 30 31      &lt;-- White on Blue
+           Note: This Chart appears at X = 35, Y= 10
+
+ Procedure DateToStr
+           - Real Simple, send it the date, and tell it how you want it
+
+ Procedure StrToDate
+           - The reverse of DateToStr
+
+ Function  DateToday
+           - Returns a ten character string containing todays date.
+
+ Function  SDateCompare
+           - Send it two string dates.
+           - It returns   -1 if Date1 is Before Date2
+                           0 if Date1 is Date2
+                           1 If Date1 is After  Date2
+
+ Function  SDateDiff
+           - Send it two string dates.
+           - It returns the difference in days between date1 and date2
+           - Note: The calculation is performed:  Date1 - Date2.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,140 @@
+<html><head><title>JULES - Find the Number of Days between Two Dates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Вычисление разности двух дат по Юлианскому календарю. <br><font color=#666666> This program shows a pretty good way to find the number of days between two dates. It is reasonably fast and has a mininum of source code to it. </font>">
+<meta name="keywords" content="pascal, sources, source code, jules, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;jules
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;JULES - Find the Number of Days between Two Dates</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:101/45">David Strickler</a></TD>
+<TD class=black align='right'>20.11.1985</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Вычисление разности двух дат по Юлианскому календарю. <br><font color=#666666>
+This program shows a pretty good way to find the number
+of days between two dates. It is reasonably fast and
+has a mininum of source code to it. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="jules.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Program Jules;
+{
+  All of the explanation needed is the source.
+
+  "May this routine make all your code run faster"
+                            - Programmer's Prayer
+}
+
+
+Type
+  Str3 = string[3];  {for a month name}
+  str9 = string[9];
+Var
+  Date1,Date2    : string[12]; {the dates to compare}
+  Number_of_days : integer;    {Number of days between the two dates}
+
+Function Number_of_Month (Month : str3) : integer;
+{Returns the sequential number of the month; Jan=1 & Dec = 12}
+Var
+  Temp : integer;
+  Dates : string[36];
+Begin
+  {Notice how I scan the string. Less code than a case!}
+  Dates := 'JanFebMarAprMayJunJulAugSepOctNovDec';
+  Number_of_Month := round((pos(Month,Dates)-1)/3) +1;
+End;
+
+function Since_Beginning (month,day,year : integer) : integer;
+var
+   DayCount  : integer;   {Holds the number of days}
+   Temp      : integer;   {Just a temporary holding integer}
+   Num_Leaps : integer;   {Holds the number of leap years}
+Begin
+  Num_Leaps := 0;
+  DayCount  := 0;
+  Writeln;
+  Writeln('Scanning ',month,'/',day,'/',year,' ...');
+  for Temp := 1 to year do   {Gets the number of leap years}
+    If (temp mod 4) = 0 then Num_Leaps := Num_Leaps + 1;
+  Writeln('Found ',num_leaps,' leap years occuring');
+  DayCount := (year * 365) + Num_Leaps;  {calcs year & leap year}
+  Writeln('Making ',abs(daycount),' days in ',year,' YEARS');
+  DayCount := DayCount + Day; {adds in days}
+  Writeln('Plus ',day,' days makes ',abs(daycount),
+          ' days in YEAR + DAY');
+
+  For Temp := 1 to Month-1 do
+{
+ Couldn't help but put a large case here.
+ The number is the number of days in that month. Feb is 28 because
+ the leap year counter takes the leap year into effect
+}
+  Begin
+    Case Temp of
+      1 : DayCount := DayCount + 31; {jan}
+      2 : DayCount := DayCount + 28; {feb}
+      3 : DayCount := DayCount + 31; {mar}
+      4 : DayCount := DayCount + 30; {apr}
+      5 : DayCount := DayCount + 31; {may}
+      6 : DayCount := DayCount + 30; {jun}
+      7 : DayCount := DayCount + 31; {jul}
+      8 : DayCount := DayCount + 31; {aug}
+      9 : DayCount := DayCount + 30; {sep}
+     10 : DayCount := DayCount + 31; {oct}
+     11 : DayCount := DayCount + 30; {nov}
+     12 : DayCount := DayCount + 31; {dec}
+    end; {case of temp}
+  end; {for loop}
+  Since_Beginning := DayCount;
+  Writeln('Plus ',month,' months makes ',abs(daycount),
+          ' days since 00/00/00');
+end; {function SINCE_BEGINNING}
+
+
+Function Days_Elapsed (date1,date2 : str9) : integer;
+Var
+  Month1,Day1,Year1,
+  Month2,Day2,Year2 : integer; {sets of dates}
+  Temp1,Temp2       : integer; {for the VAL function}
+Begin
+  Month1 := Number_of_Month(Copy(date1,4,3));  {gets the month number}
+  Month2 := Number_of_Month(Copy(date2,4,3));  {gets the month number}
+  Val(copy(date1,1,2),Day1,Temp2);      {get everything into numerics}
+  Val(copy(date2,1,2),Day2,Temp2);      { "        "      "      "   }
+  Val(copy(date1,8,2),year1,temp2);     { "        "      "      "   }
+  Val(copy(date2,8,2),year2,temp2);     { "        "      "      "   }
+  Val(copy(date1,8,2),year1,temp2);     { "        "      "      "   }
+  Val(copy(date2,8,2),year2,temp2);     { "        "      "      "   }
+  Days_Elapsed := Since_Beginning(month2,day2,year2) -
+                  Since_Beginning(month1,day1,year1);
+                  {The difference of the two numbers}
+end;
+
+Begin {Main}
+  Date1 := '27 Jan 64';  {My birthday}
+  Date2 := '20 Nov 85';  {When I last edited this program}
+  ClrScr;                {If you want originality, call an author...}
+  Writeln('JULES   -  Finds the number of days between two dates ',
+          'using a JULIAN manner.');
+  Writeln('Author  -  David Strickler');
+  Writeln('Address -  FIDO 101/45  [Midnight DEC]');
+  Writeln;
+  Writeln('This program shows a pretty good way to find the number');
+  Writeln('of days between two dates. It is reasonably fast and');
+  Writeln('has a mininum of source code to it. Please use it as');
+  Writeln('you wish. The only right I claim, is that is it officialy');
+  Writeln('in the Public Domain.');
+  Writeln;
+  {Call the main function. Very neat & clean. Two in, one out}
+  Number_of_Days := Days_Elapsed(date1,date2);
+  Writeln('Number of days between ',date1,' and ',date2,' is ',
+           Number_of_days);
+End.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

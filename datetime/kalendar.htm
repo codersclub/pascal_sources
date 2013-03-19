@@ -1,0 +1,91 @@
+<html><head><title>Вечный календарь на год</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа печатает на экран календарь на любой год.">
+<meta name="keywords" content="pascal, sources, source code, kalendar, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;kalendar
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Вечный календарь на год</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:463/357.5">Sergey Shcherbakov</a></TD>
+<TD class=black align='right'>06.08.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа печатает на экран календарь на любой год.</TD><TD class=black colspan=2 align='right'><br><A HREF="kalendar.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ------------------------------------------ It's interesting -
+ Msg  : 92 of 200                   Addr                        Date
+ From : Sergey Shcherbakov       2:463/357.5                06.08.97
+ Subj : Вечный календарь на год
+--------------------------------------------------------------------
+Рад приветствовать Sergey !
+
+Понедельник Август 04 1997, 15:21 - Sergey Zaikov пиcали к All:
+
+ SZ&gt; А не завалялись ли у кого-нибудь исходники subj ???
+ SZ&gt; (язык пpогpаммиpования значения не имеет)
+
+    Вот на весь год.
+
+ SZ&gt; Заpанее благодаpен, Sergey.
+
+До свидания, Sergey.
+
+--- Жадный Голый Дед - III
+* Origin: А хотя бы и жадный - Зато от чистого сердца. :) (2:463/357.5)
+---
+Program kalendar;
+uses crt;
+const
+ kd:array[1..7] of string=('пн','вт','ср','чт','пт','сб','вс');
+ month:array[1..12] of string=('январь','февраль','март','апрель','май',
+ 'июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь');
+ days:array [1..12] of byte=(31,28,31,30,31,30,31,31,30,31,30,31);
+var
+ year:word;
+ i,j,d,t:byte;
+Begin clrscr;writeln('введите год');
+ read(year);clrscr;
+ d:=(2+(year-1901)+(year-1901) div 4); d:=d mod 7;
+ if d=0 then d:=7;
+ for i:=1 to 3 do
+  begin
+   for j:=1 to 7 do
+    begin
+     gotoxy(1,i+j+(i-1)*7);
+     write(kd[j])
+    end;
+  for j:=1 to 4 do
+   begin
+    gotoxy(wherex+8,wherey-7);
+    write(month[j+4*(i-1)]);
+    gotoxy(wherex-6-length(month[j+4*(i-1)]),wherey+d);
+    if year mod 4=0 then days[2]:=29;
+     for t:=1 to days[j+(i-1)*4] do
+      begin
+{----------}
+       if ((wherey-1) mod 8=7) then TextColor(LightRed);
+       write(t);
+       TextColor(LightGray);
+{----------}
+       if d+1=8 then begin
+        if (t&gt;=1) and (t&lt;9) then gotoxy(wherex+2,wherey-6)
+                            else gotoxy(wherex+1,wherey-6);
+        d:=1;end
+       else begin d:=d+1;
+        if (t&gt;=1) and (t&lt;9) then gotoxy(wherex-1,i+(i-1)*7+d)
+                            else gotoxy(wherex-2,i+(i-1)*7+d);
+       end;
+     end; gotoxy(wherex+3,i+i*7);
+   end
+ end ; readln;
+End.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

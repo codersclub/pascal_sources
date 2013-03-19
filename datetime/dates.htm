@@ -1,0 +1,97 @@
+<html><head><title>Dates v1R1 - Julian Date Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для работы с датами в Юлианском календаре.<br><font color=#666666> These routines helps to work with Julian dates.</font>">
+<meta name="keywords" content="pascal, sources, source code, dates, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dates
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Dates v1R1 - Julian Date Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:74370.516@compuserv.com">Charles B. Chapman</a></TD>
+<TD class=black align='right'>02.04.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для работы с датами в Юлианском календаре.<br><font color=#666666>
+These routines helps to work with Julian dates.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="dates.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Version 1R0 - 1991 03 25
+        1R1 - 1991 04 09 - corrected several bugs, and
+                         - deleted &lt;JulianDa2&gt;, &lt;Da2OfWeek&gt; and
+                           &lt;JulianDa2ToDate&gt; - all found to be not
+                           completely reliable.
+
+These routines all assume that the year (y, y1) value is supplied in a
+form that includes the century (i.e., in YYYY form).  No checking is
+performed to ensure that a month (m, m1) value is in the range 1..12
+or that a day (d, d1) value is in the range 1..28,29,30,31.  The
+FUNCTION ValidDate may be used to check for valid month and day
+parameters. FUNCTION DayOfYearToDate returns month and day (m, d) both
+= 0 if the day-of-the-year (nd) is &gt; 366 for a leap-year or &gt; 365 for
+other years.
+
+NOTE: As written, FUNCTION Secs100 requires the presence of a 80x87
+co-processor.  Its declaration and implementation may be altered to
+REAL to make use of the floating-point emulation.
+
+Because the Gregorian calendar was not implemented in all countries at
+the same time, these routines are not guaranteed to be valid for all
+dates. The real utility of these routines is that they will not fail
+on December 31, 1999 - as will many algorithms used in MIS programs
+implemented on mainframes.
+
+The routines are NOT highly optimized - I have tried to maintain the
+style of the algorithms presented in the sources I indicate. Any
+suggestions for algorithmic or code improvements will be gratefully
+accepted.  This implementation is in the public domain - no copyright
+is claimed.  No warranty either express or implied is given as to the
+correctness of the algorithms or their implementation.
+
+Author: Charles B. Chapman, London, Ontario, Canada [74370,516]
+Thanks to Leonard Erickson who supplied a test suite of values.
+
+FUNCTION IsLeap (y : WORD) : BOOLEAN;
+
+FUNCTION ValidDate (y, m, d : WORD) : BOOLEAN;
+FUNCTION ValidDate_Str (Str         : string;                   {DWH}
+                        VAR Y, M, D : word;
+                        VAR Err_Str : string) : boolean;
+FUNCTION ValidTime_Str (Str         : string;                   {DWH}
+                        VAR H, M, S : word;
+                        VAR Err_Str : string) : boolean;
+
+FUNCTION DayOfYear (y, m, d : WORD) : WORD;
+FUNCTION JulianDay (y, m, d : WORD) : LONGINT;
+FUNCTION JJ_JulianDay (y, m, d : word) : LONGINT;               {DWH}
+
+FUNCTION DayOfWeek (y, m, d : WORD) : WORD;
+FUNCTION DayOfWeek_Str (y, m, d : WORD) : String;               {DWH}
+
+FUNCTION TimeStr   (h, m, s, c : WORD) : STRING;
+FUNCTION TimeStr2  (h, m, s : WORD) : STRING;
+FUNCTION SIDateStr (y, m, d : WORD; SLen : BYTE;
+                    FillCh : CHAR) : STRING;
+FUNCTION MDYR_Str  (y, m, d : WORD): STRING;                    {DWH}
+
+FUNCTION Secs100 (h, m, s, c : WORD) : DOUBLE;
+PROCEDURE DayOfYearToDate (nd, y : WORD; VAR m, d : WORD);
+
+PROCEDURE JulianDayToDate (nd : LONGINT; VAR y, m, d : WORD);
+PROCEDURE JJ_JulianDayToDate (nd : LONGINT; VAR y, m, d : WORD);{DWH}
+
+PROCEDURE DateOfEaster (Yr : WORD; VAR Mo, Da : WORD);
+PROCEDURE AddDays (y, m, d : WORD; plus : LONGINT;
+                   VAR y1, m1, d1 : WORD);
+
+FUNCTION Lotus_Date_Str (nd : LONGINT) : string;                {DWH}
+FUNCTION Str_Date_to_Lotus_Date_Format
+                   (Date       : String;
+                    VAR Err_Msg : String): LongInt;  {OLC}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,73 @@
+<html><head><title>TEF 1.1 - Timed Execution Facility</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для запуска в указанное время внешних программ. <br><font color=#666666> TEF is an utility useful to execute some programs at a certain time (f.e. in the middle of the night, when you asleep)</font>">
+<meta name="keywords" content="pascal, sources, source code, tef11, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tef11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TEF 1.1 - Timed Execution Facility</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:holland@matt.ksu.ksu.edu">Rich Holland</a></TD>
+<TD class=black align='right'>10.07.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для запуска в указанное время внешних программ. <br><font color=#666666>
+TEF is an utility useful to execute some programs at a certain time
+(f.e. in the middle of the night, when you asleep)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tef11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PROGRAM Timed_Execution_Facility;
+{v1.1 Toad Hall Tweak
+ - Original TEF10 at SIMTEL20 appeared to be broken: it was missing
+   a big chunk of the source.
+   Received a shiny new TEF10.PAS source from the author,
+   and of course couldn't keep my fingers off it.
+ - Very minor tweaks, no functional changes.
+ - Standardized source case via CONV_P Pascal conversion utility.
+
+}
++---------------------------------------------------------------------+
+| PROGRAM:  TEF (Timed Execution Facility                             |
+| VERSION:  1.0                                                       |
+| AUTHOR :  Rich Holland                                              |
++---------------------------------------------------------------------+
+| SYNTAX :  TEF 24-hr-time command                                    |
++---------------------------------------------------------------------+
+| PURPOSE:  I needed to execute some programs at a certain time       |
+|           (usually the middle of the night, when I was asleep)      |
+|           like backing up my hard drive to tape.  TEF was my        |
+|           solution.  You enter the time in 24-hour format and the   |
+|           command to execute at that time.  You can NOT use         |
+|           switches, so if you need a command with arguments or      |
+|           switches, you'll either need to modify TEF, or (even      |
+|           easier) write a batch file that just has the command in   |
+|           it.  For example, to execute a 'dir C:\ /w' command, you  |
+|           could write a file like this (call it something like      |
+|           A.BAT, for example):                                      |
+|                                                                     |
+|           @echo off                                                 |
+|           dir C:\ /w                                                |
+|                                                                     |
+|           and execute it with:                                      |
+|                                                                     |
+|           TEF 23:00 A                                               |
+|                                                                     |
+|           The program is pretty well documented internally, and as  |
+|           far as I know, bug free.  When run, TEF will clear the    |
+|           screen and put up a status display with the current time, |
+|           the time it's going to go off, and the command it's going |
+|           to execute.  You can hit ALT-X to abort it anytime.       |
++---------------------------------------------------------------------+
+| CONTACT:  You can reach me at any of the following reliably:        |
+|                 Internet:  holland@matt.ksu.ksu.edu                 |
+|                 Bitnet  :  holland@ksuvm                            |
+|                 UUCP    :  ...!rutgers!matt.ksu.ksu.edu!holland     |
++---------------------------------------------------------------------+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

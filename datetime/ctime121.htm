@@ -1,0 +1,177 @@
+<html><head><title>CoolTimer v1.21a - Timer Programming Library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека для перепрограммирования аппаратного таймера. Приведены исходники на Си и Борланд Паскале.<br><font color=#666666> coolTimer Version 1.21a by B-coolWare. PC hardware timer programming library.            FAST and EASY.    Up to 50 concurrent handlers.    Pascal and C sources included!          Free of charge!!!</font>">
+<meta name="keywords" content="pascal, sources, source code, ctime121, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ctime121
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CoolTimer v1.21a - Timer Programming Library</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:loki@cnit.uniyar.ac.ru">Vladimir Zakharychev</a></TD>
+<TD class=black align='right'>27.06.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека для перепрограммирования аппаратного таймера.
+Приведены исходники на Си и Борланд Паскале.<br><font color=#666666>
+coolTimer Version 1.21a by B-coolWare.
+PC hardware timer programming library.
+           FAST and EASY.
+   Up to 50 concurrent handlers.
+   Pascal and C sources included!
+         Free of charge!!!</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ctime121.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">... TIMER.DOC ...................... coolTimer 1.21a Documentation File
+Document no.: M-0030.96.95M01.05     Copyright(c) 1995,96 by B-coolWare.
+                                                     Written by Bobby Z.
+
+ What's in this document.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This file contains the only available documentation on coolTimer
+ library.
+ Please read it carefully before making use of the coolTimer.
+ It contains all necessary information and describes all functions
+ found in the library.
+
+ What is coolTimer.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ coolTimer is the collection of routines for PC timer programming
+ for use in Pascal and C/C++. It allows up to 50* timer handlers
+ to be installed, each with different rate, with resolutions from
+ 18.2 times per second up to 22000 times per second. It uses no
+ floating point operations thus being really small and fast while
+ providing impressive accuracy. It doesn't interfere with system
+ clock keeping DOS working as if timer was not reprogrammed. With
+ coolTimer you'll be able to add up to 50* "concurrent"
+ time-dependant processes to your programs as easily as adding new
+ procedures.
+
+* By default, the number of concurrent handlers is limited to 5,
+  but it can be set to any number within 1 and 255. Though we do
+  not recommend to use values greater than 50. You will have to
+  edit the source code to change the number of concurrent handlers
+  supported and recompile the library.
+
+ Software Legal Status.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ coolTimer library is copyrighted free software. This means that
+ it can be distributed freely at no charge and used freely in
+ non-commercial software provided that you keep the copyright
+ notices unchanged. Usage of the library in commercial software
+ (including shareware) requires prior written consent from the
+ author. Here goes all the legal stuff:
+
+ You are hereby granted the right to distribute the coolTimer
+ library ("the library") provided that no fee is charged from
+ recipient(s) exceeding your expences arising from distribution
+ (uploading to a commercial network, for example) but not exceeding
+ $5 in total. You are also granted the right to use the library
+ in non-commercial software provided that you keep the original
+ copyright notice unchanged. Use of the library in commercial
+ software (including shareware) requires prior written consent from
+ the author. You may not change the library source code or object
+ files(*). If you break any of the terms mentioned you'll be liable
+ for violation of Russian Copyright Law in Computer Programs and
+ Databases as well as other national or international laws,
+ treaties or provisions.
+
+ Author disclaims all warranties, whether express or implied,
+ regarding the library, including but not limited to, any implied
+ warranties of code quality, reliability, errorlessness or fitness
+ for a particular purpose. The library is distributed on "as is"
+ basis and author shall not be liable for any damages, losses of
+ data or profits or any similar troubles. The whole risk is with you.
+
+ Author reserves the right to change software legal status in
+ subsequent releases (for example, to shareware) as he sees fit.
+ If he will change the software status, all previous releases will
+ remain free and publicly available.
+
+ Author provides no support of any kind for this software.
+ But all letters regarding it will be processed and answered
+ within reasonable time and found bugs will hopefully be
+ eliminated ASAP.
+
+(*)you may change the number of supported channels if your software
+   needs more than five concurrent channels, but you may not
+   distribute changed code.
+
+
+ Some Theory.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * if you know how hardware timer works, you can skip this chapter.
+
+ The PC hardware timer is a relatively simple counter chip that
+ has a special register called "latch" that holds some number.
+ At the rate of 1193181 Hz the counter decreases the latch and when
+ its value reaches zero, the chip generates hardware interrupt,
+ then reloads the latch from another special register. Both registers
+ are word-sized, thus the maximum value for latch is 0 and minimum
+ is 1 (this is a bit tricky: the chip first decreases the latch value,
+ and only after that compares it to zero. Keeping in mind the fact,
+ that after decreasing 0 we get -1 and -1 is effectively the same as
+ unsigned 65535 (all bits set to 1), it appears that the counter will
+ have to run down to zero through all 65536 possible positions if we
+ start with 0). By default, the latch is set to 0, resulting in
+ hardware interrupt being generated approximately 18.2
+ (1193181/65536) times per second. If we reduce the latch value,
+ the timer will generate interrupt more often. Thus the latch acts
+ like a delay value for interrupt generator: the less is delay,
+ the more often interrupt is generated. What's more important,
+ is that we are able to compute and set the delay so that the timer
+ will generate the interrupt at any rate we might need and it's quite
+ precise. The equation is
+    [times per second] = 1193181/[delay]
+ and if we reverse it we'll achieve the equation used in this library:
+  [delay] = 1193181/[needed times per second] !
+ Luckily the chip was designed so that it allows to change the latch
+ initial value from software. Both special registers can be read and
+ the one that holds initial value also can be written using I/O ports
+ 40h through 43h.
+ You can read more about actual timer chip programming in any book or
+ manual that covers PC hardware programming. Robert Jourdain's
+ "Inside the IBM PC/AT" is a good starting point for a dummy
+ (regrettably, I don't remember it's ISBN).
+
+
+ Support
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ The coolTimer library is NOT supported by its author, nor by anyone
+ else. Although if you spot a bug in it or would like to talk about
+ it or suggest some improvements, you can contact author at
+
+ internet: loki@cnit.uniyar.ac.ru
+  FIDOnet: 2:5028/52.6, Vladimir M. Zakharychev aka Bobby Z.
+
+ I am always answering all letters regarding my products, whether
+ supported or not and all bugs are fixed asap.
+
+ Latest version can be obtained at
+  http://cnit2.uniyar.ac.ru/user/BobbyZ/ctimer.htm
+  ftp://cnit2.uniyar.ac.ru/local/BobbyZ/pubfiles/
+
+ If you made use of the library, I'd like you to let me know. Send me
+ a postcard with a view of the place where you live or whatever you
+ prefer to the following address:
+
+ Vladimir M. Zakharychev
+ 150031, 10-4-13,
+ Dobrynina Str.,
+ Yaroslavl,
+ Russia
+
+ and write a word "coolTimer" on it along with your opinion
+ (GREAT!!!, COOL!, NICE, FAIR, WORTHY, LAME, etc.).
+
+ Thanx for yer attention, good bye.
+
+*** AND DON'T FORGET TO CHECK OUT MY HOMEPAGE ON THE WEB AT THE URL: ***
+            http://cnit2.uniyar.ac.ru/user/BobbyZ/Homepage.htm</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

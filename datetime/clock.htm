@@ -1,0 +1,161 @@
+<html><head><title>Чтение времени из CLOCK$</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программка для чтения текущего времени из устройста &quot;CLOCK$&quot;">
+<meta name="keywords" content="pascal, sources, source code, clock, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;clock
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Чтение времени из CLOCK$</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stop@stop.karaganda.su">Сергей Топ</a></TD>
+<TD class=black align='right'>19.01.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программка для чтения текущего времени из устройста "CLOCK$"</TD><TD class=black colspan=2 align='right'><br><A HREF="clock.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello All !
+
+Вот еще один интересный способ узнать текущее время. 
+Я думаю, не все об этом знают.
+Не используется _ни_один_ unit, не вызываются прерывания DOS/BIOS 
+"дать время". Просто читаем время из файла, который называется
+"CLOCK$" - это стандартный драйвер устройства "часы" для DOS. 
+BTW, тем же способом можно поставить время, записав его туда.
+
+--
+
+  &lt;\ -----+--       E-mail:  stop@stop.karaganda.su
+  \&gt;ergey |op       FidoNet: 2:5083/43 aka 40.13
+                    Phone:   +7-3212-741177
+---
+uses Dos,Crt;
+const
+  days : array [0..6] of String[9] =
+    ('Sunday','Monday','Tuesday',
+     'Wednesday','Thursday','Friday',
+     'Saturday');
+  timeout = 5;
+var
+  y,ma,d,dow,h, m, s, s100, s1, y_old, ma_old, d_old, dow_old : word;
+  fir:text;
+  Ch:char;
+  xx, yy : word;
+  check_tm : boolean;
+
+procedure  ShowDate(y, m, d, dow : word);
+begin
+  TextColor(lightgreen);
+  write( days[dow],', ');
+  TextColor(yellow);
+  write(  d:0, '/', m:0, '/', y:0,'   ');
+  TextColor(black);
+  write(' ');
+  GoToXY(WhereX - 1, WhereY);
+end;
+
+begin
+  writeln;
+  writeln('Enter  go, '#$1a' inc day, '#$1b' dec day, '#$18,
+          ' inc month, '#$19' dec month');
+  writeln('Esc exit without saving, gray + dec year, gray - inc year');
+  {$I-}
+  assign (fir,'clock.txt');
+  reset (fir);
+  if IoResult &lt;&gt; 0 then begin
+                          y := 1994;
+                          ma := 1;
+                          d := 1;
+                        end
+  else begin
+         readln (fir,d,ma,y);
+         close (fir);
+       end;
+  y_old := y;
+  ma_old := ma;
+  d_old := d;
+  SetDate (y,ma,d);
+  GetDate(y,ma,d,dow);
+  dow_old := dow;
+  Write('Today is ');
+  xx := WhereX;
+  yy := WhereY;
+  ShowDate(y, ma, d, dow);
+
+  GetTime(h, m, s, s100);
+  check_tm := true;
+
+  while true do
+   begin
+     if  check_tm  then
+     begin
+          while not KeyPressed do
+          begin
+               GetTime(h, m, s1, s100);
+               if  s1-s mod 60 = timeout  then  break;
+
+          end;
+          if not KeyPressed  then break;
+     end;
+     Ch := ReadKey;
+     case Ch of
+       #13 : break;
+       #27 : begin
+                  GoToXY(xx,yy);
+                  ShowDate(y_old, ma_old, d_old, dow_old);
+                  TextColor(LightGray);
+                  writeln;
+                  SetDate(y_old, ma_old, d_old);
+                  Halt(0);
+              end;
+       '+' : begin
+                 y := y + 1;
+                 check_tm := false;
+             end;
+       '-' : begin
+                 y := y - 1;
+                 check_tm := false;
+              end;
+       #0  :  begin
+                Ch := ReadKey;
+                case Ch of
+                  #77 : begin
+                             if d &lt; 31 then d := d + 1;
+                             check_tm := false;
+                        end;
+                  #75 : begin
+                             if d &gt; 1 then d := d - 1;
+                             check_tm := false;
+                        end;
+                  #72 : begin
+                             if ma &lt; 12 then ma := ma + 1;
+                             check_tm := false;
+                        end;
+                  #80 : begin
+                             if ma &gt; 1 then ma := ma - 1;
+                             check_tm := false;
+                        end;
+                end;
+              end;
+     end;
+     GoToXY(xx,yy);
+     SetDate (y,ma,d);
+     GetDate(y,ma,d,dow);
+     ShowDate(y, ma, d, dow);
+   end;
+   SetDate(y,ma,d);
+   assign(fir,'clock.txt');
+   rewrite(fir);
+   writeln(fir,d,' ',ma,' ',y);
+   close(fir);
+   TextColor(LightGray);
+   writeln;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,61 @@
+<html><head><title>LilPIT - Precision Interval Timers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для организации до 64 независимых счетчиков времени, обеспечивающих точность либо 1 секунда, либо 1 тик. <br><font color=#666666> This small unit provides TIMERS.  Timers mark intervals with one-second resolution. There are 64 separate timers, referenced 0 to 63. <br><font color=#666666>">
+<meta name="keywords" content="pascal, sources, source code, timers, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;timers
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LilPIT - Precision Interval Timers</TD>
+<TD nowrap class=black>&nbsp;Woburn Software</TD>
+<TD class=black align='right'>23.12.1988</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для организации до 64 независимых счетчиков времени,
+обеспечивающих точность либо 1 секунда, либо 1 тик. <br><font color=#666666>
+This small unit provides TIMERS.  Timers mark intervals
+with one-second resolution. There are 64 separate timers,
+referenced 0 to 63. <br><font color=#666666></TD><TD class=black colspan=2 align='right'><br><A HREF="timers.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">In hardware there are devices called precision interval
+generators or precision interval timers, PIGs and PITs.   One
+of their functions that is often used to time out real time
+events is a downcounter.  A downcounter tells you when a pre
+-set time interval has elapsed.
+
+Here is a turbo pascal 5.0 unit called "lilpit" that has
+software PITs.  There are two sets, one with one-second
+resolution and one with about 50 millisecond resolution.  The
+trade off for resolution is  execution time.   The one_second
+flavor runs about 3 times faster than the millisecond kind.
+
+The software is simple to interface.   You have to "preset or
+START the timer with a call specifying how long you want it to
+run.  After that, you "poll" or TEST the timer to see if it has
+expired.  There are some examples in the source code at the top
+of pascal source module LILPIT.PAS.  Take a look at them.
+
+Lastly, there are some bells and whistles.   There is a  global
+debugging flag named "LILPIT_FATAL_ERROR" that catches some
+programmer or system slips.  There is a very fast time/date
+string conversion function named "AT_TOD" and there is a
+simplistic timer number allocate/deallocate scheme named
+"get_a_timer_number" and "unget_a_timer_number."  Lastly, there
+is an initialization/error recovery entry point called
+"reset_pit."
+
+
+Enjoy and Merry Christmas.
+
+                     WOBURN SOFTWARE ASSOCIATES
+                     6 Lawson Street
+                     Woburn MA 01801-3718</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

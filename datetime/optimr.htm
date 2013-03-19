@@ -1,0 +1,113 @@
+<html><head><title>OpTimer v1.0 - High-Resolution Timing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для высокоточных отсчетов времени в среде DOS. Обеспечивает точность до 1 микросекунды за счет перепрограммирования микросхемы таймера. <br><font color=#666666> OPTIMER - Routines for high-resolution timing of events </font>">
+<meta name="keywords" content="pascal, sources, source code, optimr, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;optimr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OpTimer v1.0 - High-Resolution Timing</TD>
+<TD nowrap class=black>&nbsp;Kim Kokkonen</TD>
+<TD class=black align='right'>02.10.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для высокоточных отсчетов времени в среде DOS.
+Обеспечивает точность до 1 микросекунды за счет
+перепрограммирования микросхемы таймера. <br><font color=#666666>
+OPTIMER - Routines for high-resolution timing of events </font></TD><TD class=black colspan=2 align='right'><br><A HREF="optimr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">OPTIMER - Routines for high-resolution timing of events
+-------------------------------------------------------
+Brian Foley and Kim Kokkonen
+TurboPower Software
+1/90
+Version 1.0
+Released to the public domain
+
+Overview
+--------------------------------------------------------------
+One problem commonly faced when trying to run benchmarks on a
+PC is that, by default, the system clock is accurate only to
+1/18th of a second. The OPTIMER unit provides a simple and
+convenient means of timing events with microsecond resolution.
+It does this by reprogramming the timer chip, but the gory
+details are hidden from you. OPTIMER automatically reprograms
+the timer before your program starts, then restores it to its
+normal state when your program ends.  Unless your program is
+working with the timer chip at a very low level, no
+incompatibilities should arise, nor should the performance of
+your program change.
+
+Using OPTIMER
+--------------------------------------------------------------
+OPTIMER is very easy to use. You just add it to your program's
+USES statement and call the ReadTimer function when you are
+ready to start/stop timing. For a simple demonstration of how
+to use OPTIMER, see BENCH.PAS.
+
+OPTIMER interfaces the following routines:
+
+  function ReadTimer : LongInt;
+    {-Read the timer with 1 microsecond resolution}
+
+  function ElapsedTime(Start, Stop : LongInt) : Real;
+    {-Calculate time elapsed (in milliseconds) between Start
+      and Stop}
+
+  function ElapsedTimeString(Start, Stop : LongInt) : string;
+    {-Return time elapsed (in milliseconds) between Start and
+      Stop as a string}
+
+  procedure InitializeTimer;
+    {-Reprogram the timer chip to allow 1 microsecond resolution}
+
+  procedure RestoreTimer;
+    {-Restore the timer chip to its normal state}
+
+The first three of these are probably the only ones you'll ever
+need to use.  InitializeTimer is executed automatically before
+your program begins, RestoreTimer when it ends. You shouldn't
+call these yourself unless you want to reset the timer to its
+normal state temporarily, as you might before using the Exec
+procedure in the DOS unit:
+
+   RestoreTimer;
+   Exec();
+   InitializeTimer;
+
+Limitations
+-----------
+Because long integers are used to represent time, OPTIMER
+cannot be used to time events longer than about 60 minutes:
+
+   4,294,967,295 (= $FFFFFFFF, largest unsigned value
+                    represented by longint)
+ /     1,193,181 (timer resolution in counts/second)
+ ---------------
+           3,599
+         /    60 (seconds/minute)
+         -------
+            59.9 minutes
+
+This should hardly be a problem, however, since an event longer
+than an hour presumably doesn't need to be timed with
+1-microsecond accuracy anyway.
+
+Also note that the process of reading the time takes time.
+Hence, results of timing very short events will be skewed by
+the overhead of reading the timer.  OPTIMER executes a
+calibration routine to try to compensate for this overhead as
+much as possible. This routine estimates the amount of time
+required to read the timer twice, and uses this value in
+ElapsedTime and ElapsedTimeString to adjust for the overhead.
+Even so, you should expect an error due to overhead of about
+1-4 ms.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

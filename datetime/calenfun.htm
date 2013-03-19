@@ -1,0 +1,234 @@
+<html><head><title>Функции календарных вычислений</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор функций для работы с датами и вычислений по календарю.">
+<meta name="keywords" content="pascal, sources, source code, calenfun, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;calenfun
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Функции календарных вычислений</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:v_ostashev@chat.ru">Victor Ostashev</a></TD>
+<TD class=black align='right'>08.08.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор функций для работы с датами
+и вычислений по календарю.</TD><TD class=black colspan=2 align='right'><br><A HREF="calenfun.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{        Calendar.pas 
+набор функций для работы с датами 
+и вычислений по календарю.
+Автор:  Виктор Осташев
+Fido:   2:5020/1194
+E-mail: v_ostashev@chat.ru
+WWW:    http://ostashev.newmail.ru
+}
+unit calendar;
+
+interface
+
+type
+  tdate = record
+               d : byte;
+               m : byte;
+               y : integer;
+             end;
+  {Хранит дату}
+  tstyle              = (grigorian, julian);
+  {Старый стиль - это юлианский, а новый - григорианский}
+
+function datein(low, high, dt : tdate) : boolean;
+{Проверяет нахождение даты в промежутке
+ между low и high}
+
+procedure stringtodate(st : string; var dt : tdate);
+{Преобразует строку в дату}
+
+procedure datetostring(dt : tdate; var st : string);
+{Преобразует дату в строку}
+
+function compdate(d1, d2 : tdate) : integer;
+{Сравнивает две даты. Возвращает 0, если даты равны,
+ -1, если первая дата меньше второй и 1, если наоборот}
+
+function numofday(dat : tdate; style : tstyle) : longint;
+{Вычисляет условный номер дня для даты dat с учетом
+ нового стиля при style=true}
+
+function dayofweek(dat : tdate; style : tstyle) : byte;
+{Вычисляет день недели для даты dat с учетом
+ нового стиля при style=true}
+
+function numinyear(dat : tdate; style : tstyle) : word;
+{Вычисляет номер дня от начала года с учетом стиля}
+
+function lenofmonth(month: byte; year: word; style: tstyle): byte;
+{Вычисляет длину месяца с учетом стиля}
+
+procedure numtodate(num: longint; style: tstyle; var dat: tdate);
+{Вычисляет дату по данному номеру дня}
+
+function isleap(year : integer):boolean;
+{Является ли год високосным}
+
+
+implementation
+
+function datein;
+begin
+  datein := (compdate(low, dt) &lt;= 0) and (compdate(high, dt) &gt;= 0);
+end;
+
+procedure stringtodate;
+var
+  s    : array[1..3] of string[5];
+  i, j : integer;
+begin
+  for i := 1 to 3 do s[i] := '';
+  j := 1;
+  for i := 1 to 3 do begin
+  while (st[j] in ['0'..'9']) and (j &lt;= length(st)) do
+    begin
+      s[i] := s[i]+st[j];
+      inc(j);
+    end;
+    inc(j);
+  end;
+  val(s[1], dt.d, i);
+  val(s[2], dt.m, i);
+  val(s[3], dt.y, i);
+end;
+
+procedure datetostring;
+var
+  s1, s2, s3 : string[5];
+begin
+  str(dt.d, s1);
+  str(dt.m, s2);
+  str(dt.y, s3);
+  if dt.d &lt; 10 then s1 := '0'+s1;
+  if dt.m &lt; 10 then s2 := '0'+s2;
+  st := s1+'.'+s2+'.'+s3;
+end;
+
+
+function compdate;
+var
+  a, b : longint;
+begin
+  {Нет никакой разницы по какому стилю номер дня}
+  a:= numofday(d1,julian);
+  b:= numofday(d2,julian);
+  if a-b = 0 then compdate := 0;
+  if a-b &gt; 0 then compdate := 1;
+  if a-b &lt; 0 then compdate := -1;
+end;
+
+function numofday;
+var
+  stcor : integer;
+begin
+  {По формуле num=[year*365.25]+[(month+1)*30.6]+day+style}
+  {Вычисляем поправку на григорианский стиль}
+  if style = grigorian then
+    begin
+      stcor := 2-dat.y div 100+dat.y div 400;
+      if ((dat.y mod 100 = 0) and
+          (dat.y mod 400 &lt;&gt; 0)) and
+          (dat.m &lt;= 2) then stcor := stcor + 1;
+    end
+  else
+    begin
+      stcor := 0;
+    end;
+  {Сразу увеличить месяц}
+  inc(dat.m);
+  {Если месяц январь и февраль, то month=month+12, year=year-1}
+  if dat.m &lt;= 3 then
+    begin
+      dat.m := dat.m+12;
+      dec(dat.y);
+    end;
+  {Вычисляем номер дня}
+  numofday := (36525*dat.y) div 100 + (306*dat.m) div 10 + stcor + dat.d;
+end;
+
+function dayofweek;
+var
+  sum : real;
+  day : byte;
+  buf : longint;
+begin
+  buf := numofday(dat, style);
+  {Прибавляем константу 4.5 - так по формуле}
+  buf := buf+4;
+  day := buf mod 7;
+  {Воскресеньем у нас кончается неделя}
+  if day = 0 then day := 7;
+  dayofweek := day;
+end;
+
+function lenofmonth;
+var
+  len : byte;
+begin
+  case month of
+   2 : begin
+         if year mod 4 = 0 then len := 29
+                           else len := 28;
+         if (style = grigorian) and
+            (year mod 100 = 0) and
+            (year mod 400 &gt; 0) then len := 28;
+       end;
+   4, 6, 9, 11 : len := 30
+   else len := 31;
+  end;
+  lenofmonth := len;
+end;
+
+function numinyear;
+var
+  dbuf : tdate;
+begin
+  dbuf.d := 0;
+  dbuf.m := 1;
+  dbuf.y := dat.y;
+  numinyear := word(numofday(dat, style)-numofday(dbuf, style));
+end;
+
+procedure numtodate;
+begin
+  {Приблизительно находим год и для гарантии прибавляем 5,
+   чтобы точно промахнуться в известную сторону}
+  dat.y := (num*100) div 36525 + 5;
+  dat.d := 1;
+  dat.m := 1;
+  {А здесь спускаемся и находим год перебором}
+  repeat
+    dec(dat.y);
+  until (num &gt;= numofday(dat, style));
+  {А здесь ищем перебором месяц, поднимаясь вверх}
+  repeat
+    inc(dat.m);
+  until (num &lt; numofday(dat, style));
+  {Промахнулись на 1 месяц вверх}
+  dec(dat.m);
+  {А уж что у нас осталось - то день месяца}
+  dat.d := num-numofday(dat, style)+1;
+end;
+
+function isleap;
+begin
+  isleap := (((year mod 4 = 0) and (year mod 100 &lt;&gt; 0)) or
+              (year mod 400 = 0));
+end;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

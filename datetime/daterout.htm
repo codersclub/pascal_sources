@@ -1,0 +1,50 @@
+<html><head><title>DateRout - Simple Date Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор функций для работы с датами: <br> Сравнение и сложение дат, номер и имя дня недели, определение високосного года.">
+<meta name="keywords" content="pascal, sources, source code, daterout, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;daterout
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DateRout - Simple Date Routines</TD>
+<TD nowrap class=black>&nbsp;John Wood</TD>
+<TD class=black align='right'>01.04.1988</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор функций для работы с датами: <br>
+Сравнение и сложение дат, номер и имя дня недели,
+определение високосного года.</TD><TD class=black colspan=2 align='right'><br><A HREF="daterout.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                                        3/28/1988
+
+   This is my second try at DateRout.  The first version contained
+ an incorrect assumption regarding the quadyear count.  Essentially,
+ DaysFrBase and ConvertDays assumed continuous 1461 day segments
+ within a four century span.  This version corrects that by:
+   1. changing the BaseYr to 1600.
+   2. adding a century counter.
+   3. adapting the quadyear count to work correctly within century's.
+
+   If there are any further problems with this code (or suggestions
+ for improvement), please write or leave a message to me on
+ the PC Library BBS - Minneapolis (612) 435-1785.
+   I placed DateRout in the Public Domain hoping it will encourage
+ you to do the same with your programming gems.  Use it however you
+ see fit.
+ Regards,
+
+ John Wood
+ 14720 Karyl Dr.
+ Minnetonka, MN  55345
+
+ P.S.  Special thanks to Lewis Paper for pointing out flaws in my
+       first effort with DateRout.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

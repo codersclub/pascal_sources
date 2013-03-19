@@ -1,0 +1,147 @@
+<html><head><title>Вечный календарь на месяц</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Вывод на экран календаря на месяц  с выбором Юлианского или Грегорианского стиля">
+<meta name="keywords" content="pascal, sources, source code, calendar, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;calendar
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Вечный календарь на месяц</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:v_ostashev@chat.ru">Victor Ostashev</a></TD>
+<TD class=black align='right'>08.08.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Вывод на экран календаря на месяц 
+с выбором Юлианского или Грегорианского стиля</TD><TD class=black colspan=2 align='right'><br><A HREF="calendar.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> From : Viktor Ostashev          2:5020/1194                05.08.97
+ Subj : Вечный календарь
+---------------------------------------------------------------------
+Oтвeт нa пиcьмo Sergey Zaikov (2:5022/18.29) к All
+oт 04 авгyста 1997 г., 15:21
+
+ SZ&gt; А не завалялись ли у кого-нибудь исходники subj ???
+ SZ&gt; (язык пpогpаммиpования значения не имеет)
+
+
+Hello Sergey!
+
+Вот тебе вечный календаpь, веpнее, скелет календаpя с минимальным
+интеpфейсом.
+Пpоцедypа вычисления дня недели тyт есть, ноpмальный интеpфейс сам
+пиши.
+
+           C yвaжeниeм -
+                                                     Bиктop Ocтaшeв
+
+--- --- C5 DA 17 BC CE 3B 3E D6 54 B2 C4 D3 90 02 79 F3 ---
+ * Origin:   ФИЗKУЛЬТ-ПРИBEТ   (2:5020/1194)
+
+---
+program CALENDAR;
+uses CRT;
+const WEEK: array[4..10] of string[3]
+            =('ПHД','ВТР','СРД','ЧТВ','ПТH','СБТ','ВСК');
+      MONTH: array[1..12] of string[3]
+             =('ЯHВ','ФЕВ','МАР','АПР','МАЙ','ИЮH',
+             'ИЮЛ','АВГ','СЕH','ОКТ','HОЯ','ДЕК');
+var   YEAR, YR, STCOR: integer;
+      SUM, BUF: real;
+      STILE: boolean;
+      CTRL: char;
+      CTR, RES, X, Y, A, MO, MO1: byte;
+procedure COL;
+begin
+  if Y=10 then TextAttr:=52 else TextAttr:=48;
+end;
+begin
+    TextAttr:=46;
+    ClrScr;
+    GotoXY(29,2);
+    write('К А Л Е H Д А Р Ь');
+    GotoXY(18,20);
+    write('Стрелки вправо - влево: листать календарь');
+    GotoXY(18,22);
+    write('Esc - выход');
+    Window(15,5,59,17);
+    repeat
+      TextAttr:=54;
+      ClrScr;
+      GotoXY(2,2);
+      write('Введите месяц ');
+      readln(MO);
+      write(' Введите год ');
+      readln(YEAR);
+      writeln(' Введите стиль:');
+      write(' григорианский (G) или юлианский (J)');
+      STILE:=(ReadKey&lt;&gt;'j');
+    until (MO&lt;13) and (YEAR&gt;1) and (YEAR&lt;9999);
+
+{Вот тyт и начинается вычисление}
+   repeat
+      MO1:=MO+1;
+      YR:=YEAR;
+      if MO&lt;3 then begin MO1:=MO1+12; Dec(YR) end;
+    case MO of
+      2: if (YEAR/4)=(YEAR div 4) then CTR:=29 else CTR:=28;
+      4, 6, 9, 11: CTR:=30;
+      else CTR:=31;
+    end;
+    if STILE then STCOR:=2-YR div 100+YR div 400 else STCOR:=0;
+    SUM:=Trunc(365.25*YR)+Trunc(30.6*MO1)+STCOR+5.5;
+    BUF:=SUM / 7 - Trunc(SUM) div 7;
+    RES:=Byte(Trunc(7*BUF));
+    if RES=0 then RES:=7;
+{А вот тyт заканчивается}
+
+    Dec(RES);
+    ClrScr;
+    GotoXY(14,1);
+    TextAttr:=52;
+    write(MONTH[MO],'   ',YEAR);
+    GotoXY(1,4);
+    for Y:=4 to 10 do
+       begin
+          COL;
+          writeln('  ',WEEK[Y]);
+       end;
+    Y:=RES+4;X:=15;
+    for A:=1 to CTR do
+       begin
+          COL;
+          GotoXY(X,Y);
+          write(A:2);
+          Inc(Y);
+          if Y=11 then begin Y:=4; X:=X+5 end;
+       end;
+    GotoXY(1,12);
+    repeat
+       CTRL:=ReadKey;
+    until (CTRL in [#27,#075,#077]);
+    case CTRL of
+      #27: begin
+              TextAttr:=48;
+              Window(1,1,80,25);
+              ClrScr;
+              MO1:=0;
+           end;
+      #075: begin
+              Dec(MO);
+              if MO=0 then begin Dec(YEAR); MO:=12 end;
+            end;
+      #077: begin
+              Inc(MO);
+              if MO=13 then begin Inc(YEAR); MO:=1 end;
+            end;
+      end;
+  until MO1=0;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

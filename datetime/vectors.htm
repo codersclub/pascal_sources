@@ -1,0 +1,50 @@
+<html><head><title>Использование COM-порта как таймера под Win</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программирование портов и таймера RS-232  для формирования и обработки прерываний от СОМ-порта, синхронизированных по времени">
+<meta name="keywords" content="pascal, sources, source code, vectors, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vectors
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Использование COM-порта как таймера под Win</TD>
+<TD nowrap class=black>&nbsp;Виктор ?</TD>
+<TD class=black align='right'>04.01.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программирование портов и таймера RS-232 
+для формирования и обработки прерываний от СОМ-порта,
+синхронизированных по времени</TD><TD class=black colspan=2 align='right'><br><A HREF="vectors.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">     Здравствуйте все!
+
+     В последнее время проявлен некоторый интерес к обработке
+аппаратных прерываний под Win. Ниже приводится модуль, в котором
+решается задача, возникшая у меня в процессе создания ПО для
+обработки телеграфных сигналов - получение строго фиксированных
+интервалов времени в 1, 2 или 5 мс. В ДОС проблем не было -
+перепрограммировал таймер новым делителем, "вешал" обработчик
+нa int08 и все дела. В Windows перепрограммировать таймер нельзя
+(эти ужасные 55 мс!), поэтому самым простым показалось использование
+прерывания от свободного СОМ-порта.
+- изготавливаем "заглушку" на СОМ-порт, заведя линию передачи Tx
+  на линию передачи Rx, DTR на DSR, а также соединяем вместе три
+  сигнала:
+    RLSD, RTS и CTS;
+- вешаем обрабочик прерываний на $0C для СОМ1 или $0B для СОМ2 таким
+  образом, что, передавая символ в линию, мы его же и получаем, что
+  возбуждает прерывание по приему символа; в обработчике снова записы-
+  ваем символ в порт передачи и пошло-поехало...
+- программируем UART на нужную скорость и, тем самым, добиваемся
+  нужного интервала времени.
+
+      Если будут вопросы, готов ответить.
+      Виктор</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

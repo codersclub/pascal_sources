@@ -1,0 +1,162 @@
+<html><head><title>Timerd v1.2 - DOS Event Timer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Функции таймера с точностью до 1 тика (55ms), построенный на Inline-коде. <br><font color=#666666> A 24 hour timer with resolution of 1/18.2... seconds to measure elapsed time in seconds. </font>">
+<meta name="keywords" content="pascal, sources, source code, timerd, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;timerd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Timerd v1.2 - DOS Event Timer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76011.217@compuserv.com">Jim LeMay</a></TD>
+<TD class=black align='right'>30.01.1987</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Функции таймера с точностью до 1 тика (55ms),
+построенный на Inline-коде. <br><font color=#666666>
+A 24 hour timer with resolution of 1/18.2... seconds to measure
+elapsed time in seconds. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="timerd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                              January 30, 1987
+
+                            DOS TIMER
+                           Version 1.2
+
+PURPOSE:
+
+This DOS timer written in Turbo Pascal and InLine assembler allows
+you to time events or programs with 1/18.2... second resoultion
+up to 24 hours.  The program was designed to be interchangeable
+with the High Precision Timer, TIMERH12.ARC.  You can then just
+change the name of the include file without having to reprogram.
+
+InLine code was used to prevent the need for calculation of reals
+until the event was over.  In addition, interrupts were disabled
+while a split is taken to prevent carry errors.
+
+This program is also meant to replace JTIMER.INC which I wrote
+some time ago which did not disable interrupts.
+
+
+TEST DRIVE:
+
+Remove curly braces as instructed in TIMERD12.INC.  Compile and
+run.
+
+
+FILES:
+
+In this version, TIMERD12.ARC contains:
+
+   Timerd12.inc:  Include file for your programs and a brief
+                  demo.
+   Timerd12.doc:  This document.
+
+
+PROGRAMMING:
+
+To use the timer, your program should look like the following:
+
+{$i timerd12.inc}
+...
+begin
+  ...
+  Timer (Start);
+  ...
+  { Code to be tested goes here. }
+  ...
+  Timer (Stop);
+  ...
+end.
+
+
+HOW IT WORKS:
+
+First, you should know that most of this program was written to
+be similar to the High Precision Timer.  Most of the whys and
+wherefores are written in the document for that program.
+
+Characteristics of the DOS timer:
+
+   1. The DOS timer is a four byte value and updated in memory at
+      0040h:006Ch, but only the first three bytes (21 bits) are
+      used because it only counts up to 1573040 (1800AFh) ticks
+      per day.  At that resolution, it only amounts to:
+
+          1573040/(60*60*24) = 18.206481481 ticks/sec
+
+   2. Since the result is a 3-byte value, Turbo integers are too
+      small to handle it.  So, reals must be used.
+
+Characteristics of Turbo reals:
+
+   1. Turbo Pascal's reals have a minimum of 5 bytes in the
+      mantissa.  Refer to your Reference Manual for the internal
+      data format of your compiler.
+   2. Five bytes are more than enough to handle the precision of
+      the DOS timer.
+
+Conversion:
+
+   1. The inline code simply stores the data in an array when the
+      timer is stopped or started keeping the timer overhead
+      small and predictable.  It is also in the same format as
+      TIMERH12.INC.
+   2. To be compatible with all versions of Turbo Pascal, it was
+      resolved to allow the specific version of Turbo to do the
+      conversion and sacrifice some simplicity and speed.  It is
+      better than having to match up codes and compilers.
+   3. After the event is timed, the array is then converted by
+      the run-time library being used.  For single events, it
+      doesn't matter how long it takes to make the conversion at
+      this point.
+
+Overhead:
+
+   1. The timer takes the start and stop splits in about 35 micro-
+      seconds or so.
+   2. Since the timer is not very precise, no overhead is needs
+      to be included with such a small amount.
+   3. Timer intialization is done automatically the with the first
+      Timer(Start) call.
+
+
+TECHNICAL:
+
+   1. You can degrade the performance of the timer if you overload
+      the keyboard buffer.  Some tick interrupts will be lost.
+
+
+CREDITS:
+
+Dave Baldwin's InLine Assembler was essential in its development.
+Some recommendations were made by Pete Becker (CIS 76347,3151).
+
+Copyright (c) 1987 by Jim LeMay
+These procedures are public domain.
+
+If there are any problems, please let me know.
+Jim LeMay [76011,217]  (1-817-735-4833  after 1800 CST )
+6341 Klamath Rd., Ft. Worth, TX, 76116.
+
+
+REVISIONS:
+
+Version 1.0 (01-13-87):
+   Original release.
+
+Version 1.1 (01-16-87):
+   Added SetRead and ReadRead to be interchangeable with TIMERH.ARC.
+
+Version 1.2 (01-30-87):
+   Stored splits in an array to be compatible with all Turbo Pascal
+     compilers.
+   Simplified the inline code.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

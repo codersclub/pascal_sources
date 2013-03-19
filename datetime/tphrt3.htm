@@ -1,0 +1,145 @@
+<html><head><title>TPHRT 3.0 - TP 5.5 High Resolution Timer Toolkit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Таймер высокого разрешения для TP5.5 и DOS. Позволяет производить измерения с точностью до микросекунд за счет перепрограммирования системного таймера и подмены прерываний Int08h, Int1Ch. Приведены только примеры и TPU модули, без исходника. <br><font color=#666666> TPHRT (Turbo Pascal High Resolution Timer) is a software library that provides the software developer with reliable timing functions that work across the entire Intel 80xxx PC compatible hardware environment with microsecond resolution. The TPHRT timing logic calibrates itself to the host PC clock rate and processor environment at run-time, so a single executable program will yield accurate results regardless of the host microprocessor and clock speed. Included: Samles, Docs and TPU5/5.5 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, tphrt3, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tphrt3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPHRT 3.0 - TP 5.5 High Resolution Timer Toolkit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73047,1765">Ryle Design</a></TD>
+<TD class=black align='right'>23.07.1990</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Таймер высокого разрешения для TP5.5 и DOS.
+Позволяет производить измерения с точностью до микросекунд
+за счет перепрограммирования системного таймера
+и подмены прерываний Int08h, Int1Ch.
+Приведены только примеры и TPU модули, без исходника. <br><font color=#666666>
+TPHRT (Turbo Pascal High Resolution Timer) is a software library
+that provides the software developer with reliable timing functions
+that work across the entire Intel 80xxx PC compatible hardware environment
+with microsecond resolution. The TPHRT timing logic calibrates itself
+to the host PC clock rate and processor environment at run-time,
+so a single executable program will yield accurate results
+regardless of the host microprocessor and clock speed.
+Included: Samles, Docs and TPU5/5.5 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="tphrt3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>53k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                               TPHRT
+
+              Turbo Pascal High Resolution Timer Toolbox
+
+                            Version 3.00
+
+                    Shareware Evaluation Version
+
+                            Ryle Design
+
+                            P.O. Box 22
+
+                     Mt. Pleasant, Michigan 48804
+
+                           (517) 773-0587
+
+                          Cserv 73047,1765
+
+Introduction
+
+
+TPHRT (Turbo Pascal High Resolution  Timer) is a software library that
+provides the software developer with  reliable  timing  functions that
+work across  the entire Intel 80xxx PC compatible hardware environment
+with microsecond resolution. The TPHRT timing logic  calibrates itself
+to the host PC clock rate and processor environment at run-time,  so a
+single executable program will yield  accurate  results  regardless of
+the host microprocessor and clock speed.
+
+TPHRT  is  the  definitive choice for any PC application that requires
+precision timing.  Some typical TPHRT applications are:
+
+Source Code Timer/Profiler
+By  adding timer calls to source code  under  development,  TPHRT  can
+generate a detailed summary  of  execution  time by program subroutine
+and immediately  illustrate  the  software's  "hot  spots"  that might
+benefit from further code or algorithm optimization.  Unlike "binning"
+profilers  that display the number of "hits" in  a  range  of  program
+addresses, TPHRT provides  a  direct one to one correspondence between
+source code and elapsed time with user defined granularity.
+
+Hardware Performance Evaluator
+The high resolution and  self  calibration  features  of TPHRT make it
+ideal  for  insertion  in code to evaluate hardware performance.  Disk
+drives,  numeric processors and CRT controllers  can  all  have  their
+throughput measured very  accurately  with  TPHRT,  and  with numerous
+timers  at  the  users   disposal,   many   device  functions  may  be
+independently  measured  in  a single run.  The formatted timer report
+generated  by  TPHRT  makes  compilation  and  interpretation  of test
+results painless.
+
+Process Control
+With TPHRT, process control applications that require  precise timings
+or  precision  delays  are  easy  to  implement.    No longer will the
+application developer have to make an educated guess as to how  long a
+critical interrupt is taking to service an I/O port as TPHRT  can time
+virtually any hardware or software interrupt and provide the developer
+with  precise  accurate  timings  of  the  critical  procedure.    The
+precision delay  functions  allow  the  programmer  to  implement data
+acquisition loops with microsecond resolution.
+
+Timing and Scoring
+TPHRT  is the perfect "timer engine" to build  a  timing  and  scoring
+system for use in nearly any competitive event.  With  its microsecond
+resolution and self calibration features, TPHRT surpasses conventional
+sports   timing  equipment  resolution  and  allows  the   application
+developer to  package  high  resolution  timing  and  complete scoring
+functionality in a single package.
+
+
+       TPHRT V3 Shareware Evaluation Version Distribution List
+       -------------------------------------------------------
+
+
+Documentation Files
+
+        distrib  txt           This file
+        license  txt           TPHRT software license
+        readme   txt           Latest manual changes
+        register txt           Registration form
+        tphrtv3  doc           TPHRT user manual
+
+Demo Programs
+
+        delay    pas           \
+        demov3   pas            \
+        seektest pas             - Pascal demos
+        testbios pas            /
+        watch    pas           /
+
+Unit Files
+
+        10      int           \
+        13      int            |
+        14      int            |
+        16      int            |- Interrupt function description
+        17      int            |  files for BIOS timers
+        21      int            |
+        33      int            |
+        67      int           /
+        tphrt   tpu           TP V5 unit
+        tphrt55 tpu           TP V5.5 unit - rename to TPHRT if used
+
+Email  on Compuserve  to 73047,1765,  or  by telephone at
+(517) 773-0587.
+This is a voice mail system.  Leave your name and number in voice
+mailbox #2, and your call will be returned and your order taken.
+
+     Thank you!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

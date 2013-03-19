@@ -1,0 +1,104 @@
+<html><head><title>pToolDat v1.0 - Julian and Gregorian Date Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор функций для работы с датами по Юлианскому и Грегорианскому календарю: сложение и вычитание дат, преобразование из одного календаря в другой, определение дня недели. <br><font color=#666666> These Turbo Pascal functions Converts Gregorian date strings, Changes Gregorian Dates to and from Julian dates, Finds Day of Week, Adds numbers to dates, Finds the difference between dates, Converts dates to 2 byte integers in order to save disk storage, and Retrieves the current (system) date. Handles date from 1/1/0100 to 12/31/9999. </font>">
+<meta name="keywords" content="pascal, sources, source code, ptooldat, datetime, Дата и Время ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Дата и Время</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ptooldat
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;pToolDat v1.0 - Julian and Gregorian Date Functions</TD>
+<TD nowrap class=black>&nbsp;R.D.Ostrander</TD>
+<TD class=black align='right'>30.01.1986</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор функций для работы с датами по Юлианскому и Грегорианскому
+календарю: сложение и вычитание дат, преобразование из одного
+календаря в другой, определение дня недели. <br><font color=#666666>
+These Turbo Pascal functions Converts Gregorian date strings,
+Changes Gregorian Dates to and from Julian dates, Finds Day of Week,
+Adds numbers to dates, Finds the difference between dates,
+Converts dates to 2 byte integers in order to save disk storage,
+and Retrieves the current (system) date.
+Handles date from 1/1/0100 to 12/31/9999. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="ptooldat.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> PTOOLDAT.INC   Copyright 1984  R D Ostrander
+ Version 1.0
+                                 Ostrander Data Services
+                                 5437 Honey Manor Dr
+                                 Indianapolis  IN  46241
+
+ These Turbo Pascal functions are date manipulation tools used
+ to Convert Gregorian date strings, Change Gregorian Dates to
+ and from Julian dates, Find Day of Week, Add numbers to dates,
+ Find the difference between dates, Convert dates to 2 byte
+ integers in order to save disk storage, and to Retrieve the
+ current (system) date. Handles date from 1/1/0100 to 12/31/9999.
+
+ This program has been placed in the Public Domain by the author
+ and copies may be freely made for non-commercial, demonstration,
+ or evaluation purposes. Use of these subroutines in a program
+ for sale or for commercial purposes in a place of business
+ requires a $20 fee be paid to the author at the address above.
+ Personal non-commercial users may also elect to pay the $20 fee
+ to encourage further development of this and similar programs.
+ With payment you will be able to receive update notices,
+ diskettes and printed documentation of this and other PTOOLs
+ from Ostrander Data Services.
+
+ PTOOL, and PTOOLxxx are Copyright Trademarks of Ostrander Data
+ Services
+
+ Turbo Pascal is a Copyright of Borland International Inc.
+
+
+Functions available in PTOOLDAT.INC are:
+
+ PTDGValid - True if argument is valid Gregorian Date
+ PTDJValid - True if argument is valid Julian Date
+             (Note that this is useful for Julian types A & B
+             (ANSI) only)
+ PTDSValid - True if argument is valid Short format Date
+ PTDGtoJ   - Convert argument (Gregorian Date) to a Julian Date
+ PTDJtoG   - Convert argument (Julian Date) to a Gregorian Date
+ PTDGtoG   - Convert argument (Gregorian Date in 2nd format)
+             to Gregorian Date in standard (1st) format -
+             Note that a blank (space filled) string returned
+             if the argument cannot be converted
+ PTDGtoS   - Convert argument (Gregorian Date to a Short format
+             date. Return -32766 if not in range of January 1st
+             of Base year thru June 1st, 179 years after the Base
+             Year.
+ PTDStoG   - Convert argument (Short format Date) to a Gregorian
+             Date
+ PTDJtoS   - Convert argument (Julian Date to a Short format date
+ PTDStoJ   - Convert argument (Short format Date) to a Julian Date
+ PTDGAdd   - Add argument-2 (Integer) number of days to argument-1
+             (Gregorian Date) and express result in Gregorian
+             format
+ PTDJAdd   - Add argument-2 (Integer) number of days to argument-1
+             (Julian Date) and express result in Julian format
+ PTDGComp  - Subtract argument-2 (Gregorian Date) from argument-1
+             (Gregorian Date) giving number of days between dates
+             minus 1.
+ PTDJComp  - Subtract argument-2 (Julian Date) from argument-1
+             (Julian Date) giving number of days between dates
+             minus 1
+ PTDGLeap  - True if argument (Gregorian Date) is a Leap Year
+ PTDJLeap  - True if argument (Julian Date) is a Leap Year
+ PTDSLeap  - True if argument (Short format date) is a Leap Year
+ PTDYLeap  - True if argument is a Leap Year
+ PTDGDay   - Return Day of Week for argument (Gregorian Date)
+ PTDJDay   - Return Day of Week for argument (Julian Date)
+ PTDSDay   - Return Day of Week for argument (Short format date)
+ PTDGCurr  - Current (system) Gregorian Date
+ PTDJCurr  - Current (system) Julian Date
+ PTDSCurr  - Current (system) Short format date</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
