@@ -1,0 +1,77 @@
+<html><head><title>Редактор таблиц Paradox 3.5/4.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="PXView sources from Dimarker Software (     bonus for pXtension 1.0       )        Viewer/Editor for DB of PDOX 3.5 & 4.0,based on PXengine 3.01">
+<meta name="keywords" content="pascal, sources, source code, pxview, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pxview
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Редактор таблиц Paradox 3.5/4.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5023/2.13">Дмитрий Кузьменко</a></TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">PXView sources from Dimarker Software
+(     bonus for pXtension 1.0       )
+       Viewer/Editor for DB of
+PDOX 3.5 & 4.0,based on PXengine 3.01</TD><TD class=black colspan=2 align='right'><br><A HREF="pxview.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>151k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Dimarker's Software.
+ Bonus for pXtention v 1.0 (Database Project Generator).
+
+! Просмотрщик-редактор таблиц Paradox 3.5 и 4.0.
+В данном варианте:
+
+ полные исходные тексты (FreeWare only)
+ просмотр таблиц заданных как из командной строки, так и выбранных
+  в среде.
+ просмотр записей со скроллингом столбцов
+ кэширование записей с целью ускорения просмотра
+ скоростной ввод новых записей - окно ввода не исчезает после нажатия
+  клавиши F2 ("Сохранить").
+ Скоростное редактирование записей - в окне редактирования Вы можете
+  перемещаться по записям таблицы (F3 и F4).
+ для BLOB полей возможен экспорт и импорт непосредственно в окне
+  редактирования записи (редактирование Memo BLOB оставлено Вам для
+  собственной реализации). Для этого на поле BLOB в окне редактирования
+  нажмите правую кнопку мыши или пробел.
+ Скомпилированный модуль PXVIEW.EXE имеет размер 267824,
+  попробуйте скомпилировать PXVIEW.PAS, чтобы получить EXE такого-же
+  размера !
+
+Для компиляции нужны модули
+     Objects, Drivers, Views, Menus, App, GadGets, Dialogs,
+     OOPXENG, StdDlg;
+а также модули
+     Fields.PAS, PXBrowse.PAS, KEYCONV.PAS, BGENC.PAS и BGENHH.PAS,
+которые включены в этот архив специально для возможности автономной
+компиляции PXVIEW.PAS.
+
+
+Недостатки:
+
+! При обновлении записи есть какая-то ошибка. Я забыл, в чем она
+состоит, но из-за срочной сборки этого архива не могу искать и
+исправлять.
+Вообще эта программа писалась для моих личных нужд.
+
+! Скомпилированный PXVIEW.EXE расчитан на сортировку индексов ASCII.
+Просмотр таблиц с другой сортировкой (русской, например) возможен
+только в том случае, если Вы сумеете использовать нужную таблицу
+сортировки со своим пакетом PXEngine 3.xx & Database Framework.
+
+! В файле поддержки дат (TBDTM.PAS - урезанная копия TPDATE из Turbo
+Professional) есть ошибка - разница между датой Paradox и TBDTM
+составляет один год.
+
+FIDO: 2:5023/2.13 Dima Kuzmenko.
+Dimarker's Software.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

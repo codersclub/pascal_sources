@@ -1,0 +1,229 @@
+<html><head><title>Dbf.Pas v1.4 - dBASE File Access via Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Несложный модуль для выполнения только базовых операций с файлами формата dBase III и FoxPro for DOS. НЕ поддерживает ни мемо-полей, ни буферизации, ни индексных файлов. <br><font color=#666666> This archieve contains routines that allow access of dBase DBF files from Turbo Pascal 3/4/5.</font>">
+<meta name="keywords" content="pascal, sources, source code, dbf4pas, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dbf4pas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Dbf.Pas v1.4 - dBASE File Access via Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:producer@cscwam.umd.edu">Winthrop Chan</a></TD>
+<TD class=black align='right'>17.01.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Несложный модуль для выполнения только базовых операций
+с файлами формата dBase III и FoxPro for DOS.
+НЕ поддерживает ни мемо-полей, ни буферизации, ни индексных
+файлов. <br><font color=#666666>
+This archieve contains routines that allow access of dBase DBF files
+from Turbo Pascal 3/4/5.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="dbf4pas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> dBASE DBF file access via Turbo Pascal
+
+ DBF.PAS             Updated Jan 17, 1989
+
+This archieve contains routines that allow access of dBase DBF files
+from Turbo Pascal 3/4/5. The original routines were written back
+in 1986 and only supported Turbo Pascal 3.0. I modified the
+routines and cleaned the code up so it could be used as a unit
+in Turbo Pascal 4.0/5.0.
+
+Here's a quick description of the files found in this archieve.
+
+READ.ME         This file you're reading now!
+DBF-TP3.PAS     The original routines written in TP 3.0
+DBF.PAS         Updated version to be used as a TP 4.0/5.0 unit
+DEMO4.PAS       Demo program for TP 4.0/5.0
+
+
+
+----------------------------------------------------------------
+ Updated to v1.4 for Turbo Pascal 4.0/5.0 by Winthrop Chan,
+                     January 1989, producer@cscwam.umd.edu
+
+ comments :
+   I originally downloaded this program from Turbo City
+   (209-599-7435) but found it was severely outdated and was
+   written for Turbo Pascal 3.0. Since I lack the dBase technical
+   reference manual, I was not able to expand on the functions
+   that are currently available. I made the code more readable
+   (which it wasn't when I got hold of it) and updated some of
+   the functions to take advantage of Turbo 4.0/5.0's new features.
+   If I get some time someday, I would like to add index file
+   access for both the dBase and Foxbase index format. As usual,
+   please backup your data before using this unit since I may
+   have not found all the bugs.
+--------------------------------------------------------------------
+
+DBF.PAS version 1.3
+
+Copyright (C) 1986 By James Troutman
+CompuServe PPN 74746,1567
+Permission is granted to use these routines for non-commercial
+purposes. For commercial use, please request permission via
+EasyPlex.
+
+Revision history
+ 1.1  - 5/6/86 - update header when modifying the .DBF file;
+ write the End Of File marker; simplify use.
+
+ 1.2  - 5/27/86 - removed (some of) the absurdities from the code;
+ allocate the current record buffer on the heap rather than in the
+ data segment; symbol names changed to avoid conflicts; some error
+ checking added.
+
+ 1.3  - 6/5/86 - added support for dBASE II files; new procedure
+ CreateDbf.
+
+                  !!!!ATTENTION!!!!
+
+If you have downloaded an earlier version of this file, please note
+that several of the TYPEs and VARs have been changed. You may have
+to make some adjustments to any existing programs you have that use
+these routines.
+
+The routines in this file present some tools for accessing dBASE II,
+III, and III Plus files from within a Turbo Pascal program. There is
+MUCH room for improvement: the error checking is simplistic, there
+is no support for memo files, no buffering of data, no support for
+index files, etc. The main routines are:
+
+       PROCEDURE OpenDbf(VAR D : dbfRecord;) : Integer;
+       PROCEDURE CloseDbf(VAR D : dbfRecord) : Integer;
+       PROCEDURE GetDbfRecord(VAR D : dbfRecord; RecNum : Real);
+       PROCEDURE PutDbfRecord(VAR D : dbfRecord; RecNum : Real);
+       PROCEDURE AppendDbf(VAR D : dbfRecord);
+       PROCEDURE CreateDbf(VAR D : dbfRecord; fn : _Str64;
+                           n : Integer; flds : _dFields);
+
+After calling one of the procedures, check the status of the
+Boolean variable dbfOK to determine the success or failure of
+the operation.  If it failed, dbfError will contain a value
+corresponding to the IOResult value or to a specially assigned
+value for several special conditions.  Notice in particular
+that an unsuccessful call to CloseDbf will leave the file status
+unchanged and the memory still allocated.  It is your program's
+responsibility to take appropriate action.
+
+A skeletal program might go something like:
+  {$I Dbf.PAS}
+  VAR
+    D : dbfRecord; { declare your dBASE file variable }
+  BEGIN
+  D.FileName := 'MyFile.DBF'; { get filename of .dbf file into
+                                FileName field of D variable...}
+  OpenDbf(D);        { to open the file }
+  IF NOT dbfOK THEN { check dbfError and process error };
+  {... the rest of your program including calls to
+   GetDbfRecord, PutDbfRecord, AppendDbf as needed,
+   always remembering to interrogate the two global status
+   variables after each procedure call   }
+  CloseDbf(D);      { to close the file  }
+  IF NOT dbfOK THEN { check dbfError and process error };
+  END.
+
+Upon exit from the GetDbfRecord Procedure, the CurRecord of
+the dbfRecord variable points to the current record contents.
+Each field can be accessed using its offset into the CurRecord^
+with the variable Off in the Fields^ array.
+Upon entry to the PutDbfRecord Procedure, the CurRecord^ should
+contain the data that you want to write.
+AppendDbf automatically adds a record to the end of the file (the
+CurRecord^ should contain the data that you want to write).
+
+Notice that the OpenDbf routine does allocate a buffer on the
+heap for the current record.  You can, of course, override this
+by pointing CurRecord to any data structure that you wish;
+HOWEVER, since CloseDbf deallocates the buffer, you must repoint
+CurRecord to its original buffer before calling CloseDbf.
+
+See the demo program for some examples.
+If you have any problems with these routines, please
+let me know.  Suggestions for improvements gratefully accepted.
+
+
+
+dBASE III Database File Structure
+The structure of a dBASE III database file is composed of a
+header and data records.  The layout is given below.
+dBASE III DATABASE FILE HEADER:
++---------+-------------------+---------------------------------+
+|  BYTE   |     CONTENTS      |          MEANING                |
++---------+-------------------+---------------------------------+
+|  0      |  1 byte           | dBASE III version number        |
+|         |                   |  (03H without a .DBT file)      |
+|         |                   |  (83H with a .DBT file)         |
++---------+-------------------+---------------------------------+
+|  1-3    |  3 bytes          | date of last update             |
+|         |                   |  (YY MM DD) in binary format    |
++---------+-------------------+---------------------------------+
+|  4-7    |  32 bit number    | number of records in data file  |
++---------+-------------------+---------------------------------+
+|  8-9    |  16 bit number    | length of header structure      |
++---------+-------------------+---------------------------------+
+|  10-11  |  16 bit number    | length of the record            |
++---------+-------------------+---------------------------------+
+|  12-31  |  20 bytes         | reserved bytes (version 1.00)   |
++---------+-------------------+---------------------------------+
+|  32-n   |  32 bytes each    | field descriptor array          |
+|         |                   |  (see below)                    +-+
++---------+-------------------+---------------------------------+ |
+|  n+1    |  1 byte           | 0DH as the field terminator     | |
++---------+-------------------+---------------------------------+ |
+                                                                  |
+                                                                  |
+A FIELD DESCRIPTOR:      &lt;----------------------------------------+
++---------+-------------------+---------------------------------+
+|  BYTE   |     CONTENTS      |          MEANING                |
++---------+-------------------+---------------------------------+
+|  0-10   |  11 bytes         | field name in ASCII zero-filled |
++---------+-------------------+---------------------------------+
+|  11     |  1 byte           | field type in ASCII             |
+|         |                   |  (C N L D or M)                 |
++---------+-------------------+---------------------------------+
+|  12-15  |  32 bit number    | field data address              |
+|         |                   |  (address is set in memory)     |
++---------+-------------------+---------------------------------+
+|  16     |  1 byte           | field length in binary          |
++---------+-------------------+---------------------------------+
+|  17     |  1 byte           | field decimal count in binary   |
++---------+-------------------+---------------------------------+
+|  18-31  |  14 bytes         | reserved bytes (version 1.00)   |
++---------+-------------------+---------------------------------+
+
+The data records are layed out as follows:
+1. Data records are preceeded by one byte that is a
+   space (20H) if the record is not deleted and an
+   asterisk (2AH) if it is deleted.
+2. Data fields are packed into records with no field
+   separators or record terminators.
+3. Data types are stored in ASCII format as follows:
+
+DATA TYPE      DATA RECORD STORAGE
+---------      --------------------------------------------
+Character      (ASCII characters)
+Numeric        - . 0 1 2 3 4 5 6 7 8 9
+Logical        ? Y y N n T t F f  (? when not initialized)
+Memo           (10 digits representing a .DBT block number)
+Date           (8 digits in YYYYMMDD format, such as
+19840704 for July 4, 1984)
+
+This information came directly from the Ashton-Tate Forum.
+It can also be found in the Advanced Programmer's Guide available
+from Ashton-Tate.
+
+One slight difference occurs between files created by dBASE III
+and those created by dBASE III Plus.  In the earlier files, there
+is an ASCII NUL character between the $0D end of header indicator
+and the start of the data.
+This NUL is no longer present in Plus, making a Plus header one
+byte smaller than an identically structured III file.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

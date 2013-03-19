@@ -1,0 +1,47 @@
+<HTML>
+<head>
+<TITLE>Объединение результатов нескольких запросов в один - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Объединение результатов нескольких запросов в один</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Бывает, что часть данных хранится
+    в одной таблице, а часть - в другой. Чтобы
+    объединить результаты выборки из обеих
+    таблиц существует команда UNION:
+<pre><font color="#008000">SELECT field1 FROM Table1 WHERE field2 = 'Москва'
+    UNION
+    SELECT field1 FROM Table2 WHERE field3&gt;0
+</font></pre>
+    Для корректного выполнения команды
+    UNION существует 2 правила:
+    <ul>
+      <li>число и порядок следования колонок
+        должны быть одинаковы во всех запросах
+      <li>типы данных должны быть совместимы (т.е.
+        не допускается, чтобы тип field1 в Table1 был
+        INT, а в Table2 - CHAR)</li>
+    </ul>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

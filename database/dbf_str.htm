@@ -1,0 +1,73 @@
+<html><head><title>Структура DBF файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Краткое описание структуры DBF файлов">
+<meta name="keywords" content="pascal, sources, source code, dbf_str, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dbf_str
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Структура DBF файлов</TD>
+<TD nowrap class=black>&nbsp;Евгений Таратухин</TD>
+<TD class=black align='right'>05.02.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Краткое описание структуры DBF файлов</TD><TD class=black colspan=2 align='right'><br><A HREF="dbf_str.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  Eugen Taratukhin &lt;eugen@eugenhm.riak.lugansk.ua&gt;
+Organization: K&K Agency
+
+&gt;From: Igor O. Rosselevich &lt;igor_new@mltrading.spb.su&gt;
+&gt;У меня возникла проблемма  связанная со структурой DBF файлов.
+&gt;Неподскажет ли кто из чего  эти файлы состоят,и как их создать
+&gt;в Паскале.
+&gt;Может у кого есть что-нибудь готовое?
+
+        Надеюсь, эта информация будет полезной.
+
+        В   DBF   файле   сначала   идет   заголовок,  затем
+дескрипторы  полей,  затем  содержимое  базы.  Далее следуют
+описания  заголовка  и   дескриптора  поля.   Запись   имеет
+структуру  описанную  дескрипторами   полей,  но   начальным
+байтом идет признак уделенной записи '*' или ' '.
+
+{ Структура заголовка файла DBF (по материалам:
+  R.Freeland "The DBF divulged", Data Based Advisor, June, 1990) }
+DBFHeader = record
+  Version   : byte;     { Заголовочный байт }
+  yy,mm,dd  : byte;     { Дата последнего обновления файла }
+  MaxRecs   : longint;  { Число записей в файле, вместе с уд-ми }
+  HplusD    : word;     { Общая дина заголовка и списка д-ров полей }
+  RecLen    : word;     { Длина одной записи }
+  Reserv1   : integer;  { Зарезервировано }
+  HoldTrans : byte;     { Флаг задержки по транзакции }
+  Res2 : array[15..27] of byte; { Зарезервировано }
+  IsMDX     : byte;     { Признак подключения MDX-файла}
+  Res3 : array[29..31] of byte; { Зарезервировано }
+end;
+
+{ Структура дескриптора поля в файле DBF (по материалам:
+R.Freeland "The DBF divulged", Data Based Advisor, June, 1990) }
+Type
+FieldDesc = record
+  Name : array [1..11] of byte; { Имя поля }
+  Typ  : char;                  { Тип }
+  Res  : longint;               { Резерв }
+  Len  : byte;                  { общая длина поля }
+  Dec  : byte;                  { число цифр после дес.точки }
+  Res2 : array[1..13] of byte;  { Резерв }
+  Tag  : byte;                  { Признак тага MDX }
+end;
+
+
+--
+# Eugen Taratukhin,                       Advertising & News Agency K&K
+# Node RIAK, ingeneer.                     +7 (06444) 32185 (voice).</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

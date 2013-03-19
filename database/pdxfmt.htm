@@ -1,0 +1,176 @@
+<html><head><title>PARADOX - Описание формата файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Описание формата файлов PARADOX v3.*, v4.*">
+<meta name="keywords" content="pascal, sources, source code, pdxfmt, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pdxfmt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PARADOX - Описание формата файлов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:psv@pcb.chernigov.ua">Сергей Перевозник</a></TD>
+<TD class=black align='right'>24.10.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Описание формата файлов PARADOX v3.*, v4.*</TD><TD class=black colspan=2 align='right'><br><A HREF="pdxfmt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Сергей Перевозник" &lt;psv@pcb.chernigov.ua&gt;
+Subject: Описание формата файлов PARADOX
+Date: 24 Oct 1997 06:27:30 GMT
+Organization: ПОЛИКОМБАНК
+
+Формат файла PARADOX
+Составил : Сергей Перевозник
+
+
+Дата - число дней с 31.12.0   - этому значению соответствует 80000000
+                                Hex
+текст - просто текст
+
+Смещение    пояснение
+
+   00         размер одной записи мл. байт
+   01         размер одной записи ст. байт
+
+   02         смещение конца заголовка мл. байт
+   03         смещение конца заголовка ст. байт
+              После этого адреса идут несколько байт 00
+              и начинаются данные. Данные выровнены по левому краю
+              поля, пустые места заполнены 00.
+
+   04
+   05         Значение этих двух байт всегда постоянно (по крайней
+              мере у меня так получилось) и равны 02 01 (H).
+              Может быть это версия Paradox (у меня 3.0).
+
+   06         число записей в файле мл. байт
+   07         число записей в файле ст. байт
+
+   08-09      Почему-то всегда 00.
+
+   A-B        Часто бывает равно числу записей в файле.
+              (но почему-то не всегда, похоже это что-то другое)
+
+   C-D        Часто бывает равно (A-B)+1.
+
+   21         число полей в записи.
+
+
+__Описание полей.__
+
+  Таблица описания полей начинается со смещения 5A.
+Поля описываются в формате:
+                                                                
+        КОД ТИПА     РАЗМЕР (байт)   КОД ТИПА     РАЗМЕР (байт) 
+                                                                
+Код типа - указывает на тип поля.
+Размер   - задает размер поля в байтах.
+
+Код типа поля:
+    01 - Alphanumeric
+    02 - Date
+    03 - Integer
+    05 - Currency
+    06 - Number
+
+PS Если у кого есть дополнения и/или замечания - милости просим.
+
+
+  Файл данных Paradox (*.db) состоит из заголовка и набора страниц.
+Страницы связаны в двусвязный список в соответствии с основным индек-
+сом. Каждая страница хранит переменное число записей фиксированной
+длины. Страница идентифицируется своим порядковым номером в файле дан-
+ных. Под номер страницы зарезервировано одно слово.
+
+ 1. Формат файла db:
+
+ Заголовок файла + Hабор страниц.
+
+ 2. Формат страницы файла данных:
+
+ Type
+   tPage = record
+     NextPage : word;
+     PrevPage : word;
+     LastOfs  : word;
+     Records  : ....
+   end;
+
+  Поле LastOfs содержит смещение начала последней заполненной записи
+на странице относительно поля Records ( для смещения относительно на-
+чала страницы надо добавлять 3 слова ).
+  Поля NextPage и PrevPage содержат номера соответственно следующей и
+предидущей страницы. Внутри страницы записи отсортированы по основному
+индексу.
+  Свободные страницы внутри файла связаны в список с помощью полей
+NextPage. Hомер первой свободной страницы хранится в заголовке.
+
+  Заголовок файла данных содержит служебную информацию о размере запи-
+сей, размере страниц и.т.п. Кроме того он содержит информацию о полях
+записи. Он состоит из общей части и набора описаний полей.
+
+ 3. Формат общей части заголовка файла данных:
+
+ Type
+   tHeader = Record
+     hRecordSize : word;    { размер записи в байтах }
+     hHeaderSize : word;    { размер заголовка в байтах }
+     hPrimaryIdx : byte;    { ??? связан с наличием основного индекса }
+     hPageSize   : byte;    { размер страницы в килобайтах }
+     hRecCount   : longint; { количество записей в файле }
+     hPageCount  : word;    { количество страниц }
+     hFreePage   : word;    { номер первой свободной страницы, далее
+Next...}
+     hTopPage    : word;    { первая страница в основном индексе }
+     hBottomPage : word;    { последняя страница в основном индексе }
+     hReserved   : array[1..15] of byte; { ??? для импорта не важны }
+     hFieldCount : word;    { количество полей в записи }
+   end;
+
+  В версии Paradox 3.X описание полей начинается со смещения 58h.
+  В версии Paradox 4.X описание полей начинается со смещения 78h.
+
+  4. Формат описателя поля:
+
+  Type
+    tField = Record
+      FieldType : byte;   { Тип поля см. ниже }
+      FieldSize : word;   { Размер поля в байтах }
+    end;
+
+  Со смещения hFieldCount*6 + 83 от начала описателей полей хранится
+список названий полей. В виде набора ASCIIZ строк. Hазвание может быть
+длиной до 25 символов.
+
+
+
+  Типы полей:
+
+    1 - Alphanumeric          { переменной длины }
+    2 - Date                  { 4 байта }
+    3 - Integer               { 2 байта }
+    5 - Currency (Integer)    { 2 байта }
+    6 - Double                { 8 байт  }
+    C - Memory                
+    D - Binary                 
+    E - Formated memory        Хранятся в Memo-файле
+    F - OLE object             
+   10 - Graphic               
+
+  Данные хранятся в следующем виде:
+
+  Alphanumeric - Массив символов дополненный до фиксированной длины
+символом 0.
+  Типы со 2 по 6 хранятся в обратном порядке:
+    Integer - ст. байт, мл. байт
+    Double  - 8, 7, 6, 5, 4, 3, 2, 1 - байт.
+  Числовые поля имеют инвертированый старший бит:
+    т.е. число 1234h хранится в виде 92 34.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

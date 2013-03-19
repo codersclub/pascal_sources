@@ -1,0 +1,39 @@
+<HTML>
+<head>
+<TITLE>Где взять информацию о таблицах, колонках, индексах, etc. - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Где взять информацию о таблицах, колонках, индексах, etc.</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    В SQL Server вся информация подобного рода
+    хранится в системных таблицах -
+    SYSOBJECTS, SYSCOLUMNS, SYSINDEXES и других. Например, для
+    получения
+    информации о пользовательских таблицах
+    выполните запрос
+<pre><font color="#008000">SELECT * FROM sysobjects WHERE type = 'U'
+</font></pre>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

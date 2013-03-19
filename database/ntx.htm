@@ -1,0 +1,233 @@
+<html><head><title>Модуль поддержки Clipper-ных индексов .NTX</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="NTX.PAS - это интерфейс к Clipper-овским индексам. Библиотек для работы с DBF-файлами хватает, а вот индексы...">
+<meta name="keywords" content="pascal, sources, source code, ntx, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ntx
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Модуль поддержки Clipper-ных индексов .NTX</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:psv@pcb.chernigov.ua">Sergey Perevoznik</a></TD>
+<TD class=black align='right'>23.01.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">NTX.PAS - это интерфейс к Clipper-овским индексам.
+Библиотек для работы с DBF-файлами хватает, а вот индексы...</TD><TD class=black colspan=2 align='right'><br><A HREF="ntx.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">unit NTX;
+
+interface
+
+Type NTX_Node = array[0..511] of word;
+
+   NTX_Head = Record
+                     Sign        : Word;
+                     Version     : Word;
+                     Root        : Longint;
+                     Next_Blk    : Longint;
+                     Item_Size   : Word;
+                     Key_Lgth    : Word;
+                     Key_Dec     : Word;
+                     Max_Keys    : word;
+                     HalfPage    : word;
+                     Key_Form    : array [0..255] of char;
+                     Unique      : boolean;
+                     Ignored     : array[1..746] of byte;
+                  end;
+
+
+            TNTX = object
+                    NTX_Name     : String[64];
+                    NTX_Hdr      : NTX_Head;
+                    NTX_File     : file;
+                    NodeRec      : Ntx_Node;
+                    NodeOfs      : longInt;
+                    L,R, ItemNo  : word;
+
+                    Constructor Init(IName : String);
+                    FUNCTION    KeyFind(st : String) : longint;
+                    Function    KeyNext(Var Key : string) : longInt;
+                    Destructor  Done;
+                 end;
+
+implementation
+
+  function CharStr(Ch : Char; Len : Byte) : string;
+    {-Return a string of length len filled with ch}
+  var
+    S : string;
+  begin
+    if Len = 0 then
+      CharStr[0] := #0
+    else begin
+      S[0] := Chr(Len);
+      FillChar(S[1], Len, Ch);
+      CharStr := S;
+    end;
+  end;
+
+Constructor TNTX.Init(IName : String);
+var
+   ct : word;
+begin
+   NTX_Name := IName;
+   assign(NTX_File,NTX_Name);
+   reset(NTX_File,1);
+   BlockRead(NTX_File,NTX_Hdr,1024,ct);
+end;
+
+Destructor TNTX.Done;
+begin
+  Close(NTX_File);
+end;
+
+FUNCTION    TNTX.KeyFind(st : String) : longint;
+var
+  Position : Word;
+
+
+Function GetKey(Item : word) : string;
+Var
+  tempSt   : string;
+begin
+   TempSt := CharStr(' ',NTX_Hdr.Key_Lgth);
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)+4],TempSt[1],NTX_Hdr.Key_Lgth);
+   GetKey := TempSt;
+
+end;
+
+Function GetRecNo(Item : word) : longInt;
+var
+  I : LongInt;
+begin
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)+2],I,4);
+   GetRecNo := I;
+end;
+
+Function GetNodeOfs(Item : Word) : longint;
+var
+  I : LongInt;
+begin
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)],I,4);
+   GetNodeOfs := I;
+end;
+
+begin
+  KeyFind := 0;
+  NodeOfs := NTX_Hdr.Root;
+  While NodeOfs &gt; 0 do
+    begin
+      Seek(NTX_File,NodeOfs);
+      BlockRead(NTX_File,NodeRec,1024);
+      if NodeRec[0] &gt; 0 then
+        begin
+          L := 1;
+          R := NodeRec[0];
+      repeat
+        if Ntx_hdr.Unique then
+          ItemNo := (L+R) shr 1
+        else
+          ItemNo := L;
+        if St = GetKey(ItemNo) then
+          begin
+            if Ntx_Hdr.Unique then
+              begin
+                KeyFind := GetRecNo(ItemNo);
+                Exit;
+              end
+               else
+                begin
+                  if GetNodeOfs(ItemNo) &gt; 0 then
+                    break
+                      else
+                        begin
+                          KeyFind := GetRecNo(ItemNo);
+                          Exit;
+                        end;
+               end
+          end
+           else
+             if St &lt; GetKey(ItemNo) then
+              R := Pred(ItemNo)
+               else
+                L := Succ(ItemNo)
+       until R &lt; L;
+
+       NodeOfs := GetNodeOfs(ItemNo);
+      end
+      else
+        NodeOfs := 0;
+     end;
+end;
+
+
+Function  Tntx.KeyNext(Var Key : string) : longInt;
+
+var
+  Position : Word;
+
+
+Function GetKey(Item : word) : string;
+Var
+  tempSt   : string;
+begin
+   TempSt := CharStr(' ',NTX_Hdr.Key_Lgth);
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)+4],TempSt[1],NTX_Hdr.Key_Lgth);
+   GetKey := TempSt;
+
+end;
+
+Function GetRecNo(Item : word) : longInt;
+var
+  I : LongInt;
+begin
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)+2],I,4);
+   GetRecNo := I;
+end;
+
+Function GetNodeOfs(Item : Word) : longint;
+var
+  I : LongInt;
+begin
+   Position := NodeRec[Item];
+   Move(NodeRec[Round(Position/2)],I,4);
+   GetNodeOfs := I;
+end;
+
+begin
+  KeyNext := 0;
+  if ((NodeOfs = FileSize(Ntx_File) - 1024 ) and (L = NodeRec[0])) then
+    Exit;
+  if L = NodeRec[0] then
+   begin
+    repeat
+      NodeOfs := NodeOfs + 1024;
+      if (NodeOfs &gt; FileSize(Ntx_File) - 1024 )  then
+      Exit;
+      Seek(NTX_File,NodeOfs);
+      BlockRead(NTX_File,NodeRec,1024);
+    until NodeRec[0] &gt; 0;
+     L := 0;
+   end;
+   Inc(L);
+   ItemNo := L;
+   Key := GetKey(ItemNo);
+   KeyNext := GetRecNo(ItemNo);
+end;
+
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,109 @@
+<html><head><title>Object-Oriented DataBase Management System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированная система для управления базами данных формата DBF. Предназначена длч совместной работы с TurboVision.<br><font color=#666666> This package  contains a simple OODBMS (Object-Oriented DataBase Management System) for Turbo Pascal 7.0. May be incorporeted into TurboVision applications.</font>">
+<meta name="keywords" content="pascal, sources, source code, oodb, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;oodb
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Object-Oriented DataBase Management System</TD>
+<TD nowrap class=black>&nbsp;Виталий Шматиков</TD>
+<TD class=black align='right'>14.07.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированная система для управления базами данных
+формата DBF. Предназначена длч совместной работы с TurboVision.<br><font color=#666666>
+This package  contains a simple OODBMS
+(Object-Oriented DataBase Management System) for Turbo Pascal 7.0.
+May be incorporeted into TurboVision applications.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="oodb.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>76k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This package  contains a simple OODBMS
+(Object-Oriented DataBase Management System).
+
+The list of files:
+------------------
+    README.DOC       This file
+    INTFACE.DOC      Database interface description
+    DBDEMO.EXE       Executable demo
+    OODB.PAS         Source code of the database management system
+    DBDEMO.PAS       Source code of a simple demo program
+    LAYOUT.PAS       Auxilliary routines for the demo
+    OODB.TPU         Compiled OODB unit
+    LAYOUT.TPU       Compiled LAYOUT.PAS
+
+FEATURES
+---------
+OODBMS is intended to be incorporated into TurboVision applications.
+It maintains a storage of arbitrary objects. The only requirements
+imposed on objects are that they must be TObject heirs and
+their Store and Load methods must be registered (by means of
+standard RegisterType procedure).
+
+OODBMS supports transactions. One can "commit" or "abort" database at
+any moment. Abort returns database to its state just before the last
+Commit.
+All objects deleted since then are recalled and all objects put to the
+database vanish. Any failure that could have occured during the
+transaction (i.e., group of database operations starting with Commit
+and ending with Abort or Commit) is annulled and database is
+rollbacked to its consistent state. When user believes that
+transaction has been successfully completed he should make all
+changes permanent by executing Commit.
+
+OODBMS performs (at least, tries to perform) intelligent garbage
+collection.
+It contains IdlePack method that should be invoked each time after
+TApplication.Idle routine is called by the user's application.
+IdlePack fights fragmentation and gets rid of "holes" in the database.
+Packing is performed "step by step" and can be interrupted at any 
+moment.
+Generally, database is being packed while user isn't working with
+application and the process of defragmentation can hardly be noticed
+"from the outside".
+
+ABOUT
+------
+OODBMS was developed in March - April '92 at the M.V.Keldysh Institute
+for Applied Mathematics, Moscow, Russia, and at Moscow State University
+as my student junior year thesis. It is distributed as a freeware.
+Though it has been debugged and tested, I can't guarantee that the
+code is bug-free. Everybody is not only allowed but also encouraged
+to correct bugs, make modifications, distribute this program, etc.
+There are no limitations whatsoever on the use of this program.
+In case of commercial use no financial reimbursement is expected
+either by me or by the Institute for Applied Mathematics.
+
+There are also other versions of OODBMS with memory caching and
+Paradox-based indices respectively. Information about them is
+available upon request (see address below).
+
+I would appreciate if the bugs were reported to me by e-mail
+(see address below). I would also be very glad if I were contacted
+by somebody who dealt with these problems and has any proposal for
+the upgrade of database or just wants to "talk about".
+
+Until September '92 I can be accessed at
+
+      shmat@drew.cog.brown.edu        or
+
+      shmat@browncog.bitnet           or
+
+      Vitaly Shmatikov
+      P.O.Box 1978
+      Dept. of Cognitive and Linguistic Sciences
+      Brown University
+      Providence, RI 02912
+
+Since October '92 I'll be at the University of Washington, Seattle, WA.
+
+                             Vitaly Shmatikov
+                             July 14, 1992</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

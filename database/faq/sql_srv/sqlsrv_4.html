@@ -1,0 +1,53 @@
+<HTML>
+<head>
+<TITLE>Использование копий таблиц - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Использование копий таблиц</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Представим, что нам нужно решить такую
+    задачу: нужно создать таблицу, в которой
+    будут храниться данные о животных в
+    питомнике. Таблица состоит из следующих
+    полей - ID животного, кличка животного,
+    мать животного. В принципе, любая особь женского
+    пола может быть матерью :), так что в поле
+    &quot;мать животного&quot; вполне можно
+    вставить ID. Но при формировании отчета
+    может потребоваться вывести кличку
+    животного и кличку его мамы, т.е. в одной
+    строке отчета должны содержаться данные
+    из разных полей таблицы. Решается все
+    очень просто - с помощью создания копий
+    таблицы:
+<pre><font color="#008000">SELECT a1.name, a2.name
+    FROM animals a1, animals a2
+    WHERE a1.id=2 AND a2.id=a1.mother_id
+</font></pre>
+    Как видите, мы по ID животного выбрали его
+    имя + имя его родительницы :)
+<br>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

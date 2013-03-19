@@ -1,0 +1,140 @@
+<html><head><title>TPDB 2.2 - Turbo Pascal Tools for dBASE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека процедурного типа (TP5.0) для работы с базами данных формата dBase III. Содержит 75 функций и процедур. Приведены все исходники, кроме модуля для работы с индексными файлами.<br><font color=#666666> TPDB v2.2 - Turbo Pascal 5.0 Tools for Accessing dBASE III files.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpdb22, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpdb22
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPDB 2.2 - Turbo Pascal Tools for dBASE</TD>
+<TD nowrap class=black>&nbsp;Brian Corll</TD>
+<TD class=black align='right'>03.03.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека процедурного типа (TP5.0) для работы с базами данных
+формата dBase III. Содержит 75 функций и процедур.
+Приведены все исходники, кроме модуля для работы с индексными файлами.<br><font color=#666666>
+TPDB v2.2 - Turbo Pascal 5.0 Tools
+for Accessing dBASE III files.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpdb22.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>50k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                     (****************************************)
+                     (*               TPDB                   *)
+                     (*  Turbo Pascal Tools for dBASE        *)
+                     (*                                      *)
+                     (*        Turbo Pascal 5.0 Unit         *)
+                     (*       for Accessing dBASE III        *)
+                     (*               files.                 *)
+                     (*                                      *)
+                     (*               Copyright 1989         *)
+                     (*                Brian Corll           *)
+                     (*      and Ten B.C. Micro Systems      *)
+                     (*          All Rights Reserved         *)
+                     (*      dBASE, dBASE III, and dBASE     *)
+                     (*      III Plus are registered         *)
+                     (* trademarks of Ashton-Tate Corp.      *)
+                     (*                                      *)
+                     (*  Turbo Pascal is a registered        *)
+                     (*  trademark of Borland Int. Corp.     *)
+                     (*                                      *)
+                     (*     Version 2.2  March 2, 1989       *)
+                     (*                                      *)
+                     (****************************************)
+                     (*     Portions copyright 1984,1988 by  *)
+                     (*       Borland International Corp.    *)
+                     (****************************************)
+
+
+            TPDB  is a  toolbox of  Turbo Pascal  5.0 units which
+            allow you  to access, index,  search, read and  write
+            database files  that were created  with dBASE III  or
+            III  Plus,  using  75  Turbo  Pascal  procedures  and
+            functions written specifically for these purposes. At
+            present,  it  supports  only  a  single  .DBF  and an
+            associated  index  (it's  own  brand  ofindexes,  NOT
+            indexes   created  by   dBASE).  You   can,  however,
+            successively open any number  of .DBF and .NDX files.
+            Index keys  can be up  to 254 characters,  and can be
+            composed  of  multiple  fields  or  expressions which
+            evaluate to a string  not longer than 254 characters.
+            Future plans  include support for  multiple indexes ,
+            as well as multiple .DBF files open concurrently.
+
+            All field types are supported except memo fields.
+
+            Questions/comments  can   be  left  for   me  on  the
+            InterLink  or  FidoNet  Pascal  or dBASE conferences.
+            More complete responses can be had by using InterLink
+            for messages,  as I then don't  have to read messages
+            on line.
+
+            This program is being distributed under the Shareware
+            concept.
+
+            If you  like this program and  use it, a registration
+            fee  of   $10  is  required   for  non-profit  users.
+            Commercial  users  MUST   register  for  a  one-time,
+            royalty-free  registration  fee  of  $15.  Registered
+            users will  be entitled to  upgrades for a  fee of $5
+            per  upgrade, to  cover shipping  and handling costs.
+            See the file REGISTER.FRM.
+
+
+            NOTA BENE: This registration fee is intended to cover
+            my   personal   time   and   expense  in  developing,
+            documenting, and distributing  this toolbox, and does
+            not  constitute  the  sale   of  the  code  contained
+            therein.
+
+
+            Write to:
+
+                         Ten B.C.  Micro Systems Brian  Corll 102
+                         West   Locust   Street  Mechanicsburg,PA
+                         17055  Home  :  717-691-0286  Eves.  and
+                         Weekends
+
+            DISCLAIMER
+
+            This program is provided  "as is" without warranty of
+            any kind, either express or implied, included but not
+            limited  to the  implied warranty  of merchantability
+            and fitness  for a specific purpose.  The entire risk
+            as to the quality and  performance of this program is
+            with you.
+
+            In no event will the author  be liable to you for any
+            damages, including any lost  profits, lost savings or
+            other incidental or consequential damages arising out
+            of the use of or inability to use this program.
+
+            NOTE
+
+            Source  code  is  included  as TPDB.pas,TPDBDate.pas,
+            Flash.asm, and TPDB.asm. Source code for TPDBIndx.tpu
+            will not  be released at  any time as  it consists of
+            custom revisions to  commercial source which, despite
+            heavy  rewriting  on  my  part,  cannot  be  released
+            without violating the rights of the copyright holder.
+
+            CREDITS
+
+            Some  of the  routines in  this toolbox  are based on
+            public  domain  Pascal  and  Assembler  code  by Juan
+            Vegarra, Brian Foley, David Bennett, Scott Bussinger,
+            and John Wood. My thanks  to them all for laying some
+            of the foundations.
+
+           ********************************************************
+                   End of Documentation - TPDB Version 2.2
+                         Copyright 1989  Brian Corll
+                                     and
+                           Ten B.C. Micro Systems</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

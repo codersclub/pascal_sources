@@ -1,0 +1,367 @@
+<html><head><title>GS_DBase v2.9. dBase III, III+ access</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="<b>GS_DBASE Version 2.9.</b> Объектно-ориентированная библиотека модулей для работы с базами данных dBase III+. Поддерживает Мемо-файлы и индексы типа NDX, NTX. Приведены исходники, примеры и документация на английском. <br><font color=#666666> GRIFFIN SOLUTIONS dBase III, III+ access. These Turbo Pascal routines handle processing for dBase III+ files, including memo (.DBT), index (.NDX), and data (.DBF) files. Use is made of object oriented programming to simplify the user interface. Examples of the user interface is demonstrated in the sample programs.</font>">
+<meta name="keywords" content="pascal, sources, source code, gsdb29, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gsdb29
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GS_DBase v2.9. dBase III, III+ access</TD>
+<TD nowrap class=black>&nbsp;Richard F. Griffin</TD>
+<TD class=black align='right'>01.01.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px"><b>GS_DBASE Version 2.9.</b>
+Объектно-ориентированная библиотека модулей для работы
+с базами данных dBase III+.
+Поддерживает Мемо-файлы и индексы типа NDX, NTX.
+Приведены исходники, примеры и документация на английском. <br><font color=#666666>
+GRIFFIN SOLUTIONS dBase III, III+ access.
+These Turbo Pascal routines handle processing for dBase III+ files,
+including memo (.DBT), index (.NDX), and data (.DBF) files.
+Use is made of object oriented programming to simplify the user interface.
+Examples of the user interface is demonstrated in the sample programs.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="gsdb29.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>223k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                 GS_DBASE
+                                Version 2.9
+
+                             GRIFFIN SOLUTIONS
+                          dBase III, III+ access
+
+                               6 April 1993
+
+               (C) Copyright 1991-1993 - All Rights reserved
+
+                             Griffin Solutions
+                          102 Molded Stone Place
+                       Warner Robins, Georgia 31088
+                              (912) 953-2680
+                           CompuServe 75206.231
+
+---------------------------------------------------------------
+
+These Turbo Pascal routines handle processing for dBase III+
+files, including memo (.DBT), index (.NDX), and data (.DBF) files.
+Use is made of object oriented programming to simplify the user
+interface.  Examples of the user interface is demonstrated in the
+sample programs.
+
+This release is valid for reading and writing of data, index, and
+memo files.  Routines will compile under either TP 5.5 or TP 6.
+Expanded routines (i.e., window routines) are incompatible with
+TurboVision.  However, the dBase file access routines will work
+in a TurboVision environment.
+
+--------------------------------------
+dBase is a trademark of Ashton-Tate
+Turbo Pascal is a trademark of Borland
+
+
+                                 Shareware
+                                 ---------
+
+GS_dBase is copyrighted. It is not a public domain program.  It is
+being distributed as Shareware, which means that unmodified copies
+of the software and documentation may be freely copied and shared.
+I ask in return that should you find GS_dBase to be useful, you
+become a registered user.  You become registered by  sending $25.00
+to the address on the cover. By registering you will get:
+
+     o  A copy of the latest version of the program.
+
+     o  Automatic notification of major program updates.
+
+     o  Technical support via Compuserve or by mail.
+
+     o  A user's manual on disk.  Sorry--printed manuals are too
+        expensive at this price.
+
+The shareware philosophy is to pay smaller amounts for well-crafted
+and useful software from developers who cannot spend the millions of
+dollars on marketing necessary to compete with the large software
+development companies.  You benefit by being able to try a wider
+variety of software products to find the ones that suit your
+particular purpose. And the trial is free. The shareware developer
+benefits from being able to distribute his work to a wider audience
+than would be possible through normal channels. 
+
+Your share of the responsibility for shareware to continue, and to
+support the development of more and better products is to distribute
+your shareware programs to others and become a registered user of
+those products you like and use.
+
+                                 FEATURES
+                                 --------
+
+Welcome to GS_dBASE, a series of Turbo Pascal routines for management
+of dBase III+ files.  The routines are designed to do the following:
+
+  - Provide a simple user interface to read and write dBase III files.
+
+  - Allow creation, use and updating of multiple dBase .NDX index
+    files in reading and updating the dBase III data (DBF) files.
+
+  - Allow creation, use and updating of multiple Clipper .NTX index
+    files in reading and updating the dBase III data (DBF) files.
+
+  - Allow reading and updating of .DBT memo file entries.
+
+  - Allow creation of new dBase III files.
+
+  - Provide expanded routines to display, edit, and update dBase III
+    files.
+
+  - Provide a file handler interface that provides a simple disk
+    management capability and provision for LAN adaptability.
+
+  - Do all of the above using only Turbo Pascal--no assembly routines
+    are used.
+
+  - Apply Object Oriented Programming to create easily usable modules.
+
+
+                                GETTING STARTED
+                                ---------------
+
+This section will acquaint you with the files on the distribution disk
+and show you a demonstration to quickly see what GS_dBase can
+accomplish.
+
+   Distribution Files
+
+   The following programs should be on the accompanying disk:
+
+File           Size   Date     Use
+
+DEMOB001 PAS   1156 02-24-92  Basic demo, used to create test file
+DEMOB002 PAS   1955 02-24-92  Basic demo, simple dBase file list
+DEMOB003 PAS   3118 02-24-92  Basic demo, more complex field retrieval
+DEMOB004 PAS   2873 02-24-92  Basic demo, modifying dBase fields
+DEMOB005 PAS   2327 02-24-92  Basic demo, appending dBase records
+DEMOB006 PAS   2339 02-24-92  Basic demo, create and use an index
+DEMOB007 PAS   2247 02-24-92  Basic demo, list a memo record
+
+DEMOE001 PAS   2532 02-24-92  Expanded demo, screen display of fields
+DEMOE002 PAS   3965 02-24-92  Expanded demo, screen display/edit
+DEMOE003 PAS   4266 02-24-92  Expanded demo, screen display/edit of memo
+DEMOE004 PAS   1956 02-24-92  Expanded demo, automatic screen display
+DEMOE005 PAS   2264 02-24-92  Expanded demo, automatic screen edit
+DEMOE006 PAS   2738 02-24-92  Expanded demo, select item from table
+DEMOE007 PAS   3001 02-25-92  Expanded demo, window routines
+DEMOE008 PAS   2035 03-02-92  Expanded demo, using Check_Func_Key
+
+DEMOR001 PAS   4046 02-29-92  Relational file demo, file maker
+DEMOR002 PAS   3215 02-29-92  Relational file demo, find master record
+DEMOR003 PAS   3287 02-29-92  Relational file demo, find transaction
+                              records
+
+DEMOTV01 PAS   5895 02-24-92  TurboVision demo, interface technique
+
+DEMOU001 PAS   1442 02-20-92  Utility demo, creating a dBase file
+DEMOU002 PAS   3209 02-20-92  Utility demo, create dBase file and memo
+DEMOU003 PAS   2765 02-23-92  Utility demo, making and managing indexes
+DEMOU004 PAS   3398 02-27-92  Utility demo, using multiple indexes
+DEMOU005 PAS   4314 02-24-92  Utility demo, tracking operation progress
+
+DEMO_CMN PAS   6758 02-21-92  Common string and date field handling demo
+
+DIRLIST        3818 03-08-92  This list
+
+GSDBLOOK PAS  13427 08-03-91  Demo program shows many features
+GSDBLOOK EXE  76000 03-03-92  Executable GSDBLOOK.PAS
+
+GS_DATE  PAS   8271 02-24-92  Date handling routines
+GS_DB3WK PAS  13544 02-24-92  dBase file creation routines
+GS_DBASE PAS  52161 02-27-92  dBase file access routines
+GS_DBFLD PAS  50345 03-02-92  dBase field update routines
+GS_DBL   PAS  11609 02-28-92  Routine to convert double to/from
+                              string
+GS_DBNDX PAS  56202 03-01-92  dBase .NDX index handling routines
+GS_DBNTX PAS  54724 02-26-92  Clipper .NTX index handling routines
+GS_DBTBL PAS   9839 02-24-92  dBase memory table routines
+GS_EDIT  PAS  22820 02-24-92  Griffin Solutions memo editor
+GS_ERROR PAS   2183 02-27-92  Griffin Solutions error handling
+GS_FILEH PAS  10736 02-24-92  Griffin Solutions file handling
+GS_GENF  PAS  10591 02-29-92  dBase test file record creator
+GS_KEYI  PAS  20627 02-24-92  Griffin Solutions keyboard input
+                              routines
+GS_LST   PAS   3796 02-28-92  Griffin Solutions printer handler
+GS_MAKMO PAS   5470 02-24-92  dBase memo record builder
+GS_OBJTS PAS   9497 02-20-92  Griffin Solutions basic collection
+                              handler
+GS_PICK  PAS   7660 02-24-92  Griffin Solutions list selector
+GS_SCRN  PAS   7014 02-24-92  Griffin Solutions screen handler
+GS_SORT  PAS   5800 02-24-92  Griffin Solutions sort routines
+GS_STRNG PAS  12615 02-24-92  Griffin Solutions string handling
+                              routines
+GS_WINDW PAS   7511 08-04-91  Griffin Solutions windowing routines
+GS_WINFC PAS   3552 08-04-91  Window interface to use other window
+                              programs
+
+LOOKFILE DBF   5102 03-03-92  Sample dBase file for use with
+                              GSDBLOOK.EXE
+LOOKFILE DBT  15872 03-03-92  Sample memo file for use with
+                              GSDBLOOK.EXE
+
+TESTDATA FIL   5953 02-06-92  Data for test data record generation
+WISDOM   FIL  64237 02-20-92  Data for test memo record generation
+
+                                 INSTALLATION
+                                 ------------
+
+Installation consists of copying these disks to your hard disk.
+It is recommended that backup copies be made.  You will likely want
+to reload the database files as you 'play' with and change them while
+running the demonstrations.
+
+                                 DEMONSTRATION
+                                 -------------
+
+To get the feeling of the speed and features of GS_dBase, let's run a
+demonstration program using GSDBLOOK.PAS.
+
+    1.  Compile and run GSDBLOOK.PAS to get a feel for the ease with
+which a program can be designed that allows selection, editing,
+and deletion of dBase records.
+
+    2.  Execute GSDBLOOK without any other parameters.
+
+        A.  You will be presented with a selection of all .DBF files
+            in the current subdirectory.  Make sure LOOKFILE.DBF is
+            highlighted and press return.
+
+        B.  Next will be displayed a list of all index files in the
+            subdirectory, if there are any .NDX files.  If any are
+            displayed, just press Escape.
+
+        C.  A menu consisting of options to Edit, Append, Select,
+            Print, Pack, and Exit will appear.  The Select option
+            is the only one that is not immediately obvious.
+            Use the cursor keys to highlight the Select option
+            and press return.
+
+        D.  You will be presented with a list of field names included
+            in the database.  Highlight 'LASTNAME' and press return.
+
+        E.  You will then be asked to provide select criteria.
+            For example, To get a selection of all last names that
+            start with 'G', you can press 'G' and return.  For all
+            starting with 'GR', press 'g', 'r' and return.  To get an
+            alphabetical list of all records press enter with the
+            select field empty.
+
+        F.  Highlight the name you wish to see.  Use the home, end,
+            and cursor up and down arrows to select.  The record will
+            be displayed for editing.  As an alternative, you may
+            append a new record by selecting 'Append' at the end of
+            the list.
+
+        G.  Once the record is selected, any field may be updated.
+            To access a memo field, use the cursor keys to highlight
+            the field.  When the field is highlighted, it will change
+            from '-- memo --' to ' Edit? '.  Press 'y' to call up the
+            memo field in the editor.
+
+        H.  When editing is complete, press F10 to exit.
+            Pressing [Esc] will exit the editor without saving the
+            changes.
+
+        I.  You may then select another record.  Press [ESC] when done.
+
+    3.  This program offers a choice of selecting, editing, appending,
+printing, or packing records.  The printing routine allows you to select
+the fields you wish to list.  When all desired fields have been picked,
+press Escape.  You will then be asked if you want to print the listing.
+
+
+                                    CHANGES
+                                    -------
+
+Major changes in GS_dBase Version 2.8:
+--------------------------------------
+
+     -  Multiple indexes (up to 16) are allowed.
+
+     -  Clipper indexes (.NTX) are allowed to replace .NDX files by
+changing one Uses statement in GS_DBASE.PAS.
+
+     -  A File_TOF flag is added to test when access to a Prev_Record
+record is made while at the top of the file.
+
+     -  Required memory is reduced by 10K by eliminating the need for
+the numeric coprocessor emulation to handle numeric key expressions for
+.NDX files.
+
+     -  Disk cache routines are eliminated in GS_FileH.  Processing
+speed is maintained by adding a node 'stack' in index processing to
+handle the most frequently used index nodes.
+
+     -  A 'Zap' procedure is now included.
+
+     -  More demonstration programs are provided to show the basic,
+expanded, and utility features available.
+
+
+Major changes in GS_dBase Version 2.5:
+--------------------------------------
+
+     -  Dates are now handled as longint values using their Julian Date.
+This simplifies date calculations.  See GS_Date unit for details.
+
+     -  A windows interface is added to facilitate use of other window
+handling packages to replace GS_Wind.  GS_Wind is renamed GS_Windw.
+See GS_Winfc unit for details.
+
+     -  Additional string handling functions have been added.
+See GS_Strng unit for details.
+
+     -  A StatusUpdate routine is available to allow the programmer
+to capture the progress of long-running routines such as Pack and
+IndexTo.
+
+                            ORDER/REGISTRATION FORM
+
+      Quan.        Program               Unit Price         Total
+
+      ____         GS_dBase Ver 2.8        $25.00          _______
+
+                   Overseas Shipping        $3.00          _______
+
+                                          Total:           _______
+
+           _____  I have included a check for  :           _______
+
+  (Canadians send Canadian POSTAL MONEY ORDER made payable in US $.)
+
+
+      DISK SIZE (circle one):        5.25" (360K)      3.5"  (720K)
+                                     5.25" (1.2M)      3.5"  (1.4M)
+
+ ** Includes one year free support, current diskette w/manual on disk.
+
+YOUR NAME: ________________________ COMPANY:  _____________________
+
+ADDRESS: __________________________________________________________
+
+CITY: _____________________________ STATE: ____   ZIP: ____________
+
+DAY TIME PHONE (in case of questions):  ___________________________
+
+How did you hear about this program? :  ___________________________
+
+                   THANK YOU FOR SUPPORTING SHAREWARE!
+
+                                 Griffin Solutions
+                              102 Molded Stone Place
+                           Warner Robins, Georgia 31088
+                                  (912) 953-2680
+                               CompuServe 75206.231</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

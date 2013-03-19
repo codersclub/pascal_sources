@@ -1,0 +1,189 @@
+<html><head><title>RWDbf. Чтение и запись в DBF файлы</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простейший пример чтения/записи полей в DBF файле">
+<meta name="keywords" content="pascal, sources, source code, rwdbf, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rwdbf
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RWDbf. Чтение и запись в DBF файлы</TD>
+<TD nowrap class=black>&nbsp;А.М.Денисов</TD>
+<TD class=black align='right'>01.02.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простейший пример чтения/записи полей в DBF файле</TD><TD class=black colspan=2 align='right'><br><A HREF="rwdbf.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{*********************************************************************}
+{*                    Чтение и запись в DBF файлы                    *}
+{*                    НФНИИДАР         Денисов А.М.                  *}
+{*********************************************************************}
+unit DBF;
+interface
+const
+  MaxKolPol=128;        { Максимальное количество полей в записи базы}
+type
+   Num=^integer;
+
+  Zagolovok=record        { Структура заголовка базы }
+   Byte0:byte;
+   God:byte;              { Год последней модификации }
+   Mes:Byte;              { Месяц }
+   Den:Byte;              { День }
+   KolZap:longint;        { Кол. записей }
+   DlZag:integer;         { Длина заголовка }
+   DlZap:Integer;         { Длина записй }
+   Rezerv2:array [1..20] of byte;
+  end;
+
+  Pole=record                   { Структура описания поля }
+   ImePol:array [1..11] of char;{ Имя поля }
+   TipPol:char;                 { Тип поля }
+   Rezerv:array [1..4] of byte;
+   DlPol:byte;                  { Длина поля }
+   KolDecR:byte;                { Количество разрядов после запятой }
+   Rezerv2:array [1..14] of byte;
+  end;
+
+  StructBaza=record
+    KolPol:Integer;                          { Кол. полей }
+    ImP:array [1..MaxKolPol] of string [11]; { Имена полей }
+    TypPole:array [1..MaxKolPol] of char;    { Тип поля }
+    RazmPol:array [1..MaxKolPol] of byte;    { Размер поля }
+    DecZn:  array [1..MaxKolPol] of byte;    { Дес.знаков }
+  end;
+
+  PBazaDbf=^BazaDbf;
+  BazaDBF=object
+    Z:Zagolovok;                    { Заголовок }
+    P:Pole;                         { Структура поля }
+    Stb:StructBaza;                 { Параметры полей базы }
+    BazaDan:file;                   { Файл базы данных }
+
+     {Откр. файл   OpenBaza(Путь и имя файла) }
+    procedure OpenBaza(ImeFile:string);
+
+{Читать поле в записи  ReadPole(Номер поля,Номер записи):значения поля}
+    function ReadPole(NomPol:byte;NomZap:longint):string;
+
+{Писать поле в запись WritePole(Номер поля,Номер записи,значение поля) }
+    procedure WritePole(NomPol:byte;NomZap:longint;ZnPole:string);
+
+     {Закрыть базу }
+    procedure CloseBaza;
+
+  end;
+
+var
+  B:BazaDBF;
+
+implementation
+
+{******************************** Правила для работы с базой данных}
+
+procedure BazaDbf.OpenBaza(ImeFile:string);
+     {  Открыть базу данных и читать заголовок }
+   var
+     J,I:integer;
+   begin
+     assign(BazaDan,ImeFile);
+     reset(BazaDan,1);
+     BlockRead(BazaDan,Z,SizeOf(Z));
+     J:=0;
+     repeat
+       BlockRead(BazaDan,P,SizeOf(P));
+       J:=J+1;  I:=1; Stb.ImP[J]:='';
+       while  P.ImePol[I]&lt;&gt;#0 do begin
+          Stb.ImP[J]:=Stb.ImP[J]+P.ImePol[I];  I:=I+1;
+       end;
+       With Stb do begin
+         TypPole [J]:=P.TipPol;
+         RazmPol [J]:=P.DlPol;
+         DecZn   [J]:=P.KolDecR;
+       end;
+     until FilePos(BazaDan)&gt;=Z.DlZag-32;
+     Stb.KolPol:=J;
+end; {OpenBaza}
+
+function  BazaDbf.ReadPole(NomPol:byte;NomZap:longint):string;
+   {Читать заданное поле в заданной записи}
+   var
+     Pole:string;
+     MestoPol,I:longint;
+   begin
+     if NomPol&gt;Stb.KolPol then begin
+       Writeln('Номер поля больше чем полей в базе');
+       Halt;
+     end;
+
+     if NomZap&gt;Z.KolZap then begin
+       Writeln('Номер записи больше чем записей в базе');
+       Halt;
+     end;
+
+     MestoPol:=0;
+     for I:=2 to NomPol do  MestoPol:=MestoPol+Stb.RazmPol[I-1];
+     MestoPol:=MestoPol+(NomZap-1)*Z.DlZap+Z.DlZag;
+     Seek(BazaDan,MestoPol);
+     BlockRead(BazaDan,Pole,Stb.RazmPol[NomPol]+1);
+     ReadPole:=Copy(Pole,1,Stb.RazmPol[NomPol]);
+end;
+
+procedure BazaDbf.WritePole(NomPol:byte;NomZap:longint;ZnPole:string);
+   {Записать заданное поле в заданной записи}
+   var
+     Pole:string;
+     Sim:char;
+     MestoPol,I:longint;
+   begin
+     if NomPol&gt;Stb.KolPol then begin
+        Writeln('Номер поля больше чем полей в базе');
+        Halt;
+     end;
+     if NomZap&gt;Z.KolZap+1 then begin
+        Writeln('Номер записи больше чем записей в базе');
+        Halt;
+     end;
+     if NomZap=Z.KolZap+1 then begin
+         Seek(BazaDan,4);
+         BlockWrite (BazaDan,NomZap,4);
+         Z.KolZap:=NomZap;
+         Seek(BazaDan,((NomZap-1)*Z.DlZap+Z.DlZag));
+         Sim:=' ';
+         BlockWrite (BazaDan,Sim,1);
+         Seek(BazaDan,(NomZap*Z.DlZap+Z.DlZag));
+         Sim:=Chr(246);
+         BlockWrite (BazaDan,Sim,1);
+     end;
+     MestoPol:=1;
+     for I:=2 to NomPol do  MestoPol:=MestoPol+Stb.RazmPol[I-1];
+     MestoPol:=MestoPol+(NomZap-1)*Z.DlZap+Z.DlZag;
+     Seek(BazaDan,MestoPol);
+     Pole:=Copy(ZnPole,1,Stb.RazmPol[NomPol]);
+     case  Stb.TypPole[NomPol] of
+     'N':while Length(Pole)&lt;Stb.RazmPol[NomPol] do
+           Insert(' ',Pole,1);
+     'C','D':while Length(Pole)&lt;Stb.RazmPol[NomPol] do
+               Insert(' ',Pole,Length(Pole)+1);
+     end;
+     for I:=1 to Stb.RazmPol[NomPol] do begin
+       Sim:=Chr(Mem[Seg(Pole):(Ofs(Pole)+I)]);
+       BlockWrite (BazaDan,Sim,1);
+     end;
+end;
+
+     {Закрыть базу }
+procedure BazaDbf.CloseBaza;
+  begin
+    Close(BazaDan);
+end;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

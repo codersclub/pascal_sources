@@ -1,0 +1,100 @@
+<HTML>
+<head>
+<TITLE>Простейший триггер - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Простейший триггер</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Ну для начала - что такое триггер? Триггер
+    - это хранимая процедура, которая
+    автоматически выполняется при изменении
+    данных в таблице. Если в таблице с
+    триггером попытаться выполнить INSERT, UPDATE
+    или DELETE - выполнится триггер, а уже он
+    решит, что дальше делать :))).
+<br>
+<br>
+    Запускаем Enterprise
+    Manager из состава SQL Server 2000. Выбираем нашу БД,
+    а в ней - таблицу, на которую хотим
+    установить триггер (ведь триггер &quot;жестко&quot;
+    привязан к конкретной таблице). Теперь
+    щелкнув по таблице правой кнопкой мыши,
+    вызываем меню, в котором выбираем &quot;Все задачи&quot;-&gt;
+    &quot;Управление Триггерами&quot; (&quot;Manage Triggers...&quot;).
+<br>
+<br>
+    <img border="0" src="trigger.gif" width="408" height="146">
+<br>
+<br>
+    Появится окошко с заготовкой для
+    триггера. &quot;Болванка&quot; для триггера
+    выглядит примерно так:
+<pre><font color="#008000">CREATE TRIGGER [TRIGGER NAME] ON [dbo].[Table1]
+    FOR INSERT, UPDATE, DELETE AS
+</font></pre>
+    Чтобы создать
+    триггер, нужно указать его имя (вместо
+    <font color="#008000">TRIGGER NAME</font>) и удалить
+    <font color="#008000">INSERT, UPDATE</font>
+    или <font color="#008000">DELETE</font>
+    - если вы хотите, чтобы вызывалась
+    обработка только для одной из этих
+    команд. Теперь нужно добавить код,
+    который будет исполняться при вызове
+    триггера. Вот что у меня получилось:
+<pre><font color="#008000">CREATE TRIGGER [MY_TRIGGER] ON [dbo].[Table1]
+    FOR INSERT, UPDATE, DELETE AS
+    PRINT &quot;Trigger run!!!&quot;
+</font></pre>
+    Все, теперь
+    давим &quot;Сохранить&quot;. Если не появилось
+    никаких сообщений об ошибках, триггер
+    нормально установился. Теперь можно
+    попробовать выполнить запрос вроде
+<pre><font color="#008000">DELETE FROM Table1
+</font></pre>
+    и будет напечатан текст &quot;Trigger run!!!&quot;.
+<br>
+<br>
+    Как изменить или удалить триггер?
+    Да все в том же
+    &quot;Управлениями Триггерами&quot; - выбрать
+    триггер, изменить его код или нажать &quot;Удалить&quot;.
+<br>
+<br>
+    P.S. Немного истории: один человек в форуме
+    на SQL.RU долго и упорно кричал, что он сумел
+    создать триггер такого вида:
+<pre><font color="#008000">CREATE TRIGGER [MY_TRIGGER] ON [dbo].[Table1]
+    FOR <b><u>SELECT</u></b> AS
+    PRINT &quot;Trigger run!!!&quot;
+</font></pre>
+    Так вот, должен вас разочаровать,
+    такой триггер создать нельзя, SQL Server даже
+    не даст сохранить его :)))
+<br>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

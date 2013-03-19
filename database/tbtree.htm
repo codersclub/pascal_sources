@@ -1,0 +1,180 @@
+<html><head><title>Turbo BTree 1.6 - BTrees Implementation for TP4-5.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Интерфейсная библиотека для TP5.5 для работы с Novell BTrieve.<br><font color=#666666> TBTREE version 1.6 is a shareware BTree and Database product for use with Turbo Pascal 4.0, Turbo Pascal 5.0 and Turbo Pascal 5.5. It is intended to give a user the capabilities to develop pascal applications for the creation and manipulation of databases. This product is extremely powerful and FAST!!! However, it is not the easiest thing to get a grasp on. If you understand the concept of btrees or at least indexing then this will not be complicated to use. I can just about guarantee that it is the best product of its type for the money and maybe the best period.</font>">
+<meta name="keywords" content="pascal, sources, source code, tbtree, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tbtree
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo BTree 1.6 - BTrees Implementation for TP4-5.5</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73240.3335@compuserv.com">Dean H. Farwell II</a></TD>
+<TD class=black align='right'>27.07.1989</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Интерфейсная библиотека для TP5.5 для работы с Novell BTrieve.<br><font color=#666666>
+TBTREE version 1.6 is a shareware BTree and Database product
+for use with Turbo Pascal 4.0, Turbo Pascal 5.0 and Turbo Pascal 5.5.
+It is intended to give a user the capabilities to develop
+pascal applications for the creation and manipulation of databases.
+This product is extremely powerful and FAST!!!
+However, it is not the easiest thing to get a grasp on.
+If you understand the concept of btrees or at least indexing
+then this will not be complicated to use.
+I can just about guarantee that it is the best product of its type
+for the money and maybe the best period.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tbtree.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>201k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                               TBTREE16
+                      ( Turbo BTree version 1.6 )
+
+
+   Yet another implementation of BTrees for Turbo Pascal 4.0/5.0/5.5
+
+               Copyright (c)  1988,1989    Dean H. Farwell II
+
+
+Anyone using this software to develop a commercial application must
+register and state their intentions to use it in a commercial
+application.  I will not charge royalties (except for the registration
+fee).  I just want to know what people are doing with it.
+Also, if someone is distributing it as part of a shareware product,
+the same restrictions apply.
+
+Most of all I want any feedback that you have the time and desire to
+submit. Suggestions, complaints, etc. are welcome.  I especially want
+feedback on errors.  I do not know of any bugs (or I'd fix them) but
+I probably missed an item or two.  Send me notice immediately so that
+I can distribute a fix if required.  Since you have the source code,
+do your best to isolate the problem.  I'll try to take it from there.
+
+To reach me use CompuServe ID - 73240,3335 or drop me a line at:
+
+                            P.O. Box 4731
+                            San Bernardino, CA 92409
+
+                            (zip code is essential!!!!!)
+
+My phone number is:
+
+                                714-887-9847
+
+
+                             Product Description
+
+TBTREE16 is version 1.6 of a shareware btree and database product for
+use with Turbo Pascal 4.0, Turbo Pascal 5.0 and Turbo Pascal 5.5.
+It is intended to give a user the capabilities to develop pascal
+applications for the creation and manipulation of databases.
+This product is extremely powerful and FAST!!!
+However, it is not the easiest thing to get a grasp on.
+If you understand the concept of btrees or at least indexing then
+this will not be complicated to use.  I can just about guarantee that
+it is the best product of its type for the money and maybe the best
+period.  If you have any feedback on how I can take the mystery out
+of using this please let me know.  I also solicit any feedback which
+will enhance the quality of the product.
+
+This product has been greatly enhanced since version 1.0 was released.
+As it presently stands, it has the following features:
+
+1. The ability to create data files and indexes for those files.
+
+2. Any number of indexes can be used for a single data file.
+
+3. Any number of data files can be used.
+
+4. All data files and index files use a virtual memory scheme in which
+   the most recently used pages are kept in memory using the heap.
+   This is different than many other implementations which use a
+   buffer or stack only for index pages.  The buffer is shared by
+   all files.  In this way separate space does not need to be set
+   aside for different files.  Space utilization is maximized and
+   performance is enhanced.
+
+5. All management of pages in memory is automatically controlled
+   although the user can exercise limited control if desired.
+
+6. Routines are provided to dump the page buffer to the printer to
+   facilitate viewing pages if a user is curious or masochistic.
+
+7. The size of the buffer is determined by the user and can be changed
+   dynamically as the program runs.  For example a 128K buffer could
+   be used initially.  If a user had a large heap requirement the
+   buffer size could be reduced.  The buffer size could later be
+   increased if desired.  This can all be done while the application
+   is running.
+
+8. Problems related to keeping track of numbers of open files are
+   alleviated.
+   The user initially specifies the maximum number of files allowed
+   to be open at once and never has to address it again.
+   Routines are provided to manage the opening and closing of files
+   dynamically.  This increases performance because files do not have
+   to be continually opened and closed unnecessarily.
+
+9. All data types supported by Turbo Pascal are explicitly supported.
+   In other words, values do not have to be converted to strings.
+   This is a great improvement over previous systems
+   (MY UNBIASED OPINION). For example an index can be set up for
+   type Byte, another for type ShortInt, another of type String
+   and even for type Real (but wait you say .. Reals in an index?).
+   See next note!
+
+10. Indexes can be searched for equality, inequality, greater than,
+    greater than or equal to, less than, less than or equal to,
+    and existence.  In other words you can ask for a list of all
+    records for which some field of type real is LE (less than or
+    equal to) XXX where XXX is a var of type real and XXX := 3.141592
+    etc.  An index can also searched on a range of values.
+    For instance an index of type byte can be checked for a
+    range &gt;= 10 and &lt; 20 etc.  Indexes containing strings can be
+    searched for partial string matches.  Partial string matches
+    can be done three ways: find a string which is at the beginning
+    of a string, anywhere in the string, or at the end of a string.
+
+11.  As physical records are deleted space is reused automatically
+     on future inserts.  Files should never have to be reorganized
+     to recover space (unless a large number of deletes were
+     performed without any inserts and even in this case there is
+     not really a good reason to reorganize unless your disk is
+     filling up).
+
+12.  Included with the package is a very crude but effective source
+     code printing routine which can be used to dump the code in a
+     more usable format.  Specifically, it handles page breaks and
+     prints a header of useful information.  It will also only print
+     out the interface section if you instruct it to do so.
+
+13.  The user does not need to perform any calculations or make any
+     estimates prior to data file or index creation.
+
+14.  Code was designed using an Object Oriented Design approach to
+     a large extent (Turbo 4.0 and Turbo 5.0 lend themselves to this
+     approach much more than Turbo Pascal 3.0 did).  This is one
+     reason that there are so many units.  Much of the code is
+     reusable for other applications.
+
+15.  Sorts can be accomplished using any number of fields in any order
+     of precedence as determined by you.  A Quicksort algorithm is
+     used to give high performance.  Sort fields can be any type
+     supported (Byte, Real, Integer, String etc.).
+
+16.  Added the following set operations: Union, Intersection and
+     Difference. These allow easy queries on multiple fields.
+     For example, retrieving all personnel who have a last name
+     starting with 'N' and who's job is 'MANAGER', etc. is greatly
+     simplified.  This enhancement is a definite plus and not
+     available in many other products.
+
+17.  Error handling added for trapping I/O errors
+
+18.  Capability to handle files with fixed size records and files
+     with variable sized records</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

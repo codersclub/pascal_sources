@@ -1,0 +1,135 @@
+<html><head><title>BTV 2.0 - Object Oriented Interface to the Btrieve</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный интерфейс к Novell BTrieve 5.15 для TP7. Компилируется для DOS, DPMI16, Win16. Добавлена поддержка расширенных операций с базой. <br><font color=#666666> Btv.pas is an object oriented Turbo Pascal 6.0,7.0 programming interface for Novell's Btrieve database manager. BTV.PAS works with DOS, MS Windows, and DOS protected mode programs. Btv.pas supports all Btrieve functions through V5.15. New to Btv.pas 2.0 is support for extended operations.</font>">
+<meta name="keywords" content="pascal, sources, source code, btv200, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;btv200
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BTV 2.0 - Object Oriented Interface to the Btrieve</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:70242.3367@compuserve.com">Richard Hansen</a></TD>
+<TD class=black align='right'>18.12.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный интерфейс к Novell BTrieve 5.15 для TP7.
+Компилируется для DOS, DPMI16, Win16.
+Добавлена поддержка расширенных операций с базой. <br><font color=#666666>
+Btv.pas is an object oriented Turbo Pascal 6.0,7.0 programming interface
+for Novell's Btrieve database manager.
+BTV.PAS works with DOS, MS Windows, and DOS protected mode programs.
+Btv.pas supports all Btrieve functions through V5.15.
+New to Btv.pas 2.0 is support for extended operations.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="btv200.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>97k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">December 17, 1993
+
+BTV.PAS is a Turbo Pascal 6.0,7.0 object oriented interface to the
+Btrieve Record Manager by Novell, Inc. It implements Btrieve file,
+error handling and error display objects. Version 2.0 now supports
+the extended Btrieve operations.
+
+I did not supply the example programs in compiled form. They aren't
+flashy, no neat screen output, and you won't get much out of them if
+you don't look at the code. I hope they are sufficient to demonstrate
+the use of BTV. Let me know if you have any problems with the examples.
+
+One note on the source code, you will note several {$IFDEF WINDOWS},
+{$IFDEF MSDOS}, {$IFDEF DPMI}. These IFDEFs control compilation for
+your targeted platform. You do not need to define any of them, they
+are built into the compiler and defined automatically depending on
+the compilation target.
+
+The source code to the main units BTV.PAS, BTVX.PAS, and BTVTYPE.PAS
+is provided in a shrouded format only. It will compile, but is almost
+unreadable. Registered users will receive the full, original source
+for these units. If it is absolutely necessary that you have the full
+source for evaluation purposes, please contact me.
+
+The protected mode interface will only work correctly with
+Turbo/Borland version 7.01. If you experience any problems with
+protected mode, please make sure that you have version 7.01 on the
+compiler. The 7.01 upgrade is available from Borland for $10.00.
+
+BTV.PAS is distributed as Shareware,
+IT IS NOT FREE. IF YOU USE BTV.PAS
+PLEASE REGISTER IT. With your paid registration you will receive the
+latest version and printed documentation. Registration is $50.00
+(U.S.) plus $5.00 shipping and handling.
+
+You may register by check, money order, credit card, or online on the
+CompuServe information service. All registrations are $50.00 plus
+$5.00 shipping and handling.
+
+Checks or money orders are prefered. If paying in U.S. dollars,
+the check must be drawn on a drawn on a U.S. bank.
+
+You can also register online on CompuServe. Type GO SWREG, and follow
+the prompts. The Registration Id for CompuServe is 759. All Compuserve
+registrations are $55.00, including shipping and handling.
+
+You may place an order by Master Card, VISA, American Express,
+or Discover by contacting Public Software Library at (800) 242-4PSL
+(from overseas (713) 524-6394), by FAX at (713) 524-6398, or on
+CompuServe at 71355,470.
+These numbers are for credit card orders only! Please, do not call
+these numbers for any type of technical assistance. The Registration
+Id for PSL is 10905. All PSL registrations are $55.00, including
+shipping and handling.
+
+Site licenses and multiple copy discounts are available. Remember a
+registered copy is required for each programmer using BTV.PAS.
+
+Please contact me with any comments, suggestions, problems, bugs, or
+questions.
+
+Richard Hansen
+PO Box 18571
+Saint Paul, MN  55118-0571  USA
+
+CompuServe : 70242,3367
+InterNet   : 70242.3367@compuserve.com
+FidoNet    : 1:282/115
+
+The following files should be included in the archive:
+
+BTV.PAS         The main btrieve unit
+BTVX.PAS        Btrieve object that supports the extended operations
+BTVTYPE.PAS     Btrieve data conversion routines
+BTVCONST.PAS    Btrieve constants
+BTRVDOS.PAS     Interface to the Btrieve TSR for DOS
+BTRWIN.PAS      Interface to the Btrieve DLL for Windows
+BTRVDPMI.PAS    Interface to the Btrieve TSR for protected mode
+EXAMPLE1.PAS    Some example code
+EXAMPLE2.PAS          "
+EXAMPLE3.PAS          "
+EXAMPLE4.PAS          "
+EXAMPLE5.PAS          "
+EXAMPLE6.PAS          "
+EXAMPLE7.PAS          "
+EXTEND.PAS      Extended operations example
+OWNER.PAS       Owner name (passwaord) example
+TYPES.DAT       Data file for example 4
+XDEMO.TXT       ASCII data file for example 6
+BTV.INT         Interface section for BTV.PAS
+BTVX.INT        Interface section for BTVX.PAS
+BTVTYPE.INT     Interface section for BTVTYPE.PAS
+BTRVMSG.PAS     Windows sample application for creating an error
+                message file
+BTRVMSG.INC     Include file for BTRVMSG.PAS
+BTRVMSG.RC      Windows resource script file for BTRVMSG.PAS
+BTRVMSG.ICO     Windows icon for BTRVMSG.PAS
+BTRVMSG.EXE     Windows executable demo compiled from BTRVMSG.PAS
+BTRIEVE.ERR     Test data file for BTRVMSG.EXE
+BTV.TXT         Documentation in ASCII format
+ORDER.FRM       Registration form
+WHATS.NEW       History and change file
+DESC.SDI        BBS file description
+FILE_ID.DIZ           "</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

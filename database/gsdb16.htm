@@ -1,0 +1,77 @@
+<html><head><title>GSdBase 1.6 - DataBase Unit with Index Support</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека для работы с DBF / DBT файлами и NDX индексами.<br><font color=#666666> Simple database unit for create/read/write dBASE .DBF files and indexed access to NDX index files. Demonstration program creates the .PAS unit for a dBase III file. The resulting unit creates objects for each data field and the entire database.</font>">
+<meta name="keywords" content="pascal, sources, source code, gsdb16, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gsdb16
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GSdBase 1.6 - DataBase Unit with Index Support</TD>
+<TD nowrap class=black>&nbsp;Richard F. Griffin</TD>
+<TD class=black align='right'>08.01.1990</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека для работы с DBF / DBT файлами и NDX индексами.<br><font color=#666666>
+Simple database unit for create/read/write dBASE .DBF files
+and indexed access to NDX index files.
+Demonstration program creates the .PAS unit for a dBase III file.
+The resulting unit creates objects for each data field and
+the entire database.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="gsdb16.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Griffin Solution DataBase Toolkit v1.6
+-------------------------------------------------------------
+   This unit handles the objects for all dBase III file (.DBF)
+   operations including dBase III index (.NDX)
+   and memo (.DBT) fields.
+
+               SHAREWARE  -- COMMERCIAL USE RESTRICTED
+
+   Health Copyright (c)  Richard F. Griffin
+
+   8 January 1990
+
+   102 Molded Stone Pl
+   Warner Robins, GA  31088
+
+HEALTH.PAS
+-------------------------------------------------------------
+The test routine HEALTH.PAS reads two dBase files, using index and memo
+files. It first reads file HLTHDATA.DBF, indexed on HLTHDATA.NDX.
+using field F_CODE, it finds the matching record in HEALTH.DBF,
+indexing on FOODCODE.NDX.  Data, including memo fields for some records,
+is displayed on the screen.
+
+The records will be displayed one at a time.  Press RETURN when
+ready for the next record.
+
+The capability to handle multiple files, along with memo and index
+files, is demonstrated here.
+
+
+DB_Make.PAS
+-------------------------------------------------------------
+
+This program creates the .PAS unit for a dBase III file.
+The resulting unit creates objects for each data field and
+the entire database.  The units HLTH_UNT.PAS and HLTHDATA.PAS
+demonstrate the resulting units.
+
+The program expects two parameters:  The dBase file, without
+the .DBF extension, and the name you want the resulting unit
+to have.
+
+For example, the HLTH_UNT.PAS unit was created by executing:
+
+  DM_MAKE HEALTH Hlth_Unt
+
+If the second parameter is left out, the unit will take the
+the first parameter.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

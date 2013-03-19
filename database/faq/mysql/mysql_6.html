@@ -1,0 +1,42 @@
+<HTML>
+<head>
+<TITLE>Как посмотреть структуру БД/таблицы - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Как посмотреть структуру БД/таблицы</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Да... такой вопрос вызвал бы у
+    пользователей SQL Server'а только смех... но
+    нам не до смеха :( Так вот, в MySQL для этого
+    есть команда SHOW. Вот что можно получить с
+    ее помощью:<pre><font color="#008000">SHOW DATABASES
+SHOW KEYS FROM table_name
+SHOW TABLES [FROM database]
+SHOW [COLUMNS|FIELDS] FROM table [FROM database]
+</font></pre>
+    Думаю, комментарии тут излишни :)
+<br>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

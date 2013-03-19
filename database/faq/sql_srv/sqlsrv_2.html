@@ -1,0 +1,39 @@
+<HTML>
+<head>
+<TITLE>Как сделать выборку данных из нескольких таблиц - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Как сделать выборку данных из нескольких таблиц</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    SQL позволяет в одном запросе обращаться к
+    нескольким таблицам. Полное имя столбца в
+    таблице фактически состоит из имени
+    таблицы, за которым идет точка и имя
+    столбца.
+<pre><font color="#008000">SELECT Table1.field1, Table2.*
+    FROM Table1, Table2
+</font></pre>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

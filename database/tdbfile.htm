@@ -1,0 +1,592 @@
+<html><head><title>TDBFile - ООП модуль для DBF файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Обектно-ориентированный модуль для работы с DBF файлами. <br><font color=#666666> BP7 OOP Unit For DBF-files</font>">
+<meta name="keywords" content="pascal, sources, source code, tdbfile, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tdbfile
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TDBFile - ООП модуль для DBF файлов</TD>
+<TD nowrap class=black>&nbsp;Владимир Бахвалов</TD>
+<TD class=black align='right'>07.12.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Обектно-ориентированный модуль для работы с DBF файлами. <br><font color=#666666>
+BP7 OOP Unit For DBF-files</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tdbfile.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">unit
+  TDBFile; { Use DBF like FoxPro }
+
+interface
+
+  uses
+    Objects; { Standard Turbo lib }
+
+  const
+    SizeOfBuffer = 65520;
+    stDelete : Byte = 42;
+    stNormal : Byte = 32;
+    ON       : Boolean = TRUE;
+    OFF      : Boolean = FALSE;
+
+  function GetDay   : Byte;
+  function GetMonth : Byte;
+  function GetYear  : Word;
+
+  type
+    PBuffer = ^TBuffer;
+    TBuffer = array [0..65520] of Byte;
+
+    PRec = ^TRec;
+    TRec = record
+      Data : String;
+      Next : PRec;
+    end;
+
+    PHeadRec = ^THeadRec;
+    THeadRec = record
+      Sign     : Byte;
+      Year     : Byte;
+      Month    : Byte;
+      Day      : Byte;
+      RecNum   : LongInt;
+      HeadLen  : Word;
+      RecLen   : Word;
+      Reserved : array [1..20] of Byte;
+    end; { Структура заголовка DBF-файла }
+
+    PFieldRec = ^TFieldRec;
+    TFieldRec = record
+      Name      : array [0..10] of Char;
+      FieldType : Char;
+      Displacem : LongInt;
+      FieldLen  : Byte;
+      DecPlace  : Byte;
+      Reserved  : array [1..14] of Byte;
+    end; { Структура описателя поля }
+
+    PInfoRec = ^TInfoRec;
+    TInfoRec = record
+      Name      : String[10];
+      FieldType : Char;
+      Displacem : LongInt;
+      FieldLen  : Byte;
+      DecPlace  : Byte;
+      Next      : PInfoRec;
+    end; { Информационная структура для потока }
+
+    PDBFStream = ^TDBFStream;
+    TDBFStream = object (TBufStream)
+      Head      : PHeadRec;
+      Info      : PInfoRec;
+      FieldNum  : Word;
+      Current   : LongInt;
+      stDeleted : Boolean;
+      constructor Use(FName : String);
+      constructor Create(FName : String; PInfo : PInfoRec);
+      procedure   Go(Num : LongInt);
+      procedure   Append(var Rec);
+      procedure   AppendBlank;
+      procedure   AppendNBlank(Num : LongInt);
+      procedure   WriteToField(var Rec; NumField : Byte);
+      procedure   WriteStr(S : String; NumField : Byte);
+      procedure   WriteRec(PR : PRec);
+      procedure   ReadFromField(var Rec; NumField : Byte);
+      procedure   ReadStr(var S : String; NumField : Byte);
+      procedure   Gather(var Rec);  {  to  }
+      procedure   Scatter(var Rec); { from }
+      procedure   Delete;
+      procedure   ReCall;
+      function    Deleted : Boolean;
+      function    RecCount : LongInt;
+       { !!!!!!!!!!!!!!!!!!!!!!!!!!! }
+      procedure   Pack; { not quiet right }
+       { !!!!!!!!!!!!!!!!!!!!!!!!!!! }
+      procedure   SetDeleted(Del : Boolean);
+      function    Field(Num : LongInt) : PInfoRec;
+      function    FieldType(Num : LongInt) : Char;
+      function    FieldLen(Num : LongInt) : Byte;
+
+      procedure   WriteAllNames; { U can exclude it... }
+
+      destructor  Close; virtual;
+    end; { Объект DBF-файла }
+
+  function  NewField(Name: String; FieldType: Char; FieldLen: Byte;
+                     DecPlace : Byte; Next : PInfoRec) : PInfoRec;
+
+  function  NewRec(Data : String; Next : PRec) : PRec;
+
+  function  Format(V : Real; W, D : Byte) : String;
+
+  procedure DeleteFile(FileName : String);
+
+
+implementation
+
+  uses
+    DOS, TPEms;
+         { Get from TPProf (I think OOPro too can do it) }
+
+  function GetDay : Byte; assembler;
+  asm
+    MOV AH,2Ah
+    INT 21h
+    MOV AL,DL
+  end;
+
+  function GetMonth : Byte; assembler;
+  asm
+    MOV AH,2Ah
+    INT 21h
+    MOV AL,DH
+  end;
+
+  function GetYear : Word; assembler;
+  asm
+    MOV AH,2Ah
+    INT 21h
+    MOV AX,CX
+  end;
+
+  constructor TDBFStream.Use;
+  var
+    LPInfo  : PInfoRec;
+    LPField : PFieldRec;
+    I, J    : Byte;
+  begin
+    inherited Init(FName, stOpen, SizeOfBuffer);
+    if Status&lt;&gt;stOk then Exit;
+    stDeleted:=OFF;
+    New(Head);
+    Read(Head^, 32);
+    New(LPField);
+    New(Info);
+    LPInfo:=Info;
+    I:=0;
+    while (I+1)*32 &lt; Head^.HeadLen do begin
+      Read(LPField^, 32);
+      J:=0;
+      while LPField^.Name[J]&lt;&gt;#0 do begin
+        LPInfo^.Name[J+1]:=LPField^.Name[J];
+        Inc(J);
+      end;
+      LPInfo^.Name[0]  :=Chr(J);
+      LPInfo^.FieldType:=LPField^.FieldType;
+      LPInfo^.Displacem:=LPField^.Displacem;
+      LPInfo^.FieldLen :=LPField^.FieldLen;
+      LPInfo^.DecPlace :=LPField^.DecPlace;
+      Inc(I);
+      if (I+1)*32 &gt;= Head^.HeadLen
+        then LPInfo^.Next:=nil
+        else begin
+          LPInfo^.Next:=New(PInfoRec);
+          LPInfo:=LPInfo^.Next;
+        end;
+    end;
+    FieldNum:=I-1;
+    Current:=1;
+    Seek(Head^.HeadLen);{ Go(1); }
+  end;
+
+  constructor TDBFStream.Create;
+  var
+    LPInfo  : PInfoRec;
+    LPField : PFieldRec;
+    I, J    : Byte;
+    RN      : LongInt;
+    HL, RL,
+    DP      : Word;
+  begin
+    inherited Init(FName, stCreate, SizeOfBuffer);
+    stDeleted:=OFF;
+    Info:=PInfo;
+    I:=0;
+    RL:=1;
+    DP:=1;
+    while PInfo&lt;&gt;nil do begin
+      Inc(I);
+      PInfo^.Displacem:=DP;
+      DP:=DP+PInfo^.FieldLen;
+      RL:=RL+PInfo^.FieldLen;
+      PInfo:=PInfo^.Next;
+    end;
+    HL:=32*I+33;
+    FieldNum:=I;
+    New(Head);
+    with Head^ do begin
+      Sign   :=3;
+      Year   :=GetYear-1900;
+      Month  :=GetMonth;
+      Day    :=GetDay;
+      RecNum :=0;
+      HeadLen:=HL;
+      RecLen :=RL;
+      FillChar(Reserved[1],20,0);
+    end;
+    Write(Head^,32);
+    New(LPField);
+    LPInfo:=Info;
+    for I:=1 to FieldNum do begin
+      with LPField^ do begin
+        FillChar(Name[0],11,0);
+        J:=Length(LPInfo^.Name);
+        Move(LPInfo^.Name[1],Name[0],J);
+        FieldType:=LPInfo^.FieldType;
+        Displacem:=LPInfo^.Displacem;
+        FieldLen:=LPInfo^.FieldLen;
+        DecPlace:=LPInfo^.DecPlace;
+        FillChar(Reserved[1],14,0);
+      end;
+      Write(LPField^,32);
+      LPInfo:=LPInfo^.Next;
+    end;
+    I:=13;
+    Write(I,1);
+    Current:=1;
+    Seek(Head^.HeadLen);{ Go(1); }
+  end;
+
+  procedure   TDBFStream.Go;
+  begin
+    Current:=Num;
+    Seek(Head^.HeadLen+(Num-1)*Head^.RecLen);
+  end;
+
+  procedure   TDBFStream.Append;
+  begin
+    with Head^ do begin
+      Seek(HeadLen+(RecNum+1)*RecLen);
+      Write(Rec,RecLen);
+      Inc(RecNum);
+      Seek(HeadLen+RecNum*RecLen);
+    end;
+  end;
+
+  procedure   TDBFStream.AppendBlank;
+  var
+    PB : PBuffer;
+  begin
+    New(PB);
+    FillChar(PB^[0],Head^.RecLen+1,32);
+    Append(PB^[0]);
+    Dispose(PB);
+  end;
+
+  procedure   TDBFStream.AppendNBlank;
+  var
+    PB : PBuffer;
+    I  : LongInt;
+  begin
+    New(PB);
+    FillChar(PB^[0],Head^.RecLen,32);
+    for I:=1 to Num do Append(PB^[0]);
+    Dispose(PB);
+  end;
+
+  procedure   TDBFStream.WriteToField;
+  var
+    C      : LongInt;
+    LPInfo : PInfoRec;
+  begin
+    C:=GetPos;
+    LPInfo:=Field(NumField);
+    Seek(C+LPInfo^.Displacem);
+    Write(Rec,LPInfo^.FieldLen);
+    Seek(C);
+  end;
+
+  procedure   TDBFStream.WriteStr;
+  begin
+    FillChar(S[Length(S)+1],255-Length(S),0);
+    WriteToField(S[1],NumField);
+  end;
+
+  procedure   TDBFStream.WriteRec(PR : PRec);
+  const
+    PB    : PBuffer = nil;
+    LPRec : PRec    = nil;
+  var
+    I, J  : Word;
+  begin
+    GetMem(PB,Head^.RecLen);
+    LPRec:=PR;
+    FillChar(PB^[0],Head^.RecLen,0);
+    PB^[0]:=stNormal;
+    I:=1;
+    J:=1;
+    while LPRec&lt;&gt;nil do begin
+      Move(LPRec^.Data[1],PB^[I],FieldLen(J));
+      Inc(I,FieldLen(J));
+      Inc(J);
+      LPRec:=LPRec^.Next;
+    end;
+    Write(PB^[0],Head^.RecLen);
+    FreeMem(PB,Head^.RecLen);
+  end;
+
+  procedure   TDBFStream.ReadFromField;
+  var
+    C      : LongInt;
+    LPInfo : PInfoRec;
+  begin
+    C:=GetPos;
+    LPInfo:=Field(NumField);
+    Seek(C+LPInfo^.Displacem);
+    Read(Rec,LPInfo^.FieldLen);
+    Seek(C);
+  end;
+
+  procedure   TDBFStream.ReadStr;
+  var
+    LPInfo : PInfoRec;
+  begin
+    LPInfo:=Field(NumField);
+    FillChar(S[Length(S)+1],255-Length(S),0);
+    FillChar(S[0],1,LPInfo^.FieldLen);
+    ReadFromField(S[1],NumField);
+  end;
+
+  procedure   TDBFStream.Gather; { to }
+  var
+    C      : LongInt;
+  begin
+    C:=GetPos;
+    Write(Rec, Head^.RecLen);
+    Seek(C);
+  end;
+
+  procedure   TDBFStream.Scatter; { from }
+  var
+    C      : LongInt;
+  begin
+    Read(Rec, Head^.RecLen);
+    Inc(Current);
+  end;
+
+  procedure   TDBFStream.Delete;
+  begin
+    Write(stDelete,1);
+    Seek(GetPos-1);
+  end;
+
+  procedure   TDBFStream.ReCall;
+  begin
+    Write(stNormal,1);
+    Seek(GetPos-1);
+  end;
+
+  function    TDBFStream.Deleted;
+  var
+    C : Byte;
+  begin
+    Read(C,1);
+    Seek(GetPos-1);
+    Deleted:=(C=stDelete);
+  end;
+
+  procedure   TDBFStream.SetDeleted;
+  begin
+    stDeleted:=Del;
+  end;
+
+  function    TDBFStream.RecCount;
+  const
+    PB : PBuffer = nil;
+  var
+    C : LongInt;
+    I : LongInt;
+  begin
+    New(PB);
+    C:=Current;
+    Seek(Head^.HeadLen);
+    for I:=1 to Head^.RecNum do begin
+      Read(PB^[0],Head^.RecLen);
+      if (not stDeleted) and (PB^[0]&lt;&gt;stDelete) then Inc(C);
+    end;
+    RecCount:=C;
+    Dispose(PB);
+    Go(C);
+  end;
+
+  procedure   TDBFStream.Pack;
+  const
+    P : PBuffer = nil;
+  var
+    R    : PStream;
+    I, J : LongInt;
+    S    : String;
+  begin
+    S:=GetEnv('TEMP')+'\@@@@@@@@.@@@';
+    I:=System.Pos('\\',S);
+    if I&lt;&gt;0 then System.Delete(S,I,1);
+    if Head^.HeadLen&gt;Head^.RecLen then I:=Head^.HeadLen
+    else I:=Head^.RecLen;
+    if EMSInstalled
+      then R:=New(PEMSStream,Init(I,I))
+      else R:=New(PBufStream,Init(S,stCreate,SizeOfBuffer));
+    New(P);
+    I:=0;
+    Seek(0);
+    R^.Seek(0);
+    Read(P^[0],Head^.HeadLen);
+    R^.Write(P^[0],Head^.HeadLen);
+    for J:=1 to Head^.RecNum do begin
+      Read(P^[0],Head^.RecLen);
+      if P^[0]&lt;&gt;stDelete then begin
+        Inc(I);
+        R^.Write(P^[0],Head^.RecLen);
+      end;
+    end;
+    Seek(0);
+    R^.Seek(0);
+    CopyFrom(R^, R^.GetSize);
+    Seek(Head^.HeadLen);
+    Head^.RecNum:=I;
+    R^.Done;
+    if not EMSInstalled then DeleteFile(S);
+  end;
+
+  function    TDBFStream.Field;
+  var
+    LPInfo : PInfoRec;
+  begin
+    LPInfo:=Info;
+    if Num&gt;FieldNum
+      then Field:=LPInfo
+      else begin
+        while Num&gt;1 do begin
+          LPInfo:=LPInfo^.Next;
+          Dec(Num);
+        end;
+        Field:=LPInfo;
+      end;
+  end;
+
+  function    TDBFStream.FieldType;
+  var
+    LPInfo : PInfoRec;
+  begin
+    LPInfo:=Info;
+    if Num&gt;FieldNum
+      then FieldType:='C'
+      else begin
+        while Num&gt;1 do begin
+          LPInfo:=LPInfo^.Next;
+          Dec(Num);
+        end;
+        FieldType:=LPInfo^.FieldType;
+      end;
+  end;
+
+  function    TDBFStream.FieldLen;
+  const
+    LPInfo : PInfoRec = nil;
+  begin
+    LPInfo:=Info;
+    if Num&gt;FieldNum
+      then FieldLen:=0
+      else begin
+        while Num&gt;1 do begin
+          LPInfo:=LPInfo^.Next;
+          Dec(Num);
+        end;
+        FieldLen:=LPInfo^.FieldLen;
+      end;
+  end;
+
+  procedure   TDBFStream.WriteAllNames;
+  var
+    LPInfo : PInfoRec;
+  begin
+    LPInfo:=Info;
+    while LPInfo&lt;&gt;nil do with LPInfo^ do begin
+      Writeln('---'#16' ',Name:10,' "',FieldType,'" ',FieldLen:3,
+              '.',DecPlace);
+      LPInfo:=Next;
+    end;
+  end;
+
+  destructor  TDBFStream.Close;
+  var
+    LPInfo : PInfoRec;
+    I      : Byte;
+    C      : LongInt;
+  begin
+    with Head^ do begin
+      Year:=GetYear-1900;
+      Month:=GetMonth;
+      Day:=GetDay;
+    end;
+    Seek(0);
+    Write(Head^,32);
+    Seek(Head^.HeadLen+Head^.RecNum*Head^.RecLen);
+    I:=26;
+    Write(I,1);
+    Truncate;
+    Dispose(Head);
+    while Info&lt;&gt;nil do begin
+      LPInfo:=Info;
+      Info:=Info^.Next;
+      Dispose(LPInfo);
+    end;
+    inherited Done;
+  end;
+
+  function NewField(Name : String; FieldType : Char; FieldLen : Byte;
+                    DecPlace : Byte; Next : PInfoRec) : PInfoRec;
+  var
+    LPInfo : PInfoRec;
+  begin
+    New(LPInfo);
+    LPInfo^.Name:=Name;
+    LPInfo^.FieldType:=FieldType;
+    LPInfo^.FieldLen:=FieldLen;
+    LPInfo^.DecPlace:=DecPlace;
+    LPInfo^.Next:=Next;
+    NewField:=LPInfo;
+  end;
+
+  function NewRec(Data : String; Next : PRec) : PRec;
+  const
+    LPRec : PRec = nil;
+  begin
+    New(LPRec);
+    LPRec^.Data:=Data;
+    LPRec^.Next:=Next;
+    NewRec:=LPRec;
+  end;
+
+  function Format(V : Real; W, D : Byte) : String;
+  var
+    S : String;
+  begin
+    Str(V:W:D,S);
+    while Byte(S[0])&lt;W do S:=S+' ';
+    Format:=S;
+  end;
+
+  procedure DeleteFile(FileName : String);
+  var
+    Regs : Registers;
+  begin
+    FileName:=Concat(FileName,#0);
+    with Regs do begin
+      flags:=( flags and  $0000 );
+      DS := Seg(FileName[1]);
+      DX := Ofs(FileName[1]);
+      AH := $41;
+      MsDos( Regs );
+    end;
+  end;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,44 @@
+<HTML>
+<head>
+<TITLE>Как использовать БД MySQL в своей программе - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Как использовать БД MySQL в своей программе</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Как я
+      уже говорил, для MySQL есть интерфейсы для
+      разных языков - C, Perl, PHP. В В любом случае,
+      нужно найти заголовочные файлы для нужного
+      языка и включить их в проект. Пример для
+      VС++: нужно указать линкеру путь к
+      библиотеке libMySql.lib (Tools-&gt;Options-&gt;Directories) и
+      заголовочным файлам (все эти файлы идут
+      в дистрибутиве с MySQL). Теперь скопируйте
+      libMySql.dll в системный каталог Windows. Все,
+      теперь можно использовать MySQL API в вашей
+      программе. Кстати, описание API и примеры
+      тоже есть в дистрибутиве.
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

@@ -1,0 +1,241 @@
+<html><head><title>DbfProc v1.9 beta - Библиотека для DBF</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека для работы с файлами типа .DBF.">
+<meta name="keywords" content="pascal, sources, source code, dbfproc, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dbfproc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DbfProc v1.9 beta - Библиотека для DBF</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5019/3.8">Сергей Никиреев</a></TD>
+<TD class=black align='right'>19.08.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека для работы с файлами типа .DBF.</TD><TD class=black colspan=2 align='right'><br><A HREF="dbfproc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>21k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          *** DBFPROC ***  
+
+                           ver. 1.9 beta
+
+  Библиотека для работы в ТР/BP с файлами типа .DBF (формат dBase).
+  -----------------------------------------------------------------
+
+Данная библиотека распространяется свободно в том виде как она есть.
+
+Изменения кода можно выполнять в том случае, если не будет затронута 
+авторская метка и заголовок. При изменении кода прошу отмечать в
+комментариях блоки, которые Вы добавили или помечать изменения в уже
+существующем тексте. 
+---------------------------------------------------------------------
+
+В библиотеке использованы возможности ООП Turbo/Borland Pascal.
+Основной объект это TDBF -  в нем реализованы основные процедуры и
+функции. Для каждого файла базы данных нужно создавать свой экземпляр
+объекта TDBF, для этой цели можно использовать динамическое
+распределение через указатель на объект
+
+                 PBase := New(PDBF,Init(...));
+
+или использовать статический экземпляр объекта  
+
+                 Base : TDBF;
+                 ...
+                 Base.Init(...);
+
+  При завершении программы необходимо закрыть файл базы, выполняется 
+это в деструкторе объекта:
+
+                 Dispose(PBase,Done) 
+                или 
+                 Base.Done;
+
+----------------------------------------------------------------------
+Описание процедур и функций:
+
+constructor Init(Name : String);  { Открытие базы данных }
+
+ Предназначен для инициализации всех полей объекта, открытия файла
+базы. В поле Name указывается путь и имя файла базы данных, расширение 
+иожно опускать.
+
+destructor  Done; virtual;        { Закрытие БД }
+
+ Предназначен для удаления всех динамически распределенных служебных
+объектов, сохранения заголовка файла и его закрытия.
+
+
+procedure CreateHeader(FType : Byte); { Подготовка пустого заголовка }
+                            { FType - тип файла dBase,dBaseIIIMemo...}
+
+ Создает пустой заголовок файла в том случае, если структура базы
+еще не определена. FType - тип файла dBase,dBaseIIIMemo...
+ 
+
+procedure WriteHeader;  { Запись заголовка в файл }
+
+ Записывает созданый или измененный заголовок в файл базы данных.
+
+procedure AppendField(Name : String; FTp : Char; LenI,LenD : Byte);
+
+ Добавляет поле Name в заголовок пустой базы. FTp - тип поля,
+   N - Число,
+   C - Массив символов (строка),
+   D - Дата,
+   M - Мемо (пока не используется),
+   B - Логическое
+
+LenI - длина поля, LenD - число символов после точки (относится только
+к типу 'N'); 
+
+function  GetNumField(Name : String) :Integer;
+
+ Найти поле по имени Name и получить его номер. 
+
+function  GetFieldName(Num : Integer) :String;
+
+ Найти поле по номеру Num и получить его имя.
+
+function  GetFieldNum(Num : Integer) :String;
+
+ Найти поле но номеру Num и прочесть значение.
+
+function  GetField(Name : String) :String;
+
+ Прочесть значение поля Name. Предварительно должна быть считана
+логическая запись, иначе функция вернет пустое значение.  
+
+function  GetTypeNum(Num : Integer) :Char;
+
+  Прочесть тип поля номер Num.
+
+function  GetType(Name : String) :Char;
+
+  Прочесть тип поля Name.
+
+function  GetLengthNum(Num : Integer): Integer;
+
+  Прочесть длину поля Num.
+
+function  GetLength(Name : String): Integer;
+
+  Прочесть длину поля по имени Name.
+
+function  GetDispNum(Num : Integer): Integer;
+
+  Прочесть смещение поля Num в логической записи.
+
+function  GetDisp(Name : String): Integer;
+
+  Прочесть смещение поля Name в логической записи.
+
+procedure ModifyFieldNum(Num :Integer; Par:String);
+
+  Записать в поле Num значение Par.
+
+procedure ModifyField(Name :String; Par:String);
+
+  Записать в поле Name значение Par.
+
+procedure SetPosition(Num : LongInt);
+
+  Установить файл на запись Num;
+   0-следующая, nnn - на запись nnn; 
+
+procedure ReadRecord(Num : LongInt);
+
+  Прочесть запись 0 - очередную, nnn- по номеру.
+
+procedure WriteRecord(Num : LongInt);
+
+  Записать  0 - в текущую запись, nn- по номеру.
+
+procedure TruncateBase(Num : LongInt);
+  
+  Обрезать все за записью Num, если Num = 0 - за текущей записью.
+
+procedure DeleteRecord(Num : LongInt);
+
+  Пометить запись как удаленную.
+  0 - в текущую запись, nn- по номеру.
+
+procedure RestoreRecord(Num : LongInt);
+  
+  Снять пометку удаления с записи }
+  0 - в текущую запись, nn- по номеру .
+
+function  SearchRecord(Field,Key :String; Start : Boolean) :LongInt;
+  Найти запись по ключу Key в поле Field.
+  Start = First - поиск с первой записи,
+  Start = Next - поиск от текущей записи.
+
+function  CountRecs :LongInt;
+
+  Прочесть число записей в базе.
+
+function  GetFileSize : LongInt;
+
+  Получить абсолютный размер базы в байтах.
+
+function  CountDescriptors : Word;
+
+Прочесть число дескрипторов в заголовке. Позволяет узнать сколько
+полей входит в логическую запись.
+
+procedure GetLastMode(var D,M,Y : Byte);
+
+  Получить дату последней модификации файла базы данных.
+
+procedure Index (IName : String);
+
+  Открыть индексные файлы. Строка IName, представляет собой
+список имен файлов-индексов, разделяемых пробелом или 
+запятой. 
+
+----------------------------------------------------------------------
+* Эти функции не входят в объект TDBF, и находятся в этой библиотеке *
+* только для удобства применения.                                    *
+----------------------------------------------------------------------
+*** Преобразование типов ***
+
+function  RealToString(D : Double; Ln,Dc : Integer) : String;
+
+ Комплексное число преобразовать в строку.Где Ln и Dc определяют 
+формат в виде D:Ln:Dc. 
+
+function  StringToReal(S: String) : Double; 
+
+ Строку преобразовать в комплексное число.
+
+function  StringToInteger(S: String) : LongInt;
+
+ Преобразовать строку в целое число.
+
+*** Строковые операции ***
+
+function  SpaceCut(DString: String): String;
+
+ Обрезать концевые пробелы,символы #0, #255.
+
+function  UpString(DString :String) :String;
+
+ Привести символы строки к верхнему регистру.
+ 
+*** Прочее ***
+
+procedure SetMaxFiles(Count:Word);
+
+ Установить максимальное число открываемых файлов (чего-то 
+не очень помогает)
+---------------------------------------------------------------
+
+ Примеры использования библиотеки приведены в файлах CRBASE - создание
+файла базы и формирование заголовка, TST - поиск записи по ключу.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,68 @@
+<html><head><title>tBase 1.1 - TP6.0 OOP unit for accessing DBF files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Объектно-ориентированный модуль для TP6.0, позволяющий работать с базами формата DBF. Приведены примеры, документация, и TPU6.0 модули (без исходников!). <br><font color=#666666> TP6.0 OOP unit for accessing DBF files, v1.1 Included: Docs, Samples and TPU6.0 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, tbase601, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tbase601
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;tBase 1.1 - TP6.0 OOP unit for accessing DBF files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ACDH083@SAUPM00.BITNET">Nasir Haniffa</a></TD>
+<TD class=black align='right'>20.12.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Объектно-ориентированный модуль для TP6.0,
+позволяющий работать с базами формата DBF.
+Приведены примеры, документация, и TPU6.0 модули
+(без исходников!). <br><font color=#666666>
+TP6.0 OOP unit for accessing DBF files, v1.1
+Included: Docs, Samples and TPU6.0 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="tbase601.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>42k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">*********************************************************************
+    Unit Tbase.TPU
+*********************************************************************
+
+Introduction
+
+  This is the main unit of my goal- Defining Objects to handle Dbase
+  III and FOXPRO compatible files.
+
+  The old existing Programs did not provide satisfactory performance
+  to me. Tbase provides facilities to Create Dbase files, Manipulation
+  on FIeld Structure and Manipulations on Data.
+
+  Tbase allows you to supply Fieldname as argument ( string ) in
+  methods.
+  For example, FieldData( 'Cust_No' ) will give you the data of
+  CUST_NO in the current record ( if such a field exists.. )
+
+  For those who are familiar with using Field numbers in the older
+  programs, Tbase provide Methods that accepts field numbers too.
+
+  The consistency in these procedures are: any method that accepts
+  a field name string as an argument has its counterpart with the same
+  structure but with Field number in place of Field Name.
+  The name of the method adds a MY in its identifier.
+  For example, FieldData accepts Field name string while MYFieldData
+  accept Field Number as Argument.
+
+  Validity Checks are performed in many methods. If the check fails
+  anywhere, the error variable DbError is set to an error number and
+  a Bleep sound occurs. No Screen Display is reported nor does the
+  program abort. The only case the program is aborted is when
+  initializing ( Opening ) a Dbase Object.
+
+  The reason for this non-screen report is to avoid the disturbance
+  when using graphical environment.
+----------------------------------------------------------
+
+Nasir Haniffa ( ACDH083@SAUPM00.BITNET )</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

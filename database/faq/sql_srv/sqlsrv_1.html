@@ -1,0 +1,104 @@
+<HTML>
+<head>
+<TITLE>Как сделать выборку данных из таблицы, Как задать параметры выборки - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Как сделать выборку данных из таблицы?<br>
+      Как задать параметры выборки?</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Чтобы просто вывести все столбцы
+    таблицы некой таблицы достаточно
+    выполнить запрос:
+<pre><font color="#008000">SELECT * FROM Table1</font>
+</font></pre>
+    где Table1 - имя вышей таблицы в текущей БД.
+<br>
+<br>
+    Если требуется выбрать только
+    определенные поля, то их нужно указать в
+    запросе:
+<pre><font color="#008000">SELECT field1, field3 FROM Table1
+</font></pre>
+    Чтобы выбрать уникальные записи (т.е.
+    отбросить повторы), запрос должен иметь
+    следующий вид:
+<pre><font color="#008000">SELECT DISTINCT field1 FROM Table1
+</font></pre>
+    Поскольку вас интересуют не все данные
+    сразу, можно устанавливать критерии,
+    чтобы определить какие строки будут
+    выбраны.
+<pre><font color="#008000">SELECT * FROM Table1 WHERE field1= 'some_text'
+</font></pre>
+    В этом примере из таблицы Table1 будут
+    выбраны все записи, где поле field1 &quot;равняется&quot;
+    строке &quot;some_text&quot;. Вместе с WHERE можно
+    использовать следующие операторы
+    сравнения:
+    <dir>
+    <table border="1" cellpadding=4>
+      <tr><td><b><font color="#008000">=</font></b></td><td>Равно</td></tr>
+      <tr><td><b><font color="#008000">&gt;</font></b></td><td>Больше чем</td></tr>
+      <tr><td><b><font color="#008000">&lt;</font></b></td><td>Меньше чем</td></tr>
+      <tr><td><b><font color="#008000">&gt;=</font></b></td><td>Больше или равно</td></tr>
+      <tr><td><b><font color="#008000">&lt;=</font></b></td><td>Меньше или равно</td></tr>
+      <tr><td><b><font color="#008000">&lt;&gt;</font></b></td><td>Не равно</td></tr>
+    </table>
+    </dir>
+    Для комбинирования условий можно
+    использовать операторы:
+    <dir>
+    <table border="1" cellpadding=4>
+      <tr><td><b><font color="#008000">AND</font></b></td><td>логическое &quot;И&quot</td></tr>
+      <tr><td><b><font color="#008000">OR</font></b></td><td>логическое &quot;ИЛИ&quot;</td></tr>
+      <tr><td><b><font color="#008000">NOT</font></b></td><td>логическое отрицание</td></tr>
+    </table>
+    </dir>
+    Если нужно выбрать строку не по точному
+    соответствию, а по подобию, можно
+    использовать LIKE. &quot;Собирательный&quot; пример:
+<pre><font color="#008000">SELECT * FROM Table1 WHERE field1= 'some_text'
+         AND field2&lt;&gt;0 OR field3 LIKE('%string%')
+</font></pre>
+    Знаки % по обе стороны от &quot;string&quot; означают, что поле должно
+    содержать (а не только равняться!) такую
+    строку, т.е. если поле содержит что-нибудь
+    вроде &quot;lalala<b>string</b>1234&quot;, условие
+    выполнится! Вот вам и простейший поиск :)
+<br>
+<br>
+    А как быть, если нужно узнать количество
+    записей в базе? Для этого используется COUNT:
+<pre><font color="#008000">SELECT COUNT(*) FROM Table1&nbsp;
+</font></pre>
+    Ну и на последок - а как отсортировать
+    результаты запроса по какому-то полю?
+<pre><font color="#008000">SELECT * FROM Table1 ORDER BY field1
+</font></pre>
+    Результат такого запроса будет
+    отсортирован по колонке field1.<font size="4">
+<br>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

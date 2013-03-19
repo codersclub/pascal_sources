@@ -1,0 +1,125 @@
+<html><head><title>Русские Файлы Справок для Paradox Engine 3.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Русские Файлы справок для Paradox Engine 3.0 for Turbo Pascal">
+<meta name="keywords" content="pascal, sources, source code, pxe3_tph, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pxe3_tph
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Русские Файлы Справок для Paradox Engine 3.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5023/2.13">Dima Kuzmenko</a></TD>
+<TD class=black align='right'>16.11.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Русские Файлы справок для Paradox Engine 3.0 for Turbo Pascal</TD><TD class=black colspan=2 align='right'><br><A HREF="pxe3_tph.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>237k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> FREEWARE Paradox Engine 3.0 & DB FW Help Files.
+
+ Привет !
+
+Вот и файлы справок для PXEngine 3.0 for Turbo Pascal. Совершенно
+бесплатно, но наверняка с ошибками.
+
+Paradox Engine 3.0 (PXENGINE.TPU)
+ PXENGINE.H   - константы для компиляции под THELP.COM
+ PXENGINE.HL  - исходный текст хелп-файла
+ PXENGINE.TPH - PXEng 3.0 context help file for TP7/BP
+
+Database Framework (OOPXENG.PAS)
+ OOPXENG.H   - константы для компиляции под THELP.COM
+ OOPXENG.HL  - исходный текст хелп файла
+ OOPXENG.TPH - PXE 3.0 DB FW context help file for TP7/BP
+
+Если файлы по группам находятся в разных архивах, то возможные имена
+архивов:
+
+ PXE3_TPH.ZIP и OOPX3TPH.ZIP
+
+
+К сожалению, пока я делал эти файлы, я чуть-ли не наизусть из выучил,
+поэтому сам проверить до конца отсутствие ошибок не могу. Так что
+будем считать это бета-версией.
+
+Исходными файлами послужили файлы PXENGINE.DOC (из дистрибутива
+PXENGINE) и OOPXENG.PAS, которые были преобразованы в help-файл
+формат Turbo Power утилитой SCANHELP 200A. Затем файлы из формата
+Turbo Power в формат Help Linker были преобразованы специальным
+конвертером. После всего был раскручен файл _PX.NG, произведенный
+Татьяной Горпенко из Москвы ((095) 923-41-45 или 323-08-75), и весь
+русский перевод перенесен (переформатирован, изменен и поправлен) в
+файл PXENGINE.HL.
+
+С OOPXENG.HL все гораздо проще - я просто "перебил" текст из
+документации (исправлены некоторые ошибки, добавлены crosslinks).
+Перевод OOPXENG.HL не предполагается (совсем).
+
+Файлы *.HL и *.H были откомпилированы при помощи HL.EXE версии 6.10 из
+пакета Borland Pascal Open Arcitecture Utilities
+
+строка компиляции для HL 6.0:
+
+ &gt;HL.EXE PXENGINE.HL -sPXENGINE.H -oPXENGINE.TPH
+
+строка компиляции для HL 6.10:
+
+ &gt;HL.EXE PXENGINE.HL -oPXENGINE.TPH -x -i -p
+
+(для компиляции PXENGINE.HL необходимы файлы примеров из
+дистрибутива PXEngine 3.0, помещенные в подкаталог \EXAM. для OOPXENG.HL
+ничего не нужно)
+
+Результат компиляции (*.TPH) проверялся в IDE TP7, BPWO и THELP.COM
+из дистрибутива BPWO.
+
+P.S. Должен заметить, что при переносе текста из PX30.NG я употребил
+много нехороших слов в адрес переводчика (Т.Г.):
+
+Во-первых, покажите мне паскалиста, который пользуется NG ?!?
+Неужели сразу нельзя было сделать TPH ???
+
+Во-вторых, женщина, отнюдь не программист, и соответственно, незнание
+и непонимание специфических терминов, куча бессмысленных кросс-линков
+(а также лишних, или отсутствующих нужных).
+
+В-третьих, забодали переносы слов и сокращения. Какие могут быть в
+документации сокращения ??? (особенно типа "таб-цы")
+
+В-четвертых, из-за попыток перевода непереводимых терминов типа
+case-sensitive
+case-insensitive
+compound key
+и подобных, возникли неоднозначности, поскольку для программиста
+получился полный бред, а у меня не было документации чтобы сделать
+обратный "перевод".
+
+
+to BBS SysOps: Вы можете разбить комплект на части в каком угодно
+виде, т.е. *.TPH и *.HL + *.H  можете поместить в отдельные архивы.
+Однако убедительная просьба - держите на BBS и хелпы, и их исходные
+тексты. Этот файл READ.ME необходимо вложить в каждый архив.
+
+Итак, все замечания, вопросы и претензии можно присылать по адресу:
+
+248021, Россия, Калуга
+ул. Московская д. 214 кв. 27
+Кузьменко Дмитрий Валерьевич
+тел (084) 222-68-91 с 8 до 24 ежедневно.
+
+сетевой адрес в FIDO -
+2:5023/2.13  Dima Kuzmenko
+
+
+                   Dimarker's Software 1993
+
+P.S. Если я узнаю, что данные *.TPH файлы кто-то продает - имя
+"коммерсанта" будет обнародовано в электронной почте в самом
+неприглядном виде !</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

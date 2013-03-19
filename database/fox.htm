@@ -1,0 +1,100 @@
+<html><head><title>FOX.PAS - Обработка DBF для BP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Интерфейсный модуль  для обработки файлов структуры dBASE III Plus, Clipper, FoxPro">
+<meta name="keywords" content="pascal, sources, source code, fox, database, Базы Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Базы Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fox
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FOX.PAS - Обработка DBF для BP7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:4641/58.18">Nick Doodka</a></TD>
+<TD class=black align='right'>24.03.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Интерфейсный модуль  для обработки файлов
+структуры dBASE III Plus, Clipper, FoxPro</TD><TD class=black colspan=2 align='right'><br><A HREF="fox.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>23k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello Max!
+
+Сpд Маp 18 1998, Max Kirilin пишет к All:
+
+ MK&gt; нет ли у кого базы данных, нужно в институт, да чтобы
+ MK&gt; pедактиpовать
+ MK&gt; внутpенности можно было (у меня своя есть, да хочу покpуче).
+
+    Вот посмотри FOX.PAS, может подойдет...
+
+Список функций:
+
+(*$X+,R-,S-,Q-,D- ********************************)
+(*   Borland Pascal version 7.0                  *)
+(*   Интерфейсный модуль  для обработки файлов   *)
+(*   структуры dBASE III Plus, Clipper, FoxPro   *)
+(*   Разработчик - Дудка  Николай  Григорьевич   *)
+(*   address - 2:4641/58.18@FidoNet              *)
+(*************************************************)
+
+function LUpDate: string;              {Дата последней корректировки}
+function LastRec: Longint;                 {Количество записей}
+function Header: Word;                     {Размер заголовка}
+function RecSize: Word;                    {Размер записи}
+function FCount: Word;                     {Количество полей}
+function FSize(Key: KeyStr): Byte;         {Размер заданного поля}
+function AtF(Key: KeyStr): PField;         {Описание поля записи}
+function AtN(No: Integer): PField;         {Описание поля записи}
+function Field(No: Integer): KeyStr;       {Имя поля по номеру}
+function Alias: string;                    {Имя БД без расширения}
+function Deleted: Boolean;                 {Признак удаленнной записи}
+function DbStruct: PFList;                 {Структура текущей БД}
+procedure Skip(X: Integer);                {Пропустить X записей}
+procedure GoTop;                           {Переход на начало БД}
+procedure GoBottom;                        {Переход в конец БД}
+procedure GoRec(No: Longint); virtual;     {Установить текущую запись}
+procedure Append; virtual;                 {Добавить чистую запись}
+procedure Commit; virtual;                 {Вытолктуть буфер записи}
+procedure Flush; virtual;                {Обновить дату модификации}
+procedure Pack; virtual;               {Удаление помеченных записей}
+procedure Delete;                          {Удалить запись}
+procedure Recall;                          {Восстановить запись}
+procedure Zap;                             {Очистка базы данных}
+procedure FRename(Old, New: KeyStr);       {Переименование поля базы}
+procedure SetFilter(Fltr: PFilter);        {Установить фильтр}
+procedure Relation(Child: PBase; Rel: PFList); {Установить отношения}
+procedure LSort(Lo,Hi: Longint; List: PFList); {Быстрая сортировка}
+procedure Sort(ToFile:FNameStr; List: PFList); {Сортировка записей}
+procedure Arrange(Order: PFList); virtual;     {Упорядочить записи}
+function Scan(First: Boolean; Sub: string): Boolean; {Сканирование}
+function LookUp(First: Boolean; List: PFList): Boolean;  {Справочник}
+function BSearch(Key: KeyStr; const Str: string): Boolean; {Двоичный}
+function Num(Key: KeyStr): Numeric;        {Значение числового поля}
+function Log(Key: KeyStr): Logical;        {Значение логического поля}
+function Get(Key: KeyStr): Character;      {Получить данные по имени}
+procedure Put(Key: KeyStr; Info: string);{Записать данные по имени}
+procedure FieldGet(F: Word; var X);      {Считать  знач. в переменную}
+procedure FieldPut(F: Word; var X);      {Записать знач.из переменной}
+procedure GetText(List: PFList);           {Список строк}
+procedure PutText(List: PFList);           {Список строк}
+procedure GetVar(List: PFList);            {Список переменных}
+procedure PutVar(List: PFList);            {Список переменных}
+procedure Scatter(var Rec); virtual;     {Считать стр. данные из базы}
+procedure Gather(var Rec); virtual;      {Записать стр. данные в базу}
+procedure Sum(List: PFList);               {Суммирование записей}
+procedure Display(List: PFList);           {Вывод записей на экран}
+procedure CopyTo(Dest: PBase);             {Добавить записи к Dest}
+procedure Merge(Source: PBase);          {Объединить записи из Source}
+procedure MemoPut(Key: KeyStr; Info:Memo); {Записать текст в MEMO-поле}
+function MemoGet(Key: KeyStr): Memo;       {Считать значение MEMO-поля}
+
+Nick Doodka [Втp Маp 24 1998, 11:01]
+
+--- FastEcho 1.45
+ * Origin: === Pipe Station === (2:4641/58.18)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

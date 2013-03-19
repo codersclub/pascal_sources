@@ -1,0 +1,77 @@
+<HTML>
+<head>
+<TITLE>Ввод, удаление и изменение значений полей - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Ввод, удаление и изменение значений полей</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Все строки вводятся с использованием
+    команды INSERT.
+<pre><font color="008000">INSERT INTO Table1 VALUES (1, 'text', 10)
+</font></pre>
+    Если данные нужно добавить не во все поля,
+    то запрос принимает следующий вид:
+<pre><font color="008000">INSERT INTO Table1 (field1) VALUES (3)
+</font></pre>
+      Учтите, что таблица уже должна
+      существовать к моменту выполнения этой
+      команды, а тип каждого значения в
+      скобках после VALUES должен совпадать с
+      типом данных столбца, в который оно
+      вставляется. Первое значение попадает в
+      столбец 1, второе - 2 и т.д.
+<br>
+<br>
+    Для удаления строк из таблицы
+    используется команда DELETE. Она удаляет не
+    отдельные значения, а строки целиком.
+<pre><font color="008000">DELETE FROM Table1 WHERE field1=1
+</font></pre>
+    Если вызвать DELETE без указания условия,
+    будет удалено все содержание таблицы!
+<br>
+<br>
+    Команда UPDATE изменяет значения в
+    существующей записи в таблице. Эта
+    команда содержит предложение UPDATE, за
+    которым указывается имя таблицы, и
+    предложение SET, которое указывает на
+    изменение которое нужно сделать для
+    определенного столбца.
+<pre><font color="008000">UPDATE Table1 SET field2='new_text'
+</font></pre>
+      Естественно, DELETE может использовать
+      условия для выбора записей, подлежащих
+      изменению.
+<pre><font color="008000">UPDATE Table1
+      SET field2='new_text', field3=10
+      WHERE field1=0
+</font></pre>
+      Как видно из примера, можно изменить
+      значения в нескольких столбцах,
+      перечислив их через запятую
+<br>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>

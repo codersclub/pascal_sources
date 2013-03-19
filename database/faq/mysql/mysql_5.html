@@ -1,0 +1,55 @@
+<HTML>
+<head>
+<TITLE>Как создать/изменить таблицу - FAQ по Базам Данных - Исходники.Ру</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<LINK href="../sources.css" rel=stylesheet>
+</head>
+<body>
+<table border="0" width="80%" align="center">
+  <tr>
+    <td valign="top">
+      <h2>FAQ по Базам Данных<br>
+      <font size="2">(<a class="blueb" href="http://pascal.sources.ru/cgi-bin/forum/YaBB.cgi" target="_blank">Форум
+      на Исходниках.Ru</a>)</font></h2>
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>Как создать/изменить таблицу</h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    Для создания таблицы нужно выполнить запрос:<pre><font color="#008000">CREATE TABLE Table1 (
+    id int(10) not null auto_increment,
+    text_field text,
+    int_field int(10) not null DEFAULT 0,
+    PRIMARY KEY (id))
+</font></pre>
+    Этот запрос создаст
+    таблицу <font color="#008000">Table1</font> с ключевым полем-счетчиком
+    <font color="#008000">id</font> и двумя полями
+    <font color="#008000">text_field</font> и
+    <font color="#008000">int_field,</font>,
+    причем последнее имеет значение по умолчанию 0.
+<br>
+<br>
+    А теперь, если нам нужно изменить таблицу
+    (например, добавить столбец), выполняем
+    такой запрос:<pre><font color="#008000">ALTER TABLE Table1 ADD new_row int(10)
+</font></pre>
+    Этот запрос добавил колонку <font color="#008000">new_row</font> типа int.
+    А теперь удалим этот столбец:<pre><font color="#008000">ALTER TABLE Table1 DROP COLUMN new_row
+</font></pre>
+    А если нужно удалить всю таблицу,
+    достаточно выполнить такой запрос:<pre><font color="#008000">DROP TABLE Table1</font>
+</font></pre>
+<br>
+<br>
+      <a class="blueb" href="../index.html">Содержание</a>
+    </td>
+  </tr>
+</table>
+</body>
+</HTML>
