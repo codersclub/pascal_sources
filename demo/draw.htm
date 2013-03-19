@@ -1,0 +1,122 @@
+<html><head><title>Draw - Sinusoidal Running Text String [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демострационная заставка. Бегущая по отраженной синусоиде цветная текстовая строка.">
+<meta name="keywords" content="pascal, sources, source code, draw, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;draw
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Draw - Sinusoidal Running Text String [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:aamonster@mail.ru">Alexey Monastyrenko</a></TD>
+<TD class=black align='right'>04.05.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="draw.gif"><p style="margin-left:20px">Демострационная заставка.
+Бегущая по отраженной синусоиде цветная текстовая строка.</TD><TD class=black colspan=2 align='right'><br><A HREF="draw.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="draw_1.gif" alt="">
+
+{&gt; Cut here. FileName= DRAW.PAS }
+{Draw - Sinusoidal Running Text Demo [320x200x256]
+ by Alexey Monastyrenko &lt;aamonster@mail.ru&gt;
+             04 May 1997
+}
+{$R-,Q-,S-,Q-}
+uses Crt;
+
+{-$i pal_rad.src}
+procedure SetPalette;
+var   N:Integer;
+begin
+  Port[$3C8] := 0;
+  for N := 0 to 2 do
+    Port[$3C9] := 0;
+  for N := 3 to 256*3-1 do
+    Port[$3C9] := Round(Abs(Sin(N*21167.0))*63);
+end; {of SetPalette}
+
+var BIOSTicks: Longint absolute $0040:$006C;
+
+procedure VIDMode(Mode : Byte);assembler;
+  asm mov ah,$00;  mov al,mode; int 10h; end;
+
+var Scr: array[0..199,0..319] of Byte absolute $A000:$0000;
+
+type TFont=array[0..32767] of Byte;
+var  Font:^TFont absolute 0:$10C;
+const FontHeight:Byte=8;
+const FontScale:Byte=2;
+
+procedure DrawLetter(L:Char; X,Y:Word; Color:Byte);
+var I,J:Word;
+begin
+  for I:=0 to 7 do
+    for J:=0 to 7 do
+      if X-J*FontScale*(Y-80) div 50&lt;320 then begin
+       Inc(Scr[Y+I*FontScale,X-J*FontScale]
+             ,((Font^[Ord(L)*8+I] shr J) and 1)*Color);
+       Inc(Scr[Y+I*FontScale,X-J*FontScale+1]
+             ,((Font^[Ord(L)*8+I] shr J) and 1)*Color);
+       Inc(Scr[Y+I*FontScale+1,X-J*FontScale]
+             ,((Font^[Ord(L)*8+I] shr J) and 1)*Color);
+       Inc(Scr[Y+I*FontScale+1,X-J*FontScale+1]
+             ,((Font^[Ord(L)*8+I] shr J) and 1)*Color);
+      end;
+end;
+
+procedure Letter(L:Char; X:Word; Color:Byte);
+begin
+  X:=340-(640-X) mod 400;
+  DrawLetter(L,X,160-Abs(Round(50*Cos((200-X)/256*2*PI))),Color);
+end;
+
+{---------------------------MAIN PROGRAM-------------------------}
+
+var
+  I : Longint;
+  J,K,L: Word;
+  X:Word;
+const S:string='Test string';
+begin
+  Randomize;
+
+  VIDMode($13);                       { 320x200x256 graphics mode }
+  SetPalette;
+
+  I:=0;
+  repeat
+
+    for K:=1 to Length(S) do begin
+      if I&lt;&gt;0 then
+        Letter(S[K],320-(I-1)+K*8*FontScale,-K*16);
+        Letter(S[K],320-I+K*8*FontScale,K*16);
+{      for L:=0 to 7 do
+        for J:=0 to 7 do begin
+          Dec(Scr[80+L*FontScale+
+             Round(-32*Abs(Sin(((-(I-1)/8+K)*8)*2*PI/64))),
+             50+(-(I-1)-J+K*8)*FontScale],
+             ((Font^[Ord(S[K])*8+L] shr J) and 1)*(K)*16);
+          Inc(Scr[80+L*FontScale+
+             Round(-32*Abs(Sin(((-I/8+K)*8)*2*PI/64))),
+             50+(-I-J+K*8)*FontScale],
+             ((Font^[Ord(S[K])*8+L] shr J) and 1)*(K)*16);}
+    end;
+    if KeyPressed then case ReadKey of
+      ' ': ReadKey;
+      #27: Break;
+    end;
+    Inc(I);
+  until False;
+
+  vidMode($03);                       { return to 80x25 textmode }
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

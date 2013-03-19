@@ -1,0 +1,159 @@
+<html><head><title>Gourad Shading Effect - Demo - Pascal.Sources.Ru</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="keywords" content="pascal, sources, demo, gourad shading, effect, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;goushad
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=80% nowrap>&nbsp;Gourad Shading Effect</TD>
+<TD nowrap class=black>&nbsp;&nbsp;&nbsp;<!--img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A href="mailto:"-->Faker/S!P<!--/A--></TD>
+<TD class=black align="right">01.09.1994</TD></TR>
+<TR vALign=top><TD class=black colSpan=2><img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="goushad.jpg"><p style="margin-left:20px">
+<br>
+How to code gouraud shading. Full pascal source included.<br>
+Coded by The Faker/S!P. Fast iNjEcTioN By Access/Antares
+</TD><TD class=black align="right"><br><A HREF="goushad.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">
+
+                <img border=0 width=320 height=200 src="goushad1.jpg" alt="">
+
+Hello Dudes ...
+
+I was away for a longer weekend and when I came back I saw there
+was quite some discussion about certain aspects of my person and
+my code.
+
+I remember posting some controversial statements which I thought
+would lead to some discussion and widen the horizon of some people
+who only believe the things what the computer magazines and the
+so-called gurus say.
+
+Well, there was some reaction I didn't quite like - some guys
+reacted quite childish in the way of this-is-not-the-way-it's-
+-done-therefore-you-are-an-idiot-and-we-laugh-at-you.
+Way under there age (or?). Which made me quite angry so I replied
+hard at them. Most of it was crap anyway - lamers who thought they
+could prove me wrong and made themselves laughed at by others,
+when they tried to improve the 16bit code in 32bit mode. NONE of
+it works, as I was claiming before and was flamed with crap from
+the people who have to boost their ego.
+
+Another thing was the statement about the Gouraud code with 0.25
+instructions per pixel. I wrote that only 'coz I was surprised
+that people still thought it was so expensive ... while I replaced
+it with Phong shading already.
+According to the replies I got, where people actually thought I
+meant 1/4 of a frame and stuff like that, they act like
+when-I-cannot-do-that-how-can-HE-do-that-MUST-be-some-sort-of-
+-error-or-else-I'd-be-lame.
+Some people really think that their code is optimized or so, and
+nothing can get faster - well it's not impossible to optimize even
+more, you'd be surprised.
+
+NEVER EVER say your code is optimized, somebody can come and make
+it faster - and if it is with the new Pentium execution unit, or
+with some new undocumented feature.
+
+Therefore below's the code for it. You may want to get my released
+sources/intros and look at them. Then let's argue again ...
+
+Something else about giving code out.
+It's definitely *NOT* in use for demo groups to give code out.
+While it may be 'in' for some American demo groups to do that, we
+Europeans started out without all those tutorials - most of us
+don't have Internet access or a modem anyway. Enough about this.
+
+But I find today's attitude of 'HAVING to give code out, if you
+mention you have a good method' lame - there's a increasing
+majority of newbies who actually DEMAND that, 'coz they're used to
+it. Like the 'if he holds his code back we'll flame him till he
+gives us!' approach. I fucking hate those LAMERS.
+
+Try to see it as a GIFT, and not as your right! Nevertheless I
+released some, and I'll probably still do ... However, would you
+give your code/technique/ tricks gratefully to guys who flame you?
+
+Most of those lamers don't have anything to prove they can code,
+actually.  Everybody can snap up a few bits of 'on how to do this
+and that', and no matter if it's wrong or right, flame all who are
+of a different opinion. I think that's what is called being
+fascist.
+
+Let's take for example DOOM: Lot's of people 'claim' they've
+coded/are coding it - I don't know who turned up with the argument
+that DOOM be ray casting, but I bet the ID guys were laughing
+their ass off when that thread about it was taking place ;)   It
+may lie in their interest to disinform the public as they want to
+sell their routine's technology, or?   (This is only an assumption
+and no accusation, dudes).
+
+You probably could make it ray casting, but I'd strongly doubt
+you'd reach the speed of the original. Well, how do I come to that
+conclusion? Me, and some of the leading demo coders agree on that.
+(There's an example with ray casting, called ACK3D, but it doesn't
+reach the speed of Wolf3D by far, as you can see, and for
+floor/ceiling the ratio is worse ...)
+
+Laugh at me, but as a demo coder I'm testing algorithms due to
+their usability and performance. And I don't select the most
+sophisticated one, but the one who fulfills the needs of the
+routine. For example, I've never bothered with BSP- trees - I know
+about the algorithm - but I see no use for it.  What I'm trying to
+say, you shouldn't blindly follow those who call themselves Gurus,
+but try to look what's behind it.
+
+I know that some guys will flame me, either for this attitude, or
+for some little bugs they find in my routine, or some unoptimized
+ASM instructions.  Those fuckers should really get a life.
+
+I thank all those who know me, have seen my routines and support
+me in this group - You know who you are!
+
+
+----------------RIP this code here, lamers-----------------------
+
+
+Signed, The Faker (S!P Internet PR)
+
+
+_____________________________________________________________
+\                                    \                       \
+ |   "No one told you when to run,    |  in fake life:        |
+ |    you missed the starting gun."   |  Stefan Ohrhallinger  |
+ |                                    |    St. Laurenz 54     |
+ |   SURPRISE! PRODUCTIONS, AUSTRIA   |    A-4950 ALTHEIM     |
+ |                                    |                       |
+ |        "lightyears ahead!"         |  +43-732-2457-1025    |
+ |   __________________________________\_______________________\__
+  \_/____________________________________________________________/
+
+
+
+I really don't care what you're doing with it, 'coz for me it's
+obsolete ...  Why? It's been coded a year before, I never
+optimized anything except the inner loop, so my Phong stuff is
+faster now.
+
+And it's an example of provement, not a full-documented well-
+structured nice- ascii-pictured anal-retentive code - I've
+got better things to do.
+
+compile:        tp -G+ gourex.pas
+run:            gourex sphere 2 x g
+
+</p></PRE>
+
+<!--#include virtual="/t_footer.htm"-->

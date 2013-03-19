@@ -1,0 +1,126 @@
+<html><head><title>Flame 3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Огонечек">
+<meta name="keywords" content="pascal, sources, source code, flame3, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;flame3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Flame 3</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5054/26">Victor Shantar</a></TD>
+<TD class=black align='right'>07.05.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=41 vspace=4 hspace=8 alt="" src="flame3.jpg"><p style="margin-left:20px">Огонечек</TD><TD class=black colspan=2 align='right'><br><A HREF="flame3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{- 4INT ------------------------------------------ It's interesting -
+ Msg  : 21 of 110                    Addr                        Date
+ From : Victor Shantar      2:5054/26                        07.05.97
+ Subj : Flame
+---------------------------------------------------------------------
+-=Ё&gt; Привет тебе DENnIS. &lt;Ё=-
+
+ Однажды (03 May 97) DENnIS PR0nin писал(а) к All, а я вмешался:
+
+ Dn&gt;     Hужно исходник:
+ Dn&gt;                    Полыхающего пламени с пояснениями алгоpитма!
+ Dn&gt;     Плиз Хелп! Hу очень тpеба!
+
+ Вот тебе огонечек
+
+                 <img border=0 width=320 height=240 src="flame31.jpg" alt="">
+
+Покедова...
+-=Ё&gt; Пишите письма. Они дойдут ( в обоих смыслах ;) &lt;Ё=-
+
+... [ HEDGEHOG HOUSE ] +7-3422-622044,PERM  [ Team Daemon's Hedgehog ]
+--- Work Time 01:00-07:00 Local. Freq ONLY      [ Team Coca-Cola ]
+ * Origin: ~Для кого ночь, а для кого - темное время суток.~ (2:5054/26)
+
+{&gt; Cut here. FileName= FLAME3.PAS }
+{ Огонек }
+uses crt;
+
+var ftable : array [1..30,1..60] of byte; { Массив области с огонечком }
+    x,y,i : word; { Координаты и просто переменная для циклов }
+    v:integer; { переменная для инициализации графики }
+
+{ Установка цветов }
+procedure SetPalette;
+var N : Integer;
+
+procedure SetRGBColor(color,r,g,b: Byte); Assembler;
+ asm
+  mov dx,3C8h
+  mov al,color
+  out dx,al
+  inc dx
+  mov al,r
+  out dx,al
+  mov al,g
+  out dx,al
+  mov al,b
+  out dx,al
+ end;
+
+
+{ Функция вычисления цвета в зависимости от коэфициента X }
+function f(x:real):integer;
+begin
+  if (x&gt;=0) and (x&lt;=1) then f:=round(63*x*(2-x));
+  if x&lt;0 then f:=0;
+  if x&gt;1.0 then f:=63;
+end;
+
+begin {SetPalette}
+  for N := 1 to 100 do
+    setrgbcolor(n,f(n/50),f(n/50-0.2),
+                f(n/50-0.5)+f(0.1-n/50)*n div 7+5);
+ { Установка цветовой палитры : SetRGBColor( num, Red, Green, Blue );
+       где num - номер за которым сохранить этот цвет.
+           Red - кол-во красного ( 0-63 )
+         Green - кол-во зеленого ( 0-63 )
+          Blue - кол-во синего   ( 0-63 )
+     }
+end;
+
+
+begin
+  asm mov ax,13h;  int 10h end; { Установка режима 320x200x256 }
+
+setpalette; { Установка нашего набора цветов }
+
+{ Обнуление массива с огоньком }
+for x:=1 to 30 do for y:=1 to 60 do ftable[x,y]:=0;
+
+repeat
+
+{ Рисование исходной линии ( самой нижней ) }
+for x:=10 to 20 do if random(100)&lt;50 then ftable[x,60]:=100 else
+ftable[x,60]:=0;
+{ За счет резкого случайного перепада цвета идет колебание огонька }
+
+{ Изменение цвета точки, в зависимости от точек снизу и с боков }
+for y:=1 to 59 do for x:=2 to 28 do
+  { ахождение среднего цвета относительно 9-ти точек }
+  ftable[x,y]:=(ftable[x-1, y ]+ftable[ x , y ]+ftable[x+1, y ]+
+                ftable[x-1,y+1]+ftable[ x ,y+1]+ftable[x+1,y+1]+
+                ftable[x-1,y+2]+ftable[ x ,y+2]+ftable[x+1,y+2]) div 9;
+
+{ Вывод массива }
+for y:=1 to 57 do for x:=1 to 30 do
+  mem[$a000:x+144+(y+69)*320]:=ftable[x,y];
+
+until keypressed;
+
+  asm mov ax,3;  int 10h end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

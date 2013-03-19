@@ -1,0 +1,234 @@
+<html><head><title>Fire Routine with Keyboard Handling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект пламени с регулируемой интенсивностью. [320x400x256]<br><font color=#666666> A really cool fire routine.</font>">
+<meta name="keywords" content="pascal, sources, source code, fire, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fire
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fire Routine with Keyboard Handling</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:292/120.91">Patrick Van Oosterwijck</a></TD>
+<TD class=black align='right'>20.10.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="fire.jpg"><p style="margin-left:20px">Эффект пламени с регулируемой интенсивностью. [320x400x256]<br><font color=#666666>
+A really cool fire routine.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="fire.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="fire_1.jpg" alt="">
+
+{&gt; Cut here. FileName= FIRE.PAS }
+{--- Fire by Patrick Van Oosterwijck - XorBit - Fido 2:292/120.91 ---}
+{$G+}
+program XorBitFire;
+uses crt;
+
+const
+  verttweak=6;              { Tweak constant : number of vertical }
+                            { scanlines for 1 pixel (&gt;=3) }
+  xsize=320;                { X size of the fire }
+  ysize=400 div verttweak;  { Y size of the fire }
+  invlines=3;               { Number of invisible lines }
+
+const firepal: array[0..767] of byte = (
+   0,   0,   0,   1,   0,   0,   1,   0,   0,   3,   0,   0,   4,   0,
+   0,   5,   0,   0,   7,   0,   0,   8,   0,   0,   9,   0,   0,  10,
+   0,   0,  12,   0,   0,  13,   0,   0,  14,   0,   0,  16,   0,   0,
+  17,   0,   0,  18,   0,   0,  20,   0,   0,  21,   0,   0,  22,   0,
+   0,  23,   0,   0,  25,   0,   0,  26,   0,   0,  27,   0,   0,  29,
+   0,   0,  30,   0,   0,  31,   0,   0,  32,   0,   0,  34,   0,   0,
+  35,   0,   0,  36,   0,   0,  38,   0,   0,  39,   0,   0,  40,   0,
+   0,  41,   0,   0,  43,   0,   0,  44,   0,   0,  45,   0,   0,  47,
+   0,   0,  47,   0,   0,  47,   0,   0,  47,   1,   0,  47,   1,   0,
+  47,   1,   0,  47,   2,   0,  47,   2,   0,  48,   3,   0,  48,   3,
+   0,  48,   4,   0,  48,   4,   1,  48,   5,   1,  48,   5,   1,  48,
+   6,   1,  48,   6,   1,  49,   7,   1,  49,   7,   1,  49,   8,   1,
+  49,   8,   1,  49,   9,   1,  49,   9,   2,  49,  10,   2,  49,  10,
+   2,  50,  11,   2,  50,  11,   2,  50,  12,   2,  50,  12,   2,  50,
+  13,   3,  50,  13,   3,  50,  14,   3,  50,  14,   3,  51,  15,   3,
+  51,  15,   3,  51,  16,   4,  51,  16,   4,  51,  17,   4,  51,  17,
+   4,  51,  18,   4,  51,  19,   4,  52,  19,   4,  52,  19,   5,  52,
+  20,   5,  52,  20,   5,  52,  21,   5,  52,  22,   5,  52,  22,   6,
+  52,  23,   6,  53,  23,   6,  53,  23,   6,  53,  24,   6,  53,  24,
+   6,  53,  25,   7,  53,  26,   7,  53,  26,   7,  53,  27,   7,  54,
+  27,   7,  54,  28,   7,  54,  28,   7,  54,  29,   8,  54,  29,   8,
+  54,  30,   8,  54,  30,   8,  54,  31,   8,  55,  31,   8,  55,  32,
+   9,  55,  32,   9,  55,  33,   9,  55,  33,   9,  55,  34,   9,  55,
+  34,  10,  55,  35,  10,  55,  35,  10,  56,  36,  10,  56,  36,  10,
+  56,  37,  10,  56,  37,  11,  56,  38,  11,  56,  38,  11,  56,  39,
+  11,  56,  39,  11,  57,  40,  12,  57,  40,  12,  57,  41,  12,  57,
+  41,  12,  57,  42,  12,  57,  42,  13,  57,  43,  13,  57,  43,  13,
+  58,  44,  13,  58,  44,  13,  58,  45,  13,  58,  45,  14,  58,  46,
+  14,  58,  46,  14,  58,  46,  14,  58,  47,  14,  59,  47,  15,  59,
+  48,  15,  59,  48,  15,  59,  49,  15,  59,  49,  15,  59,  50,  16,
+  59,  50,  16,  59,  51,  16,  60,  51,  16,  60,  52,  16,  60,  52,
+  17,  60,  53,  17,  60,  53,  17,  60,  54,  17,  60,  54,  18,  60,
+  55,  18,  61,  55,  18,  61,  55,  18,  61,  56,  18,  61,  56,  19,
+  61,  57,  19,  61,  57,  19,  61,  58,  19,  61,  58,  19,  62,  59,
+  20,  62,  59,  20,  62,  60,  20,  62,  60,  20,  62,  60,  20,  62,
+  61,  21,  62,  61,  21,  62,  62,  21,  63,  62,  21,  63,  63,  22,
+  63,  63,  22,  63,  63,  23,  63,  63,  23,  63,  63,  23,  63,  63,
+  24,  63,  63,  24,  63,  63,  25,  63,  63,  25,  63,  63,  26,  63,
+  63,  26,  63,  63,  27,  63,  63,  27,  63,  63,  28,  63,  63,  28,
+  63,  63,  29,  63,  63,  29,  63,  63,  29,  63,  63,  30,  63,  63,
+  30,  63,  63,  31,  63,  63,  31,  63,  63,  32,  63,  63,  32,  63,
+  63,  33,  63,  63,  33,  63,  63,  34,  63,  63,  34,  63,  63,  35,
+  63,  63,  35,  63,  63,  36,  63,  63,  36,  63,  63,  36,  63,  63,
+  37,  63,  63,  37,  63,  63,  38,  63,  63,  38,  63,  63,  39,  63,
+  63,  39,  63,  63,  40,  63,  63,  40,  63,  63,  41,  63,  63,  41,
+  63,  63,  42,  63,  63,  42,  63,  63,  42,  63,  63,  43,  63,  63,
+  43,  63,  63,  44,  63,  63,  44,  63,  63,  45,  63,  63,  45,  63,
+  63,  46,  63,  63,  46,  63,  63,  47,  63,  63,  47,  63,  63,  48,
+  63,  63,  48,  63,  63,  48,  63,  63,  49,  63,  63,  49,  63,  63,
+  50,  63,  63,  50,  63,  63,  51,  63,  63,  51,  63,  63,  52,  63,
+  63,  52,  63,  63,  53,  63,  63,  53,  63,  63,  54,  63,  63,  54,
+  63,  63,  55,  63,  63,  55,  63,  63,  55,  63,  63,  56,  63,  63,
+  56,  63,  63,  57,  63,  63,  57,  63,  63,  58,  63,  63,  58,  63,
+  63,  59,  63,  63,  59,  63,  63,  60,  63,  63,  60,  63,  63,  61,
+  63,  63,  61,  63,  63,  61,  63,  63,  62,  63,  63,  63);
+
+type scrtype=array[0..ysize+invlines-1, 0..xsize-1] of byte;
+var screen: scrtype absolute $A000:0;
+    virtscr: scrtype;
+    i, firepower: integer;
+    key: char;
+
+procedure CalculateFire(var source, dest);assembler;
+asm
+                PUSH    DS
+                CLD
+                LDS     SI, source
+                LES     DI, dest
+                ADD     SI, xsize
+                MOV     CX, xsize*(ysize+invlines-1)
+@@1:            XOR     AX,AX
+                XOR     BX,BX
+                MOV     AL,[SI-xsize]
+                MOV     BL,[SI-1]
+                ADD     AX,BX
+                MOV     BL,[SI+1]
+                ADD     AX,BX
+                MOV     BL,[SI]
+                ADD     AX,BX
+                SHR     AX,2
+                JZ      @@2
+                DEC     AL
+@@2:            STOSB
+                INC     SI
+                DEC     CX
+                JNZ     @@1
+                POP     DS
+end;
+
+procedure WaitRetrace;assembler;
+asm
+                MOV     DX,3DAh
+@@1:            IN      AL,DX
+                AND     AL,08h
+                JNZ     @@1
+@@2:            IN      AL,DX
+                AND     AL,08h
+                JZ      @@2
+end;
+
+procedure SetPal(var palet);assembler;
+asm
+                PUSH    DS
+                LDS     SI,palet
+                MOV     CX,768
+                XOR     AL,AL
+                MOV     DX,3C8h
+                OUT     DX,AL
+                INC     DX
+                REP     OUTSB
+                POP     DS
+end;
+
+procedure SetGraphMode;assembler;
+asm
+                MOV     AX,13h
+                INT     10h
+                MOV     DX,03d4h
+                MOV     AX,4009h+((verttweak-1)*100h)
+                OUT     DX,AX
+ end;
+
+procedure SetTextMode;assembler;
+asm
+                MOV     AX,3h
+                INT     10h
+end;
+
+procedure Move32(var source,dest;count:word);assembler;
+
+asm
+                MOV     DX,DS
+                CLD
+                LDS     SI,source
+                LES     DI,dest
+                MOV     CX,count
+                MOV     BL,CL
+                AND     BL,3
+                SHR     CX,2
+                DB      66h
+                REP     MOVSW
+                MOV     CL,BL
+                REP     MOVSB
+                MOV     DS,DX
+end;
+
+begin
+
+  writeln;
+  writeln(' Fire by Patrick Van Oosterwijck',
+          '  - XorBit -  Fido 2:292/120.91');
+  writeln(' Keys :  ''+'' = Burn fire to Hell');
+  writeln('         ''-'' = Extinguish fire');
+  writeln('         ESC = Escape to a safer place');
+  writeln(' -&gt; Press any key to burn...');
+  while readkey=#0 do;
+
+  SetGraphMode;
+  SetPal(firepal);
+  Randomize;
+  firepower:=18;
+
+  repeat
+
+   key:=#0;
+   while keypressed do key:=readkey;
+   if (key='+') and (firepower&lt;50) then inc(firepower);
+   if (key='-') and (firepower&gt;0) then dec(firepower);
+
+   for i:=0 to xsize-1 do
+     if random(50)&lt;=firepower then
+       virtscr[ysize+invlines-1,i]:=random(100)+156
+     else
+       virtscr[ysize+invlines-1,i]:=0;
+
+   CalculateFire(virtscr,virtscr);
+   WaitRetrace;
+   Move32(virtscr,screen,xsize*ysize);
+
+  until key=#27;
+
+  SetTextMode;
+  writeln(' You have survived it, lucky one...');
+
+end.
+
+That's all folks...
+
+Bye, Patrick.   - XorBit -
+
+--- The-Box Point 0.15- PC
+ * Origin: 95... 95... 95... Aaaaarrggghhh!!!!!! (2:292/120.91)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

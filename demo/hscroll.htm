@@ -1,0 +1,119 @@
+<html><head><title>Hardware Horizontal Text Scoller in MCGA Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Аппаратный скроллинг текста в графическом режиме 320x200x256. <br><font color=#666666> Great hardware horizontal text scoller in MCGA-mode.</font>">
+<meta name="keywords" content="pascal, sources, source code, hscroll, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;hscroll
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Hardware Horizontal Text Scoller in MCGA Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:291/1800.12">Bart Vanderostyne</a></TD>
+<TD class=black align='right'>17.10.93</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=50 vspace=4 hspace=8 alt="" src="hscroll.gif"><p style="margin-left:20px">Аппаратный скроллинг текста в графическом режиме 320x200x256. <br><font color=#666666>
+Great hardware horizontal text scoller in MCGA-mode.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="hscroll.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>47k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> ¬¬  Hardware Scrollies .. Everything You Might Dream Of .. ¬¬
+
+                <img border=0 width=320 height=200 src="hscroll1.jpg" alt="">
+
+ Released   : 17/10/93
+ Doc & Code : Binary Slave
+ Last Minute: Living Nature
+
+ Binary Slave presents his first source-code to Public Domain.
+
+ It mainly consist of the so called Hardware scroll... .
+
+ A Hardware scroll is a characteristic of the standard VGA-card.
+ It does not take hudge CPU time just a few port writes and the rest
+ is up to another VGA characteristic nl. Vertical retrace which does
+ all the synchronisation.
+
+ I will give you an idea/example how to make a hardware scrolly... .
+ So you'll be able to make very fast scrollers (I sure hope so) on
+ your PC even on an XT! Just like in some demos.
+ All you need is some knowledge about programming pascal/assembly,
+ graphic environments,image processing.
+
+ The code is written in TP & ASM, and may easyly be converted into C
+ language or similar languages. The complete source is given and you
+ need at least TP version 6.0.
+
+ I've chosen those languages for several reasons.
+  Turbo Pascal : - one of the most popular languages...
+                 - very easy to read/write/learn and understand some
+                   techniques.
+  ASM : For the fast actions... such page flipping/filling/drawing
+        routines.
+
+ It was not the intention to make a super fast scrolling, no, it is
+ intended to make Hardware scrolling a fact and understandable to all
+ coders, not just the asm-speed freaks (who already know the hardware
+ scrollies).
+ The speed of the actual scroll is not so important due to the
+ synchronisations Learning to make smooth animations is perhaps more
+ important than the speed of the animation!
+ Also try not to make too much procedure calls because TP's internal
+ memory management slows (due to the activation records) down the
+ animation.
+
+ The scrolling is performed in tweaked video mode, it is also perfectly
+ possible that you make your scrollers in normal graphics mode (13H -
+ 320*200*256colors), but I think mode X has got its charms...
+
+ Well if you find something interesting, or if you make some scrollies
+ yourself with this source, I would be pleased if you upload them 
+ at MN2.
+ Also if you have an idea/comment please upload it at MN2 in the
+ Binary Slave conference...
+ Still having trouble?
+ Leave a msg at MN2 and I'll see what I can do...
+
+ Files:
+ ------
+ - Cijf.pcx
+ - Multa-u.pcx
+ - Multv-.pcx    {GFX files made by Wolf. My personal gfx man!}
+ - Example.hdw   {"Modulated" scroll text}
+ - Example.txt   {Scroll text}
+ - Explain.doc   {This file}
+ - Hscroll.exe   {Compiled example file}
+ - Hscroll.pas   {Example source}
+ - Meat.exe      {MN2 publicement file}
+ - Meat.pas      {Source from this file}
+ - Txt2scr.exe   {Converts example.txt 2 example.hdw ascii# 33 - 100}
+ - Txt2scr.pas   {Source for this file
+
+
+ Note:
+   I don't have the official documents of the Vga, only some books.
+   I'm not responsable for any faults in these docs!
+   Take care with some ports because they might cause damage!
+   The only method to learn such things is trail and error!
+   Be sure you get the whole and correct source and D/L it from MN2!
+
+ | MultiNet 2: +32 (0)50/36.33.96 [HST 24/24]             |
+ | FidoNet   : 2:291/1800.12 [Bart Vanderostyne]          |
+ | F A X     : +32 (0)50/34.73.79 [Write to Binary Slave] |
+
+ Hi's and Ho's  to - D.H.
+ -------------     - Tasmaniac
+                   - Shadowlord
+                   - Overlord 0f House
+                   - Living Nature
+                   - El Presidento
+
+   Greetings to all wich I humbly forgot on the MN2 greetingslist...
+
+&lt;EOF&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

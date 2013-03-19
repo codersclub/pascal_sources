@@ -1,0 +1,87 @@
+<html><head><title>Sinus-Curve Waving Flag</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Развевающийся на ветру сине-бело-красный флаг, состоящий из точек. [320x200x256] <br><font color=#666666> A sinus-curve waving flag.</font>">
+<meta name="keywords" content="pascal, sources, source code, sinmap, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sinmap
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Sinus-Curve Waving Flag</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>20.11.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="sinmap.gif"><p style="margin-left:20px">Развевающийся на ветру сине-бело-красный флаг,
+состоящий из точек. [320x200x256] <br><font color=#666666>
+A sinus-curve waving flag.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sinmap.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="sinmap1.gif" alt="">
+
+{&gt; Cut here. FileName= SINMAP.PAS }
+
+program sinmap;
+
+uses crt;
+
+const
+  gseg : word = $a000;
+  spd = 1; size = 3; curve = 125;
+  xmax = 230 div size;
+  ymax = 140 div size;
+  sofs = 30; samp = 10; slen = 255;
+var stab : array[0..slen] of word;
+
+procedure csin; var i : byte; begin
+  for I := 0 to slen do
+    stab[i] := round(sin(i*4*pi/slen)*samp)+sofs;
+  end;
+
+procedure displaymap;
+type scrarray = array[0..xmax,0..ymax] of byte;
+var
+  postab : array[0..xmax,0..ymax] of word;
+  bitmap : scrarray;
+  x,y,xp,yp,sidx : word;
+begin
+  fillchar(bitmap,sizeof(bitmap),0);
+  sidx := 0;
+  for x := 0 to xmax do
+    for y := 0 to (ymax div 3) do
+      bitmap[x,y] := lightred;
+  for x := 0 to xmax do
+    for y := (ymax div 3) to 2*(ymax div 3) do
+      bitmap[x,y] := white;
+  for x := 0 to xmax do
+    for y := 2*(ymax div 3) to ymax do
+      bitmap[x,y] := lightblue;
+  repeat
+    while (port[$3da] and 8) &lt;&gt; 0 do;
+    while (port[$3da] and 8) = 0 do;
+    for x := 0 to xmax do
+      for y := ymax downto 0 do begin
+        mem[gseg:postab[x,y]] := 0;
+        xp := size*x+stab[(sidx+curve*x+curve*y) mod slen];
+        yp := size*y+stab[(sidx+4*x+curve*y+y) mod slen];
+        postab[x,y] := xp+yp*320;
+        mem[gseg:postab[x,y]] := bitmap[x,y];
+      end;
+    sidx := (sidx+spd) mod slen;
+  until keypressed;
+end;
+
+begin
+  csin;
+  asm mov ax,13h; int 10h; end;
+  displaymap;
+  textmode(lastmode);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

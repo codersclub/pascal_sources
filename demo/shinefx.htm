@@ -1,0 +1,120 @@
+<html><head><title>Shine FX for the Text Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Бегущий Блик в Текстовом Режиме. <br><font color=#666666>  Shine FX for text mode </font>">
+<meta name="keywords" content="pascal, sources, source code, shinefx, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;shinefx
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Shine FX for the Text Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:369/35">Christopher Chandra</a></TD>
+<TD class=black align='right'>21.01.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Бегущий Блик в Текстовом Режиме. <br><font color=#666666> 
+Shine FX for text mode </font></TD><TD class=black colspan=2 align='right'><br><A HREF="shinefx.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{- ZEPAS95 --------------------------------------- English Pascal 95 -
+ Msg  : 1551 of 1932                  Addr                        Date
+ From : Christopher Chandra        1:369/35                   21.01.95
+ Subj : Shine FX
+----------------------------------------------------------------------
+{
+ Here is something that you can play with ...
+
+ Shine FX - by Christopher J. C.
+ inspired by lotsa product out there that use this kind of FX
+
+ This code is public domain.  Do whatever you want with it.
+
+ A credit line for me would be nice  ;^p
+}
+
+uses crt;
+
+const MaxRow=25;MaxColumn=80;
+
+var Buffer:array[1..MaxRow] of byte;
+    XTable:array[1..MaxRow] of shortint;
+
+procedure Init_XTable;
+var cnt:byte;
+begin for cnt:=0 to MaxRow-1 do XTable[cnt+1]:=-cnt; end;
+
+procedure Shine(sx,sy,ex,ey:integer;c:byte);
+var x,y:integer;
+    num,cnt:word;
+begin
+ cnt:=0;
+ for x:=sx to ex+ey-sy do
+ begin
+  for y:=sy to ey do
+   if (XTable[y-sy+1]+x &gt; sx-1) and (XTable[y-sy+1]+x &lt; ex+1) then
+   begin
+    num:=(y-1)*160+(XTable[y-sy+1]+(x-1))*2+1;
+    Buffer[y]:=mem[$b800:num];              {save background attr.}
+    mem[$b800:num]:=c+Buffer[y] and 240;    {highlight the spot}
+   end;
+  asm                                       {retrace}
+   mov dx,3dah;
+   @r1: in al,dx; test al,8; jnz @r1
+   @r2: in al,dx; test al,8; jz @r2
+  end;
+ for y:=sy to ey do
+  if (XTable[y-sy+1]+x &gt; sx-1) and (XTable[y-sy+1]+x &lt; ex+1) then
+  begin                                    {restore background attr.}
+   mem[$b800:(y-1)*160+(XTable[y-sy+1]+(x-1))*2+1]:=Buffer[y];
+  end;
+ end;
+end;
+
+procedure ShowImage;
+
+var cnt:word;
+begin
+ textbackground(0);window(25,7,55,18);clrscr;inc(windmax);
+ for cnt:=1 to 7 do
+ begin
+  gotoxy(1,cnt+1);textcolor(11);write('ђ');
+  gotoxy(31,cnt+4);textcolor(9);write('ђ');
+ end;
+ textcolor(11);
+ gotoxy(1,1);write('ѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓѓ');
+ textcolor(3);write('ѓ');
+ gotoxy(1,12);write('ј');
+ textcolor(9);write('јјјјјјјјјјјјјјјјјјјјјјјјјјјјјј');
+ textbackground(3);gotoxy(1,9);textcolor(11);write('¬');
+ gotoxy(1,10);write('');gotoxy(1,11);write('');
+ gotoxy(31,4);textcolor(9);write('¬');
+ gotoxy(31,3);write('');gotoxy(31,2);write('');
+ window(26,8,54,17);clrscr;
+ textcolor(11);gotoxy(9,2);write('Shine FX Test');
+ textcolor(8);gotoxy(6,3);write('-------------------');
+ textcolor(12);gotoxy(12,4);write('Code by');
+ textcolor(1);gotoxy(7,5);write('Christopher J. C.');
+ textcolor(8);gotoxy(6,6);write('-------------------');
+ textcolor(11);gotoxy(3,7);write('Add a little shine to the');
+ gotoxy(5,8);write('usually boring screen');
+ textcolor(12);gotoxy(12,9);write('Enjoy!!');
+ window(1,1,80,25);
+end;
+
+begin
+ Init_XTable;
+ ShowImage;
+ Shine(25,7,55,18,15);
+ repeat until keypressed;
+end.
+
+{---
+--- ifmail v.2.8a
+ * Origin: The InterZone Cafe - Pembroke Pines FL USA (1:369/35) }</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

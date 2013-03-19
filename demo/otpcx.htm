@@ -1,0 +1,235 @@
+<html><head><title>Outlaw Triad Demo Series, Part 5 - PCX DECODING</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демо серия группы Outlaw Triad, Выпуск №5. Вывод PCX файлов в режиме 13h (320x200x256).<br><font color=#666666> We have reached the fifth release in these series already. This time we will talk about decoding .pcx files. This is a very wellknown graphics format and very easy to use, once you know the trick. A full pcx-decoding routine coded in Pascal is provided. Enjoy!</font>">
+<meta name="keywords" content="pascal, sources, source code, otpcx, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;otpcx
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Outlaw Triad Demo Series, Part 5 - PCX DECODING</TD>
+<TD nowrap class=black>&nbsp;Vulture/OT</TD>
+<TD class=black align='right'>14.05.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=46 vspace=4 hspace=8 alt="" src="otpcx.gif"><p style="margin-left:20px">Демо серия группы Outlaw Triad, Выпуск №5.
+Вывод PCX файлов в режиме 13h (320x200x256).<br><font color=#666666>
+We have reached the fifth release in these series already. This time we will
+talk about decoding .pcx files. This is a very wellknown graphics format and
+very easy to use, once you know the trick. A full pcx-decoding routine coded
+in Pascal is provided. Enjoy!</font></TD><TD class=black colspan=2 align='right'><br><A HREF="otpcx.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      - THE OUTLAW TRIAD DEMO-SERIES -
+
+------------------------ PART V ------------------------------------
+
+                 Written by : Vulture/OT
+                 Code in    : Pascal/asm
+                 Topic      : Decoding .pcx files
+
+                <img border=0 width=320 height=200 src="otpcx1.gif" alt="">
+
+---------------------- Introduction --------------------------------
+
+ Welcome to the Outlaw Triad demo-series! In these series we will be
+ talking about programming demo-effects in either pascal or assembler.
+ Theory behind the effects shall be discussed while a full sourcecode
+ is also provided.
+ We have reached the fifth release in these series already. This time
+ we will talk about decoding .pcx files. This is a very wellknown
+ graphics format and very easy to use, once you know the trick. A full
+ pcx-decoding routine coded in Pascal is provided. Enjoy!
+
+------------------------- Theory -----------------------------------
+
+ Note: we will discuss how to decode a .pcx file in plain mode 13h.
+ This will not work in any unchained mode or high resolution modes.
+
+ Ok, let's get right down to business and start with looking at the
+ actual format of a .pcx file. Here it is:
+
+   - Header     (128 bytes)
+   - Data part
+   - Palette    (768 bytes)
+
+ Now, usually we can just ignore the header when we know we want to
+ display a picture in plain mode 13h. Anyhow, for those of you who
+ want to know how the header looks like, I'll type it down:
+
+   0  Manufacturer
+   1  Version
+   2  Encoding
+   3  Bits Per Pixel
+   4  XMin, Ymin, XMax, YMax (2 bytes each)
+   12 Horizontal Resolution (2 bytes)
+   14 Verticle Resolution (2 bytes)
+   16 Color pallette setting (48 bytes)
+   64 Reserved
+   65 Number of color planes
+   66 Bytes per line (2 bytes)
+   68 1 = Color    2 = Grayscale (2 bytes)
+   70 Blank (58 bytes)
+
+ That's it. This adds up to 128 bytes.
+
+ Ok, as you can see from the format, the palette data is situated
+ right at the end of the .pcx file. It's usually best to set the
+ palette of the .pcx file before you write the file to the screen.
+ To set the palette, you could do something like this:
+
+   - Seek to (end of file - 768)
+   - Grab values
+   - Divide all by 4
+   - Send to vga
+
+ Vga RGB values range 0..63 while the RGB values in the .pcx file are
+ 0..255. To get the correct vga values, we divide by 4.
+ In the sourcecode I grabbed all 768 RGB values at once. I've set the
+ colors using a standard SetColor procedure. Easy stuff, once you know
+ what to do...
+
+ Ok, now let's start decoding, shall we? (ignore header, seek to 128th
+ byte)
+
+ We read a byte from the data. If the top 2 bits of the byte aren't
+ set, the byte can be written to the screen. If they ARE set, we go
+ into a loop in which we process the next byte. In pascalcode:
+
+ Temp := (read first byte from data)
+ If ((Temp AND 192) = 192) then         { Top 2 bits set?
+                                          (192 = 11000000b) }
+ Begin                              { If so, then go write next byte }
+   Temp2 := (read next byte from data)
+   For Loop := 1 to (Temp AND 63) Do    { Set loopcounter
+                                          (63 = 00111111b) }
+   Begin                                { Write next byte a number
+                                          of times }
+     SetPixel(VgaPos,Temp2);
+     Inc(VgaPos);
+   End;
+ End
+ Else                                   { Top bits not set,
+                                          plot first byte }
+ Begin
+   SetPixel(VgaPos,Temp);               { Temp = color }
+   Inc(VgaPos);
+ End;
+
+ So, what does all this mean? Well, like stated previously, first we
+ see if the top 2 bits of the FIRST byte we read are set. If the top
+ 2 bits are set, we go and write the NEXT byte to the screen.
+ The number of times we write the next byte to the screen is
+ determined by ANDing the FIRST byte with 63. If the top two bits of
+ the first byte aren't set, we simply write the first byte to the
+ screen. That's all there is to it! In steps:
+
+     - 1. Read a byte
+     - 2. Check if top 2 bits of that byte are set
+     - 3. If they are set, go to 5
+     - 4. Top 2 bits aren't set, write the byte to the screen
+          (and back to 1)
+     - 5. Determine loopcounter by 'and'ing the byte with 00111111b
+          (63)
+     - 6. Read next byte
+     - 7. Write that byte to the screen a number of times
+          (then back to 1)
+
+ Pretty easy once you get the point...
+
+ For those of you who don't know much about assembler and the 'AND'
+ command, I will spend a few bytes extra... If you 'and' a bit with 0,
+ that bit will get the value 0. An example:
+
+  (original byte)    10101010b
+  ('anding' byte)    01000001b
+                     ---------
+  (resulting byte)   00000000b
+
+ You see? So with the 'AND' command you can disable certain bits in a
+ byte!
+ Now what happens when we 'and' a bit with 1? In that case, the bit
+ will keep it's origal value. An example:
+
+  (original byte)    01010101b
+  ('anding' byte)    10111110b
+                     ---------
+  (resulting byte)   00010100b
+
+ Get it? I know this all might sound pretty damn cryptic if you are
+ new to this. Just go and read a book on assembler and practise a lot.
+ And remember these two things:
+
+   - a bit 'anded' with 0, will be 0
+   - a bit 'anded' with 1, will keep it's original value (0 or 1)
+
+ When you keep this in mind, the pcxdecoder is a piece of cake.
+ Just do some experimenting and you'll get it eventually.
+ Trial and error rulez... ;-)
+
+ The routine provided here to decode a pcxfile is very slow. However,
+ you can speed it up by using more assembler code. Also, you should
+ implement code to write the pcx file to another destination besides
+ the VGA screen, like a virtual page. Hint: load the pcx into memory
+ at once. Don't read data byte per byte from disk. That's very slow.
+ And remember, this is only an example. I can give you my own routines,
+ but I feel that people should learn for themselves and not just use
+ code they found somewhere. However, if you really want more code,
+ write me and I'll send 'm to you. Oh, if you find this stuff usefull,
+ a mention in your own productions is appriciated.
+ Having problems? Mail me! I'd like to hear from you!
+
+ Ok, this is all for now. Happy coding!
+
+       - Vulture / Outlaw Triad -
+
+----------------------- Distro Sites -------------------------------
+
+ Call our distrobution sites! All our releases are available at:
+
+ BlueNose   World HQ          +31 (0)345-619401
+ FireHouse  Distrosite        +31 (0)528-274176
+ The Force  Distrosite        +31 (0)36-5346967  More distros wanted!
+ Bugs'R'Us  Distrosite        +31 (0)252-686092  (preferably outside
+ MagicWare  Italian HQ        +39  6-52355532     of The Netherlands)
+ ShockWave  South African HQ  +27 (011)888-6345
+
+ Also check the major FTP sites for Outlaw Triad productions.
+
+-------------------------- Contact ---------------------------------
+
+ Want to contact Outlaw Triad for some reason? You can reach us at our
+ distrosites in Holland. Or if you have e-mail access, mail us:
+
+   Vulture   (coder/pr)   comma400@tem.nhl.nl
+
+ Our internet homepage:
+
+   http://www.tem.nhl.nl/~comma400/vulture.html
+
+ These internet adresses should be valid at least till june 1996.
+
+----------------------------------------------------------------------
+
+Quote:  There are 3 types of persons: those who can count and those
+        who can't!
+
+
+----------------------------------------------------------------------
+ Note for those of you who read part 4 of these series...
+
+ I removed a small but annoying bug from the source code.
+ Before writing a characters scanline, you must READ the byte from the
+ vga position you are planning to write to. This will load the latches
+ and readies the vga for your WRITE command. I forgot to do this in the
+ source which resulted into incorrect characters (e.g. white background)
+ when you run the program.
+ Anyway, this is what you got to implement. Shouldn't be too hard...
+----------------------------------------------------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

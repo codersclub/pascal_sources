@@ -1,0 +1,193 @@
+<html><head><title>Outlaw Triad Demo Series, Part 10 - FACE SORTING</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демо серия группы Outlaw Triad, Выпуск №10. FACE SORTING - алгоритм отсечения невидимых поверхностей, т.е. распознавания, какие из полигонов трехмерного объекта должны быть видны на экране, а какие - нет. [320x200x256] <br><font color=#666666> The tenth release in the Outlaw Triad Demo Series! We will be talking about face sorting in 3d objects. Face sorting will enable you to determine in which order polygons in 3d objects should be drawn on the screen. It's an essential part of coding 3d graphics.</font>">
+<meta name="keywords" content="pascal, sources, source code, otface, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;otface
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Outlaw Triad Demo Series, Part 10 - FACE SORTING</TD>
+<TD nowrap class=black>&nbsp;Vulture/OT</TD>
+<TD class=black align='right'>29.08.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="otface.gif"><p style="margin-left:20px">Демо серия группы Outlaw Triad, Выпуск №10.
+FACE SORTING - алгоритм отсечения невидимых поверхностей,
+т.е. распознавания, какие из полигонов трехмерного объекта
+должны быть видны на экране, а какие - нет. [320x200x256] <br><font color=#666666>
+The tenth release in the Outlaw Triad Demo Series! We will be talking
+about face sorting in 3d objects. Face sorting will enable you to
+determine in which order polygons in 3d objects should be drawn on
+the screen. It's an essential part of coding 3d graphics.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="otface.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              - THE OUTLAW TRIAD DEMO-SERIES -
+
+----------------------- PART X -------------------------------------
+
+                 Written by : Vulture/OT
+                 Code in    : Pascal
+                 Topic      : Face sorting
+
+                <img border=0 width=320 height=320 src="otface1.gif" alt="">
+
+---------------------- Introduction --------------------------------
+
+ Welcome to the Outlaw Triad demo-series! In these series we will be
+ talking about programming demo-effects in either pascal or assembler.
+ Theory behind the effects shall be discussed while a full sourcecode
+ is also provided.
+ The tenth release in the Outlaw Triad Demo Series! We will be talking
+ about face sorting in 3d objects. Face sorting will enable you to
+ determine in which order polygons in 3d objects should be drawn on
+ the screen. It's an essential part of coding 3d graphics. Enjoy!
+
+------------------------- Theory -----------------------------------
+
+ We will be building a basic 3d engine this time using polygons to
+ create closed 3d objects. I will asume you know the basics of 3d
+ graphics coding, that is, how to rotate 3d points and how to
+ calculate 2d screen coЩrdinates.
+
+ The most important thing in 3d engines at this point is how to draw
+ the 3d object on the screen. Rotating the 3d object and calculating
+ 2d coordinates shouldn't be real problems. However, drawing the
+ object correctly on the screen might cause significant troubles.
+ Polygons in 3d objects are to be drawn in a specific order, that is,
+ those polygons which are way deep in space have to be drawn first.
+ The polygons which are closer to the origin (closer to the eye) have
+ to be drawn last. Like this:
+
+       ------------------ Poly 1           (small z)
+       |                |
+       |                |
+   -------------------------- Poly 2       (large z)
+   |                        |
+   |                        |
+   |                        |
+   |                        |
+   |                        |
+   |                        |
+   --------------------------
+
+ Hmm, it ain't very much 3d but with a little imagination you can see
+ that poly 1 has to be drawn first since it's drawn partially behind
+ poly 2. It's located deeper in space than the second poly.
+ If you draw poly 2 first and then poly 1, poly 2 will be partially
+ overwritten by poly 1 and that's not what we want. To be short, you
+ have to draw your polys from back to front, so that the nearest polys
+ (the ones close to the eye) overwrite the futher polys.
+ This is also known as "the painter's algorithm".
+
+ This is where face sorting comes in! Face sorting means finding out
+ in which order the polygons must be drawn on the screen. In our case,
+ we'll use the most simple method around and that's sorting the
+ polygons on their average z value! Let's take a look at this in
+ detail...
+
+ A polygon is made up by a number of 3d-points. And each 3d-point
+ consists of x,y,z values. If we add the z values from all 3d-points
+ of a polygon and divide the resulting value by the number of
+ 3d-points, we've calculated the average z value of that polygon,
+ that is, how deep the polygon is in space.
+ Remember to do this AFTER you have rotated the 3d-point! (note: in
+ the code, I did not divide the resulting value as it is not really
+ necessary)
+ We calculate the average z value for all the polygons in the 3d
+ object and store those values in a seperate list. Now we keep two
+ lists. One for all the average z values and one for the exact drawing
+ order of the polygons.
+ At start of each frame, the orderlist looks like:
+
+     1 2 3 4 5 6 7 8 9 etc etc...
+
+ So, each polygon got his own number. Ok, now we sort the polygons on
+ their z values, that is, we sort the average z values list.
+ For example: compare the first two values. If the first value
+ (average z of poly 1) is greater than the second value, swap them.
+ Repeat this until you've got an average z list in which the values
+ go from small to large. In the sourcecode, I used a bubblesort
+ routine to do this. These bubblesort routines work most of the time
+ but there are better algorithmes to sort values in a list. I mean,
+ try to use the provided bubblesort routine to sort, like, 400 values
+ each frame.
+ Bad idea... Just so you know... :-) (hint: use a quicksort routine
+ instead)
+
+ Anyway, when you swap values in the average z value list, you must
+ also swap the corresponding values in the order list! So, if you swap
+ the first two values in the z value list, you must also swap the
+ first two values in the polygon orderlist. Ok, after you sorted the
+ average z value list, the final polygon orderlist could then look
+ something like:
+
+     3 5 6 4 2 8 1 9 7 etc etc...
+
+ At this time you've created a list in which the exact drawing order
+ of the polygons is saved! In our case we have to draw polygon 3
+ first, then 5, then 6, then 4 etc. Polygon 3 has the smallest
+ average z which means it lies far deep in space so it has to be
+ drawn first. There! Quite simple, eh? :-)
+ Of course, as said before, you will have to reset the orderlist at
+ start of each frame to its original state (1,2,3,4 etc).
+
+ Ok, that's practically all there is to it. Simply sort all polygons
+ on their average z value and draw them from back to front. You can
+ also implement code to determine the face-normal. With this, we can
+ entirely skip drawing polygons which would not be visible on the
+ screen when the entire object has been drawn. This makes the engine
+ a lot faster. Also, you can go and do lightshading using face-normals.
+ Hmm... something for a future trainer.
+
+ The example source is a basic 3d system. It was the first 3d engine
+ I coded using this method so it's not that hot and needs a lot of
+ improvements. It should be enough to get started, though, as it shows
+ how a basic 3d engine works. We will be working on this 3d system in
+ future trainers. What about implementing glenzing and various kinds
+ of shading. Watch out for more docs from OT. Anyway, hope this helped
+ you a bit futher in 3d graphics coding.
+ If it has, greet Outlaw Triad in your productions. We like that...
+ :-)
+
+ This is all for now. Happy coding!
+
+     -Vulture/Outlaw Triad-
+
+----------------------- Distro Sites -------------------------------
+
+ Call our distribution sites! All our releases are available at:
+
+BlueNose     World HQ         +31 (0)345-619401
+The Force    Distrosite       +31 (0)36-5346967
+Bugs'R'Us    Distrosite       +31 (0)252-686092 More distros wanted!
+The 7 Angels Distrosite       +31 (0)715-148377 (preferably outside
+ShockWave    South African HQ +27 (011)888-6345  of the Netherlands)
+Society HQ   United States HQ +1  (518)465-6721
+ACe World    Brazilian HQ     +55 (21)-259-8847
+
+ Also check the major FTP/WWW sites for Outlaw Triad productions.
+
+-------------------------- Contact ---------------------------------
+
+ Want to contact Outlaw Triad for some reason? You can reach us at our
+ distrosites in Holland. Or if you have e-mail access, mail us:
+
+   Vulture   (coder/pr)   comma400@tem.nhl.nl
+
+ Our internet homepage:
+
+   http://www.tem.nhl.nl/~comma400/vulture.html
+
+ These internet adresses should be valid at least till june 1997.
+
+----------------------------------------------------------------------
+
+   Quote: To do nothing is exhausting because you can't take breaks.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,72 @@
+<html><head><title>Линза или Натягиваем Рисунок на Шар</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Два варианта программы (Ассемблер и Паскаль), демонстрирующей принцип наложения (с растяжением) изображения на сферическую поверхность (эффект линзы). [320x200x256]">
+<meta name="keywords" content="pascal, sources, source code, lens, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;lens
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Линза или Натягиваем Рисунок на Шар</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5027/12.71">Aleksey Mashihin</a></TD>
+<TD class=black align='right'>24.03.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="lens.gif"><p style="margin-left:20px">Два варианта программы (Ассемблер и Паскаль),
+демонстрирующей принцип наложения (с растяжением)
+изображения на сферическую поверхность (эффект линзы). [320x200x256]</TD><TD class=black colspan=2 align='right'><br><A HREF="lens.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              * 3D |_|_|ap *
+
+                <img border=0 width=320 height=200 src="lens_1.gif" alt="">
+Привет !
+
+ Вот алгоритм натягивания рисунка на шар.
+ Для просмотра работы проги 3Der следует запускать её с параметром.
+
+      Пример : 3der Image1.pic
+
+ Код Asm файла не оптимизирован.
+ Если кого-то интересует скорость или мин.обьем,
+ напишите лучше сами прогу !
+
+ Алгоритм :
+
+ R:=20; { Радиус }                      Коорд. центра экрана 320Х200
+ For i:=0 to 2*R do                       /       \
+    For t:=0 to 2*R do MMM[i,t]:=getpset(160+i-R,100+t-R);
+    { заносит в массив МММ картинку оригинальную (не растянутую ) }
+
+ for i:=0 to 2*R do begin
+  for t:=0 to 2*R do begin
+   X:=i-r;Y:=t-r;                    { X от -R до R  ,и Y от -R до R }
+   if (X*X+Y*Y)&lt;=(R*R) then begin
+    Z:=round(sqrt(R*R-X*X-Y*Y));
+    X1:=round((X*R)/(Z+R));
+    Y1:=round((Y*R)/(Z+R));
+    pset(160+X,100+Y,MMM[X1+R,Y1+R]);
+   end;
+  end;
+ end;
+
+                    ШАР
+(X,Y,Z) --|--      /
+     *_/   |   \_
+    /|\    |      \
+  /  | \   |        \
+-----+--\--+--------+--- Экран (X1,Y1,0)
+        \  |      /
+         \ |    /
+          \|  /
+           |/
+           *  (0,0,-R)
+
+/Orel 2:5027/12.71/ Mashihin Aleksey Present</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

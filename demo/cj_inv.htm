@@ -1,0 +1,45 @@
+<html><head><title>CJ Party Invitation Intro [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Исходники интро в режиме 13h, с эффектами: blur, bilinear filtering, blured fonts, blured wormhole &amp; etc">
+<meta name="keywords" content="pascal, sources, source code, cj_inv, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cj_inv
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CJ Party Invitation Intro [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vdm_wrc@beep.ru">Ivan Kalininskiy</a></TD>
+<TD class=black align='right'>27.11.1999</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="cj_inv.jpg"><p style="margin-left:20px">Исходники интро в режиме 13h, с эффектами:
+blur, bilinear filtering, blured fonts, blured wormhole & etc</TD><TD class=black colspan=2 align='right'><br><A HREF="cj_inv.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>179k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="cj_inv1.jpg" alt="">
+
+ для компиляции интрошки:
+
+  в директории \MAKE_PAK лежат файлы для создания pak файла
+  надо запустить make_pak.bat
+  появится файл wrc_blur.pak - его нужно скопировать в директорию интрошки
+
+  для компиляции интрошки нужна команда:
+
+  c:\bp\bin\bpc.exe -B -$G+ -$N+ wrc_blur.pas
+  ^^^^^^^^^^здесь ваш путь к компилятору
+
+
+&gt; VV&gt; 4. Почему в CJ_INV отключена музыка??
+&gt; VV&gt;    Хай бы играла!
+ 
+для этого всего навсего нужно раскомментировать в cj_inv.pas строки,
+относящиеся к музыке.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

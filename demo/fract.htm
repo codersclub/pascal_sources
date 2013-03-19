@@ -1,0 +1,97 @@
+<html><head><title>Fractal Fern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Рисование папоротника с помощью фракталов">
+<meta name="keywords" content="pascal, sources, source code, fract, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fract
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fractal Fern</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5085/13.11">Aziz Saidrasulov</a></TD>
+<TD class=black align='right'>04.05.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="fract.gif"><p style="margin-left:20px">Рисование папоротника с помощью фракталов</TD><TD class=black colspan=2 align='right'><br><A HREF="fract.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello Mike!
+
+ VK&gt;&gt; Так вот . Все это очень здорово и можно помучиться со всем этим,
+ VK&gt;&gt; но может кто-нибудь уже.. Хотелось :( бы увидеть реальную работу
+ VK&gt;&gt; всей этой кухни, хотя для треугольника Сьерпинского алгоритм у
+ VK&gt;&gt; меня есть, но это совсем не то. А вот с листом (АБАЛДEHHЫЙ  8O )
+ VK&gt;&gt; папоротника - шо-то мудренное или я торможу.
+
+Да ничего оказывается мудренного. Привожу программку, она такая
+маленькая что даже удивительно что она может что нибудь нарисовать.
+Она была опубликована в PC Magazine, на бейсике.
+Hу я перевел короче.
+
+                   <img border=0 width=320 height=240 src="fract1.gif" alt="">
+
+Кстати сама статья где она публиковалась именно посвящена тому
+какая это круть фрактальные алгоритмы и как же они устроены.
+Hу и обьяснение ограничивается глубокомысленным рассуждением о том
+что вот смотрите какая простая программка рисует такую сложную
+картинку и значит как легко можно сжать подобную картинку
+если она встретится в реальности. Hу и выплывают коэфициенты
+сжатия в 500 раз.
+Меня разумеется такие доводы совершенно ни в чем не убедили,
+но картинка действительно красивая.
+
+Aziz
+
+--- GoldED 2.40+
+ * Origin: Happiness is a warm gun (2:5085/13.11)
+
+{&gt; Cut here. FileName= FRACT.PAS }
+{ Фрактальные структуры и программка для папоротника! }
+{-----------------------------------------------------}
+program Fract;
+{ remaked by A.Saidrasulov }
+uses
+  Graph,Crt;
+var
+  Dt,M : integer;
+  R,A,B,C,D,E,F,
+  NewY,NewX,X,Y : real;
+begin
+  Dt := Detect;
+  InitGraph(Dt, M,'');
+  Randomize;
+  X := 0; Y := 0;
+  repeat
+    R := Random;
+    if R&gt;0.93 then
+    begin
+      A := -0.15; B := 0.28; C := 0.26; D := 0.24; E := 0; F := 0.44;
+    end
+    else
+    if R&gt;0.86 then
+    begin
+      A := 0.2; B := -0.26; C := 0.23; D := 0.23; E := 0; F := 1.6;
+    end
+    else
+    if R&gt;0.01 then
+    begin
+      A := 0.85; B := 0.02; C := -0.02; D := 0.85; E := 0; F := 1.6;
+    end
+    else
+    begin
+      A := 0; B := 0; C := 0; D := 0.16; E := 0; F := 0;
+    end;
+    NewX := A*X + B*Y + E;
+    NewY := C*X + D*Y + F;
+    X := NewX; Y := NewY;
+    PutPixel(Round(X*50)+100,Round(Y*50)+50, Green);
+  until(Keypressed);
+  CloseGraph;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

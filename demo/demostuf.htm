@@ -1,0 +1,131 @@
+<html><head><title>DemoStuff - Collection of Demo Effects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Коллекция демонстрационных программ: <br> - Масштабирование и поворот битмапов, текстурирование <br> - Пламя, плазма, линза, трансформация резиновых объектов <br> - Летящие звезды и убегающий в перспективу текст <br> - Простой лабиринт в стиле Замка Вольфенштейн <br><font color=#666666> Demo collection from Bjarke Viksoe: <br> - Bitmap zooming, scaling and rotating <br> - Texture-mapped box rotating <br> - Flame, plasma, magnify glass <br> - Rubber cube transformation <br> - Starfield, Starwars text scroller <br> - Simple wolfenstein thing </font>">
+<meta name="keywords" content="pascal, sources, source code, demostuf, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;demostuf
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DemoStuff - Collection of Demo Effects</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dat92230@rix02.lyngbyes.dk">Bjarke Viksoe</a></TD>
+<TD class=black align='right'>27.05.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="demostuf.jpg"><p style="margin-left:20px">Коллекция демонстрационных программ: <br>
+- Масштабирование и поворот битмапов, текстурирование <br>
+- Пламя, плазма, линза, трансформация резиновых объектов <br>
+- Летящие звезды и убегающий в перспективу текст <br>
+- Простой лабиринт в стиле Замка Вольфенштейн <br><font color=#666666>
+Demo collection from Bjarke Viksoe: <br>
+- Bitmap zooming, scaling and rotating <br>
+- Texture-mapped box rotating <br>
+- Flame, plasma, magnify glass <br>
+- Rubber cube transformation <br>
+- Starfield, Starwars text scroller <br>
+- Simple wolfenstein thing </font></TD><TD class=black colspan=2 align='right'><br><A HREF="demostuf.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>78k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hi there,
+
+so I just though I would contribute a bit to the wast number of
+source codes lying around out there. Here is some more demo
+code. It's not the hottest stuff ever made, quite simple most
+of it - but you will find a fast vector-box, wildly rotating
+full-screen pictures and a nifty starwars scroller. Also a
+very simple (but fast and easy to expand) wolfenstein thing.
+Use ESCAPE key to exit most of the stuff!
+
+                 <img border=0 width=320 height=200 src="demost10.jpg" alt="">
+
+I'm sorry about the quality of the code, but I have not had
+much time for coding (bought my PC half a year ago) so perhaps
+I'll put up some better code later...
+But look out for my vector animation program for doing stuff
+like "Another World" animations.
+
+                 <img border=0 width=320 height=200 src="demost11.jpg" alt="">
+
+If the stuff doesn't work on your computer it's probably my
+fault. I really don't know why. Perhaps its some interrupt
+failure or illegal opcode, but anyway, my code seems to
+break on some computers. If you find the mistake please
+contact me!!!
+
+                 <img border=0 width=320 height=200 src="demost12.jpg" alt="">
+
+It's all in Pascal - with embedded assembly stuff in it
+of course. Most files come in more than one version, so
+you can see how the basic stuff worked and how easy it was
+to expand the routines. But I'm not one of thoses "let's
+comment the whole thing"-guys, so if you really want to
+have explained stuff - mail me for an explanation.
+
+                 <img border=0 width=320 height=200 src="demost13.jpg" alt="">
+
+Use Borland Pascal V7.0, some with DPMI some not, and with '286
+code generation, and put all range/stack checking switches off.
+The assembly uses 80386 opcode even though BP7.0 doesn't
+actually support this. Instead I'm writing the prefixes
+myself. An example: A "xor eax,eax" typically is written as
+$66,$33,$C0, which is "xor ax,ax" with a DB $66 prefix. So
+instead we write "DB $66; xor ax,ax" in the source code.
+"DB $66" is replaced with a constant, which is more readable.
+"DB LONG; xor ax,ax" and so on.
+
+                 <img border=0 width=320 height=200 src="demost14.jpg" alt="">
+
+If this sound really wierd, complain to Borland. Why didn't they
+just have 386/486 opcodes in the assembler in the first place?
+(for those of you who disagree with the "xor eax,eax" opcode I
+can only say, that I'm confused too. "xor eax,eax" has two (or more)
+different opcodes!!! BP7.0 and TDX generates different opcodes!!??!!)
+
+                 <img border=0 width=320 height=200 src="demost15.jpg" alt="">
+
+The most interesting for not-so-experienced programmers would
+probably be the units, which can be used for any purpose.
+PCX and ILBM loaders are allways nice to have.
+
+                 <img border=0 width=320 height=200 src="demost16.jpg" alt="">
+
+You can use this code in any way you like. Credit me if you
+use it in a demo - I really don't care! But a little message
+or an e-mail note would be nice.
+
+                 <img border=0 width=320 height=200 src="demost17.jpg" alt="">
+
+And by the way, I'm not a member of any demo-group and don't
+really want to be - only if there is some COOL danish group out
+there who needs a really lazy coder...
+
+                 <img border=0 width=320 height=200 src="demost18.jpg" alt="">
+
+Font by SLIDE: "Hils resten og ogsaa Goy, slider!"
+Rat picture by PMA: "Hej Peter, hvo'n gaar det med 3D studio ?"
+(These are Amiga guys... R.I.P!)
+
+If you have any questions or wanna chat write to me at:
+  Bjarke Viksoe
+  Norrebred 139
+  2625 Vallensbaek
+  Denmark
+Or e-mail in 1994 : dat92230@rix02.lyngbyes.dk
+
+
+                                         good programming
+                                               Bjarke Viksoe
+
+
+
+       +---------------------------+
+       |Wanna beat orgasm          | Bjarke Viksoe
+       |            try bit-pushing| dat92230@rix02.lyngbyes.dk
+       +---------------------------+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,132 @@
+<html><head><title>Fancy - 16k Intro from Millenium'2001 DemoParty</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="16-килобайтная заставка. Эффекты: tunnel, fadeing, 3D-rotation, bitmap scaling, texturing, backfeed...<br><font color=#666666> This is a 16K intro by Psycho from Millennium'2001 Demoparty. (May 5-6, Minsk, Belarus). Code: by Cooler; Music by DJ Mohax. Requirements: P2-266, GUS (needs ULTRASND env. string), 400K of DOS memory. Written in Borland Pascal 7.0</font>">
+<meta name="keywords" content="pascal, sources, source code, 02-fancy, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;02-fancy
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fancy - 16k Intro from Millenium'2001 DemoParty</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:cooler@tut.by">Ivan Polyacov</a></TD>
+<TD class=black align='right'>09.06.2001</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=48 vspace=4 hspace=8 alt="" src="02-fancy.jpg"><p style="margin-left:20px">16-килобайтная заставка. Эффекты: tunnel, fadeing, 3D-rotation,
+bitmap scaling, texturing, backfeed...<br><font color=#666666>
+This is a 16K intro by Psycho from Millennium'2001 Demoparty.
+(May 5-6, Minsk, Belarus). Code: by Cooler; Music by DJ Mohax.
+Requirements: P2-266, GUS (needs ULTRASND env. string),
+400K of DOS memory. Written in Borland Pascal 7.0</font></TD><TD class=black colspan=2 align='right'><br><A HREF="02-fancy.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>59k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    В этом файле вы найдете замечания и комментарии к исходникам
+моей интро. Кроме того, многие вещи мне было просто влом
+комментировать в исходнике, поэтому тут я тоже постараюсь
+уделить им внимание.
+
+                <img border=0 width=320 height=200 src="02-fanc1.jpg" alt="">
+
+Сразу постараюсь ответить на возможные вопросы:
+
+Q: Что это за идиотская номинация - 16K? Нигде такого нет.
+A: Содрана с ZX. Вообще-то предполагалось, что это будет номинация
+   для начинающих (т.е. меня :) В 16K нетрудно засунуть хоть какую
+   музыку, при этом  писать можно на ЯВУ, что как-никак удобнее.
+   В соседних 4K и 64K гораздо сложнее: 4K - огромное кол-во работы
+   на асме, а 64K - вообще в некотором смысле высший пилотаж.
+   Хотя на BP тоже можно запросто написать 64K, но это будет трудно
+   сравнивать с работами Haujobb, Proxium и др. Ну а в 16K особых
+   ориентиров нету, поэтому никто не скажет, Fancy - suxx или rulez.
+
+                <img border=0 width=320 height=200 src="02-fanc2.jpg" alt="">
+
+Q: У тебя кривая процедура рисования треугольника.
+A: Согласен, поэтому лучше ее не используйте. Вообще ее надо было бы
+   написать на асме, но не было времени. Кроме того, даже в самой
+   сложной сцене (с шестеренками - ~300 тр.) рисование треугольников
+   отнимает очень мало времени.
+
+                <img border=0 width=320 height=200 src="02-fanc3.jpg" alt="">
+
+Q: А как вообще вся сцена рисуется?
+A: Алгоритм художника. После матричного преобразования всей сцены,
+   прохожу по списку треугольников и выбираю те,
+   у которых Z-компонента нормали отрицательна.
+   Это конечно неправильно для перспективной проекции, но тоже вполне
+   сносно, зато не нужно считать всю нормаль :)
+   Потом я сортирую треугольники по среднему значению Z методом
+   bytesort (кажется так называется побитная лексикографическая
+   сортировка?)
+   и рисую от дальних к ближним.
+
+                <img border=0 width=320 height=200 src="02-fanc4.gif" alt="">
+
+Q: А где собственно музыка?
+A: В файле patterns.obj содержится начало MOD'а вплоть до начала сэмплов.
+   Сами же сэмплы генерятся по данным из файла samples.obj
+
+Q: А как они генерятся?
+A: Для этого я написал простенький сэмплер. Процедура генерации весит
+   около 200 байт. (Чего не скажешь о редакторе сэмплов... )
+
+                <img border=0 width=320 height=200 src="02-fanc5.jpg" alt="">
+
+Q: Ну а что за плеер?
+A: Gusplay by CASCADA. Изначально это был чисто asm'овый плеер.
+   Потом один товарищ прикрутил его к паскалю, ну а затем уже я еще
+   раз его перелопатил, чтобы приспособить к интро.
+   ВНИМАНИЕ: теперь он играет ТОЛЬКО этот модуль,
+   так что если хотите играть что-либо другое - берите оригинал и
+   пляшите от него.
+
+Q: Я скомпилировал интро, но оно весит гораздо больше 16K :(
+A: Дык, паковать надо... Я паковал UPX'ом.
+
+Q: Даже после упаковки!
+A: Ладно, на самом деле надо еще выкинуть ненужную инициализацию.
+   Для этого я перекомпилировал модуль SYSTEM выкинув оттуда довольно
+   много ненужного.
+
+                <img border=0 width=320 height=200 src="02-fanc6.jpg" alt="">
+
+Q: А нафига sintable.asm?
+A: Для заполнения таблицы синусов ;) Дело в том, что если в паскале
+   использовать FPU (даже с $N+,E-), то он подключает около 3K лишнего
+   кода.
+   Из него конечно тоже можно много выбросить, но все-равно остается
+   много. Выход? А не использовать FPU. То есть его можно использовать
+   в ассемблерных вставках, но  287 - не рулит,
+   у него даже fsin нету :(
+   Кроме того, если вы посмотрите, КАК BP использует FPU,
+   то вам станет плохо...
+
+                <img border=0 width=320 height=200 src="02-fanc7.jpg" alt="">
+
+Q: Что еще можно сделать, чтобы уменьшить размер?
+A: Интуитивно кажется, что переписать что-нить на асме. Нифига!
+   От этого код действительно уменьшится, но он будет хуже паковаться
+   и итоговый размер будет больше. Другое дело, если ОЧЕНЬ МНОГО
+   переписать, но тогда смысл писать на паскале?
+   Так что, гораздо выгоднее просто стараться делать похожие участки
+   кода, использовать одни и те же операции в похожих случаях.
+   Еще нужно использовать локальные переменные, причем одинаково их
+   располагая. А вообще есть куча способов сделать код меньше,
+   но все они влияют на степень сжатия, поэтому предсказать итоговый
+   результат довольно трудно. Так что надо пробовать...
+
+Q: А чё TASM ругается на АСМовые файлы?
+A: Дык это... надо ставить не менее 2-х пpоходов.
+   У меня по умолчанию стоит tasm /m4 и никаких пpоблем.
+   По-кpайней меpе лишними пpоходы явно не будут.
+
+P.S.
+   Интра вместе с исходниками на паскале лежит на
+   ftp.scene.org/pub/parties/2001/millenium01/in64/02-fancy.zip</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,367 @@
+<html><head><title>Plasma Textured Tunnel Effect [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект туннеля, текстурированного плазмой. Предусмотрено управление клавиатурой - движение вперед и назад, а также вращение по (или против) часовой стрелке. <br><font color=#666666> This is a very cool plasma tunnel which you can &quot;walk&quot; around in with the keyboard.</font>">
+<meta name="keywords" content="pascal, sources, source code, plasmat, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;plasmat
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Plasma Textured Tunnel Effect [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>15.11.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="plasmat.jpg"><p style="margin-left:20px">Эффект туннеля, текстурированного плазмой.
+Предусмотрено управление клавиатурой - движение вперед и назад,
+а также вращение по (или против) часовой стрелке. <br><font color=#666666>
+This is a very cool plasma tunnel which you can
+"walk" around in with the keyboard.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="plasmat.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+               <img border=0 width=320 height=200 src="plasmat1.jpg" alt="">
+
+{&gt; Cut here. FileName= PLASMAT.PAS }
+{$N+,X+,R-,S-,I-,G+,E+,Q-}
+program plasma_tunnel;
+uses crt,dos;
+const segA000 : word = $A000;
+      biosseg : word = $0040;
+var v,pic : pointer;
+    addr,x,y : word;
+    i,r,d : byte;
+    ds,rs : shortint;
+    len : real;
+    warp,interactive : boolean;
+    keys : array[0..127] of boolean;
+    oldint9h : procedure;
+    key : char;
+    stab : array[0..255] of byte;
+
+procedure newint9h;interrupt;assembler;
+asm
+   xor bh,bh
+   in al,60h
+   mov bl,al
+   and bl,01111111b
+   xor al,10000000b
+   shr al,7
+   mov byte ptr keys[bx],al
+   pushf
+   call oldint9h
+   cli
+   mov es,biosseg
+   mov ax,es:[1Ah]
+   mov es:[1Ch],ax
+   sti
+end;
+
+function vinkel(x,y : real) : byte;
+var v : integer;
+begin
+   if (x = 0) and (y &gt; 0) then vinkel := 64 else
+   if (x = 0) and (y &lt;= 0) then vinkel := 192 else
+   begin
+      v := round(arctan(y/x)/pi*128);
+      if (x &lt; 0) and (y &lt; 0) then vinkel := v+128 else
+      if (x &lt; 0) and (y &gt;= 0) then vinkel := 128+v else
+      vinkel := v;
+   end;
+end;
+
+function max(a,b : integer) : integer;
+inline($58/$5B/$3B/$C3/$7F/$01/$93);
+function min(a,b : integer) : integer;
+inline($58/$5B/$3B/$C3/$7C/$01/$93);
+
+procedure plasma(x1,y1,x2,y2 : longint);
+var nx,ny : word;
+    c : integer;
+
+function cc(c,n : integer) : byte;
+var d : integer;
+begin
+   d := ((x2-x1+y2-y1)*5) div 3;
+   cc := min(max((c+d-random(d+d)) div n,1),255);
+end;
+
+procedure putpixel(x,y : byte;c : byte);assembler;
+asm
+   mov es,word ptr [pic+2]
+   mov bl,x
+   mov bh,y
+   mov al,c
+   mov es:[bx],al
+end;
+
+function getpixel(x,y : byte) : byte;assembler;
+asm
+   mov es,word ptr [pic+2]
+   mov bl,x
+   mov bh,y
+   mov al,es:[bx]
+end;
+
+begin
+   if ((x2-x1) &lt; 2) and ((y2-y1) &lt; 2) then exit;
+   nx := x1+(x2-x1) shr 1;
+   ny := y1+(y2-y1) shr 1;
+   if getpixel(nx,y1) = 0 then
+     putpixel(nx,y1,cc(getpixel(x1,y1)+getpixel(x2,y1),2));
+   if getpixel(nx,y2) = 0 then
+     putpixel(nx,y2,cc(getpixel(x1,y2)+getpixel(x2,y2),2));
+   if getpixel(x1,ny) = 0 then
+     putpixel(x1,ny,cc(getpixel(x1,y1)+getpixel(x1,y2),2));
+   if getpixel(x2,ny) = 0 then
+     putpixel(x2,ny,cc(getpixel(x2,y1)+getpixel(x2,y2),2));
+   if getpixel(nx,ny) = 0 then
+     putpixel(nx,ny,cc(getpixel(x1,y1)+getpixel(x2,y2)+
+                       getpixel(x1,y2)+getpixel(x2,y1),4));
+   plasma(x1,y1,nx,ny);
+   plasma(nx,y1,x2,ny);
+   plasma(x1,ny,nx,y2);
+   plasma(nx,ny,x2,y2);
+end;
+
+procedure retrace;assembler;
+asm
+   mov dx,3DAh
+@loop:
+   in al,dx
+   test al,8
+   jnz @loop
+@loop2:
+   in al,dx
+   test al,8
+   jz @loop2
+end;
+
+procedure setp(c,r,g,b : byte);assembler;
+asm
+   mov dx,3C8h
+   mov al,c
+   out dx,al
+   inc dx
+   mov al,r
+   out dx,al
+   mov al,g
+   out dx,al
+   mov al,b
+   out dx,al
+end;
+
+function test8086 : byte;assembler;
+asm
+   xor dl,dl
+   push sp
+   pop ax
+   cmp sp,ax
+   jne @out
+   inc dl
+   pushf
+   pop ax
+   or ax,4000h
+   push ax
+   popf
+   pushf
+   pop ax
+   test ax,4000h
+   je @out
+   inc dl
+@out:
+   mov al,dl
+end;
+
+begin
+   randomize;
+   if test8086 &lt; 2 then begin
+      writeln('Sorry, you need a 386 or better to run this program.',#7);
+      halt;
+   end;
+
+   interactive := false;
+   write('Do you want to control? ');
+   repeat
+      key := readkey;
+   until (upcase(key) in ['Y','N']);
+   writeln(key);
+   if upcase(key) = 'Y' then interactive := true;
+
+   write('Wait while calculating tunnel data...');
+
+   for i := 0 to 127 do keys[i] := false;
+   for i := 0 to 255 do stab[i] := round(sin(i*pi/128)*127.5+127.5);
+
+   getmem(v,64000);
+   addr := 0;
+   for y := 0 to 99 do
+      for x := 0 to 319 do begin
+         len := sqrt((x-159.5)*(x-159.5)+(y-99.5)*(y-99.5))+1;
+         memw[seg(v^):addr] := vinkel(x-159.5,y-99.5)+
+                               (round(4000/len) and 255) shl 8;
+         inc(addr,2);
+      end;
+
+
+   getmem(pic,$FFFF);
+   asm
+      mov es,word ptr [pic+2]
+      xor di,di
+      mov cx,0FFFFh/4+1
+      db 66h;xor ax,ax
+      db 66h;rep stosw
+   end;
+
+   plasma(0,0,256,256);
+
+   addr := 0;
+   for y := 0 to 255 do
+   for x := 0 to 255 do begin
+      mem[seg(pic^):addr] :=
+           (mem[seg(pic^):addr+256]+mem[seg(pic^):addr+256]+
+              mem[seg(pic^):addr-256]+mem[seg(pic^):addr+1]+
+              mem[seg(pic^):addr-1]) div 5;
+      inc(addr);
+   end;
+
+   asm
+      mov ax,13h
+      int 10h
+   end;
+
+   for i := 1 to 63 do setp(i,i,32,32+i div 2);
+   for i := 0 to 63 do setp(i+64,63-i,32+i div 2,63);
+   for i := 0 to 63 do setp(i+128,i div 2,63-i,63-i);
+   for i := 0 to 63 do setp(i+192,32+i div 2,0,i);
+
+   getintvec($09,@oldint9h);
+   setintvec($09,@newint9h);
+
+   asm
+      mov ax,word ptr [v+2]
+      db 8Eh;db 0E0h {mov fs,ax}
+      mov ax,word ptr [pic+2]
+      db 8Eh;db 0E8h {mov gs,ax}
+      mov es,segA000
+   end;
+
+   rs := 0;
+   if not interactive then ds := 8;
+
+   repeat
+      if interactive and not warp then begin
+         if keys[$48] then begin
+            if ds &lt; 10 then inc(ds);
+         end else if ds &gt; 0 then dec(ds);
+         if keys[$50] then begin
+            if ds &gt; -10 then dec(ds);
+         end else if ds &lt; 0 then inc(ds);
+         if keys[$4D] then begin
+            if rs &lt; 10 then inc(rs);
+         end else if rs &gt; 0 then dec(rs);
+         if keys[$4B] then begin
+            if rs &gt; -10 then dec(rs);
+         end else if rs &lt; 0 then inc(rs);
+      end else begin
+         if not warp then r := stab[i];
+         inc(i);
+      end;
+
+      inc(d,ds shr 1);
+      inc(r,rs shr 1);
+
+      if keys[1] then warp := true;
+      if warp then begin
+         inc(ds,2);
+         inc(rs,1);
+      end;
+
+      retrace;
+
+      asm
+         push bp
+         xor di,di
+         xor bx,bx
+         mov cl,r
+         mov ch,d
+         mov bp,8000
+
+      @dloop:
+         db 64h;mov dx,[bx]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov al,[si]
+         db 64h;mov dx,[bx+2]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov ah,[si]
+         db 66h;shl ax,16
+         db 64h;mov dx,[bx+4]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov al,[si]
+         db 64h;mov dx,[bx+6]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov ah,[si]
+         db 66h;rol ax,16
+         db 66h;stosw
+         add bx,8
+         dec bp
+         jnz @dloop
+
+         mov bp,8000
+         sub bx,2
+         add cl,128
+
+      @dloop2:
+         db 64h;mov dx,[bx]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov al,[si]
+         db 64h;mov dx,[bx-2]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov ah,[si]
+         db 66h;shl ax,16
+         db 64h;mov dx,[bx-4]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov al,[si]
+         db 64h;mov dx,[bx-6]
+         add dl,cl
+         add dh,ch
+         mov si,dx
+         db 65h;mov ah,[si]
+         db 66h;rol ax,16
+         db 66h;stosw
+         sub bx,8
+         dec bp
+         jnz @dloop2
+
+         pop bp
+      end;
+   until ds &gt;= 120;
+
+   asm
+      mov ax,3h
+      int 10h
+   end;
+
+   setintvec($09,@oldint9h);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

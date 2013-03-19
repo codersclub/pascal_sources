@@ -1,0 +1,161 @@
+<html><head><title>Sphere Drawing Sample with SVGA BGI Graphics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простейшая программа, демонстрирующая алгоритм рисования сферы с затенением и световым бликом. Сферу можно перемещать по экрану и &quot;крутиться&quot; на месте.">
+<meta name="keywords" content="pascal, sources, source code, sphere, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sphere
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Sphere Drawing Sample with SVGA BGI Graphics</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>25.09.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=50 vspace=4 hspace=8 alt="" src="sphere.jpg"><p style="margin-left:20px">Простейшая программа, демонстрирующая алгоритм рисования
+сферы с затенением и световым бликом. Сферу можно перемещать по экрану
+и "крутиться" на месте.</TD><TD class=black colspan=2 align='right'><br><A HREF="sphere.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="sphere1.jpg" alt="">
+
+{&gt; Cut here. FileName= SPHERE.PAS }
+program sphiere;
+uses graph,crt;
+type vect=array[1..3] of real;
+const
+  Il=1;
+  Ia=0.6;
+  ka=0.15;
+  kd=0.2;
+  ks=0.8;
+  st:byte=3;
+  rr:real=0;
+  aa=1;
+  l:vect=(-1,0,1);
+  s:vect=(0,0,1);
+  _s=50;
+  _r=30;
+
+var
+  driver,mode : integer;
+  i,j,cyc     : integer;
+  r,n         : vect;
+  ys,xs       : integer;
+  p           : pointer;
+  size        : word;
+  ex          : boolean;
+  key         : char;
+  min         : real;
+  cfi,ca      : real;
+
+Procedure SetRGB(c,r,g,b:byte);
+begin
+ port[$3c8]:=c;
+ port[$3c9]:=r;
+ port[$3c9]:=g;
+ port[$3c9]:=b
+end;
+
+Function w(c:real):real;
+begin
+ w:=(c-0.5)*(c-0.5)/2+0.7
+end;
+
+Function Step(c:real;a:byte):real;
+var
+  i:byte;
+  r:real;
+begin
+ r:=1;
+ for i:=1 to a do r:=r*c;
+ step:=r
+end;
+
+Procedure sph(x,y,rad:integer;b:boolean);
+var
+ i,j,q,c:integer;
+ len_l,len_r,len_s:real;
+begin
+ len_l:=sqrt(sqr(l[1])+sqr(l[2])+sqr(l[3]));
+ if not b then rr:=0.8/abs(l[1]/len_l*x/640+l[2]/len_l*y/480+l[3]/len_l);
+
+ if rr&gt;min then min:=rr;
+ for j:=-rad to rad do
+  begin
+   q:=trunc(sqrt(rad*rad-j*j));
+   for i:=-q to q do
+    begin
+     n[1]:=i/rad;
+     n[2]:=j/rad;
+     n[3]:=sqrt(rad*rad-i*i-j*j)/rad;
+
+     cfi:=(n[1]*l[1]+n[2]*l[2]+l[3]*n[3])/len_l;
+     if cfi&lt;0 then cfi:=0;
+     for cyc:=1 to 3 do r[cyc]:=2*cfi*len_l*n[cyc]-l[cyc];{2*cfi}
+     len_r:=sqrt(r[1]*r[1]+r[2]*r[2]+r[3]*r[3]);
+     len_s:=sqrt(s[1]*s[1]+s[2]*s[2]+s[3]*s[3]);
+     ca:=(r[1]*s[1]+r[2]*s[2]+r[3]*s[3])/(len_r*len_s);
+     if (ca=1)and(l[3]=-r[3]) then ca:=0;
+     if ca&lt;0 then ca:=0;
+
+     c:=trunc(63* (Il/(rr+aa)*(kd*cfi+ks*step(ca,st)) + Ia*ka));
+
+     putpixel(x+i,y+j,c);
+    end;
+  end;
+end;
+
+begin
+ driver:=InstallUserDriver('svga256', nil);
+ mode:=2;
+ InitGraph(driver, mode, '');
+ randomize;
+ ClearDevice;
+ for i:=1 to 63 do setRGB(i,i,i,i);
+ setcolor(5);
+ line(0,0,300,0);
+ xs:=100;ys:=100;
+ ex:=false;
+ size:=ImageSize(0,0,100,100);
+ GetMem( p, size);
+ repeat
+  GetImage( xs-_r, ys-_r, xs+_r, ys+_r, p^);
+  sph(xs,ys,_r,false);
+  key:=readkey;
+  if key=#0 then key:=readkey else
+   begin
+    ex:=(key=#27);
+    if key=#13 then
+     begin
+      for j:=-3 to 3 do begin
+       l[1]:=sqrt(9-j*j);
+       l[2]:=j;
+       sph(xs,ys,_r,true)
+      end;
+      for j:=2 downto -2 do begin
+       l[1]:=-sqrt(9-j*j);
+       l[2]:=j;
+       sph(xs,ys,_r,true)
+      end;
+     end;
+   end;
+  PutImage( xs-_r, ys-_r, p^, NormalPut);
+  case ord(key) of
+   75 : if xs&gt;60 then dec(xs,_s);
+   77 : if xs&lt;520 then inc(xs,_s);
+   80 : if ys&lt;420 then inc(ys,_s);
+   72 : if ys&gt;60 then dec(ys,_s)
+   end;
+ until ex;
+
+ closegraph
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,612 @@
+<html><head><title>Peroxide Programming Tips - 3D Vector Handling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Третий выпуск демо-группы &quot;Пероксид&quot; - Подробное описание методов работы с 3-х мерными векторными изображениями в режиме 320x200x256. <br><font color=#666666> The third part of The Peroxide Programming Tips - 3D VECTOR handling: <br>  - Nice object handling <br>  - 3D -> 2D projections <br>  - Rotations <br>  - Depth Sorting <br>  - Hidden face removal <br>  - Polygon drawing <br>  - Glenzing </font>">
+<meta name="keywords" content="pascal, sources, source code, pxdtut3, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pxdtut3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Peroxide Programming Tips - 3D Vector Handling</TD>
+<TD nowrap class=black>&nbsp;Peroxide</TD>
+<TD class=black align='right'>01.06.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="pxdtut3.gif"><p style="margin-left:20px">Третий выпуск демо-группы "Пероксид" -
+Подробное описание методов работы с 3-х мерными векторными
+изображениями в режиме 320x200x256. <br><font color=#666666>
+The third part of The Peroxide Programming Tips - 3D VECTOR handling: <br>
+ - Nice object handling <br>
+ - 3D -> 2D projections <br>
+ - Rotations <br>
+ - Depth Sorting <br>
+ - Hidden face removal <br>
+ - Polygon drawing <br>
+ - Glenzing </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pxdtut3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>21k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        |====================================|
+        |                                    |
+        |   TELEMACHOS proudly presents :    |
+        |                                    |
+        |    Part 3 of the PXD trainers  -   |
+        |                                    |
+        |          3D Vector engine          |
+        |          The basics of 3D          |
+        |                                    |
+        |====================================|
+
+___---__--&gt;   The Peroxide Programming Tips   &lt;--__---___
+
+<img border=0 width=320 height=200 src="pxdtut31.gif" alt=""> <img border=0 width=320 height=200 src="pxdtut32.gif" alt="">
+
+&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;
+
+
+Intoduction
+-----------
+
+Hiya... I'm Telemachos of Peroxide - a new danish group (yes... we DO
+have groups in Denmark too :)))  )
+
+Since my last trainer quite a few people has mailed me and asked me to
+do trainers on various 3D subjects.
+As a result of this I have decided to dedicate my next two trainers
+to the realm of 3D graphic.
+
+What we'll be doing in the next two trainers is to build a 3D vector
+engine capable of doing most of the effects used in todays demos.
+Our engine will have the following features.
+
+Tuturial #3 (this one) :
+  - Nice 3D object organization - no unnessesary rotations done.
+  - Depth sorting
+  - Hidden face removal.
+  - Solid Fill
+  - Glenzing
+
+
+Tuturial #4 (next week or so...) :
+  - Z-shading
+  - Flat shading according to moving lightsource(s)
+  - Gouraud Shading according to moving lightsource(s)
+  - Texturemapping
+  - Environment-mapping
+  - Phong Shading  (a fake 'cause )
+
+
+So when you are done with these two tuturials you should be able to
+do some nice 3D vector objects.
+It might seem that tuturial 4 will be a hard one to get through -
+but believe me : We're doing all the preparations in this trainer.
+Once our 3D engine is set up all the different shading/fill types are
+surprisingly alike :)
+
+
+******************* ATTENTION ARTISTS!!! *****************************
+
+ARE YOU AN ARTIST ?
+DO YOU DRAW VGA-BITMAPS ?
+CAN YOU DO GFX IN ALL RESOLUTIONS - 320x200x256 AND VARIOUS SVGA-MODES ?
+DO YOU WANT TO SEE YOUR WORK IN AMAZING PRODUCTIONS ?
+CAN YOU DO GAME-GFX AS WELL AS BACKGROUNDS FOR DEMOS ?
+
+IF YOU MEET THE ABOVE TERMS (or some at least :) ),
+THEN DROP ME (TELEMACHOS) A MESSAGE OR MAIL THE GROUP AT :
+  Peroxide@image.dk
+
+*********************************************************************
+
+
+If you want to get in contact with me, there are several ways of
+doing it :
+
+1) Write me via FIDO-net   :      2:235/350.22
+
+2) E-mail me               :      tm@image.dk
+
+3) Snail mail me           :      Kasper Fauerby
+                                  Saloparken 226
+                                  8300 Odder
+                                  Denmark
+
+4) Call me  (Voice ! )     :    +45 86 54 07 60
+
+
+Get this serie from the major demo-related FTP-sites - currently :
+
+  GARBO ARCHIVES  (forgot the address)  :  /pc/programming/
+
+  ftp.teeri.oulu.fi  :   /msdos/programming/docs/
+
+
+Or grap it from my homepage :
+
+   Telemachos' Codin' Corner   http://www.image.dk/~tm
+
+
+
+FIRST THINGS FIRST! - 3D DEFINATIONS AND TRANSLATIONS
+------------------------------------------------------
+
+Lets define the 3D space where our object is placed. The origin of
+the 3D object space is located at the middle of the screen and the
+axis is defined as shown below :
+
+               \ |
+              -----------------------------&gt; X-axis
+                 | \
+                 |   \
+                 |     \
+                 |       \
+                 |         \
+                 |           \&gt;
+                 |             Z-axis (into the screen :)  )
+                 |
+                 V
+               Y-axis
+
+
+Ok.. so our object is made from a number of 3D points each defined by
+(X,Y,Z) But how do we plot such a 3D point to the screen ?? We must
+find some way of translating the 3 coordinated in the 2 coordinates
+of the screen.
+This is done by calculating the intersection between the vector made
+from the 3D point and the eye position and the viewplane.
+I won't get into the math involved in this operation - if you'r
+interrested go grap a book on vector math and read the bit about
+intersection between a line and a plane.
+I'll just give you some formulas :
+
+ X0 := Xofs  +  Round(X*(Zeye/(Zeye-Z)));
+ Y0 := Yofs  +  Round(Y*(Zeye/(Zeye-Z)));
+
+Set Xofs to 160 and Yofs to 100 to center object space at the center
+of the screen.
+If you'r unhappy with these formulas (they are a bit slow because of
+the Round and all the floating point muls and divs) you can use a
+approximation of the formulas :
+
+ X0 := Xofs + (x div (z-Zoff)) shl 8;
+ Y0 := Yofs + (y div (z-Zoff)) shl 8;
+
+This will also work allthough not entirely correct.
+
+
+LETS TALK ABOUT DATA-STRUCTURES
+--------------------------------
+
+Now for the keyword of 3D programming - DATA STRUCTURES !!
+
+In 3D it is VERY important that you think about how to structure your
+data so that a minimum of calculations has to be done.
+First problem is how to store your 3D object.
+
+The easiest way is to store it an array of polygons, each polygon
+consisting of 4 3D points. But it is also the way ONE SHOULD NEVER!!
+store 3D objects.
+Lets have a look at a simple cube. A cube consists of 6 sides right ?
+And each side consist of 4 points. That sums up to 24 points to be
+rotated using the above mentioned data structure.
+But as we all know there is only 8 corners in a cube - ie. there is
+only 8 DIFFERENT points in a cube.
+So what we do is to store all the different points in one array - and
+then introduce another variable - we could call it faces - to store
+information about which points appears in which faces.
+This way we only rotates ONE THIRD of the points we rotate using the
+first methode.
+The goal in 3D is never do do unnessesary calculations. Only rotate
+each point ONCE, only draw each pixel on the screen ONCE and so on.
+
+Now some words about precision.
+As we are using a pretty low resolution (320X200) a fairly big amount
+of rounding is performed when rotation / projecting a 3D point.
+If you store your 3D object in a single variable and rotates the
+object into the very same variable the object will in time be distorted
+from the roundings. So my advice is to store the original 3D object
+in ONE variable and then rotate this BASEOBJECT into a buffer from
+which you then perform all the calculations on the rotated 3D object.
+This way each rotation starts out with a "fresh" 3D object and the
+distortion will be minimal.
+
+
+For an idea of a 3D data structure check out the sample program
+supplied with this text.
+NOTE!!
+This is only meant as an idea of a data structure. Modify it to match
+your needs.
+
+
+
+OK - NOW I WANT TO ROTATE THE POINTS
+-------------------------------------
+
+Having an object defined by 3D coords is no fun if it just stands
+still on the screen. So we want to rotate it around the different
+axes.
+
+For this there is 3 formulas - one for each axis. Please note that
+the formulas presented here is the standard rotation formulas given
+by vector math books. Numerous optimizations has been made to these
+routines making rotation a little faster but I won't get into that
+in this text. For now the important thing is to make the points
+rotate correctly :)
+Before we throw ourselves into the formulas one more important note
+has to be made. One has to bear in mind that the sequence in which
+the point is rotated around the different axes DOES matter. To rotate
+the point 5 degrees around the X axis and then 5 degrees around the
+Y axis is NOT the same as rotating it about the Y axis and then the
+X axis!! Think about it! 
+So, it has been decided that one rotates around the axes in the
+following order :  X, Y and then Z.
+
+Ok... now it's time for the formulas :
+
+rotation around Z-axis :  (rotating the point X,Y,Z  A degrees)
+    Xrotated = Cos (A)*X - Sin (A)*Y
+    Yrotated = Sin (A)*X + Cos (A)*Y
+    Zrotated = Z
+
+rotation around X-axis :
+    Xrotated = X
+    Yrotated = Cos (A)*Y - Sin (A)*Z
+    Zrotated = Sin (A)*Y + Cos (A)*Z
+
+rotation around Y-axis :
+    Xrotated = Cos (A)*X - Sin (A)*Z
+    Yrotated = Y
+    Zrotated = Sin (A)*X + Cos (A)*Z
+
+OK... these are the formulas - check out the sample program for an
+idea of how to combine them in a pretty fast way.
+I just grapped the rotation routine from an Asphyxia tuturial
+by Denthor.
+His routine is a straight implemention of the above mentioned
+formulas - in fixed point assembler. Thanx Denthor.
+
+
+OK.. lets sum things up.
+By now we have learned to
+  - rotate a 3D point around all 3 axis
+  - Translate a 3D point into 2D screen coordinates
+
+This is allmost enough to get you started coding a 3D object engine.
+With this information you could easily code a wirefram engine - as a
+matter of fact I suggest you do just that! By coding a simple 3D
+engine you really learn the next stuff faster :)
+
+
+BACK SO SOON ??? - POLYGON DRAWING
+-----------------------------------
+
+OK.. I guess you have now coded a wireframe engine (not so hard ehh ?)
+and you want more. Lets face it - your demo won't win The Party if
+it's only running wireframe 3D graphics.
+But we're going to change that - now is the time for solid objects!!
+(WEE!!)
+To draw a solid face we need to code a good polygon routine.
+We'll code it in a way so that all the nice shadings in the next
+tuturial will be really easy to implement - I'll tell you how right
+now!
+
+What is a polygon ?? In demos most polygons are triangles but today
+we'll draw four sided polygons because I'm gonna use a simple square
+box for my sample code. Don't worry though - I'll tell you how to do
+triangles too.
+So we got our four points and we want to fill the shape with some
+color.
+But how ?? Well... we draw polygons scanline per scanline.
+Ie. a polygon is a bunch of horizontal lines.
+So the first thing we'll need is a horizontal line drawer :
+
+
+Procedure HorLine(Xbegin,Xend,Ypos: integer; color: byte; where: word);
+Assembler;
+asm
+ mov cx,[Xend]
+ inc cx
+ sub cx,[Xbegin]   {cx = length of line - used for counter }
+                   {note, I assume that Xbegin &lt; Xend -
+                          the poly routine}
+                   {will take care of that...}
+ mov ax,[ypos]
+ shl ax,8
+ mov di,ax
+ shr ax,2
+ add di,ax
+ add di,[Xbegin]   {di = Ypos * 320 + Xbegin - offset for our line}
+ mov es,[where]    {where to draw..}
+
+ mov al,[color]
+ rep stosb         {I draw byte by byte - slower than drawing a word}
+                   {at a time but it is because of the changes we are}
+                   {going to make to this routine when
+                    glenzing/gouraud/texturemapping}
+end;
+
+
+
+OK.. now we just have to find out what the X-coords for each
+scanline is.
+We define a variable to hold that information for us :
+
+     polygon : Array[0..199,1..2] of byte;
+
+This variable can hold the endpoints of a horizontal line for each of
+the 200 y-lines on the VGA screen.
+
+Now we want to fill this buffer out with the correct information.
+For each of the four sides (three if it were a triangle) we scan
+along the edge of the polygon and updates the polygon variable like
+this :
+
+Procedure ScanPolySide(X1,Y1,X2,Y2 : integer);
+var
+ DeltaX : integer;
+ temp : integer;
+ Xposfixed,Xpos : integer;
+ counter : integer;
+begin
+  if Y2=Y1 then exit;          {exit if side is a horizontal line }
+  if (Y2&lt;Y1) then              {make sure Y1 is top point}
+               begin
+                 temp := Y1;
+                 Y1 := Y2;
+                 Y2 := temp;
+
+                 temp := X1;
+                 X1 := X2;
+                 X2 := temp;   {switch the points if Y1 is not top..}
+               end;
+
+  DeltaX := ((X2-X1) shl 7) div (Y2-Y1);
+     {DeltaX in 9.7 fixed point math}
+  Xposfixed := X1 shl 7; {Xpos in 9.7 fixed point math }
+    for counter := Y1 to Y2 do
+      begin
+        Xpos := XposFixed shr 7;
+        if (Xpos &lt; polygon[counter,1]) then polygon[counter,1] := Xpos;
+        if (Xpos &gt; polygon[counter,2]) then polygon[counter,2] := Xpos;
+        Xposfixed := XposFixed + DeltaX;
+      end;
+end;
+
+
+Now... run this procedure on each side of the poly, and the variable
+'polygon' is set up and ready for our friend Mr. Horline.
+
+
+So..
+
+Procedure Polygon(X1,Y1,X2,Y2,X3,Y3,X4,Y4: integer;
+                  color : byte; where : word);
+var
+ counter : integer;
+ Ymin, Ymax : integer;
+ polygon : Array[0..199,1..2] of integer;
+
+begin
+ Ymin := Y1;
+ Ymax := Y1;
+ if (Y2 &lt; Ymin) then Ymin := Y2;
+ if (Y2 &gt; Ymax) then Ymax := Y2;
+ if (Y3 &lt; Ymin) then Ymin := Y3;
+ if (Y3 &gt; Ymax) then Ymax := Y3;
+ if (Y4 &lt; Ymin) then Ymin := Y4;
+ if (Y4 &gt; Ymax) then Ymax := Y4;
+    {what is Ymin and Ymax in this polygon ?}
+
+ for counter := 0 to 199 do
+   begin
+     polygon[counter,1] := 32000;
+     polygon[counter,2] := -32000;
+   end;
+
+ {we have to initialize our variable 'polygon' to some extreme values}
+
+ ScanPolySide(X1,Y1,X2,Y2);
+ ScanPolySide(X2,Y2,X3,Y3);
+ ScanPolySide(X3,Y3,X4,Y4);
+ ScanPolySide(X4,Y4,X1,Y1); {all four sides scanned}
+
+ for counter := Ymin to Ymax do
+    Horline(polygon[counter,1],polygon[counter,2],counter,color,where);
+end;
+
+Well... that was pretty easy... Now we can do solid sides in our 3D
+cube. Try it out before continuing :)
+
+
+
+WHAT - SOMETHING IS WRONG ??  - DEPTH SORTING :
+------------------------------------------------
+
+YES - I know. You have some problems getting your cube look right when
+having different colors for each face. This is because of the random
+order we draw the faces in.
+We have to find some way of depth sorting them. We sort the faces by
+their center point. The Z component of their center point, that is.
+So for each frame we have to calculate the center Z-value for each
+face in the object.
+To find the center Z value we add the Z values from the 4 points
+making the face and divide this value by 4 (if we are talking
+triangles obviously we'll divide by 3)
+Only that we don't divide at all! If we don't divide by the number of
+points we'll NOT end up with the center Z value. We'll end up with a
+value that is 4 times to big. But as ALL the calculated Z values will
+be 4 times to big they will still sort corectly.
+
+We'll store the values in a variable called
+
+     centers : Array[1..Num_of_faces]  of integer;
+
+But when we start sorting this table we'll mess up which center that
+belongs to which face. To solve this problem we'll introduce another
+variable called
+
+    OrderTable  :  Array[1..Num_of_faces] of integer;
+
+This table will store the correct sequence for drawing the faces.
+Ie. it'll store the face-numbers belonging to a centervalue.
+
+To do the actual sorting we'll use a simple bubble-sort.
+This is a pretty simple sorting algoritm which will work for us
+as long we are not talking sorting hundreds of faces.
+If you are rendering LOTS of faces I suggest you use a quicksort
+routine instead.
+The idea is to scan through the centers variable and compare the
+entries two and two. If the value at position+1 is higher than the
+value at position we switch the two values and updates the ordertable
+variable.
+We then reset the scan and start over. We continue doing this until
+we reach the end of 'centers' without having to switch any values.
+
+
+Procedure Sort_faces;
+{Just a simple bubble-sort - not to fast but what the heck :) }
+{Faces with the HIGHEST Z-val is placed first in Order[] }
+VAR
+  counter : integer;
+  position : integer;
+  tempval : integer;
+BEGIN
+  for counter:=1 to Num_of_faces do BEGIN
+    OrderTable[counter]:=counter;
+  END;
+  {we resets the ordertable so that it matches the
+   unsorted 'centers' variable}
+  position := 1;
+
+  repeat
+    if (centers[position] &lt; centers[position+1]) then
+        BEGIN
+          tempval := Centers[position+1];
+          Centers[position+1] := centers[position];
+          centers[position] := tempval;
+
+          tempval := OrderTable[position+1];
+          OrderTable[position+1] := OrderTable[position];
+          OrderTable[position] := tempval;
+
+          position:=1;
+        END;
+      inc(position);
+  until (position = Num_of_faces);
+END;
+
+
+Now when doing the faces we draw them in the order specified in
+OrderTable.
+Go ahead... try it out...
+
+
+
+HIDDEN FACE REMOVAL
+--------------------
+
+Fire up your 3D engine and take a look at the rotating cube.
+Looks cool ehh ?? Nice work... YOU did that ;)
+But try and count the faces visible at a time. How many faces do you
+see at one time ? Only about half of them ????
+ARGH!!  We are drawing half an object that is never seen ???
+This won't do. Right now it does not matter much as drawing a polygon
+is fairly fast - but next week when we start texturemapping or
+shading the faces it will slow things down.
+So - we'll just have to remove the faces we do not see.
+This is fortunately VERY!! easy.
+To be able to perform this operation it is important that you have
+defined your faces in a clockwise direction. Ie. all faces should be
+defined as :
+
+
+                   P1               P2
+                    |---------------|
+                    |               |
+                    |               |
+                    |               |
+                    |               |
+                    |               |
+                    |---------------|
+                   P4               P3
+
+
+Ok... now I'll introduce a new formula to you - the cross product.
+The cross product is a formula that returns the normal to a plane :
+
+        Xnormal=(P2.Y-P1.Y)(P1.Z-P3.Z)-(P2.Z-P1.Z)(P1.Y-P3.Y)
+        Ynormal=(P2.Z-P1.Z)(P1.X-P3.X)-(P2.X-P1.X)(P1.Z-P3.Z)
+
+        Znormal=(P2.X-P1.X)(P1.Y-P3.Y)-(P2.Y-P1.Y)(P1.X-P3.X)
+
+Well... for now we are only interrested in the Z normal.
+If the Z normal is negative it means that the normal points towards
+us - ie. we draw the face.
+If not we discard it.
+
+One more important note to make is that because the Znormal does not
+involve any Z components of the points we can use it on the PROJECTED
+2D values.
+
+Now go implement this in your 3D engine - if you are having trouble
+take a look at the &lt;a href="pxdtut3.zip"&gt;sample program&lt;/a&gt;.
+Next week we'll see how we use this normal (the hole 3D normal though)
+for shading...
+
+
+
+ONE LAST THING - GLENZING THE POLYGON
+--------------------------------------
+
+OK.. now we have done a 3D object engine that handles 3D objects
+correct - showing only what HAS to be shown.
+That done I think you are ready for another kind of fill - that
+TOTALLY ignores ALL we have learned about sorting and hidden face
+removal... SIGH, thats life :)
+
+The effect is called glenzing and the idea is to make the object look
+like it is made from colored glass. This effect is done by setting
+the correct pallette. I don't think there is any way of calculating
+this pallette so you'll have to experiment.
+Now when drawing your faces you do not draw the polygon in one color.
+For each pixel you grap the background color and add it to the face
+color.
+This is of course a little slower than doing single colored polygons
+but not much. You'll have to change your horizontal line drawer to do
+this - check the sample program if you experiment any trouble.
+
+When glenzing you should obviously NOT remove the faces pointing away
+from you as they can be seen through the glass sides.
+Sorting is useless.... the result will look the same with or without
+sorting.
+In my opinion glenzing is not a cool effect - but well... it can't
+hurt to know how to do it :)
+
+
+
+LAST REMARKS
+-------------
+
+Well, that's about all for now.
+Hope you found this doc useful - and BTW : If you DO make anything
+public using these techniques please mention me in your greets or
+where ever you se fit.
+I DO love to see my name in a greeting :=)
+
+
+As mentioned earlier my next tuturial will be on different types of
+shading - using this 3D object engine as a base...
+But after that ??
+If you have any good ideas for a subject you wish to see a tuturial
+on please mail me. If I like the idea (and know anything about it :)
+I'll write a tut on it.
+
+Keep on coding...
+
+Telemachos - May '97.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

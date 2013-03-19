@@ -1,0 +1,801 @@
+<html><head><title>Water Effect [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Отлично реализованный ЭФФЕКТ ВОЛН на воде. Применено несколько вариантов: одиночная капля, дождь, поперечные волны, волны от движущегося объекта, а также комбинация всех этих эффектов. <br><font color=#666666> Water spectacular graphics originaly made by Dф-PhОSSфD! Converted to Pascal by Anders Haglund</font>">
+<meta name="keywords" content="pascal, sources, source code, water2, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;water2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Water Effect [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;Anders Haglund</TD>
+<TD class=black align='right'>20.10.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=53 vspace=4 hspace=8 alt="" src="water2.jpg"><p style="margin-left:20px">Отлично реализованный ЭФФЕКТ ВОЛН на воде.
+Применено несколько вариантов: одиночная капля, дождь,
+поперечные волны, волны от движущегося объекта,
+а также комбинация всех этих эффектов. <br><font color=#666666>
+Water spectacular graphics originaly made by Dф-PhОSSфD!
+Converted to Pascal by Anders Haglund</font></TD><TD class=black colspan=2 align='right'><br><A HREF="water2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="water2_1.jpg" alt="">
+
+{&gt; Cut here. FileName= WATER2.PAS }
+{ Water originaly made by Dф-PhОSSфD! Converted to Pascal
+  by Anders Haglund }
+{ Press ESC to quit }
+
+{.$define Debug_Test} {Test speed}
+{.$define Syncronize} {Wait for retrace}
+const Semilla_Inicial = $9234;
+      Ancho_Olas = 0002;
+      Densidad_Inicial : word = 0005;
+      Borde = 0002;
+      Ancho = 0160;
+      Alto = 0100;
+      Maximo = 0150;
+      Ancho_Puntos : word = 0320;
+      Other_page : word = Alto*Ancho*2;
+      Actual_Page : word = 0;
+var Imr,Densidad : byte;
+    Rnd,A,B : word;
+    Fil,Col : array[0..4] of word;
+    Buff2 : Pointer;
+    Key : Boolean;
+
+procedure Put_320;assembler;
+asm
+   Mov     Ax,0013H
+   Int     10H
+end;
+
+procedure Init_Buffers;
+begin
+     getmem(buff2,65535);
+     asm
+        mov es,word ptr [buff2+2]
+        xor di,di
+        mov cx,65536/4
+        db 66h;xor ax,ax
+        db 66h;rep stosw
+        mov es,sega000
+        mov ax,word ptr [buff2+2]
+        db 8Eh;db 0E8h {Mov Fs,Ax}
+     end;
+end;
+
+procedure Text_Mode;assembler;
+asm
+   Mov     Ax,0003H
+   Int     10H
+end;
+
+procedure Vsync;assembler;
+asm
+{$IfDef Debug_Test}
+   Mov     Dx,3Dah
+   In      Al,Dx
+   Mov     Dx,3C0H
+   Mov     Al,31H
+   Out     Dx,Al
+   Mov     Al,80
+   Out     Dx,Ax
+{$Endif}
+   Mov     Dx,03Dah
+@1:
+   In      Al,Dx
+   Test    Al,8
+   Jnz     @1
+@2:
+   In      Al,Dx
+   Test    Al,8
+   Jz      @2
+{$IfDef Debug_Test}
+   Mov     Dx,3Dah
+   In      Al,Dx
+   Mov     Dx,3C0H
+   Mov     Al,31H
+   Out     Dx,Al
+   Mov     Al,0
+   Out     Dx,Ax
+{$Endif}
+end;
+
+procedure Zero_Pal;assembler;
+asm
+   Mov     Dx,3C8H
+   Xor     Al,Al
+   Out     Dx,Al
+   Inc     Dx
+   Xor     Al,Al
+   Mov     Cx,768
+@1:
+   Out     Dx,Al
+   Loop    @1
+end;
+
+procedure palette;assembler;
+asm
+Db 3Fh,3Fh,3Fh,3Ch,3Fh,3Fh,3Ah,3Fh,3Fh,37H,3Eh,3Fh,34H,3Eh,3Fh,32H
+Db 3Eh,3Fh,2Fh,3Eh,3Fh,2Dh,3Dh,3Fh,2Ah,3Dh,3Fh,29H,3Ch,3Fh,28H,3Bh
+Db 3Fh,27H,3Bh,3Fh,27H,3Bh,3Fh,26H,3Ah,3Fh,25H,39H,3Fh,24H,38H,3Fh
+Db 23H,37H,3Fh,22H,37H,3Fh,21H,36H,3Fh,20H,35H,3Fh,1Fh,34H,3Fh,1Eh
+Db 33H,3Fh,1Dh,32H,3Fh,1Ch,31H,3Fh,1Bh,30H,3Fh,1Ah,2Fh,3Fh,19H,2Eh
+Db 3Fh,18H,2Dh,3Fh,17H,2Ch,3Fh,16H,2Ah,3Fh,15H,29H,3Fh,14H,28H,3Fh
+Db 13H,27H,3Fh,12H,25H,3Eh,11H,25H,3Dh,11H,23H,3Dh,10H,22H,3Ch,0Fh
+Db 20H,3Bh,0Fh,20H,3Ah,0Eh,1Eh,39H,0Dh,1Dh,39H,0Ch,1Bh,38H,0Ch,1Bh
+Db 37H,0Bh,19H,36H,0Bh,18H,35H,0Ah,16H,35H,09H,16H,34H,09H,14H,33H
+Db 08H,13H,32H,07H,12H,31H,07H,11H,31H,06H,10H,30H,06H,0Fh,2Fh,05H
+Db 0Eh,2Fh,05H,0Dh,2Eh,04H,0Ch,2Dh,04H,0Bh,2Ch,03H,0Ah,2Bh,03H,09H
+Db 2Bh,02H,08H,2Ah,02H,07H,29H,02H,06H,28H,01H,06H,27H,01H,04H,27H
+Db 01H,04H,26H,01H,04H,26H,01H,04H,26H,01H,04H,25H,01H,04H,25H,01H
+Db 04H,25H,01H,04H,24H,00H,04H,24H,00H,04H,24H,00H,04H,23H,00H,03H
+Db 23H,00H,03H,22H,00H,03H,22H,00H,03H,22H,00H,03H,21H,00H,03H,21H
+Db 00H,03H,21H,00H,03H,20H,00H,03H,20H,00H,03H,20H,00H,03H,20H,00H
+Db 03H,1Fh,00H,03H,1Fh,00H,03H,1Fh,00H,03H,1Eh,00H,03H,1Eh,00H,02H
+Db 1Eh,00H,02H,1Dh,00H,02H,1Dh,00H,02H,19H,00H,02H,16H,00H,01H,12H
+Db 00H,01H,0Fh,00H,00H,0Ah,00H,00H,05H,00H,00H,00H,0Eh,00H,00H,13H
+Db 00H,00H,18H,00H,00H,1Dh,00H,00H,22H,00H,00H,27H,00H,00H,2Ch,00H
+Db 00H,31H,00H,00H,34H,00H,00H,38H,00H,00H,37H,00H,00H,36H,00H,02H
+Db 35H,00H,04H,35H,00H,05H,34H,00H,08H,33H,00H,09H,33H,00H,0Ah,32H
+Db 00H,0Bh,31H,00H,0Ch,30H,00H,0Dh,30H,01H,0Eh,2Fh,00H,0Fh,2Eh,00H
+Db 10H,2Eh,00H,10H,2Dh,00H,12H,2Ch,01H,13H,2Ch,01H,14H,2Bh,01H,14H
+Db 2Ah,01H,15H,29H,01H,16H,29H,01H,16H,28H,01H,17H,29H,03H,19H,2Ah
+Db 05H,1Bh,2Ch,08H,1Dh,2Dh,0Bh,1Fh,2Eh,0Dh,20H,2Fh,10H,22H,31H,13H
+Db 25H,32H,17H,27H,33H,1Ah,29H,34H,1Eh,2Bh,36H,21H,2Dh,37H,25H,30H
+Db 38H,29H,32H,3Ah,2Dh,34H,3Bh,31H,37H,3Ch,36H,3Ah,3Eh,3Ah,3Ch,3Fh
+Db 3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh,3Fh
+end;
+
+procedure Put_Palette;assembler;
+asm
+   Push    Ds
+   Mov     Dx,3C8H
+   Xor     Al,Al
+   Out     Dx,Al
+   Inc     Dx
+   Mov     Si,Offset Palette
+   Mov     Cx,450
+@1:
+   Mov     Al,Cs:[Si]
+   Inc     Si
+   Out     Dx,Al
+   Loop    @1
+   Pop     Ds
+end;
+
+procedure TheEnd;Forward;
+
+procedure Print_Frame;assembler;
+asm
+   Mov     Si,Actual_Page
+   Mov     Di,64000
+   Mov     Cx,Ancho
+@4:
+   Push    Di
+   Push    Cx
+   Xor     Ax,Ax
+   Xor     Dx,Dx
+   Xor     Bx,Bx
+@3:
+   Db 65h;Mov     Cx,[Si]
+   Sar     Cx,7
+   Add     Cx,Ax
+   Sub     Cx,Dx
+   Jle     @1
+   Add     Dx,Cx
+@2:
+   Mov     Word Ptr Es:[Di],Bx
+   Sub     Di,Ancho_Puntos
+   Loop    @2
+@1:
+   Add     Si,2
+   Add     Bx,0101H
+   Inc     Ax
+   Cmp     Ax,Alto
+   Jnz     @3
+   Mov     Dh,Dl
+@5:
+   Sub     Di,Ancho_Puntos
+   Mov     Word Ptr Es:[Di],Dx
+   Add     Dx,0101H
+   Cmp     Dx,maximo+maximo*256;
+   Jnz     @5
+   Pop     Cx
+   pop     Di
+   Add     Di,2
+   Loop    @4
+{$IfDef Syncronize}
+   Call    Vsync
+{$Endif}
+   In Al,60h
+   Cmp Al,1
+   Jne @Skip
+   Call TheEnd
+@Skip:
+end;
+
+procedure Stabylize;assembler;
+asm
+   Mov     Si,[Actual_Page]
+   Mov     Di,[Other_Page]
+   Mov     [Actual_Page],Di
+   Mov     [Other_Page],Si
+   Add     Si,Borde*Alto
+   Add     Di,Borde*Alto
+   Mov     Cl,[Densidad]
+   Mov     Bx,Ancho*Alto/2-Borde*Alto/2
+@1:
+   db 66h;db 65h;Mov Ax,Word Ptr [Si-Alto*2]
+   db 66h;db 65h;Add Ax,Word Ptr [Si+Alto*2]
+   db 66h;db 65h;Add Ax,Word Ptr [Si+2]
+   db 66h;db 65h;Add Ax,Word Ptr [Si-2]
+   db 66h;Ror     Ax,16
+   Sar     Ax,1
+   db 66h;Ror     Ax,16
+   Sar     Ax,1
+   db 66h;db 65h;Sub     Ax,Word Ptr [Di]
+   db 66h;Mov     Dx,Ax
+   Sar     Dx,Cl
+   db 66h;Ror     Dx,16
+   Sar     Dx,Cl
+   db 66h;Ror     Dx,16
+   db 66h;Sub     Ax,Dx
+   db 66h;db 65h;Mov     Word Ptr [Di],Ax
+   Add     Si,4
+   Add     Di,4
+   Dec     Bx
+   Jnz     @1
+end;
+
+procedure Stabylize2;assembler;
+asm
+   Mov     Si,Word Ptr [Actual_Page]
+   Mov     Di,Word Ptr [Other_Page]
+   Mov     Word Ptr [Actual_Page],Di
+   Mov     Word Ptr [Other_Page],Si
+   Add     Si,Borde*Alto
+   Add     Di,Borde*Alto
+   Mov     Cx,Ancho*Alto-Borde*Alto-100
+@@1:
+   db 65h;Mov     Ax,Word Ptr [Si-Alto*2]
+   db 65h;Add     Ax,Word Ptr [Si+Alto*2]
+   db 65h;Add     Ax,Word Ptr [Si+2]
+   db 65h;Add     Ax,Word Ptr [Si-2]
+   db 65h;Add     Ax,Word Ptr [Si-Alto*2-2]
+   db 65h;Add     Ax,Word Ptr [Si-Alto*2-2]
+   db 65h;Add     Ax,Word Ptr [Si+Alto*2-2]
+   db 65h;Add     Ax,Word Ptr [Si+Alto*2-2]
+   Sar     Ax,3
+   db 65h;Mov     Word Ptr [Di],Ax
+   Add     Si,2
+   Add     Di,2
+   Loop    @@1
+end;
+
+procedure Put_Point;assembler;
+asm
+   Mov     Ax,Si
+   db 66h;Rol     Si,16
+   Mov     Si,Ax
+   Mov     Ax,Alto
+   Mul     Dx
+   Add     Bx,Ax
+   Shl     Bx,1
+   Add     Bx,Word Ptr [Actual_Page]
+   db 66h;db 65h;Mov     Word Ptr [Bx],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+4],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*2)],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*2+4)],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*4)],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*4)+4],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*6)],Si
+   db 66h;db 65h;Mov     Word Ptr [Bx+(Alto*6)+4],Si
+end;
+
+procedure Put_Big_Point;assembler;
+asm
+   Mov     Ax,Si
+   db 66h;Rol     Si,16
+   Mov     Si,Ax
+   Mov     Ax,Alto
+   Mul     Dx
+   Add     Bx,Ax
+   Shl     Bx,1
+   Add     Bx,Word Ptr [Actual_Page]
+   db 66h;db 65h;Mov     word Ptr [Bx],si
+   db 66h;db 65h;Mov     word Ptr [Bx+4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+10],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*2)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*2+4)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*2+8)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*2+10)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*4)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*4)+4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*4)+8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*4)+10],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*6)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*6)+4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*6)+8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*6)+10],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*8)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*8)+4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*8)+8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*8)+10],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*10)],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*10)+4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*10)+8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+(Alto*10)+10],si
+end;
+
+procedure Rnd_Calc;assembler;
+asm
+   Inc     Rnd
+   Xor     Dx,Dx
+   Mov     Ax,Rnd
+   Mov     Bx,32719
+   Mul     Bx
+   Add     Ax,3
+   Mov     Bx,32749
+   Div     Bx
+   Add     Dx,0F000H
+   Mov     Rnd,Dx
+end;
+
+procedure Read_Point;assembler;
+asm
+   Call    Rnd_Calc
+   And     Dx,11111111B
+   Add     Dx,32
+   Push    Dx
+   Call    Rnd_Calc
+   Mov     Bx,Dx
+   Pop     Dx
+   And     Bx,1111111B
+   Add     Bx,36
+end;
+
+procedure Touch;assembler;
+asm
+   db 66h;Push    si
+   Call    Read_Point
+   db 66h;Pop     si
+   Shr     Dx,1
+   Call    Put_Point
+end;
+
+procedure Big_Touch;assembler;
+asm
+   db 66h;Push    si
+   Call    Read_Point
+   db 66h;Pop     si
+   Shr     Dx,1
+   Call    Put_Big_Point
+end;
+
+procedure Put_Line;assembler;
+asm
+   Mov     Ax,Si
+   db 66h;Rol     si,16
+   Mov     Si,Ax
+   Mov     Ax,Alto*2
+   Mul     Dx
+   Mov     Bx,Ax
+   Add     Bx,Ancho_Olas
+   Mov     Cx,Alto/2-Ancho_Olas
+   Add     Bx,2*8
+   Sub     Cx,2*8
+@@1:
+   db 66h;db 65h;Mov     word Ptr [Bx],si
+   db 66h;db 65h;Mov     word Ptr [Bx+Alto*2],si
+   db 66h;db 65h;Mov     word Ptr [Bx+Alto*4],si
+   db 66h;db 65h;Mov     word Ptr [Bx+Alto*6],si
+   db 66h;db 65h;Mov     word Ptr [Bx+Alto*8],si
+   db 66h;db 65h;Mov     word Ptr [Bx+Alto*10],si
+   Add     Bx,4
+   Loop    @@1
+end;
+
+procedure Fila;assembler;
+asm
+   Dw      025,025,026,027,028,030,032,034,037,039,042,045
+   Dw      048,052,055,058,061,063,066,068,070,072,073,074
+   Dw      075,075,075,074,073,072,070,068,066,063,061,058
+   Dw      055,052,048,045,042,039,037,034,032,030,028,027
+   Dw      026,025
+   Dd      0Ffffffffh
+end;
+
+procedure Columna;assembler;
+asm
+   Dw      015,015,016,016,017,018,020,021,023,025,027,030
+   Dw      033,036,039,042,045,049,052,056,060,064,068,072
+   Dw      076,080,084,088,092,096,000,104,108,111,115,118
+   Dw      121,124,127,130,133,135,137,139,140,142,143,144
+   Dw      144,145,145,145,144,144,143,142,140,139,137,135
+   Dw      133,130,127,124,121,118,115,111,108,104,100,096
+   Dw      092,088,084,080,076,072,068,064,060,056,052,049
+   Dw      045,042,039,036,033,030,027,025,023,021,020,018
+   Dw      017,016,016,015
+   Dd      0Ffffffffh
+end;
+procedure Read_Sinus;assembler;
+asm
+   Shl     A,1
+@@11:
+   Mov     Bx,A
+   Mov     Si,Word Ptr [Fil+Bx]
+   Mov     Cx,Word Ptr [Fila+Si]
+   Cmp     Cx,0Ffffh
+   Jnz     @@1
+   Mov     Bx,A
+   Mov     Word Ptr [Fil+Bx],0
+   Jmp     @@11
+@@1:
+   Mov     Bx,A
+   Mov     Si,Word Ptr [Col+Bx]
+   Mov     Dx,Word Ptr [Columna+Si]
+   Cmp     Dx,0Ffffh
+   Jnz     @@2
+   Mov     Bx,A
+   Mov     Word Ptr [Col+Bx],0
+   Jmp     @@1
+@@2:
+   Mov     Bx,A
+   Add     Word Ptr [Col+Bx],2
+   Add     Word Ptr [Fil+Bx],2
+   Mov     Bx,Cx
+end;
+
+procedure Clear_Sinus;assembler;
+asm
+   Mov     Word Ptr [Col],10
+   Mov     Word Ptr [Col+2],20
+   Mov     Word Ptr [Col+4],40
+   Mov     Word Ptr [Col+6],0
+   Mov     Word Ptr [Col+8],0
+   Mov     Word Ptr [Fil],50
+   Mov     Word Ptr [Fil+2],20
+   Mov     Word Ptr [Fil+4],40
+   Mov     Word Ptr [Fil+6],40
+   Mov     Word Ptr [Fil+8],0
+end;
+
+procedure Touch_Sinus;assembler;
+asm
+   db 66h;Push    si
+   push a
+   Call Read_Sinus
+   pop a
+   db 66h;Pop     si
+   Call   Put_Point
+end;
+
+procedure Print;assembler;
+asm
+@@1:
+   Push    Cx
+   Push    Bx
+   Call    Print_Frame
+   Pop     Bx
+   Push    Bx
+   Call    Bx
+   Pop     Bx
+   Pop     Cx
+   Loop    @@1
+end;
+
+procedure Density(Densidad_Variable : Word);
+{Mov     Byte [Densidad],Densidad_Variable}
+inline($58/$88/$06/&gt;Densidad);
+
+procedure P001;assembler;
+asm
+   Xor     Si,Si
+   Mov     Cx,40
+@@2:
+   Push    Cx
+   Mov     Cx,3
+@@1:
+   Push    Cx
+   Push    Si
+   Call    Big_Touch
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Si
+   Pop     Cx
+   Loop    @@1
+   Add     Si,25
+   Pop     Cx
+   Loop    @@2
+   Mov     Cx,40
+@@12:
+   Push    Cx
+   Mov     Cx,3
+@@11:
+   Push    Cx
+   Push    Si
+   Call    Big_Touch
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Si
+   Pop     Cx
+   Loop    @@11
+   Sub     Si,20
+   Pop     Cx
+   Loop    @@12
+end;
+
+procedure P002;assembler;
+asm
+   Mov     Cx,5
+@@2:
+   Push    Cx
+   Mov     Si,3000
+   Mov     Dx,320/4
+   Mov     Bx,150
+   Call    Put_Point
+   Mov     Cx,50
+@@3:
+   Push    Cx
+   Mov     Si,300
+   Call    Touch
+   Mov     Si,200
+   Call    Touch
+   Mov     Si,100
+   Call    Touch
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@3
+   Pop     Cx
+   Loop    @@2
+   Mov     Cx,80
+@@4:
+   Push    Cx
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@4
+end;
+
+procedure P003;assembler;
+asm
+   Mov     Cx,30
+@@1:
+   Push    Cx
+   Mov     Si,-4000
+   Call    Big_Touch
+   Call    Stabylize2
+   Call    Print_Frame
+   Mov     Si,-4000
+   Call    Big_Touch
+   Call    Stabylize2
+   Call    Print_Frame
+   Mov     Si,-4000
+   Call    Big_Touch
+   Call    Stabylize2
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@1
+   Mov     Cx,20
+@@4:
+   Push    Cx
+   Call    Stabylize2
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@4
+end;
+procedure P004;assembler;
+asm
+   Mov     Cx,7
+@@2:
+   Push    Cx
+   Mov     Si,3000
+   Mov     Dx,320/4
+   Mov     Bx,150
+   Call    Put_Point
+   Mov     Cx,5
+@@3:
+   Push    Cx
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@3
+   Mov     Si,-2000
+   Mov     Dx,320/4
+   Mov     Bx,150
+   Call    Put_Point
+   Mov     Cx,30
+@@6:
+   Push    Cx
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@6
+   Pop     Cx
+   Loop    @@2
+   Mov     Cx,80
+@@4:
+   Push    Cx
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@4
+end;
+
+procedure P005;assembler;
+asm
+   Mov     Si,800
+   Mov     Cx,150
+@@1:
+   Push    Cx
+   db 66h;Push    si
+   Push    A
+   Cmp     A,4
+   Jz      @@5
+   Cmp     A,3
+   Jz      @@4
+   Cmp     A,2
+   Jz      @@3
+   Cmp     A,1
+   Jz      @@2
+   mov a,0
+   Call Touch_Sinus
+@@2:
+   mov a,1
+   Call Touch_Sinus
+@@3:
+   mov a,2
+   Call Touch_Sinus
+@@4:
+   mov a,3
+   Call Touch_Sinus
+@@5:
+   mov a,4
+   Call Touch_Sinus
+   Mov     Cx,B
+   Mov     Bx,Offset Stabylize
+   Call    Print
+   Pop     A
+   db 66h;Pop     si
+   Pop     Cx
+   Loop    @@1
+end;
+
+procedure P006;assembler;
+asm
+   Mov     Si,-1500
+   Mov     Cx,4
+@@1:
+   Push    Cx
+   Push    Si
+   Mov     Dx,1
+   Cmp     A,0
+   Jz      @@S1
+   Call    Put_Line
+@@S1:
+   Mov     Cx,50
+@@3:
+   Push    Cx
+   Mov     Si,250
+   Cmp     B,0
+   Jz      @@S2
+   Call    Touch
+@@S2:
+   Call    Stabylize
+   Call    Print_Frame
+   Call    Stabylize
+   Call    Print_Frame
+   Pop     Cx
+   Loop    @@3
+   Pop     Si
+   Pop     Cx
+   Loop    @@1
+end;
+
+procedure Stabylize_Water;assembler;
+asm
+   Mov     Cx,100
+   Mov     Bx,Offset Stabylize
+   Call    Print
+end;
+
+procedure SetAB(C,D : Word);Assembler;
+asm
+   Mov Ax,C
+   Mov A,Ax
+   Mov Ax,D
+   Mov B,Ax
+end;
+
+procedure TheEnd;
+begin
+     Zero_Pal;
+     Text_Mode;
+     Halt;
+end;
+
+begin
+     Put_320;
+     Init_Buffers;
+     Density(Densidad_Inicial);
+     asm
+        Mov     Bx,Offset Stabylize
+        Mov     Cx,1
+     end;
+     Print;
+     Zero_Pal;
+     Put_Palette;
+     asm
+        Push    Es
+        Mov     Ax,0A000H
+        Mov     Es,Ax
+        Mov     Di,320*101
+        Mov     Cx,320/4
+        Mov     Ax,6363H
+        db 66h;Shl     Ax,16
+        Mov     Ax,6363H
+        db 66h;Rep     Stosw
+        Pop     Es
+     end;
+     repeat
+           asm
+              Mov     Rnd,Semilla_Inicial
+           end;
+           Density(Densidad_Inicial);
+           P001;
+           P002;
+           Density(6);
+           P003;
+           Stabylize_Water;
+           P003;
+           Stabylize_Water;
+           Density(5);
+           P004;
+           Stabylize_Water;
+           Clear_Sinus;
+           SetAB(4,2);
+           P005;
+           SetAB(3,2);
+           P005;
+           SetAB(2,2);
+           P005;
+           SetAB(4,1);
+           P005;
+           SetAB(4,1);
+           P005;
+           SetAB(3,2);
+           P005;
+           Density(6);
+           SetAB(1,0);
+           P006;
+           SetAB(1,1);
+           P006;
+           SetAB(0,1);
+           P006;
+     until False;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

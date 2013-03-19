@@ -1,0 +1,262 @@
+<html><head><title>Water Wave Effect [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект волн на поверхности изображения. Mode 13h.">
+<meta name="keywords" content="pascal, sources, source code, water, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;water
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Water Wave Effect [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:virgi@perm.raid.ru">Vistor Shantar</a></TD>
+<TD class=black align='right'>06.09.1999</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="water.gif"><p style="margin-left:20px">Эффект волн на поверхности изображения. Mode 13h.</TD><TD class=black colspan=2 align='right'><br><A HREF="water.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="water_1.gif" alt="">
+
+{&gt; Cut here. FileName= WATER.PAS }
+Program Water;
+{Ничего не USES}
+
+type Tscr=array[0..199,0..319] of byte;
+     SegmentT = Array[0..65534] of byte;
+     Tsegment = ^SegmentT;
+var
+  ilx,ily:integer;
+  key,amp,mul,i,j,k,nx,ny,nz,rx,ry,x,y,lx,ly,x1,y1:integer;
+  MANUAL:BOOLEAN;
+  tx,ty,tz:real;
+  time:integer;
+
+var segm,offs:integer;
+ Segment : Tsegment;
+ frame:integer;
+ screen,buffer,wave:word;
+ buf,scr:pointer;
+ sintab:array[0..255] of integer;
+ multab:array[0..319] of integer;
+
+Procedure GetSegment(VAR segname:Tsegment;VAR add : word);
+begin
+ GetMem (Segname,65535);
+ add := seg (Segname^);
+end;
+
+Procedure wait; assembler;
+asm mov dx,3DAh;
+@l1:in al,dx
+    and al,08h
+    jnz @l1
+@l2:in al,dx
+    and al,08h
+    jz @l2
+end;
+
+Procedure SetMode (Mode : word);assembler;
+asm
+ mov ax,Mode
+ int 10h
+end;
+
+Procedure FillBox(x,y,w,h:integer; color:byte);
+var i,j,k:integer;
+begin
+ for j:=y to y+h-1 do
+  for i:=x to x+w-1 do
+   mem[buffer:i+j*320]:=color;
+end;
+
+Procedure Print(x,y:integer; s:string; xs,ys:integer; color:byte);
+var i,j,k,c,px,py:integer; b:byte;
+begin
+ px:=x;
+ py:=y;
+ for k:=1 to length(s) do begin
+  c:=ord(s[k]);
+  for i:=0 to 7 do begin
+   b:=mem[segm:offs+c*8+i];
+   for j:=0 to 7 do begin
+    if b shl j and 128&lt;&gt;0 then FillBox(x,y,xs,ys,color);
+    x:=x+xs;
+   end;
+   x:=px;
+   y:=y+ys;
+  end;
+  y:=py;
+  px:=px+xs*8;
+  x:=px;
+ end;
+end;
+
+Procedure SetGradientPalette;
+var k,r,g,b:byte;
+begin
+ asm
+  mov  dx,03c8h
+  xor  al,al
+  out  dx,al
+ end;
+ r:=0;
+ g:=0;
+ for k:=0 to 255 do begin
+  b:=(k*63 div 255);
+  r:=b;
+  g:=b;{}{ if k&gt;200 then begin r:=r+1;g:=g+1;end;{}
+  asm
+   mov dx,03c9h
+   mov al,r
+   out dx,al
+   mov al,g
+   out dx,al
+   mov al,b
+   out dx,al
+  end;
+ end;
+end;
+
+Procedure Blur;
+var i,j,k,jt:integer;
+begin
+ jt:=0;
+ for j:=0 to 199 do begin
+  for i:=0 to 319 do
+   mem[buffer:i+jt]:=( mem[buffer:(i+1)+jt]+
+                       mem[buffer:(i-1)+jt]+
+                       mem[buffer:i+(jt+320)]+ 
+                       mem[buffer:i+(jt-320)]) shr 2;
+  jt:=jt+320;
+ end;
+end;
+
+Procedure Clearbuffer(buffer:word);
+var i:word;
+begin
+ for i:=0 to 63999 do mem[buffer:i]:=0;
+end;
+
+Procedure CopyBuffer(Buffer:word);assembler;
+asm
+ push ds
+ mov ax,buffer
+ mov ds,ax
+ mov ax,$0a000
+ mov es,ax
+ xor di,di
+ xor si,si
+ mov cx,32000
+ cld
+ db $66
+ rep movsw
+ pop ds
+end;
+
+Procedure DrawWave(mx,my,amp:integer);
+var x,y,yt,px,py:integer;
+begin
+ yt:=0;
+ for y:=0 to 199 do begin
+  px:=-mx;
+  py:=(y-my)*(y-my);
+  for x:=0 to 319 do begin
+   inc(px);
+   py:=py+px;
+   mem[wave:x+yt]:=sintab[(frame+(py div mul)) and 255] div amp;
+  end;
+  yt:=yt+320;
+ end;
+end;
+
+Procedure DrawPic;
+var x,y,yt,px,py,mx,my:integer;
+begin
+ yt:=320*20;
+ for y:=20 to 199-20 do begin
+  for x:=0 to 319 do begin
+   px:=x+(mem[wave:(x-1)+yt]-mem[wave:(x+1)+yt]);
+   py:=y+(mem[wave:x+(yt-320)]-mem[wave:x+(yt+320)]);
+   mem[screen:x+yt]:=mem[buffer:multab[py]+px];{}
+  end;
+  yt:=yt+320;
+ end;
+end;
+
+BEGIN
+ {Достанем адрес знакогенератора}
+ asm
+  mov ax,$1130
+  mov bh,03h
+  int 10h
+  mov segm,es
+  mov offs,bp
+ end;
+ {установим режим и палитру}
+ setmode($13);
+ setgradientpalette;
+
+ screen:=$0a000;
+ GetSegment(Segment,buffer);
+ GetSegment(Segment,wave);
+
+ frame:=1;
+ clearbuffer(buffer);
+
+ for i:=0 to 30000 do fillbox(random(320),random(200),1,1,255);{}
+ blur;blur;blur;blur;blur;blur;blur;blur;
+ print(56,50,'WAVE',7,7,255);
+ print(60,115,'TRANSFORM',3,4,255);
+ blur;
+ for i:=0 to 255 do sintab[i] := round(cos(2 * PI * i / 256) * 127 +128);
+ for i:=0 to 320 do multab[i] :=i * 320;
+
+ ilx:=5;
+ ily:=5;
+ lx:=160;
+ ly:=100;
+
+ frame:=1;
+ amp:=4;
+ mul:=64;
+ time:=0;
+
+ REPEAT
+  {clearbuffer(wave);}
+
+  memw[$000:$041a]:=memw[$000:$041c];
+  key:=port[$60];
+  case key of
+  82: inc(mul);
+  83: if mul&lt;&gt;1 then dec(mul);
+  71: begin  if (amp&lt;&gt;1) then dec(amp); end;
+  79: begin  inc(amp); end;
+  {73: iz :=  1;   81: iz := -1;}
+  56: if not manual then begin  manual:=true;end;
+  57: if manual then begin clearbuffer(screen);manual:=false;end;
+  end;
+
+  DrawWave(lx,ly,amp);{}
+  if not manual then DrawPic;{}
+
+  if manual then copybuffer(wave);{}
+  frame:=frame-25;
+  {
+  lx:=lx+ilx;if (lx&gt;270) or (lx&lt;50) then ilx:=-ilx;
+  ly:=ly+ily;if (ly&gt;150) or (ly&lt;50) then ily:=-ily;
+  }
+  wait;
+  inc(time);
+ UNTIL port[$60]=1;{ESC}
+ {сбросим буфер клавиатуры}
+ memw[$000:$041a]:=memw[$000:$041c];
+ setmode($3);
+END.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

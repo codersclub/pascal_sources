@@ -1,0 +1,89 @@
+<html><head><title>Flame1 - BGI Graphics Fire Routine</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простая программа, имитирующая пламя, вырывающееся из сопла реактивного двигателя. Используется драйвер SVGA256.BGI">
+<meta name="keywords" content="pascal, sources, source code, flame1, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;flame1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Flame1 - BGI Graphics Fire Routine</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5054/26@fidonet">Victor Shantar</a></TD>
+<TD class=black align='right'>29.12.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="flame1.jpg"><p style="margin-left:20px">Простая программа, имитирующая пламя, вырывающееся из сопла
+реактивного двигателя. Используется драйвер SVGA256.BGI</TD><TD class=black colspan=2 align='right'><br><A HREF="flame1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="flame1_1.jpg" alt="">
+
+{&gt; Cut here. FileName= FLAME1.PAS }
+program flame;
+uses graph,crt;
+const max=182;
+var         d,m,dx      : integer;
+            i,c,k,r     : integer;
+            maxcol,s    : integer;
+            v           : byte;
+            l           : real;
+            a           : array[1..100]of integer;
+            st          : string;
+
+
+begin
+  d:= installuserdriver('svga256',nil);
+  m:= 0;
+  InitGraph(D, M, '');{Инициализация графического режима}
+  if GraphResult &lt;&gt; grOk then
+    begin
+      Writeln(GraphErrorMsg(GraphResult));
+      Halt(1);
+    end;
+
+      for i:=1 to 63 do setRGBpalette(i,63,63,63-i);
+      for i:=64 to 127 do setRGBpalette(i,63,63-i,0);
+      for i:=128 to 170 do setRGBpalette(i,63-i,0,0);
+      for i:=170 to 255 do setRGBpalette(i,0,0,i+25);
+
+
+ randomize;
+ repeat { цикл 1 }
+  a[1]:=max;
+  for i:=2 to 100 do
+   begin
+    v:=round(6*random+1);
+    if i&gt;50 then if v&lt;&gt;7 then a[i]:=a[i-1]+5 else a[i]:=a[i-1]-5
+             else if v&lt;&gt;7 then a[i]:=a[i-1]-5 else a[i]:=a[i-1]+5;
+    if a[i]&lt;0 then a[i]:=0;
+   end;
+
+   maxcol:=0;
+   for i:= 1 to 100 do if maxcol&lt;a[i] then maxcol:=a[i];
+
+   for i:=1 to 100 do a[i]:=trunc(a[i]/maxcol*max+1);
+
+  c:=0;
+  repeat {1.1}
+   for i:=1 to 100 do
+     begin
+       setfillstyle(1,a[i]);
+       bar(50+i,200-c,51+i,199-c);
+       inc(a[i]);
+       if (a[i]&gt;max)or(a[i]=1) then a[i]:=0;
+     end;
+   inc(c,2);
+    until c&gt;200;
+     until keypressed;{ or (c=1); { 1 }
+
+ readkey;
+ closegraph
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

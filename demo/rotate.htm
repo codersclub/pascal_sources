@@ -1,0 +1,114 @@
+<html><head><title>Fast Bitmap Scale/Rotate Demo [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Две программы, демонстрирующие механизм масштабирования, вращения и перемещения битмапов.<br><font color=#666666> Two programs are meant to be examples of a fast method  for rotating bitmaps.</font>">
+<meta name="keywords" content="pascal, sources, source code, rotate, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rotate
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fast Bitmap Scale/Rotate Demo [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:phkahler@oakland.edu">Paul H. Kahler</a></TD>
+<TD class=black align='right'>03.02.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="rotate.gif"><p style="margin-left:20px">Две программы, демонстрирующие механизм масштабирования,
+вращения и перемещения битмапов.<br><font color=#666666>
+Two programs are meant to be examples of a fast method 
+for rotating bitmaps.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="rotate.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   The file you've unzipped contains 2 executable programs and the
+complete source code for each. The programs are meant to be examples
+of a fast method for rotating bitmaps. I came up with the method
+on my own. Though I'm sure it has been used before by other people,
+I've never seen it talked about or presented by anyone else.
+
+                <img border=0 width=320 height=200 src="rotate1.gif" alt="">
+
+BITMAP.EXE -- This program pans/scales/rotates a 256x256 bitmap which
+is tiled over the whole screen. Though it uses 320x200 mode (13h) it
+maintains a 1:1 aspect ratio. The source is fully commented and meant
+for people to learn from. It is written in Turbo Pascal with some
+inline assembly, but C programmers should be able to make good sense
+of it. The test bitmap created by the program is stupid, but it does
+show what can happen to certain types of images when they are scaled
+down. If anyone throws in code to load a standard image file please
+let me know.
+
+                <img border=0 width=320 height=200 src="rotate2.gif" alt="">
+
+TILE.EXE -- This one does basically the same thing, only it uses a
+32x32 bitmap defined in the source which can be easily altered by
+anyone with the compiler. There are NO comments and the aspect ratio
+is not correct.
+The code is not well optimized, so it's slower.
+
+Overview of rotation methods:
+-----------------------------
+   I've heard a lot of people ask how to rotate a bitmap, and there
+seem to be a few common methods that get brought up:
+
+1) Scan the source image pixel by pixel. For each one, transform the
+   coordinates (with a rotation matrix or whatever) and plot the pixel
+   at these new coordinates in the destination image. This method
+   produces bad images with holes, because not all pixels in the
+   destination image get written to.
+
+2) Scan the destination image pixel by pixel and 'untransform'
+   (ie. rotate the opposite direction) the coordinates of the pixel
+   and use the new coordinates to grab a pixel from the source image
+   and copy it to the destination. This prevent the 'holes' from
+   appearing, because EVERY pixel in the destination is mapped to
+   something in the source image.
+
+3) Do 3 shear operations. Shearing a rectangular bitmap will turn it
+   into a parallelogram. You can achieve a rotation by performing 3
+   shear operations on it. This is often given (as of this writing)
+   as a good way to do it, but I never tried. #4 is just plain faster.
+
+4) The method used by these programs is to scan the destination image
+   left to right/top to bottom, and at the same time scan the source
+   image by using rotated 'right' and 'down' vectors. This can be done
+   extremely fast by using fixed point math for the vectors and
+   coordinates, and eliminates the need to do any transformations.
+   This method is faster than the others and produces no holes in the
+   destination image. It also allows easy scaling of the bitmap at the
+   same time (as do the other methods).
+
+Sprites:
+--------
+  Most people want to rotate sprites, not do what these programs do.
+  If you understand the code, you can see that it isn't hard to adapt
+  it to draw sprites. I recommend storing them in a 256-wide image,
+  so the 8.8 fixed point calculations can be preserved. So what if
+  thats wider than your sprite... Put a couple side by side in the
+  image. Also, the inner loop will have to be modified so that it
+  won't write the 'clear' parts of the sprite to the destination image.
+  This can be done by adding 2 instructions to the inner loop like so:
+
+            mov  bl,[ds:bx]
+            or   bl,bl
+            jz   nodraw          &lt;--  Add these 2 instructions
+            mov  [es:di],bl      &lt;--  and label the 'inc' instruction
+  nodraw:   inc  di
+
+This will slow things down a bit, but for actually doing sprites you'll
+want to have it branch when it IS drawing a pixel, since that will
+probably happen LESS often. (a 16x16 sprite requires scaning a 27x27
+pixel area to allow full rotation, and this extra area will all be
+clear.)
+
+  I hope all this helps someone. I've already started writing a game
+with it and I can think of a few more that would be cool.
+
+-Paul-
+
+comments to---&gt; phkahler@oakland.edu</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,244 @@
+<html><head><title>Trivial Snow</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Тривиальная программка, реализующая упрощенный эффект падающего снега">
+<meta name="keywords" content="pascal, sources, source code, snowy, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;snowy
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Trivial Snow</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5003/15.1">Алексей Ванеев</a></TD>
+<TD class=black align='right'>26.06.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=50 vspace=4 hspace=8 alt="" src="snowy.gif"><p style="margin-left:20px">Тривиальная программка, реализующая упрощенный эффект падающего снега</TD><TD class=black colspan=2 align='right'><br><A HREF="snowy.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        <img border=0 width=320 height=240 src="snowy1.gif" alt="">
+
+{&gt; Cut here. FileName= SNOWY.PAS }
+{$A+,B-,D-,E-,F-,G+,I-,L-,N-,O-,P-,Q-,R-,S-,T-,V-,X+,Y-}
+{$M 4096,0,655360}
+
+{ tapstep = 4 }
+
+PROGRAM Snowy;
+
+CONST
+  FlakeCount = 1024;
+
+TYPE
+  TFlake = RECORD
+    x,y: INTEGER;
+    Depth: BYTE;
+    Falling: BOOLEAN;
+    InAir: BOOLEAN;
+  END;
+
+VAR
+  Screen: ARRAY[0..63999] OF BYTE ABSOLUTE $A000:0;
+  Flake: ARRAY[1..FlakeCount] OF TFlake;
+
+FUNCTION Keypressed: BOOLEAN;
+ASSEMBLER;
+ASM
+  XOR BX,BX
+  MOV AH,01H
+  INT 16H
+  JZ @Done
+
+  MOV BX,-1
+
+@Done:
+  MOV AX,BX
+END;
+
+FUNCTION Readkey: WORD;
+ASSEMBLER;
+ASM
+  XOR AH,AH
+  INT 16H
+END;
+
+PROCEDURE VideoModeSet(Mode: BYTE);
+ASSEMBLER;
+ASM
+  XOR AH,AH
+  MOV AL,[Mode]
+  INT 10H
+END;
+
+PROCEDURE PaletteSet(VAR PaletteBuffer; StartColour, EndColour: BYTE);
+ASSEMBLER;
+ASM
+  PUSH DS
+
+  LDS SI,[PaletteBuffer]
+  XOR CX,CX
+  MOV CL,[EndColour]
+  MOV AH,[StartColour]
+  MOV BH,AH
+
+  CLD
+
+  MOV BL,1
+
+  CMP CL,AH
+  JA @@Incrementing
+
+  STD
+  NEG BL
+  XCHG CL,AH
+
+@@Incrementing:
+  SUB CL,AH
+  INC CX
+
+  CLI
+
+@@FillLoop:
+  MOV DX,3C8H
+  MOV AL,BH
+  OUT DX,AL
+
+  MOV DX,3C9H
+  LODSB
+  OUT DX,AL
+  LODSB
+  OUT DX,AL
+  LODSB
+  OUT DX,AL
+
+  ADD BH,BL
+  LOOP @@FillLoop
+
+  STI
+
+@@Done:
+  POP DS
+END;
+
+PROCEDURE TimerWait;
+VAR
+  i: WORD;
+BEGIN
+  i:=MEM[$40:$6C];
+
+  WHILE i=MEM[$40:$6C] DO
+    ;
+END;
+
+PROCEDURE PixelPut(x,y: INTEGER; c: BYTE);
+BEGIN
+  IF (x&gt;-1) AND (x&lt;320) AND (y&gt;-1) AND (y&lt;200) THEN
+    Screen[y*320+x]:=c;
+END;
+
+PROCEDURE GeneratePalette;
+TYPE
+  TComponent = RECORD
+    r,g,b: BYTE;
+  END;
+
+VAR
+  NewPalette: ARRAY[0..255] OF TComponent;
+  i: INTEGER;
+BEGIN
+  FOR i:=0 TO 255 DO
+    BEGIN
+      NewPalette[i].r:=i DIV 4;
+      NewPalette[i].g:=i DIV 4;
+      NewPalette[i].b:=i DIV 4;
+    END;
+
+  PaletteSet(NewPalette,1,255);
+END;
+
+PROCEDURE InitializeSnow;
+VAR
+  i: INTEGER;
+BEGIN
+  FOR i:=1 TO FlakeCount DO
+    BEGIN
+      Flake[i].Falling:=FALSE;
+      Flake[i].InAir:=FALSE;
+    END;
+END;
+
+PROCEDURE ShowSnow;
+VAR
+  i: INTEGER;
+BEGIN
+  FOR i:=1 TO FlakeCount DO
+    IF Flake[i].InAir THEN
+      PixelPut(Flake[i].x,Flake[i].y,Flake[i].Depth*8);
+END;
+
+PROCEDURE MoveSnow;
+VAR
+  i: INTEGER;
+  NewSnow: BYTE;
+  Spd,Loc: INTEGER;
+BEGIN
+  NewSnow:=RANDOM(255);
+
+  FOR i:=1 TO FlakeCount DO
+    BEGIN
+      IF (NOT Flake[i].Falling) AND (NewSnow&gt;0) THEN
+        BEGIN
+          Flake[i].y:=RANDOM(60)-70;
+          Flake[i].x:=RANDOM(320);
+          Flake[i].Falling:=TRUE;
+          Flake[i].InAir:=TRUE;
+          Flake[i].Depth:=RANDOM(32);
+        END
+      ELSE
+        BEGIN
+          Spd:=Flake[i].Depth DIV 12+1+RANDOM(2);
+          Flake[i].y:=Flake[i].y+Spd;
+          Flake[i].x:=Flake[i].x-2+RANDOM(5);
+
+          IF Flake[i].y&gt;199 THEN
+            BEGIN
+              Flake[i].InAir:=FALSE;
+              Flake[i].Falling:=FALSE;
+            END;
+        END;
+
+      IF NewSnow&gt;0 THEN
+        NewSnow:=NewSnow-1;
+    END;
+END;
+
+PROCEDURE KillSnow;
+VAR
+  i: INTEGER;
+BEGIN
+  FOR i:=1 TO FlakeCount DO
+    IF (Flake[i].Falling) AND (Flake[i].InAir) THEN
+      PixelPut(Flake[i].x,Flake[i].y,0);
+END;
+
+BEGIN
+  VideoModeSet($13); { set 320x200x256 videomode }
+  InitializeSnow; { initialize snowflakes }
+  GeneratePalette; { set suitable palette }
+
+  REPEAT
+    MoveSnow; { change positions of snowflakes }
+    ShowSnow; { show snowflakes }
+    TimerWait; { pause for about 1/18th seconds }
+    KillSnow; { remove snowflakes }
+  UNTIL Keypressed; { repeat, until the key was pressed }
+
+  Readkey; { flush keyboard buffer }
+  VideoModeSet($3); { set 80x25 textmode }
+END.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

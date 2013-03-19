@@ -1,0 +1,168 @@
+<html><head><title>Pixel Tunnel [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект вьющегося туннеля, состоящего их точек. <br><font color=#666666> A cool pixel tunnel in 320*200 mode.</font>">
+<meta name="keywords" content="pascal, sources, source code, pixtun, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pixtun
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Pixel Tunnel [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stians@interlink.no">Stian SЫreng</a></TD>
+<TD class=black align='right'>08.02.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="pixtun.gif"><p style="margin-left:20px">Эффект вьющегося туннеля, состоящего их точек. <br><font color=#666666>
+A cool pixel tunnel in 320*200 mode.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="pixtun.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This source performs a pixel tunnel in chunky mode (320x200x256).
+It is a rather unoptimized, slow source, but I hope you will learn
+something out of it anyways. All circles and sinuses are precalculated
+and is being done internal by the source itself, so no external files
+are needed.
+
+                <img border=0 width=320 height=200 src="pixtun1.gif" alt="">
+
+All you need is turbo pascal with ASM options (5.3+?), since a couple
+of the procedures uses this facillity.
+It was coded at school on request, so I uploaded it on the net as well.
+More sources to follow, so stick around!
+If you have any question at all, considering this source or programming
+in all, on 680x0, 6502, Z80 or 80x86 do ask. I don't bite.. that hard!
+
+*bows*
+stians@interlink.no
+
+Stian SЫreng
+Naustjorde 4
+7560 Vikhamar
+Norway
+
+{&gt; Cut here. FileName= PIXTUN.PAS }
+
+{¬ђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђ¬
+¬ђ                                                                ђ¬
+¬ђ PIXTUN.PAS - This source was coded by The Jerk of Hoaxers aka  ђ¬
+¬ђ Stian SЫreng in February 1995. If you have any questions about ђ¬
+¬ђ this source, email to: stians@interlink.no, 100% answer. (Bug  ђ¬
+¬ђ reports are welcome!) Boy, can this source be optimized !!!    ђ¬
+¬ђ Feel free to use it at any time, as long as you give me the    ђ¬
+¬ђ credits for it. Tested on 486SX/30: ok, 486DX2/66: fast and    ђ¬
+¬ђ 386SX/25 slow. Conclusion: Requires mcga and a 486.            ђ¬
+¬ђ                                                         stians ђ¬
+ ¬ђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђђ¬}
+
+USES crt;
+
+CONST Amount=30;        { number of circles }
+
+VAR circles:array[1..360,1..Amount] of word;
+    ypts,xpts:array[1..90,1..Amount] of integer;
+    xsinus,ysinus:array[1..720] of integer;
+    sinptr,
+    xx,yy,
+    x,y,a:integer;
+    r:real;
+
+PROCEDURE pal(c,r,g,b:byte);    { sets palette }
+begin
+     port[$3c8]:=c;
+     port[$3c9]:=r;
+     port[$3c9]:=g;
+     port[$3c9]:=b;
+end;
+
+procedure sync;assembler;asm  { synchronize routine, wait for vblank }
+          mov dx,03dah
+@frame:   in al,dx
+          test al,8
+          jz @frame
+@besure:  in al,dx
+          test al,8
+          jnz @besure
+   end;
+
+{ ****************************************************************** }
+
+BEGIN
+
+{ ** Precalculate circles ** }
+
+     Writeln('Calculating, please wait..');
+
+     for a:=1 to Amount do
+     begin
+     r:=0;
+          for x:=1 to 360 do
+          begin
+          r:=r+(0.0175)*4;
+          circles[x,a]:=round(sin(r)*(5+(a shl 2)))+(5+(a shl 2));
+          end;
+     end;
+
+{ ** Precalc x and y sinuses ** }
+
+     r:=0;
+     for x:=1 to 720 do
+     begin
+          r:=r+0.0175;
+          xsinus[x]:=round(sin(r)*140)+140;
+          ysinus[x]:=round(cos(r)*90)+90;
+     end;
+
+{ ** Initialize 320x200x256 chunky mode ** }
+
+     asm
+        mov ax,13h    { Using bitplanes, this routine would be MUCH }
+        int 10h      { faster, but a 256 colour pixtunnel is cooler }
+     end;
+
+{ ** Set grayscale palette ** }
+
+     for a:=63 downto 0 do pal(a,a,a,a);
+     sinptr:=0;
+
+{ ** Main loop ** }
+
+     repeat
+     sync;
+
+     if sinptr&gt;358 then sinptr:=0;      { loop sinus }
+     inc(sinptr,2);
+
+{ ** Draw and clear circles ** }
+
+     for a:=1 to Amount do
+     for x:=1 to 90 do
+     begin
+         xx:=xpts[x,a];                 { store old pts }
+         yy:=ypts[x,a];
+         mem[$a000:xx+yy*320]:=0;       { clear old }
+         xx:=(circles[x,a]+xsinus[(a shl 3)+sinptr])-a*4; { new pos }
+         yy:=(circles[x+23,a]+ysinus[sinptr+90+(a shl 2)])-(a*4);
+         if ((xx&gt;0) AND (xx&lt;319)) then     { check if inside bounds }
+         if ((yy&gt;0) AND (yy&lt;199)) then
+         begin
+         mem[$a000:xx+yy*320]:=a+5;             { put pixel }
+         xpts[x,a]:=xx;
+         ypts[x,a]:=yy;
+         end;
+     end;
+
+     until keypressed;       { loop }
+
+{ ** Back to text mode ** }
+
+     asm
+        mov ax,3h
+        int 10h
+     end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

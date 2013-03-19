@@ -1,0 +1,201 @@
+<html><head><title>VGA Plasma Routine [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект плазмы.<br><font color=#666666> Another plasma routine.</font>">
+<meta name="keywords" content="pascal, sources, source code, plazma4, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;plazma4
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VGA Plasma Routine [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71330.3567@CompuServe.com">Genie B.Mulvey</a></TD>
+<TD class=black align='right'>24.06.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=48 vspace=4 hspace=8 alt="" src="plazma4.jpg"><p style="margin-left:20px">Эффект плазмы.<br><font color=#666666>
+Another plasma routine.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="plazma4.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="plazma41.jpg" alt="">
+
+{&gt; Cut here. FileName= PLASMA4.PAS }
+{ Program and documentation copyright 1988 by Bret Mulvey
+
+  Instructions:  Type PLASMA at the DOS prompt.  Program requires VGA.
+  The first time the program is run it takes a few minutes to create
+  an image file.  Second and subsequent times it recalls the image
+  file from disk and goes straight to the action.  If you get tired of
+  using the same image you can type PLASMA NEW.
+
+  GEnie B.MULVEY
+  CompuServe 71330,3567 }
+
+{ Turbo Pascal 4.0 source code }
+{$I-}
+program plasma;
+
+  uses
+    Crt,Dos;
+
+  const
+    F = 3.0; { the "roughness" of the image }
+
+  type
+    ColorValue = record Rvalue,Gvalue,Bvalue: byte; end;
+    PaletteType = array [0..255] of ColorValue;
+
+  var
+    ch: char;
+    i: integer;
+    p: PaletteType;
+    image: file;
+    ok: boolean;
+
+PROCEDURE Retrace; Assembler;
+ASM
+        mov dx,$3da
+@1:     in al,dx
+        test al,8
+        jz @1
+@2:     in al,dx
+        test al,8
+        jnz @2
+END;
+
+  procedure SetVGApalette(var tp: PaletteType);
+    var regs: Registers;
+  begin { procedure SetVGApalette }
+    with regs do
+      begin
+        AX:=$1012;
+        BX:=0; { first register to set }
+        CX:=256; { number of registers to set }
+        ES:=Seg(tp); DX:=Ofs(tp);
+      end;
+    Intr($10,regs);
+  end; { procedure SetVGApalette }
+
+  procedure PutPixel(x,y: integer; c: byte);
+  begin { procedure PutPixel }
+    mem[$A000:word(320*y+x)]:=c;
+  end; { procedure PutPixel }
+
+  function GetPixel(x,y: integer): byte;
+  begin { function GetPixel }
+    GetPixel:=mem[$A000:word(320*y+x)];
+  end; { function GetPixel }
+
+  procedure adjust(xa,ya,x,y,xb,yb: integer);
+    var
+      d: integer;
+      v: real;
+  begin { procedure adjust }
+    if GetPixel(x,y)&lt;&gt;0 then exit;
+    d:=Abs(xa-xb)+Abs(ya-yb);
+    v:=(GetPixel(xa,ya)+GetPixel(xb,yb))/2+(random-0.5)*d*F;
+    if v&lt;1 then v:=1;
+    if v&gt;=193 then v:=192;
+    PutPixel(x,y,Trunc(v));
+  end; { procedure adjust }
+
+  procedure subDivide(x1,y1,x2,y2: integer);
+    var
+      x,y: integer;
+      v: real;
+  begin { procedure subDivide }
+    if KeyPressed then exit;
+    if (x2-x1&lt;2) and (y2-y1&lt;2) then exit;
+
+    x:=(x1+x2) div 2;
+    y:=(y1+y2) div 2;
+
+    adjust(x1,y1,x,y1,x2,y1);
+    adjust(x2,y1,x2,y,x2,y2);
+    adjust(x1,y2,x,y2,x2,y2);
+    adjust(x1,y1,x1,y,x1,y2);
+
+    if GetPixel(x,y)=0 then
+      begin
+        v:=(GetPixel(x1,y1)+
+            GetPixel(x2,y1)+
+            GetPixel(x2,y2)+
+            GetPixel(x1,y2))/4;
+        PutPixel(x,y,Trunc(v));
+      end;
+
+    subDivide(x1,y1,x,y);
+    subDivide(x,y1,x2,y);
+    subDivide(x,y,x2,y2);
+    subDivide(x1,y,x,y2);
+  end; { procedure subDivide }
+
+  procedure rotatePalette(var p: PaletteType; n1,n2,d: integer);
+    var
+      q: PaletteType;
+  begin { procedure rotatePalette }
+    q:=p;
+    for i:=n1 to n2 do
+      p[i]:=q[n1+(i+d) mod (n2-n1+1)];
+    SetVGApalette(p);
+  end; { procedure rotatePalette }
+
+begin
+  Inline($B8/$13/0/$CD/$10);
+  { select video mode 13h (320x200 with 256 colors) }
+
+  with p[0] do             { set background palette entry to grey }
+    begin
+      Rvalue:=32;
+      Gvalue:=32;
+      Bvalue:=32;
+    end;
+
+  for i:=0 to 63 do { create the color wheel }
+    begin
+      with p[i+1] do begin Rvalue:=i; Gvalue:=63-i; Bvalue:=0; end;
+      with p[i+65] do begin Rvalue:=63-i; Gvalue:=0; Bvalue:=i; end;
+      with p[i+129] do begin Rvalue:=0; Gvalue:=i; Bvalue:=63-i; end;
+    end;
+
+  SetVGApalette(p);
+
+  Assign(image,'PLASMA.IMG');
+  Reset(image,1);
+  ok:=(ioResult=0);
+
+  if not ok or (ParamCount&lt;&gt;0) then { create a new image }
+    begin
+      Randomize;
+
+      PutPixel(0,0,1+Random(192));
+      PutPixel(319,0,1+Random(192));
+      PutPixel(319,199,1+Random(192));
+      PutPixel(0,199,1+Random(192));
+
+      subDivide(0,0,319,199);
+
+      Rewrite(image,1);
+      BlockWrite(image,mem[$A000:0],$FA00);
+    end
+  else { use the previous image }
+    BlockRead(image,mem[$A000:0],$FA00);
+
+  Close(image);
+
+  repeat
+    rotatePalette(P ,1,192,+1);
+    Retrace;
+  until KeyPressed;
+
+  ch:=ReadKey; if ch=#0 then ch:=ReadKey;
+
+  TextMode(LastMode);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

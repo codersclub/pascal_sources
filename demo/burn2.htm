@@ -1,0 +1,492 @@
+<html><head><title>Burn 2.0 - Modified Fire Routine</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Отличная программа рисования пламени, исправленная и ускоренная в 3 раза по сравнению с оригинальной (см. <a href="burn.htm">Burn</a>). <br><font color=#666666> Beautiful Fire routine, changed and speedupped.</font>">
+<meta name="keywords" content="pascal, sources, source code, burn2, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;burn2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Burn 2.0 - Modified Fire Routine</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stefan.goehler@gmx.de">Stefan Goehler</a></TD>
+<TD class=black align='right'>01.01.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="burn2.jpg"><p style="margin-left:20px">Отличная программа рисования пламени,
+исправленная и ускоренная в 3 раза по сравнению с оригинальной
+(см. <a href="burn.htm">Burn</a>). <br><font color=#666666>
+Beautiful Fire routine, changed and speedupped.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="burn2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="burn2_1.jpg" alt="">
+
+{&gt; Cut here. FileName= BURN2.PAS }
+
+{$A+,B-,D+,E+,F-,G+,I-,L+,N+,O-,P+,Q-,R-,S-,T-,V-,X+,Y+}
+{$M 16384,0,655360}
+{
+
+Hi guys, try this, use it in your code, but please credit
+
+Frank Jan Sorensen Alias:Frank Patxi (fjs@lab.jt.dk) for the
+fireroutine.
+
+}
+{
+
+Hi again, guys!
+
+If you use this code, please also credit me, Joachim Fenkes,
+'cause I added the following speedups:
+
+  -Replaced one tiny loop with a faster Move(...)
+   (not much speedup)
+  -Wrote the main display loop in 100% assembler, including a faster
+   random number generator (the RNG is only a more or less optimized
+   version of Borland's generator (see MEGARAND.ASM), but with the
+   advantage of the ultimate crash if you call it normally :-)
+  -Changed version number into 1.10 (this isn't a speedup,
+   but necessary :-)
+
+}
+
+{
+ Bcoz of the knowledge that reading from videocards is much slower
+ than writing to them, I changed some things to write and read
+ from/to a pointer and put the result with 32-Bit moves to the screen
+
+ Also I added now a much more faster randommer.
+
+ The result of this change is more than 3 times fast than before
+  Stefan Goehler
+ Please credit me!
+ ...
+ to JF: your bug is fixed!
+}
+Program Burn;
+uses
+  Dos,Crt;
+
+Const
+  RootRand = 20;  { Max/Min decrease of the root of the flames }
+  Decay    =  5;  { How far should the flames go up on the screen? }
+                  { This MUST be positive - JF }
+  MinY     = 50;  { Startingline of the flame routine.
+                    (should be adjusted along with MinY above) }
+  Smooth   =  1;  { How descrete can the flames be?}
+  MinFire  = 50;  { limit between the "starting to burn" and
+                    the "is burning" routines }
+  XStart   = 90;  { Startingpos on the screen, should be divideable
+                    by 4 without remain!}
+  XEnd     = 210; { Guess! }
+  Width    = XEnd-XStart; {Well- }
+  MaxColor = 110;   { Constant for the MakePal procedure }
+  FireIncrease : Byte =   3;  {3 = Wood, 90 = Gazolin}
+
+{Var
+  Scr : Array[0..199,0..319] Of Byte Absolute $A000:$0000;}
+
+Type
+  ColorValue     = record
+                     R, G, B : byte;
+                   end;
+  VGAPaletteType = array[0..255] of ColorValue;
+
+function fastrand : word;assembler;
+const
+  factor : longint = $8088405;
+asm
+  db  66h,81h,0E3h,0FFh,0FFh,00h,00h{and ebx,$FFFF}
+  db  66h;mov  ax,word ptr randseed
+  db  66h;mul  word ptr factor
+  db  66h;inc  ax
+  db  66h;mov  word ptr randseed,ax
+
+  db  66h;shr  ax,16
+  db  66h;mul  bx
+  db  66h;shr  ax,16
+end;
+
+procedure ReadPal(var Pal);
+var
+  K    : VGAPaletteType Absolute Pal;
+  Regs : Registers;
+begin
+  with Regs do
+  begin
+    AX := $1017;
+    BX := 0;
+    CX := 256;
+    ES := Seg(K);
+    DX := Ofs(K);
+    Repeat Until Port[$03DA] And $08 = $08; {Wait for rescan}
+    Intr($10,Regs);
+  end;
+end;
+
+procedure move(var input,output;size : word);assembler;
+{
+implemented by me -SG
+-you can use this routine instead of the one implemented in Pascal...
+ it's much more faster (nearly 4 times depending on your pc)!
+}
+asm
+mov dx,ds
+lds si,input
+les di,output
+mov cx,size
+mov ax,cx
+shr cx,2
+jz @not4
+db 0F3h,66h,0A5h{rep movsd}
+@not4:
+ mov cx,ax
+ and cx,11b
+ jz @end
+rep movsb
+@end:
+mov ds,dx
+end;
+
+
+procedure WritePal(var Pal);
+Var
+  K : VGAPaletteType Absolute Pal;
+  Regs : Registers;
+begin
+  with Regs do
+  begin
+    AX := $1012;
+    BX := 0;
+    CX := 256;
+    ES := Seg(K);
+    DX := Ofs(K);
+    Repeat Until Port[$03DA] And $08 = $08; {Wait for rescan}
+    Intr($10,Regs);
+  end;
+end;
+
+Procedure Hsi2Rgb(H, S, I : Real; var C : ColorValue);
+{Convert (Hue, Saturation, Intensity) -&gt; (RGB)}
+var
+  T : Real;
+  Rv, Gv, Bv : Real;
+begin
+  T := H;
+  Rv := 1 + S * Sin(T - 2 * Pi / 3);
+  Gv := 1 + S * Sin(T);
+  Bv := 1 + S * Sin(T + 2 * Pi / 3);
+  T := 63.999 * I / 2;
+  with C do
+  begin
+    R := trunc(Rv * T);
+    G := trunc(Gv * T);
+    B := trunc(Bv * T);
+  end;
+end; { Hsi2Rgb }
+
+{ Faster put'n get pixel routines!  }
+(*
+procedure put(x,y : integer; c : byte); assembler;
+{ Written by Matt Sottile }
+ asm
+  mov ax,y
+  shl ax,6
+  mov di,ax
+  shl di,2
+  add di,ax
+  add di,x
+  mov ax,0a000h
+  mov es,ax
+  mov al,c
+  mov es:[di],al
+ end;
+
+Function get(x,y : integer):byte; assembler;
+{ Put Modified by me }
+asm
+  mov ax,y
+  shl ax,6
+  mov di,ax
+  shl di,2
+  add di,ax
+  add di,x
+  mov ax,0a000h
+  mov es,ax
+  mov al,es:[bx]
+end;
+*)
+Procedure MakePal;
+Var
+  I : Byte;
+  Pal   : VGAPaletteType;
+
+begin
+  FillChar(Pal,SizeOf(Pal),0);
+  For I:=1 To MaxColor Do
+    HSI2RGB(4.6-1.5*I/MaxColor,I/MaxColor,I/MaxColor,Pal[I]);
+  For I:=MaxColor To 255 Do
+  begin
+    Pal[I]:=Pal[I-1];
+    With Pal[I] Do
+    begin
+      If R&lt;63 Then Inc(R);
+      If R&lt;63 Then Inc(R);
+      If (I Mod 2=0) And (G&lt;53)  Then Inc(G);
+      If (I Mod 2=0) And (B&lt;63) Then Inc(B);
+    end;
+  end;
+
+  WritePal(Pal);
+
+end;
+
+
+Function Rand(R:Integer):Integer;
+{ Return a random number between -R And R}
+begin
+  Rand:=Random(R*2+1)-R;
+end;
+
+
+Procedure Help;
+Var
+  Mode : Byte;
+  R    : Registers;
+begin
+  R.Ax:=$0F00;
+  Intr($10,R);
+  Mode:=R.Al;
+  R.Ax:=$0003;  {TextMode}
+  Intr($10,R);
+
+  ClrScr;
+  WriteLn('Burn version 1.15');
+  WriteLn;
+  WriteLn('Light''n''play');
+  WriteLn;
+  WriteLn('Keys : ');
+  WriteLn('&lt;space&gt; : Throw in a match');
+  WriteLn('&lt;W&gt;     : Water');
+  WriteLn('&lt;+&gt;     : Increase intensity');
+  WriteLn('&lt;-&gt;     : Decrease intensity');
+  WriteLn('&lt;C&gt;     : Initialize fire');
+  WriteLn('&lt;1&gt;..&lt;9&gt;: Burnability (1=Wood, 9=Gaz)');
+  WriteLn('&lt;?&gt;     : This help');
+  WriteLn;
+  Write('Hit any key kid &gt;');
+  ReadKey;
+  R.Ax:=$0000+Mode;
+  Intr($10,R);
+  If Mode = $13 Then MakePal;
+end;
+
+Var
+  FlameArray : Array[XStart..XEnd] Of Byte;
+  LastMode : Byte;
+  I,J : Integer;
+  X,P : Integer;
+  MoreFire,
+  V   : Integer;
+  R   : Registers;
+  Ch  : Char;
+  pt   : pointer;
+begin
+  getmem(pt,64000);
+  Help;
+  RandomIze;
+  R.Ax:=$0F00;
+  Intr($10,R);
+  LastMode:=R.Al;
+  R.Ax:=$0013;
+  Intr($10,R);
+
+  MoreFire:=1;
+  MakePal;
+
+  (* Use this if you want to view the palette *)
+{  For I:=0 To 255 Do
+  For J:=0 To 20 Do
+    Put(I,J,I);
+  ReadKey;}
+
+  { Initialize FlameArray }
+  For I:=XStart To XEnd Do
+    FlameArray[I]:=0;
+
+{  FillChar(Scr,SizeOf(Scr),0); { Clear Screen }
+  fillchar(pt^,64000,0);
+
+  repeat
+    If KeyPressed Then Ch:=ReadKey Else Ch:='.';
+                                  {'.' = Nothing (Dummy)}
+
+    While KeyPressed Do ReadKey;  { Empty Keyboard buffer }
+
+   { Put the values from FlameArray on the bottom line of the screen }
+    Move(FlameArray,
+         ptr(seg(pt^),ofs(pt^)+199*320+pred(XStart))^,
+         Width+1);
+
+    { This loop makes the actual flames }
+
+    { Here comes my assembler code - JF }
+
+    { There's still a little bug in the code: When you have started
+      the fire, some pixels near the upper left corner of the screen
+      dance around. }
+
+    asm
+       les DI, PT
+       mov SI, DI
+       mov AX, MinY*320+XStart
+       add SI, MinY*320+XStart
+       add DI, MinY*320+XStart-320
+       mov CX, 200-MinY
+@@1:
+         push CX
+         mov CX, Width+1
+@@2:
+           mov AL,ES:[SI]
+           inc SI
+           cmp AL, Decay
+           jb  @@3
+           cmp CX, 2
+           jb  @@3
+           cmp CX, Width-1
+           ja  @@3
+           push CX
+           push AX
+           mov BX, 3
+           call FastRand
+           dec AX
+           push AX
+           mov BX, Decay
+           call FastRand
+           pop DX
+           pop CX
+           sub CL, AL
+           mov AL, CL
+           sub DI, DX
+           mov ES:[DI],AL{a little bit faster than stosb}
+           inc DI
+           add DI, DX
+           pop CX
+           dec CX
+           jnz @@2
+
+         add SI, 319-Width
+         mov DI, SI
+         sub DI, 320
+         pop CX
+         dec CX
+         jnz @@1
+
+       jmp @@4
+
+@@3:       xor AL, AL
+           mov ES:[DI],AL
+           inc DI
+           dec CX
+           jnz @@2
+
+         add SI, 319-Width
+         mov DI, SI
+         sub DI, 320
+         pop CX
+         dec CX
+         jnz @@1
+
+@@4:
+    end;
+
+{
+  (* This was the original code I translated to assembler - JF *)
+
+    For I:=XStart To XEnd Do
+    For J:=MinY To 199 Do
+    begin
+      V:=VMem[J, I];
+      If (V=0) Or
+         (V&lt;Decay) Or
+         (I&lt;=XStart) Or
+         (I&gt;=XEnd) Then
+        Put(I, Pred(J), 0);
+      else
+        Put(I-Pred(Random(3)), Pred(J), V-Random(Decay));
+    end;
+}
+
+    {Match?}
+    If (Random(150)=0) Or (Ch=' ') Then
+      FillChar(FlameArray[XStart+Random(XEnd-XStart-5)],5,255);
+
+    {In-/Decrease?}
+    If (Ch='-') Then If MoreFire &gt;-2 Then Dec(MoreFire);
+    If (Ch='+') Then If MoreFire &lt; 4 Then Inc(MoreFire);
+
+    {!!}
+    If UpCase(Ch) = 'C' Then
+      FillChar(FlameArray,SizeOf(FlameArray),0);
+    If UpCase(Ch) = 'W' Then
+      for I:=1 To 10 Do FlameArray[XStart+Random(Width)]:=0;
+
+    If Ch = '?' Then Help;
+
+    if Ch in ['1'..'9'] Then FireIncrease:=3+Sqr(Ord(Ch)-Ord('1'));
+
+    {This loop controls the "root" of the
+     flames ie. the values in FlameArray.}
+    For I:=XStart To XEnd Do
+    begin
+      X:=FlameArray[I];
+
+      If X&lt;MinFire Then { Increase by the "burnability"}
+      begin
+        {Starting to burn:}
+        If X&gt;10 Then Inc(X,Random(FireIncrease));
+      end
+      else
+      { Otherwise randomize and increase by intensity (is burning)}
+        Inc(X,Rand(RootRand)+MoreFire);
+      If X&gt;255 Then X:=255; { X Too large ?}
+      FlameArray[I]:=X;
+    end;
+
+
+    { Pour a little water on both sides of
+      the fire to make it look nice on the sides}
+    For I:=1 To Width Div 8 Do
+    begin
+      X:=Trunc(Sqr(Random)*Width/8);
+      FlameArray[XStart+X]:=0;
+      FlameArray[XEnd-X]:=0;
+    end;
+
+    {Smoothen the values of FrameArray to avoid "descrete" flames}
+    P:=0;
+    For I:=XStart+Smooth To XEnd-Smooth Do
+    begin
+      X:=0;
+      For J:=-Smooth To Smooth Do Inc(X,FlameArray[I+J]);
+      FlameArray[I]:=X Div succ(Smooth shl 1);
+    end;
+
+  for i := miny to 199 do
+  move(ptr(seg(pt^),ofs(pt^)+i*320+xstart)^,
+       ptr(segA000,i*320+xstart)^,
+       width+1);
+  Until Ch=#27;
+  {Restore video mode}
+  textmode(lastmode);
+  {Good bye}
+freemem(pt,64000);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,215 @@
+<html><head><title>3D Wave Effect by Jare/Iguana</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект волн на воде [320x200x256].<br><font color=#666666> Very cool 3d-waves (like water).</font>">
+<meta name="keywords" content="pascal, sources, source code, 3dwave, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;3dwave
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;3D Wave Effect by Jare/Iguana</TD>
+<TD nowrap class=black>&nbsp;Jare/Iguana</TD>
+<TD class=black align='right'>16.02.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="3dwave.jpg"><p style="margin-left:20px">Эффект волн на воде [320x200x256].<br><font color=#666666>
+Very cool 3d-waves (like water).</font></TD><TD class=black colspan=2 align='right'><br><A HREF="3dwave.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 <img border=0 width=320 height=200 src="3dwave_1.jpg" alt="">
+
+(* ---------------------------- WAV3D.PAS ------------------------- *)
+(* Coded bye Jare/Iguana in 1993. Want more comment's? Write'em!    *)
+(* Use this as you like; you're going to anyway, so who cares.      *)
+(* But remember: proper crediting and greeting rules.               *)
+
+USES Dos;
+
+VAR
+  reg : Registers;
+
+FUNCTION GetKey: WORD;
+BEGIN
+  reg.AH := 0;
+  Intr($16, reg);
+  GetKey := reg.AX
+END;
+
+FUNCTION TestKey: BOOLEAN;
+BEGIN
+  reg.AH := 1;
+  Intr($16, reg);
+  TestKey := (reg.Flags AND FZero) = 0
+END;
+
+PROCEDURE VSync;
+BEGIN
+  WHILE (Port[$3DA] AND 8) =  8 DO;
+  WHILE (Port[$3DA] AND 8) &lt;&gt; 8 DO;
+END;
+
+  (* -------------------- *)
+
+TYPE
+  tScrBuf = ARRAY [0..200-1,0..320-1] OF BYTE;
+  tScrWBuf = ARRAY [0..200-1,0..160-1] OF WORD;
+VAR
+  VGABuf : TScrBuf ABSOLUTE $A000:0000;
+  VGAWBuf : TScrWBuf ABSOLUTE $A000:0000;
+
+VAR
+  i,j,k,n : INTEGER; { Shitty global vars. This is just a prototype!}
+  r, d, v, a : REAL;
+  c, lasth, limit : WORD;
+  highest : ARRAY [0..159] OF BYTE;
+
+TYPE
+  TWavBuf = ARRAY [0..63, 0..127] OF BYTE;
+  TLandBuf = ARRAY [0..31, 0..159] OF BYTE;
+
+VAR
+  Wb : TWavBuf;
+  fw : FILE OF TWavBuf;
+  lb : TLandBuf;
+  fl : FILE OF TLandBuf;
+
+CONST
+  MaxRadius = 159.0*159.0 + 31.0*31.0;
+  s159      = 159.0*159.0;
+  s31       = 31.0*31.0;
+
+PROCEDURE GenerateLand;
+BEGIN
+  FOR i := 0 TO 31 DO
+    FOR j := 0 TO 159 DO BEGIN
+      lb[i,j] := ROUND(SQRT((i+0.0)*i/s31 +
+                            (j+0.0)*j/s159)*127{/SQRT(2)});
+      IF lb[i,j] &gt; 127 THEN
+        lb[i,j] := 127
+    END;
+  Assign(fl, 'land.dat');             { Escritura de la tabla. }
+  ReWrite(fl);
+  Write(fl, lb);
+  Close(fl)
+END;
+
+PROCEDURE GenerateWav;
+BEGIN
+  FOR j := 0 TO 63 DO                  { Generacion de la tabla. }
+    FOR i := 0 TO 127{319} DO BEGIN
+      r := (i+1) * 5.0 * PI / 320.0;
+      d := j * PI / 32.0;
+      v := ((Sin(r - d)-Sin(-d)) / r )
+           - (Cos(r-d)/2);
+      a := Cos(i*PI/2/128);
+      k := 100 + ROUND(100.0 * a * a * v);
+      Wb[j, i] := BYTE(k);
+      VGABuf[k,i] := 150 + j
+    END;
+  Assign(fw, 'waves.dat');            { Grabaciвn de la tabla. }
+  ReWrite(fw);
+  Write(fw, wb);
+  Close(fw)
+END;
+
+VAR
+  par, pcod : INTEGER;
+
+BEGIN
+  VAL(ParamStr(1), par, pcod);
+  IF pcod = 0 THEN BEGIN
+    ASM
+      MOV AX,13h
+      INT 10h
+    END;
+    IF (par AND 1) = 1 THEN
+      GenerateLand;
+      IF (par AND 2) = 2 THEN
+        GenerateWav;
+  END ELSE BEGIN
+    WriteLn('3D Wave bye Jare/Iguana (Pascal prototype & .DAT',
+            ' generator).'#13#10,
+            '   Type "WAV3D 3" to generate files. From then on just',
+            ' type "WAV3D 0",'#13#10,
+            '     which will use the created files.');
+    HALT
+  END;
+
+  Assign(fl, 'land.dat');             { Lectura de la tabla. }
+  ReSet(fl);
+  Read(fl, lb);
+  Close(fl);
+
+  Assign(fw, 'waves.dat');             { Lectura de la tabla. }
+  ReSet(fw);
+  Read(fw, wb);
+  Close(fw);
+
+  FillChar(VGABuf,  64000, 0);
+  FillChar(highest, 160, 199);
+
+  WHILE TestKey DO
+    GetKey;
+
+  ASM
+    MOV CX,64
+    MOV DX,03C8h
+    MOV AL,64
+    OUT DX,AL
+    INC DX
+    XOR AL,AL
+  @@l:
+    OUT DX,AL
+    OUT DX,AL
+    OUT DX,AL
+    INC AL
+    LOOP @@l
+  END;
+
+  k := 0;
+  REPEAT
+    n := (k + 1) MOD 64;
+    FOR j := 0 TO 159 DO BEGIN
+      c := 63+64;
+      lasth := 199;
+      FOR i := 31 DOWNTO 0 DO BEGIN
+        limit := 56+i+Wb[n,Lb[i,j]];
+        WHILE lasth &gt; limit DO BEGIN
+          VGABuf[lasth,j+160] := c;
+          VGABuf[lasth,159-j] := c;
+          DEC(lasth)
+        END;
+        DEC(c)
+      END;
+      FOR i := 0 TO 31 DO BEGIN
+        limit := 55-i+Wb[n,Lb[i,j]];
+        WHILE lasth &gt; limit DO BEGIN
+          VGABuf[lasth,j+160] := c;
+          VGABuf[lasth,159-j] := c;
+          DEC(lasth)
+        END;
+        DEC(c)
+      END;
+      FOR i := lasth DOWNTO highest[j] DO BEGIN
+        VGABuf[i, j+160] := 0;
+        VGABuf[i, 159-j] := 0
+      END;
+      highest[j] := lasth
+    END;
+    VSync;
+    k := n
+  UNTIL TestKey;
+
+  GetKey;
+  ASM
+    MOV AX,3h
+    INT 10h
+  END
+END.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

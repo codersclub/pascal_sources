@@ -1,0 +1,68 @@
+<html><head><title>Фрактальный Треугольник</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для рисования ажурного фрактального треугольника. Используется стандартный драйвер egavga.bgi для режима 640x480x16">
+<meta name="keywords" content="pascal, sources, source code, fractrio, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fractrio
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Фрактальный Треугольник</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5054/26@FidoNet">Victor Shantar</a></TD>
+<TD class=black align='right'>21.09.98</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="fractrio.gif"><p style="margin-left:20px">Программа для рисования ажурного фрактального треугольника.
+Используется стандартный драйвер egavga.bgi для режима 640x480x16</TD><TD class=black colspan=2 align='right'><br><A HREF="fractrio.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="fractri1.gif" alt="">
+
+{&gt; Cut here. FileName= FRACTRIO.PAS }
+program sss;
+uses graph;
+var xa,ya,xb,yb,xc,yc,driver,mode       :  integer;
+    n                                   :  byte;
+
+procedure tria(xa,ya,xb,yb,xc,yc:integer;n:byte);
+var xq,yq,xp,yp,xr,yr:integer;
+begin
+  if n&lt;&gt;0 then begin
+               xp:=(xb+xc)div 2;
+               yp:=(yb+yc)div 2;
+               xq:=(xc+xa)div 2;
+               yq:=(yc+ya)div 2;
+               xr:=(xa+xb)div 2;
+               yr:=(ya+yb)div 2;
+               tria(xa,ya,xq,yq,xr,yr,n-1);
+               tria(xq,yq,xc,yc,xp,yp,n-1);
+               tria(xp,yp,xr,yr,xb,yb,n-1);
+                line(xq,yq,xp,yp);
+                line(xp,yp,xr,yr);
+                line(xq,yq,xr,yr)
+               end;
+end;
+
+begin
+  driver:=detect;
+  initgraph(driver,mode,'');
+  cleardevice;
+  n:=6;
+  xa:=0;ya:=0;
+  xc:=0;yc:=getmaxy;
+  xb:=getmaxx;yb:=getmaxy;
+   line(xa,ya,xb,yb);
+   line(xb,yb,xc,yc);
+   line(xc,yc,xa,ya);
+  tria(xa,ya,xb,yb,xc,yc,n);
+  readln;
+  closegraph;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

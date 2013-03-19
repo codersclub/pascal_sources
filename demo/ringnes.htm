@@ -1,0 +1,95 @@
+<html><head><title>Ringnes Motion - Text Mode 3D Demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Трехмерное вращение отекстуренного текста в текстовом режиме.<br><font color=#666666> Text mode 3D Textured Text Rotation.</font>">
+<meta name="keywords" content="pascal, sources, source code, ringnes, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ringnes
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Ringnes Motion - Text Mode 3D Demo</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:joker@crusaders.no">Joker/Crusaders</a></TD>
+<TD class=black align='right'>04.12.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="ringnes.gif"><p style="margin-left:20px">Трехмерное вращение отекстуренного текста в текстовом режиме.<br><font color=#666666>
+Text mode 3D Textured Text Rotation.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ringnes.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>450k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="ringnes1.gif" alt="">
+
+                    --=&gt;  R I N G N E S   M O T I O N  &lt;=--
+
+This demo was created during one week of coding, and released at
+Distortion96 It won the competition, and was (shock) the only one
+in its kind.
+- I know that it could need a smaller bit of optimization,
+but I have this rule : I don't alter demos after release.
+This one is released.
+
+                 <img border=0 width=320 height=200 src="ringnes2.gif" alt="">
+
+The only thing I had some pressure on, are that some people wanted
+(..real much..) a support for *nosound*.
+Well, I implemented it today, and uses a timer to fake-time the music.
+
+- Anyway, only two persons made this demo, me (The Joker / Crusaders) and
+Eric Lloyd / ATC.  The reason that It stands 'ATC', is that I was in that group
+when I created it.  Some additional help to ideas was picked up from some
+sick people at crusaders.
+
+                 <img border=0 width=320 height=200 src="ringnes3.gif" alt="">
+
+Here is the list over all ports/intterupts used :
+
+         INT 10h  AX=1112h : setting of 80x50.
+         INT 10h  AX=0003h : Set back to 80x25.
+         INT 10H  CX=2020h
+                  ah=01h   : Takes away the cursor (annoying thing).
+         INT 10h  CX=0706h
+                  AH=01h   : Get back the cursor.  Nice touch for the user.
+         Port 3DAh         : wait for retrace.
+
+ None character was altered during this demo, so if you use weird character-
+ set, then it might not look so good anymore. :)
+
+                 <img border=0 width=320 height=200 src="ringnes4.gif" alt="">
+
+ If any doubt, you can press any key during zoom/rotate-part, and I will use
+ that character you pressed  (All ASCII-codes accepted) - Exept SPACE : it
+ quits the demo. All other parts : any key will (should?) quit the demo....
+
+                 <img border=0 width=320 height=200 src="ringnes5.gif" alt="">
+
+       Greetings :
+
+	Wobba 	-	Man,  you need help... much help.
+       Zeb	-	Keep the Internet account running  :)
+       Andy Floyd	Congratulations on the police-case.
+       all others on #coders
+
+
+ You can contact us :
+
+
+ joker@crusaders.no
+
+ lloyd@whq.atc.no
+
+  - or
+
+  Crusaders Productions v/The Joker
+  Stationsveien 56
+  2010 STROMMEN
+  Norway
+
+
+  Feel free to send money (yeah, right!)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

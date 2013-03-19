@@ -1,0 +1,88 @@
+<html><head><title>Flame 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Нечаянно полученный эффект, похожий на пламя">
+<meta name="keywords" content="pascal, sources, source code, flame, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;flame
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Flame 2</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5050/2.5">Алексей Копылов</a></TD>
+<TD class=black align='right'>27.06.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="flame.jpg"><p style="margin-left:20px">Нечаянно полученный эффект, похожий на пламя</TD><TD class=black colspan=2 align='right'><br><A HREF="flame.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Friday June 14 1996 20:02, Dmitry Naghin писал Genya Koinov:
+
+ GK&gt;&gt; Люди, а не знает ли кто здесь ,  как пламя pисовать? А то сижу тут
+ GK&gt;&gt; уже целую неделю , а в голову стоющих мыслей так и не пpишло!
+
+А вот еще. Дружок хотел какой-то алгоритм фильтрации реализовать. Hо вместо
+того, что бы копировать данные из одного буфера в другой, он делал
+преобразования в этом же -- и получил нечаянно нечто, похожее на пламя.
+
+                         <img border=0 width=203 height=203 src="flame_1.jpg" alt="">
+
+Alexey Kopylov
+---
+ * Origin:   (2:5050/2.5@@fidonet.org)
+
+{&gt; Cut here. FileName= FLAME.PAS }
+program Test;
+
+{uses  CRT;}
+
+var   M : array[0..199,0..319] of Byte absolute $A000:$0000;
+      Num : Word;
+
+procedure SetPalette;
+
+var   N, C : Integer;
+
+begin
+  Port[$3C8] := 0;
+  for N := 0 to 255 do begin
+    if N mod 128 &lt; 64 then C := N mod 64 else C := 63 - N mod 64;
+    Port[$3C9] := C+n;
+    Port[$3C9] := C;
+    Port[$3C9] := C;
+  end;
+end; {of SetPalette}
+
+var   X, Y, S, DX, DY, C : Integer;
+
+begin
+  asm mov ax,$13; int $10; end;
+  SetPalette;
+  for Num := 0 to 64000 do Mem[$A000:Num] := Num div 2 mod 320;
+  DX := 0; DY := 0; C := 30;
+  while 1=1 do begin
+    if DX &lt; 100 then begin
+      Inc(DX); Inc(DY);
+    end
+    else if C &lt; 60 then Inc(C) else begin
+      asm mov ax,$03; int $10; end;
+      Exit;
+    end;
+    for Num := 0 to DY do M[DY,Num] := Random(C)+8;
+    for Num := 0 to DX{-1} do M[Num,DX] := Random(C)+8;
+    for Num := 1 to 5000 do begin
+    Y := Random(DY);
+    X := Random(DX);
+    S := (M[Y+1,X+1]*2+M[Y+1,X]*2+M[Y+1,X]+M[Y,X+1]*2+M[Y,X+1]) div 8;
+    if S &gt;= M[Y,X] then Inc(M[Y,X],2) else Dec(M[Y,X],1);
+    end;
+  end;
+  asm mov ax,$03; int $10;
+  end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

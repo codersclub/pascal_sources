@@ -1,0 +1,149 @@
+<html><head><title>DemoStuff #2 - Collection of Demo Effects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Второй выпуск коллекции трехмерных демо-эффектов от Bjarke Viksoe: точечный туннель, несколько вариантов затенения (точечное, Gourad), несколько вариантов текстурирования, поэтапная разработка интерьеров в стиле Doom. Всего 15 программ. <br><font color=#666666> Second bunch of great demos by Bjarke Viksoe: It's bits and scraps of demo code. Gouraud shading, texture mapping and other kinds of shading.</font>">
+<meta name="keywords" content="pascal, sources, source code, demostu2, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;demostu2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DemoStuff #2 - Collection of Demo Effects</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:bjarke.viksoe@capacity.dk">Bjarke Viksoe</a></TD>
+<TD class=black align='right'>15.12.94</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=49 vspace=4 hspace=8 alt="" src="demostu2.jpg"><p style="margin-left:20px">Второй выпуск коллекции трехмерных демо-эффектов от Bjarke Viksoe:
+точечный туннель, несколько вариантов затенения (точечное, Gourad),
+несколько вариантов текстурирования, поэтапная разработка
+интерьеров в стиле Doom. Всего 15 программ. <br><font color=#666666>
+Second bunch of great demos by Bjarke Viksoe:
+It's bits and scraps of demo code. Gouraud shading,
+texture mapping and other kinds of shading.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="demostu2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>97k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                                      (December 1994)
+Hi there,
+
+                <img border=0 width=320 height=200 src="demost21.gif" alt="">
+
+First of all I want to thank all of you who wrote to me because
+of the DEMOSTUF.ZIP source codes. I really appreciate all of your
+support and finally I decided that perhaps I would do some more
+sources.
+
+                <img border=0 width=320 height=200 src="demost22.gif" alt="">
+
+This time it's also bits and scraps of demo code. Gouraud shading,
+texture mapping and other kinds of shading are the main issues.
+Tried to comment the sources a bit better, but I still lack much
+I think (really hate writing documentation).
+
+                <img border=0 width=320 height=200 src="demost23.jpg" alt="">
+
+As usual I use Borland Pascal v7.0 with loads of in-line assembly.
+Many had problems with my sources last time. Some because of a bug
+in the code that crashed some machines. But most were trying to run
+the sources from TP6.0 (or lower):
+If you have TP6.0 you need to take care of the "SEGA000". I think
+I have fixed it with the "SEGA000 : word = $A000".
+
+                <img border=0 width=320 height=225 src="demost24.jpg" alt="">
+
+Anyway. To compile these sources, turn on '286 code generation, put
+all stack/range checking off. And hope it all works well.
+Units are not totally compatible with DEMOSTUF.ZIP. In some cases you
+need to include the PICTURE unit.
+If you run low on memory, compile it, quit the IDE and run it from
+dos!
+
+                <img border=0 width=320 height=200 src="demost25.gif" alt="">
+
+Hints:
+The red area on the screen is how much raster-time the routine takes
+up!
+You can turn it off by setting an "{" i front of the "{$DEFINE DEBUG}"
+line!
+The "r:=LongMul(x,y)" is "r:=x*y" and "r:=LongDiv(x,y)" is
+ "r:=x DIV y"!
+
+                <img border=0 width=320 height=200 src="demost26.gif" alt="">
+
+The one routine that is used by allmost ALL sources is:
+  xpos:=x1 SHL 16;
+  xadd:=((x2-x1) SHL 16) DIV (y2-y1);
+  for i:=y1 to y2 do begin
+    writeln(xpos SHR 16);
+    inc(xpos,xadd);
+  end;
+
+                <img border=0 width=320 height=200 src="demost27.jpg" alt="">
+
+or some variation written in asm. It produces a slope-array of
+ (y2-y1) positions ranging from [x1..x2] ( = interpolation?)!
+
+                <img border=0 width=320 height=200 src="demost28.jpg" alt="">
+
+And one thing, I don't know how you intend to use these source codes
+out there. But I'm NOT in favour of the "hey, rip my source code"
+feeling.
+
+                <img border=0 width=320 height=200 src="demost29.gif" alt="">
+
+I actually don't care if you simply replace the colours and release
+it in your name; but try to be a bit more clever than that:
+Look at the sources, try to figure out what happens, and make your
+own version (much better and ten times faster, of course! :)
+Anyway, there are about 40 downloads of my DEMOSTUF.ZIP sources right
+now every week. Imagine how boring it would be to see 40 demos with
+the same crappy routines every week!
+If you do use them, please remeber to mention my name :)
+
+                <img border=0 width=320 height=200 src="demost2a.jpg" alt="">
+
+Special thanx, hellos and acknowledgements:
+
+Commodore Amiga
+Mark Feldman and PCGPE
+Peter V and friends from Lyngby Udd.Center.
+John B, Ervin and Aaron from Australia for nice talks lately.
+All x-Parasite/Amiga members and members of Polka Brothers/Amiga!
+
+                <img border=0 width=320 height=200 src="demost2b.jpg" alt="">
+
+If you have any questions or wanna chat, write to me at:
+  Bjarke Viksoe
+  Norrebred 139
+  2625 Vallensbaek
+  Denmark
+
+                <img border=0 width=320 height=200 src="demost2c.jpg" alt="">
+
+Please don't use the e-mail address from the DEMOSTUF.ZIP! I will
+have left school when you read this and don't have an account on
+the net anymore. Sorry, I'll miss you all.
+
+                <img border=0 width=320 height=200 src="demost2d.gif" alt="">
+
+; Legal stuff:
+; These source codes may be used freely as you please.
+; They can be copied freely as long as nothing is charged for a copy
+; and as long as all files are included and nothing is modified.
+; I offer no warranty with this code whatsoever, including its
+; fitness for any particular purpose. Neither shall I
+; be liable for damages of any kind that may arise from its use.
+
+                <img border=0 width=320 height=200 src="demost2e.gif" alt="">
+
+And remember: Pascal rulez, but asm rulez even more!
+
+                <img border=0 width=320 height=220 src="demost2f.jpg" alt="">
+
+                                         happy programming
+                                               Bjarke Viksoe</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,151 @@
+<html><head><title>Outlaw Triad Demo Series, Part 6 - 3D Morphing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Основы программирования MCGA-графики от демо-группы Outlaw Triad. Часть 6: 3D Morphing - плавное превращение одного трехмерного объекта в другой при одновременном трехмерном вращении. [320x200x256]<br><font color=#666666> The Outlaw Triad Demo Series, Part 6 - 3D Morphing &amp; Rotating.</font>">
+<meta name="keywords" content="pascal, sources, source code, otmorph, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;otmorph
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Outlaw Triad Demo Series, Part 6 - 3D Morphing</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:comma400@tem.nhl.nl">Vulture/OT</a></TD>
+<TD class=black align='right'>06.06.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="otmorph.gif"><p style="margin-left:20px">Основы программирования MCGA-графики от демо-группы Outlaw Triad.
+Часть 6: 3D Morphing - плавное превращение одного трехмерного объекта
+в другой при одновременном трехмерном вращении. [320x200x256]<br><font color=#666666>
+The Outlaw Triad Demo Series, Part 6 - 3D Morphing & Rotating.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="otmorph.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             - THE OUTLAW TRIAD DEMO-SERIES -
+
+----------------------- PART VI -----------------------------------
+
+                 Written by : Vulture/OT
+                 Code in    : Pascal/Asm
+                 Topic      : 3d morphing
+
+              <img border=0 width=320 height=200 src="otmorph1.gif" alt="">
+
+---------------------- Introduction -------------------------------
+
+Welcome to the Outlaw Triad demo-series! In these series we will be
+talking about programming demo-effects in either pascal or assembler.
+Theory behind the effects shall be discussed while a full sourcecode
+is also provided.
+This time we'll discuss 3d morphing. This type of morphing involves a
+3d object changing into another 3d object. The example pascalsource
+rotates and morphs a number of 3d points and was coded in Pascal.
+Enjoy!
+
+-------------------------- Theory ----------------------------------
+
+What does morphing mean exactly? Like said in the introduction,
+morphing of 3d objects means that one 3d object is gradually changing
+into another 3d object. What I am about to show you is morphing of 3d
+objects which consist of pixels only, not lines or anything. However,
+the principle is the same when using lines or polygons. One of the
+basic properties of 3d morphing is that all 3d points should reach
+their destination at the same time. Like, in our example, it wouldn't
+be good to see some pixels already at their destination while others
+are still on their way, right? In the example all pixels (2d) arrive
+at the same time.
+
+Ok, how do we code this stuff? First of all I will assume you know the
+basics of 3d coding, like, how to rotate and show a 3d point on the vga.
+If you don't know that, this doc is probably of no use to you yet.
+Anyway, with that clear, let's see the theory behind 3d morphing, ok?
+Let's say x1,y1,z1 represent a 3d point and x2,y2,z2 form another one
+(origin & destination). Observe this:
+
+    x2-x1 = distance on the X axis between the twese points
+    y2-y1 = distance on the Y axis between the twese points
+    z2-z1 = distance on the Z axis between the twese points
+
+When we add the difference between the x values to x1, we get x2. BUT,
+we don't want to get to x2 in just 1 step. So, let's divide that value
+by 64!
+Then, if we add the resulting value to x1 64 times, we get x2.
+We also do this for the y and the z:
+
+    Xstep = (x2-x1) / 64
+    Ystep = (y2-y1) / 64
+    Zstep = (z2-z1) / 64
+
+This must be done for all 3d points in the objects. You will get as
+many Xstep values as there are x values in the object. Same goes for
+y and z.
+The method described here will only work for objects of equal size.
+In other words, you can't have one 3d object of (for example) 100
+points and another 3d object of 120 points.
+
+Now for the pascalcode. What we are going to do is adding the
+stepsizes to the x,y,z values of the original 3d point 64 times.
+While doing this, we also rotate and display the point. So:
+
+ For Loop1 := 1 to 64 Do
+ Begin
+   x1 := x1 + Xstep;
+   y1 := y1 + Ystep;
+   z1 := z1 + Zstep;
+   { rotate x1,y1,z1 }
+   { display point }
+ End
+
+Easy, huh? This will show a rotating 3d point changing from position
+1 to position 2. Now, of course we are not done yet. What we want is
+not just 1 morphing 3d point but an entire object changing into
+another. To do this, simply store all stepvalues of all 3d points
+into an array and do the same thing. So, code for a 100 3d points
+could look like:
+
+ For Loop1 := 1 to 64 Do              { We want 64 steps }
+ Begin
+   For Loop2 := 1 to 100 Do           { And a 100 3d points }
+   Begin
+     x1 := x1 + StepArray[Loop1,1];   { StepArray contains all }
+     y1 := y1 + StepArray[Loop1,2];   { stepvalues             }
+     z1 := z1 + StepArray[Loop1,3];
+     { rotate x1,y1,z1 }
+     { display point }
+   End;
+ End;
+
+This is practically all there is to it! Just fool around a bit to get
+it to work the way you want. Take a look at the example source to see
+how things can be done. Luckily, the math behind 3d morphing is
+pretty easy. So easy in fact, even I was able to understand it!
+And my math really stinks... :-) 
+The example provided needs a lot of optimizing as I wanted to keep it
+simple and easy to understand. It should be enough to get you started,
+though, and that's what these trainers are all about. Goodluck and if
+you encounter any problems, mail me!
+
+Ok, this is all for now. Happy coding!
+
+       - Vulture / Outlaw Triad -
+
+-------------------------- Contact ---------------------------------
+
+Want to contact Outlaw Triad for some reason? You can reach us at our
+distrosites in Holland. Or if you have e-mail access, mail us:
+
+   Vulture   (coder/pr)   comma400@tem.nhl.nl
+
+ Our internet homepage:
+
+   http://www.tem.nhl.nl/~comma400/vulture.html
+
+ These internet adresses should be valid at least till june 1996.
+
+----------------------------------------------------------------------
+
+          Quote: I think ... therefore I am confused...</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

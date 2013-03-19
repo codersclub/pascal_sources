@@ -1,0 +1,117 @@
+<html><head><title>Simple Fire Version for TMT Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект пламени для TMT Pascal. Демонстрирует метод прямого обращения к памяти и прямой доступ к портам видеокарты.<br><font color=#666666> Fire routine for TMT Pascal. This exaple demonstrate direct access to video memory and I/O port.</font>">
+<meta name="keywords" content="pascal, sources, source code, tmtflame, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tmtflame
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Simple Fire Version for TMT Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:9323767@info.umoncton.ca">Keith Degruece</a></TD>
+<TD class=black align='right'>04.09.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="tmtflame.jpg"><p style="margin-left:20px">Эффект пламени для TMT Pascal.
+Демонстрирует метод прямого обращения к памяти
+и прямой доступ к портам видеокарты.<br><font color=#666666>
+Fire routine for TMT Pascal.
+This exaple demonstrate direct access
+to video memory and I/O port.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tmtflame.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                <img border=0 width=320 height=200 src="tmtflam1.jpg" alt="">
+
+{&gt; Cut here. FileName= TMTFLAME.PAS }
+
+(***********************************************)
+(*                                             *)
+(* The FLAME                                   *)
+(* Copyright (c) 1998 by TMT Development Corp. *)
+(*                                             *)
+(* Targets:                                    *)
+(*   MS-DOS 32-bit protected mode              *)
+(*                                             *)
+(***********************************************)
+
+{$ifndef __DOS__}
+  This program can be compiled for MS-DOS target only
+{$endif}
+
+{ this exaple demonstrate direct access to video memory }
+{ and I/O port                                          }
+
+{ this program has been posted to COMP.LANG.PASCAL newsgroup.}
+{ Here is unchanged original version with author comments.   }
+{ This program can't works under DOS32 extender              }
+
+{ DOS version: Use Turbo Pascal 6.0+ to compile }
+
+{------------------------------------------------------------}
+{ g'day, this is a probably the most simple version   }
+{ of fire that you will ever see in pascal. i wrote   }
+{ the code in pascal so it's slow and choppy, i have  }
+{ another version in asm. and it's faster. anyways if }
+{ you have any critics or question on this code, just }
+{ e-mail me at ekd0840@bosoleil.ci.umoncton.ca. or    }
+{              9323767@info.umoncton.ca               }
+{  note : I have code for all kinds of stuff (that I  }
+{         wrote of course), if you want something     }
+{         e-mail me (i never get mail), maybe i have  }
+{         what you want.                              }
+{                               keith degr?ce         }
+{                               moncton, n.-b. canada }
+
+var c, x, y, z : Word;
+procedure setrgb( c, r, g, b : byte );
+begin
+  port[$3c8] := c;
+  port[$3c9] := r;
+  port[$3c9] := g;
+  port[$3c9] := b;
+end;
+
+begin
+  randomize;
+  asm   mov ax, 13h
+        int 10h
+  end;
+  for x := 1 to 32 do
+  begin
+    setrgb(x,   x*2-1, 0,     0    );
+    setrgb(x+32, 63,   x*2-1, 0    );
+    setrgb(x+64, 63,   63,    x*2-1);
+    setrgb(x+96, 63,   63,    63   );
+  end;
+  port[$60] := 0;
+  repeat
+   x := 0;
+   repeat
+     y := 60;
+     repeat
+       c := (mem[$a000:y * 320 + x]+
+             mem[$a000:y * 320 + x + 2]+
+             mem[$a000:y * 320 + x - 2]+
+             mem[$a000:(y+2) * 320 + x + 2]) div 4;
+       if c &lt;&gt; 0 then dec(c);
+       memw[$a000:(y-2) * 320 + x] := (c shl 8) + c;
+       memw[$a000:(y-1) * 320 + x] := (c shl 8) + c;
+       Inc(Y,2);
+     until y &gt; 202;
+     Dec(y,2);
+     mem[$a000:y * 320 + x] := random(2) * 160;
+     Inc(X,2);
+    until x &gt;= 320;
+  until port[$60] &lt; $80;
+  asm  mov ax, 3
+       int 10h
+  end;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,276 @@
+<html><head><title>Outlaw Triad Basic MCGA Tutorial [Mode 13h]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Основы программирования MCGA-графики от демо-группы Outlaw Triad. Описание структуры графической видео-памяти, установка режима 320x200x256, вывод точки. В качестве примера приведена программа, заполняющая разноцветными точками экран.<br><font color=#666666> Outlaw Triad, a basic MCGA-tutorial. It should be interesting for all people who wanna learn vga-coding.</font>">
+<meta name="keywords" content="pascal, sources, source code, otmcga, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;otmcga
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Outlaw Triad Basic MCGA Tutorial [Mode 13h]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:comma400@tem.nhl.nl">Vulture/OT</a></TD>
+<TD class=black align='right'>17.06.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=50 vspace=4 hspace=8 alt="" src="otmcga.gif"><p style="margin-left:20px">Основы программирования MCGA-графики от демо-группы Outlaw Triad.
+Описание структуры графической видео-памяти,
+установка режима 320x200x256, вывод точки. В качестве примера
+приведена программа, заполняющая разноцветными точками экран.<br><font color=#666666>
+Outlaw Triad, a basic MCGA-tutorial.
+It should be interesting for all people who wanna learn vga-coding.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="otmcga.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  Љ---------------------------------------------------------------+
+  |                                                             |
+  |                                                               |
+  |  ђђђђђђђђђ                   ђђ                             |
+  |  ђђ    ђђ ђђ   ђђ ђђђђђђ ђђ     ђђђђђђђђ ђђ     ђђ   |
+  |  ђђ    ђђ ђђ   ђђ   ђђ   ђђ     ђђ   ђђ ђђ     ђђ   |
+  |  ђђ    ђђ ђђ   ђђ   ђђ   ђђ     ђђђђђђђђ ђђ     ђђ   |
+  |  ђђ    ђђ ђђ   ђђ   ђђ   ђђ     ђђ   ђђ ђђ ђђ ђђ   |
+  |  ђђђђђђђђђ ђђђђђђђђ   ђђ   ђђђђђђ ђђ   ђђ  ђђђ ђђђ    |
+  |                                                               |
+  |                        T њ R њ I њ A њ D                      |
+  |                                                             |
+  +---------------------------------------------------------------|
+                           +--------------+
+                           | њ PRESENTS њ |
+                           +--------------+
+
+                  Mode 13h Documentary Version 1.5
+---------------------------------------------------------------------
+Written By : Vulture                 Total Files  : 2
+File Type  : Textfile                Release Date : 17th of June 1995
+Difficulty : Basic level             Filename     : BASICDOC.ZIP
+---------------------------------------------------------------------
+
+Welcome to yet another textfile by Vulture. I decided to write this
+file for all starting gfx coders coz I think it is very important to
+fully understand the basics. When I started to code graphics, I lost
+a lotta time just because I did not acctually knew what I was doing.
+Maybe this text will prevend this to happen again to other coders.
+This file was written for those of you who really want to get into
+vga-programming. I will be using plain Turbo Pascal and just a very
+small bit of assembler. It won't be very hard to understand.
+Yeah, I know there are already lots of trainers on this subject
+available but I also have experienced that it can be helpful to read
+various trainers on the same subject. Anyway, off we go....
+
+=-=-=-=-=-=-=-=-=-= MODE 13H DOCUMENTARY =-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+In this document I will cover:
+
+A. How to enter mode 13h
+B. Memory layout
+C. Place yar first pixels
+D. Example program
+E. Closing words
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+A. HOW TO ENTER MODE 13H.
+
+Ok, let's start. I will refer to mode 13h as MCGA mode coz this is the
+official name of the mode. The MCGA mode has a resolution of 320*200*256
+which means that we have 320 pixels along the X-axis and 200 pixels
+along the Y-axis. We also have no less than 256 colors to our disposal.
+Great!
+Now, how do we get into this great grafix mode? I mean, before we can
+do any graphic related stuff such as plotting pixels, we have to get
+into the videomode first. This is done using a bit of inline assembler.
+Here it is:
+
+Procedure VideoMode(Mode: Byte); Assembler;
+  { Used to switch videomodes }
+Asm
+   mov  ah,00             { Set high byte of ax }
+   mov  al,Mode           { Select the mode here }
+   int  10h               { Call video interrupt }
+End;
+
+The 'Mode' variable should contain $13 if you want to get in gfx-mode
+or else $3 if you want to get to text-mode. Pretty easy, uh? :)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+B. MEMORY LAYOUT of MODE 13H.
+
+Right, now we have entered the videomode 13h. What we need to know
+now is the way things are organized in the vga memory when using MCGA
+mode. This is acctually very easy.
+
+Layout of a VGA-mode 13h screen:
+
+ + ---------                       X-AXIS
+ |
+ |    0. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .319
+ |    320. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .639
+ Y    640. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .959
+ A    960. . . . . .
+ X
+ I                               etc etc etc
+ S
+                                                     . . . . . . .63679
+      63680. . . . . . . . . . . . . . . . . . . . . . . . . . . .63999
+
+So, as you can see here, the VGA memory in this mode is lineair.
+To be more exact: When you show pixel 319, you will see a pixel in the
+upperRIGHT corner of the screen. But when you fill pixel 320, you will
+then see a pixel in the upperLEFT corner on line 1! (know that the
+upperleft corner is location 0,0)
+But in vga memory these values are situated next to eachother. It may
+sound a little strange at this moment but you'll get the hang of it
+soon. Think of it as one long string. Range from 0 to 63999
+(64000 total). This gives us the 320 pixels on the x-axis and 200 on
+the y-axis.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+C. PLACING PIXELS ON THE SCREEN.
+
+You can place pixels on the screen by pointing to the spot you want
+filled and giving the color of the dot. The color is a number between
+0 and 255 coz we have 256 colors. Now, suppose you want to place a
+pixel in exactly the middle of the screen with color blue. What you
+have to know then is the X and Y-value of that position and the
+colorvalue of blue. Well, the X-value should be 160 since 320/2=160
+is the middle of a line. Our Y-value should be 100 coz 200/2 is 100.
+The colorvalue of blue is 1 (when using the standard pallette).
+When you know all this, you must calculate the position on the screen
+since the screen layout is lineair and does not work with X and Y
+values. This is the formula to do that: Y*320+X. Think about it.
+It really should be very easy to understand. So easy infact, that I'm
+not gonna explain it here...
+(hehe, evil grin:))
+
+Anyway, here's a pascal procedure which plots a pixel at X,Y:
+
+Procedure Putpixel(X,Y: Integer; Col: Byte);
+Begin
+  Mem[VGA:(Y*320)+X]:=Col;
+End;
+
+Why don't you try X=160, Y=100 and Col=1? You'll see what I mean...
+The 'VGA' is a constant which resembles the VGA-segment $a000.
+This is another aspect to be understood well. To put it simply it
+means that 'VGA' points to the start of the screen. When you plot a
+pixel you are using a segment and an offset. The VGA segment is $a000.
+So, to be more exact: $a000:0000 represents the upperleft corner of
+the screen. When you are pointing to a certain pixel, you are pointing
+to it's offset from the segment. Think of it this way: The segment is
+the start of the screen and the offset is the exact place within this
+segment. As said before, you can only adress 64000 pixels in MCGA mode.
+(Hmm, acctually 64kB can be adressed but the last bytes are not shown)
+Well, you should create a constant 'VGA' by doing this:
+
+Const VGA = $a000;
+
+The above putpixel procedure isn't real fast but it is fast enough
+for our purposes right now. If you really want a fast one, you should
+convert it to assembler. That's what I have done myself. Hee, if you
+have troubles coding in assembler, contact me at one of the Outlaw
+distros. I'll give you my own putpixel procedure to work with.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+D. SAMPLE PROGRAM.
+
+Now follows a sample-program which demonstrates the putpixel procedure.
+Play with it and learn. . . You could try to draw horizontal and
+vertical lines...
+
+Program MCGASample;       { Demonstrates the basic mode 13h }
+
+Uses Crt;
+
+Const VGA = $a000;        { The VGA segment }
+
+Var Ch: Char;
+
+Procedure VideoMode(Mode: Byte); Assembler;
+  { Used to switch videomodes }
+Asm
+   mov  ah,00             { Set high byte of ax }
+   mov  al,Mode           { Select the mode here }
+   int  10h               { Call video interrupt }
+End;
+
+Procedure Putpixel (X,Y: Integer; Col: Byte);
+Begin                     { Puts a pixel at X,Y with color Col }
+  Mem[VGA:(Y*320)+X] := Col;
+End;
+
+Begin
+  RandoMize;
+  VideoMode($13);         { Get in graphics mode }
+  Repeat
+    PutPixel(Random(320), Random(200), Random(255));
+  Until KeyPressed;       { Draw pixels on the screen until
+                            a key is pressed }
+  Ch := Readkey;
+  VideoMode($3);          { Get in text mode }
+End.
+
+That's it...
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+E. CLOSING WORDS.
+
+Well, this is all I was about to explain in this short tutorial.
+You can now get into the vgamode and plot pixels all across the screen.
+You should be able to understand the memory layout in this mode and
+also the basics behind the segment and offset things. Take a look at
+the sample program for a quick example. It's all pretty basic stuff
+but be sure to fully understand it all before moving on to all kinds
+of cewl fx you want to create. You can loose a lot of time when you
+are just fooling around a bit. I know what I'm talking about... :)
+
+This document was written by Vulture. Although many things concerning
+MCGA have not been discussed here, this text should be of some help
+to you. It's enough to get you started. Maybe in the future updated
+versions of this file will be released but that remaines to be seen.
+
+Hmm, well, the following cr*p is supposed to be stated so here we go:
+I (Vulture) take no responsibility for any mistakes found in this
+document. So use at your own risk. If you spot errors or have
+something to add to the text, don't hesitate to contact me.
+Phew, that's that... :)
+
+Wanna contact Outlaw for any reason? Then leave mail at one of our
+distros.
+Don't hestitate to mail Outlaw, coz we like to chat with otha
+scene-people.
+
+
+          Signed:   Vulture / Outlaw Triad
+
+
+----------------------+--------------------+------------------------
+Outlaw Triad Distros :| Greetz from Outlaw:| Releases sofar:
+----------------------+--------------------+------------------------
+                      |                    |
+    Blue Thunder    |  - DemoLisher      |  MESSAGE  (dosscroller)
+ +31 (0)36-5346967  |  - ThunderHawk     |
+                      |  - Ash             |  VGA-VUL1 (sources)
+                      |  - The Machine     |
+     FireHouse      |  - XњNњTRiC        |  CHAINDOC (textfile)
+ +31 (0)58-2661590  |  - Utter Chaos     |
+                      |  - Crusher         |  VGA-VUL2 (sources)
+                      |                    |
+                      |  - Critical        |  BASICDOC (textfile)
+    Open for more!    |  - Da Frisian Force|
+                      |  - Tribal          | + various bbs-intros
+                      |                    |
+----------------------+--------------------+-------------------------
+
+                    (C) 1995  OњUњTњLњAњW   TњRњIњAњD 
+
+---------------------------------------------------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

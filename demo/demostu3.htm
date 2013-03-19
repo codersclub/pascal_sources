@@ -1,0 +1,136 @@
+<html><head><title>DemoStuff #3 - Collection of Demo Effects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Третий выпуск коллекции демо-эффектов от Bjarke Viksoe. Вращение трехмерных изображений в формате 3DS, FLI, ANM. <br><font color=#666666> Third bunch of great demos by Bjarke Viksoe: flat, gouraud and environment shading. It reads Autodesk 3D Studio objects! Create your own objects in 3DS and render them real-time with this piece of code!!!! </font>">
+<meta name="keywords" content="pascal, sources, source code, demostu3, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;demostu3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DemoStuff #3 - Collection of Demo Effects</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:bjarke.viksoe@capacity.dk">Bjarke Viksoe</a></TD>
+<TD class=black align='right'>04.05.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="demostu3.jpg"><p style="margin-left:20px">Третий выпуск коллекции демо-эффектов от Bjarke Viksoe.
+Вращение трехмерных изображений в формате 3DS, FLI, ANM. <br><font color=#666666>
+Third bunch of great demos by Bjarke Viksoe:
+flat, gouraud and environment shading.
+It reads Autodesk 3D Studio objects! Create your own objects in 3DS
+and render them real-time with this piece of code!!!! </font></TD><TD class=black colspan=2 align='right'><br><A HREF="demostu3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>94k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                                           (jan 1996)
+
+Hi again,
+a year has passed since I last managed to turn on my old computer at
+home and tap in some more code...
+
+-------------------------
+
+Have you ever seen one of those cool demos with vector worlds,
+gouraud and phong shading, texturemapping and so on? Probably you
+have! And you think: "They're cool" - and they are.
+But it's hard figuring out what's really done and what it takes to
+make something like it.
+
+So here my code for flat, gouraud and environment shading.
+I dug up my gouraud code from last year (DEMOSTU2.ZIP) which I
+thought to be no good - it turned out that with a few modifications,
+it could produce really nice shadings!
+
+                <img border=0 width=320 height=200 src="demost31.jpg" alt="">
+
+It reads Autodesk 3D Studio objects! Create your own objects in 3DS
+and render them real-time with this piece of code!!!!
+Be aware that this is my first attempt to make something like this.
+Parts of the code is really slow (such as the polygon drawer) but it
+does seem to work. I'm not a hot-shot demo coder. Havn't done a
+single PC demo in my whole life - and I'm not trying to. I'm no
+math wiz-kid either, most of the formulas are from documents
+from x2ftp.oulu.fi regarding shading or tampered from other
+peoples code :)
+I have included a few 3DS objects for display. You'll be pleased
+to see the awfull duck is here again.
+
+Files to look for:
+  READ3DS.PAS
+  GOURAUD1.PAS
+  GOURAUD2.PAS
+  ENVIRON1.PAS
+
+-------------------------
+
+                <img border=0 width=320 height=200 src="demost32.jpg" alt="">
+
+Did you ever wish that it was YOU who could play dashing FLIC
+animations for your friends. Well, you can now. I got so tired of the
+usual net commercials "Buy this software pack for only $XXX,
+and get a super FLIC library". Why not code it yourself...
+
+These sources allow you to read and display:
+
+ pcx,pcc,lbm,iff,pic,tga,bmp,rle,cel,gif,tiff,anm,fli,flc,dl,3ds,avi
+
+files.
+The sources were made to MY needs and does not support all modes!
+Images are only supported at 320x200x256 and most files cannot be
+larger than 64K!?!! Some of the formats are only supported with a
+limited compression selection. But it should give you a pretty good
+idea of what goes on and give you something to work on to match your
+needs.
+I have included code to play FLIs and FLCs, Deluxe Paint ][ .ANM files,
+AVI and .DL animations too. Soon to be followed by QuickTime.
+
+Files to look for:
+  TESTFLI.PAS
+  TESTANM.PAS
+
+and a bunch of units for reading each format.
+
+-------------------------
+
+                <img border=0 width=320 height=200 src="demost33.jpg" alt="">
+
+To get all this working: use Borland Pascal 7.0, put off all
+stack/range checking, put on +286 code and compile.
+The democode requires a 386, but assumes something faster with
+co-processor.
+Since this file contains updates to DEMOSTUF.ZIP and DEMOSTU2.ZIP,
+please unzip this file after all others.
+
+I havn't really time for this. It's funny to see cool demos on the
+PC thinking back on the good ol' Amiga days. Sniff, I get all
+sentimental. Hope some of your guys out the can use this for
+anything.
+
+                <img border=0 width=320 height=200 src="demost34.jpg" alt="">
+
+Well, that's it...
+In case you wanna chat, here's my new net address:
+
+ bjarke.viksoe@capacity.dk
+
+Regards and peace on earth...
+ Bjarke Viksoe
+
+(as always: Pascal rulez, but ASM rulez even more :)
+
+; Legal stuff:
+; These source codes may be used freely as you please.
+; They can be copied freely as long as nothing is charged for a copy
+; and as long as all files are included and nothing is modified.
+; I offer no warranty with this code whatsoever, including its
+; fitness for any particular purpose. Neither shall I
+; be liable for damages of any kind that may arise from its use.
+
+Oh, by the way: If, by accident, you're managing a large PC network
+please consider buying the fabulous Network Management Product,
+NetCon. Info on www.capacity.dk !</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

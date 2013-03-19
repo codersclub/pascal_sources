@@ -1,0 +1,82 @@
+<html><head><title>Фрактальный Папоротник</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простая программка для рисования папоротника. [BGI]">
+<meta name="keywords" content="pascal, sources, source code, paporotn, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;paporotn
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Фрактальный Папоротник</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/659.12">Роман Азаров</a></TD>
+<TD class=black align='right'>18.08.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="paporotn.gif"><p style="margin-left:20px">Простая программка для рисования папоротника. [BGI]</TD><TD class=black colspan=2 align='right'><br><A HREF="paporotn.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Kaк-тo пиcaл Stanislav пpo Fractals
+И вoт нaбpaлcя я cил дoпoлзти дo кoмпa и нacтyчaть oтвeт:
+Конечно, не так глобально, как твое детище, но все равно красиво...
+
+    +&gt;.&lt;+                                    See ya! Roman Azarov
+
+   ++--+++      [Russian Team RUDN]
+... NO CARRIER - Are you sure (y/n) ?
+--- Дед Маздай и 2.50.Beta5+ зайцев
+ * Origin: Если все хорошо, значит вы что-то не замечаете! (2:5020/659.12)
+
+                   <img border=0 width=320 height=240 src="paporot1.gif" alt="">
+
+{&gt; Cut here. FileName= PAPOROTN.PAS }
+Uses Crt,Graph;
+var gr,gr1:integer;
+   k,color:integer;
+   newx,x,y,newy,a,b,r,c,d,e,f:extended;
+begin
+ gr1:=3;
+ gr:=InstalluserDriver('svga256',nil);
+ Initgraph(gr,gr1,'');
+randomize;
+ 
+asm {Белая рамка}
+   mov ax,1001h
+   mov bh,15
+   int 10h
+ end;
+
+repeat
+r:=random;
+If r&lt;=0.1 then
+begin
+ a:=0;B:=0;c:=0;d:=0.16;f:=0;
+end else Begin
+ if (r&gt;0.1) and (r&lt;=0.86) then
+ begin
+  a:=0.85 ;b:=0.04;c:=-0.04;d:=0.85;f:=1.6;
+ end else begin
+  if (r&gt;0.86) and (r&lt;=0.93) then
+   begin
+    a:=0.2;b:=-0.26;c:=0.23;d:=0.22;f:=1.6;
+   end else Begin
+    a:=-0.15;b:=0.28;c:=0.26;d:=0.24;f:=0.44;
+   end;
+ end;
+end;
+newx:=(a*x)+(b*y);
+newy:=(c*x)+(d*y)+f;
+x:=newx;
+y:=newy;
+putpixel(round(x*64+350),round(530-y*48),LightGreen);
+
+until keypressed;
+readkey;
+closegraph;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

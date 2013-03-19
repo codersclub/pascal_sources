@@ -1,0 +1,87 @@
+<html><head><title>Cos - Plasma Caleidoscope Demo [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Красивая демонстрационная заставка, напоминающая картинку в калейдоскопе.">
+<meta name="keywords" content="pascal, sources, source code, cos, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cos
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Cos - Plasma Caleidoscope Demo [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:aamonster@mail.ru">Alexey Monastyrenko</a></TD>
+<TD class=black align='right'>11.03.98</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=53 vspace=4 hspace=8 alt="" src="cos.gif"><p style="margin-left:20px">Красивая демонстрационная заставка, напоминающая картинку
+в калейдоскопе.</TD><TD class=black colspan=2 align='right'><br><A HREF="cos.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                <img border=0 width=320 height=200 src="cos_1.jpg" alt="">
+
+{&gt; Cut here. FileName= COS.PAS }
+{Plasma Caleidoscope Demo [320x200x256]
+ by Alexey Monastyrenko &lt;aamonster@mail.ru&gt;
+          11 Mar 1998
+}
+procedure SetPalette;
+var   N:Integer;
+begin
+  Port[$3C8] := 0;
+  for N := 0 to 256*3-1 do
+    Port[$3C9] := Round(Sqr(Sin(N*21167.0{PI*257/3/256}))*63);
+end; {of SetPalette}
+
+procedure VIDMode(Mode : Byte);assembler;
+  asm mov ah,$00;  mov al,mode; int 10h; end;
+
+type TScr = array[0..199,0..319] of Byte;
+type TScr_ = array[0..63999] of Byte;
+var Scr: TScr absolute $A000:$0000;
+var Scr_: TScr_ absolute Scr;
+var Scr_2: TScr_;
+
+label M1;
+var SinTable:array[Byte] of Integer;
+    I,J,Q:Integer;
+    X,Y,Z,Z0,ZC,DZDX,DZDY,A:Word;
+begin
+  for I:=0 to 255 do SinTable[I]:=Round(Sin(I*2*PI/256)*64);
+  VIDMode($13);
+  SetPalette;
+  for J:=0 to 1000 do begin
+    FillChar(Scr_2,64000,0);
+    for Q:=0 to 4 do begin
+      Z0:=J*1000;
+      DZDX:=Round(2000*Cos(Q*2*PI/5+J/100));
+      DZDY:=Round(2400*Sin(Q*2*PI/5+J/100));
+      Z0:=Z0-100*DZDY-160*DZDX;
+      A:=0;
+      for Y:=0 to 199 do begin
+        Z:=Z0;
+        Inc(Z0,DZDY);
+        for X:=0 to 319 do begin
+          Inc(Scr_2[A],SinTable[Hi(Z)]);
+          Inc(Z,DZDX);
+          Inc(A);
+        end;
+      end;
+    end;
+    Scr_:=Scr_2;
+    if Port[$60]&lt;128 then Break;
+  end;
+  asm mov ah,0;
+      int 16h
+  end; {readkey}
+  asm mov ah,0;
+      int 16h
+  end; {readkey}
+  VIDMode($3);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

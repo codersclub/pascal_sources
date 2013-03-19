@@ -1,0 +1,99 @@
+<html><head><title>Full Screen Texturing Demo [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демонстрация полноэкранного текстурирования. Вращение и масштабирование битмапов. <br><font color=#666666> Full screen texturing. Looks alot better than in 2nd Reality =)</font>">
+<meta name="keywords" content="pascal, sources, source code, tf_texmp, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tf_texmp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Full Screen Texturing Demo [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;Stefan Ohrhallinger</TD>
+<TD class=black align='right'>19.10.93</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=47 vspace=4 hspace=8 alt="" src="tf_texmp.jpg"><p style="margin-left:20px">Демонстрация полноэкранного текстурирования.
+Вращение и масштабирование битмапов. <br><font color=#666666>
+Full screen texturing. Looks alot better than in 2nd Reality =)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tf_texmp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>34k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Another Release by The Faker!
+
+                <img border=0 width=320 height=200 src="tf_texm1.jpg" alt="">
+
+Full screen texturing:
+It runs full screen (320x200) at 70 frames/second on a 486DX-66 Local
+Bus or even larger areas.
+It runs at about half screen (200x120 or so) on a 486DX-33 without
+Local Bus or at 35 frames/second full screen.
+(and looks alot better than in 2nd Reality =)
+BTW, this was coded quite a time before that; but couldn't be released
+earlier due to upload problems (fuck the sysops!)
+
+                                       coded by The Fakerо / AARDVARK
+
+Feel free to use this in your productions - Feel free to credit me  =)
+
+Notes: This is the same routine as in TEXTURE.PAS except that the
+'db 66h' (386er opcodes) are replaced. That may be also useful for
+ASM-only programmers.
+
+Look at the sample program in the tf_texmp.zip !
+
+PROCEDURE PutTexture(IncX,IncY:Integer; P:Pointer);
+VAR
+   Y,PosX,PosY,PX,PY:Integer;
+BEGIN
+  PosX:=-(ScreenX SHR 1)*IncX; { ScreenX,-Y are size of screen; PosX,-Y }
+  PosY:=-(ScreenY SHR 1)*IncY; { PosX,-Y are set so rotation is around
+                                 middle }
+  FOR Y:=0 TO ScreenY-1 DO
+  BEGIN
+    PX:=PosX;   { PosX,-Y is updated every line,
+                  PX,-Y taken from those }
+    PY:=PosY;
+    ASM
+      push ds
+      mov ax,0a000h
+      mov es,ax
+      mov ax,y
+      xchg al,ah
+      mov di,ax
+      shr di,2
+      add di,ax
+      lds si,p   { in P there should be a 256x256 bitmap }
+      mov cx,screenx shr 1
+      cld
+      mov ax,incx
+      shl eax,16
+      mov ax,incy
+      mov esi,eax
+      mov dx,px
+      shl edx,16
+      mov dx,py
+@1:   add edx,esi
+      mov ebx,edx
+      shr ebx,16
+      mov bl,dh
+      mov al,[bx]
+      add edx,esi
+      mov ebx,edx
+      shr ebx,16
+      mov bl,dh
+      mov ah,[bx]
+      stosw
+      dec cx
+      jnz @1
+      pop ds
+    END;
+    Inc(PosX,IncY);
+    Inc(PosY,-IncX);
+  END;
+END;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

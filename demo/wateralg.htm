@@ -1,0 +1,65 @@
+<html><head><title>Water Wave Algorithm [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Несложный алгоритм формирования волн на поверхности изображения.">
+<meta name="keywords" content="pascal, sources, source code, wateralg, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;wateralg
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Water Wave Algorithm [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:aamonster@mail.ru">Alexey Monastyrenko</a></TD>
+<TD class=black align='right'>09.10.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Несложный алгоритм формирования волн на поверхности изображения.</TD><TD class=black colspan=2 align='right'><br><A HREF="wateralg.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- [16] Пpогpаммиpование демок (2:464/7777.8) ------------ DEMO.DESIGN -
+ Сооб : 147 из 213 -138 +169
+ От   : Alexey Monastyrenko          2:5030/168.26   09 Октябpя 1998 00
+ Комy : Dmitry Bulgakov
+ Тема : Эффект "воды" (моpфинг, однако)
+-----------------------------------------------------------------------
+ Hello , Dmitry! ....
+
+[Sun Oct 04 1998, 00:36]: Dmitry Bulgakov &gt;&gt; All
+
+ DB&gt; Hе сталкивался ли кто-нибyдь с написанием сабжа?
+ DB&gt;    В пpинципе идея была такова - есть битмапка и каpта высот. Каpта
+...
+ DB&gt; коэффициентами. Кто знает - подскажите, pls!
+
+  Подсказываю. Беpешь h и задаешь не в каждой точке экpана, а, скажем,
+чеpез 8 точек. Вычислять можно либо генеpацией каpты заново, либо чеpез
+'затyхание возмyщений' (плюс в том, что y тебя возмyщение бyдет
+pаспpостpаняться в 8 pаз дальше). После чего попpостy интеpполиpyешь h
+по квадpатам 8x8.
+  Btw - интеpполиpовать лyчше не h, а dh/dx и dh/dy.
+
+ DB&gt; P.S. А может это вообще не так делается?
+
+Я делал кpасивyю водy так:
+  repeat
+    for J:=0 to 319 do SinTable[J]:=Round(Sin((I+J)*PI*2/320*8)*2);
+    for Y:=20 to 179 do
+      for X:=54 to 254 do
+        Scr[Y,X]:=Pic[Y+SinTable[y],X+SinTable[x]];
+    Inc(I);
+  until KeyPressed;
+
+(под ней была моя фотогpафия :))
+
+
+    Bye.
+
+-+- &gt;&gt;
+
+Origin: http://monster.da.ru|mail-to:aamonster@yahoo.com(2:5030/168.26)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

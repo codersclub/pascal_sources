@@ -1,0 +1,109 @@
+<html><head><title>Water Effect for TMT Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект волн на воде: Подводный пейзаж с рыбками. По поверхности воды пробегают &quot;водомерки&quot;, оставляя за собой мелкую рябь... <br> Source Code for Water Effect for TMT Pascal. Two versions:<br> 1. 100% Pascal code !!!<br> 2. Optimised asm procedure.">
+<meta name="keywords" content="pascal, sources, source code, paswater, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;paswater
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Water Effect for TMT Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:kolejnik@ck-sg.p.lodz.pl">Konrad Olejnik</a></TD>
+<TD class=black align='right'>20.08.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Эффект волн на воде: Подводный пейзаж с рыбками.
+По поверхности воды пробегают "водомерки",
+оставляя за собой мелкую рябь... <br>
+Source Code for Water Effect for TMT Pascal. Two versions:<br>
+1. 100% Pascal code !!!<br>
+2. Optimised asm procedure.</TD><TD class=black colspan=2 align='right'><br><A HREF="paswater.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>89k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        +   +     +       +
+                        |  ++     |    +  |
+                          -+      |    |  |
+                        |   +   --+    +  |
+                      --+ --+   --+  -----+
+ ----------------------------- 1997 ------------------------------
+
+ 1. Intro.
+
+   Now here is... 100% Pascal version of WATER EFFECT !!!
+   All clear, all simple, all ready to run.
+   You should find in this package:
+
+   - paswater.pas   - 100% pascal source file for water effect
+   - paswater.exe   - executable of above
+   - asmwater.pas   - optimized asm version of water effect
+                      (still pascal !)
+   - asmwater.exe   - executable of above
+   - file_id.diz    - ?    :-)
+   - water.doc      - this file
+   - fastmove.asm   - some additional procedures in pure asm
+   - fastmove.obj   - obj version of above
+   - sea.bmp        - nice background picture...
+
+ 2. Thanks.
+
+    Now I want to send BIG thanks to people who wrote some code
+    about this effect before me...and their docs really help me.
+
+    Special thanks must go to:
+
+    - Yamaha of XYZZ (Scott Scriven) - your examples are the best !!!
+    - Tom Hammersley - good tutorial, but there are some inaccuracies...
+    - NeMeSiS - another good example, easy to read even for people who
+                don't know C (like me).
+
+ 3. About.
+
+    It takes me about two afternoons to understand and (re)write
+    all that stuff called water effect. It's far from real model of
+    fluid but looks really nice, so who cares...
+    I don't want to repeat all, what other authors write about it.
+    If you interested in, please read Tom's or Scott's tutorials.
+    Pascal code is so easy to read, and I think it's enough.
+
+    All my sources are written for TMT Pascal. Why ? TMT Pascal
+    is real 32-bit compiler. It's still Pascal but programs works
+    under PMODE - it gives you all your RAM in flat mode so
+    now there is no problem to write (for example):
+
+    var
+        buffer : array[ 0..128000 ] of word;
+
+    It is a must for water effect because you need two buffers
+    0..64000 of integer if you want full screen version!
+    It's impossible to do full screen (320x200) water effect
+    under Turbo Pascal. Confused? Hey, you can change few
+    lines in my sources and code water effect in 160x100 resolution
+    under your favourite TP 7.0 ! :-) But why do you stay in 286
+    epoch?
+
+    Anyway I suggest you to get TMT Pascal. It has still a little
+    unstable editor and debugger (TP editor is far better)   :-)
+    but TMT gives you 32-bit power. It is a must for Pascal fans.
+
+ 4. Performance of code
+
+    When I run this on my AMD 5x86/133 MHz with fast PCI video
+    card I get around 17 fps with 320x200 assembler version.
+    On P200 (PCI video card slower then in my PC) I get 35 fps.
+    I think it's as fast as Scott's version.
+
+ 5. End words.
+
+    You can use this code as you like. It's freeware so who cares...
+    ...but proper crediting and greeting rules !
+
+    you can find me at: kolejnik@ck-sg.p.lodz.pl (yes, it's POLAND!).
+
+    K!O/(Konrad Olejnik)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

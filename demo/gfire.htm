@@ -1,0 +1,133 @@
+<html><head><title>GFire - Green Fire Demo [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демонстрация эффекта пламени в зеленых тонах. Режим 13h. <br><font color=#666666> Green fire routine by Nick Slaughter </font>">
+<meta name="keywords" content="pascal, sources, source code, gfire, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gfire
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GFire - Green Fire Demo [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:jimmy.painless@falkenberg.mail.teli">Nick Slaughter</a></TD>
+<TD class=black align='right'>29.11.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="gfire.jpg"><p style="margin-left:20px">Демонстрация эффекта пламени в зеленых тонах. Режим 13h. <br><font color=#666666>
+Green fire routine by Nick Slaughter </font></TD><TD class=black colspan=2 align='right'><br><A HREF="gfire.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="gfire_1.gif" alt="">
+
+{&gt; Cut here. FileName= GFIRE.PAS }
+(*      Green Fire       *)
+(* By Nick Slaughter '96 *)
+
+(* Feel free to use this source!  *)
+(* I had fun making it! ;)        *)
+
+(*              //Nick Slaughter  *)
+
+(* Sorry about my bad ENGLISH! ;) heheh *)
+Program gfire;
+
+Uses Crt;
+
+Var Buffer : Array[0..16000] of Byte;
+
+procedure mcga;  { Mcga (mode 13) }
+  begin
+  Asm
+    Mov  ax,13h
+    Int  10h
+  End;
+end;
+Procedure Firecalc;
+{ Calculating of the Fire!}
+
+Var
+  x, y, ColorVal : Integer;
+
+Begin
+  For y := 98 downto 0 do
+  For x := 149 downto 10 do
+  Begin
+  ColorVal := (Buffer[(Y+1)*160+x]+Buffer[(Y+1)*160+(x+1)]+
+    Buffer[(Y+1)*160+(x-1)]+Buffer[Y*160+x]) Shr 2;
+  If ColorVal &gt; 0
+   Then ColorVal := ColorVal - 1;
+    Buffer[Y*160+x] := ColorVal;
+  End;
+End;
+
+Procedure Kordinat;
+{Sets the cordinates at the bottom of the screen!}
+
+Var  q : Integer;
+
+Begin
+  For q := 0 to 159 do
+    Buffer[99*160+q] := Random(13) * 255;
+End;
+
+
+Procedure Kopiera;
+{ Copy the fire using 2*2 squars }
+
+Var
+  x,y : Integer;
+
+Begin
+  For y := 193 downto 0 do
+  For x := 319 downto 0 do
+  Mem[$A000:y*320+x] := Buffer[(y Shr 1)*160+(x Shr 1)];
+End;
+
+Procedure Greencolor;
+{ Makes the green COLOR! }
+
+Var
+ col : Integer;
+
+Begin
+ For col := 255 Downto 0 do
+  Begin
+   Port[$3c8] := col;
+   Port[$3c9] := col Div 12;
+   Port[$3c9] := col Div 7;
+   Port[$3c9] := 0;
+ End;
+End;
+
+begin
+  mcga;  { Get the mode13 procedure }
+  FillChar(Buffer, Sizeof(Buffer), 0);
+  Greencolor;   { Get the Greencolor procedure }
+  Repeat              { Repeats until a key is pressed }
+    Kordinat;
+    Firecalc;
+    Kopiera;
+  Until KeyPressed;
+  Asm
+  Mov  ax,0003h   { Back in text mode }
+  Int  10h
+  End;
+End.
+
+
+Contact me:
+
+E-MAIL:
+
+jimmy.painless@falkenberg.mail.telia.com
+
+cya
+
+                        //Nick Slaughter</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

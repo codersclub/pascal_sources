@@ -1,0 +1,195 @@
+<html><head><title>Dasaev Demo Guide v1.1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Dasaev DemoGuide v1.1. Содержит эффекты и их полные исходные тексты c описанием: Fire, Plasma, Water, Scaling, 3D Rotating, Phong Shadeing, Gouraud Shadeing, Texture Mapping и многое другое. Всего 32 демки.">
+<meta name="keywords" content="pascal, sources, source code, ddg11, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ddg11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Dasaev Demo Guide v1.1</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:464/8086.29">Vladimir Gorsky</a></TD>
+<TD class=black align='right'>31.01.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=40 vspace=4 hspace=8 alt="" src="ddg11.jpg"><p style="margin-left:20px">Dasaev DemoGuide v1.1.
+Содержит эффекты и их полные исходные тексты c описанием:
+Fire, Plasma, Water, Scaling, 3D Rotating, Phong Shadeing,
+Gouraud Shadeing, Texture Mapping
+и многое другое. Всего 32 демки.</TD><TD class=black colspan=2 align='right'><br><A HREF="ddg11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>87k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Добpого вpемени суток, Mega!
+
+03 Feb 98 в 10:09 ты, Mega G Baitoff писал к Vladimir Gorsky
+пpимеpно такое:
+
+ MB&gt; откуда взять effects.pas, котоpый в каждом файлике стоит
+ MB&gt; как uses effects;
+
+  Да не нужен этот Effect для того , чтобы откомпилировать исходники.
+ Там из него используется все лишь процедура RegisterEffect. А она
+ нужна только для моей оболочки. Т.е. можно смело убирать
+ из раздела Uses модуль Effect, строку с RegisterEffect и
+ компилировать исходники.
+
+Dasaev DemoGuide выложен на Ftp.
+
+URL - ftp://ff.dsu.dp.ua/ddg11.rar
+
+С уважением, Владимир (aka Dasaev)
+
+--- Дедок с IQ=2.50.Beta6+
+ * Origin:  -= *MANIAC* Station =- (2:464/8086.29)
+
+{&gt; Cut here. FileName= DDG11.LST }
+          Dasaev Demo Guide v.1.1
+          Список приведенных эффектов
+
+
+ Базовые эффекты.
+-----------------
+        DEMOVGA : Базовый модуль для построения демок в 320x200x256!!!
+
+        <img border=0 width=320 height=200 src="ddg11_1.jpg" alt="">
+
+        Алгоритм пламени
+
+        <img border=0 width=320 height=200 src="ddg11_2.jpg" alt="">
+
+        Алгоритм линзы. Идея и формула by Bjarke Viksoe
+
+        <img border=0 width=320 height=200 src="ddg11_3.jpg" alt="">
+
+        Вращение и zooming изображения 256x256. С небольшим эффектом
+
+        <img border=0 width=320 height=200 src="ddg11_4.jpg" alt="">
+
+        Эффекты на таблице перехода
+
+        <img border=0 width=320 height=200 src="ddg11_5.jpg" alt="">
+
+        Фрактальная плазма
+
+        <img border=0 width=320 height=200 src="ddg11_6.jpg" alt="">
+
+        Shade Bobs
+
+        <img border=0 width=320 height=200 src="ddg11_7.jpg" alt="">
+
+        BumpMapping - отображение карты неровностей
+
+        <img border=0 width=320 height=200 src="ddg11_8.jpg" alt="">
+
+        Бегущая строка , как в звездных войнах
+
+        <img border=0 width=320 height=200 src="ddg11_9.gif" alt="">
+
+        Использование в демке шрифтов собственного производства
+
+        <img border=0 width=320 height=200 src="ddg11_11.gif" alt="">
+
+        Эффект волн на воде
+
+        <img border=0 width=320 height=200 src="ddg11_10.jpg" alt="">
+
+        Алгоритм эффекта дождя
+
+        <img border=0 width=320 height=200 src="ddg11_12.jpg" alt="">
+
+        Эффект снегопада
+
+        <img border=0 width=320 height=200 src="ddg11_13.jpg" alt="">
+
+ Синусоидальные эффекты
+-------------------------
+        Синусоидальная плазма. Базовый вариант
+
+        <img border=0 width=320 height=200 src="ddg11_14.jpg" alt="">
+
+        Синусоидальная плазма. Мой вариант
+
+        <img border=0 width=320 height=200 src="ddg11_15.jpg" alt="">
+
+        Синусоидальный флаг
+
+        <img border=0 width=320 height=200 src="ddg11_16.gif" alt="">
+
+        Вьющаяся синусоидальная линия
+
+        <img border=0 width=320 height=200 src="ddg11_17.jpg" alt="">
+
+        Синусоидальная бегущая строка
+
+        <img border=0 width=320 height=200 src="ddg11_18.gif" alt="">
+
+        Картинка с синусоидальгыми смещениями
+
+        <img border=0 width=320 height=200 src="ddg11_19.jpg" alt="">
+
+ Элементы 3D графики
+-------------------------
+        Базовая 3D графика. Простой вращающийся тор
+
+        <img border=0 width=320 height=200 src="ddg11_20.jpg" alt="">
+
+        Закраска Гуру
+
+        <img border=0 width=320 height=200 src="ddg11_21.jpg" alt="">
+
+        Закраска Фонга
+
+        <img border=0 width=320 height=200 src="ddg11_22.jpg" alt="">
+
+        Простейший вариант текстурения
+
+        <img border=0 width=320 height=200 src="ddg11_23.jpg" alt="">
+
+        Псевдотрехмерная фигура с одной осью вращения
+
+        <img border=0 width=320 height=200 src="ddg11_24.jpg" alt="">
+
+        Извивающаяся фигура с неравными углами поворотов
+
+        <img border=0 width=320 height=200 src="ddg11_25.jpg" alt="">
+
+ Комбинированные эффекты
+-------------------------
+        Эффект Desert из демки Fractals by Mikko Reinikainen
+
+        <img border=0 width=320 height=200 src="ddg11_26.jpg" alt="">
+
+        Интерференция плазменных карт
+
+        <img border=0 width=320 height=200 src="ddg11_27.jpg" alt="">
+
+        Эффект из демки FluId by Monster
+
+        <img border=0 width=320 height=200 src="ddg11_28.jpg" alt="">
+
+        Эффект из демки Top by Monster
+
+        <img border=0 width=320 height=200 src="ddg11_29.jpg" alt="">
+
+ Таблички перехода
+-------------------------
+        Эффект скрутки экрана в центр
+
+        <img border=0 width=320 height=200 src="ddg11_30.jpg" alt="">
+
+        Эффект на таблице перехода с изменениями картинки
+
+        <img border=0 width=320 height=200 src="ddg11_31.jpg" alt="">
+
+        Табличный эффект Vortex by Mega G Baitoff
+
+        <img border=0 width=320 height=200 src="ddg11_32.jpg" alt="">
+
+ has been mmma</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,242 @@
+<html><head><title>Outlaw Triad Demo Series, Part 4 - HIGH RESOLUTION</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демо серия группы Outlaw Triad, Выпуск №4. Быстрый вывод текста в графике высокого разрешения 640x480x16. Язык -Assembler, легко переводится на Pascal.<br><font color=#666666> In this fourth release we will discuss the basics of high resolution modes like 640*480*16. We will make simple stringwriter for use in these modes. A full sourcecode in assember is included. It's a part of the sourcecode of a BBS intro coded for Magicware. The Outlaw Triad Italian HQ.</font>">
+<meta name="keywords" content="pascal, sources, source code, othires, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;othires
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Outlaw Triad Demo Series, Part 4 - HIGH RESOLUTION</TD>
+<TD nowrap class=black>&nbsp;Vulture/OT</TD>
+<TD class=black align='right'>22.03.96</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="othires.gif"><p style="margin-left:20px">Демо серия группы Outlaw Triad, Выпуск №4.
+Быстрый вывод текста в графике высокого разрешения 640x480x16.
+Язык -Assembler, легко переводится на Pascal.<br><font color=#666666>
+In this fourth release we will discuss the basics of high resolution modes
+like 640*480*16. We will make simple stringwriter for use in these modes.
+A full sourcecode in assember is included. It's a part of the sourcecode of
+a BBS intro coded for Magicware. The Outlaw Triad Italian HQ.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="othires.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              - THE OUTLAW TRIAD DEMO-SERIES -
+
+------------------------ PART IV -----------------------------------
+
+                   Written by : Vulture/OT
+                   Code in    : Assembler
+                   Topic      : High resolution
+
+                <img border=0 width=320 height=238 src="othires1.gif" alt="">
+
+---------------------- Introduction --------------------------------
+
+ Welcome to the Outlaw Triad demo-series! In these series we will be
+ talking about programming demo-effects in either pascal or assembler.
+ Theory behind the effects shall be discussed while a full sourcecode
+ is also provided.
+ In this fourth release we will discuss the basics of high resolution
+ modes like 640*480*16. We will make simple stringwriter for use in
+ these modes.
+ A full sourcecode in assember is included. It's a part of the
+ sourcecode of a BBS intro coded for Magicware. The Outlaw Triad
+ Italian HQ. Enjoy!
+
+------------------------- Theory -----------------------------------
+
+ Ok, I will not waste much time explaining how a stringwriter works
+ since these routines are fairly easy to make. However, I will spend
+ a few bytes on it. I mean, this still is a trainer, right? ;-)
+
+ To show some text on the screen, you will have to state the text you
+ want. What we want is a label representing the text to show.
+ Like this:
+
+ Label Text Byte
+      DB   '   the text you want to show   ',0
+
+ The major advantage of doing it this way is the fact that you can
+ change the text very easily. Another way I've seen in some intro
+ sourcecodes is stating the numeric values of the text, or something
+ like that. A rather odd way of doing things, IMHO.
+ Anyway, the "0" at the end of the string means that the text has come
+ to an end there. We will take care of that in our stringwriter routine.
+ Ok, now how to we show this text? That's the main question here.
+ First, we need a font to work with. In most small intros, the fontdata
+ is organised in a lineair way. For example, you could scan a pcxfile
+ from left to right, top to bottom and save the bytes to a constant.
+ Ok, you also need to know the x,y size of the font. We need them for
+ calculating the exact starting position in the fontdata of the
+ specific character we want to draw. Next thing you need is the
+ character order. An example:
+
+ Label Order Byte
+      DB   'abcdefghijklmnopqrstuvwxyz!?.,()":+-'
+
+ Let's take a look at an example of how to locate a character in the
+ data. I assume the data is organised in a lineair way like a stated
+ above. Also, let's say the x and y size are both 16. If we wanted to
+ locate the letter 'g', we would add (6*16) to the offset (start) of
+ the fontdata. Why? Take a look: The letter 'g' is the seventh letter
+ in the fontorder. We want to locate the upperleft corner (!) of that
+ letter. So, by adding (6*16) to the offset we are exactly where we
+ want to be! We have simply skipped the first 6 characters (that is,
+ the first scanline of those characters). Ok, when we have located
+ that particular position, we can draw the char. You could do something
+ like this:
+
+    - Go into a loop where you:
+      - Draw 16 pixels
+      - Update pointer to fontdata (remember: fontdata is lineair)
+      - Update vga position
+
+ Do this 16 times (y was 16 here) and you're done. Ok, I don't want to
+ waste much more space explaining this so here are the steps you could
+ take to show some text:
+                                 ~~~~~
+
+     1 - Load a character from the text
+     2 - Do appropiate action (in case of "0")
+     3 - Reset counter
+     4 - Go into a loop:
+       a - Load a character from order
+       b - Compare with the character from the text
+       c - If not the same, increase counter, back to A
+     5 - They were the same, now use the counter to find
+         the position of the character in the fontdata
+         (The way this is done depends on how the data is
+          organised. Check out the source to see what I mean)
+     6 - Draw the character
+     7 - Do next one
+
+ Well, and that's it! You can use these steps in any resolution you
+ want. In our case, high resolution 640*480*16. Let's take a closer
+ look at this particular mode, shall we?
+
+ Each byte in high resolution vgamemory represents 8 neighboring
+ horizontal pixels! In a byte are 8 bits, so each bit is 1 pixel on
+ the screen! Quite a difference compared to standard mode 13h where 1
+ byte represented one pixel on the screen. Ok, since you are working
+ with groups of 8 horizontal pixels at a time, the logical screenwidth
+ is now 80. Think about it! The screenwidth in pixels is 640. Because
+ 1 byte represents 8 horizontal pixels, the logical screenwidth is
+ 640/8=80. You use the logical screenwidth when drawing a character on
+ the screen.
+ When you write a byte to the screen, you can select the bits (pixels)
+ you want by writing the byte into the Bit Mask Register.
+ This is index 08h of the Graphic Controller. All enabled bits in this
+ register will be written to the screen and all not-enabled bits will
+ not be written to the screen!
+ So, with this register you could write a PutPixel routine.
+ Anyway, typical code to write a byte (a pattern of 8 horizontal pixels)
+ to the screen can look something like:
+
+     mov   dx,03ceh       ; Graphic Controller
+     mov   ah,ds:[si]     ; The byte to write (pointed to by ds:si)
+     mov   al,08h         ; Bit Mask Register
+     out   dx,ax
+     movsb                ; From data to vga (es:di points to vga)
+
+ This is exactly what I did in the sourcecode. Note when using the Bit
+ Mask Register, all pixels you write to the vga will have the same
+ color. If you want them to have different colors you could use a
+ PutPixel procedure in which you set the color for the dot to write.
+ Ok, you would like to have a PutPixel routine for use in this mode,
+ right? Well, I could give you one but I won't. Instead, I will give
+ you some hints on how to code your own.
+
+     - Set color of dot
+     - Multiply Y with 80
+     - Divide X with 8
+     - Y=Y+X
+     - Set correct bit (using Bit Mask register =&gt; X and 7)
+     - Read dummy byte from vga (loading latches)
+     - Write byte to screen
+
+ There you go! It shouldn't be hard to write a PutPixel routine now.
+ If you don't succeed, please mail me. I will give you my own routine
+ instead.
+
+ Ok, one more thing to discuss and that is setting the color for a dot.
+ Like I stated before, you should load the byte you want to write to
+ the screen into the Bit Mask Register before you write it to the
+ screen. All enabled bits will be written to the screen with the same
+ data as presented in the Set/Reset Register! With this, we can set
+ the color of the dot we want to write to the screen. The Set/Reset
+ Register is 4 bits width so this leaves us with a maximum number of
+ 16 colors. Colorsetting code in assembler:
+
+  mov     dx,3ceh           ; Graphic Controller address register port
+  mov     ax,0f01h          ; Index 01h  (enable set/reset register)
+  out     dx,ax             ; Enable all 4 bits to be altered
+  xor     al,al             ; Index 00h  (set/reset register)
+  mov     ah,cl             ; Color (0 to 15)
+  out     dx,ax             ; Set color
+
+ There are 2 registers to be altered here. The Enable Set/Reset
+ Register and the Set/Reset Register. They are both 4 bits in width.
+ If you enable a bit in the Enable Set/Reset Register,
+ the corresponding bit in the Set/Reset Register can be altered.
+ And, when you disable a bit in the Enable Set/Reset Register,
+ the corresponding bit in the Set/Reset Register can't be altered.
+ So, we set all (4) bits in the Enable Set/Reset Register to 1.
+ This way, all bits (4) of the Set/Reset Register may be altered.
+ Then, we load the color into the Set/Reset Register. Any byte (bits)
+ that is written to the screen will have this color. Why don't you
+ make a sample program to test this code?
+ It should work just fine. (note: I used this code in my own PutPixel
+ proc).
+
+ One advantage of these high resolution modes is that you need just
+ a few bytes to represent an entire character. Like in this example
+ source, you only need 2*18=36 bytes. If you want to show a character
+ this size in plain mode 13h, you would need 16*18=288 bytes. Quite a
+ difference, eh?
+ (note: this doesn't have to be true. When using a single color font,
+ you can also store the pixels in bits in mode 13h).
+ A disadvantage of high resolution mode is that you only have 16
+ colors to you disposal.
+
+ Now go and take a look at the sourcecode provided in this package.
+ It is fully documented so there shouldn't be any problems. If you
+ have troubles after all, e-mail me. I like to hear from you!
+
+ Ok, this is all for now. Happy coding!
+
+       - Vulture / Outlaw Triad -
+
+----------------------- Distro Sites -------------------------------
+
+ Call our distros to get all our releases.
+
+  BlueNose    World HQ          +31 (0)345-619401
+  FireHouse   Distrosite        +31 (0)528-274176
+  The Force   Distrosite        +31 (0)36-5346967 More distros wanted!
+  MagicWare   Italian HQ        +39  6-52355532
+  ShockWave   South African HQ  +27 (011)888-6345
+
+-------------------------- Contact ---------------------------------
+
+ Want to contact Outlaw Triad for some reason? You can reach us at our
+ distrosites in Holland. Or if you have e-mail access, mail us:
+
+   Vulture  (coder/pr)     comma400@tem.nhl.nl
+
+ Our internet homepage:
+
+   http://www.tem.nhl.nl/~comma400/vulture.html
+
+ These internet adresses should be valid at least till june 1996.
+
+----------------------------------------------------------------------
+
+                  Quote:  Does killing time hurt eternity?</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

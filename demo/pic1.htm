@@ -1,0 +1,145 @@
+<html><head><title>Pic1 - Colorized Micro Colonies [320x200x256]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демонстрационная программа-заставка, внешне напоминающая игру &quot;Жизнь&quot;. Отличие в том, что на одном экране оказываются одновременно несколько разных (разноцветных) колоний, каждая из которых &quot;пытается выжить&quot; за счет других.">
+<meta name="keywords" content="pascal, sources, source code, pic1, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pic1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Pic1 - Colorized Micro Colonies [320x200x256]</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:aamonster@mail.ru">Alexey Monastyrenko</a></TD>
+<TD class=black align='right'>24.04.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="pic1.gif"><p style="margin-left:20px">Демонстрационная программа-заставка, внешне напоминающая игру "Жизнь".
+Отличие в том, что на одном экране оказываются одновременно несколько
+разных (разноцветных) колоний, каждая из которых "пытается выжить"
+за счет других.</TD><TD class=black colspan=2 align='right'><br><A HREF="pic1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=200 src="pic1_1.gif" alt="">
+
+{&gt; Cut here. FileName= PAL_RAD.SRC }
+const PalConst:Real=0;
+
+procedure SetPalette;
+
+function f(x:real):real;
+begin
+  x := x+palconst;
+  x := (x - round(x));
+  f:=x*x*4;
+end;
+
+var   N, C : Integer;
+      r,g,b,i: real;
+
+begin
+  Port[$3C8] := 0;
+  for N := 0 to 255 do begin
+    R := F(N/256-1/3);
+    G := F(N/256);
+    B := F(N/256+1/3);
+    i :=r; if g&gt;i then i:= g; if b&gt;i then i:=b;
+    Port[$3C9] := round(r*63/1);
+    Port[$3C9] := round(g*63/1);
+    Port[$3C9] := round(b*63/1);
+  end;
+end; {of SetPalette}
+
+{&gt; Cut here. FileName= PIC1.PAS }
+{$R-,Q-,S-,Q-}
+uses crt;
+{$i pal_rad.src}
+
+type TScr = array[0..199,0..319] of byte;
+var Scr: TScr absolute $A000:$0000;
+type TScr2 = array[0..63999] of byte;
+var Scr2: TScr2 absolute $A000:$0000;
+var Scr3, Scr4: ^TScr;
+
+const color:byte=255;
+
+function longmul(X, Y: Integer): Longint;
+inline($5A/$58/$f7/$EA);
+
+function LongDiv(X: Longint; Y: Integer): Integer;
+inline($59/$58/$5A/$F7/$F9);
+
+procedure line(x1,y1,x2,y2:integer);
+var i,j:integer;
+begin
+  i := abs(x2-x1);
+  j := abs(y2-y1);
+  if i&lt;j then i:=j;
+  if i=0 then exit;
+
+  for j := 0 to i do begin
+{    inc(scr[y1+longdiv(longmul(y2-y1,j), i),
+            x1+longdiv(longmul(x2-x1,j), i)], color);{}
+  scr[y1+longdiv(longmul(y2-y1,j), i),
+      x1+longdiv(longmul(x2-x1,j), i)] :=
+      (y1+longdiv(longmul(y2-y1,j), i)) or
+      (1+(x1+longdiv(longmul(x2-x1,j), i)) div 2);
+  end;
+end;
+
+procedure drop(x,y,r:integer); {капля}
+var i,j,L:integer;
+    x1,y1:integer;
+begin
+  for i := -r to +r do begin
+    L := round(sqrt(sqr(r+0.5)-sqr(i)));
+    for j := -L to +L do begin
+      x1 := x+ ((j*7) div 8); y1 := y+ ((i*7) div 8);
+      scr3^[y+i,x+j] := scr4^[y1, x1];{}
+{      scr3^[y+i,x+j] := (scr4^[y1, x1]+scr4^[y1, x1+1]+
+       scr4^[y1, x1-1]+scr4^[y1+1, x1]+scr4^[y1-1, x1]) div 5;{}
+    end;
+  end;
+  for i := y-r to y+r do
+    for j := x-r to x+r do begin
+      scr4^[i,j] := scr3^[i,j];{}
+      scr[i,j] := scr3^[i,j];
+    end;
+end;
+
+Procedure vidMode(mode : byte);assembler;
+  asm mov ah,$00;  mov al,mode; int 10h; end;
+
+var x,y,x1,y1:integer;
+    i:word;
+begin
+  vidMode($13);                       { 320x200x256 graphics mode }
+  SetPalette;
+  GetMem(Scr3,65535);
+  GetMem(Scr4,65535);
+  y := random(200);
+  x := random(320);
+  i :=0;
+  for i:=0 to 65535 do begin
+    y := (i + (i shl 5) xor i shl 3 ) div 320;
+    x := (i + (i shl 5) xor i shl 3 ) mod 320;
+    y1:=y; x1:=x;
+  scr[y, x] :={y xor x}random(255);
+  end;
+  scr4^:=scr;
+  scr3^:=scr;
+  repeat
+{   palconst:=palconst+0.01; setpalette;{}
+    y := random(200);
+    x := random(320);
+    drop(x,y,4);
+  until keypressed; readkey;
+  vidMode($03);                       { return to 80x25 textmode }
+  writeln('i=',i);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

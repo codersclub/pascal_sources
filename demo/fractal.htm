@@ -1,0 +1,390 @@
+<html><head><title>Filled Fractal Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Демонстрация шести вариантов фрактальных структур, из них одна - динамическая. BGI Graphics. [640x480x16]<br><font color=#666666> Draws some fractals, some classics and some new ones you've maybe never seen. </font>">
+<meta name="keywords" content="pascal, sources, source code, fractal, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fractal
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Filled Fractal Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sacha@i-manila.com.ph">Sacha Chua</a></TD>
+<TD class=black align='right'>24.07.97</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="fractal.gif"><p style="margin-left:20px">Демонстрация шести вариантов фрактальных структур,
+из них одна - динамическая. BGI Graphics. [640x480x16]<br><font color=#666666>
+Draws some fractals, some classics and some new
+ones you've maybe never seen. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="fractal.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"><img border=0 width=320 height=240 src="fracta_1.gif" alt=""> <img border=0 width=320 height=240 src="fracta_2.gif" alt="">
+
+<img border=0 width=320 height=240 src="fracta_3.gif" alt=""> <img border=0 width=320 height=240 src="fracta_4.gif" alt="">
+
+<img border=0 width=320 height=240 src="fracta_5.gif" alt=""> <img border=0 width=320 height=240 src="fracta_6.gif" alt="">
+
+
+{&gt; Cut here. FileName= FRACTAL.PAS }
+
+{ Signed by Sacha Chua, sacha@i-manila.com.ph
+
+  http://www.geocities.com/SouthBeach/6562/
+
+
+  This program was written on March 23, 1997 in Turbo Pascal
+
+  Copyright (c) 1997 Sacha Chua. }
+
+
+program fractals;
+
+{ This program contains fractal routines. }
+
+
+uses crt, graph;
+
+const maxpoly = 20;
+
+type polypoints = array[1..maxpoly + 1] of pointtype;
+
+
+procedure makepoly(
+          var P: polypoints;  { Returned polygon vertices }
+          X, Y,               { Coordinates of center of polygon }
+          N,                  { Number of sides of polygon }
+          Size,               { Height/width of polygon }
+          Rotation : integer);{ Angle of rotation }
+          forward;
+
+{ This procedure returns a polygon of the type used by DrawPoly
+  and FillPoly.
+
+  Because it uses trigonometric functions to determine the coordinates
+  of the vertices, it may not be as nice (straight lines and all).}
+
+
+
+procedure poly_fractal(
+             X, Y,              { Coordinates of center of fractal }
+             N,                 { Number of sides of fractal }
+             Size : integer;    { Height/width of fractal }
+             R : byte;          { Depth/detail of fractal }
+             Hollow : boolean); { Do not fill in the fractal }
+             forward;
+
+{ This procedure draws a normal fractal. }
+
+
+
+procedure rotated_poly_fractal(
+             X, Y,             { Coordinates of center }
+             N,                { Number of sides }
+             Size : integer;   { Height/Width of fractal }
+             R : byte;         { Depth/detail of fractal }
+             Hollow : boolean; { Do not fill in the fractal }
+             Angle : integer   { Rotation angle }
+             ); forward;
+
+
+procedure rect_fractal    (x, y, size : integer; r : byte); forward;
+
+{ Primitive fractal for squares }
+
+
+procedure tri_fractal2    (x, y, size : integer; r : byte); forward;
+
+{ Fractal found in Pascal's Triangle }
+
+
+procedure bintree_fractal  (x, y, size : integer; r : byte); forward;
+
+{ Binary tree fractal }
+
+
+{ !------------------ POLYGON HANDLING ------------------------- }
+
+procedure makepoly(var p: polypoints; x, y, n, size, rotation : integer);
+
+  { n is the number of sides, size the total width/height }
+
+var ctr : byte;
+
+    a : real;
+
+begin
+
+  a := (360 / n + rotation) * (pi / 180);
+
+  if n &lt;&gt; 4 then
+
+    for ctr := 1 to n do begin
+
+      p[ctr].x := x + round(cos(a * ctr) * size / 2);
+
+      p[ctr].y := y + round(sin(a * ctr) * size / 2);
+
+    end
+
+  else begin
+
+    p[1].x := x - size div 2; p[1].y := y - size div 2;
+
+    p[2].x := x + size div 2; p[2].y := y - size div 2;
+
+    p[3].x := x + size div 2; p[3].y := y + size div 2;
+
+    p[4].x := x - size div 2; p[4].y := y + size div 2;
+
+  end;
+
+  p[n + 1] := p[1];
+
+end;
+
+{ !------------------ POLYGON HANDLING ------------------------- }
+
+
+
+procedure rect_fractal(x, y, size : integer; r : byte);
+
+begin
+
+  if r = 0 then exit;
+
+  rect_fractal(x - size div 2, y - size div 2, size div 2, r - 1);
+
+  rect_fractal(x + size div 2, y - size div 2, size div 2, r - 1);
+
+  rect_fractal(x - size div 2, y + size div 2, size div 2, r - 1);
+
+  rect_fractal(x + size div 2, y + size div 2, size div 2, r - 1);
+
+  bar(x - size div 2, y - size div 2, x + size div 2, y + size div 2);
+
+  rectangle(x - size div 2, y - size div 2,
+            x + size div 2, y + size div 2);
+
+end;
+
+
+
+procedure tri_fractal2(x, y, size : integer; r : byte);
+
+var p : array[1..4] of pointtype;
+
+begin
+
+  if r = 0 then exit;
+
+  p[1].x := x - size div 2;
+  p[1].y := y + size div 2;
+
+  p[2].x := x;
+  p[2].y := y - size div 2;
+
+  p[3].x := x + size div 2;
+  p[3].y := y + size div 2;
+
+  p[4] := p[1];
+
+  tri_fractal2(p[1].x + size div 4, p[1].y - size div 4,
+               size div 2, r - 1);
+
+  tri_fractal2(x,                   p[2].y + size div 4,
+               size div 2, r - 1);
+
+  tri_fractal2(p[3].x - size div 4, y + size div 4,
+               size div 2, r - 1);
+
+  drawpoly(4, p);
+
+end;
+
+
+
+procedure poly_fractal(x, y, n, size : integer; r : byte;
+                       hollow : boolean);
+
+  { n is an integer &lt; maxpoly, equals number of sides. }
+
+var ctr : byte;
+
+    p : polypoints;
+
+begin
+
+  if r = 0 then exit;
+
+  makepoly(p, x, y, n, size, 0);
+
+  for ctr := 1 to n do
+
+    poly_fractal(p[ctr].x, p[ctr].y, n, size div 2, r - 1, hollow);
+
+  if hollow then drawpoly(n + 1, p) else fillpoly(n + 1, p);
+
+end;
+
+
+
+procedure rotated_poly_fractal(x, y, n, size : integer;
+                               r : byte; hollow : boolean;
+                               angle : integer);
+
+  { n is an integer &lt; maxpoly, equals number of sides. }
+
+var ctr : byte;
+
+    p : polypoints;
+
+begin
+
+  if r = 0 then exit;
+
+  makepoly(p, x, y, n, size, angle);
+
+  for ctr := 1 to n do
+
+    poly_fractal(p[ctr].x, p[ctr].y, n, size div 2, r - 1, hollow);
+
+  if hollow then drawpoly(n + 1, p) else fillpoly(n + 1, p);
+
+end;
+
+
+
+procedure bintree_fractal(x, y, size : integer; r : byte);
+
+begin
+
+  if r = 0 then exit;
+
+  bintree_fractal(x - size div 2, y - size div 2, size div 2, r - 1);
+
+  bintree_fractal(x + size div 2, y - size div 2, size div 2, r - 1);
+
+  line(x, y, x - size div 2, y - size div 2);
+
+  line(x, y, x + size div 2, y - size div 2);
+
+  { left branch }
+
+  { right branch }
+
+end;
+
+
+
+
+
+var gd, gm : integer;
+
+    ctr: byte;
+
+    a : integer;
+
+
+
+const rotspeed = 10;
+
+
+
+begin
+
+  gd := VGA; gm := VGAHi;
+  initgraph(gd, gm, '');
+  cleardevice;
+
+  setcolor(white);
+  setlinestyle(solidln, 0, 0);
+  setfillstyle(closedotfill, blue);
+  settextjustify(centertext, bottomtext);
+  outtextxy(getmaxx div 2, getmaxy div 2,
+            'Welcome to Sacha''s FractalDemo.');
+
+  outtextxy(getmaxx div 2, getmaxy div 2 + 10,
+     'This program was written in Turbo Pascal on March 23, 1997.');
+
+  readkey;
+
+
+  cleardevice;
+  bintree_fractal(getmaxx div 2, getmaxy - 10, 300, 10);
+  outtextxy(getmaxx div 2, getmaxy, 'Binary Tree Fractal');
+
+  readkey;
+
+
+  cleardevice;
+  tri_fractal2(getmaxx div 2, getmaxy div 2, 300, 10);
+  outtextxy(getmaxx div 2, getmaxy, 'TriFractal2 (Pascal''s Fractal)');
+  readkey;
+
+
+
+  cleardevice;
+  rect_fractal(getmaxx div 2, getmaxy div 2, 200, 7);
+  outtextxy(getmaxx div 2, getmaxy, 'RectFractal (Depth 7)');
+  readkey;
+
+
+
+  cleardevice;
+  poly_fractal(getmaxx div 2, getmaxy div 2, 5, 200, 5, TRUE);
+  outtextxy(getmaxx div 2, getmaxy, 'Static PolyFractal, Hollow');
+  readkey;
+
+
+
+  cleardevice;
+  poly_fractal(getmaxx div 2, getmaxy div 2, 5, 200, 6, FALSE);
+  outtextxy(getmaxx div 2, getmaxy, 'Static PolyFractal, Filled');
+  readkey;
+
+
+
+  cleardevice;
+  outtextxy(getmaxx div 2, getmaxy, 'Rotating PolyFractal');
+  setviewport(getmaxx div 2 - 200, getmaxy div 2 - 200,
+  getmaxx div 2 + 200, getmaxy div 2 + 200, FALSE);
+
+  repeat
+    clearviewport;
+    inc(a);
+    if a &gt; 360 then a := a - 360;
+    rotated_poly_fractal(200, 200, 5, 100, 3, TRUE, a);
+    delay(5)
+  until keypressed;
+
+  setviewport(0, 0, getmaxx, getmaxy, FALSE);
+  readkey;
+
+
+
+  cleardevice;
+  outtextxy(getmaxx div 2, getmaxy div 2 - 30,
+
+            'You have just finished Sacha''s FractalDemo.'+
+            ' I hope you enjoy the');
+
+  outtextxy(getmaxx div 2, getmaxy div 2 - 20,
+            'source code. Please e-mail me at'+
+            ' sacha@i-manila.com.ph and tell me');
+
+  outtextxy(getmaxx div 2, getmaxy div 2 - 10,
+            'what you think, or pass by '+
+            'http://www.geocities.com/SouthBeach/6562.');
+
+  readkey;
+
+  closegraph;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,139 @@
+<html><head><title>CPlasma v1.0 -- Polar Based Plasma</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Эффект Плазмы, использующий полярные координаты вместо декартовых. <br><font color=#666666> A really cool plasma thing with lots of options.</font>">
+<meta name="keywords" content="pascal, sources, source code, cplasma, demo, Demo Making ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Demo Making</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cplasma
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CPlasma v1.0 -- Polar Based Plasma</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:jrsx03b@prodigy.com">Jason Trowbridge</a></TD>
+<TD class=black align='right'>31.03.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="cplasma.jpg"><p style="margin-left:20px">Эффект Плазмы, использующий полярные координаты вместо декартовых. <br><font color=#666666>
+A really cool plasma thing with lots of options.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="cplasma.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CPlasma v1.0 -- Polar Based Plasma
+
+By Jason Trowbridge
+
+                <img border=0 width=320 height=320 src="cplasma1.jpg" alt="">
+
+-----
+Intro
+-----
+    A couple of years ago, when the plasma algorithms first started
+showing up, I noticed that the plasma was based upon a rectangle.
+Take a good look close up on a smooth plasma, and you can see all
+sorts of edges in the colors.  This is because most plasma algorithms
+uses cartesian coordinates, an (x,y) way of determaining position.
+This is done because monitors use cartesian coordinates.
+It's easiest.
+    But I wondered: what about circle based plasma?  Would it look the
+same?  This program is the result.
+    I think it looks like some sort of explosion.  That's why I added
+the palette rotations--to see what it would look like "animated."
+    Instead of creating points from (x1,y1) and (x2, y2), I create
+points from (Angle1, Radius1) to (Angle2, Radius2).  However, it
+really uses the same _essential_ technique as the regular plasma.
+I just use an angle and radius.  For each radius R that I figure
+outwards, I do the following:
+  1)  To figure out angle 2, which is between angle 1 and angle 3,
+      I take the average of the pixel at angle 1 and angle 3.
+  2)  I add/subtract an amount of randomness. The amount of randomness
+      that is added/subtracted is based upon the chord length between
+      the two pixels. Note that it is the chord length, not a simple
+      distance formula.
+  3)  Then, I figure out the pixel between angle 1 and angle 2, as well
+      as the pixel between angle 2 and angle 3.  I do this, of course,
+      recursively.
+
+----------
+Running It
+----------
+    When the program is first run, there's several questions that
+must be first answered.  The defaults run fine, but here's what each
+of them do....
+
+RandSeed
+    If you enter a number here, and you like the result,
+you can enter the same number here and get the exact same result.
+
+Roughness
+    This number determines how rough the plasma is.  The higher the
+number, the rougher the plasma.
+
+Radii
+    This is the radius, in pixels.  The maximum radius is 100 pixels.
+
+Fadeout
+    Fadeout controls how much the plasma darkens as it gets near the
+edges of the radius.
+
+Ejection
+    The ejection angle is the minimum angle that the plasma will
+compute. For large plasmas, you'll want a very small value. For small
+plasmas, you can have a large ejection value without any trouble.
+If the ejection value is too high, you'll have spots in your plasma
+which are not figured out. It'll look kind of weird. If the ejection
+value is too small, it won't affect the plasma any. However, it will
+increase the time the program takes to generate the plasma.
+
+Palette Delay
+    This will speed up/slow down the rate at which the palette
+rotates.  The higher the delay, the slower it goes.
+
+Screen Aspect
+    The VGA mode 13hex is not particularly well suited for circles.
+The pixels aren't squares, so circles look like elipses. If you answer
+"Y"es to this question, the plasma will be distorted to look circular.
+
+Random Endpoints
+    If you don't want this, then the endpoints of the axis of the
+plasma will be black.  It'll have the effect of slightly darkening and
+distorting the plasma.  The center will be white with this turned off.
+With this on, the endpoints are set at random.
+
+Random Center
+    If you selected that you want random endpoints, you'll also get
+to choose whether or not to have a random center.
+
+    Then, the plasma will be drawn.  After it is done, you'll here a
+beep.  Just press a key.
+    The screen will become blue for about a second.  You'll be able to
+see if your ejection value was too small.  If it was, you'll see bits
+of blue showing from behind the plasma.
+    Then, the screen will go dark, and the palette will rotate
+through and fade out.  Press any key to do it again.  Press the &lt;ESC&gt;
+or the 'Q' key in order to quit to the next palette rotation.
+    To stop any of these palette rotations, just hit any key.
+
+----------
+In Closing
+----------
+    That's all of the program.  The source code is included.  It does
+exactly what the EXE does.
+    Go ahead, distribute this.  It's not exactly optimized, or even
+well written.  But it works, and I've yet to see a program that does
+this, so I'm releasing it to everyone.  You can use parts of the code
+in your code. However, you may not modify the source code, then
+redistribute it.
+You must include this file, the original executable, and the original
+source code when distributing this program.  You can't charge money
+for this program.  This program is presented "as is" and with all
+defects.  The programmer may not be held liable for damage to data,
+property, and various inhabited planets due to this program.
+
+  Contact me if you like it!
+  jrsx03b@prodigy.com
+  trowbri@unm.edu  &lt;-  Soon to change....</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
