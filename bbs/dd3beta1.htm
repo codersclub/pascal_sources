@@ -1,0 +1,100 @@
+<html><head><title>DoorDriver/3 - Turbo Pascal 7.0 Door Kit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Комплект модулей для разработки BBS Door. Имеет собственный коммуникационный модуль, поддерживающий нестандартные прерывания, до 4х портов, прерывания 0-15, скорость до 115200 бод, ANSI и прочую текстовую графику. <br><font color=#666666> DD/3 Turbo Pascal 7.0 Door Kit. Supports any drop file that is text. Supports non-standard interrupts, comm 1-4, IRQs 0-15, and speeds up to 115,200 baud. Resource Files Like SRGAME Doors use! Supports INI File Handling. Full support of timeslicing. Supports ASCII/AVT/RIP/MAX/ANSI graphics. You cannot live without this package! Includes FULL SOURCE CODE! Public Domain 1997 </font>">
+<meta name="keywords" content="pascal, sources, source code, dd3beta1, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dd3beta1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DoorDriver/3 - Turbo Pascal 7.0 Door Kit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dalger@map.com">Dalger</a></TD>
+<TD class=black align='right'>16.01.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Комплект модулей для разработки BBS Door.
+Имеет собственный коммуникационный модуль,
+поддерживающий нестандартные прерывания, до 4х портов,
+прерывания 0-15, скорость до 115200 бод,
+ANSI и прочую текстовую графику. <br><font color=#666666>
+DD/3 Turbo Pascal 7.0 Door Kit.
+Supports any drop file that is text.
+Supports non-standard interrupts, comm 1-4, IRQs 0-15,
+and speeds up to 115,200 baud.
+Resource Files Like SRGAME Doors use!
+Supports INI File Handling. Full support of timeslicing.
+Supports ASCII/AVT/RIP/MAX/ANSI graphics.
+You cannot live without this package!
+Includes FULL SOURCE CODE! Public Domain 1997 </font></TD><TD class=black colspan=2 align='right'><br><A HREF="dd3beta1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>112k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                Attention Beta Testers!
+
+This is a pre-release of the new DoorDriver/3, or DD3 for short.
+Please report any bugs, or send any patches with an explanation
+to 1:321/200.0 FidoNet, 413-568-5241 City Scape BBS, or
+dalger@map.com via the InterNet.  Fixes can be found at:
+
+City Scape BBS:  413-568-5241
+FidoNet FREQ  :  1:321/200
+WorldWide Web :  http://pages.map.com/~dalger/dd3/welcome.htm
+(Not up Yet)
+
+DD/3 Beta 1 Notes
+-----------------
+
+Implemented Resource from CTL File. To access simply include
+DD3RES on your include statement. Resources include
+resourcestring,resourceinteger, and resourceboolean. You may
+include whatever resources your door needs in the CTL file. The
+CTL file may be called whatever it likes on the command line, or
+default to what you set it to.
+
+Implemented INI File Support. Currently used to support DROP
+files, the INI support can also be included and used on other
+files.  Yes DD3INI *can* read Windows INI files as well.
+
+Command Line parameters are documented in the source of
+DD3START.
+
+To use graphics, you must include DD3GRAPH.  Currently supports
+ASCII and ANSI.  AVT, MAX, and RIP support are coming. Local
+mode produces the same results as the remote side unlike DDPlus.
+So if you make an ANSI door and want to see it in ASCII, set
+your mode to ASCII and it'll look the same! Currently a TTY
+emulator is being written for ASCII. For example #12 is clear
+screen.
+
+LowLevel ASYNC and Fossil routines are included in DD3COMM, the
+can most likely be used to support Call Back verifiers, etc.
+They do not check the comport for carrier or if characters are
+waiting when using them.  The standard Read/Writes do however
+support it.
+
+InitDoorCTL is no longer needed to run a door.
+
+
+         Acknowledgements
+         ----------------
+
+        DD3RES         SRGames Comm Library - Thanks guys!
+        DD3STR         SRGames String Library
+        D3ANSI         Derrick Parkhurt/Scott Baker
+        DD3INI         Brad Zavitsky
+        DD3FOS         Original DDPlus Library
+        DD3ASYNC       TDK By Larry Athey (not his original)
+        DD3TIME        Taken from SWAG
+        DD3CHAT        Scott Baker/Bob Dalton
+
+Those libraries have been used in DD/3. Original source may be
+slightly, or grealty altered from original. The originals
+however are written by the above mentioned. Any other routines
+may have been similiar to DDPlus, but have been re-written or
+bugs fixed.  DD/3 is a compilation of the work that Scott Baker
+started.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

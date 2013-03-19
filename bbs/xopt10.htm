@@ -1,0 +1,71 @@
+<html><head><title>XOptimize v1.0 - XBBS Menu Files Optimizer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для оптимизации файлов меню XBBS за счет сокращения длины меток и удаления комментариев. <br><font color=#666666> Optimizes XBBS menu files by shortening label names and removing comments. </font>">
+<meta name="keywords" content="pascal, sources, source code, xopt10, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xopt10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;XOptimize v1.0 - XBBS Menu Files Optimizer</TD>
+<TD nowrap class=black>&nbsp;Keith Vertanen</TD>
+<TD class=black align='right'>24.03.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для оптимизации файлов меню XBBS
+за счет сокращения длины меток и удаления комментариев. <br><font color=#666666>
+Optimizes XBBS menu files
+by shortening label names and removing comments. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="xopt10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">XOptimize v1.0 (c) Copyright 1991 by Keith Vertanen
+------------------------------------------------------
+     "Everybody outta the pool!  There's a lobster loose!"
+
+What it does:
+---------------
+     XOptimize will take your XBBS menu file and will optimize it for
+speed and space.  It does this by removing comments, and renaming
+your long labels with short two letter labels.  In theory this should
+speed up XBBS's interpretation of the menu, as it has a shorter string
+to search for and less menu to search through.  Does it?  You tell
+me...  On my 45K menu file (yes I do keep my entire BBS in one menu),
+it shrank it to around 40K, a savings of 10% (and 5K in ram disk
+space).  Just type XOPT without any command line options to get some
+help, that should be all you will need to get rocking.
+
+Program notes:
+---------------
+     The full Turbo Pascal 5.5 source code is provided along with the
+executable.  Feel free to read the fully commented source listing (:)).
+You may modify the code for your own use, but if you intend to release
+a modified copy, you must contact me first.  Also if you recompile the
+source, you will have to remove the CRC checking as you don't have the
+necessary code to add the CRC to the end of the EXE.
+     A 32-bit CRC has also been added to the EXE, and XOptimize will
+check itself before running.  If you get a CRC error message, you
+should replace the EXE will a new copy (a error could mean the EXE has
+been corrupted, or it may have been infected by a virus).  Since
+XOptimize expects itself to be a certain length, do not compress it
+with any EXE compression utility (such as LZEXE or PKLITE).
+
+
+Author:
+---------------
+     I can be contacted by any of the following means:
+
+        o XBBS echo
+
+        o Netmail to Fidonet 1:282/73 (please poll for response)
+
+        o On my BBS, Altered Dimensions (612) 779-6018.
+
+        o Send SASE to:   Keith Vertanen
+                          7750 66th St. N.
+                          Pine Springs, MN 55115</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

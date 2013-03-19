@@ -1,0 +1,170 @@
+<html><head><title>BBSkit 2.0 - Communications toolkit for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор модулей (только TPU!) для создания собственной BBS. <br><font color=#666666> Pascal TPU Modules for create a BBS. Included: Docs and TPU6.0-7.0 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, bbskt20e, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bbskt20e
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BBSkit 2.0 - Communications toolkit for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sjmadsen@miavx1.acs.muohio.edu">Steve Madsen</a></TD>
+<TD class=black align='right'>17.01.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор модулей (только TPU!) для создания собственной BBS. <br><font color=#666666>
+Pascal TPU Modules for create a BBS.
+Included: Docs and TPU6.0-7.0 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="bbskt20e.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>127k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                             BBSkit version 2.00
+
+                         Communications toolkit for Turbo Pascal
+
+                                                 by Steve Madsen
+
+Copyright
+
+BBSkit, associated utilities, source code, and documentation are
+copyright (c) 1991, 1992 by Steven Madsen.  All rights reserved.
+
+The purpose of BBSkit
+
+     Ever since I became involved with telecommunications in the
+mid  1980's, I have been very interested in writing applications
+that  work  with the serial port.  Particularly, I like  writing
+bulletin  board systems.  The only problem was that I  found  no
+communications  packages that met my standards,  which  included
+being usable under Turbo Pascal 6.0.  Thus, BBSkit was born.
+      My  main  idea in creating BBSkit was to provide the  most
+seamless  environment  for a BBS author to  create  his  or  her
+application.   BBS  applications  require  certain  things  that
+terminal programs do not, such as being able to route input  and
+output,  having  support to handle all kinds of terminals,  from
+slow  terminals  requring nulls to keep up with transmission  to
+new  ones  that  have  advanced terminal emulation  as  standard
+equipment.   Users  have grown along with the technology.   They
+want  power, speed and beauty in the systems that they frequent.
+But  the most important thing was creating a toolkit that  would
+meet  my needs, and also meet those of people like me that  were
+having  the same difficulty finding toolkits that would  do  the
+job for them.
+     Think of BBSkit as a shell program.  Everything you need to
+use  your  modem  or  communicate through your  serial  port  is
+already there.  You can route input and output, send and receive
+files,  emulate  over  10  different  terminals.   Now  you  can
+concentrate  on  writing your application, not on  communicating
+with your serial port.
+
+What's new in version 2.0?
+
+      Version  2.0  is a tremendous enhancement to the  original
+package.   Version 1.0 was robust when compared to many  of  the
+other  shareware  or freeware packages I still find  on  systems
+today, but 2.0 will easily surpass that.  With 2.0 I have  added
+more complete VT-100 style terminal emulation directly into  the
+package.  This means no more ANSI.SYS!  All of the file transfer
+protocols  have  been  recoded  and  are  now  much  easier   to
+understand since the source follows the same style as  the  main
+units.  Ymodem and Ymodem-G have also been added to our list  of
+protocols.  To keep things more close to home, I have  rewritten
+my serial support in 100% assembly language.  You no longer need
+a  FOSSIL  driver  to  communicate with your  system,  and  that
+reduces  the  amount  of memory taken up by device  drivers  and
+leaves more for your app.  Of course, as a registered user,  you
+have  all  of  the  source  code to  BBSkit  available  on  your
+registration disks.
+      Perhaps the most important announcement comes in the  form
+of  the  BBS  Session Protocol.  Lately everyone has been  going
+crazy  over  the  incredible changes user interfaces  are  going
+through.  Mouse support is becoming standard, graphics are being
+found everywhere.  And Windows is responsible.  Well... wouldn't
+it be great to have this kind of support over a normal telephone
+line?   BSP gives it to you!  Mouse support and graphics,  in  a
+form  of terminal emulation that can be used in conjunction with
+any  of  the  provided templates.  Now you  can  add  mouse  and
+graphics  support  to  your app, and the remote  end  will  take
+advantage  of it if it can.  Otherwise, the user will experience
+no change from a normal session.
+
+Where's Zmodem?
+
+     Some of you who saw or used the first version of BBSkit may
+be  wondering where Zmodem is in the new package.  The reason is
+actually quite simple, although it is a very disappointing  one.
+During the development of BBSkit 2.00 I looked long and hard for
+the  latest Zmodem specifications, to be assured that  my  users
+would  receive the latest Zmodem implementation, coded according
+to  Omen  Technology's  most current  Zmodem  documentation.   I
+became  very  disappointed  when I could  not  find  any  recent
+specifications on local BBSes, or anywhere in the world  through
+Internet ftp access.  This led me to actually call Omen's BBS  a
+few  times,  searching diligently for these  specifications.   I
+could  not find any later than 1987, and these were done in  the
+typical  Omen  fashion, which pretty much kept me from  doing  a
+good  implementation of their protocol.  To top things off, when
+I  read  through Omen's BBS, I found something called the Zmodem
+Developer's Kit (which convienently comes with C source  code!).
+Apparently  Omen has taken Zmodem out of the public domain  with
+their  introduction of MobyTurbo.  So, sorry, but Zmodem is  not
+going to be included in this (or probably any future) release of
+BBSkit.   If  you  don't  like this (I don't),  please  complain
+directly to Omen Technology, because I cannot do anything  about
+it from where I stand.
+      As the author of whatever software you write using BBSkit,
+I would suggest that you do your utmost to promote Ymodem-batch.
+This protocol is fast, safe (CRC-16 error checking) and probably
+more  efficient than Zmodem.  The reason for this is that Zmodem
+is  one of those "do everything" protocols, so it tries to  make
+file  transfers safe across all platforms.  This includes packet
+switching  networks which gobble up certain characters.   Zmodem
+protects  these  characters by prefixing them.  The  problem  is
+that  it  turns  one offending character into two  non-offending
+characters, which slows down the overall speed of the  transfer.
+Ymodem  doesn't even try to do this, so it sends all  characters
+as  they are, which can speed up transfers.  Plus, you still get
+batching  capability.   The  only thing  you  lose  is  transfer
+recovery,  but  this could be fixed with a proprietary  protocol
+for all BBSkit applications.  If there is any interest in such a
+thing,  please  let  me know.  I would make  all  specifications
+public domain and implementations of the protocol royalty  free,
+without the complexity of Zmodem.
+
+Contacting Technical Support
+
+     Technical support is available to all registered users free
+of charge from the time that registration is received.  By "free
+of  charge" I mean that I will provide as much help as I can  in
+any  way  that  I can, so long as it does not cost  me  lots  of
+money.   Support is available over the phone (no  collect  calls
+will   be   accepted),  through  United  States  Mail,   through
+CompuServe, through the Internet, or through BITNET.
+      As  a  college student, my address away at school  changes
+with  each  year.  Since this something that can be a bother  to
+users, I am taking it upon myself to inform registered users  of
+my  change of address at the beginning of each school year.  The
+address  for that school year and the telephone number  will  be
+provided  in  a  mailing sent to all users  through  U.S.  Mail.
+Additional  information may be included with this mailing  about
+technical support.
+
+     Current addresses are as follows:
+
+U.S. Mail (at home): Steve Madsen
+                  BBSkit Technical Support
+                  1888 Edith Marie Drive
+                  Beavercreek, OH  45431-3377
+CompuServe:       INTERNET&gt;sjmadsen@miavx1.acs.muohio.edu
+Internet:         sjmadsen@miavx1.acs.muohio.edu
+BITNET:           sjmadsen@miavx1
+
+
+          Steven Madsen
+          1888 Edith Marie Drive
+          Beavercreek, OH  45431-3377</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,347 @@
+<html><head><title>BBS Door Skeleton</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Готовый к компиляции пример построения BBS Door. Поддерживает работу с портами COM1...COM4 и локальный режим.  <br><font color=#666666> It is a complete BBS DOOR ready to compile and run! </font>">
+<meta name="keywords" content="pascal, sources, source code, doorskel, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;doorskel
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BBS Door Skeleton</TD>
+<TD nowrap class=black>&nbsp;Bernie Gallagher</TD>
+<TD class=black align='right'>22.11.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Готовый к компиляции пример построения BBS Door.
+Поддерживает работу с портами COM1...COM4 и локальный режим. 
+<br><font color=#666666>
+It is a complete BBS DOOR ready to compile and run! </font></TD><TD class=black colspan=2 align='right'><br><A HREF="doorskel.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>83k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                    DOOR SKELETON
+
+            COPYRIGHT (C) 1992 BERNIE GALLAGHER
+
+    ...is a complete BBS DOOR ready to compile and run!
+
+
+--- INTRODUCTION ------------------------------------------------------
+
+
+    Of course, it doesn't do anything (except ask the caller a few silly
+questions)...  It's just a skeleton program for YOU to build your
+brainchild Door around.
+
+    However, it is a functional door even as it exists now and you could
+very well install it as a door on your BBS.  In fact, why don't you do
+that and see what it does before you make any changes to it?
+
+    Even in it's skeleton form, you will see that it extracts the user's
+name from DORINFO file (or prompts for your name in local mode), and
+maintains a player file indexed by first and last name.
+
+
+--- INVOCATION --------------------------------------------------------
+
+
+    The format to invoke the program is:
+
+            DOORSKEL &lt;node&gt; &lt;bulletin&gt;
+
+    &lt;node&gt; is a number from 0 to 4.  Node 0 means local mode.  Node 1 to
+4 causes it to read DORINFO&lt;node&gt;.DEF which is created by your BBS (or
+by a door file conversion program).  It obtains the caller's name, com
+port, baud rate, time remaining, and ANSI preference from this file.
+
+    &lt;bulletin&gt; is optional, and is the full path/name of the score
+bulletin to create or update when the player ends his session.
+
+    No special config or install program is required.  This program
+will create all files it needs "on the fly" when it runs for the
+first time.
+
+
+--- INSTALLATION-------------------------------------------------------
+
+
+    As suggested above, I again suggest that you install it in it's
+present form as a door on your BBS before you make any modifications to
+the source.
+
+    You install Door Skeleton just as you would any other door:
+configure your BBS to call a BATch file similar to the following one
+when the caller selects it from your menu of doors.  Also configure your
+BBS to write a caller info file to the directory in which Door Skeleton
+resides.
+
+        REM EXAMPLE BATCH FILE TO CALL DOOR SKELETON FROM BBS NODE 1
+        CD \DOORSKEL
+        DOORSKEL 1 C:\BBS\BULLET7
+        CD \BBS
+        STARTBBS.BAT
+
+    Door Skeleton expects a DORINFO type caller info file, named either
+DORINFO&lt;node&gt;.DEF or CALLINFO.&lt;node&gt;.  The format of this file is:
+
+        Line  1 = Name of BBS
+        Line  2 = Sysop's first name
+        Line  3 = Sysop's last name
+        Line  4 = Com port (1, 2, 3, or 4 - non numeric characters
+                  are ignored, ie. "COM3", "COM 3", "3", " 3 ", etc.
+                  all translate to com 3)
+        Line  5 = Baud rate (begins scanning at first numeric digit
+                  and continues scanning until it comes to a non
+                  numeric character or EOL, ie. "2400", " 2400 "
+                  "baud 2400", "2400,8,N,1", " 2400 7 E 1", etc.,
+                  all translate to 2400 baud)
+        Line  6 = ignored
+        Line  7 = Player's first name
+        Line  8 = Player's last name
+
+                  Up to this point, all lines are required, Door
+                  Skeleton will now keep reading until all optional
+                  lines are read or until it comes to EOF.
+
+        Line  9 = ignored
+        Line 10 = ANSI switch (numeric value of 2 will select ANSI,
+                  any other value will not select ANSI - default is
+                  no ANSI).
+        Line 11 = ignored
+        Line 12 = ignored
+        Line 13 = ignored
+        Line 14 = screen width (default is 80)
+        Line 15 = screen length (default is 24)
+
+
+--- CUSTOMIZATION -----------------------------------------------------
+
+
+    The assumption here is that you are already a proficient programmer
+in Pascal (or are an expert programmer in some other language and are
+familiar with the syntax and use of your Pascal compiler).  Door
+Skeleton is not intended to be a "door writer's construction set".  It
+is merely a foundation (async/modem drivers, remote terminal I/O, and
+file locking).  YOU must still do the work of programming the "meat" of
+your door program.
+
+    After you have tried it out, and have got it to work as a door from
+your BBS in it's pristine state, you can begin to use it as the
+foundation for your own door.  At first, you should not change any of
+the modules except these:
+
+    One is PLAYREC.INC.  This is the file record for the player file.
+You will need to add your own fields to this record to keep track of
+players position, score, options, etc. during and between sessions.  DO
+NOT delete or modify any of the fields already defined!  And DO NOT
+yourself write to any of those fields with your code!  IMPORTANT:  any
+time you change the format of any file record, you must delete that data
+file, and let it be re-created from scratch, otherwise you will get a
+"RECORD LENGTH ERROR" the next time you enter the door.
+
+    The module CLRPLAYR.INC is what initializes each new player record
+whenever a player enters the game for the first time.  You need to
+initialize all the fields you define here, otherwise your fields will
+contain random gibberish.
+
+    Another is CFGREC.INC.  This is the file record for the config file.
+You may want to add your own fields to control the number of credits
+each player starts out with, the maximum number of widgets a player may
+posess at any given time, etc.
+
+    The config file also has it's corresponding CLRCFG.INC.  You could
+change the default values for the daily time limit, turn limit, session
+limit, or snoop toggle here.
+
+    COMMON.INC is where you should define all global variables used by
+your own routines.  However, you really should make your variables local
+whenever possible and pass them as formal parameters.
+
+    Put the logic of your game in PLAY.INC.  This currently contains
+some comments and example statements to display text and prompt the
+remote user for input.
+
+    Modify BULLETIN.INC to create your SCORES BULLETIN.  Again, DO NOT
+change any of the logic of this module.  Change only the WRITELN's to
+format your SCORES BULLETIN the way you want.
+
+    Add your COPYRIGHT to COPYRITE.INC. You MUST leave my COPYRIGHT
+intact so it will display at the start of the program!  And depending on
+what brand of Pascal compiler you use, they may also require you to add
+their copyright too.
+
+    Oh, and you'll probably want to change the name of the program
+header in DOORSKEL.PAS to the name of your door.
+
+
+--- ADVANCED CUSTOMIZATION --------------------------------------------
+
+
+    After you have become comfortable with Door Skeleton, you might
+become daring and start to modify some of the support modules to really
+customize your door.  In fact, you will have to do this if you want to
+add ANSI special effects, respond immediately to the press of arrow or
+other keys (hot keys), and other things to make your door truly unique.
+But DO NOT do this until you thoroughly understand how the support logic
+works!
+
+    Browse through some of the INC files that came with Door Skeleton
+and read the comments at the top of each one.  I've given you some Good
+Stuff that might be useful in writing your door.
+
+    A really sophisticated door will probably need additional files.
+For example, in a Trade-Wars-like game, you will need a file of all the
+ports.  You can create your own additional files with Pascal's low level
+REWRITE, RESET, READ, WRITE, and CLOSE functions; or you can use
+PLAYREC.INC, GETPLAYR.INC, PUTPLAYR.INC, CLRPLAYR.INC, DEFPLAYR.INC,
+ADDPLAYR.INC, and FNDPLAYR.INC as examples for creating equivalent
+functions to access files of your own design.
+
+    If you use my file functions as models for additional files of your
+own, you should place your DEF's after the existing DEF's for the player
+and config files in START.INC.
+
+    Of course, you may wish to take the complete opposite approach.  You
+may just want to yank out the async/modem drivers (in ASYNC.INC) and
+write everything else yourself from scratch.  Be my guest - and good
+luck!
+
+
+--- SPECIAL FEATURES --------------------------------------------------
+
+
+    Some of the nifty features already included are as follows:
+
+    A sysops CONFIG menu which is automatically entered in local mode,
+and is also entered in remote mode when the user's name matches the
+sysop's name on the caller info file.  You can set the the maximum
+number of player turns, daily sessions, time limit, and local snoop
+toggle from the config menu.  Add other options that you need for your
+particular door.
+
+    All output sent to the remote user thru PUTSTRING is word wrapped.
+I.E., you do not have to place end-of-line marks so that your text
+doesn't run off the right edge of the screen (though you can insert them
+when you want text formatted Just So).
+
+    Through the use of a wide variety of ASK_... functions, all input is
+length, type, and range checked before it is passed back to your code.
+
+    When ANSI mode is on, all remote text is displayed in ANSI color,
+with one color for text generated by the program, and another color for
+text typed by the user.
+
+    Supports COM-1 thru COM-4, from 300 to 9600 baud.
+
+    If it is a remote connection, it converses with the remote user,
+while echoing all communication on the local screen (if snoop is on).
+It monitors Carrier Detect and exits if the user drops carrier.  It will
+also exit if the remote user remains idle for over 5 minutes.
+
+    With Turbo Pascal's "split screen" ability, it displays a static
+status line at the bottom of the local screen at all times while the
+user is playing (this feature may not be supported if you use a Pascal
+compiler other than Borland's).
+
+    It will take the modem "off hook" after a user disconnects or drops
+carrier so that there will be no window of vulnurability until the BBS
+reloads itself.
+
+    It opens each file only while it is being accessed and then closes
+it again.  There is a performance penalty imposed by this design, but
+the benefit is that no more than 1 file will ever be open at the same
+time - thus saving you the potential problem of your door locking up
+because your users hve selected only a small number of file handles on
+their machines.
+
+    It also performs file locking by node!  YES, you door will be
+multi-node with no special effort required on your part!
+
+    A scores bulletin is generated at the end of each player's session
+(if the bulletin file name is specified on the program parameter list).
+
+
+--- POTENTIAL PROBLEMS ------------------------------------------------
+
+
+    If the program should abend while performing disk I/O, it is
+possible that it will leave the lock for that node set.  All further use
+of the program will report a FILE SYSTEM DEADLOCK.  There are two ways
+to fix this when it happens.  The simplest is to simply ERASE all the
+lock files.  A fancier way to clear the deadlock is to run a utility
+program included here called FREENODE.  It lowers all the semaphores of
+all the lock files it finds and reports which ones are hung.  Obviously,
+you don't want to do this until you are sure that there are no users
+playing the game, or you could possibly free a lock that is locked
+because the door is actually updating data from that node!
+
+
+--- COPYRIGHTS --------------------------------------------------------
+
+
+    A word about copyrights...  This code IS copyrighted.  You may alter
+it and change it around any way you like to make your door work the way
+you want it to work.  My only requirement is that you display the
+following copyright notice at the start of the program (it does this as
+of the way you received it), below your COPYRIGHT.
+
+        WRITTEN OVER DOOR SKELETON V1.0
+            COPYRIGHT (C) 1992 BERNIE GALLAGHER
+
+    Please also be advised that the publisher of your Pascal compiler
+(Borland, Microsoft, etc) may require that you also include their
+copyright in the final compiled COM program.  The easiest way to do this
+is to add it in to COPYRIGHT.INC below my COPYRIGHT.
+
+    You may NOT distribute any of my Pascal source code (except in it's
+original unaltered ZIP file as you received it), whether you modified it
+or not.  You may, of course, distribute your own source code PROVIDED
+that it is completely your own work and not derived from any of my
+source files.
+
+    If you ernestly desire to distribute your door in source code form
+so that users can compile and run it, you may place my unaltered ZIP
+file as a single file embedded within your ZIP file.  If you don't
+charge a fee for this composite ZIP file, then everything is still
+hunky-dory.  But if you want to CHARGE for your source AND include my
+source along with it, I'm not opposed to the idea, but we need to have a
+little chat and work out royalties.
+
+    Finally, if you distribute a COM program that you have created with
+the help of my DOOR SKELETON, you must register DOOR SKELETON!  Note
+that you do NOT have to register DOOR SKELETON merely to use it!  You
+may use it for months, or years without having to register it, while you
+develop your brainchild.  But once you start distributing a COM program
+created from it, you MUST, then, register it!
+
+    Furthermore, you must register it once for EACH door that you
+release.  You do NOT have to re-register it for a new version of a
+previously registered door, ONLY for a completely new door.  IE, if you
+register it for GALACTIC MARAUDERS v1.0, you do NOT have to re-register
+it for GALACTIC MARAUDERS v2.0, 3.0, etc.  However, you DO have to
+re-register it when you release ULTRA TRADER v1.0.
+
+
+--- SUPPORT -----------------------------------------------------------
+
+
+    You are welcome to call my BBS, the Starship BBS at (908) 828-8121
+at 2400, 1200, or 300 baud.
+
+    On my BBS, you will find the latest versions of all doors and other
+shareware written by myself - including Bernie Host, a complete BBS
+system.  You will also find a large shareware library of Pascal
+toolboxes and source libraries written by various shareware authors.
+Hopefully, you will even find actual doors by other shareware authors
+written with Door Skeleton.
+
+    Please be advised that as I write this READ.ME in November of 1992,
+I expect to be moving early 1993.  I hope to be able to take my BBS
+phone number with me when I move, but if not, I am listed in Computer
+Shopper and you can find my new number listed there.  The Starship BBS
+will still be listed in the 908 area code section.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

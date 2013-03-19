@@ -1,0 +1,100 @@
+<html><head><title>AVDOOR - Avatar's Generic Door Toolkit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор модулей для создания BBS DOOR с поддержкой Fossil, Avatar, Ansi. <br><font color=#666666> AvDoor provides most of the underlying infrastructure needed by almost every online program, including:  FOSSIL detection (but will work without one)<br>  ANSI emulation (doesn't need ANSI.SYS installed!)<br>  Local console screen I/O and status line (using only BIOS calls)<br>  Built-in chat mode with word-wrap and logging (and optional shell-to-DOS)<br>  BBS interfaces, command-line mode and local operation<br>  Timeout, time used and hangup detection (very important!)<br>  Software registration keys (with registered copies of AvDoor only)<br> Included: Docs and TPU5.5-6.0 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, avdoor11, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;avdoor11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;AVDOOR - Avatar's Generic Door Toolkit</TD>
+<TD nowrap class=black>&nbsp;Serious Cybernetics</TD>
+<TD class=black align='right'>10.12.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор модулей для создания BBS DOOR с поддержкой
+Fossil, Avatar, Ansi. <br><font color=#666666>
+AvDoor provides most of the underlying infrastructure needed by almost
+every online program, including:
+ FOSSIL detection (but will work without one)<br>
+ ANSI emulation (doesn't need ANSI.SYS installed!)<br>
+ Local console screen I/O and status line (using only BIOS calls)<br>
+ Built-in chat mode with word-wrap and logging (and optional shell-to-DOS)<br>
+ BBS interfaces, command-line mode and local operation<br>
+ Timeout, time used and hangup detection (very important!)<br>
+ Software registration keys (with registered copies of AvDoor only)<br>
+Included: Docs and TPU5.5-6.0 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="avdoor11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>44k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  AVDOOR - Avatar's Generic Door Toolkit
+  Created 3/12/90 by Avatar
+  Sysop of S.I.G. BBS +61 3 888-8846
+  Copyright (c) 1991 Serious Cybernetics
+| Version 1.10 documentation
+| Last updated 10/12/91 by Avatar
+
+| Lines marked with a vertical bar "|" in the left margin have been
+| updated since the previous version.  If you have any comments or
+| suggestions, please contact me as Avatar on S.I.G. BBS +61 3 888-8846
+| or via netmail at 199:4242/1@RainbowNet, 3:632/358@FidoNet
+| or 58:4100/32@INTLnet.  You can also reach me as avatar@csource.oz.au
+| on the Internet or by mail at:
+
+  Serious Cybernetics
+  P.O. Box 409
+  Canterbury 3126
+  Australia
+
+
+  Introduction
+  ------------
+
+| AvDoor evolved from another program of mine called AIchat, and later
+| closed the circle by being used to implement further releases of that
+| program.  However, I needed to write a number of other online programs,
+| and thus AvDoor was born.  Pretty soon people were asking me if they
+| could use my routines and I decided to release this unit as shareware.
+
+  AvDoor provides most of the underlying infrastructure needed by almost
+  every online program, including:
+
+  * FOSSIL detection (but will work without one)
+  * ANSI emulation (doesn't need ANSI.SYS installed!)
+  * Local console screen I/O and status line (using only BIOS calls)
+  * Built-in chat mode with word-wrap and logging
+    (and optional shell-to-DOS)
+  * BBS interfaces, command-line mode and local operation
+  * Timeout, time used and hangup detection (very important!)
+  * Software registration keys (with registered copies of AvDoor only)
+
+
+  Installation
+  ------------
+
+  You will need to rename AVDOOR55.TPU to AVDOOR.TPU if you are using
+  Turbo Pascal 5.5, or rename AVDOOR60.TPU to AVDOOR.TPU if you are
+  using Turbo Pascal 6.0.  If you are using any other programming
+  language, please contact me to find out if a version of AvDoor to suit
+| you is planned.  Source code for parts of AvDoor may be available in
+| later releases if requested - contact the author for pricing.
+
+
+  Contents
+  --------
+
+| This manual is gradually being expanded with every release of AvDoor.
+| At present it consists of the following information:  A summary of the
+| types, constants and variables (in that order) defined by AvDoor, an
+| explanation of the ShellProc variable with a sample DosShell function,
+| a brief summary of the functions and procedures provided by AvDoor, a
+| longer explanation of each of the procedures and functions, and a
+| (very simple!) sample program.  Hopefully that should be enough to get
+| you started, but if you have any further questions feel free to
+| contact me by any of the means listed at the beginning of this
+| documentation.  Priority will obviously be given to registered users.
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

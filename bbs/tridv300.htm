@@ -1,0 +1,192 @@
+<html><head><title>TriDoor 3.0 - Door/Comm Support Unit for TP 5.5/6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Набор модулей для разработки онлайновых приложений для BBS (BBS Door). Приведены примеры, документация и скомпилированные TPU модули для TP5.5/6.0 (исходников нет!). <br><font color=#666666> TriDoor is the most advanced, efficient and easy-to-use utility to create fully-functioning doors, on-line programs and utilities in a matter of minutes without ever having to delve into the hundreds of texts on communications programming. </font>">
+<meta name="keywords" content="pascal, sources, source code, tridv300, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tridv300
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TriDoor 3.0 - Door/Comm Support Unit for TP 5.5/6.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:crusso@cs.ulowell.edu">Christopher M. Russo</a></TD>
+<TD class=black align='right'>27.02.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Набор модулей для разработки онлайновых приложений для BBS
+(BBS Door). Приведены примеры, документация и скомпилированные
+TPU модули для TP5.5/6.0 (исходников нет!). <br><font color=#666666>
+TriDoor is the most advanced, efficient and easy-to-use utility
+to create fully-functioning doors, on-line programs and utilities
+in a matter of minutes without ever having to delve into the hundreds
+of texts on communications programming. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="tridv300.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>69k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">           ђђђђђђђђђђ        ђђ   ђђђђђђђ
+           ђ  ђђ  ђ               ђђ  ђђ
+               ђђ     ђђђ  ђђ    ђђ  ђђ  ђђђ   ђђђ  ђђђ
+               ђђ      ђ ђ  ђ    ђђ  ђђ ђ  ђ ђ  ђ  ђ ђ
+              ђђђђ    ђђ    ђђђ  ђђђђђђђ   ђђђ   ђђђ  ђђ
+
+
+                          An On-Line Door Support Unit
+                      For use with Turbo Pascal 5.5 and 6.0
+
+
+  TriDoor is the  most advanced,  efficient  and easy-to-use  utility of
+it's kind available  on the software  market today.  It allows  even the
+novice  Borland  Turbo Pascal  programmer  to  create  fully-functioning
+doors,  on-line  programs and utilities  in a  matter of minutes without
+ever having to  delve  into  the hundreds  of  texts  on  communications
+programming.
+
+  In addition  to having complete  communications  support  TriDoor also
+comes equipped with many  other features which are extremely useful when
+writing communications  applications.  Examples of  these are color ANSI
+graphics controls,  user time  handling routines  and  many  Pascal-like
+commands such as td_writeln() which is the communications  equivalent of
+write() and writeln().
+
+  TriDoor is  flexible too!  With  the  exception of  a few  things here
+and there (like the tell-tale chat mode) your  users may never even know
+that you  did not write  the entire program- communications routines and
+all.  You will see no  hard-coded error  messages,  forced configuration
+files or annoying  restrictions that you did not develop yourself.  This
+allows you to  use all  your programming  resources  the way YOU want as
+opposed to the way a tool kit may  have set them up.  A prime example of
+this is command line parameters; some tool kits  will force you to enter
+in the name  of a configuration  file on  the command line.  What if you
+would rather enter in an IRQ setting or a user name?  What if you do not
+want a configuration file?  TriDoor allows you to do as you will.
+
+  The programming  possibilities  are endless- I  have  written  on-line
+games,  archive  viewing  utilities,  text/ANSI  graphics  file viewers,
+"top ten list"  generators,  terminal  programs, SysOp  paging doors and
+many MANY more.
+
+  How many  times have you said to yourself, "This is truly an excellent
+system I have running if  only I could add on a [blank] without changing
+to a new  BBS  software..."?  Well, there  are a  few solutions  to this
+problem:  You could switch BBS software which may give you a few options
+you did not have before but you are also reducing yourself to rebuilding
+a system  you have already put  probably hundreds  of hours of work into
+and potentially compromising the quality of your user's environment -or-
+you  could  download a  door  from your  local BBS  where you may find a
+program to do what you need, but it  may  not  be  EXACTLY what you want
+-or- you could use TriDoor to write your own!  You  could have  the door
+you want, make  the changes you  need at ANY  time and have the pleasure
+of having made it yourself.
+
+  I frequently  find  myself saying, "If you cannot do  it with TriDoor,
+then you  probably cannot do it."   I have only  scraped the  surface of
+it's capabilities  and ease of use; the  rest is up to you. You now hold
+the power to make the doors,  on-line games and utilities  that you have
+always wanted!
+
+
+                           FEATURES OF TRIDOOR
+
+
+  TriDoor has  many  advanced and  VERY easy-to-use  features  which are
+built  right in.  And  although  there are   so many  that  I  literally
+cannot  remember ALL  of them, we are  still adding all the time so give
+us a call so we can get you a copy of the latest version.
+
+     * NOW VERY INEXPENSIVE!  SEE LICENSING AGREEMENT!
+
+     * Automatic set-up and support of communications ports
+     * Automatic reading and processing of DORINFO1.DEF and PCBOARD.SYS
+     * Easy to use commands such as td_writeln() and td_readln() which
+       function as communications supporting equivalents of the Turbo
+       Pascal commands
+     * Built-in chat mode with word-wrap and ANSI color graphics
+     * Boolean variable halt_program which is set to TRUE if [F8] is
+       hit from the local keyboard- allows for programmer-defined
+       or non-existent "hang-up" procedures
+     * Easy forced "caps-lock", and "password-entry" (see "***"
+       instead of "hey" or "YOU" instead of "you")
+     * Length restriction available on input fields
+     * Built-in string capitalization, first letter capitalization and
+       easy integer/longint to string conversion available
+     * Built-in direct screen write functions
+     * Automatic status bar displaying time, name and baud rate
+     * Automatic on-line user time handling routines
+     * Built-in routines for clearing user's and local screen
+     * Built-in Boolean response "Are you sure?" function
+     * Built-in user-page (&gt;BEEP!&lt; "The SysOp is paging you!" &gt;BEEP!&lt;)
+     * Automatic "Last Printed" memory (can be disabled)
+     * Command list status bar on local screen
+     * Auto-sensing of color/monochrome local screen
+     * Borland Turbo Pascal 5.5 AND 6.0 support
+     * Full color ANSI graphics support
+     * User on-line time modification
+     * Auto-hang-up (halt_program := TRUE) at time&lt;1
+     * System messages in status bar  ("SysOp : User is being paged.")
+     * Ability to EASILY add support for ANY BBS system
+     * Ability to be run in multi-tasking environments such as
+       DESQVIEW and WINDOWS.
+     * Local disable/enable of remote user keyboard
+     * Fake line-noise from local console
+     * Ability to use non-standard IRQ/COMM port configurations
+     * Ability to change all communications parameters
+     * Locked communications port support
+     * Complete flow control support (XON/XOFF and CTS/RTS)
+     * Configurable/disableable user keyboard time-out feature
+     * Messages such as "Entering chat mode." can now be changed
+     * Configurable return to normal status bar after nn seconds
+     * Procedure naming conventions similar to Turbo Pascal's
+     * Efficient, fast, operation
+     * ANSI capable display_file() procedure
+     * Ability to disable local screen from program or [F9]
+     * PCBoard convention SysOp local control command keys
+     * A built-in DOS shell
+
+                              ... And more!
+
+
+     This is a list of all files contained in this release.
+
+File Name           Description
+==============      =================================================
+
+RELEASE  xxx        This File - xxx is Release Number
+DORINFO1 DEF        Example Dorinfo1.Def file as created by QuickBBS
+DORINFO1 DOC        Dorinfo1.Def explanation file
+CRC_CHK  DOC        PKZip CRC/file-size check list
+HISTORY  DOC        Brief programming history of TriDoor
+TRIDOOR  DOC        Documentation for Tridoor
+READBBS  DOC        TriDoor door support read functions
+SPECIAL  DOC        Special notice to all users (Last update 05-Dec-1992)
+TRIDOOR  REG        Registration form for TriDoor
+TRIDOOR  UPG        TriDoor Upgrade Request Form
+TRIDR55U TPU        Actual TriDoor Turbo Pascal V5.5 Unit (unregistered)
+TRIDR60U TPU        Actual Tridoor Turbo Pascal V6.0 Unit (unregistered)
+DISPATTR EXE        Text attribute display tutorial and reference
+EXAMPLE  PAS        A brief example of a Turbo Pascal Program using
+                      the TriDoor unit.
+
+==============      ==================================================
+
+14 Files Total            ** Please be sure to read SPECIAL.DOC **
+
+
+ If any of these files are missing, or you want to obtain the latest
+    release of the TriDoor package, you may contact us as follows :
+
+         Triumph Software VOICE Business Line : (508)263-4247
+
+            If we are not at work, please try us at home.
+
+         Christopher M. Russo           Voice : (508)263-8420
+         Jeremy H. DuBois               Voice : (508)263-7004
+                                                (716)274-0227
+
+  You may also contact us on the Internet at the following addresses :
+
+             Chris Russo   : crusso@cs.ulowell.edu
+             Jeremy DuBois : jer@blaise.cif.rochester.edu</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

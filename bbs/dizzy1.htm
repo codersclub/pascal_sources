@@ -1,0 +1,133 @@
+<html><head><title>DIZZY 1.01a - FILE_ID.DIZ off-line reformatter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Автоматический Форматизатор файлов типа FileId.Diz. <br><font color=#666666> DIZZY; Free DOS utility: FILE_ID.DIZ off-line reformatter v1.01a, reformats any text file into 44 (or other spec. length) character lines, preparing it for use as a FILE_ID.DIZ (a BBS .ZIP file contents descriptor). W/ Pascal source. </font>">
+<meta name="keywords" content="pascal, sources, source code, dizzy1, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dizzy1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DIZZY 1.01a - FILE_ID.DIZ off-line reformatter</TD>
+<TD nowrap class=black>&nbsp;David Daniel Anderson</TD>
+<TD class=black align='right'>24.09.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Автоматический Форматизатор файлов типа FileId.Diz. <br><font color=#666666>
+DIZZY; Free DOS utility: FILE_ID.DIZ off-line reformatter v1.01a,
+reformats any text file into 44 (or other spec. length) character lines,
+preparing it for use as a FILE_ID.DIZ
+(a BBS .ZIP file contents descriptor). W/ Pascal source. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="dizzy1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                     DIZZY
+               Free DOS utility: FILE_ID.DIZ off-line reformatter
+                       Version 1.01a - September 24, 1993
+                                    (c) 1993
+                                       by
+                             David Daniel Anderson
+                                   Reign Ware
+
+
+DIZZY reformats any text file (with lines up to 255 characters long)
+into 44 (or an alternate length) character lines, preparing it for
+use as a FILE_ID.DIZ (a BBS .ZIP file contents descriptor).
+
+PCBoard BBS's typically use the FILE_ID.DIZ (if it exists as a file
+within the .ZIP file) as the upload description, and require that
+description to be a maximum of 8 lines at up to 44 characters each.
+DIZZY won't remove extra lines: it is up to the user to edit, and up
+to DIZZY to reformat what the user has written.
+
+     *** WARNING!!!  DIZZY OVERWRITES THE INPUT FILE, SO MAKE SURE
+     THAT YOU EITHER WORK ON A COPY OF YOUR FILES OR YOU KNOW WHAT
+     YOU ARE DOING BEFORE YOU START. ***
+
+It will be impossible to have your file returned be to its original
+state, but you may be able to retrieve the original with an undelete
+program.
+
+However, DIZZY does not remove text, so no matter what happens, you
+will still have everything that you started with.
+
+Usage:  DIZZY &lt;file_id.diz&gt; [line_length]
+
+DIZZY takes one or two parameters on the command line: the name of
+the file(s) to reformat and the line length desired.
+
+The file name may contain wildcards, for example: "DIZZY *.diz"
+(without the quotes) would reformat all files with the extension
+".diz".
+
+The line length must be a number between 40 and 127.  The default
+(used if none is specified) is 44 characters.
+
+Note: DIZZY removes leading and trailing spaces from all lines, and
+changes all occurrences of multiple spaces into single spaces.
+It leaves hard tabs and ASCII 255 (a blank character that is not a
+space) intact. 
+
+Finally, I have noticed a couple of FILE_ID.DIZ editors available,
+but have not tried them.  I wrote (and use) DIZZY because I don't
+want to learn how to use another editor - especially if the author
+is asking for a registration fee.  I like DIZZY because, like most
+of my programs, it is small, simple, fast, and free.  I really do not
+need or want a mule of a GUI like Microsoft Windows (tm).
+
+--------------------------------------------------------------------
+ Introduction
+--------------------------------------------------------------------
+This program and its PASCAL (BP7) source code IS Copyright (c) 1993 by:
+                  David Daniel Anderson - Reign Ware.
+
+The utility package referenced herein (.ZIP) consists of at least
+5 files:
+  1) The executable program (.EXE)
+  2) The pascal source code (.PAS)
+  3) The program documentation (.DOC)
+  4) The BBS description (FILE_ID.DIZ)
+  5) This legal statement (REIGNWAR.TXT)
+  6) other supporting files as needed
+
+Each individual utility package is archived using the PKZIP (R)
+Authenticity Verification feature.  If they have NOT been modified,
+PKUNZIP will display the contents and following message when you enter
+the command:
+PKUNZIP -t filename.ZIP (substitute name of .ZIP file for "filename"):
+
+Authentic files Verified!   # IAU056
+David Daniel Anderson
+
+Contact me if you have reason to believe this utility package has been
+subject to any malevolent tampering, or if you wish to receive a current,
+complete, unmodified and "guaranteed" virus-free copy.
+
+Although this utility package may be archived along with other software,
+including my own, the following pertains solely to THIS portion of it.
+
+Current versions of most of my distributable programs can be found on:
+
+Channel 1 (R) (Cambridge, MA):      The Kandy Shack (Garden Grove, CA)
+  regular line:  617-354-8873           main (14.4k): 714-636-2667
+  v.32bis 14.4:  617-354-5776
+
+
+I can be contacted in many ILink and RIME (Relaynet) conferences,
+particularly the SHAREWARE conferences.  Use "DAVID DANIEL ANDERSON".
+On RIME, you can route mail to me at SITE #15 (-&gt;15 or -&gt;CHANNEL1).
+
+IF YOU CONTACT ME, tell me HOW, WHEN, and WHERE you obtained this
+program.
+
+Users of this program consent implicitly to the ALL terms in this
+document.
+
+
+                             DAVID DANIEL ANDERSON
+                                241 N MADISON ST
+                        ST. CROIX FALLS, WI  54024-9135</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

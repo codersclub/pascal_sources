@@ -1,0 +1,74 @@
+<html><head><title>SNXT 1.0 - Sysop Next key Utility for BBS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Вспомогательная утилита для Сисопа BBS. Предназначена для ожидания нажатия определенной клавиши в течение заданного времени. Если нажатия не произошло, то утилита завершает работу и возвращает заданный ErrorLevel. <br><font color=#666666> SYSNXT is a general purpose batch file get key utility. SYSNXT was written to use as a Sysop Next key for BBS. It waits desired time of desired key and returns with desired errorlevel. </font>">
+<meta name="keywords" content="pascal, sources, source code, snxt_100, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;snxt_100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SNXT 1.0 - Sysop Next key Utility for BBS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:273/701.0">Mark Billig</a></TD>
+<TD class=black align='right'>19.01.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Вспомогательная утилита для Сисопа BBS.
+Предназначена для ожидания нажатия определенной клавиши
+в течение заданного времени. Если нажатия не произошло,
+то утилита завершает работу и возвращает заданный
+ErrorLevel. <br><font color=#666666>
+SYSNXT is a general purpose batch file get key utility.
+SYSNXT was written to use as a Sysop Next key for BBS.
+It waits desired time of desired key and returns with desired
+errorlevel. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="snxt_100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">     SYSNXT is a general purpose batch file get key utility.
+SYSNXT was written to use as a Sysop Next key for my BBS.
+
+     This program is guarenteed to do nothing but take up your precious
+hard disk space.
+
+SYSNXT ssskeee [ssskeee] [ssskeee] [ssskeee]
+       sss = seconds to wait for timeout 0-255
+       k = key to activate timeout
+           (A)lways (C)apsLock (N)umLock (S)crollLock
+       eee = errorlevel to exit if any key is pressed 0-255
+
+Example:
+     SYSNXT 30S5 = Wait 30 seconds for any key if scroll lock is on.
+                   If key is pressed exit with errorlevel 5.
+
+     If sss is equal to 0 or missing then there will be no timeout
+and the program will exit immediately.  If eee is missing or equal
+to 0 then the exit code will be equal to the ascii code of the key
+pressed.  (k) can be an A, C, N or S.  If the A, C, N or S is an
+uppercase character, the computer will beep as every second ticks by.
+
+USE: Example of BBS.BAT...
+
+ECHO OFF
+:START
+SYSNXT 30S1
+IF ERRORLEVEL 1 GOTO BATEND
+C:
+CD\BINKLEY
+BT SHARE
+.
+.
+.
+GOTO START
+:BATEND
+
+
+Please send any suggestions or comments to:
+
+                                         Mark Billig
+                                         1:273/701.0
+                                         (215)641-0270</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

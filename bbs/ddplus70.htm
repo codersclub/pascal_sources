@@ -1,0 +1,211 @@
+<html><head><title>DDPLus 7.0 - Door Driver Toolkit for TP7.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программный комплекс для разработки BBS Door. Включает в себя коммуникационный модуль, поддерживающий до 4-х портов и скорость до 115200 бод. <br><font color=#666666> DDPLUS 7.0  Turbo Pascal 7.0 Door Kit. Supports most popular BBS Software packages, including PCBoard Vers 15.XX & WildCat 4.XX. With Rip detect. Supports non-standard interrupts, com 1-4, IRQs 0-15, and speeds up to 115,200 baud. Fossils to 115,200. Provides automatic support for most common multi-taskers. 100% Source. 100% Free. Comes with complete door writing tutorial, extensive documentation, door configuration setup program, an inter-BBS kit, RipLink for viewing RIP on local screens and many other features too numerous to mention! Provides needed knowledge and expertise to programmers who have always dreamed of making their own door programs, but until now didn't know how!! </font>">
+<meta name="keywords" content="pascal, sources, source code, ddplus70, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ddplus70
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DDPLus 7.0 - Door Driver Toolkit for TP7.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:391/3010">Bob Dalton</a></TD>
+<TD class=black align='right'>23.03.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программный комплекс для разработки BBS Door.
+Включает в себя коммуникационный модуль,
+поддерживающий до 4-х портов и скорость до 115200 бод. <br><font color=#666666>
+DDPLUS 7.0  Turbo Pascal 7.0 Door Kit.
+Supports most popular BBS Software packages,
+including PCBoard Vers 15.XX & WildCat 4.XX. With Rip detect.
+Supports non-standard interrupts, com 1-4, IRQs 0-15,
+and speeds up to 115,200 baud. Fossils to 115,200.
+Provides automatic support for most common multi-taskers.
+100% Source. 100% Free.
+Comes with complete door writing tutorial,
+extensive documentation, door configuration setup program,
+an inter-BBS kit, RipLink for viewing RIP on local screens
+and many other features too numerous to mention!
+Provides needed knowledge and expertise to programmers
+who have always dreamed of making their own door programs,
+but until now didn't know how!! </font></TD><TD class=black colspan=2 align='right'><br><A HREF="ddplus70.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>714k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        DDPLus Version 7.0 Door Driver Toolkit for Turbo Pascal 7.0
+
+                             INTRODUCTION:
+                             ------------
+DDplus is a package of pascal units for use in creating programs for
+use with Bulletin Board Systems (BBS).  These programs are called
+"DOORS" and are stand alone products which "link" with the BBS to
+allow users to enjoy games and utilities of all types.  The DDPlus
+package takes the tedium out of Door programming by allowing you to
+concentrate on the writing of door specific code and not having to
+worry about details such working with fossils, multi-tasker support,
+handling communications I/O and the processing of BBS drop Files.
+This package does NOT teach Turbo Pascal programming. It assumes
+that you know basic Turbo Pascal programming already, and desire
+to put that knowledge to use by designing a door for a BBS.
+
+                    Features of DDPLUS and the DDPLus Kit:
+                    --------------------------------------
+
+ 1. IRQs 0-15 are supported.
+
+ 2. Comports 1-4 supported.
+
+ 3. Selectable Port Addresses.
+
+ 4. DesqView aware routines.
+
+ 5. Detects Rip.
+
+ 6. Fast and correct ansi color routines.
+
+ 7. Lock baud and comm baud rates to 115,200
+
+ 8. Built in Windows, WindowsNT and OS/2 time slice releasing.
+
+ 9. Fossil support to 38,400 using normal fossil calls.
+
+10. Fossil support to 115,200 using extended fossil calls. Use XFossil
+    for any fossils (X00 or BNU) over 38,400.  This option does not open
+    or close the fossil but only writes to it the way it is.
+
+11. Local video can be toggled off to save processing time in
+    multitasking windows or to give some user privacy when competing
+    in game against the sysop.
+
+12. Multiple control files can be accessed by a command line parm.
+
+13. Will work with OR without the presence of a fossil.
+
+14. ALL source code is provided and you can modify it to do whatever
+    you need it to do!  Just be sure to document your changes as new
+    versions of DDPLUS come out periodically and will not have your
+    changes in them. A better idea would be to make a separate add
+    on unit for use with the main DDPLUS units so that you do not
+    have to edit the DDPlus units each time a new DDPlus version
+    comes out.
+
+15. A Turbo Vision program skeleton is provided for use as a door
+    setup/configuration/editor program.
+
+16. An Inter BBS Door unit is provided so you can make your door an
+    inter BBS one if you desire.
+
+17. DDSETUP.EXE is provided for distribution with your Door program
+    to help users configure the required CTL file for use with your
+    door. It is FREEWARE.
+
+18. A file/record locking unit is provided to allow you to design
+    multi-node/online multi-player games.
+
+19. An automatic overlay unit is included for making programs
+    overlays to conserve memory and automatically initializes them.
+
+20. RipLink is now provided so that you can build in a local display
+    of RIP graphics for a using sysop.
+
+                             REQUIREMENTS:
+                             ------------
+At this point in time the only requirements are that you must be using
+Borland Turbo Pascal 7.0.  Most of the kit should also work with
+version 6.0 as well, but we no longer guarantee it.  If you use file
+locking and sharing then users must be notified that SHARE is required
+to be loaded prior to use. The same goes for ANSI.SYS as well if ANSI
+graphics are used. 
+
+                            Files Included
+                            --------------
+Below is a listing of all files for the this Package. Feel free to
+give out copies of the ENTIRE archive package but please make sure
+all the files below are in that package:
+
+DVAWARE.ASM  - DDPlus support source code unit.
+SLASYNC.ASM  - DDPlus support source code unit.
+SAMPLE1.BAT  - A sample BAT file which runs a DDPlus game program
+               from the game directory. Feel free to distribute these
+               batch files with your DDPLus game package creations.
+SAMPLE2.BAT  - A sample BAT file which runs a DDPlus game program
+               from any node directory. Feel free to distribute these
+               batch files with your DDPLus game package creations.
+SAMPLE3.BAT  - A sample BAT file identical to the one I use on my
+               Single node WildCat Support BBS to run my DDPlus Games.
+               Feel free to distribute these batch files with your
+               DDPLus game package creations.
+GAME.CTL     - Un-edited and heavily commented Control file for use
+               with all doors produced with the DDplus package.
+               Provided mainly for information as DDSETUP.ZIP now
+               provides a VGA setup program for inclusion with
+               programs made with this package.
+FILE_ID.DIZ  - Ascii Description File for BBS Sysops on DDPLUS70.ZIP
+DDPLUS.DOC   - The file you are now reading.
+HISTORY.DOC  - History file of changes made to the DDPlus package.
+DVAWARE.OBJ  - DDPlus support unit (compiled)
+SLASYNC.OBJ  - DDPLus support unit (compiled)
+ASYNC2.PAS   - DDPlus support source code unit.
+COMIO.PAS    - DDPlus support source code unit.
+DDANSI2.PAS  - DDPlus support source code unit.
+DDFOSSIL.PAS - DDPlus support source code unit.
+DDOVR.PAS    - DDPLus support source code unit.
+DDOVR2.PAS   - DDPlus support source code unit.
+DDPLUS.PAS   - Main DDPlus source code unit. Needs to be compiled.
+DDSCOTT.PAS  - DDPlus support source code unit.
+BOOKS.TXT    - List of useful Borland Pascal reference books.
+SWAG.TXT     - Information on a programmers best friend -SWAG!
+ANSIMENU.ZIP - A ANSI Menu routine with example program and
+               instruction file. A simple but effective way to
+               add ansi menus to your door program. Includes a sample
+               door, with source code, to demonstrate the use of the
+               ansimenu unit.
+DDSETUP.ZIP  - VGA Setup program for distribution with doors you
+               make using the DDPlus Package.  Freeware.
+ELOG.ZIP     - An error log unit with explanation text file for
+               use in your door programs. Can make bug detection
+               and extermination of the little critters much easier.
+               I highly recommend that you use this unit in ALL your
+               door programs!!!  Revised to make it much easier to
+               install then before.
+IBBS.ZIP     - An Inter-BBS unit which can be used with DDplus to make
+               an Inter-BBS capable door program.
+LOCKING.ZIP  - A unit for use with your program and DDPlus that will
+               give you the capability to make a multi-node and online
+               multi-user door program. Includes a fully operational
+               sample door, with source code,  which demonstrates the
+               principles involved in file/record locking.
+MACROKEY.ZIP - A small and simple unit with instruction file to allow
+               you to add macro-recording and play-back to your
+               door programs.
+OVERLAY.ZIP  - A sample overlay initialization unit. Can be used to
+               automatically provide overlay support. Comes with a
+               text file to help explain it's use.
+RIPLINK.ZIP  - RipLink units to allow you to show RIP graphics on
+               the sysops screen! Works with RIP 1.54.
+SETUP.ZIP    - A Turbo Vision skeleton program you can make into a
+               door setup/configuration/editor program.
+SYSOP.ZIP    - Sample of documentation I use with my door programs, to
+               include the all important SYSOP.DOC which explains how
+               sysops should set up the program to work on their BBS.
+               Feel free to modify these files for your door products
+               and distribute it with YOUR DDPlus creations. All we ask
+               is that you keep us in the credits section of the
+               document file. Hey, it's only fair we get some credit....
+
+                           Where to reach us
+                           -----------------
+
+We can usually be reached at the following places:
+
+Steven Lorenz - The Officer Club BBS
+              - Telephone Number: 818-249-8579 (CA)
+
+Bob Dalton    - The TANSTAFL BBS 
+              - Telephone Number: 501-741-5699 (AR).
+                FIDO Node Number: 1:391/3010</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

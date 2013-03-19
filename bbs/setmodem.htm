@@ -1,0 +1,88 @@
+<html><head><title>SetModem - BBS Modem Initializer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Вспомогательная программа для BBS, позволяющая отправить в модем команду инициализации. <br><font color=#666666> This program allows to send any Hayes command (for example, ATS16=1O, the = counts as a character) to your Hayes/ compatible modem. It may be used as a convenient way to send modem commands without starting up a terminal program. I use it to send the offhook command when I am doing board maintenance.</font>">
+<meta name="keywords" content="pascal, sources, source code, setmodem, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;setmodem
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SetModem - BBS Modem Initializer</TD>
+<TD nowrap class=black>&nbsp;Steven R. Sterling</TD>
+<TD class=black align='right'>26.03.1987</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Вспомогательная программа для BBS,
+позволяющая отправить в модем команду инициализации. <br><font color=#666666>
+This program allows to send any Hayes command
+(for example, ATS16=1O, the = counts as a character) to your Hayes/
+compatible modem.
+It may be used as a convenient way to send modem commands
+without starting up a terminal program.
+I use it to send the offhook command when I am doing board maintenance.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="setmodem.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        BBS Modem Initializer
+
+                        By Steven R. Sterling
+
+
+Archive inventory:   SETMODEM.COM - Program file
+                     MODEM.DAT    - User defined init. string file
+                     SETMODEM.PAS - Turbo Pascal 3.1 source
+                     SETMODEM.DOC - This doc.
+
+This program will allow you to send any Hayes command up to 8
+characters long (for example, ATS16=1O, the = counts as a character)
+to your Hayes compatible modem. It was written and timed for an 8mhz
+IBM AT using a Hayes Smartmodem 1200, it should work satisfactorily
+on any compatible.
+
+Although originally intended as a modem initializer for the Collie
+1.20 BBS, it may be used as a convenient way to send modem commands
+without starting up a terminal program. I use it to send the offhook
+command when I am doing board maintenance.
+
+COLLIE 1.20 users who have had no success in getting their board to
+handle the modem properly (i.e. ANSWER THE PHONE!) will find this a
+useful addition to their C.BAT file. SETMODEM should be inserted into
+the batch file just before :LOOP, as you only need to run SETMODEM
+once.
+
+Also before you use SETMODEM with Collie 1.20 you must modify
+COLLIE.COM with a sector editor (Norton Utilities, PC-Tools etc.).
+
+To modify COLLIE.COM....
+
+     1) MAKE A BACK-UP OF COLLIE.COM!
+
+     2) Load a sector editor and view relative sector 68.
+
+     3) Change the string 'ATZ' to 'ATH'.
+
+
+If you have followed these instructions correctly you will have a
+COLLIE.COM file that will not wipe out the initialization strings
+that SETMODEM sends.
+
+The only remaining task is to determine what initialization strings
+you are going to need to send to the modem. Generally the ones that
+you had in your MODMINIT.BBS are satisfactory. All you have to do is
+rename MODMINIT.BBS to MODEM.DAT. The file structure is the same.
+
+
+Please address any comments/suggestions to:
+
+Steve Sterling
+561 Nottingham Dr.
+Yardley, Pa. 19067
+
+SYSOP, THE ABSTRACTION - Collie 804/3
+
+GEnie Mail - [S.STERLING]</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

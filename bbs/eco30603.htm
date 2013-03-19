@@ -1,0 +1,273 @@
+<html><head><title>Eco Library II Release 3.0 V 6.03 for TP5...BP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Библиотека для создания BBS. Включает в себя модули для работы с последовательными портами, поддержку fossil-драйверов, обработку ANSI, работу с базами сообщений в формате Hudson и Squish. Приведена документация в формате Norton Guide. Ассемблерных исходников нет, но зато есть все необходимые .OBJ модули. <br><font color=#666666> Eco Library II Release 3.0 V 6.03, Pascal Port #3, Complete Edition. All Pascal source included.  Without .ASM but .OBJ included for recompiling.<br> - Traveling Concise Edition <br> - Full Edition <br> - Bulletin Board Edition <br> - All Demos, like an Archive Television Shell, and a Small Fast Commander <br> - Norton Guide </font>">
+<meta name="keywords" content="pascal, sources, source code, eco30603, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;eco30603
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Eco Library II Release 3.0 V 6.03 for TP5...BP7</TD>
+<TD nowrap class=black>&nbsp;Floor Naaijkens</TD>
+<TD class=black align='right'>14.04.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Библиотека для создания BBS.
+Включает в себя модули для работы с последовательными портами,
+поддержку fossil-драйверов, обработку ANSI, работу с базами сообщений
+в формате Hudson и Squish. Приведена документация
+в формате Norton Guide. Ассемблерных исходников нет,
+но зато есть все необходимые .OBJ модули. <br><font color=#666666>
+Eco Library II Release 3.0 V 6.03, Pascal Port #3, Complete Edition.
+All Pascal source included.  Without .ASM but .OBJ included for recompiling.<br>
+- Traveling Concise Edition <br>
+- Full Edition <br>
+- Bulletin Board Edition <br>
+- All Demos, like an Archive Television Shell, and a Small Fast Commander <br>
+- Norton Guide </font></TD><TD class=black colspan=2 align='right'><br><A HREF="eco30603.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>733k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬ћ--                                              --ћ¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬|                                                  |¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   The ECO Library II was Conceived, Designed,      ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   Compiled and Written by  Floor A.C. Naaijkens    ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   for UltiHouse Software / The ECO Group.          ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬                                                    ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   (C) MCMXCIII by EUROCON PANATIONAL CORPORATION   ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   All Rights Reserved for The ECO Group.           ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬                                                    ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   If you like what you get send $50,= or more to   ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   UltiHouse Software, B.V., Kwendelhof 173,        ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬   5044 EG  Tilburg, The Netherlands.               ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬|                                                  |¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬ћ--                                              --ћ¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+
+
+
+     ¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+     ¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+     ¬¬¬¬¬ћ--                                             --ћ¬¬¬¬¬¬¬
+     ¬¬¬¬¬|                                                 |¬¬¬¬¬
+     ¬¬¬¬¬                   UltiHouse'                      ¬¬¬¬¬
+     ¬¬¬¬¬                  ------------                     ¬¬¬¬¬
+     ¬¬¬¬¬    The ECO Library II Release 3.0 Version 6.02    ¬¬¬¬¬
+     ¬¬¬¬¬                 Pascal Port #3                    ¬¬¬¬¬
+     ¬¬¬¬¬                  Full Edition                     ¬¬¬¬¬
+     ¬¬¬¬¬|                                                 |¬¬¬¬¬
+     ¬¬¬¬¬ћ--                                             --ћ¬¬¬¬¬
+     ¬¬¬¬¬¬¬¬¬¬¬¬
+     ¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+     ¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+
+
+
+ECOLIBII.LZH 650K [013]  Full Edition of The ECO Library II
+ (Freaks' Version)
+
+
+Complete Edition Consists Of :
+
+-=- Traveling Concise Edition
+-=- Full Edition
+-=- Bulletin Board Edition
+-=- All Demos, like an Archive Television Shell,
+    and a Small Fast Commander
+-=- Norton Guide
+
+
+
+======================================================================
+INSTALLATION:
+    A:
+    INSTALL D:   (or whatever drive you want it installed on)
+
+  you are adviced to have TPC.EXE or BPC.EXE in your PATH environment.
+
+  INSTALL will compile via a satelite INSTALL2.BAT and run from
+  harddisc from the moment the file ECOLIBII.LZH has been copied to
+  harddisc, so you may remove the floppy after that.
+
+  INSTALL will automatically compile all sourcefiles, projects and
+  demos, and execute W.EXE, The Final Directory Application.
+======================================================================
+
+
+  (C) Copyright MCMXCIII by UltiHouse Software / The ECO Group
+  All Rights Reserved. Written by Floor A.C. Naaijkens
+  of UltiHouse Software.
+
+
+If you have any questions, please contact me any time you like
+using FAX/BBS telephone number xx31,13,638709. 24Hrs/day using
+US Robotics HST/DS upto 16.800 baud. (1200, 2400, 9600, 12000, 14400)
+
+
+Full source is included for recompilation under TP5.x, TP6.x & BP7.0
+If registered, ASM is available as well.
+
+
+The ECO Library II -- Concise Edition
+Depends on nothing but SYSTEM.TPU, DOS.TPU and CRT.TPU, and
+delivers almost anything you really need!
+
+Also available:
+
+The ECO Library II -- Full Edition
+All kinds of easy extra's like a Small Fast Commander, Norton-like
+Tree Info and File Panels, PopUp Calculator, Calendar and many more.
+
+The ECO Library II -- BBS Edition
+Depends on ECO_LIB and delivers ZModem/ASYNC/FOSSIL/EMSI/NODELIST
+datacom functions. Set up a mailer/BBS in no-time!
+
+The ECO Library II -- NortonGuide.
+A NortonGuide describing it all, sorting by unit, by function,
+by Full/Concise/BBS. 200K.
+
+
+  ***************************************************************
+  NOTE: IF CRT OR DOS IS TO BE USED, (IN SUB-UNITS OR WHEREEVER),
+  USE THEM _FIRST_ IN _ANY_ USES CLAUSE.
+  USE ECO_SWAP AS LAST IN ANY USES CLAUSE.
+  ***************************************************************
+
+
+The Concise Edition is 250K in size, 64K in actual code, and
+is thus constructed, that simple use DOES result in limited
+.EXE filesize. (included example writes directly to screen, 10K)
+Full example DEMO_LIB.PAS is included. .EXE size = 50K, and
+demonstrates what can be done.
+
+As complexity of your application grows, you'll see that you'll
+still only need the The ECO Library II. Thus, filesize maintains
+it's limited size.
+
+The ECO Library II is fully functional and recompilable, although
+I do request a contribution. Source to ASM is released upon payment.
+I do not believe in CrippleWare. \
+
+I started writing The ECO Library II, after I discovered, some
+years ago, that my disc was cluttered with all kinds of interesting,
+but very different sources. I also found, that various authors, from
+whom the work originated, had solved the same problem over and over
+in different ways.
+I rewrote all those sources to have them use the same functions, now
+contained in The ECO Library II. It thus became smaller, more self-
+contained, easier to use and confined to one single unit.
+OK, very small programs might get a little large, but don't forget,
+using different units, also puzzles TP, and TP subsequently includes
+too much code.
+ECO_LIB.TPU is 64K in code (TPU is 120K itself).
+But compiling:
+    "
+    uses eco_lib;
+    begin
+      __bandwin(true, 5, 5, 75, 20, 0, 7, sh_default, bt_single)
+    end.
+    "
+results in an EXE file of only 15K.
+Obviously, TP succeeds in locating/removing the unused code very well!
+The Kernel of ECO_LIB.TPU is some 5K, the Borland Pascal Kernel is
+some 4K, and the rest is included code.
+It now contains well over a 1000 functions and procedures.
+
+Let it be noted that not all code was written by me. True, I've written
+a great deal of it. But credit must be given where it is due.
+If I wrongly excluded reference to the author of the work, I apologize.
+All work has been re-editted and reprogrammed by me, though. And not
+only for the sake of ECOLIB-usage, but also as to enhance functionality,
+debug et al.
+
+Source:
+
+ d:/a/proj/eco
+   1  eco_cal   pas 10.693  Calendar
+   2  eco_doo2  pas 11.295  Door programming for RemoteAccess
+   3  eco_edit  pas 24.687  Borland Editor Toolbox Interface
+   4  eco_exe   pas  6.782  EXE Spawning With Child Communications
+   5  eco_font  pas  2.099  FONT Template Unit (Use turbo BGI)
+   6  eco_gdrv  pas  2.236  Graphical Driver Template Unit (Use DRV)
+
+ d:/a/proj/eco/ecolibbs/eco*.pas  (13 : 384.631)
+   1  eco_232   pas        5.915  CRT 232 access
+   2  eco_ansi  pas       13.586  ANSI driver
+   3  eco_asyn  pas      102.569  Async port control
+   4  eco_comm  pas       29.222  Communications unit
+   5  eco_crc   pas        8.413  CRC calculation
+   6  eco_door  pas       31.651  BBS DOOR functions
+   7  eco_fido  pas       14.688  Fidonet IFNA functions
+   8  eco_fosl  pas       14.021  Fossil functions
+   9  eco_hdsn  pas       38.596  Hudson messagebase
+  10  eco_lock  pas        2.124  Lock (part of) files using SHARE
+  11  eco_sqsh  pas       34.500  Squish messagebase
+  12  eco_text  pas       10.789  Textpointer manipulation
+  13  eco_zmod  pas       78.557  ZModem protocol.
+
+ d:/a/proj/eco/ecolibcs/eco*.pas  (2 : 470.402)
+   1  eco_lib   pas      243.042  The ECO Library Concise Edition
+
+ d:/a/proj/eco/ecolibii/eco*.pas  (24 : 383.798)
+   1  eco_atv   pas       25.324  Interface to CFI
+   2  eco_bcnv  pas        3.581  Base conversion
+   3  eco_calc  pas       17.035  Calculator
+   4  eco_cfi   pas       53.801  Compression File Interface
+   5  eco_dsqv  pas        3.535  DesqView functions
+   6  eco_emou  pas       38.958  Extended mouse functions
+   7  eco_fast  pas       16.300  Fast screen unit (dept/self-cont)
+   8  eco_file  pas       50.745  File screen like in Norton Commander
+   9  eco_info  pas        9.736  Info screen like in Norton Commander
+  10  eco_kbd   pas       15.562  Keyboard routines (ASM, own driver)
+  11  eco_lzw   pas       13.307  LZW compression (slow, OK)
+  12  eco_mou   pas        8.093  Standard Mouse functions
+  13  eco_mtrx  pas       10.680  Matrix calculations (++)
+  14  eco_os2   pas        3.992  Test for OS/2 presence, multitaskers
+  15  eco_pal   pas        4.268  VGA palette play
+  16  eco_pasc  pas        5.606  Popup ASCII table.
+  17  eco_pclc  pas       11.819  Popup calculator (rudimentary)
+  18  eco_play  pas       11.331  BASIC Play command
+  19  eco_reg   pas       15.463  Registration Unit
+  20  eco_srch  pas       10.728  Quick search unit (Boyer Moore)
+  21  eco_stak  pas        8.403  Check Turbo Stack / ASM/TSR
+  22  eco_swap  pas        3.521  Swap to DISC/EMS.
+  23  eco_tree  pas       38.118  Tree screen like in Norton Commander
+  24  eco_vga   pas        3.892  VGA ticks
+
+ d:/a/proj/eco/ecolibii/eco_crt/eco*.pas  (1 : 27.892)
+   1  eco_crt   pas       27.892  Complete TURBO CRT replacement (asm)
+
+ d:/a/proj/eco/ecolibii/eco_crt/eco_adpt/eco*.pas  (1 : 4.266)
+   1  eco_adpt  pas        4.266  Adapter recognition unit
+
+ d:/a/proj/eco/ecolibii/eco_dos/eco*.pas  (1 : 6.725)
+   1  eco_dos   pas        6.725  Complete TURBO DOS replacement (asm)
+
+
+I recommend you play around with ECO_LIB and the independent units.
+It'll surprise you that you actually can write BBS/Mailer software
+that easily! Or write a handy compressionfile-interface.
+Like I always do, I include full source.
+If YOU like it, please send me $50,= or more, so that I can continue
+enhancing The ECO Library II. Ports to C(++) &gt; OS/2 & UNIX are
+being considered.
+At any rate, I like a postcard of ECO users... Send one &
+
+  Have fun!
+
+
+
+                                        Floor A.C. Naaijkens.
+                                        Pres. UltiHouse Software, B.V.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

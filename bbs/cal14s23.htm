@@ -1,0 +1,96 @@
+<html><head><title>CALLS 14.23 - Call analyzer for PCBoard v14.23</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для обработки статистики на основании пользовательских логинов. <br><font color=#666666> Statistics program for analize BBS user calls </font>">
+<meta name="keywords" content="pascal, sources, source code, cal14s23, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cal14s23
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CALLS 14.23 - Call analyzer for PCBoard v14.23</TD>
+<TD nowrap class=black>&nbsp;Samuel H. Smith</TD>
+<TD class=black align='right'>09.01.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для обработки статистики
+на основании пользовательских логинов. <br><font color=#666666>
+Statistics program for analize BBS user calls </font></TD><TD class=black colspan=2 align='right'><br><A HREF="cal14s23.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>62k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                             CALLS.EXE
+
+              Call analyzer for PCBoard versions 11.7
+  (updated for PCBoard 11.8 and PCB/ProDOOR, S.H.Smith, 07/05/87)
+          (updated for PCBoard 14.x, S.H.Smith, 01-17-91)
+
+
+     Note:  Warren Lauzon is no longer supporting this program
+               (since he's completely rewriting it)
+        So, please don't bother him with support questions.
+
+              If you need help with it, contact me at
+                         Samuel H. Smith,
+                       Sysop, The Tool Shop
+
+                   Phone number         Modem type
+                  --------------    ---------------------
+                  (818) 891-3772    US Robotics HST 9600
+                  (818) 891-1344    Hayes-V series 9600
+                  (818) 891-6780    US Robotics 2400 (free line)
+
+------------------------------------ Calls program and documentation
+
+FILES    DOC   2708   8-02-89   5:23p   This list of files
+CALLS    CNF   1483   8-02-89   2:25p   Sample config file
+CALLS    DOC  15964   8-02-89   3:07p   Program Documentation
+CALLS    EXE  49152   8-02-89   3:19p   CALLS main program
+
+
+---------------------------  Source code (not required for operation)
+
+ANSICRT  PAS   1927   3-12-89   7:13a   ANSI based CRT unit (source)
+CALLS    PAS  65926   8-02-89   3:19p   CALLS main source code
+QREAD    ASM   4451  11-22-88   3:10p   Quick file i/o source
+QREAD    PAS    609  11-20-88   6:24a   Quick file i/o source
+STOUPPER INC   1098  12-01-88           Map to upper case source
+
+
+========================== SAMPLE3.ZIP =============================
+
+----------------------------- Sample config files for a 3 node system
+
+CALLS1   CNF   1331   8-02-89   4:53p   Node 1 main config file
+CALLS1D  CNF   1375   8-02-89   5:02p   Node 1 daily config file
+CALLS1U  CNF   1331   8-02-89   4:54p   Node 1 event update config
+CALLS1Y  CNF   1376   8-02-89   5:16p   Node 1 yesterday config file
+CALLS2   CNF   1331   8-02-89   4:53p   Node 2 main config file
+CALLS2D  CNF   1375   8-02-89   5:02p   Node 2 daily config file
+CALLS2U  CNF   1331   8-02-89   4:54p   Node 2 event update config
+CALLS2Y  CNF   1376   8-02-89   5:16p   Node 2 yesterday config file
+CALLS3   CNF   1331   8-02-89   4:53p   Node 3 main config file
+CALLS3D  CNF   1375   8-02-89   5:02p   Node 3 daily config file
+CALLS3U  CNF   1331   8-02-89   4:54p   Node 3 event update config
+CALLS3Y  CNF   1376   8-02-89   5:16p   Node 3 yesterday config file
+CALLSA   CNF   1331   8-02-89   4:53p   All Nodes main config file
+CALLSAD  CNF   1375   8-02-89   5:02p   All Nodes daily config file
+CALLSAY  CNF   1376   8-02-89   5:16p   All Nodes yesterday config file
+
+
+--------------------------------------------------- Sample batch files
+
+REPORTS  BAT   1135   8-02-89   5:12p   Event BATCH to do reports
+NEWCALLS BAT    305   8-02-89   5:11p   Generate new history files
+TODAY    BAT    116   8-02-89   5:15p   Check today's activity
+TODAY1   BAT    116   8-02-89   5:14p   Check today's Node-1 activity
+TODAY2   BAT    116   8-02-89   5:13p   Check today's Node-2 activity
+TODAY3   BAT    116   8-02-89   5:13p   Check today's Node-3 activity
+YESTER   BAT    126   8-02-89   5:15p   Check yesterday's activity
+YESTER1  BAT    126   8-02-89   5:14p   Check yesterday's Node-1 activity
+YESTER2  BAT    126   8-02-89   5:14p   Check yesterday's Node-2 activity
+YESTER3  BAT    126   8-02-89   5:12p   Check yesterday's Node-3 activity</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

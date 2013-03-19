@@ -1,0 +1,150 @@
+<html><head><title>Barak's House - Online BBS Door Game</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Онлайновая игра на базе BBS Door. <br><font color=#666666> Source Code to Baraks House [LORD IGM]. Based on DDPLUS door toolkit. Includes: code for program and modified DDPLUS units for communication i/o. </font>">
+<meta name="keywords" content="pascal, sources, source code, barsrc, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;barsrc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Barak's House - Online BBS Door Game</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sethable@rtsoft.com">Seth A. Robinson</a></TD>
+<TD class=black align='right'>11.03.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Онлайновая игра на базе BBS Door. <br><font color=#666666>
+Source Code to Baraks House [LORD IGM].
+Based on DDPLUS door toolkit.
+Includes: code for program and modified DDPLUS units for
+communication i/o. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="barsrc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>85k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">**************  ENTIRE SOURCE CODE TO BARAK'S HOUSE ****************
+
+Hi!  Ever wanted to make your own IGM but were too lazy to figure out
+how, etc?  Well now you can compile this one in seconds, and begin
+changing it to create your own.  This is FULL source, EVERYTHING is
+changable.
+
+This IGM is the perfect template because it is the only IGM I wrote for
+LORD, and is the only one that completely follows my standards, and is
+able to work with all fossil/com port configurations properly without
+using drop files.
+
+It also demonstrates how to keep track of who has used the IGM that day,
+and automatically resets everyone when a new day starts, by reading from
+time.dat.
+
+The configure program is easy to use, and even stores the LORD dir you
+installed it two, so uninstalling is a snap!
+
+There are hundreds of usefull procedures in here, even though they are
+a few years old.  Use them wisely, child!
+
+I did change two things right before I zipped this - I took off the
+part in the config program that wouldn't allow more than 9 IGM's to be
+used at once, and I changed it to allow node 0. (Barak was created
+before node 0 or 10+ IGM were allowed)
+
+-Seth (sethable@rtsoft.com)
+WWW:  http://www.rtsoft.com
+
+BCSHARE and DVAWARE have been enclosed in their shareware form so you
+don't have to go find them - this package contains everything you need
+to compile BARAK.EXE and BARAKCFG.EXE.
+
+Special thanks to Steve Lorenze, Bob Dalton and Scott Baker for
+writing DDPLUS.
+
+License agreement:
+
+You may use this kit as an example IGM, and modify it to create your
+own, using any or all of Seth's routines enclosed - You may NOT compile
+this and sell it as is, or distribute ANYTHING resembling Barak's house
+or associated with Barak's house.
+
+(ie, you can't go create your own version of Seth's Barak House -
+that is Seth's job, don't mess with that!!)
+
+Barak's House is a copyrighted program, and all rights are reserved.
+
+You can however make your OWN IGM with it and sell it, or use pieces
+of the source in your own door and sell that.
+
+************
+
+Info:
+
+BARAK.PAS:  The main file for barak's house.
+
+BARAKCFG.PAS:  The setup program.
+
+-= Other files the above use =-
+
+ALLPAS.PAS:  Contains MANY generic routines, can be 'used' by any
+piece of source. (the headers are commented to explain each routine)
+
+SETHLIB.PAS:  DOS non modem specific routines such as string and
+              number input routines, cannot be used with DDPLUS,
+              but are used in dos only applications such as
+              BARAKCFG.PAS.
+
+SETHLIBB.PAS:  The ddplus version of the string and number input
+              routines, can only be used inside a door, because it
+              calls SWRITELN directly.
+
+DDPLUSB.PAS:  Modified DDPLUS, with things in it for Barak's house.
+
+DDOVRB and DDOVR2B:  Modifed DDPLUS support files, allow reading of
+              the node dat and info.* files.  Also some texts have
+              been added and changed to reflect BARAK'S house.
+              You would want to change these for your own IGM.
+
+BAR_VAR.PAS:  All the varibles - they are put in a seperate TPU
+              because most .pas files USE them.  The lord structures
+              are in this.
+
+********** TO COMPILE THIS THING **********
+
+Unzip to a separate dir (hopefully you already did this)
+
+Have Turbo Pascal installed, and the bin dir in your path.
+
+type:
+TPC -b barak.pas
+tpc -b barakcfg.pas
+
+Those two exe's will be built.  From there, check out BARAK.PAS,
+you should be able to figure out how things work by looking at them.
+The arcade sequences in Barak's house are tricky to read, but when
+doing something like that, you should probably write it from scratch
+yourself anyway, or you will never fully understand it.
+
+Sethln and Seth replace Swrite and Swriteln.  You can use color codes
+inside of them.
+
+IMPORTANT:  If you change the name of the file, be sure to change all
+instances of BARAK.EXE with YOURNAME.EXE in DDOVR2B.PAS, it uses this
+to find what dir it is, if you don't, it won't figure out where the
+NODE?.DAT is and not work. This is also kind of security from people
+changing your filename.
+
+** ABOUT STRING INPUT COMMANDS **
+
+They are Edi() and Edi_num(), learn how to use them by example in
+BARAKCFG.PAS.  They are nifty!
+
+
+*****  If you have any questions, ask Seth. *****
+
+*****  Many routines were written years ago and are quite ugly,
+       feel free to beautify them for your own ease of use 
+
+Seth A. Robinson (sethable@rtsoft.com)
+WWW:  http://www.rtsoft.com
+</PRE>
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,200 @@
+<html><head><title>Psych0Tag 0.5 - Tagline Program for DOS and OS/2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="ПСИХОТАГ - программа для автоматической вставки таглайнов в отправляемые сообщения. Совместима со многими редакторами сообщениий. <br><font color=#666666> Psych0Tag v0.5 - tagline program  with full support for DOS and OS/2. Slaps a tagline onto a text file. Works great with BBSs, offline mail readers, Psych0Liner, and more. Directly compatible with Blue Wave, GoldED, IceEdit, TerMail, TimEd and  many other programs. Public Domain/Freeware with Pascal source code. </font>">
+<meta name="keywords" content="pascal, sources, source code, ptag0500, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ptag0500
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Psych0Tag 0.5 - Tagline Program for DOS and OS/2</TD>
+<TD nowrap class=black>&nbsp;Andrew Ziem</TD>
+<TD class=black align='right'>03.09.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">ПСИХОТАГ - программа для автоматической вставки таглайнов
+в отправляемые сообщения. Совместима со многими редакторами
+сообщениий. <br><font color=#666666>
+Psych0Tag v0.5 - tagline program 
+with full support for DOS and OS/2.
+Slaps a tagline onto a text file. Works great with BBSs,
+offline mail readers, Psych0Liner, and more.
+Directly compatible with Blue Wave, GoldED, IceEdit, TerMail, TimEd
+and  many other programs.
+Public Domain/Freeware with Pascal source code. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="ptag0500.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>57k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">
+Psych0Tag version 0.5
+Public domain by Andrew Ziem
+
+Released: June 18,2003
+
+
+-= Introduction
+
+  Psych0Tag is a tagline program that will put a tagline on a text file, and
+  it works with a broad range of programs.  
+  
+  There is an infinate number of ways to use it. Your imagination is your 
+  only barrier.
+
+
+
+-= License Agreement
+
+  Psych0Tag is provided `as is' without warranty of any kind, expresed,
+  implied or otherwise.  If it breaks, you keep both pieces.
+
+
+
+-= Command Line Arguments
+
+  These can also be listed by running "PTAG /?".  Only one command may be
+  passed at a time.  The command-line is case insensitive.
+
+  Usage: PTAG <command> <command stuff> [-<switch> [-<switch>...]]
+         or
+         PTAG (defaults to look for PTAG.CFG)
+
+
+  Commands:
+
+  ?: help similar to this section
+  c: compile text configuration
+     c PTAG.TXT PTAG.CFG: compile PTAG.TXT into PTAG.CFG
+  d: display tagline
+  u: update configuration
+     u PTAG.CFG: auto-update PTAG.CFG's configuration (taglines/file)
+  o: output a tagline to a file
+     o MSGTMP: output a tagline to MSGTMP
+
+  Switches:
+
+  ac: specify compiled configuration file
+      ac PTAG_BW.CFG: use PTAG_BW.CFG
+   b: brag-line (`-=- Psych0Tag')
+      b0: brag-line goes before tagline   (default)
+      b1: brag-line goes after tagline
+      b2: no brag-line =(
+   c: creates output file if it does not exist
+      c+: create                          (default)
+      c-: abort if not present
+   d: enable debug mode and extra information
+   e: ellipsis (`...')
+      (not set): ignore                   (default)
+             e+: add if not present
+             e-: remove if presesent
+   l: long taglines handling
+      lX: define long tagline as X bytes or more (79=default, valid=40..250)
+      l0: let long taglines hang          (default)
+      l1: truncate (cut-off)
+      l2: line-wrap
+
+  Examples:
+
+  ex1: PTAG
+  Run with all defaults and use PTAG.CFG as configuration.
+
+  ex2: PTAG U C:\TAGLINES\PTAG.CFG /D
+  Updates taglines in the compiled configuration C:\TAGLINES\PTAG.CFG and
+  enables debug mode.
+
+  ex3: PTAG o \BBS\MSGTMP -ac C:\TAGLINES\PTAG.CFG -c- -e+ 
+  Output tagline to \BBS\MSGTMP, get configuration from C:\TAGLINES\PTAG.CFG,
+  do not create output file if it doesn't already exist, and add ellipsis if
+  they don't already exist.
+
+
+-= Limitations
+
+  All:
+   4096   characters per line (72 is the standard)
+   ~ 4.3  billion lines per tagline file
+
+
+  DOS:
+      4.3
+   *   32  files
+   ======
+      128  billion total lines
+
+
+  OS/2:
+      4.3
+   *  256  files
+   ======
+     1100  billion total lines
+
+
+-= Highlight of Features
+
+  * public domain w/ source code
+  * 16-bit DOS and 32-bit OS/2 executables
+  * auto-update of configuration (via /U command-line switch)
+
+
+-= Included Files
+
+  If any of these are missing or damaged, see the end of this document
+  for information on how to get a fresh copy of Psych0Tag.
+
+    PTAG    .EXE     DOS 16-bit executable
+    PTAG2   .EXE     OS/2 32-bit executable
+
+    MANUAL  .TXT     this documentation
+    README  .xxx     changes, important notes for version xxx
+
+    8BALL   .ZIP     "Eight Ball" mode
+    INSTALL .TXT     installation help
+    SAMPLE  .CFG     sample text configuration file
+
+    SRC     .ZIP     source code
+
+    FILE_ID .DIZ     BBS-compatible description
+
+
+-= Sorting Taglines
+
+  MS-DOS and OS/2 systems come with the SORT command.   This sorts a file 
+  line by line, making it perfect for taglines.  As a drawback, DOS has a 
+  limitation on the size of the file.
+
+  Note: Using the same input filename and output filename the same file may
+  generate a "access denied" error.
+
+  usage:
+
+  SORT < INPUT-FILENAME > OUTPUT-FILENAME
+
+  example1: 
+
+  SORT < PSYCH0.TAG > PSYCH0.$$$
+  DELETE PSYCH0.TAG
+  COPY PSYCH0.$$4 PSYCH0.TAG
+
+   Sorts PSYCH0.TAG, using PSYCH0.$$$ as a temporary file.
+
+  example2:
+
+  SORT < PSYCH0.TAG > NULL
+
+   Sort PSYCH0.TAG and send it into oblivion (where it belongs).  Why would
+   you want to do this?  You're crazy, of course.
+
+
+-= Acknowledgments and Credits (in no particular order)
+
+  All other programs are copyright and/or trademarked by their respective
+  author unless otherwise noted.
+
+
+-- end of file
+
+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,80 @@
+<html><head><title>RIPlink v1.20 - a RIP toolkit for TP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="РипЛинк - Объектно-ориентированный TP7 интерфейс для разработки программ, поддерживающих RIP графику для BBS. Приведены только TPU для TP5-TP7 (исходников нет!). <br><font color=#666666> RIPlink v1.20 - This is a RIP toolkit for Turbo Pascal programmers. It allows doors to add full support for the RIPscrip graphics protocol. This includes both sending RIPscrip codes to the user AND creating the graphics on the sysop's screen. Support includes local Mouse, TextWindow, and more! Included Manual, Samles and TPU5.5...7.0 only :( </font>">
+<meta name="keywords" content="pascal, sources, source code, rlnk120, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rlnk120
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RIPlink v1.20 - a RIP toolkit for TP</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:301/3">Thomas E. Morgan</a></TD>
+<TD class=black align='right'>10.07.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">РипЛинк - Объектно-ориентированный TP7 интерфейс для разработки программ,
+поддерживающих RIP графику для BBS.
+Приведены только TPU для TP5-TP7 (исходников нет!). <br><font color=#666666>
+RIPlink v1.20 - This is a RIP toolkit for Turbo Pascal programmers.
+It allows doors to add full support for the RIPscrip graphics protocol.
+This includes both sending RIPscrip codes to the user
+AND creating the graphics on the sysop's screen.
+Support includes local Mouse, TextWindow, and more!
+Included Manual, Samles and TPU5.5...7.0 only :( </font></TD><TD class=black colspan=2 align='right'><br><A HREF="rlnk120.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>360k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             RIPlink(tm) - Version 1.20 - 07-07-1994
+        Copyright 1994 InterProgramming, All Rights Reserved.
+
+
+This toolkit and all related programs and documentation are:
+Copyright 1994 Thomas E. Morgan and InterProgramming,
+All Rights Reserved.
+
+
+RIPlink provides RIPscrip support in two ways.  One is an internal
+support with various procedures that will translate the given
+parameters to RIPscrip commands and send them to the remote side
+as well as interpret them locally. 
+The other option is to have RIPlink read in an external .RIP file.
+It will then parse and display the RIP screen locally and will
+optionally send the commands to the remote side.  Because RIPlink
+is still under development, it does not fully support all of the
+commands that make up RIPscrip.  It only has limited interactive
+ability for the Sysop.  It will display the graphics and do the
+mouse support, but it does not do things such as protocol support,
+etc.  Those things may be added in a future release.
+
+RIPlink is an Object Oriented toolkit. Although not everyone is
+familiar with OOP programming, we feel that the provided examples
+should be enough to fully use RIPlink.  If you have difficulty,
+support is available from the locations listed above
+(Section: Distribution and Support.)
+
+The RIPscrip commands that require that the remote terminal return
+a value must be handled with care.  RIPlink will only send the codes.
+It will NOT wait for the returned information; this is left up to the
+individual programmer.
+
+If you are looking for more information regarding the RIPscrip standard,
+it is highly suggested that you obtain and read the RIPscrip
+specification document.
+As of this release, the latest version is 1.54.00.
+
+RIPlink has no internal comm routine support. Instead, RIPlink must
+be given information about your existing comm routines whether they
+are a 3rd party toolkit, or your own routines. This section will
+explain how to set up RIPlink and your comm routines so that they
+will talk to each other. If you are in the market for a reliable set
+of comm routines, we suggest that you use Turbo Power Software's
+Async Professional.  Be aware however, they are not inexpensive.
+If you decide to buy Async Professional or you already have
+it, contact us for a unit that will interface RIPlink and Async
+Professional.
+The unit is FREE to all registered RIPlink users.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

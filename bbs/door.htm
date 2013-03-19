@@ -1,0 +1,76 @@
+<html><head><title>Doors Engine v1.0 - VT100/ANSI Door for BBS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Движок для построения BBS Door. Поддерживает эмуляцию терминалов VT100 и ANSI. Пригоден для преобразования любой программы в онлайновый вариант для работы через BBS. <br><font color=#666666> Doors Engine provides an easy way for creating BBS doors in EXE format (for example to use under PCE). It can be used to convert existing programs into BBS doors. Supports VT100 and ANSI terminals. </font>">
+<meta name="keywords" content="pascal, sources, source code, door, bbs, Программы для BBS ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для BBS</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;door
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Doors Engine v1.0 - VT100/ANSI Door for BBS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:solar at openwall.com">Solar Designer</a></TD>
+<TD class=black align='right'>05.09.1995</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Движок для построения BBS Door.
+Поддерживает эмуляцию терминалов VT100 и ANSI.
+Пригоден для преобразования любой программы
+в онлайновый вариант для работы через BBS. <br><font color=#666666>
+Doors Engine provides an easy way for creating BBS doors
+in EXE format (for example to use under PCE).
+It can be used to convert existing programs into BBS doors.
+Supports VT100 and ANSI terminals. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="door.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      - Coding maniacs from RUSSIA -
+                 _____________ .________________________
+                 \_______   _/_|   ______    \ ________/:
+                 .|   ____     \   \_________/   /    \:::
+                ::|      /      \_     |:|      /      \_::
+                 :|______________/_____|:|______________/::
+                [=================================[ZACK]==]
+
+       Doors Engine V1.0
+      -------------------
+
+Doors Engine provides an easy way for creating BBS doors in EXE format
+(for example to use under PCE). It can be used to convert existing
+programs into BBS doors.
+
+The archive should contain the following files:
+
+DOOR.PAS     - the example program (source)
+DOOR.EXE     - the example program (compiled)
+DOOR.DOX     - Documentation file
+BIOSKEYS.PAS - BIOS key codes table
+FOSSIL.PAS   - FOSSIL support unit
+SENDANSI.PAS - ANSI output unit
+INITPORT.PAS - the main Doors Engine unit
+BPC_95.NFO   - BPC '95 info file
+BPC_95.REL   - List of all BPC releases
+FILE_ID.DIZ  - Archive description
+
+This version of Doors Engine requires a FOSSIL driver to be installed
+to memory before running the BBS software. Future versions may not
+require it.
+
+The example program, DOOR.EXE, can be used to make any program work as
+BBS door. You don't even need that program's source code. I've tested
+the DOOR.EXE program with Norton Commander.
+
+If you have the TP 7.0 sources of the program you want to convert into
+a BBS door, you should do the following:
+
+ - Add the InitPort unit to your program's USES line.
+ - Add the TimeLimit:=... line to the very beginning of your program
+   (for example, TimeLimit:=30*(182*6)-1 will set a 30 minutes limit)
+ - Replace all the ReadKey, etc. calls with InitPort.GetEvent calls
+   (you may also have to replace the key codes)
+
+-- Solar Designer --</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
