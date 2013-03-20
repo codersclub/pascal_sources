@@ -1,0 +1,142 @@
+<html><head><title>TPW32 v1.0 - 32-bit functions to BPW and Delphi 1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль, позволяющий вызывать 32-битные функции из 16-битных программ на Borland Pascal for Windows и Delphi 1 при работе в среде Windows 95 или Windows NT.  This is a package containing units to add 32-bit functions to Borland Pascal for Windows and Delphi 16-bit programs running under Windows 95 or Windows NT. The units implement some of the Win32 API, but also provide a means for people to call functions in 32-bit DLLs when running under a 32-bit version of Windows.'>
+<meta name="keywords" content="pascal, sources, source code, tpw32_10, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpw32_10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPW32 v1.0 - 32-bit functions to BPW and Delphi 1</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:laa12@keele.ac.uk">African Chief</a></TD>
+<TD class=black align='right'>15.11.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль, позволяющий вызывать 32-битные функции
+из 16-битных программ на Borland Pascal for Windows
+и Delphi 1 при работе в среде Windows 95 или Windows NT. <br>
+This is a package containing units to
+add 32-bit functions to Borland Pascal
+for Windows and Delphi 16-bit programs
+running under Windows 95 or Windows NT.
+The units implement some of the Win32
+API, but also provide a means for
+people to call functions in 32-bit DLLs
+when running under a 32-bit version of
+Windows.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpw32_10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>42k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">************************************************************
+    TPW32 - a package of UNITS to add
+    32-bit functionality to BPW/Delphi
+************************************************************
+Version 1.00 (15 November 1995)
+
+
+1. ORIGINAL DOCUMENTATION BY CHRISTIAN GHISLER
+----------------------------------------------
+
+ CALL32nt.pas: Library for Delphi/TPW/BPW to call 32 bit
+               functions in Windows NT or Windows 95
+
+Adapted to Pascal by Christian Ghisler, CIS: 100332,1175
+from CALL32.DLL, a DLL for Visual Basic written and placed
+in the Public Domain by Peter Golde.
+
+This unit is placed in the public domain. Please feel free
+to redistribute as you wish. No guarantees are made as to
+its suitability or usefulness, and no support can be provided.
+
+
+CALL32NT.PAS is a Unit that can be used for calling routines
+in 32-bit DLLs on the Microsoft(R) Windows NT(TM) and/or
+Windows 95(TM) operating system.
+It cannot be used on Windows(TM) 3.1, Win32s(TM),
+or other operating systems. Using it, a Delphi, Turbo or
+Borland Pascal program, running in the Win16 subsystem,
+can declare and call functions in any 32-bit DLL
+(including, but not limited to, the system DLLs).
+
+
+2. EXTRA DOCUMENTATION BY DR ABIMBOLA A. OLOWOFOYEKU
+----------------------------------------------------
+TPW32.PAS:
+
+This package (originally called CALL32NT) is now called TPW32. It
+includes the original CALL32NT.PAS (by Christian Ghisler) and
+some of the original LONGNAME.PAS (also by Christian). I have
+added some extra functions to LONGNAME.PAS and called the result
+TPW32.PAS. I have also added a "types" unit (W32TYPES.PAS) which
+implements data types and structures for use with the Win32 API.
+There is a TEST.PAS which shows how to use some of the functions.
+In most cases, I have tried to mimic as closely as possible, the
+functions in the BPW runtime library (but with the letters "W32"
+prepended to the function names).
+
+The Win32 API contains several hundred functions. I have only
+implemented a few. Hopefully, the package as it is will help many
+people to add 32-bit functions to their BPW/Delphi programs. The
+functions which are implemented herein provide ample examples for
+those who wish to implement more of the Win32 API.
+
+Please note that all the work that I have done on this was
+primarily for my own purposes. I have not tested the functions in
+all scenarios, and they may very well contain bugs. Some of the
+functions contain klugdes. Some will work alright under Win95 but
+will not work alright under NT - so you need to test under both
+platforms. If you find a bug, please let me know. I cannot
+promise to fix any bug, and since there will be no further
+releases of this package from me, any bugs that I fix will only
+be known to me.
+
+
+LICENCE:
+--------
+This package is released into the public domain. This was
+Christian Ghisler's original ideal, and I am following it. You
+are getting this free.  Please do not charge anyone else for it.
+If you add more functions please release them into the public
+domain as well. But please indicate what you have added or
+changed. The package may be distributed freely - as long as all
+the files supplied by me are included, and NONE of my
+documentation is removed or altered in any way.
+
+SUPPORT ISSUES:
+---------------
+Please NOTE: this package is FREE software. I CANNOT PROVIDE ANY
+SUPPORT AT ALL. Any attempt to ask me questions about this
+package or how to use it will be met with total silence - so
+please note that point. I have tried to add some comments to what
+I did so as to provide some clues as to usage.  That is really
+the best I can do, and that is all I intend to do.
+
+DISCLAIMER
+---------
+I (Dr Abimbola Olowofoyeku) do NOT warantee ANYTHING concerning
+any of the files which make up this TPW32 package. I accept NO
+RESPONSIBILITY for ANY LOSS OR DAMAGE of ANY kind, including, but
+not limited to, losses of a physical, mental, social, financial,
+marital, or of whatever nature, resulting from the use, or the
+purported use of TPW32 or any of the files in the package, for
+any purpose whatsoever. I do not even warantee that the files
+will not kill you. You use TPW32 ENTIRELY AT YOUR OWN RISK, and
+you supply it to your customers, friends, family, acquaintances,
+or enemies, ENTIRELY AT YOUR OWN RISK. If these terms are NOT
+acceptable to you, then you should delete all the TPW32 files
+from all your disks immediately AND PERMANENTLY.
+
+
+------------------------
+November 15, 1995
+
+Dr Abimbola A. Olowofoyeku (The African Chief)
+Email: laa12@keele.ac.uk</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

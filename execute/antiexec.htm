@@ -1,0 +1,109 @@
+<html><head><title>Anti Exec (Int21h TSR)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Резидентная программа, отслеживающая и запрещающая запуск определенных программ'>
+<meta name="keywords" content="pascal, sources, source code, antiexec, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;antiexec
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Anti Exec (Int21h TSR)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5058/9.12">Sergey Dushin</a></TD>
+<TD class=black align='right'>28.07.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Резидентная программа, отслеживающая и запрещающая запуск
+определенных программ</TD><TD class=black colspan=2 align='right'><br><A HREF="antiexec.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Пpивет, Valery!
+
+Глянь, может быть зто войдет в коллекцию, смотpи...
+
+Не помню, откуда это взялось, но пpикольная штука :)
+Запускаешь пpогpаммку, а тебе в ответ 'Hужно pаботать, а не игpать' ;)
+Резидентная прога, перехватывает на себя 21-е прерывание,
+функцию "execute".
+
+Пока!
+Sergey.
+
+--- GoldED/386 2.50.b6+ FastEcho
+ * Origin: Hету OrigiN. (2:5058/9.12)
+
+{&gt; Cut here. FileName= ANTIEXEC.PAS }
+{$D-,B-}
+{$M 1024, 0, 0}
+
+program AntiGame;
+
+uses
+  Dos;
+
+var
+  Int21h, P: pointer;
+  A: pointer absolute 0:$84;
+  B: pointer absolute 0:$184;
+  R: Registers;
+  ProgramName: String[80];
+  I, J: Byte;
+
+const
+  NamesNum = 7;
+  NeedingNames: array [1 .. NamesNum] of string[8] =
+    ('GPU', 'GOLD', #250'LOADER1', 'TETRIS', 'TET', 'POKER', 'DIGGER');
+
+{$F+}
+procedure My21h(Flags, CS, IP, AX, BX, CX, DX, SI, DI, DS, ES, BP: Word); interrupt;
+begin
+  if AX = $4B00 then
+  begin
+    Move(Ptr(DS, DX)^, ProgramName[1], 80);
+    ProgramName[0] := #$FF;
+    ProgramName[0] := Char(Pos(#0, ProgramName) - 1);
+    I := Byte(ProgramName[0]);
+    while (I &gt; 0) and (ProgramName[I] &lt;&gt; ':') and (ProgramName[I] &lt;&gt; '\') do Dec(I);
+    J := Byte(ProgramName[0]) - I;
+    Inc(I);
+    Move(ProgramName[I], ProgramName[1], J);
+    ProgramName[0] := Char(J);
+    ProgramName[0] := Char(Pos('.', ProgramName) - 1);
+    For I := 1 to Byte(ProgramName[0]) do
+      ProgramName[I] := UpCase(ProgramName[I]);
+    For I := 1 to NamesNum do
+      if ProgramName = NeedingNames[I] then
+      begin
+        WriteLn('Нужно работать, а не играть.');
+        Exit;
+      end;
+  end;
+  R.Flags := Flags; R.AX := AX;
+  R.BX := BX; R.CX := CX; R.DX := DX; R.SI := SI;
+  R.DI := DI; R.DS := DS; R.ES := ES; R.BP := BP;
+  inline($FA); P := B; B := Int21h; inline($FB);
+  Intr($61, R);
+  inline($FA); B := P; inline($FB);
+  Flags := R.Flags; AX := R.AX;
+  BX := R.BX; CX := R.CX; DX := R.DX; SI := R.SI;
+  DI := R.DI; DS := R.DS; ES := R.ES; BP := R.BP;
+end;
+{$F-}
+
+begin
+  SwapVectors;
+  inline($FA);
+  Int21h := A;
+  A := @My21h;
+  inline($FB);
+  WriteLn('Программа загружена.');
+  Keep(0);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

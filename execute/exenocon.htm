@@ -1,0 +1,90 @@
+<html><head><title>Запуск программ с перенаправлением вывода в файл</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Переадресация вывода в файл средствами DOS'>
+<meta name="keywords" content="pascal, sources, source code, exenocon, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;exenocon
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Запуск программ с перенаправлением вывода в файл</TD>
+<TD nowrap class=black>&nbsp;Руслан Нурисламов</TD>
+<TD class=black align='right'>22.11.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Переадресация вывода в файл средствами DOS</TD><TD class=black colspan=2 align='right'><br><A HREF="exenocon.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Ruslan R. Nurislamov" &lt;hornet@civt.kazan.su&gt;
+Organization: Computer Center of the Kazan State University
+
+Не знаю то ли нужно, но вот, шлю.
+Кстати - это я уже высылал - в TPU-шке A_DESIGN оная весч была ...
+---
+My adresses :
+
+ RELCOM   : hornet@civt.kazan.su
+ INTERNET : hornet@alpha.ksu.ras.ru
+
+{&gt; Cut here. FileName= EXENOCON.PAS }
+{ Вызов программы с перенаправлением вывода в файл }
+Procedure ExecNoCon(Prog,Param,ToOut : String);
+Var NDir    : Array[1..80] of Byte;
+    SSt     : String;
+    I       : Integer;
+    F       : Text;
+    Reg     : Registers;
+    Desc,
+    OldDisc : Word;
+Begin
+ Sst:=ToOut;
+ Sst:=Sst+#0;
+ For I:=1 To Length(Sst) Do
+  Ndir[I]:=Ord(Sst[I]);
+ Assign(F,ToOut);    { сие для создания файла нулевой длины }
+ Rewrite(F);
+ Close(F);
+ {Open File}
+ Reg.AH:=$3D;        { открытие файла средствами DOS, дальше все прозрачно }
+ Reg.AL:=2;
+ Reg.DS:=Seg(Ndir);
+ Reg.DX:=Ofs(Ndir);
+ MsDos(Reg);
+ Desc:=Reg.AX;
+ {Duplicate Discriptor}
+ Reg.AH:=$45;
+ Reg.BX:=1;
+ MsDos(Reg);
+ Olddisc:=Reg.AX;
+ {ReDirect Discriptor}
+ Reg.AH:=$46;
+ Reg.BX:=Desc;
+ Reg.CX:=1;
+ MsDos(Reg);
+ {Close File}
+ Reg.AH:=$3E;
+ Reg.BX:=Desc;
+ MsDos(Reg);
+ {Execute File}
+ SwapVectors;
+ Exec(Prog,Param);
+ SwapVectors;
+ {Stay Old Descriptor}
+ Reg.AH:=$46;
+ Reg.BX:=Olddisc;
+ Reg.CX:=1;
+ MsDos(Reg);
+ {Close Olddisc}
+ Reg.AH:=$3E;
+ Reg.BX:=Olddisc;
+ MsDos(Reg);
+End;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

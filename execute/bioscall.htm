@@ -1,0 +1,191 @@
+<html><head><title>Передача управления на точку входа BIOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Переписка о методах передачи управления на точку входа BIOS'>
+<meta name="keywords" content="pascal, sources, source code, bioscall, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bioscall
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Передача управления на точку входа BIOS</TD>
+<TD nowrap class=black>&nbsp;Алексей Громак</TD>
+<TD class=black align='right'>12.02.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Переписка о методах передачи управления на точку входа BIOS</TD><TD class=black colspan=2 align='right'><br><A HREF="bioscall.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Alex! A. Gromak &lt;alex@mhti.msk.su&gt;
+Organization: Mendeleyev University of Chemistry and Technology of
+
+&gt;   Помогите мне передать управление в программе на опре-
+&gt;   деленную точку входа BIOS!
+
+inline($EA,4 байта long адрес в BIOS'е);
+---
+             Новел - Не тВарь, а средство коммуникации!
+
+Alex!   alex@mhti.msk.su
+phone:  (095) 258-75-98 (w, 9.00-19.00); (095) 150-04-51 (h, 20.00-22.00)
+
+
+From: ark2@viza.munic.msk.su (Arkady V.Belous)
+Subj: Re: Передача управления на точку входа BIOS. HELP!
+Organization: Moscow Mayor Office
+Date: Tue, 15 Feb 94 23:24:52 +0300
+
+Hi, Alex!
+
+&gt;From: Alex! A. Gromak &lt;alex@mhti.msk.su&gt;
+&gt;Date: Sat, 12 Feb 94 13:27:26 +0300
+
+&gt;inline($EA,4 байта long адрес в BIOS'е);
+&gt;Lines: 3
+ ^^^^^^^^ Ну уезжает же!
+
+Алекс. Зачем так грубо? Поласковей надо :)
+
+asm jmp &lt;4 байта long адрес в BIOS'е&gt;
+end {asm};
+--
+                   Best regards! Sincerely yours (SY),
+&lt;Аркадий В.Белоусов = ark@munic.msk.su&gt; &lt;Voice: (095) 229-7884, 200-5402&gt;
+            Beer? Не, чай. Глядишь, и с булочками :). Бильбо.
+
+
+From: Alexeev Vlad &lt;Vlad@zik.rcupi.e-burg.su&gt;
+Subj: Re: Передача управления на точку входа BIOS. HELP!
+Organization: UGTU-UPI
+Date: Thu, 17 Feb 94 15:15:30 +0500
+
+&gt;&gt;&gt;asm jmp &lt;4 байта long адрес в BIOS'е&gt;
+&gt;&gt;&gt;end {asm};
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ну да, Вы бы это попробовали сделать на паскале
+и встроенном в нем ассемблере!
+
+--
+Good Luck!
+
+Alexeev Vlad
+E-mail:Vlad@zik.rcupi.e-burg.su;
+
+
+From: ark2@viza.munic.msk.su (Arkady V.Belous)
+Subj: Re: Передача управления на точку входа BIOS. HELP!
+Organization: Moscow Mayor Office
+Date: Sat, 19 Feb 94 23:55:04 +0300
+
+Hi, Vlad!
+
+&gt;&gt;&gt;   Помогите мне передать управление в программе на опре-
+&gt;&gt;&gt;   деленную точку входа BIOS!
+&gt;Ну да, Вы бы это попробовали сделать на паскале
+&gt;и встроенном в нем ассемблере!
+
+"Муж волшебник? Был не прав. Вспылил. Приношу свои извинения."
+Был не прав. Вспылил. Действительно не проходит. Остаётся inline.
+--
+                   Best regards! Sincerely yours (SY),
+&lt;Аркадий В.Белоусов = ark@munic.msk.su&gt; &lt;Voice: (095) 229-7884, 200-5402&gt;
+            Beer? Не, чай. Глядишь, и с булочками :). Бильбо.
+
+
+
+From: Alexeev Vlad &lt;Vlad@zik.rcupi.e-burg.su&gt;
+Subj: Re: Передача управления на точку входа BIOS!
+Organization: UGTU-UPI
+Date: Sun, 20 Feb 94 22:08:10 +0500
+
+        Приветик Аркадий!
+
+&gt;"Муж волшебник? Был не прав. Вспылил. Приношу свои извинения."
+&gt;Был не прав. Вспылил. Действительно не проходит. Остаётся inline.
+                                                           ^^^^^^^
+Ну зачем же так сурово и сложно. Вполне можно обойтись
+
+ var
+       &lt;...&gt; : procedure absolute [xxx:yyy];
+
+Хоть и выполняется дольше, но как ни как простому смертному понятно,
+а то с твоей inline не каждый человек разберется (в смысле коды команд)!
+
+--
+Good Luck!
+
+Alexeev Vlad
+E-mail:Vlad@zik.rcupi.e-burg.su;
+
+
+
+From: VICTOR@net.neic.nsk.su (Victor Malov)
+Subj: Re: Передача управления на точку входа BIOS. HELP!
+Organization: DTL
+Date: Mon, 21 Feb 1994 07:44:34 GMT
+
+ Alexeev Vlad &lt;Vlad@zik.rcupi.e-burg.su&gt; writes:
+
+&gt;&gt;&gt;&gt;asm jmp &lt;4 байта long адрес в BIOS'е&gt;
+&gt;&gt;&gt;&gt;end {asm};
+&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&gt;Ну да, Вы бы это попробовали сделать на паскале
+&gt;и встроенном в нем ассемблере!
+
+var P: Pointer;
+begin
+   asm
+        jmp     P
+   end;
+end.
+
+
+
+From: ark2@viza.munic.msk.su (Arkady V.Belous)
+Subj: Re: Передача управления на точку входа BIOS.
+Organization: Moscow Mayor Office
+Date: Tue, 22 Feb 94 20:37:19 +0300
+
+Hi, Vlad!
+Hi, Victor!
+
+&gt;From: Alexeev Vlad &lt;Vlad@zik.rcupi.e-burg.su&gt;
+&gt;Ну зачем же так сурово и сложно. Вполне можно обойтись
+&gt; var  &lt;...&gt; : procedure absolute [xxx:yyy];
+
+Сия конструкция не совсем правильна (вот тебе и "простому смертному
+понятно"): jmp &lt;...&gt; перейдет косвенно, по адресу, хранящемуся в
+переменной &lt;...&gt;. При этом absolute xxx:yyy (а не absolute [xxx:yyy])
+здесь поможет только в случае, если по указанному адесу будет лежать
+(положат) нужный адрес. А речь шла о BIOS (то бишь в большинстве
+случаев про ПЗУ).
+
+&gt;From: VICTOR@net.neic.nsk.su (Victor Malov)
+&gt;var P: Pointer;
+&gt;begin  asm     jmp     P
+&gt;       end;
+&gt;end.
+
+Все это конечно прекрасно, но, имхо, один инлайн с комментарием и
+быстрее и яснее, чем следующая конструкция:
+
+var     p :pointer;
+begin   p := ptr(xxx, yyy);
+        asm     jmp p
+        end {asm};
+end.
+
+Так что Alex! Gromak здесь действительно был прав. С чем я его и
+поздравляю :)
+--
+                   Best regards! Sincerely yours (SY),
+&lt;Аркадий В.Белоусов = ark@munic.msk.su&gt; &lt;Voice: (095) 229-7884, 200-5402&gt;
+            Beer? Не, чай. Глядишь, и с булочками :). Бильбо.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

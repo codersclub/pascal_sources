@@ -1,0 +1,186 @@
+<html><head><title>Вызов процедур по адресу</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Простейший способ вызова процедуры по ее адресу в Turbo Pascal'е.'>
+<meta name="keywords" content="pascal, sources, source code, addrcall, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;addrcall
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Вызов процедур по адресу</TD>
+<TD nowrap class=black>&nbsp;Василий Рабец</TD>
+<TD class=black align='right'>11.03.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Простейший способ вызова процедуры по ее адресу
+в Turbo Pascal'е.</TD><TD class=black colspan=2 align='right'><br><A HREF="addrcall.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Василий Сергеевич Рабец &lt;rabets@icph20.sherna.msk.su&gt;
+Subj: Простейший способ вызова процедуры по ее адресу в Turbo Pascal'е.
+Date: 11.03.93
+
+                      (C) V.S.Rabets, 1993.
+
+        Простейший способ вызова процедуры по ее адресу
+                       в Turbo Pascal'е.
+
+В Turbo Pascal'е нередко встречается такая ситуация:
+    указатель P содержит адрес некоторой процедуры без параметров;
+    нужно вызвать эту процедуру.
+
+Обычно в таком случае используется оператор asm (начиная с TP 6.0):
+           asm
+               call dword ptr P
+           end
+или inline:
+           inline ($FF/$1E/&gt;P);   {call dword ptr [&gt;P]}
+
+К сожалению, вызвать процедуру, приведя тип pointer к типу procedure
+           procedure (P)
+не удастся - компилятор воспримет такую конструкцию как ошибку.
+
+Однако можно (и это самый простой путь) объявить, например, тип
+           type ExecPtr = procedure;
+и вызвать процедуру
+           ExecPtr (P);
+что короче и проще, чем asm и inline, и не требует знакомства с
+ассемблером.
+
+*** КОНЕЦ основного текста. Дальше идут примеры и комментарии ***
+
+    (* Вообще не совсем понятно, почему для хранения адреса
+       процедуры обычно используется переменная типа pointer, а не
+       procedure. Единственный недостаток procedure - некоторые
+       сложности с созданием типизированных констант (2 строки
+       вместо одной):
+           const NilPtr: pointer = nil;
+           var P: procedure absolute NilPtr;
+       Преимущество procedure - компилятор следит за соответствием
+       типов (например, в нашем примере - чтобы переменной P при-
+       сваивалось значение только процедуры типа far без парамет-
+       ров); для переменной типа pointer никакого контроля нет.
+    *)
+===================================================================
+
+Ниже приведены примеры программ с использованием всех вышеупомяну-
+тых способов вызова процедуры по ее адресу. Каждый пример содержит
+  создание типизированной константы с нулевым значением;
+  присвоение ей некоторого значения, в т.ч. нулевого;
+  проверку, не является ли значение переменной нулевым;
+  вызов процедуры по адресу, сохраненному в переменной.
+Exe - файлы во всех случаях получаются совершенно одинаковыми;
+исходный текст проще в примере с использованием типа ExecPtr.
+
+--------------------------------------------------
+program _Asm; { Пример вызова процедуры по адресу, сохраненному в
+                переменной типа pointer, оператором asm. }
+uses CRT;
+
+const P: pointer = nil;
+
+procedure Proc1; far;    begin writeln(#7)   end;
+procedure Proc2; far;    begin writeln(#7#7) end;
+
+begin
+  writeln ('1 or 2 ?');
+  case ReadKey of
+       '1': P:=@Proc1;
+       '2': P:=@Proc2;
+       else P:=nil
+  end; {of case}
+  if P&lt;&gt;nil then
+     asm
+         call dword ptr P
+     end;
+end.
+
+--------------------------------------------------
+program _Inline; { Пример вызова процедуры по адресу, сохраненному в
+                   переменной типа pointer, оператором inline. }
+uses CRT;
+
+const P: pointer = nil;
+
+{$F+}
+procedure Proc1;    begin writeln(#7)   end;
+procedure Proc2;    begin writeln(#7#7) end;
+{$F-}
+
+begin
+  writeln ('1 or 2 ?');
+  case ReadKey of
+       '1': P:=@Proc1;
+       '2': P:=@Proc2;
+       else P:=nil
+  end; {of case}
+  if P&lt;&gt;nil then inline ($FF/$1E/&gt;P);   {call dword ptr [&gt;P]}
+end.
+
+--------------------------------------------------
+program _ExecPtr; { Пример вызова процедуры по адресу, сохраненному в
+                    переменной типа pointer, приведением к типу ExecPtr. }
+uses CRT;
+
+type ExecPtr = procedure;
+const P: pointer = nil;
+
+{$F+}
+procedure Proc1;    begin writeln(#7)   end;
+procedure Proc2;    begin writeln(#7#7) end;
+{$F-}
+
+begin
+  writeln ('1 or 2 ?');
+  case ReadKey of
+       '1': P:=@Proc1;
+       '2': P:=@Proc2;
+       else P:=nil
+  end; {of case}
+  if P&lt;&gt;nil then ExecPtr (P);
+end.
+
+--------------------------------------------------
+program _Procedure; { Пример вызова процедуры по адресу, сохраненному в
+                      переменной типа procedure. }
+uses CRT;
+
+const NilPtr: pointer = nil;
+var P: procedure absolute NilPtr;
+
+{$F+}
+procedure Proc1;    begin writeln(#7)   end;
+procedure Proc2;    begin writeln(#7#7) end;
+{$F-}
+
+begin
+  writeln ('1 or 2 ?');
+  case ReadKey of
+       '1': P:=Proc1;
+       '2': P:=Proc2;
+       else @P:=nil
+  end; {of case}
+  if @P&lt;&gt;nil then P;
+end.
+
+---------------------------------------------------------------
+
+        11-03-93                     В.С. Рабец
+
+                           e-mail:   rabets@icph20.sherna.msk.su
+
+                            Адрес:   142 432
+                                     Московская обл.
+                                     Ногинский р-н
+                                     п. Черноголовка
+                                     Школьный б-р, 18, кв. 241
+                                     Рабцу В.С.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

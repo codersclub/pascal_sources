@@ -1,0 +1,217 @@
+<html><head><title>Call32NT - Call 32-bit DLL from 16-bit Application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль, позволяющий делать вызов 32-разрядных функций под Windows-9x/NT для 16-битных программ, написанных на BP7, BPW и Delphi-1.  Call 32-bit DLLs from 16-bit Delphi/TPW! This unit allows you to call most 32-bit functions in Windows 95 and Windows NT from your 16 bit Delphi or Turbo Pascal application! Public domain inc. source.'>
+<meta name="keywords" content="pascal, sources, source code, call32nt, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;call32nt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Call32NT - Call 32-bit DLL from 16-bit Application</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:100332.1175@compuserv.com">Christian Ghisler</a></TD>
+<TD class=black align='right'>28.06.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль, позволяющий делать вызов 32-разрядных функций
+под Windows-9x/NT для 16-битных программ, написанных на
+BP7, BPW и Delphi-1. <br>
+Call 32-bit DLLs from 16-bit Delphi/TPW!
+This unit allows you to call most 32-bit
+functions in Windows 95 and Windows NT
+from your 16 bit Delphi or Turbo Pascal
+application! Public domain inc. source.</TD><TD class=black colspan=2 align='right'><br><A HREF="call32nt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>22k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CALL32nt.pas: Library for Delphi/TPW/BPW to call 32 bit
+              functions in Windows NT or Windows 95
+
+Adapted to Pascal by Christian Ghisler, CIS: 100332,1175
+from CALL32.DLL, a DLL for Visual Basic written and placed
+in the Public Domain by Peter Golde.
+
+This unit is placed in the public domain.
+Please feel free to redistribute as you wish.
+No guarantees are made as to its suitability or
+usefulness, and no support can be provided.
+
+ CALL32NT.PAS is a Unit that can be used for calling
+ routines in 32-bit DLLs on the Microsoft(R) Windows NT(TM)
+ and/or Windows 95(TM) operating system. It cannot be used
+ on Windows(TM) 3.1, Win32s(TM), or other operating systems.
+ Using it, a Delphi, Turbo or Borland Pascal program, running
+ in the Win16 subsystem, can declare and call functions in any
+ 32-bit DLL (including, but not limited to, the system
+ DLLs).
+
+Directories in ZIP file (unzip with pkunzip -d):
+
+root:
+call32nt.pas  the unit to call 32 bit functions from
+              Delphi/TPW/BPW
+
+delphi:   sample source of a Delphi program calling 32-bit code
+          (exe not incuded)
+tpw-bpw:  sample source and exe of a TPW/BPW wincrt program
+          calling 32-bit code
+longname: some 32-bit functions which use long filenames,
+          ready to be called
+
+                         ----------------
+
+CALL32nt.pas: Library for Delphi/TPW/BPW to call 32 bit functions
+               in Windows NT or Windows 95
+
+Adapted to Pascal by Christian Ghisler
+from CALL32.DLL, a DLL for Visual Basic
+written and placed in the Public Domain by Peter Golde
+
+This unit is placed in the public domain.
+Please feel free to redistribute as you wish.
+No guarantees are made as to its suitability or
+usefulness, and no support can be provided.
+
+
+To call a function in a 32-bit DLL, follow these steps:
+
+ 1. Declare the function you wish to call. Declare it
+ in the ordinary fashion, with the following exceptions:
+
+ &gt;  Declare it as a function variable
+ &gt;  Add an additional argument at the end, of type Longint:
+
+ For example, if you are calling the function:  (C code)
+
+    GetWindowText(HWND hwnd, LPSTR lpsz, int cch)
+
+ declare it as follows (remember that ints and all handles
+ are 32 bits, so use a Longint):
+
+    var GetWindowText:function(hwnd:Longint;lpsz:PChar;
+                      cch:longint;id:Longint):Longint;
+
+ 2. Each function needs an identifier to distinguish the
+    function from other called functions. Declare this
+    identifier in a var block.
+
+For the above example:
+
+    var id_GetWindowText:longint;
+
+ 3. In the initialization section of your application, set the
+    address of the called function to the address of Call32:
+
+    @GetWindowtext:=@Call32;
+
+ 4. Also in the initialization section of your application,
+ declare the actual library and name of the function you
+ want to call with the Declare32 function. Pass it the name
+ of the function (CASE SENSITIVE!!!), the library name, and
+ a string describing the argument types.
+
+ Each letter in the string declares the type of one argument,
+ and should be either "i" for a 32-bit integer or handle
+ type, "p" for any pointer type, or "w" for an HWND parameter
+ to which you want to pass a 16-bit HWND and have it be
+ automatically converted to a 32-bit HWND. Save the return
+ value of Declare32 in a global variable to pass as the last
+ parameter to the function you declared earlier. So, in
+ continuing the example, you would call:
+
+   id_GetWindowText:=Declare32('GetWindowText','user32','wpi');
+
+ (As a side note, this more properly would be declared as
+ 'GetWindowTextA', since this is the real exported name.
+ However, Declare32 will automatically add an 'A' to the
+ end of a function name if necessary.)
+
+ To call the function, you would call:
+
+   cbCopy:=GetWindowText(hwnd, sz, cb, id_GetWindowText);
+
+ It is important to use the correct data types when calling
+ DLL functions. There are two important points to pay
+ attention to when using CALL32NT.PAS.
+
+ First, only 32-bit integers can be passed to a DLL
+ procedure. Since virtually all 32-bit functions take int,
+ UINT, LONG, DWORD, or HANDLE parameters, which are all 32
+ bits, this is not a major restriction. However, you must
+ remember to always declare function arguments as Longint,
+ not Integer.
+
+ Second, 16-bit handles and 32-bit handles are not
+ interchangeable. For example, a 16-bit bitmap handle that
+ you get from calling a 16-bit DLL or from the Delphi/TPW
+ environment cannot be passed to a 32-bit function
+ expecting a bitmap handle. Similarly, a 32-bit handle
+ obtained from a 32-bit function cannot be passed to a 16-
+ bit DLL. The only exception is window handles (HWND). If
+ you declare a function parameter with the "w" letter in
+ the argument description string passed to Declare32, the
+ corresponding parameter will be automatically converted
+ from a 16-bit HWND to a 32-bit HWND when the call is made.
+ You must still declare the argument as a LONG. This is
+ convenient, for example, when passing the value returned
+ by the "handle" property of a form/control to a 32-bit DLL
+ function. Only windows created by your application can be
+ translated.
+
+ The following is a summary of data types:
+
+ C data type    Type specified in Declare   Character for Declare32
+   int, UINT           Longint                   i
+   LONG, DWORD         Longint                   i
+   HANDLE              Longint                   i
+   WORD, short         not supported
+   HWND                Longint                   w
+                                          (i for no 16-&gt;32
+                                            translation)
+   LPSTR               PChar                     p
+   LPLONG, LPDWORD,
+   LPUINT, int FAR *   VAR x:Longint             p
+   LPWORD              VAR x:Word                p
+
+ Note on Declare32 function names: Declare32 will
+ automatically try three different names for the function
+ name you pass in. First, it uses the exact name you pass
+ in. If it doesn't find that function name, it converts the
+ name to the stdcall decorated name convention by adding an
+ underscore at the beginning and adding "@nn" at the end,
+ where "nn" is the number of bytes of arguments. If it
+ doesn't find that name, it adds an "A" to the end of the
+ original name to try the Win32(R) ANSI function calling
+ convention.
+
+ If there occurs an error in Declare32, the returned id will
+ be less than 0. Also, the variable Call32NTError will be set,
+ so you only have to check one variable to check that all went
+ well. You can use this variable to distinguish between Windows
+ 3.1 and Windows NT/95: if Call32NTError is false, you can use
+ the declared 32-bit functions, otherwise you must use 16-bit
+ replacement functions.
+ This allows you to write programs which work in both 16 and 32
+ bit environments.
+
+ If you have to pass a record containing a pointer, you must use
+ the function GetVDMPointer32W to create a 0:32 pointer from
+ your 16:16 pointer.
+
+ This unit is, like the original DLL, in the public domain.
+ Feel free to redistribute as you wish. No guarantees are
+ made as to its suitability or usefulness, and no support
+ is provided. Please send bug reports to my CIS address
+ 100332,1175.
+
+ CALL32NT requires the Microsoft Windows NT operating system
+ or Windows 95 Preview or later to perform its task. The program
+ will also run in Win 3.1, but of course the functions will not
+ work.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

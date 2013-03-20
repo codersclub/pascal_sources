@@ -1,0 +1,76 @@
+<html><head><title>Exec против TSR</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Метод замены резидентности на простой вызов внешних программ'>
+<meta name="keywords" content="pascal, sources, source code, exevstsr, exec, Приемы Вызова Программ ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Приемы Вызова Программ</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;exevstsr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Exec против TSR</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5057/4.10">Лион Роканиди</a></TD>
+<TD class=black align='right'>06.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Метод замены резидентности на простой вызов внешних программ</TD><TD class=black colspan=2 align='right'><br><A HREF="exevstsr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">       Hello All !
+
+
+  Люди! По поводу резидентов на Паскале могу дать пару советов.
+1. Писать их можно не хуже, чем на Си (хотя "настоящие профессионалы"
+предпочитают Ассемблер, но  попробуйте  сваять 100-200k монстра со свопингом
+в EMS/XMS/HDD), только надо точно  знать,  что  при  этом происходит как в
+системе, так и в Паскале, и не по-наслышке,  а  все на собственном опыте
+проверив.
+2. Слушай других, и делай по-своему (глобальный принцип).
+В частности, зачем  использовать Keep(ExitCode),  наживая  проблемы
+с выгрузкой резидента  и его отладкой, когда есть Exec(Path,CmdLine).
+
+Попробуйте нижепришитый исходник - его же можно
+ОТЛАЖИВАТЬ ПРЯМО В СРЕДЕ !
+
+  Ремарк к исходнику:
+
+    IntRegisters заимствовано из Turbo Professional 4.0;
+    Pardon для поклонников Асма за оформление Proc CallInt -
+           стиль у меня такой :);
+    а вообще, прог этот для хохмы блокирует открытие сишных манускриптов.
+    Такой вот скрытый намек...
+
+    А велики ли системные издержки за удовольствие  писать на Паскале ?
+
+  Всего 7Kb в памяти вместе со стеком (2Kb) и клочком из DOS.TPU
+(и то, и другое можно хэкерскими приемами урезать) - ну, если и не драйвер
+клавиатуры/дисплея, конечно, но что посерьезнее можно на  Asm  даже и не
+переписывать (к тем, кто на ASMе пишет быстрее, чем PASСALе, это не относится
+- им PAS вовсе ненужен).
+
+  Это, понятно, почти голая идея, так что до(пере)писывайте сами. Могу так же
+бесплатно поделиться  организацией  многозадачности внутри  паскалевской
+программы  с  динамическим   старт/стопом процессов  (вроде Модулы), обработкой
+исключений   (в смысле exeption, как в C++), системным драйвером (типа SYS, для
+Config) и много чем еще. Пишите письма, кому надо и не надо, и кто не верит, что
+на Пасе пишется все, что угодно, из того что может Си. Все это работает на BP
+7.0 (наверное и на TP 4.0 ?).
+
+      Cincerelly yours
+                      Lion.
+
+       Good luck ! Lion.
+       Data,Fax - 846-256-1948 - CM
+       Voice    - 846-256-1815 - 11-20 Msk
+
+
+--- GoldED 2.42.G1218+
+ * Origin:  , Russia, SamaraMedNet  (FidoNet 2:5057/4.10)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
