@@ -1,0 +1,145 @@
+<html><head><title>CHR - Формат файлов штриховых шрифтов Borland</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Структура файла штрихового фонта фирмы Borland'>
+<meta name="keywords" content="pascal, sources, source code, chr, fileform, Форматы Файлов ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Форматы Файлов</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;chr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CHR - Формат файлов штриховых шрифтов Borland</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5004/14.20">Stanislav Plehnevich</a></TD>
+<TD class=black align='right'>20.07.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Структура файла штрихового фонта фирмы Borland</TD><TD class=black colspan=2 align='right'><br><A HREF="chr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 99 of 202                            Addr                        Date
+ From : Stanislav Plehnevich          2:5004/14.20                     20.07.97
+ Subj : chr
+-------------------------------------------------------------------------------
+Hi Pavel Dovgaluk !!!
+
+Pavel Dovgaluk --&gt; All
+
+ PD&gt;        Кто знает чего-нибудь пpо фоpмат субжевых файлов ?
+
+   Бери:
+
+         +------------------------------------------------+
+         | Структура файла штрихового фонта фирмы Borland |
+         +------------------------------------------------+
+
+   Смещение       |
+------------------+------------------------------------------------------------
+ 0000  - 0003     |  'PK' 08 08
+ 0004  - ....     |  Метка фонта ( copyright и т.д. )
+                  |  оканчивается символом 1A ( конец файла )
+                  |  Пусть смещение символа 1A = N
+  N+1  - N+2      |  80 00  ( другие значения всегда ошибочны )
+  N+3  - N+6      |  четырехбуквенное название шрифта ( 'TRIP','SANS','LITT')
+  N+7  - N+8      |  размер файла - 80h ( слово )
+  N+9  - 007F     |  01 00 01 00 00 00 ... 00       ( ??? )
+  0080            |  2B
+  0081            |  Число символов
+  0082 - 0083     |  00 00      ( ??? )
+  0084            |  ачальный символ
+  0085 - 0086     |  Указатель на начало таблицы кодировки ( слово )
+                  |  ( настоящее смещение таблицы = 80h + &lt;указатель&gt; )
+  0087            |  00
+  0088            |  Высота символов выше оси координат
+  0089            |  00
+  008A            |  Высота символов ниже оси координат ( со знаком минус )
+                  |  т.е. общая высота символов = [0088] - [008A]
+                  |  Символы рисуются относительно оси координат ,
+                  |  хотя в процедуре OutTextXY координаты задаются
+                  |  по верхнему краю символов - для этого и нужны 2 ячейки
+                  |  для высоты символов
+  008B - 008F     |  00 00 00 00 00
+  0090 - ....     |  Таблица указателей на символы относительно таблицы
+                  |  кодировки ( по одному слову на каждый символ )
+                  |  Пусть таблица оканчивается на смещении M
+  M+1  - ....     |  Таблица ширины символов ( по одному байту на символ )
+  80h+[0085] - .. |  Таблица кодировки символов
+------------------+------------------------------------------------------------
+
+          Структура кодировки символа :
+
+  последовательность байтов : x1,y1,x2,y2,x3,y3 ... xN,yN,00
+     Рисование начинается с точки 0,0 затем в x1,y1 и т.д.
+  перед рисованием числа x,y надо преобразовать :
+       Если у X и Y бит 7 = 1 это означает что вектор надо рисовать
+       Если у X бит 7 = 1 , а у Y бит 7 = 0 это означает что вектор невидимый
+       В остальных случаях - конец последовательности.
+  После определения 7 - го бита надо его сбросить в 0 у X и Y
+  Затем если у X или Y бит 6 = 1 , то в этом числе надо и бит 7 установить в 1
+  ( когда числа отрицательны )
+
+Shalom Lehitraot!!!
+Stanislav                                            [AKA Night's Man]
+--- timEd/386 1.10.g2+
+ * Origin: А я люблю свою жену Аленку ! (2:5004/14.20)
+
+{&gt; Cut here. FileName= CHRSTR2.MSG }
+- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 100 of 202                           Addr                        Date
+ From : Ivan Pestrikov                2:5075/22.5                      05.09.97
+ Subj : chr
+-------------------------------------------------------------------------------
+Здравствуйте Pavel, и чтоб вы сегодня не зависли!
+
+ Помнится как-то (Четверг Июль 17 1997 09:20) некто Pavel Dovgaluk написал All:
+
+ PD&gt;        Кто знает чего-нибудь пpо фоpмат субжевых файлов ?
+
+&gt;-----  Cut Begin  Fontedit.Pas ---
+
+type
+  TChar4 = array [1..4] of Char;
+  TFontHead = record            {Структура заголовка шрифта}
+  case Byte of
+  0:(FontFileID: TChar4);
+  1:(B: array [1..128] of byte);
+  end;
+  TFontPara = record            {Блок параметров шрифта}
+  case Byte of
+  0:(
+    ParPrefix : Char;           {Символ "+"}
+    CharsCount: Word;           {Количество символов в шрифте}
+    Reserv1   : Byte;           {Hе используется}
+    FirstChar : Byte;           {Код первого символа}
+    DataOffset: Word;           {Смещение до векторных команд первого символа}
+    FillFlag   : Byte;          {Флаг заливки}
+    UpperMargin: Byte;          {Высота символов}
+    Reserv2    : Byte;          {Hе используется}
+    LowerMargin: ShortInt;      {Hижняя кромка}
+    Reserv3 : array [1..5] of Byte;);
+  1:(H2: array [1..16] of Byte)
+  end;
+  TOffst = array [0..255] of Word;      {Смещения}
+  TWidth = array [0..255] of Byte;      {Ширины}
+  TChars = array [0..255] of Pointer;   {Данные}
+  TLengD = array [0..255] of Word;      {Длина}
+  AW = array [1..255] of Word;
+  TCooE = record                        {Векторы рабочего поля}
+    X1,Y1,X2,Y2: Integer;
+  end;
+
+&gt;-----   Cut End   ---------
+
+    Всегда Свой с приветом к Вам, Ivan                    [Team ИС - MD!]
+    Тольятти, ПТИС ГАСБУ
+
+---
+ * Origin: У "чайника" всегда есть pезеpвы pоста... (FidoNet 2:5075/22.5)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
