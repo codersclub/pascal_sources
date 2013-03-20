@@ -1,0 +1,147 @@
+<html><head><title>GRF. Как вывести точку в VESA режимах</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Несколько вариантов вывода точки на экран в графических режимах '>
+<meta name="keywords" content="pascal, sources, source code, pixels, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pixels
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRF. Как вывести точку в VESA режимах</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5054/26">Victor Shantar</a></TD>
+<TD class=black align='right'>20.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Несколько вариантов вывода точки на экран в графических режимах </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&gt; Hi, Vadim.
+
+ Однажды 18 Dec 97 13:13, Vadim Maximoff писал к All, а я вмешался:
+ VM&gt;    Я сам это попытался сделать, да в нашем городе нет вообще книг
+ VM&gt; нормальных по программированию, файликов тоже нет с документацией...
+ VM&gt;   Hужно все это для Graphical User Interface (GUI)...SUBJ (если есть
+ VM&gt; доки, то намыльте пожалуйста)...
+
+2Vadim:  Hе знаю как на счет скорости, но точка в VESA режимах вроде так
+         выводится :
+
+procedure PutPixel(X, Y: Integer; Color: Byte);
+var
+  Offset: Longint;
+  Bank: Integer;
+begin
+  if (X &gt;= 0) and (Y &gt;= 0) and (X &lt; VesaMode.Width)
+  and (Y &lt; VesaMode.Height) then begin
+    Offset := LongMul(Y, VesaMode.Width) + X;
+    Bank := LongRec(Offset).Hi;
+    if Bank &lt;&gt; LastBank then SetBank(Bank);
+    case DrawMode of
+    0: Mem[SegA000: LongRec(Offset).Lo] := Color;
+    1: Mem[SegA000: LongRec(Offset).Lo] := 
+                    Color xor Mem[SegA000:LongRec(Offset).Lo];
+    2: Mem[SegA000: LongRec(Offset).Lo] := 
+                    Color or Mem[SegA000:LongRec(Offset).Lo];
+    end;
+  end;
+end;
+
+Procedure Plot(x,y:integer; color:byte); assembler;
+Asm
+  mov bh,0
+  mov cx,x { sets x coordinate }
+  mov dx,y { sets y coordinate }
+  mov al,color { sets color (0-255) }
+  mov ah,0Ch { tells video to plot a point }
+  int 10h
+End;
+
+procedure SetPixel(X, Y : Word; C : word);
+var b,z1,z2,z3,q,w:longint;
+    bnk:word;
+
+begin
+ if c&lt;=255 then
+  begin
+   z1:=y;z2:=xmax;
+   q:=z1*z2+x;
+   z3:=memw[sos:ooo+6];
+   z3:=z3*1024;
+   if z3=0 then z3:=1;
+   b:=q div z3;
+   bnk:=b*bank;
+   if oldbank&lt;&gt;b then
+    begin
+     asm
+      mov ax,$4f05
+      mov bx,0
+      mov dx,bnk
+      int $10
+     end;
+     oldbank:=b;
+    end;
+   if ((x&lt;xmax) and (y&lt;ymax)) then mem[$a000:q]:=c;
+ end;
+end;
+
+procedure PutPixel(x,y:word;col:byte);assembler;
+asm
+       mov  ax,GraphResult
+       cmp  ax,grOk
+       jne  @L_END
+       mov  ax,modeInfo.usBytesPerScanLine
+       mul  y
+       add  ax,x
+       jnc  @LOOP1
+       inc  dx
+@LOOP1:
+       mov  di,ax
+       cmp  dx,WinPos
+       je   @LOOP2
+       mov  WinPos,dx
+       xor  bx,bx
+       call modeInfo.fpWinFunc
+@LOOP2:
+       mov  ax,ModeInfo.usBegSegA
+       mov  es,ax
+       mov  al,col
+       mov  es:[di],al
+@L_END:
+End;
+
+procedure PutPixel256(X,Y : word; C : byte);
+begin
+  asm
+     mov ax,y
+     mov bx,bytesPerLine
+     mul bx
+     add ax,x
+     mov bx,0a000h
+     mov es,bx
+     mov si,ax
+     mov al,dl
+     and al,0fh
+     mov dx,3d7h
+     out dx,al
+     mov al,byte ptr c
+     mov es:[si],al
+  end;
+end;
+
+Выбор за тобой. :)
+
+&gt; With best wishes and regards.
+ћ Как мало программ остается в первоначальном виде. Так давайте слать
+  исходники, чтоб проще было их изменять. :)
+
+--- [Hedgehog House] Phone: +7-3422-622044  Work Time: 00:00 - 07:30 Local
+ * Origin: Это не GoldEd. Это примочка к Д00Му для написания писем. (2:5054/26)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

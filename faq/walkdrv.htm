@@ -1,0 +1,127 @@
+<html><head><title>FIL. Как найти файлы на ВСЕХ дисках</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа поиска файла по всему диску и даже по всем дискам. '>
+<meta name="keywords" content="pascal, sources, source code, walkdrv, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;walkdrv
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FIL. Как найти файлы на ВСЕХ дисках</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:461/27">Dima Orlov</a></TD>
+<TD class=black align='right'>08.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа поиска файла по всему диску и даже по всем дискам. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= WALKDRV.MSG }
+- FAQ ---------------------------------------- ЧАВО - Частые Вопросы и Ответы -
+ Msg  : 42 of 51                             Addr                        Date
+ From : Dima Orlov                    2:461/27                         08.11.97
+ Subj : Как найти файлы на ВСЕХ дисках
+-------------------------------------------------------------------------------
+Hello, Sergei Salnikov !
+
+ &gt; Вопрос таков : как соорудить в ТР 7.0 нечто вроде поисковой машины
+ &gt; по ВСЕМУ диску ( типа FindFast в Hортоне ) .
+
+  Вот тебе и по всему диску, и даже по всем дискам:
+
+
+С уважением, Дима Орлов.
+
+--- [CONNECT Team]
+ * Origin: Electric BBS (0572) 477177 (2:461/27)
+
+{&gt; Cut here. FileName= WALKDRV.PAS }
+{ From : Dima Orlov   2:461/27    08.11.97}
+{ Subj : Как найти файлы на ВСЕХ дисках   }
+Uses DOS,CRT;
+var
+  Stop:boolean;
+Procedure FileFind(Dir,FindName : PathStr);
+Procedure SearchDir(Dir : PathStr);
+ Var
+    SRec : SearchRec;
+    i:integer;
+ begin
+   if Stop then Exit;
+   if Dir[Length(Dir)] &lt;&gt; '\' then Dir := Dir+'\';
+   ClrEol;
+   Write(Dir,#13);
+   if KeyPressed then Stop := ReadKey = #27;
+
+    FindFirst(Dir + FindName, AnyFile, SRec);
+    While DosError = 0 do
+      begin
+        With SRec do
+         if Attr and (VolumeID + Directory) = 0 then
+          WriteLn(Dir + Name);
+        FindNext(SRec);
+      end;
+
+   FindFirst(Dir+'*.*', $17, SRec);
+   While DosError = 0 do
+     begin
+       With SRec do
+        if (Attr and Directory &lt;&gt; 0) and (Name[1] &lt;&gt; '.') then
+         SearchDir(Dir+Name);
+       FindNext(SRec);
+     end;
+ end;
+begin
+ Stop:=False;
+ SearchDir(Dir);
+end;
+
+function GetCurDrive: Char;
+var
+  r: Registers;
+begin
+  r.ah := $19;
+  MSDOS(r);
+  GetCurDrive := Char(r.al + $41);
+end;
+
+procedure SetCurDrive(Drive: Char);
+var
+  r: Registers;
+begin
+  r.ah := $0E;
+  r.dl := Byte(Drive) - $41;
+  MSDOS(r);
+end;
+
+procedure WalkDrives(Name : String);
+var
+  SaveDrive, Drive, Ch: Char;
+begin
+  if Pos('.', Name) = 0 then Name := Name + '*.*';
+  SaveDrive := GetCurDrive;
+  for Ch := 'C' to 'Z' do
+  begin
+    SetCurDrive(Ch);
+    Drive := GetCurDrive;
+    if Drive = Ch then
+    begin
+     FileFind(Drive + ':\',Name);
+     if Stop then Break;
+    end;
+  end;
+  SetCurDrive(SaveDrive);
+end;
+
+begin
+  FileFind('C:','*.bak'); {search *.bak in C:}
+  WalkDrives('*.pas');    {search *.pas in all drives}
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

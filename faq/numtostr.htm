@@ -1,0 +1,72 @@
+<html><head><title>STR. Как преобразовать число в строку</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция для преобразования числа в строку  и вывод вещественных чисел с заданным количеством знаков после запятой. '>
+<meta name="keywords" content="pascal, sources, source code, numtostr, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;numtostr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;STR. Как преобразовать число в строку</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/794.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>27.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция для преобразования числа в строку 
+и вывод вещественных чисел с заданным количеством знаков после запятой. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              Pascal FAQ created by SLY Golovanov, 2:5020/278.13
+              (slightly corrected by Valery Votintsev 2:5021/22)
+==============================================================================
+
+Q&gt;: А как преобразовать целое число в строку?
+
+A: Воспользоваться процедурой STR.
+   А если нужна не процедура, а функция, то взять вот эту:
+
+   function IntToStr(I: Longint): String;
+   { Convert any integer type to a string }
+   var
+    S: string;
+   begin
+    Str(I, S);
+    IntToStr := S;
+   end;
+
+Q&gt;: А как преобразовать вещественное число в строку?
+
+A:  Если нужно просто вывести число, то
+
+   WriteLn(R:n:m)
+
+   А если нужна именно строка, то воспользоваться той же процедурой STR:
+
+   var
+    R:real;
+    S:string;
+   ...
+
+   Str(R:n:m,S);
+
+   Здесь n - общее количество знаков в строке, включая десятичную точку,
+         m - количество знаков после запятой (дробная часть)
+
+   Кстати, если задать n:=-1, то ведущих пробелов в строке не будет!
+   В help'е про эту возможность не написано, и про нее не все знают.
+   Например:
+
+   Str(Pi:10:2,S); {даст '      3.14'}
+   Str(Pi:10:2,S); {даст '3.14'      }
+
+---
+ * Origin:  (2:5020/794.13)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

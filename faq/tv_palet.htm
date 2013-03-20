@@ -1,0 +1,126 @@
+<html><head><title>TV: Работа с Палитрами в Turbo Vision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как изменить стандартные наборы цветов в программе на TV, как выводить цветом, которого нет в палитре, как сохранить несколько палитр во внешних файлах.'>
+<meta name="keywords" content="pascal, sources, source code, tv_palet, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tv_palet
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TV: Работа с Палитрами в Turbo Vision</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:torin@kerin.donetsk.ua">Dmitry Beloshistov</a></TD>
+<TD class=black align='right'>06.04.2001</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как изменить стандартные наборы цветов в программе на TV,
+как выводить цветом, которого нет в палитре,
+как сохранить несколько палитр во внешних файлах.</TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Q:&gt; Как изменить стандартный набор цветов в программе на TV?
+
+A:  Начнем с того, что все видимые обьекты, создаваемые вами наследованием
+    от TView имеют метод GetPalette.
+    Переопределяя палитру мы получаем цвет из стандартной палитры...
+    Стандартная палитра представляет собой строку символов,
+    каждый символ которой представляет собой байт текстового атрибута,
+    аналогичного переменной TextAttr модуля Crt.
+
+    TV имеет в своем распоряжении 3 палитры:
+    CAppColor,CAppBlackWhite,CAppMonochrome;
+    К сожалению, данные переменные описаны как константы,
+    поэтому манипулирование ими невозможно...
+    Вот тут и поможет метод Application.GetPallette;
+    Достаточно создать наследника от TApplication и перекрыть его метод
+    GetPalette;
+
+Вот пример кода:
+
+Function TApp.GetPalette:PPalette;
+var S:String;
+begin
+ case WhatPalette of
+   1:S:=MyPalette;
+   2:S:=CAppColor;
+   3:S:=CAppBlackWhite;
+   4:S:=CAppMonochrome;
+ end;
+ {и кстати, что мешает нам сделать например S[22]:=#$8A ?-)))) }
+ GetPalette:=@S;
+end;
+
+
+Q:&gt; А мне тех цветов, что есть в палитре, не хватает! Что делать?
+
+A:  В этом случае необходимо обратить внимание на процедуру рисования обьекта
+    на экране, т.е. на метод Draw.
+    При отображении его можно  заставить вывести вообще произвольный цвет...
+
+     Вот небольшой пример...
+
+  Bkg:=(lo(GetColor(2)) and $F0) shr 4;   {получаем цвет для фона}
+  MyColor:=Bkg*16+ColorAttr[1];           {назначаем свой цвет для
+                                           отображения символов
+                                           (палитра - не используется) }
+  Color:=MyColor;
+  MoveChar(B[CurCol],' ',Color,ColWidth); {переносим изображение в буфер (фон)}
+  MoveStr(B[CurCol+1],Text,Color);        {переносим текст}
+  WriteLine(0, I, Size.X, 1, B);          {выводим буфер}
+
+
+Q:&gt; А как сделать хранение многих палитр во внешних файлах
+  &gt; (как в Дос Навигаторе) ?
+
+A:  Вот набор процедур для организации этого...
+    Все они достаточно примитивны ;))))
+
+    И не забудьте переопределить метод GetPalette у вашего наследника
+    TApplication...
+
+const WorkPalette:String=' ваша рабочая палитра по умолчанию ';
+
+Procedure SavePalette(PaletteFile:String);
+{сохранить палитру в файл}
+var  f:file;
+begin
+   Assign(f,PaletteFile);
+   rewrite(f,1);
+   BlockWrite(f,WorkPalette,SizeOf(String));
+   close(f);
+end;
+
+Procedure LoadPalette(PaletteFile:String);
+{ загрузить палитру из файла }
+var  f:File;
+begin
+   Assign(f,s);
+   reset(f,1);
+   BlockRead(f,WorkPalette,SizeOf(String));
+   close(f);
+end;
+
+Procedure SetAppPalette(PaletteFile:String);
+{ загрузить и установить палитру }
+begin
+ LoadPalette(PaletteFile);
+ Application^.GetPalette^:=WorkPalette;  {небольшой финт ушами ;))))}
+{ эти две строчки необходимы для моментального отображения изменений в
+  палитре, не ожидая по какое либо окно свернеться/развернеться}
+ Application^.Redraw;
+ Desktop^.Redraw;
+end;
+
+
+(с) 2001 by Dmitry Beloshistov AKA [-=BDS=-]
+
+WBR, Dmitry Beloshistov AKA [-=BDS=-]
+e-mail: torin@kerin.donetsk.ua</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

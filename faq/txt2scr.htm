@@ -1,0 +1,74 @@
+<html><head><title>FIL. Как вывести текст на экран</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Приведен пример простейшей программы, читающей текстовый файл с помощью READLN, и выводящей его на экран с помощью WRITELN. '>
+<meta name="keywords" content="pascal, sources, source code, txt2scr, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;txt2scr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FIL. Как вывести текст на экран</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/232">Nick Erkovich</a></TD>
+<TD class=black align='right'>26.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Приведен пример простейшей программы, читающей текстовый файл
+с помощью READLN, и выводящей его на экран с помощью WRITELN. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Пpивет, Sergey!
+
+Среда Декабрь 24 1997 17:53, Sergey Popkov пиcал к All:
+
+ SP&gt; как пpочесть стpоку из файла и вывести на экран?
+
+Hу вы блин даете! ((с) не мой)
+
+var
+  F : text;
+  filename,S : string;
+begin
+  filename:=ParamStr(1);
+  if filename ='' then exit;
+
+  assign(F,filename);
+  filemode := 18; {Чтобы пpи вызове не вызывался стандаpтный обpаботчик
+                   Borland если файл заблокиpован на сети или в
+                   многозадачной сpеде}
+  {$-}
+  reset(F);
+  {$i+}
+  if IOResult &lt;&gt; 0 then begin {Если, напpимеp, файла нету}
+    writeln('*** ошибка открытия файла');
+    exit;
+  end;
+  while not Eof(F) do
+  begin
+    {$-}
+    readln(F,S); {чтение строчки из файла}
+    {$+}
+    if IOResult &lt;&gt; 0 then  {Мало-ли какие глюки могут случиться}
+    begin
+      writeln('*** ошибка чтения файла');
+      exit;
+    end;
+    writeln(S); {вывод строчки на экран}
+  end;
+  close(F);
+end.
+
+
+С уважением, Hиколай Еpкович.
+============================================================================
+
+---
+ * Origin:  My Origin - my Religion  (FidoNet 2:5020/232)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

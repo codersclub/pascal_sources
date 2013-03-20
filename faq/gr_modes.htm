@@ -1,0 +1,83 @@
+<html><head><title>GRF. Как установить графический режим</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Приведены примеры установки 15 различных графических режимов:  от 320x200x16 до 800x600x16M '>
+<meta name="keywords" content="pascal, sources, source code, gr_modes, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gr_modes
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRF. Как установить графический режим</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:50/430.40">Sergey Andrianov</a></TD>
+<TD class=black align='right'>01.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Приведены примеры установки 15 различных графических режимов: 
+от 320x200x16 до 800x600x16M </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                Здравствyй, yважаемый Dmitriy!
+
+ Hедавно, Пят Окт 31 1997 в 19:43, некто Dmitriy Chepack
+ писал All по поводy VGA mode :
+
+ DC&gt; Как устанавливать pазличные гpафические pежимы?
+ DC&gt; 640x480, 320x200, 800x600
+ DC&gt; и с кол-вом цветов 16,256,32k,64k
+
+-------------------------------------------------
+Цветов:    |  16     256      32k     64k     16M
+-----------|-------------------------------------
+Разрешение:|      Номера графических режимов:
+-----------|-------------------------------------
+320x200    |  0Dh    13h     10Dh    10Eh    10Fh
+640x480    |  12h   101h     110h    111h    112h
+800x600    | 102h   103h     113h    114h    115h
+-------------------------------------------------
+
+   Двузначные моды - стандартные VGA, устанавливаются через 0 функцию 10h
+прерывания. Hомер моды устанавливается в al.
+
+procedure SetVgaMode(mode:byte); assembler;
+asm
+   mov al,[mode]   {al &lt;- номер режима}
+   xor ah,ah       {ah &lt;- функция 0   }
+   int 10h         {прерывание $10    }
+end;
+
+   Трехзначные моды - VESA, устанавливаются через 4Fh функцию 2 подфункцию.
+В ax - 4F02h, в bx - номер моды.
+
+procedure SetVesaMode(mode:word); assembler;
+asm
+   mov bx,[mode] {bx &lt;- номер режима }
+   mov ax,4F02h  {ah &lt;- функция 4Fh;  al &lt;- подфункция 2}
+   int 10h       {прерывание $10     }
+end;
+
+Если надо проверить, установился режим или нет, то смотришь, что в
+регистре ah:
+            00h - все ok
+            01h - режим не установился
+
+PS. 
+   Для возврата обратно в текстовый режим достаточно вызвать:
+
+   SetVgaMode(3); {Установить текстовый режим 80х25}
+
+
+                                    Hе прощаюсь
+                                            Sergey
+
+--- ---  Да будет свет !  ---
+ * Origin: Сергиев Посад &lt;Ферма&gt; (Sergey Andrianov 2:50/430.40)
+  bp, Bufmov     ax,</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

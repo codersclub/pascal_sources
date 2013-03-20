@@ -1,0 +1,63 @@
+<html><head><title>EXE. Как запустить внешнюю программу</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Методика запуска внешних программ с помощью EXEC(...),  в том числе, когда внешняя программа слишком велика... '>
+<meta name="keywords" content="pascal, sources, source code, runext, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;runext
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EXE. Как запустить внешнюю программу</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/794.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>27.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Методика запуска внешних программ с помощью EXEC(...), 
+в том числе, когда внешняя программа слишком велика... </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              Pascal FAQ created by SLY Golovanov, 2:5020/278.13
+              (slightly corrected by Valery Votintsev 2:5021/22)
+==============================================================================
+
+Q:&gt; А как из моей программы запустить другую?
+
+A: С помощью процедуры Exec:
+
+        SwapVectors;
+        Exec(Путь&ИмяВашейПрограммы, Доп_Параметры);
+        SwapVectors;
+
+Q:&gt; А почему внешняя программа из моей не запускается?
+
+A: А память кто будет внешней проге отдавать?
+   По умолчанию все 640Kb отдаются твоей программе.
+   Исправить это можно либо через Options/Memory Sizes../ High heap limit,
+   либо директивой компилятора:
+       {$M 4096,0,10000}
+   Здесь первая цифра - память под стек (в стеке размещаются локальные
+   переменные каждой вызываемой процедуры/функции),
+   вторая - нижняя граница памяти, третья - верхняя.
+   В данном примере твоей программе отдается 10000 байт,
+   а все остальное - внешней программе.
+
+Q:&gt; А если мне самому память нужна?
+
+A: Используй библиотеку для своппинга (выгрузки из памяти) в XMS/EMS/Disk -
+   перед запуском внешней программы твоя программа вместе со всеми данными
+   переписывается в XMS/EMS или на винт, а после завершения внешней -
+   восстанавливается.
+   Можно воспользоваться, например, юнитом SPAWNO от Ральфа Брауна,
+   или модулем OpExec из ObjectProf by TurboPower.
+
+---
+ * Origin:  (2:5020/794.13)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

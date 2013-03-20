@@ -1,0 +1,115 @@
+<html><head><title>STR. Как вытащить N-е слово из строки</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Приведен пример вытаскивания N-го слова в строке на примере переменной окружения PATH. '>
+<meta name="keywords" content="pascal, sources, source code, getnword, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;getnword
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;STR. Как вытащить N-е слово из строки</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/312.66">Victor Snopov</a></TD>
+<TD class=black align='right'>07.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Приведен пример вытаскивания N-го слова в строке
+на примере переменной окружения PATH. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hi, Andrey!
+
+04 Nov 1997 at 16:30 you wrote to All:
+
+ AL&gt; как yзнaть кoличеcтвo cлoв в cтpoке и пoлyчить n-oе?
+
+   возьми какой-нибудь TurboProfessional, там все есть... или почти все.
+   лови кусок tpstring.pas
+
+  Type
+    CharSet = Set of Char ;
+
+  function WordCount(S : string; WordDelims : CharSet) : Byte;
+    {-Given a set of word delimiters, return number of words in S}
+  var
+    I, Count : Byte;
+    SLen : Byte absolute S;
+  begin
+    Count := 0;
+    I := 1;
+
+    while I &lt;= SLen do begin
+      {skip over delimiters}
+      while (I &lt;= SLen) and (S[I] in WordDelims) do
+        Inc(I);
+
+      {if we're not beyond end of S, we're at the start of a word}
+      if I &lt;= SLen then
+        Inc(Count);
+
+      {find the end of the current word}
+      while (I &lt;= SLen) and not(S[I] in WordDelims) do
+        Inc(I);
+    end;
+
+    WordCount := Count;
+  end;
+
+  function ExtractWord(N : Byte; S : string; WordDelims : CharSet) : string;
+    {-Given a set of word delimiters, return the N'th word in S}
+  var
+    I, Count, Len : Byte;
+    SLen : Byte absolute S;
+  begin
+    Count := 0;
+    I := 1;
+    Len := 0;
+    ExtractWord[0] := #0;
+
+    while (I &lt;= SLen) and (Count &lt;&gt; N) do begin
+      {skip over delimiters}
+      while (I &lt;= SLen) and (S[I] in WordDelims) do
+        Inc(I);
+
+      {if we're not beyond end of S, we're at the start of a word}
+      if I &lt;= SLen then
+        Inc(Count);
+
+      {find the end of the current word}
+      while (I &lt;= SLen) and not(S[I] in WordDelims) do begin
+        {if this is the N'th word, add the I'th character to Tmp}
+        if Count = N then begin
+          Inc(Len);
+          ExtractWord[0] := Char(Len);
+          ExtractWord[Len] := S[I];
+        end;
+
+        Inc(I);
+      end;
+    end;
+  end;
+
+&gt;(* example *)
+Uses
+  Dos;
+Var
+  S : String ;
+  i : Byte ;
+begin
+  S := GetEnv('PATH') ;
+  WriteLn('Path`s directories :') ;
+  for i := 1 to WordCount(S,[';']) do
+    WriteLn(ExtractWord(i,S,[';'])) ;
+end.
+
+See you, Victor.
+--- timEd/386 1.10+
+ * Origin: Vitka Station St.Petersburg, Russia (2:5030/312.66)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

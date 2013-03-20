@@ -1,0 +1,85 @@
+<html><head><title>MAT. Как вычислить ArcSin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вычисление ArcSin через ArcTan и с помощью сопроцессора FPU '>
+<meta name="keywords" content="pascal, sources, source code, arcsin, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;arcsin
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MAT. Как вычислить ArcSin</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/755.12">Evgeny Sharandin</a></TD>
+<TD class=black align='right'>28.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вычисление ArcSin через ArcTan и с помощью сопроцессора FPU </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Reply-To: shar@nep.cplire.ru
+
+Hello, Vladimir!
+
+Пон Hоя 24 1997 23:34, Vladimir Vikulin написал All:
+
+ VV&gt; Hе подскажет ли кто-нибудь алгоритм вычисления ArcSinуса? Или
+ VV&gt; готовую функцию на Паскале?
+
+   Вот так:
+
+ Arcsin(x):=Arctan(x/Sqrt(1-x*x));
+
+   Или вот так:
+
+function ArcSin( x:extended):extended;  assembler;
+var 
+  sw:word;
+asm
+      fld     [x]
+      xor     al,al
+      mov     ah,byte ptr [x+9]
+      shl     ah,1
+      jnc     @plus
+
+      fchs
+      inc     al
+@plus:
+      { fld1}   db    0CDh, 35h, 0e8h
+      fld     st(1)
+      fmul    st,st(2)
+      fsub
+      fsqrt
+      fcom    st(1)
+      fstsw   [sw]
+      fwait
+      mov     ah,byte ptr [sw+1]
+      sahf
+      jnb     @l1
+      fxch
+      fpatan
+      { fld1}  db    0CDh, 35h, 0e8h
+      fchs
+      { fldPi} db    0CDh, 35h, 0eBh
+      fscale
+      fstp    St(1)
+      fsubrp  st(1),st
+      jmp     @2
+@l1:  fpatan
+@2:   shr     al,1
+      jnc     @end
+      fchs
+@end:
+end;
+
+С уважением, Евгений
+
+--- GoldED 2.42.G0214+
+ * Origin: LID, Evgeny Sharandin (2:5020/755.12)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

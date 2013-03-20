@@ -1,0 +1,127 @@
+<html><head><title>PRN. Как вывести изображение на Printer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример вывода изображения в режиме 640x480 на матричный принтер. '>
+<meta name="keywords" content="pascal, sources, source code, grprint, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;grprint
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PRN. Как вывести изображение на Printer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/333.14">Yuriy Kuznetsov</a></TD>
+<TD class=black align='right'>08.10.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример вывода изображения в режиме 640x480 на матричный принтер. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= GRPRINT.MSG }
+- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 32 of 202                            Addr                        Date
+ From : Yuriy Kuznetsov               2:5030/333.14                    08.10.97
+ Subj : Как вывести изображение на Printer
+-------------------------------------------------------------------------------
+Hi Dmitry !
+
+DK&gt; Hyжны исходники для pаботы с пpинтеpом на паскале.
+DK&gt; Интеpесyет печать в гpафическом pежиме.
+
+Деpжи. 
+Это из книжки Вальвачева пpо гpафикy с пpимеpами на Паскале.
+Для контpоля: на Епсонах (LX-100, LQ-100) pаботает ;)
+
+        Best breast regards,                               [Team Таллер ;]
+                      Yuriy
+
+  Карнеги научил улыбаться, Мерфи дал понять, что это не поможет (c) 1997
+
+--- ГолДЕД 2.50.Beta4+
+ * Origin: В моей смерти прошу винить Легалайз Марь Иванну... (2:5030/333.14)
+
+{&gt; Cut here. FileName= GRPRINT.PAS }
+{ Как вывести изображение на Printer}
+{Это из книжки Вальвачева пpо гpафикy с пpимеpами на Паскале.}
+{Для контpоля: на Епсонах (LX-100, LQ-100) pаботает ;) }
+uses crt,printer,graph;
+const
+  horisontal=0;
+  vertical=1;
+  esc=#$1b;
+var
+  d,m:integer;
+
+procedure Printing(turn:integer);
+var
+  n1,n2,i,k,m,j:integer;
+begin
+  sound(1000); delay(100);
+  sound(500); delay(100); nosound;
+  setviewport(0,0,639,479,false);
+  write(lst,esc,'A',#$07);
+  IF turn=horisontal THEN
+   begin
+     n1:=639 and $00FF;
+     n2:=639 shr 8;
+     for j:=0 to 479 div 8 do
+      begin
+        write(lst,esc,'*',char(1),char(n1),char(n2));
+        for i:=0 to 639 do
+         begin
+           m:=0;
+           for k:=0 to 7 do
+            begin
+              m:=m shl 1;
+              if getpixel(i,j*8+k)&lt;&gt;0 then inc(m)
+            end;
+           write(lst,char(m))
+         end;
+        write(lst,#$0d,#$0a)
+      end
+   end
+  ELSE
+   begin
+     n1:=479 and $00FF;
+     n2:=479 shr 8;
+     j:=0;
+     repeat
+       write(lst,esc,'*',char(1),char(n1),char(n2));
+       for i:=479 downto 0 do
+        begin
+          m:=0;
+          for k:=0 to 7 do
+           begin
+             m:=m shl 1;
+             if getpixel(j+k,i)&lt;&gt;0 then inc(m)
+           end;
+          write(lst,char(m))
+        end;
+       write(lst,#$0d,#$0a);
+       inc(j,8)
+     until j&gt;= 638
+   end;
+  write(lst,#$0c);
+  sound(500); delay(100);
+  sound(1000); delay(100);
+  nosound
+end;
+
+
+begin
+  d:=detect;
+  initgraph(d,m,'');
+  circle(639 div 2, 479 div 2,50);
+  line(200,200,250,270);
+  outtextxy(260,120,'Printing form the TURBO PASCAL');
+  printing(horisontal);
+  repeat until keypressed;
+  closegraph
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

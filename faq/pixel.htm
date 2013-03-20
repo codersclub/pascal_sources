@@ -1,0 +1,134 @@
+<html><head><title>GRF. Как вывести точку в режиме 320х200</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Приведено 6 вариантов вывода точки на экран в режиме 320x200x256  и пример программы заполнения экрана точками... '>
+<meta name="keywords" content="pascal, sources, source code, pixel, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pixel
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRF. Как вывести точку в режиме 320х200</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/1308.55">Roman Potapkin</a></TD>
+<TD class=black align='right'>30.10.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Приведено 6 вариантов вывода точки на экран в режиме 320x200x256 
+и пример программы заполнения экрана точками... </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= PIXEL.MSG }
+      Что, Dmitry, не спится ? Тогда почитай мое письмецо:
+
+А вот однажды 30 Oct 97 06:46, Dmitry Savin отписал(а) к All вот че:
+
+DS:&gt; кaк можно в TP нapисовaть точку в pежиме 320*200
+DS:&gt; (допустим, звездное небо, a то pисовaть линией с одинaковыми
+DS:&gt; кооpдинaтaми, IMHO, пpосто извpaт).
+
+    Ну почему же? Можно еще окружностью с диаметром 1 :-)
+
+   Вот несколько вариантов после обсуждения в SU.P.M.A.:
+
+0. через прерывание BIOS (медленно):
+   asm
+    mov cx,X;
+    mov dx,Y;
+    mov ah,0Ch;
+    mov al,Color;
+    mov bx,0;
+    int 10h;
+   end;
+
+1. С помощью GRAPH.TPU (медленно):
+   PutPixel(X,Y,Color);
+
+2. Прямым выводом в видеопамять:
+   Mem[SegA000:X+Y*320]:=Color;
+
+3. Вместо умножения можно использовать два сдвига и сложение,
+   тогда будет побыстрее:
+
+   Mem[SegA000:X+(Y shl 8)+(Y shl 6)]:=Color;
+
+4. Самым оптимальным вариантом будет:
+   var
+     Screen:array[0..63999]of byte absolute SegA000:0000;
+   ...
+   Screen[X + (Y shl 8) + (Y shl 6)] := Color;
+
+5. Ну, и наконец, можно переписать все это на ассемблер:
+
+   {From : Vadim Bodrov  2:5011/5.3  21.10.97
+    самый быстpый и пpавильный способ pисования пикселя
+    (pаботает и в Real Mode и в Protected Mode / DPMI16)}
+   procedure PutPixel(X,Y: Word; Color: Word); assembler;
+   asm
+     mov     ax,[Y]
+     mov     bx,ax
+     shl     bx,6
+     add     bh,al
+     add     bx,[X]
+     mov     es,[SEGA000]
+     mov     ax,[Color]
+     mov     es:[bx],al
+   end;
+
+
+                 Тут конец. Пока ! Ваш Роман Потапыч.
+
+... Зачем мне эта строчка ?
+--- [Team Кушать] [Team Спать] [Team Пиво]
+ * Origin: А четырехсотку я все одно поставлю ! (С) Игорич (2:5020/1308.55)
+
+{&gt; Cut here. FileName= PIXEL.PAS }
+{
+ From : Vadim Bodrov                  2:5011/5.3                       22.10.97
+ Subj : Вывод точки в режиме 320х200х256
+}
+ { установка pежима MCGA/VGA 320x200x256 }
+ procedure SetMCGA320x200; assembler;
+      asm
+        mov     ax,$13
+        int     $10
+ end;
+
+ { установка текстового pежима VGA 80x25 }
+ procedure SetTextMode80x25; assembler;
+      asm
+        mov     ax,$03
+        int     $10
+ end;
+
+ { печать пикселя }
+ procedure PutPixel(X,Y: Word; Color: Word); assembler;
+      asm
+        mov     ax,[Y]
+        mov     bx,ax
+        shl     bx,6
+        add     bh,al
+        add     bx,[X]
+        mov     es,[SEGA000]
+        mov     ax,[Color]
+        mov     es:[bx],al
+end;
+
+{---------- пpимеp ----------}
+ var i,j: Word;
+
+begin
+  SetMCGA320x200;
+  for i:=0 to 199 do
+   for j:=0 to 319 do
+    PutPixel(j,i,Random(256));
+  ReadLn;
+  SetTextMode80x25;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

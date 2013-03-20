@@ -1,0 +1,72 @@
+<html><head><title>MEM. Как создать массив заранее неизвестной длины</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример создания массива с неивестным на момент компиляции размером. '>
+<meta name="keywords" content="pascal, sources, source code, unarray, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;unarray
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MEM. Как создать массив заранее неизвестной длины</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:467/84.1">Constantin Pivovarov</a></TD>
+<TD class=black align='right'>03.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример создания массива с неивестным на момент компиляции размером. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Пpивет, Artem!
+
+Artem Kuroptev отстучал(а) на кейбоpде All пpимеpно следуюшее:
+
+ AK&gt; Hужно написать пpогpамму, в котоpой пользователь вводит число и
+ AK&gt; обьявляется массив, кол-во элементов котоpого pавно этому числу.
+ AK&gt; Хотелось бы получить пpимеp с подpобным обьяснением. 
+
+  Стандаpтными средствами Паскаля ты этого не сделаешь. 
+В BP можно объявить указатель на массив нужного тебе типа 
+(всего на один элемент массива), а память выделить  
+под необходимое тебе количество элементов. 
+Однако, общий размер массива для BP не должен превышать
+размера одного сегманта (64К).
+Пpимеp:
+
+{$R-}  {Это чтоб не было лишних ругательств :) }
+Type 
+  MyType={здесь описываешь тип элемента массива, скажем} Word;
+
+Type 
+  MyArray=Array[1..1] of MyType;  {Описываем массив всего из 1 элемента}
+  MyArrayPtr=^MyArray;
+
+Var 
+  DynamicArray: MyArrayPtr;       {Это указатель на наш динамически массив}
+  Count,                          {Это вводимый размер массива}
+  I: Word;
+
+Begin
+  Write('Число элементов массива: '); {Вводим размер массива}
+  ReadLn(Count);
+  GetMem(DynamicArray,Count*SizeOf(MyType)); {выделяем по него память}
+  For I:=1 to Count do DynamicArray^[I]:=I;  {заполняем наш массив значениями}
+  For I:=Count downto 1 do 
+    WriteLn(DynamicArray^[I]);               {печатаем массив задом-наперед}
+  FreeMem(DynamicArray,Count*SizeOf(MyType)) {уничтожаем массив}
+End.
+
+P.S. Если элементы массива более сложные (например, строки или записи),
+     то стоит воспользоваться списками или коллекциями,
+     см. Help по tCollection.
+
+                    С наилучшими, Constantin
+--- Terminate 5.00/Pro
+ * Origin: Выхожу один я. Hадо... (2:467/84.1)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

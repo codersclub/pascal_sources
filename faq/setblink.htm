@@ -1,0 +1,112 @@
+<html><head><title>CRT. 16 Background Colors in Text Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как убрать мерцание и вместо него сделать 16 фоновых цветов. '>
+<meta name="keywords" content="pascal, sources, source code, setblink, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;setblink
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRT. 16 Background Colors in Text Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/87.2">Nikita Popov</a></TD>
+<TD class=black align='right'>12.05.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как убрать мерцание и вместо него сделать 16 фоновых цветов. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= SETBLINK.MSG }
+- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 10 of 110                            Addr                        Date
+ From : Nikita Popov                  2:5020/87.2                      12.05.95
+ Subj : 16-color back
+-------------------------------------------------------------------------------
+Hello Andrew!
+
+07 May 95, Andrew Kascheev --. All:
+
+ AK&gt;         Подскажите как перестроить VGAшку, чтобы вместо Blinking было 16
+ AK&gt; цветов в Background ?
+
+     Смотри и учись :)
+
+-- Nikita --
+
+--- Delphi/95 EET Gamma
+ * Origin: NiX underground command center (2:5020/87.2)
+
+
+{&gt; Cut here. FileName= SETBLINK.PAS }
+Uses CRT;
+
+procedure SetBlink( BlinkOn : boolean ); assembler;
+asm
+  mov BL, BlinkOn
+  mov AX, 1003h
+  int 10h
+end;
+
+{ ------------- TEST for SetBlink -----------------------------}
+begin
+  ClrScr;
+  Writeln(' 16 BackGround Colors in Text Mode without Blinking');
+  Writeln('-------------------');
+  SetBlink(False);
+
+  TextAttr:=White;
+  Write    ('White on Black      ');
+    TextAttr:=White+Blink;
+    Writeln('White on DarkGray    ');
+
+  TextAttr:=White+Blue*16;
+  Write    ('White on Blue       ');
+    TextAttr:=White+Blue*16+Blink;
+    Writeln('White on LightBlue   ');
+
+  TextAttr:=White+Green*16;
+  Write    ('White on Green      ');
+    TextAttr:=Black+Green*16+Blink;
+    Writeln('Black on LightGreen  ');
+
+  TextAttr:=White+Cyan*16;
+  Write    ('White on Cyan       ');
+    TextAttr:=Black+Cyan*16+Blink;
+    Writeln('Black on LightCyan   ');
+
+  TextAttr:=White+Red*16;
+  Write    ('White on Red        ');
+    TextAttr:=Black+Red*16+Blink;
+    Writeln('Black on LightRed    ');
+
+  TextAttr:=White+Magenta*16;
+  Write    ('White on Magenta    ');
+    TextAttr:=Black+Magenta*16+Blink;
+    Writeln('Black on LightMagenta');
+
+  TextAttr:=White+Brown*16;
+  Write    ('White on Brown      ');
+    TextAttr:=Black+Brown*16+Blink;
+    Writeln('Black on Yellow      ');
+
+  TextAttr:=White+LightGray*16;
+  Write    ('White on LightGray  ');
+    TextAttr:=Black+LightGray*16+Blink;
+    Writeln('Black on White       ');
+
+  TextAttr:=LightGray;
+  Writeln('-------------------');
+  Writeln('Press any key for exit...');
+
+  ReadKey;
+  SetBlink(True);
+  Writeln;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

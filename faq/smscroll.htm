@@ -1,0 +1,96 @@
+<html><head><title>CRT. Плавный попиксельный Scroll-инг</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для попиксельного скроллинга экрана в текстовом режиме. '>
+<meta name="keywords" content="pascal, sources, source code, smscroll, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;smscroll
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRT. Плавный попиксельный Scroll-инг</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:50/430.40">Sergey Andrianov</a></TD>
+<TD class=black align='right'>26.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для попиксельного скроллинга экрана в текстовом режиме. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= SMSCROLL.MSG }
+- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 107 of 139                           Addr                        Date
+ From : Sergey Andrianov              2:50/430.40                      26.12.97
+ Subj : Scroll
+-------------------------------------------------------------------------------
+                Здравствyй, yважаемый Armen!
+
+ Hедавно, Чет Дек 25 1997 в 23:02, некто Armen Ambartsumian
+ писал All по поводy Scroll :
+
+ AA&gt; Hужны сырцы или лучше алгоритмы _плавного_ скроллинга текста.
+ AA&gt; ( Как в некоторых демках, по клавишам "стрелка вниз" и "вверх", очень
+ AA&gt; красиво скроллится текст ;) )
+
+   Люди, есть FAQ в этой эхе? 
+А то я вместо ФАКа буду текстовый скроллинг каждый месяц постить. :)
+
+                                    Hе прощаюсь
+                                            Sergey
+
+--- ---  Да будет свет !  ---
+ * Origin: Сергиев Посад &lt;Ферма&gt; (Sergey Andrianov 2:50/430.40)
+
+
+{&gt; Cut here. FileName= SMSCROLL.PAS }
+{ From : Sergey Andrianov 2:50/430.40 }
+uses crt;
+function clock:longint;          {чтение количества тиков}
+begin
+   clock:=MemL[Seg0040:$6c];
+end;
+
+const
+   CrtP = $3d4;    { Базовый номер порта контроллера ЭЛТ }
+
+Procedure SetVgaReg(P:word;New_V,Mask,Number:byte);
+{Устанавливает один из регистров VGA:
+P      - Базовый адрес регистра
+New_v  - новое значение,которое нужно записать в регистр,
+Mask   - маска,
+Number - индекс регистра}
+Begin
+   Inline($0FA);{ Cli - запрещает прерывания}
+   Port[P] := Number;
+   Port[P+1] := (Port[P+1] and (not Mask))or (New_V and Mask);
+   Inline($0FB);{ Sti - разрешает прерывания}
+End;
+
+var
+  b : byte;
+  l : longint;
+begin
+  for b := 1 to 24 do writeln('Строка текста номер ',b);
+  write('Строка текста номер 25');
+  repeat
+    l := clock;
+    for b := 0 to 15 do begin
+      while clock &lt; l + 1 do; {задержка на 1/18 сек.}
+      setvgareg(crtp,b,$1f,8);
+      l := clock;
+    end;
+    for b := 15 downto 0 do begin
+      while clock &lt; l + 1 do; {задержка на 1/18 сек.}
+      setvgareg(crtp,b,$1f,8);
+      l := clock;
+    end;
+  until keypressed;
+  While keypressed do readkey;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

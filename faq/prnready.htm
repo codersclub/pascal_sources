@@ -1,0 +1,155 @@
+<html><head><title>PRN. Как проверить готовность принтера перед печатью</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Технология и программа проверки состояния принтера при печати. '>
+<meta name="keywords" content="pascal, sources, source code, prnready, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;prnready
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PRN. Как проверить готовность принтера перед печатью</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:root@corvet.vernet.lv">Eugene A. Misnik</a></TD>
+<TD class=black align='right'>04.11.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Технология и программа проверки состояния принтера при печати. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Eugene A. Misnik" &lt;root@corvet.vernet.lv&gt;
+Organization: unknown
+
+
+&gt;   Умные люди!
+&gt;   Какой бит в байте статуса принтера говорит о переполнении его буфера,
+&gt;   какой о подтверждении принятии данных?
+&gt;   Если таковых нет, то как узнать о том, принял он байт или нет?
+&gt;   Прочитал множество литературы, но везде говориться только об
+&gt;   ошибках "printer offline" & "no paper".
+
+&gt;                          С уважением, Дмитрий.
+
+   Ув. Дмитрий.
+
+   О переполнении буфера можно судить по появлени сигнала "BUSY"
+(выв.11 принтера). Правда этот сигнал появляется и в состоянии
+сбоя принтера, но приэтом надо еще проверять и состояние вывода
+32 принтера "ERROR". Сигнал "ERROR" при переполнении буфера не
+появляется. 
+Перед передачей байта в принтер надо проверить состояние линии "BUSY"
+и если все в порядке, то передавать байт.
+
+   При чтении состояния принтера проверяются биты:
+
+биты
+----
+If (b and $B8) = $90 then { all's well }
+else begin
+  If (b and $20) = $20 then { no paper }
+  If (b and $10) = 0   then { off line }
+  If (b and $80) = 0   then { busy     }
+  If (b and $08) = $08 then { i/o error}
+end;
+
+---
+
+  Eugene Misnik (root@corvet.vernet.lv)
+
+{&gt; Cut here. FileName= PRNSTAT.PAS }
+{-------------------------------------}
+{    Проверка состояния принтера      }
+{written by Valery Votintsev 2:5021/22}
+{usage: prnstat &lt;lptnumber&gt;           }
+{  where lptnumber = 1 for lpt1       }
+{        lptnumber = 2 for lpt2       }
+{-------------------------------------}
+{    Запустите программу,             }
+{    включите/выключите принтер,      }
+{    понажимайте кнопку OnLine...     }
+{    Когда надоест - ESC              }
+{-------------------------------------}
+uses
+  crt;
+
+Type
+  String8 = String[8];
+
+Const
+  HexD:array[0..15] of Char='0123456789ABCDEF';
+
+var 
+  b,b1,
+  prnum:byte;
+  e:integer;
+
+   function Byte2Hex(x:Byte):String8;
+   begin
+      Byte2Hex:=HexD[(x and $F0) shr 4]+HexD[x and $0F]
+   end;
+
+   function Byte2Bit(b:byte):string8;
+   var 
+     i,m:byte;
+     s:string8;
+   begin
+     m:=1;
+     s[0]:=#8;
+     for i:=8 downto 1 do begin
+        if (b and m) &lt;&gt; 0 then
+          s[i]:='1'
+        else
+          s[i]:='0';
+        m:=m shl 1;
+     end;
+     byte2bit:=s;
+   end;
+
+   Function PrinterStatus(LptNumber:byte):byte; assembler;
+   {LptNumber: 1 - lpt1, 2 - lpt2, 3 - lpt3, 4 - lpt4}
+   {Функция возвращает байт статуса принтера,
+    в котором установленные биты означают:
+         Printer Status
+         7 6 5 4 3 2 1 0
+    $80  x . . . . . . .      Printer not busy (0=busy)
+    $40  . x . . . . . .      Acknowledgement from printer
+    $20  . . x . . . . .      Out of paper
+    $10  . . . x . . . .      Printer selected (0=No printer)
+    $08  . . . . x . . .      I/O error
+    $04  . . . . . 0 . .      Not used (reserved)
+    $02  . . . . . . 0 .      Not used (reserved)
+    $01  . . . . . . . x      Time-out error
+   }
+   Asm
+      mov dl,LptNumber {DX &lt;- номер принтера}
+      dec dl
+      xor dh,dh
+      mov ah,2  {функция 2 - чтение статуса принтера}
+      int 17h
+      mov al,ah {AL &lt;- байт состояния принтера}
+   end;
+
+begin
+   val(paramstr(1),prnum,e);
+   if prnum = 0 then Inc(prnum); {по умолчанию LPT=1}
+   writeln('lpt',prnum,' status:');
+
+   b:=PrinterStatus(prnum);
+   writeln(Byte2Bit(b),'b (',byte2hex(b),'h)');
+   repeat
+     b1:=PrinterStatus(prnum);
+     If b1 &lt;&gt; b then begin     {если статус изменился - печатаем его}
+       writeln(Byte2Bit(b1),'b (',byte2hex(b1),'h)');
+       b:=b1;
+     end;
+   until keypressed;
+
+   while keypressed do readkey;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

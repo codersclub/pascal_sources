@@ -1,0 +1,52 @@
+<html><head><title>CRT. Как Включить/Выключить Курсор</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Две процедуры для отключения и восстановления курсора на экране. '>
+<meta name="keywords" content="pascal, sources, source code, conoff, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;conoff
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CRT. Как Включить/Выключить Курсор</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/794.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>27.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Две процедуры для отключения и восстановления курсора на экране. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              Pascal FAQ created by SLY Golovanov, 2:5020/278.13
+              (slightly corrected by Valery Votintsev 2:5021/22)
+==============================================================================
+
+Q:&gt; А как убрать курсор в текстовом режиме?
+
+A:
+        procedure CursorOff; assembler;
+        asm
+          mov   ah,1
+          mov   cx,2020h   {Убрать мерцание за пределы знакоместа}
+          int   10h
+        end;
+
+Q:&gt; А как его потом обратно включить?
+
+A:
+        procedure CursorOn; assembler;
+        asm
+          mov   ah,1
+          mov   cx,0607h   {Установить мерцание 6й и 7й строк}
+          int   10h
+        end;
+
+---
+ * Origin:  (2:5020/794.13)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

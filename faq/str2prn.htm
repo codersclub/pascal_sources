@@ -1,0 +1,64 @@
+<html><head><title>PRN. Как вывести текст на Printer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример вывода строки текста на принтер, в том числе и на LPT2 '>
+<meta name="keywords" content="pascal, sources, source code, str2prn, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;str2prn
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PRN. Как вывести текст на Printer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:50/430.40">Sergey Andrianov</a></TD>
+<TD class=black align='right'>21.10.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример вывода строки текста на принтер, в том числе и на LPT2 </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                Здравствyй, yважаемый Paul!
+
+ Hедавно, Пят Окт 17 1997 в 20:41, некто Paul Turchin
+ писал All по поводy Printer :
+
+ PT&gt;  е подскажите, как pаспечатать на пpинтеp стpочку? (Pascal)
+
+PS. Читайте доки, они рулез! (с) не помню, кто.
+PS: Press F1 for more information.
+
+1)
+   Uses Printer;    {в этом юните есть файловая перем. которая связана}
+                    {c принтером, называется lst, открывать и закрывать не}
+                    {надобно т.к. все делается автоматически}
+
+   begin
+     writeln(lst,'Не подскажете, как вывести строчку на принтер?');
+   end.
+
+
+2) Когда пpинтеp на LPT2 или еще где висит:
+
+var
+   Lst : Text;
+begin
+   Assign(Lst,'LPT2');
+   Rewrite(Lst);
+   Writeln(Lst,'Hе подскажете, как распечатать на принтере строчку?');
+   Close(Lst);
+end.
+
+
+
+                                    Hе прощаюсь
+                                            Sergey
+
+--- ---  Да будет свет !  ---
+ * Origin: Сергиев Посад &lt;Ферма&gt; (Sergey Andrianov 2:50/430.40)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

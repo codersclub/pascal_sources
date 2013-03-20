@@ -1,0 +1,241 @@
+<html><head><title>GRF. Как программировать Спрайты</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример простейшей программы рисования спрайтов. '>
+<meta name="keywords" content="pascal, sources, source code, human, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;human
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRF. Как программировать Спрайты</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/857.31">Ivan Sockolachcko</a></TD>
+<TD class=black align='right'>27.06.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример простейшей программы рисования спрайтов. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= HUMAN.MSG }
+- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 39 of 202                            Addr                        Date
+ From : Ivan Sockolachcko             2:5020/857.31                    27.06.97
+ Subj : Как выводить Spritы
+-------------------------------------------------------------------------------
+        Увидев класный сон я решил написать тебе Alexandr !
+
+Втp Июн 24 1997 10:27, Alexandr Lebedev писал к All:
+ AL&gt; Может у кого-нибудь есть исходники вывода на экран спрайтов,
+ AL&gt; или хотя бы алгоритмы их создания? Очень надо...
+
+  Пожалуста, элементарная програмка со спрайтами:
+
+ [ Team Psychodelic ] [ Team OS/2 ]    Желаем вам приятных сновидений !
+ [ Team Trance ] [ Team СHЫ ]              s_b_s_bbs@hotmail.com
+ [  SOCKOL  Board  System  BBS. Tel: 212-7077, WorkTime:  00:00 - 07:00  ]
+
+--- Ded Must Die
+ * Origin: Sockol Board System. Tel:212-7077 (00:00-06:00) (2:5020/857.31)
+
+
+{&gt; Cut here. FileName= HUMAN.PAS }
+uses dos,crt;
+{$I HUMAN.INC}
+type
+    sr=array[1..10,1..10] of byte;
+var
+   mas:sr;
+   i,j,n,k:integer;
+   r:registers;
+
+procedure pixel(x,y,c:integer);
+begin
+   mem[$a000:(y shl 8 + y shl 6 + x)]:=c;
+end;
+
+procedure spr(spri:sr);
+begin
+ for i:=1 to 10 do
+   for j:=1 to 10 do
+   begin
+      if spri[i,j]=1 then pixel(i,j,15)
+      else pixel(i,j,0);
+   end;
+end;
+
+procedure initgrp; assembler;
+asm
+   mov ax,13h
+   int 10h
+end;
+
+begin
+   initgrp;
+   n:=400;
+   k:=1;
+   repeat
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv1[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv2[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv3[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv4[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv5[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv6[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      for i:=1 to 10 do
+         for j:=1 to 10 do
+            begin
+               if dv7[j,i]=1 then pixel(i+k,j,15)
+               else pixel(i+k,j,0);
+            end;
+      delay(n);
+      k:=k+1;
+      if k=320 then k:=1;
+   until keypressed;
+end.
+
+{&gt; Cut here. FileName= HUMAN.INC }
+const
+     dv1 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,0,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0));
+
+
+     dv2 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,0,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0));
+
+
+     dv3 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,0,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0),
+     (0,0,1,0,1,0,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,1,0,1,0,0,0,0),
+     (0,0,1,0,0,1,1,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0));
+
+
+     dv4 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,1,1,1,0,1,0,0,0),
+     (0,0,1,0,1,1,0,0,0,0),
+     (0,0,1,0,1,1,0,0,0,0),
+     (0,0,0,1,0,1,0,0,0,0),
+     (0,0,1,0,0,1,0,0,0,0),
+     (0,1,0,0,0,1,1,0,0,0),
+     (0,0,1,0,0,0,0,0,0,0));
+
+
+     dv5 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,1,1,1,0,0,0,0,0),
+     (0,0,1,0,1,1,1,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,1,1,1,1,1,0,0,0,0),
+     (0,1,0,0,0,1,0,0,0,0),
+     (0,0,0,0,0,1,1,0,0,0));
+
+
+     dv6 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,0,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,1,1,1,1,0,0,0,0),
+     (0,0,1,0,1,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0));
+
+     dv7 : array[1..10,1..10] of byte =
+     (
+     (0,0,0,0,0,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,0,1,0,0,0,0,0),
+     (0,0,0,0,1,1,0,0,0,0),
+     (0,0,0,1,1,0,0,0,0,0),
+     (0,0,0,1,1,1,0,0,0,0));</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

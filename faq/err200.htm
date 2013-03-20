@@ -1,0 +1,48 @@
+<html><head><title>ERR. Как побороть Error 200 на быстрых машинах</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Что делать, если программа слетает с Runtime Error 200. '>
+<meta name="keywords" content="pascal, sources, source code, err200, faq, ЧАВО - Частые Вопросы и Ответы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">ЧАВО - Частые Вопросы и Ответы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;err200
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ERR. Как побороть Error 200 на быстрых машинах</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/794.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>27.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Что делать, если программа слетает с Runtime Error 200. </TD><TD class=black colspan=2 align='right'><br>&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              Pascal FAQ created by SLY Golovanov, 2:5020/278.13
+              (slightly corrected by Valery Votintsev 2:5021/22)
+==============================================================================
+
+Q:&gt; А почему программы, написанные на паскале, вылетают с ошибкой
+    Runtime Error 200 (Division by zero) на быстрых машинах типа PII-300?
+
+   Еще раз: Юнит CRT криво написан. Если в программе используется модуль CRT,
+то программа виснет при запуске из-за инициализации, которая потом
+используется процедурой Delay(). Инициализация происходит в любом случае -
+даже если эта процедура не используется в программе. При написании своих
+программ используйте пропатченный CRT. Чтобы заработала уже скомпилированная
+программа (чужая), возьмите hex-редактор и:
+
+Ищем:       B93700F7F1
+Меняем на:  B96E00F7F1    (увеличение в 2 раза)
+или на:     B937009090    (убрать деление вообще)
+
+    Программа _не_ должна быть запакована EXE-паковщиками.
+
+---
+ * Origin:  (2:5020/794.13)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
