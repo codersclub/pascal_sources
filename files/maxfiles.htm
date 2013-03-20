@@ -1,0 +1,70 @@
+<html><head><title>Открытие более 15 файлов в Паскале</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция, позволяющая открыть много файлов одновременно'>
+<meta name="keywords" content="pascal, sources, source code, maxfiles, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;maxfiles
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Открытие более 15 файлов в Паскале</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>04.01.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция, позволяющая открыть много файлов одновременно</TD><TD class=black colspan=2 align='right'><br><A HREF="maxfiles.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Vitus B. Wagner &lt;vitus@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+Возможно, некоторым из работающих в Turbo-Pascal приходилось встречаться
+с Runtime error 4 - too many open files. В help по этому поводу написано:
+
+&gt;DOS never allows more than 15 open files per
+&gt;process.
+
+При этом совершенно непонятно, зачем мы пишем в CONFIG.SYS FILES=40 или что-то
+вроде этого.
+    Могу вас обрадовать, дорогие коллеги. Вышеприведенная цитата из Help
+просто неверна. DOS allows по меньшей мере столько open files per process,
+сколько указано в CONFIG.SYS. Ее только нужно об этом явно попросить.
+   Для этого можно применить следующую коротенькую функцию:
+
+   function MaxFiles ( FileCount:Integer ):integer;assembler;
+    asm
+      MOV AH,67H
+      MOV BX,FileCount
+      INT 21H
+      JC @@ERROR
+      SUB AX,AX
+   @@ERROR:
+    end;
+
+   Эта функция получает в качестве параметра число файлов, которое вы хотите
+открыть и возвращает 0 в случае успеха и код ошибки DOS в случае ошибки.
+(см. Help по переменной DosError).
+   Утверждается, что при наличии свободной памяти эта функция позволяет открыть
+даже больше файлов, чем указано в CONFIG.SYS. Я попробовал - не получилось.
+(Примечание. Задавая FileCount учитывайте, что всегда открыто 5 стандартных
+ файлов: StdIn, StdOut, StdErr, StdPrn и StdAux)
+
+Для тех, кто пользуется Turbo Pascal версии 5.x и не имеет возможности вос-
+пользоваться встроенным ассемблером, приведу текст той же функции в виде
+inline (сомневаюсь, что вы будете вызывать ее более, чем из одного места
+программы)
+
+   Function MaxFiles (FileCount:Integer):Integer;
+     inline($B4/$67/$5B/$CD/$21/$72/$02/$29/$C0);
+
+                                           Vitus Wagner
+                                           vitus@agropc.msk.su</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

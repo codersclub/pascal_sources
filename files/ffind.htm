@@ -1,0 +1,181 @@
+<html><head><title>FFind v1.5p - File Find Program</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Утилита для поиска файлов на всем диске по маске.  FFIND is a file finder program much like FF found in the Norton Utilities Advanced Edition.'>
+<meta name="keywords" content="pascal, sources, source code, ffind, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ffind
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FFind v1.5p - File Find Program</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76367.106@compuserv.com">C.C. Thompson</a></TD>
+<TD class=black align='right'>08.04.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Утилита для поиска файлов на всем диске по маске. <br>
+FFIND is a file finder program much like FF found in the Norton
+Utilities Advanced Edition.</TD><TD class=black colspan=2 align='right'><br><A HREF="ffind.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> FFIND (C) 1989 C.C. Thompson  (Compuserve 76367,106)
+
+ DESCRIPTION
+
+ FFIND is a file finder program much like FF found in the Norton
+ Utilities Advanced Edition.
+
+ FFIND can be used to find all files on a drive matching a
+ particular filespec. Wildcard file specifications are fully
+ supported.
+
+ FFIND is very helpful when you may have 'lost' a file, or
+ when you'd like to determine whether you may have files with
+ duplicate names scattered across your disk.
+
+ Note that FFIND lists the volume label and directory entries
+ in UPPER case, while other entries are listed in lower
+ case. This is especially helpful when using the wide (/W)
+ listing option.
+
+ The output of FFIND can be redirected to a device or printer
+ (e.g. LPT1: or fname.ext)
+
+ Execution can be terminated at any time by hitting the Esc
+ (Escape) key, Ctrl-Break, or Ctrl-C.
+
+ FFIND can be renamed to any valid DOS name (e.g.
+ you could rename FFIND.EXE to FS.EXE); under DOS 3.0
+ or later, the copyright and help screens will
+ reflect the new name of the program.
+
+
+ USAGE
+
+
+ FFIND [d:] [filespec] [switches]
+
+       [d:]       is the drive to search; if this is not
+                  specified, the default drive is used
+
+       [filespec] is optional; if omitted, *.* is used
+
+
+ SWITCHES:
+
+       /W  Wide format
+
+           if /W is specified, file sizes and dates are omitted,
+           and only the file names are listed in a 5 file per
+           line format.
+
+
+       /O  Omit directories
+
+           This can be especially useful when using a filespec of
+           *. or *.* . It produces a more compact listing when
+           you are interested only in files, and not
+           subdirectories, which happen to match the filespec.
+
+
+       /P  Pause Mode
+
+           Pauses and prompts for a keypress after each page
+           of output.
+
+           Whether or not the /P option is specified FFIND
+           output can be interrupted at any time by pressing any
+           key.
+
+
+       /H  Help
+
+           Produces a screen explaining FFIND syntax
+
+
+
+ LICENSING/RESTRICTIONS
+ ----------------------
+
+ FFIND is copyright (C) 1989 by C.C. Thompson. It is
+ provided for personal use, and for distribution through
+ electronic bulletin boards and shareware distribution channels.
+
+ Enquiries regarding commercial use of FFIND should be
+ directed to:
+
+              C.C. Thompson
+              398 Dorchester St.
+              Newmarket, ON
+              CANADA
+              L3Y 7Z3
+
+              Compuserve 76367,106
+
+ This program is provided on an as-is basis. The author disclaims
+ any warranties, expressed or implied, including but not limited
+ to implied warranties of fitness for any particular purpose.
+
+ Comments, suggestions, and improvement requests should be
+ directed to the program author via Compuserve 76367,106.
+
+
+ RELEASE HISTORY
+
+  1.1    first general release
+
+  1.4    corrected Pause message to always appear in column 1
+         when /W format specified
+
+         allow '- ' to delimit parameters as well as '/'
+
+         discard . and .. as ignored filespecs, rather
+         than halt with an error
+
+         added the drive letter to line indicating the filespec
+         used for search.
+
+  1.5P   corrected truncation of filename.ext when filespec is
+         greater than 13 characters long
+
+         Suffix added to distinguish version of program written
+         in Pascal (P) from that written in C (C)
+
+  Interim 'releases' have involved optimization of source code
+  only.
+
+
+  SOURCE CODE
+
+  Source Code for FFIND can be found in the Borland (TP5)
+  data library on Compuserve, and on Canada Remote Systems.
+
+  Note:
+
+    Under DOS 3.00 or later, the executable FFIND program can
+    be renamed, and the copyright and help screens will
+    reflect the new name.
+
+    This has a harmless side-effect; programmers RUNning FFIND
+    from the TurboPascal development environment will find
+    that FFIND refers to itself as TURBO. (Try it!)
+
+    The same program compiled to disk will reflect the correct
+    program name when executed from the DOS command line, even
+    when using the TurboPascal DOS Shell.
+
+
+ A Turbo C Version Soon Available
+
+ A functional identical version of this program has been
+ written in C and is currently undergoing beta-test. The
+ source code will be released to the Compuserve Turbo C forum
+ (and other BBS's) as soon as it is available.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

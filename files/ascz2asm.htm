@@ -1,0 +1,67 @@
+<html><head><title>Конвертор ASCIIZ -> ASM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Convert the binary file (ASCII MESSAGES TERMINATED BY NULL) to an assembler format file.'>
+<meta name="keywords" content="pascal, sources, source code, ascz2asm, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ascz2asm
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Конвертор ASCIIZ -> ASM</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Стефанков</TD>
+<TD class=black align='right'>12.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Convert the binary file
+(ASCII MESSAGES TERMINATED BY NULL)
+to an assembler format file.</TD><TD class=black colspan=2 align='right'><br><A HREF="ascz2asm.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{ LIBRARY               SYSTEM UTILITIES                                }
+{ MODULE                ASCIIZ_TO_ASM_CONVERTER                         }
+{ FILE NAME             ASCZ2ASM.PAS                                    }
+{ PURPOSE               Convert the binary file                         }
+{                       (ASCII MESSAGES TERMINATED BY NULL)             }
+{                       to an assembler format file.                    }
+{ VERSION               1.10                                            }
+{ DATE                  28-Oct-93                                       }
+{ COMPANY               Freelance Software Engineer                     }
+{ ADDRESS               Isakowskogo str, 4-2-30                         }
+{                       Moscow, 123181                                  }
+{                       USSR                                            }
+{                       Tel. 007 (095) 944-6304                         }
+{ COPYRIGHT NOTICE      Copyright (C) 1987-1993, Dmitry Stefankov       }
+{ RESTRICTED RIGHTS     AVAILABLE ONLY FOR FREE DISTRIBUTION,           }
+{                       NOT FOR COMMERCIAL PURPOSE                      }
+{ COMPILER              Turbo Pascal Version 6.0                        }
+{                       (Borland International Inc.)  or compatible     }
+{ ARGUMENTS             &lt;infile&gt;     -   input  stream                  }
+{                       &lt;outfile&gt;    -   output stream                  }
+{                       &lt;maxbytes&gt;   -   max # of chars per one line    }
+{                       &lt;dispofs&gt;    -   display file offset of string  }
+{ DESCRIPTION           1.Read from input stream                        }
+{                       2.Write ASM-format  output stream               }
+{-----------------------------------------------------------------------}
+{
+Problem description:          extract ASCIIZ strings to more readable form
+Agreements and terminology:   ASCIIZ string - string + NUL (ASCII 0)
+Data for application:         input:  file containing ASCIIZ strings
+                              output:  Microsoft MASM compatible format file
+Instructions to compile:      TPC  ascz2bin.pas , where
+                              TPC is a Turbo Pascal command-line compiler
+Example to run:               ascz2bin.exe infile.asc outfile.asm 33 yes ,
+                              where
+                              &lt;infile.asc&gt;  -&gt; input filename
+                              &lt;outfile.asc&gt;  -&gt; output filename
+                              &lt;33&gt;  -&gt; max. bytes per single ASCIIZ string
+                              &lt;yes&gt; -&gt; add file offset for each ASCIIZ string
+}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

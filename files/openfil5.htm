@@ -1,0 +1,75 @@
+<html><head><title>OPENFILES 1.5 - Print List of All Open Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit interfaces three routines, which look in the (undocumented) DOS list of open files for the filenames.  One routine prints a list of open files, another returns the list in a collection of strings, and the third calls a user routine once for each open file.  If compiled for DOS, it automatically installs an exit handler to call the print routine, so if your program bombs because it runs out of file handles, you'll see the list of what's open.'>
+<meta name="keywords" content="pascal, sources, source code, openfil5, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;openfil5
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OPENFILES 1.5 - Print List of All Open Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dmurdoch@mast.queensu.ca">D.J. Murdoch</a></TD>
+<TD class=black align='right'>29.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit interfaces three routines, which look in the (undocumented) DOS list
+of open files for the filenames.  One routine prints a list of open files,
+another returns the list in a collection of strings, and the third calls a
+user routine once for each open file.  If compiled for DOS, it automatically
+installs an exit handler to call the print routine, so if your program bombs
+because it runs out of file handles, you'll see the list of what's open.</TD><TD class=black colspan=2 align='right'><br><A HREF="openfil5.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    OPENFILES - Unit to show list of open files.
+
+    Written by D.J. Murdoch for the public domain.
+
+    This unit interfaces three routines, which look in the
+    (undocumented) DOS list of open files for the filenames.  One
+    routine prints a list of open files, another returns the list in a
+    collection of strings, and the third calls a user routine once for
+    each open file.  If compiled for DOS, it automatically installs an
+    exit handler to call the print routine, so if your program bombs
+    because it runs out of file handles, you'll see the list of what's
+    open.
+
+    Not all versions of TP support collections of strings, and not all
+    users of those that do install the Objects unit, so I've added a
+    conditional compilation symbol "Collections" which can be used to
+    control the inclusion of the object-oriented code.
+
+    For details of parameters etc., see the source code OPENFILES.PAS or
+    the sample program TEST.PAS.
+
+    I've tested this unit in TP 6, BP 7 (all modes), TPW 1.5, MSDOS 3.2,
+    4.01, 5 and 6; it should work in the other DOS versions from 2 to 6,
+    but I'd like to hear from you if it doesn't.
+
+    Fidonet:   DJ Murdoch at 1:249/99.5
+    Internet:  dmurdoch@mast.queensu.ca
+    CIS:       71631,122
+
+    History:
+      1. 21 Oct 91  - First release to PDN echo.
+      2. 26 Oct 91  - Added check of PSP segment, and DOS 3.0 record
+                      format. Set Allfiles to true to get previous
+                      behaviour.
+      3. 24 Jun 93  - Added DOS 6 and DPMI support
+      4. 24 Aug 94  - Added BP 7 Windows support, a bit more flexibility
+                      in ways to call
+      5. 29 Aug 94  - Added conditional Collections, added PSPseg to
+                      information passed to for_each_open_file action
+                      routine.
+
+    Thanks are due to Berend de Boer for a series of articles explaining
+    how to make real mode interrupt calls from protected mode.  His
+    hints let me add the DPMI support.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

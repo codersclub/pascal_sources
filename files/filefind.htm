@@ -1,0 +1,90 @@
+<html><head><title>Поиск файлов по всему диску</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Поиск файлов по маске по всему диску с помощью FindFirst & FindNext'>
+<meta name="keywords" content="pascal, sources, source code, filefind, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;filefind
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Поиск файлов по всему диску</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:461/27">Dima Orlov</a></TD>
+<TD class=black align='right'>08.07.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Поиск файлов по маске по всему диску
+с помощью FindFirst & FindNext</TD><TD class=black colspan=2 align='right'><br><A HREF="filefind.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 101 of 200                           Addr                        Date
+ From : Dima Orlov                    2:461/27                         08.07.97
+ Subj : DIR C: /S
+-------------------------------------------------------------------------------
+Hello, Anton Kapcinel !
+
+ AK&gt; Hаpод,а как к пpимеpу весь диск с: пpовеpить на существование файлов
+ AK&gt; '*.txt' ? То есть пpогу как написать, котоpая заданный файл по всему
+ AK&gt; диску ищет ???
+
+   Пора бы уже в ФАК это вставить...
+   
+   Для поиска используются FindFirst & FindNext.
+Причем их приходится вызывать дважды:
+Первый раз для указанных файлов, а второй раз - 
+чтобы найти все вложенные подкаталоги.
+
+С уважением, Дима Орлов
+
+--- [CONNECT Team]
+ * Origin: Electric BBS (0572) 477-177 (2:461/27)
+
+{&gt; Cut here. FileName= FILEFIND.PAS }
+{ From : Dima Orlov  2:461/27  08.07.97}
+Uses DOS;
+
+Procedure FileFind(Dir,FindName : PathStr);
+{Поиск файлов по маске по всему диску}
+
+ Procedure SearchDir(Dir : PathStr);
+ Var
+   SRec       : SearchRec;
+ begin
+   {Поиск файлов по маске}
+   if Dir[Length(Dir)] &lt;&gt; '\' then Dir := Dir+'\';
+   FindFirst(Dir + FindName, AnyFile, SRec);
+   While DosError = 0 do
+     begin
+       With SRec do
+        if Attr and (VolumeID + Directory) = 0 then
+         WriteLn(Dir + Name);
+       FindNext(SRec);
+     end;
+   {Поиск всех вложенных каталогов, в т.ч. скрытых, системных, r/o}
+   FindFirst(Dir+'*.*', Directory or ReadOnly or Hidden or SysFile, SRec);
+   While DosError = 0 do
+     begin
+       With SRec do
+        if (Attr and Directory &lt;&gt; 0) and (Name[1] &lt;&gt; '.') then
+         SearchDir(Dir+Name);
+       FindNext(SRec);
+     end;
+ end;
+
+begin
+ SearchDir(Dir);
+end;
+{------------------------------------------}
+{Пример поиска всех .TXT файлов на диске С:}
+begin
+  FileFind('c:\','*.txt');
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,48 @@
+<html><head><title>Fmanage - TP6 Basic File Handling Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='A TP unit containing some basic file handling routines. Fmanage has been checked on TP 6.0, but may work on other versions as well.'>
+<meta name="keywords" content="pascal, sources, source code, fmanage, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fmanage
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fmanage - TP6 Basic File Handling Routines</TD>
+<TD nowrap class=black>&nbsp;Eyal Doron</TD>
+<TD class=black align='right'>11.10.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">A TP unit containing some basic file handling routines.
+Fmanage has been checked on TP 6.0, but may work on
+other versions as well.</TD><TD class=black colspan=2 align='right'><br><A HREF="fmanage.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This archive contains FMANAGE.PAS, a TP6 unit containing some basic
+file handling routines, that for some reason are missing in TP
+itself. The routines are fairly elementary, but useful nevertheless.
+Feel free to experiment, and to include them in whatever you like.
+
+FMANAGE is not guarranteed to do anything whatsoever, nor is the unit
+guarranteed safe. I will probably also not be supporting it.
+
+function  IsDirName   (DirName: string): boolean;
+function  IsFileName  (FileName: string): boolean;
+function  FileExist   (FileName: string): Boolean;
+function  TextFileSize(FileName: String): LongInt;
+procedure Fdel        (FileName: string; Var ErrCode: byte);
+procedure Frename     (SourceFile,TargetFile: string; Var ErrCode: byte);
+procedure Unique      (Path: String; Var FileName: String);
+
+
+Enjoy!
+
+Eyal Doron</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,85 @@
+<html><head><title>Extend 6.0 - Open More Files than DOS Standard 20</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit allows a program to open more than the standard DOS maximum of 20 open files at one time.'>
+<meta name="keywords" content="pascal, sources, source code, extend6, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;extend6
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Extend 6.0 - Open More Files than DOS Standard 20</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72247.2671@compuserv.com">Scott Bussinger</a></TD>
+<TD class=black align='right'>06.12.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit allows a program to open more than the standard
+DOS maximum of 20 open files at one time.</TD><TD class=black colspan=2 align='right'><br><A HREF="extend6.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                  EXTEND.PAS
+                                  Version 6
+                               November 30, 1992
+                              by Scott Bussinger
+                             Compuserve 72247,2671
+
+
+  MS-DOS and PC-DOS Turbo Pascal 3.0 and higher only allow up to 15 files to
+be open at the same time, due to limitations in DOS.  This file shows you how
+to have up to 96 files open simultaneously under DOS 2.0 or 2.1, or 252 files
+open simultaneously under DOS 3.0 or higher.  Below is a description of how to
+use this technique, followed by a technical explanation of the implementation,
+for those who are interested.  Note this documentation is liberally based on
+the original EXTEND.PAS documentation by Randy Forgaard, but has been renamed
+to EXTEND.DOC and modified by Scott Bussinger to reflect the changes to
+involved in versions 2 and 3.
+
+TO USE THIS TECHNIQUE:
+
+  You simply include the EXTEND unit in the USES statement in the source code
+of your main program.  You will have to either compile the EXTEND unit
+separately or use Turbo Pascal 4.0's project compiling features to Make or
+Build your program (which will compile the EXTEND unit automatically).  The
+EXTEND unit should be the first unit in your USES statement, following only
+the DOS unit (which is USEd by the EXTEND unit).  The unit automatically
+installs itself and will uninstall itself when your program ends or an error
+is detected.  See the demo program below for an example of using the EXTEND
+unit.
+
+  The EXTEND.PAS file will need to be available available to be compiled if
+the Make or Build features are used to compile the program.  The EXTEND.ASM
+is the source code for the assembly language interrupt handler used when
+running under DOS 2.  The EXTEND.OBJ file is the assembled object code for
+EXTEND.ASM and was compiled using A86, a shareware compiler available on
+Compuserve and other bulletin boards.
+
+  You must edit your CONFIG.SYS file (see the DOS manual for details), so
+that it includes a line that says "FILES=XXX".  XXX should be a number that is
+at least 3 greater than the maximum number of files that will be in use
+(opened by RESET, REWRITE or APPEND) at the same time during the execution of
+your program (larger values will provide no additional benefit, with respect
+to your individual program), and should not exceed 99 (for DOS 2.0/2.1) or 255
+(for DOS 3.0 and higher).  Under any version of DOS, the minimum allowable
+value for XXX is 8.  Then, reboot your computer so that the FILES=XXX
+parameter takes hold.  This same change to the CONFIG.SYS file will have to be
+made on any machine in which your program is to run.
+
+  Running the sample program will tell you the
+maximum number of files you can have open at once (usually 3 less than the
+number of files specified in the CONFIG.SYS file as discussed above, unless a
+resident program has opened some files and hasn't closed them yet).
+
+  Scott Bussinger
+  Professional Practice Systems
+  110 South 131st Street
+  Tacoma, WA  98444
+  (206)531-8944
+  Compuserve [72247,2671]</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

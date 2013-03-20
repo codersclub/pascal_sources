@@ -1,0 +1,71 @@
+<html><head><title>D - Maximum Security File Eraser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This short program deletes a file, and if you undelete it, it does not contain the original information.'>
+<meta name="keywords" content="pascal, sources, source code, deleted, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;deleted
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;D - Maximum Security File Eraser</TD>
+<TD nowrap class=black>&nbsp;Duane Bailey</TD>
+<TD class=black align='right'>05.04.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This short program deletes a file, and if you undelete it,
+it does not contain the original information.</TD><TD class=black colspan=2 align='right'><br><A HREF="deleted.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                  02-27-1993
+
+This is a short program I wrote that deletes a file, and if you undelete it,
+it does not contain the original information. Wildcards are not allowed. You
+can only kill one file at a time. Just type "D", and then you name the file to
+be destroyed.
+
+Now, the only reason I can think of for you to use this utility is to get rid
+of a file fast if it's top-secret. A normal "Del" or "Erase" command will only
+pluck out the leading character of the file's first name, thereby making it
+invisible to DOS at the F.A.T. level. The file is still there on disk, it's
+just that DOS doesn't know this. The file is un-deletable with a number of un-
+delete utilities available today. But, if you happen to write to the same sub-
+directory, chances are that maybe you'll hit the deleted file and corrupt it,
+making total un-deletion impossible. If you write to that same sub-directory
+with a file of the same exact name as the deleted file, then only a seasoned
+programmer with a sector editing utility stands any hope of recovering even a
+little bit of the data in the deleted file. And it takes a while, too. With my
+program, you create a garbage file at least as long as the deleted one, and
+possibly up to 80 bytes longer for good measure. It has the same path and file
+name. Then it deletes it. And my program also does not open the original file
+for output, making for less opportunity for DOS to randomize where it might
+decide to write next ("where the wind wills"). Try it, if you like it let me
+know.
+
+Programmers: You may understand my concepts. If there are any errors or
+improvements you can point out, definitely mail them to me. Also, if anyone
+"busts" it, i.e. if you can still recover a substantial amount of the original
+data from the original file, definitely mail me your results. (And anything
+else you can think of for the benefit of my research).
+
+I have a utility by SoftLogic Solutions called "KillFile" 4.05 which has the
+same function, but I noticed that when I had Windows 3.1's Smartdrv write-
+caching turned on, and used KillFile, that Smartdrv would not dump the write
+to disk. The 5 second rule was suspended indefinitely. But exit KillFile, and
+Smartdrv dumped immediately. With my program, the write goes down within 5
+seconds. With Smartdrv for Windows 3.1, with write-caching on, a small cache,
+and some big files "kill", and a person could run their computer out of
+memory... not a problem with my program.
+
+
+Duane Bailey                                              My handle: "Yes Fan"
+409 W. First St, Apt. C
+Winston-Salem, NC 27101</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

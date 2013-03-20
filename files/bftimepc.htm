@@ -1,0 +1,194 @@
+<html><head><title>BFTIME v1.0 - A File Date/Timestamp Updater</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для установки текущей даты/времени у группы файлов, задаваемых по маске. BP7/RM<br><font color=#666666> This small program update a date/timestamp for a group of files.</font>">
+<meta name="keywords" content="pascal, sources, source code, bftimepc, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bftimepc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BFTIME v1.0 - A File Date/Timestamp Updater</TD>
+<TD nowrap class=black>&nbsp;Brian Leiter</TD>
+<TD class=black align='right'>11.03.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для установки текущей даты/времени у группы файлов,
+задаваемых по маске. BP7/RM<br><font color=#666666>
+This small program update a date/timestamp for a group of files.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="bftimepc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+<img border=0 width=640 height=379 src="bftime10.gif" alt="">
+
+Program BFTIME; {(C) 1995 - Brian Leiter - 03/11/1995}
+
+Uses DOS,CRT;
+
+Var H,M,S,Hund         : Word;       { For GetTime         }
+    FTime              : Longint;    { For Get/SetFTime    }
+    DT                 : DateTime;   { For Pack/UnpackTime }
+    Year,Month,Day,Dow : Word;       { For Date            }
+    F,F1               : Text;       { For File Name       }
+    Log                : Boolean;    { For Log File        }
+    Count              : Integer;    { For File Count      }
+    DirInfo            : SearchRec;  { For Search Info     }
+
+Const Days : Array [0..6] of String[9] =
+      ('Sunday','Monday','Tuesday','Wednesday','Thursday',
+       'Friday','Saturday');
+      CDrive: Byte = 0;
+
+Procedure Help;
+Begin
+  ClrScr;
+  Textcolor(9);
+  Writeln(' BFTIME v1.0 - A File Date/Timestamp Updater Program ');
+  Textcolor(15);
+  Writeln('-------------------------------------------------------');
+  Writeln('');Textcolor(14);
+  Writeln('Command Line Usage:  BFTIME [FILE MASK] (Log File)');
+  Writeln('');Textcolor(11);
+  Writeln('Ex 1: BFTIME *.ZIP                    ',
+          '&lt;---&lt; No Log File');
+  Writeln('Ex 2: BFTIME *.ZIP C:\LOG\BFTIME.LOG  ',
+          '&lt;---&lt; Log File Used');
+  Textcolor(7);
+  Writeln('      ^      ^     ^');
+  Writeln('      |      |     +------------------',
+          '&lt; Path & Name Of Log File');
+  Writeln('      |      |');
+  Writeln('      |      +------------------------',
+          '&lt; Mask For Files To Be Updated');
+  Writeln('      |');
+  Writeln('      +-------------------------------',
+          '&lt; Executionable Program File');
+  Writeln('');Sound(850);Delay(350);NoSound;Sound(650);
+  Delay(350);NoSound;Sound(850);Delay(350);NoSound;
+  Halt;
+End;
+
+Procedure CheckParams;
+Begin
+  Log:=False;
+  If (ParamCount=0) or (ParamCount&gt;2) Then Help;
+  If ParamCount=2 Then Log:=True;
+End;
+
+Procedure DateNow;
+Begin
+  GetDate(Year,Month,Day,Dow);
+  If Log=True Then
+  Begin
+    Assign(F1,ParamStr(2));
+    {$I-}Reset(F1);{$I+}
+    IF IOResult&lt;&gt; 0 Then Rewrite(F1);
+    Append(F1);
+    Writeln(F1,'START  LOG: ',Days[Dow],', ',Month:0, '-',
+                Day:0, '-', Year:0,'  BFTIME v1.0');
+  End;
+End;
+
+Function LeadingZero(W : Word) : String;
+Var S : String;     { For File Name       }
+
+Begin
+  Str(W:0,S);
+  If Length(S) = 1 Then S := '0' + S;
+  LeadingZero := S;
+End;
+
+Procedure Importit;
+Begin
+  FindFirst(ParamStr(1), Archive, DirInfo);
+  While DosError = 0 Do
+  Begin
+    Count:=Count+1;
+    Assign(F,DirInfo.Name);
+    Reset(F);
+    GetTime(H,M,S,Hund);
+    GetDate(Year,Month,Day,Dow);
+    GetFTime(F,FTime);
+    Gotoxy(1,9);
+    Textcolor(14);
+    Writeln(' ',DirInfo.Name,
+            ' Was Re-Dated And Re-Timestamped At ',
+            LeadingZero(h),':',LeadingZero(m),':',
+            LeadingZero(s));
+    If Log=True Then
+    Begin
+      Append(F1);
+      Writeln(F1,'     ',DirInfo.Name,
+              ' Was Re-Dated And Re-Timestamped At ',
+              LeadingZero(h),':',LeadingZero(m),':',
+              LeadingZero(s));
+    End;
+    UnpackTime(FTime,DT);
+    With DT Do
+    Begin
+      GetDate(Year,Month,Day,Dow);
+      Day:=Day;
+      Month:=Month;
+      Year:=Year;
+      Hour := H;
+      Min := M;
+      Sec := S;
+      PackTime(DT,FTime);
+      Reset(F);
+      SetFTime(F,FTime);
+    End;
+    Close(F);
+    FindNext(DirInfo);
+  End;
+  Gotoxy(1,10);
+  Textcolor(11);
+  If Count&gt;=1 Then Writeln(' Operation Successfull',
+                   ' - There Were ',Count,' Files Updated!');
+  If Count&lt;=0 Then
+  Begin
+    Writeln(' Operation Failed - There Were No Files ',
+            'Matches Found!');
+    Sound(350);Delay(350);NoSound; Sound(150);
+    Delay(350);NoSound;
+  End;
+  If Log=True Then
+  Begin
+    Append(F1);
+    If Count&lt;=0 Then Writeln(F1,'     Operation Failed',
+                     ' - No File Match Found ');
+    Writeln(F1,'END OF LOG: BFTIME (C) 1995 Brian Leiter,',
+               ' All Rights Reserved');
+    Writeln(F1,'-----------------------------------------',
+               '---------------------------------------');
+    Close(F1);
+  End;
+End;
+
+Procedure Logo;
+Begin
+  Clrscr;
+  Textcolor(15);Textbackground(4);
+  Writeln('+--------------------------------------------+');
+  Writeln('| -= BFTIME v1.0 =-               03/11/95 |');
+  Writeln('|                                            |');
+  Writeln('|      File Date And Timestamp Updater       |');
+  Writeln('|                                            |');
+  Writeln('| (C) 1995 Brian Leiter, All Rights Reserved |');
+  Writeln('+--------------------------------------------+');
+  Textbackground(0);
+End;
+
+Begin;
+CheckParams;
+Logo;
+DateNow;
+Importit;
+Textcolor(7);
+
+End.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

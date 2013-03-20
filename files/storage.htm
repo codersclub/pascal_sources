@@ -1,0 +1,71 @@
+<html><head><title>STORAGE - Store Your Info in a Compreesed File</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This Unit was designed to allow you the user to save and restore several bodies of text or information into a single file and restore that information based on a single LONGINT.'>
+<meta name="keywords" content="pascal, sources, source code, storage, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;storage
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;STORAGE - Store Your Info in a Compreesed File</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71675.765@compuserv.com">Marcos R. Della</a></TD>
+<TD class=black align='right'>09.02.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This Unit was designed to allow you the user to save and restore
+several bodies of text or information into a single file and restore
+that information based on a single LONGINT.</TD><TD class=black colspan=2 align='right'><br><A HREF="storage.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              STORAGE.PAS
+
+                                  By
+
+                            Marcos R. Della
+
+
+
+     This Unit was designed to allow you the user to save and restore
+     several bodies of text or information into a single file and restore
+     that information based on a single LONGINT.  Examples of usage are:
+
+        In a BBS system where you are creating a message base and need to
+        save several messages however do not want to create several files.
+        You also want the messages compressed to save disk space
+
+        In a program where you are storing variable length records that you
+        want to keep track of in an indexed database.  Your index key can
+        use the LONGINT returned by the storage system as your reference
+        into the record.  The record will be stored in compressed format.
+
+     I'm sure that people can think of all kinds of neat things to do with
+     this system.  The main advantage that you have with this object is
+     that ANY kind of data can be stored {Length: 0 &lt; sizeof(data) &lt; 65530}
+     as long as it fits in the buffer space.
+
+  ---------------------------------------------------------------------------
+
+  These routines were originally designed as a message storage routine for a
+  new BBS system message base that we are putting together, however we have
+  used this storage format for a varity of purposes as you can store variable
+  length messages to one file and only have to keep track of an index.  It
+  also attempts to save on disk space which is ALWAYS at a premium around
+  here.
+
+  If you have any suggestions or improvments on this file or its usage, or
+  would just like to chat, you can reach me at the following:
+
+        Marcos R. Della
+        5084 Rincon Ave.
+        Santa Rosa, CA 95409
+
+        CIS: 71675,765</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,89 @@
+<html><head><title>RLine - Fast Text Reading Operations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Объектно-ориентированный модуль для быстрого буферизованного чтения текстовых файлов. В качестве примера приведена программа SeeMe для просмотра и скроллинга текстовых файлов большого размера (тестировалось на 2,8MB - отлично!).  This unit contains a fast reading object designed for high speed reading standard ASCII disk files.'>
+<meta name="keywords" content="pascal, sources, source code, rlinetp, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rlinetp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RLine - Fast Text Reading Operations</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72617.132@compuserv.com">Don Strenczewilk</a></TD>
+<TD class=black align='right'>10.10.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Объектно-ориентированный модуль для быстрого буферизованного
+чтения текстовых файлов. В качестве примера приведена
+программа SeeMe для просмотра и скроллинга текстовых файлов
+большого размера (тестировалось на 2,8MB - отлично!). <br>
+This unit contains a fast reading object designed for high speed
+reading standard ASCII disk files.</TD><TD class=black colspan=2 align='right'><br><A HREF="rlinetp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                   Fast disk file text reading operations.
+
+        Address comments, complaints, suggestions on CompuServe to
+                       Don Strenczewilk [72617,132]
+
+
+    This unit contains a fast reading object designed for high speed
+    reading standard ASCII disk files.
+
+    The RLINE unit uses about 600 bytes of your programs code space,
+    and 0 data.
+
+    All of RLobject's methods return the result of their operation in
+    the RFerror field, except for methods: FFilePos and FClose, which
+    have no error codes.  RFerror should be checked after each call to
+    one of the methods that set it, because it is re-set with each
+    method call.
+
+
+    ------------------------------------------------------------------
+
+README FILE for RLINE.COM archive.
+
+Copyright notice:
+
+    RLINE.COM and all the routines contained in the files in the
+    RLINE.COM archive copyrighted by Don Strenczewilk.  The routines
+    may be freely used in your own programs and/or distributed, but
+    RLINE.COM or any of the routines are not to be sold.
+
+
+
+FILES:
+
+UNITS:
+RLINE.ASM
+	TASM source for the RFobject methods.
+
+RLINE.PAS
+	RFobject - low level fast buffered text file reading/seeking object.
+	RFextended - adds FileSize, Error string, and Reset.
+        FileOfLines - adds indexing and SeekLine.
+
+MOVEOPS.PAS Objects for displaying strings and moving around the screen.
+	Rectangle - describes a rectangular area of the screen.
+	ScreenR - adds ability to move about in the rectanle.
+	Scroller - adds searching and autoscrolling.
+
+READERS.PAS
+	Reader - Combines Scroller and FileOfLines Object to allow
+                 viewing/scrolling through ascii files.
+
+
+EXAMPLE PROGRAMS:
+RLTEST.PAS - timing comparison between ReadLn/FReadLn, and other tests.
+SEEME.PAS  - view/scroll/search through ascii file passed on command line.
+OVIEW.PAS  - dual-window Object viewing program, views TP5.5 OOP source
+             code. Filename is entered on command line.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

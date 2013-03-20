@@ -1,0 +1,84 @@
+<html><head><title>TextF - Fast Text File Reading Operations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='ООП-модуль для ускорения работы с текстовыми файлами. Содержит функции FOpen, FRead, FReadLn, FFilePos, FSeek, FClose. This unit contains some fast reading routines designed to work with standard ASCII disk files.'>
+<meta name="keywords" content="pascal, sources, source code, textf, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;textf
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TextF - Fast Text File Reading Operations</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73417.525@compuserv.com">Arthur Zatarain</a></TD>
+<TD class=black align='right'>27.08.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">ООП-модуль для ускорения работы с текстовыми файлами.
+Содержит функции FOpen, FRead, FReadLn, FFilePos, FSeek, FClose.<br>
+This unit contains some fast reading routines designed to work with
+standard ASCII disk files.</TD><TD class=black colspan=2 align='right'><br><A HREF="textf.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TEXTF by:  Arthur Zatarain  C'serve # 73417,525
+09/24/89
+
+TEXTF is a text file processing package that allows for position
+seeks and faster string input from files.
+
+The files in the TEXTF package are a direct adaptation of the
+RLINE package developed by Don Strenczewilk, C'Serve [72617,132].
+
+The TEXTF package takes the RLINE routines and makes the primary
+data type RFREC into an object.  All other operations are the
+same as RLINE except for slight changes in the test program.
+Rather than using the command line, the sample program TEXTTEST
+prompts for the file name.
+
+This was done mainly as an exercise in using Objects and TASM,
+but there are some advantages I can think of in using ojects
+here.  First, descendent objects can be easily formed to do
+special tricks like seek forward and backward for a specific
+string.  I can use that in my script processor.
+
+After doing the conversion and getting familiar with the WELL
+DOCUMENTED asm code, I got to wondering if straight Turbo Blocked
+I/O could be used just as well as the ASM code.  The end result
+would be the same.  A new object type could override the present
+methods with TURBO level methods for a test.  I don't have time
+right now.
+
+I tried testing with and without virtual methods, and found no
+speed diferences on a 200K text file.
+
+Please address any comments to Myself or to Don at the above
+Compuserve addresses.
+
+(*********************************************************************
+                   Fast disk file text reading operations.
+
+ This program is a OOP'd version of Don Strenczewilk's
+ [72617,132] RLINE package.
+
+ Modifications by Arthur Zatarain, C'serve 73417,525  09/25/89
+
+
+This unit contains some fast reading routines designed to work
+with standard ASCII disk files:
+
+FOpen             Open a file
+FRead             Read the next character
+FReadLn           Read the next string
+FFilePos          Return the current position in the file
+FSeek             Seek to any position
+FClose            Close a file
+
+The RLINE unit uses about 600 bytes of your programs code space,
+and 0 data.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

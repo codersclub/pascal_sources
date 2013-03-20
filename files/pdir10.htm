@@ -1,0 +1,90 @@
+<html><head><title>PDir 1.0 - Object Oriented Directory Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Object oriented access to directories. The routines in the PDir unit are based almost entirely on the object-oriented extensions in Turbo Pascal 5.5.  The user should be familiar with the stream, node and list types found in the Objects unit provided in OOPDEMOS.ARC found on the Turbo 5.5 distribution disks.'>
+<meta name="keywords" content="pascal, sources, source code, pdir10, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pdir10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PDir 1.0 - Object Oriented Directory Routines</TD>
+<TD nowrap class=black>&nbsp;Matthew J. Palcic</TD>
+<TD class=black align='right'>18.08.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Object oriented access to directories.
+The routines in the PDir unit are based almost entirely on the
+object-oriented extensions in Turbo Pascal 5.5.  The user should be
+familiar with the stream, node and list types found in the Objects unit
+provided in OOPDEMOS.ARC found on the Turbo 5.5 distribution disks.</TD><TD class=black colspan=2 align='right'><br><A HREF="pdir10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">PDir v1.0, 18 Aug 89
+
+Palcic Directory Routines
+-------------------------
+
+Matthew J. Palcic
+MJP Enterprises
+1030 Dayton-Yellow Springs Rd.
+Xenia, OH  45385-9508
+
+     The routines in PDir are Copyright (C) 1989 by Matthew J. Palcic.
+The code is public domain, but a donation would be greatly appreciated.
+Any suggestions for modifications/additions to the source code are
+welcome.  However, the source code is to be distributed only in its
+original, unmodified form.  MJP Enterprises reserves the rights to all
+code and documentation included with PDir.  MJP Enterprises and Matthew
+J. Palcic shall not be held responsible for any damages resulting from
+the use of this code.  No warranty is offered (express or written) for
+the performance or accuracy of the documentation and source code.  If
+you plan to use PDir for a distribution program (shareware, public
+domain or commercial) please inform Matthew Palcic at the address above.
+I'd like to know who's using my code and for what purposes.
+
+     PDir was developed using Turbo Pascal 5.5 on a 286 machine running
+MS-DOS 4.01. Requires the Objects unit found on the Turbo Pascal 5.5
+distribution disks.
+
+     The routines in the PDir unit are based almost entirely on the
+object-oriented extensions in Turbo Pascal 5.5.  The user should be
+familiar with the stream, node and list types found in the Objects unit
+provided in OOPDEMOS.ARC found on the Turbo 5.5 distribution disks. Also
+an understanding of recursive calls is helpful but not required to use
+the routines.  Even though there are many methods which may not be used
+in a program, the smart linker will eliminate all unused methods at
+compile time.  The data elements in the objects should not be directly
+accessed in a program; the methods defined for each object should be
+sufficient forms of access to the data elements.  If these routines do
+not fill a need, define a descendant object type that inherits all the
+other routines and adds the function you need.  It is strongly
+recommended that the user employ these objects as dynamic (using their
+Ptr counterparts) rather than static.  This offers much more flexibility
+than the static routines can offer.
+
+     Throughout this documentation a compact notation is used to
+describe any elements or routines from other units.  Turbo Pascal allows
+a unit specifier to precede any items in the unit to prevent ambiguity
+(such two procedures having the same name.)
+
+  An example:
+
+       PDir defines a routine Rename that calls the Dos unit's routine
+       Rename.  Calling Rename does not clearly call either version so
+       PDir.Rename and Dos.Rename explicitly call one or the other.
+
+This notation is also used to specify where a routine, variable, etc.
+originates.  Rather than saying 'The NameStr type found in the Dos unit'
+the documentation would read Dos.NameStr.  Sufficient documentation is
+found in the Turbo Pascal manual such that they need not be explained
+here.  The examples will build on other methods in the object for
+clarity.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

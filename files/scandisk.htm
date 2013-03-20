@@ -1,0 +1,74 @@
+<html><head><title>Сканирование файлов по всему диску</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Использование FindFirst, FindNext для рекурсивного обхода каталогов'>
+<meta name="keywords" content="pascal, sources, source code, scandisk, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;scandisk
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сканирование файлов по всему диску</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>21.02.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Использование FindFirst, FindNext для рекурсивного обхода каталогов</TD><TD class=black colspan=2 align='right'><br><A HREF="scandisk.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&gt;&gt; FindFirst,Next из доса нормально рекурсивные каталоги не проходит
+&gt;&gt; :-(
+
+
+Ну не наезжайте на Борландовскую RTL не разобравшись.
+Проходит и еще как. Сам многократно писал этот проход
+на всех версиях от 5.5 до 7.0 и ни разу у меня проблем
+не возникло.
+
+  (см. scandisk.pas)
+
+---------------------------------------------------------------------------
+Phone: 7(095)230-80-61          Victor B. Wagner
+Fax:   7(095)230-80-42          Dokuchaev Soil Institute, Pyzhevsky lane, 7
+EMail: vitus@agropc.msk.su      Moscow,109017 Russia
+
+
+
+{&gt; Cut here. FileName= SCANDISK.PAS }
+Unit ScanDisk;
+interface
+uses dos;
+Type ProcessFile=Procedure(FileName:PathStr);
+Procedure RecurseTree(StartDir:PathStr;Action:ProcessFile);
+var SR:Searchrec;
+begin
+   if StartDir[Length(StartDir)]&lt;&gt;'\' then
+      StartDir:=StartDir+'\';
+   FindFirst(StartDir+'*.*',{Собака может быть зарыта
+      здесь. Если вы задатите, скажем *.pas,
+       вам потребуются два цикла поиска - один для
+       файлов, а второй с шаблоном *.* для директорий,
+       а то директории, не имеющие расширения pas не будут
+       найдены ;-)}
+    Archive+Directory {ReadOnly и Hidden
+     добавлять по вкусу},sr);
+   While DosError=0 do
+     begin
+       if (Sr.Attr and Directory)&lt;&gt;0 then
+        begin
+          RecurseTree(StartDir+Sr.Name,Action);
+        end
+       else
+         Action(StartDir+Sr.Name);
+       FindNext(Sr);
+      end;
+end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

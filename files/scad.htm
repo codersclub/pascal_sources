@@ -1,0 +1,76 @@
+<html><head><title>ScaD - поиск/удаление файлов по всему диску</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа SCAD  предназначена  для поиска и удаления файлов, указанных пользователем, по всему диску.'>
+<meta name="keywords" content="pascal, sources, source code, scad, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;scad
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ScaD - поиск/удаление файлов по всему диску</TD>
+<TD nowrap class=black>&nbsp;Валерий Вотинцев</TD>
+<TD class=black align='right'>18.04.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа SCAD  предназначена  для поиска и удаления
+файлов, указанных пользователем, по всему диску.</TD><TD class=black colspan=2 align='right'><br><A HREF="scad.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Valery Votintsev &lt;vot@infolink.tver.su&gt;
+
+                       ПРОГРАММА    S C A D
+                               ЭТО
+                     S C A N   &   D E L E T E
+                           по ВСЕМУ ДИСКУ
+
+
+          Программа SCAD  предназначена  для поиска и удаления
+     файлов, указанных пользователем.
+
+          Программа имеет две особенности:
+          - удаление файлов можно осуществить сразу в несколь-
+     ких директориях:  в указанном и в его дочерних директори-
+     ях;
+          - удаленные файлы невозможно восстановить.
+
+
+                         Запуск программы
+
+          Программа запускается командной строкой:
+
+          Scad &lt;[путь\]маска&gt; [/N][/S][/H]
+
+          Путь может быть опущен. В этом случае поиск и удале-
+     ние файлов  будет  проводиться в текущем директории и до-
+     черних для него директориях.
+          Маска задается  в соответствии со стандартом MS DOS,
+     например: *, *.*, *.txt, as*.*, ??.pas и т.д.
+
+         [/N] - не запрашивать подтверждения на удаление; если
+     параметр опущен,  то  с  экрана будет запрашиваться подт-
+     верждение на удаление каждого файла.
+         [/S] - удалять файлы в дочерних директориях; если па-
+     раметр опущен, удаления в поддиректориях не будет.
+         [/H] - вывод на экран подсказки (HELP).
+
+          Если при  запуске программы параметры не указаны, то
+     на экране высвечивается подсказка, такая же, как и пpи
+     использовании ключа /H.
+
+     Пример:
+
+     Scad  C:\tp\*.bak  /S
+
+     Delete        C:\TP\SCAD        .BAK   ?     Y
+     Delete        C:\TP\EASYCOPY    .BAK   ?     Y
+     Delete        C:\TP\LENPAS\MASKA.BAK   ?     N
+     Delete        C:\TP\LENPAS\PARA .BAK   ?     Y</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

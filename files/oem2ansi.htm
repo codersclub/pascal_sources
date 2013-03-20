@@ -1,0 +1,76 @@
+<html><head><title>Конвертор Win to DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Конвертирование текстовых файлов из Win в DOS'>
+<meta name="keywords" content="pascal, sources, source code, oem2ansi, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;oem2ansi
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Конвертор Win to DOS</TD>
+<TD nowrap class=black>&nbsp;GVC Energetiki</TD>
+<TD class=black align='right'>05.11.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Конвертирование текстовых файлов из Win в DOS</TD><TD class=black colspan=2 align='right'><br><A HREF="oem2ansi.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: root@kt3asu.tatpeo.elektra.ru
+Subject: OEM &lt;-&gt; ANSI
+Date: 5 Nov 1996 10:51:59 GMT
+Organization: JSC "GVC Energetiky",Moscow,Russia
+
+&gt; как перекодировать из OEM в ANSI, из Виндов в DOS ?
+
+                Держи исходник !
+                Мне однажды помогли в обратном случае, теперь сам бог велел
+                помочь тебе здесь.
+                Исходник для ТП6.0, но не расстраивайся сильно !
+                Могу прислать переделыш для наоборот !
+
+
+
+        program win2dos;
+        var
+           infile, outfile: text;
+           Insymbol, Outsymbol: char;
+           Innumber, Outnumber: word;
+        begin
+        if paramstr(1) = '' then
+        begin
+             writeln('не задано имя для конвертации');
+             Halt
+        end;
+        if paramstr(2) = '' then
+        begin
+             writeln('не задано результирующее имя для конвертации');
+             Halt
+        end;
+        assign(infile, paramstr(1)); reset(infile);
+        assign(outfile,paramstr(2)); rewrite(outfile);
+        while not eof(infile) do
+        begin
+             read(infile, insymbol);
+             innumber:=ord(insymbol);
+             if innumber in [192..255] then
+                if innumber in [192..239] then
+                   outnumber := innumber-64
+                else outnumber := innumber-16
+             else outnumber := innumber;
+             if innumber = 133 then innumber := 168;
+             if innumber = 165 then innumber := 184;
+        outsymbol:=chr(outnumber);
+        write(outfile,outsymbol);
+        end;
+        close(infile);
+        close(outfile);
+        end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

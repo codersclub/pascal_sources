@@ -1,0 +1,98 @@
+<html><head><title>FileRead 1.0 - Object Oriented File Read Library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This library allows you to create a file of any type record by passing in the record size.  You must also pass in a record of the same type that the object has been initialized with so that you don't get errors when reading and writing. There is no internal buffering, but the routines are fairly fast and because each file is actually an object, you can create higher level objects of this object type that allow more flexibility, such as indexing and sorting.'>
+<meta name="keywords" content="pascal, sources, source code, fileread, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fileread
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FileRead 1.0 - Object Oriented File Read Library</TD>
+<TD nowrap class=black>&nbsp;Tom Clancy</TD>
+<TD class=black align='right'>16.04.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This library allows you to create a file of any type record
+by passing in the record size.  You must also pass in a record of
+the same type that the object has been initialized with so that
+you don't get errors when reading and writing.
+There is no internal buffering, but the routines are fairly
+fast and because each file is actually an object, you can create
+higher level objects of this object type that allow more
+flexibility, such as indexing and sorting.</TD><TD class=black colspan=2 align='right'><br><A HREF="fileread.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>23k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">              +-----------------------------------------+
+              |                                         |
+              |    FileRead Programmer's Library 1.0    |
+              |                                         |
+              +-----------------------------------------+
+              |                                         |
+              |       Copyright 1992, Tom Clancy        |
+              |          All Rights Reserved            |
+              |                                         |
+              +-----------------------------------------+
+
+INTRODUCTION
+
+     The FileRead programmer's library is a set of tools that allow you,
+the programmer, to open and manipulate a data file with any data type
+you choose.  It's fully object oriented and extensible so using this
+database is as easy as declaring an instance of the TFread object,
+initializing the file, then manipulating the data.
+
+
+REQUIREMENTS
+
+     This toolkit requires Turbo Pascal 6.0 and will work on anything
+that Turbo Pascal 6.0 will work on, including my lowly tandy 1000 SX,
+the computer on which I designed FileRead.
+
+FILES
+
+     You should have the following files in your distribution disk or
+archive:
+
+     Fileread.Pas........The fileread library source code
+     Fileread.Tpu........The fileread library Tpu version 6 format
+     Fileread.Txt........This documentation
+     Test.Pas............Test #1 source code
+     Test2.Pas...........Test #2 source code
+     L.Exe...............File listing program
+     Readme.Bat..........Batch file to launch file viewer
+     Register.Doc........Registration form to be filled out and sent in
+
+
+ENDING NOTES
+
+     This is merely the first version of this software library, and no
+attempts to include internal buffering have been attempted.  I am
+planning with future releases to have some kind of internal buffering
+that might make the file accessing faster.  Since this is an object,
+however, you could take it upon yourself to write your own object which
+would inherit mine and add your own buffering handler.
+
+     My address and telephone number follows as does the numbers of a
+few bulletin boards where I can be reached:
+
+     Thomas J. Clancy Jr.
+     5861 Horseshoe Drive
+     Bethel Park, PA 15102
+     Home Phone: (412) 833-7754
+
+     BBS's:
+
+     The Titusville Connection : (814) 827-1234
+     Century Products BBS      : (412) 831-5438
+     Technicomm BBS            : (412) 885-4347
+     Thiel College BBS         : (412) 589-2039
+     SV Educational BBS        : (412) 962-0765</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

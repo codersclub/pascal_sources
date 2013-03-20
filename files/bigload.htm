@@ -1,0 +1,82 @@
+<html><head><title>BigLoad 2.0 - Big File Support Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для создания "файла файлов", содержащего индекс вложенных файлов, и доступа к каждому отдельному файлу с использованием потоков. Этот способ позволяет хранить на диске всего один файл, в котором содержатся все необходимые программе ресурсы (например, множество спрайтов). Компилируется как в реальном, так и в защищенном режиме.  BigLoad 2.0 - BigFile Support for Turbo and Borland Pascal A libary for game developers for Real & Protected Mode with example files and complete source code!'>
+<meta name="keywords" content="pascal, sources, source code, bigload, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bigload
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BigLoad 2.0 - Big File Support Routines</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:j.gelhaus@flight.gun.de">Joachim Gelhaus</a></TD>
+<TD class=black align='right'>13.01.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для создания "файла файлов", содержащего индекс
+вложенных файлов, и доступа к каждому отдельному файлу
+с использованием потоков. Этот способ позволяет хранить
+на диске всего один файл, в котором содержатся все необходимые
+программе ресурсы (например, множество спрайтов).
+Компилируется как в реальном, так и в защищенном режиме. <br>
+BigLoad 2.0 - BigFile Support for Turbo and Borland Pascal
+A libary for game developers for Real & Protected Mode
+with example files and complete source code!</TD><TD class=black colspan=2 align='right'><br><A HREF="bigload.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  _BIGLOAD.PAS : Shareware-version.
+
+         -  put all files in a huge one
+         -  Supports Real Mode and Protected Mode.
+         -  easy to use
+         -  handles each type of file
+         -  supports seek on text files
+
+  (c) vIRTUAL tECHNOLOGIES 1996
+
+  Version 1.9
+
+  Registered version includes BigFileSupport and Spritescaling!
+
+  Distribition via any media is explicit allowed.
+
+  DISCLAIMER:
+  We give no warranty for this code, because it was firstly coded
+  for us, and not for the public.
+  But after lot of people asking us for releasing the source, we
+  decided, to make it as unit avialable.
+  But however, I really don't think that there is a bug in this
+  unit.  We use this videosystem in our own productions for years
+  without any problems.
+
+  for more information, questions and register contact us:
+
+    Ansgar Scherp
+    scherp.ansgar@informatik.uni-oldenburg.de
+
+    Joachim Gelhaus
+    j.gelhaus@flight.gun.de
+
+    http://www.informatik.uni-oldenburg.de/~virtech/
+
+    Mailbox : + 49 (0) 4441 / 851887
+    Hotline : + 49 (0) 4441 / 851717 (english, german)
+
+  Use : Just put before the normal I/O-Functions like Reset,
+        BlockRead, Close,... the word "Big".  Reset will than be
+        BigReset and BlockRead will be BigBlockRead.  You have
+        also to specify a input stream number for each opened
+        file of the BigFile.
+
+  Examples :
+    BigAssign( 1, 'HALLO.TXT' );
+    BigReset( 1, 0 );
+    BigReadB( 1, b );</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

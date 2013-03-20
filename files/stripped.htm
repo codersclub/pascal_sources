@@ -1,0 +1,93 @@
+<html><head><title>STRIPPED - Search All Programs damaged by TDStrip</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Program to detect .EXE files which have been damaged by Borland's TDSTRIP. Searches complete directory tree of current disk.'>
+<meta name="keywords" content="pascal, sources, source code, stripped, files, Файловые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Файловые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;stripped
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;STRIPPED - Search All Programs damaged by TDStrip</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dmurdoch@watstat.waterloo.edu">D.J. Murdoch</a></TD>
+<TD class=black align='right'>29.05.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Program to detect .EXE files which have been damaged by Borland's TDSTRIP.
+Searches complete directory tree of current disk.</TD><TD class=black colspan=2 align='right'><br><A HREF="stripped.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">STRIPPED - Check directories for files damaged by TDSTRIP.
+
+Written by D.J. Murdoch for the public domain, May, 1992.
+
+SYNTAX:
+
+  STRIPPED dir
+
+will search the given directory, and any of its subdirectories, for
+damaged .EXE files.
+
+DESCRIPTION:
+
+Borland ships a utility called TDSTRIP with its Turbo Debugger.  TDSTRIP
+lets you strip the external debugging information out of .EXE or .OBJ
+files.  However, version 2.0 (and some later ones) contain a serious
+bug:  it damages the header of the .EXE file, setting the "minimum extra
+allocation" field to zero.
+
+The extra allocation fields are used by DOS to determine how much memory
+to give to your program.  In addition to the amount needed to load the
+image of your .EXE file, you'll get at least the minimum allocation and
+as much as the maximum allocation, if it's available.  If there's not
+enough memory to give you the minimum allocation, DOS will refuse to
+load the program.
+
+The extra memory is used in different ways depending on the
+compiler/linker, but Turbo Pascal makes typical use of it: uninitialized
+static variables, the stack, the overlay buffer, and the heap all reside
+there.
+
+If you try to load a TDSTRIP-damaged .EXE file, usually nothing bad will
+happen.  You'll have more than the required minimum, and things will be
+fine.  However, if memory is very tight, you might have less than the
+true minimum, but more than the 0 value that TDSTRIP has put in.  Your
+program may be loaded with an initial stack pointer in video memory, or
+in an area where there's no memory, or in the middle of a TSR that's
+been loaded above it.  You'll quickly crash.
+
+The program STRIPPED is an attempt to detect these damaged files.  It
+checks the header, and verifies that the initial stack pointer is going
+to fall within the minimum allocation.  If not, it prints the name of
+the file, and the amount of free RAM which you'd need to have for it to
+actually matter.
+
+STRIPPED doesn't try to fix the .EXE, because there's no way to know
+what the true minimum allocation should be; the program may use
+overlays, or depend on a certain size of heap. Turbo Pascal 6 source for
+STRIPPED is included in this archive, so feel free to attempt fixes if
+you feel confident.  A safer approach, if available, is to recompile the
+bad .EXE, and not to use TDSTRIP on it.  The EXEMOD program distributed
+with some compilers could also be used to repair the damage, if you're
+willing to guess at the required size.
+
+
+SUPPORT:
+
+Support?  Well, comments on STRIPPED should be sent to me at one of the
+following addresses.  No guarantee that I'll be able to help though.
+
+  Internet:    dmurdoch@watstat.waterloo.edu
+  Fidonet:     DJ Murdoch at 1:249/99.5
+  Compuserve:  71631,122
+  Postal:      337 Willingdon Ave,       (After June 19, 1992)
+               Kingston, Ontario, Canada
+               K7L 4J3</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
