@@ -1,0 +1,188 @@
+<html><head><title>MKSM 1.06 - An Update for MKSM 1.05 - MsgBase Lib</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='MK Source for Msg Access v1.06 - Mark May's Pascal OOP source code to access Squish, Jam, Hudson, *.Msg, and Ezycom message bases. Great for developing BBS utilities. (FW)'>
+<meta name="keywords" content="pascal, sources, source code, mksm106, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mksm106
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MKSM 1.06 - An Update for MKSM 1.05 - MsgBase Lib</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:110/290">Mark May</a></TD>
+<TD class=black align='right'>10.12.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">MK Source for Msg Access v1.06 - Mark May's Pascal OOP source code
+to access Squish, Jam, Hudson, *.Msg, and Ezycom message bases.
+Great for developing BBS utilities. (FW)</TD><TD class=black colspan=2 align='right'><br><A HREF="mksm106.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>218k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              Changes to MKSrcMsg
+
+         v1.06 12/10/94
+
+               + Added ReReadIdx function to JAM to reduce code
+                 size (was repeated in several areas) (thanks to
+                 Thomas Antepoth @2:2487/8086 for noticing this)
+
+               - Now set HdrLoc in JAM index to -1 when a message
+                 is deleted
+
+               + Added GetHighActiveMsg function so that highest
+                 active message number is available
+                 (for Brent Shellenberg @ 1:140/146)
+
+               + Added IsValidAddr function to MKGlobT to ease
+                 checking addresses (from a suggestion by
+                 Matej Miheli~ @ 2:380/103.2)
+
+               - Fixed Hudson delete msg to properly update number
+                 of msgs (changed OR to AND when checking if it
+                 was already deleted) (thanks to Patrick Riley
+                 @ 1:247/129 for reporting this)
+
+               - Changed get number of msgs in Hudson to return
+                 number of msg in area instead of number of msgs
+                 in msg base.  (suggested by Patrick Riley also)
+
+               - Fixed bug in getstring method of *.Msg for
+                 messages larger than 64k (switched from
+                 word to longint) (thanks to Jonas Eckerman
+                 at 2:201/623 for catching this one and also
+                 for suggestions on improving speed, some of
+                 which are not implemented yet)
+
+               + Changed GetString in *.Msg to get a block from
+                 the MKFFile buffer at a time to improve processing
+                 speed (this one I thought of!)
+
+               - Fixed bug in deleting msgs in JAM areas (wasn't
+                 rewriting the msghdr to disk) (thanks to Vadim
+                 Rumyantsev @ 2:5030/48 for spotting this)
+
+               - Fixed bug in no-kludge-line get string (thanks
+                 to Vadim Rumyantsev@2:5030/48 for catching this
+                 one)
+
+               + Added prescan to *.Msg to significantly improve
+                 speed in *.Msg areas (also RESCAN method to allow
+                 for updates) (several people made suggestions for
+                 this one, although I ended up taking a slightly
+                 different approach to implement it)
+
+               - Fixed INTL kludge lines in *.msg areas to
+                 ignore points (thanks to Ron Huiskes @2:281/506
+                 for spotting this one)
+
+               - Added return value to open of *.msg area
+
+               - Fixed bug in MKFile GetTempName routine that
+                 resulted in the temp file not being closed
+
+               - Added code to prevent setting TOPT and FMPT kludge
+                 lines for *.Msg and Hudson unless the message type
+                 is Netmail
+
+         v1.05 03/20/94
+
+               + Changed name to MK Source for Messages (archive
+                 name MKSM???.*) to reduce confusion with a similar
+                 named Make Message utility by another author)
+
+               + Changed "FileError" to "MKFileError" in MKFile unit
+                 to reduce conflict with other libraries that
+                 also used a "FileError" variable
+
+               - Fixed bug in Hudson msg object so that messages
+                 exceeding the maximum message size it handles are
+                 now truncated
+                 (thanks to Mark Lewis for catching this one)
+
+               - Fixed bug in "yournext" routine in Hudson msg base
+                 (read sizeof(yourarray) instead of "yoursize")
+                 (finally a bug that showed up in my own testing &lt;grin&gt;)
+
+               - Fixes to MKFFile to improve effeciency by reducing
+                 writes to the file
+
+               - Fixed serious error in detecting Hudson and
+                 Ezycom message bases.  OpenOrCreate would not see
+                 the message base and re-create it (overwriting the
+                 old one!)
+
+               - Improved ParseAddr to ignore @domain information
+                 when parsing zone, net, node, point fields
+                 (thanks to Ryan Murray at 1:153/942)
+
+               - Fixed value returned by WriteMsg for Ezycom
+                 message object (thanks to Mark Lewis)
+
+               + Added GetNoKludgeStr method to allow ^A kludge
+                 lines to be ignored while retreiving text
+                 {thanks to Johan Corstjens 2:281/610}
+
+               + Added capability to create directories so that
+                 the CreateMsgBase function will now create
+                 subdirectories as needed
+
+
+         v1.04 01/09/94
+
+               + Major changes to the *.Msg routines to allow it
+                 to handle virtually unlimited message size with
+                 reasonable speed
+
+               + Changed default in MKB.Def to use BASM interrupts
+                 under Windows
+
+               - Fixed dropping character on JAM subbuf characters
+                 (array should start at 0)   (Thanks to Frank
+                 Van.Der.Ham 2:285/630.3 for noticing this and the
+                 following fix)
+
+               - Fixed JAM writeidx to only write the amount that
+                 had been read
+
+               + Added support for NextSeeAlso for JAM (using
+                 suggestion provided by Jonas Eckerman 2:201/623)
+
+               - Fixed seekprior in JAM format to avoid GPF when
+                 compiled for Windows (thanks to Ton Van Den Broek
+                 2:2802/122)
+
+
+         v1.03 11/21/93
+
+               - Fixed handling of JAM lastread pointers
+
+               + Added reading JAM msg kludge lines
+
+               - Fixed handling of message deletes in JAM
+
+               - Fixed bug that caused some kludge lines to be
+                 missed in *.Msg messages
+
+
+         v1.02 08/15/93
+
+               + Added support for JAM message bases
+
+
+         v1.01 ??/??/??
+
+               + Added support for Ezycom message bases
+
+
+         v1.00 ??/??/??
+
+               + MKMsgSrc released with support for Hudson,
+                 Squish, and *.Msg message formats</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

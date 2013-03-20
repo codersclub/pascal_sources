@@ -1,0 +1,88 @@
+<html><head><title>FidoFmt - Opus (MSG) Message Structure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль, описывающий структуры FIDO-сообщений в формате .MSG.'>
+<meta name="keywords" content="pascal, sources, source code, fidofmt, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fidofmt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FidoFmt - Opus (MSG) Message Structure</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>14.08.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль, описывающий структуры FIDO-сообщений в формате .MSG.</TD><TD class=black colspan=2 align='right'><br><A HREF="fidofmt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">UNIT FIDOFMT;
+(*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*)
+(*%                                                              %*)
+(*%                                                              %*)
+(*%        F I D O   M E S S A G E   S T R U C T U R E           %*)
+(*%                                                              %*)
+(*%                                                              %*)
+(*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*)
+(*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*)
+(*                                                                *)
+(* Opus stores and handles its messages in the traditional        *)
+(* FTSC FidoNet message format with the exception that            *)
+(* additional dating information is added in a set of two         *)
+(* 'timestamp' fields that indicate when a message was            *)
+(* created and when it arrived on the system and in the use       *)
+(* of certain message flags.  The extended use of the flags       *)
+(* is done in such a way as to only be of use within the          *)
+(* Opus environment and avoidsconflict with other systems         *)
+(* which adhere to basic FidoNet standards.                       *)
+(* In a manner directly descended from the original Fido&lt;tm&gt;      *)
+(* BBS system, messages are stored in one or more directories     *)
+(* which each correspond to a System Area (topic).                *)
+(* Each message is stored in its own file and has a file name     *)
+(* format "#.MSG" where "#" is the assigned number of the         *)
+(* message. The first messages in any given area would be         *)
+(* named 1.MSG, 2.MSG, and so on.                                 *)
+(*                                                                *)
+(* Each message file consists of a fixed-length header record,    *)
+(* immediately followed by a variable-length stream of ASCII      *)
+(* text that is terminated by an ASCII NULL (Code 0).             *)
+(* All text is considered to be unformatted and continuous        *)
+(* without end-of-line sequences unless they are meant to         *)
+(* unconditionally force a new paragraph.  Traditionally,         *)
+(* some message editors and BBS's use a  $8D character            *)
+(* (CR with 8th bit ON) as a "soft" carriage return.              *)
+(* These should be treated as superfluous *unless" they are       *)
+(* immediately followed by a space.  In that case, the line       *)
+(* that the space starts is considered to be fixed format and     *)
+(* should not be word wrapped as all other message text will be.  *)
+(* The header data contains fixed information about the author,   *)
+(* addressee, creation and arrival dates, subject, message        *)
+(* numbers that it replies to or is answered by, privacy flags,   *)
+(* and so on.  In the case of messages in a netmail area,         *)
+(* there are many special flags used.                             *)
+(*----------------------------------------------------------------*)
+
+
+(*----------------------------------------------------------------*)
+(*  TIME STAMP  (Not an FTSC Standard. Unique to Opus)            *)
+(*----------------------------------------------------------------*)
+(*                                                                *)
+(*  The following _stamp structure is used in Opus message        *)
+(*  headers to store a message's creation date (when first        *)
+(*  written) and the date the message arrived on the system       *)
+(*  such as when received via netmail.                            *)
+(*                                                                *)
+(*  This dating information is auxiliary and used by Opus only.   *)
+(*  It does *not* replace the functionality of the FTSC           *)
+(*  standard ASCII formatted date field which is also maintained  *)
+(*  by Opus for compatibility with the rest of the world.         *)
+(*                                                                *)
+(*----------------------------------------------------------------*)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

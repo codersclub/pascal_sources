@@ -1,0 +1,84 @@
+<html><head><title>ALLFIX Developers Kit version 5.11</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор модулей для упрощения работы с ФайлЭхоПроцессором AllFix. Содержит описание структур данных и примеры работы с файлами конфигурации, обработки статистики, вычисления CRC32, кодировки бинарных файлов в формате UUENCODE.  This package contains several files to help you on your way towards creating 3rd party utilities for ALLFIX.'>
+<meta name="keywords" content="pascal, sources, source code, allfix, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;allfix
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ALLFIX Developers Kit version 5.11</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:harald@allfix.com">Harald Harms</a></TD>
+<TD class=black align='right'>25.06.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор модулей для упрощения работы с ФайлЭхоПроцессором
+AllFix. Содержит описание структур данных и примеры работы
+с файлами конфигурации, обработки статистики, вычисления
+CRC32, кодировки бинарных файлов в формате UUENCODE. <br>
+This package contains several files to help you on
+your way towards creating 3rd party utilities for ALLFIX.</TD><TD class=black colspan=2 align='right'><br><A HREF="allfix.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">*********************************************************************
+                      ALLFIX sample procedures
+Copyright (C) 1992,98 Harms Software Engineering, all rights reserved
+
+             All information in this documentation is
+              subject to change without prior notice
+*********************************************************************
+
+This package contains several files to help you on your way towards
+creating 3rd party utilities for ALLFIX.
+
+The information in this documentation is not very detailed. It
+is suggested that you look at the few example procedures to
+learn how to read in the data files. Please make sure that the
+file structure remains correct, if your utility needs to update
+any of the files. Corrupt files can lead to a lot of headaches.
+
+Following is a description of the 5 sample files:
+
+TYPES.PAS       Contains the type definitions for ALLFIX.
+
+FILEECHO.PAS    Contains a sample procedure for reading
+                the file echo configuration. The procedure
+                for reading the node manager, hatch manager,
+                etc, configuration is identical to this one.
+                Therefore, those routines are not included
+                in this package.
+
+STATFILE.PAS    Contains a sample procedure for reading
+                in the statistics information.
+
+FILEAREA.PAS    Contains a sample procedure for reading in
+                the FILEAREA.FIX file.
+
+CRC32.PAS       Contains sample procedures for calculating
+                the 32 bit CRC of filenames and strings.
+
+INTERNET.DOC    Contains the formats and structures used
+                to send files via the internet.
+
+UUENCODE.PAS    Contains routines to uuencode and decode
+                binary data.
+
+
+Please feel free to contact me if you have any trouble with any
+of these definitions. Also, if you make any nice utilities, please
+let me know, so that we can hatch them in the ALLFIX Utility
+fileecho and make them available on our website.
+
+
+Thank you,
+
+Harald Harms (harald@allfix.com)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

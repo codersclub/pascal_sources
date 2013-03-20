@@ -1,0 +1,379 @@
+<html><head><title>LogPas 1.7 - Writing FrontDoor Style Logs for TP/BP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для записи LOG-файлов в стиле FrontDoor. Представляет собой виртуальный текстовый драйвер, связываемый с файлом. Любой текст, выводимый в такой файл, будет приведен к соответствующему формату, с добавлением даты и времени вывода.  LogPas 1.7 TP/BP Unit source code to write to Frontdoor/Binkley/D'Bridge logs. Implements a Pascal "Text Device Driver" to which a file can be assigned. All text written to that file is then formatted as a log entry with date/time etc. Five levels of logging are available. * Free Sourceware *'>
+<meta name="keywords" content="pascal, sources, source code, logpas17, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;logpas17
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LogPas 1.7 - Writing FrontDoor Style Logs for TP/BP</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:441/286">M.P.B. Cole</a></TD>
+<TD class=black align='right'>31.05.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для записи LOG-файлов в стиле FrontDoor.
+Представляет собой виртуальный текстовый драйвер,
+связываемый с файлом. Любой текст, выводимый в
+такой файл, будет приведен к соответствующему формату,
+с добавлением даты и времени вывода. <br>
+LogPas 1.7 TP/BP Unit source code to
+write to Frontdoor/Binkley/D'Bridge
+logs. Implements a Pascal "Text Device
+Driver" to which a file can be assigned.
+All text written to that file is then
+formatted as a log entry with date/time
+etc. Five levels of logging are
+available. * Free Sourceware *</TD><TD class=black colspan=2 align='right'><br><A HREF="logpas17.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">=================================================================
+LogDev.pas (c) Copyright M.P.B. Cole, 1990,1991,1995.
+              All Rights Reserved.
+=================================================================
+
+
+This unit implements a Turbo Pascal "Text Device" which formats
+output in a form suitable for Opus\Binkley, FrontDoor or D'Bridge
+style LOG files. If you find it of use and want to say so (you'd
+be the first but still...) I can be reached via Fidonet mail at
+2:441/286 or PascalNet 115:4401/1 (Limited hours, no Crash Mail).
+
+VERSION   1.7
+
+Turbo/Borland Pascal versions 4 to 7
+
+You are free to use and adapt this code with the following
+restrictions.
+
+1) You MAY NOT use this code in any commercial application or in
+   a "Shareware" or any other such application which requests
+   payment from the user, without express permission from the
+   copyright holder.  Such permission is unlikely to be withheld
+   but I shall probably expect a freebi in return!
+
+2) You are free to distribute the original version of this code
+   as long as you do not demand payment other than a nominal one
+   to cover your costs (such as a BBS registration fee or
+   postage) and in any event such a charge is not to exceed 5UKP
+   unless it is a BBS Registration fee. Please distribute the
+   source code (logdev.pas), the documentation (Logdev.doc) and
+   the example program (logtest.pas) together and ensure that the
+   distribution file name clearly indicates the version number.
+   Preferably as an archive file named LOGPASxx.??? (eg.
+   LOGPAS14.ARJ).
+
+3) You MAY NOT distribute altered versions of this code unless
+   you distribute them with an altered file name AND with my
+   original code included AND with all changes documented (in a
+   seperate document). The distributed code MUST retain my
+   copyright message and must bear the same restrictions on use
+   as the original.
+
+4) Naturally I would be delighted to here from anyone who finds
+   this code useful (never have in the past though) and would not
+   object at all to being given due credit in any program of
+   yours that uses it.
+
+This code is not warranted to do anything except waste space on
+your system. If it works, great, if it does not I accept no
+responsibliliy for any damage it may do. If you cannot accept
+that condition then please do not use LOGDEV.
+
+Of course it works for me, but that may be luck!
+
+=================================================================
+=================================================================
+
+
+*Warning: I wrote the initial LogDev in 1989 planning to release
+ it in the near future. Since then it has undergone extensive
+ changes. The original documention was written soon after the
+ first version of the code and has not always (well alright,
+ almost never) been corrected for changes. Until now that is. So
+ with the best will in the world (?) it is likely that there are
+ still mistakes in it. For these I apologise. Actually the unit
+ is quite easy to use so rotten documentation should do little
+ harm (who reads it anyway!).
+
+ In fact you could consider it a bonus with free software.  With
+ commercial software you have to PAY to get rotten documentation.
+
+
+This document is broken into the following sections:
+
+        Overview
+        LogDev Usage
+        LogDev in use
+        Important Notes
+        Adding your own log format
+
+No index, find 'em yourself!
+
+
+-----------------------------------------------------------------
+                          Overview
+-----------------------------------------------------------------
+
+This unit implements a Turbo Pascal "Text File Device" which
+formats output in a form suitable for Opus\Binkley, FrontDoor or
+D'Bridge style LOG files. Assigning a file to this driver makes
+it simple for a program to update its log and give users a choice
+of log formats.
+
+To use the unit you use the procedure "AssignLog" to assign a
+TEXT file to the device, open the file with the normal Turbo
+REWRITE or APPEND procedures and then WRITE or WRITELN entries to
+the log just as you would to any TEXT file.  LogDev takes care of
+forrmatting the entry correctly for your chosen log type and adds
+the appropriate date and time stamp to it.
+
+The only change you have to make in your code, once the log is
+open, is that you must preceed your entries with a "Level
+Number". This, as you will see later, allows you to assign all
+log entries a level of importance. Because when you ASSIGN the
+log file you also specify the level of entry that is to be
+written to the log you can allow users to exclude unimportant
+entries. Levels are 1 to 5 with level 1 being the most important
+and level 5 being the least (this is based on the Binkley/Opus
+log method).
+
+If you assign a log with a level of 3 then only entries with
+levels of 3 or below will actually be written to the log, others
+will be discarded. To actually assign a level to an entry you
+simply preceed it with a number from 1 to 5, for example.
+
+  writeln(Log,'1Important: Error ',ErrNum);
+  writeln(Log,'5Not important at all!');
+
+which is the same as
+
+  s := 'Not Important at all!';
+  writeln(Log,'5',s);
+
+If you do not give an entry a level it will be treated as having
+level the same level as the previous entry.
+
+Only entries that start a new line need to be given a level so
+that the following has the same effect as the above...
+
+  write(Log,#13#10'1Important: Error');    { Start a line }
+  writeln(Log,ErrNum);                     { On the same line }
+
+In addition to writing entries to your log file LogDev also echos
+entries to the console. As with the log you can set a maximum
+level of entry that is to be echoed when you ASSIGNLOG the log.
+Entries echoed to the screen are exactly as you wrote them (that
+is, they do not have the date/time stamp added).
+
+You can also ASSIGLOG to stdout with ASSIGNLOG(f,''....) just as
+you can with Turbo's "Output" file. Then users can redirect log
+output. A simple method is to AssignLog(Output,''...) so that all
+WRITE/WRITELN statements that do not specify a file are written
+via LogDev. This allows you to take an existing program and have
+all its output formatted by LogDev (though unless you make some
+changes you loose the ablility to control output levels).
+However you should NOT echo output to the screen if the primary
+log is the console and you should not allow users to redirect
+output if the primary log is a disk file (in case they redirect
+output to the same file which would lead to a screwed up
+disk!!!). Normally LogDev's console output goes to the stderr
+handle to avoid this (stderr is not normally redirectable).
+
+Any I/O errors that occur while writing to the log file will be
+returned as usual in IORESULT.
+
+-----------------------------------------------------------------
+                        LogDev in use.
+-----------------------------------------------------------------
+
+The way it works is this. When assigning a file with AssignLog
+you specify a "Level". This is the MINIMUM level of log entry
+that will be allowed. Whenever you WRITE a new line to the log
+file you preceed the entry with one of the "Entry Levels". IF and
+only if the entry has a priority greater than or equal to the
+MINIMUM level you set with ASSIGN then the entry is written to
+the log otherwise it is ignored.
+
+For example
+
+  VAR lf: TEXT;
+  .....
+  Logdev_Intro := 'MyProg v1.0';
+  AssignLog(Lf,'MYPROG.LOG',Binkley,'MPRG',3,0);
+
+        { Log file is MYPOG.LOG
+        Each entry will be identified by 'MYPRG'
+        No entrys below level 3 will be written
+        No echo to screen }
+
+  APPEND(Lf);    { Append to existing log if any}
+  IF IORESULT &lt;&gt; 0 THEN REWRITE(Lf); { else new log }
+
+  WRITELN(Lf,'1A Serious error');  { WILL go to log }
+  WRITELN(Lf,'4Progress report');  { will NOT as &lt; Level 3 }
+  WRITELN(Lf,'5Booring info');     { will NOT as &lt; Level 3 }
+  CLOSE(Lf);
+
+What happens if the Level Number is missing from the start of a
+new line? well there are two possibilities.  Normally the line
+will be treated as though it had actually had the same level as
+the preceeding entry.  However the CONSTant
+"LogDev_AssumeLastFlag" may be set FALSE by your program and in
+this case any line lacking a flag assumes level 5.
+
+Eg.
+
+  { Starts with AssumeLastFlag TRUE }
+
+  Logdev_Intro := 'MyProg v1.0';
+  AssignLog(Lf,'MYPROG.LOG',Binkley,'MPRG',1,0);
+          { Log Level 1, only priority 1 messages ('!','*')
+            will be seen }
+  APPEND(Lf);    { Append to existing log if any}
+  WRITELN(Lf,'1Eeek, an Error,(Code: ',ErrorCode,')');
+  WRITELN(lf,'Oh dear, a second error')
+  WRITELN('Oh dear, another error');
+          { Now this line assumes the same flag as the
+            previous line, "!" with priority 1,
+            and will be written to the log.
+
+  { Log looks like this
+  + 01 Jan 00:10:01 MPRG Begin, MyProg V1.0
+  ! 01 Jan 00:10:01 MPRG Eeek, an error (Code 102)
+  ! 01 Jan 00:10:02 MPRG Oh dear, a second error
+  ! 01 Jan 00:10:03 MPRG And a third error }
+
+  AssumeLastFlag := FALSE;
+  WRITELN(Lf,'1Eeek, an Error (Code: ',ErrorCode,')');
+  WRITELN(lf,'Oh dear, a second error')
+  WRITELN(lf,'1And a third error');
+        { The second line will default to priority
+          5 and will not be added to the log}
+
+  CLOSE(Lf);
+
+  { Log looks like this
+  ! 01 Jan 00:10:01 MPRG Eeek, an error (Code 102)
+  ! 01 Jan 00:10:03 MPRG And a third error }
+
+If you need to change the logs priority level after opening the
+file you can call "SetLogLevel"
+
+Eg:  SetLogLevel(f,5,0);
+
+Or you can totally ignore the level of entries and have
+everything go into the log by setting "LogDev_IgnoreLevel :=
+TRUE"
+
+* You cannot change the level of a log created with an original
+  level of ZERO because in this case no file was ever actually
+  created. Level ZERO exists only so that you can give users the
+  option to switch logging off completely (or perhaps just keep
+  that which is echoed to the screen).
+
+
+Echoing output to the screen.
+
+Messages with flag levels &gt;= "ScreenLevel" will be written to the
+screen using STDERR (DOS Handle 2). Only your own text will be
+written, the flag, date, time and progID added when writing to
+the log are NOT sent to the screen.
+
+STDERR is used because it is not (normally) redirectable.
+
+You can make this screen output go to other standard devices by
+changing the interface CONST LogDev_ScreenHandle. Default is 2
+(STDERR) but you may change it to 1 (STDOUT), 3 (STDAUX) or 4
+(STDPRN)
+
+DO NOT use the screen facility if you are assigning the log file
+to STDOUT (by using a null file name - see below) as the output
+will be garbled.
+
+NEVER use Screen output to STDOUT if assigning the log file also
+to STDOUT (ditto see below) because this will corrupt your disk
+if the user redirects STDOUT to a file (DOS and your program both
+open, write to, and close the same file!!).
+
+Assigning to STDOUT.
+
+This is exactly the same as with Turbo's ASSIGN. If you AssignLog
+and give a null file name the file is linked to STDOUT and the
+user is able to redirect. ENSURE that, if output is echoed to the
+screen it goes to STDERR (the default). Best not to use echo at
+all because if the user does NOT redirect STDOUT they will get
+garbage on the screen as every character is displayed twice!
+
+
+-----------------------------------------------------------------
+                Adding your own log format
+-----------------------------------------------------------------
+
+
+There are no special facilities in the code to allow you to add
+your own log format, however it is not hard to do.
+
+  1) Add a new type to the LogTypes (INTERFACE block)
+
+    type LogTypes = (Binkley,FrontDoor,DBridge,MineOwn);
+                                                ^^^^^
+
+  2) Add a set of flags to be used if you want them
+     (IMPLEMENTATION)
+
+       BinkleyFlags =   '!+:# ';
+       FrontDoorFlags = '     ';
+       DBridgeFlags =   '     ';
+       MineOwnFlags =   '12345';
+
+  3) To the CASE Ltyp OF in function LogDateString add code to
+     return your desired date format (or use the existing one).
+
+  4) To the CASE LType OF in function Stamp add code to return
+     your desired log entry stamp. This function returns the
+     date/time stamp that preceeds log entries, for instance for
+     Binkley style logs it returns something like '01 May
+     04:52:34'
+
+  5) Add code to CASE LogType OF in Procedure LogNewLine to set
+      string "S" to the text required to start a new entry on the
+      log. This might consist of a flag and a time stamp
+      appropriately formatted. So for Binkley style logs S is set
+      to
+
+        '+ 01 May 01:45:56 PROGID '
+
+      If you are using flag characters the one you want can be
+      found in FlagChars[LastFlag], Function Stamp amended above
+      provides the appropriate form of time stamp.
+
+   6) In Function LogOpen is a CASE Params(UserData).LogType OF
+      which adds any automatic entries to a newly opened log. If
+      you want to do this add your own code to do it. Note that
+      for Binkley style logs the variable Mode (part of a
+      TextRec) is used to determine if the file was opened by an
+      APPEND call (Mode = fminout) so as to add a blank line to
+      an existing log.
+
+   7) If you are using flag characters add code to the CASE
+      LogType OF in procedure AssignLog. You must set FlagChars
+      equal to your flag characters defined earlier.
+
+   8) If you want to do anything special when CLOSEing a log add
+      code to Procedure LogClose (see the example used by Binkley
+      log type).
+
+That should about do it. Note though that I have not actually
+tested the above suggestions (should be right though).
+
+=================================================================</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

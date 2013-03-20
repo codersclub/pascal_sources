@@ -1,0 +1,51 @@
+<html><head><title>Работа с T-MAIL.LNG на Паскале</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор подпрограмм для работы с T-MAIL.LNG'>
+<meta name="keywords" content="pascal, sources, source code, t_lng, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;t_lng
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Работа с T-MAIL.LNG на Паскале</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/339">Jury Fradkin</a></TD>
+<TD class=black align='right'>16.11.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор подпрограмм для работы с T-MAIL.LNG</TD><TD class=black colspan=2 align='right'><br><A HREF="t_lng.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">T_LNG   - это набор подпрограмм для работы с T-MAIL.LNG на паскале и Си.
+TYPELNG - тестовый пример (распечатка T-MAIL.LNG).
+
+T_LNG передается  в  виде "as is" и я не возражаю против использования этого
+модуля в любых программах, равно как и любых переделок его текста.
+
+Я благодарю Anton Krenitskiy за перевод этого  модуля  с  паскаля  на  Си  и
+Dmitri Karapats за перевод с русского на английский.
+
+
+
+Для интересующихся деталями - формат .LNG.
+
+1) Файл  .LNG  состоит  из  строк  формата  (для printf),  каждая из которых
+   заканчивается нулевым байтом.
+
+2) В конце .LNG сидит 2 байта контрольной суммы.
+
+3) Если в очередной версии формат или назначение какого-то сообщения  сильно
+   меняется,  то под его номером в .LNG записывается пустая строка и в хвост
+   .LNG вставляется новое сообщение.
+
+
+
+                                               Jury Fradkin, 2:5030/339</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

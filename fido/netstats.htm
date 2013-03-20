@@ -1,0 +1,123 @@
+<html><head><title>NetStats 3.10 - Utility for NodeList Statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='NetStats reads a FidoNet NODELIST and outputs a list of stats about the nodelist.'>
+<meta name="keywords" content="pascal, sources, source code, netstats, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;netstats
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;NetStats 3.10 - Utility for NodeList Statistics</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:106/100">Justin Marquez, Jr.</a></TD>
+<TD class=black align='right'>28.02.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">NetStats reads a FidoNet NODELIST
+and outputs a list of stats about the nodelist.</TD><TD class=black colspan=2 align='right'><br><A HREF="netstats.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>26k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         NetStats.Pas and NetStats.Exe
+                         =============================
+
+TurboPASCAL 5.00 program written by Justin Marquez, Jr. and placed into the
+Public Domain for all to freely do what they will with it. There are no
+restrictions placed on distribution or use of this code and program. There is
+no support given, NOR ANY WARRANTY OF ANY TYPE IMPLIED. It is what it is.
+
+Input Files Required:
+=====================
+A FidoNet "St. Louis Format" nodelist or fragment thereof.
+
+OutPut Files Generated:
+=======================
+NetStats.Out = a text file showing various statistics about the input
+nodelist file's contents.
+
+USAGE:
+======
+
+NETSTATS &lt;filename&gt;
+
+where &lt;filename&gt; is replaced with a DOS-type filename or simply the
+file's "first name". The program will search through all files with that
+first name (or wildcard) for the file which:
+
+        - has numbers in the .### part of the name (name Extension)
+        - and has the latest time/date stamp
+
+If you do NOT want it to search for the latest file, do not add anything
+after the program (i.e., no parameters):
+
+NETSTATS
+
+and you'll be prompted for a complete filename.
+
+
+The report generated shows "real" nodes (i.e., NOT Admin, or Down, or Hold, or
+Pvt ) for all categories except those which are designed to show non-real
+nodes. The percents shown are also based on division by the "real" node count.
+
+Output Data File
+================
+
+        The program outputs a data file with the same data as is in the
+        regular print report file. The data file is COMMA-DELIMTED
+        format, with ASCII strings enclosed in double quotes. This
+        format may be "imported" into a number of spreadsheets and
+        databases. It may also be easily read by a BASIC program as
+        well.  Here is  list of the output data items in the order in
+        which they appear in the file. (Note that each run of the
+        program produces ONE LINE which is APPENDED to the data file):
+
+   FKb          File Size, in KBytes (Bytes/1024)
+   FMonth       File Date: MONTH
+   FDay         File Date: DAY
+   FYear        File Date: YEAR
+   IfnaList     FILE NAME used as input
+   i            Number of "real nodes"
+   NonComments  Number of Non-Comment lines in the list
+   ZoneCount    Zones
+   RegionCount  Regions
+   HostCount    Hosts (and therefore, NETS)
+   HubCount     HUBs in those nets
+   DownCount    How many nodes are marked "Down"
+   PvtCount     How many nodes are marked "Pvt"
+   HoldCount    How many nodes are marked "Hold"
+   AdminOVHD    Number of Administrative nodes (Zone, Region, Host, Hub)
+   Baud9600     How many "9600 baud flags" there are (Yes, yes, BPS ...)
+   HST          HST flagged
+   PEP          PEP flagged
+   MAX          MAX flagged
+   HAY          HAY flagged
+   V32          V32 flagged
+   V32B         V32B flagged
+   V42          V42 flagged
+   V42B         V42B flagged
+   Baud2400     2400 baud (uh, BPS) systems
+   Baud1200     1200 baud (uh, BPS) systems
+   Baud300       300 baud (uh, BPS) systems
+   CrashMail    CM flagged
+   MailOnly     MO flagged
+
+
+Examples:
+=========
+
+NetStats Region19.188
+
+NetStats C:\Opus\Nodelist\Nodelist.188
+
+
+Enjoy.
+
+Justin Marquez
+@FidoNet 1:106/100</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

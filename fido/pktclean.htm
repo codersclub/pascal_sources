@@ -1,0 +1,97 @@
+<html><head><title>PktClean 0.98g. Удаление Клуджей из PKT файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='PKTCLEAN 0.98 gamma. Freeware. A FIDOnet utility.  Cleans garbage kludges from PKT files. Required: TURBO Pascal 7.0 & Turbo Professional 5.11+.'>
+<meta name="keywords" content="pascal, sources, source code, pktclean, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pktclean
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PktClean 0.98g. Удаление Клуджей из PKT файлов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:469/15">Дмитрий Тимченко</a></TD>
+<TD class=black align='right'>24.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">PKTCLEAN 0.98 gamma. Freeware.
+A FIDOnet utility.  Cleans garbage kludges from PKT files.
+Required: TURBO Pascal 7.0 & Turbo Professional 5.11+.</TD><TD class=black colspan=2 align='right'><br><A HREF="pktclean.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>34k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    PKTCLEAN 0.98 gamma.
+Freeware.  CopyLeft by Dimmy Timchenko, 1994-95.  FIDO 2:469/15
+A FIDOnet utility.  Cleans garbage kludges from PKT files.
+Required: TURBO Pascal 7.0 & Turbo Professional 5.11+.
+
+Утилита удаляет из PKT-файлов "левые" кладжи.  Список кладжей и эх,
+которые надо/не надо обрабатывать, задается в файле PKTCLEAN.CFG (см.).
+Программа занимает 15К, для работы ей надо примерно 90К, количество
+одновременно обрабатываемых пакетов - не более 500, размер пакета не
+ограничен.  Работает быстро. :)  Ведется лог-файл.
+
+В PKT-файле ищется последовательность 00 'AREA:', содержимое строки
+AREA сравнивается со списком эх.  Если эту эху обрабатывать надо,
+ищется последовательность 0D 01 &lt;текст&gt; и затем проверяется, входит ли
+этот кладж в список (описание - в CFG-файле).  Если входит - строка с
+кладжем "удаляется".
+
+При желании можно заменить одну строку на другую (см. CFG).  Замещение
+происходит следующим образом : ищется образец, на его место записывается
+замена.  Далее, могут быть два варианта.  Если первый символ строки
+замещения - "+", остаток строки (то, что не вошло в шаблон) после замены
+сохраняется.  Иначе - остаток строки удаляется.
+
+При этом надо следить, чтобы строка замены не была длиннее исходной строки.
+Если строка замены длиннее образца, выдается сообщение об ошибке или (если
+в конфигурации закомментирована строка StrictCheck) в лог выдается
+предупреждение (один раз после обновления конфигурации).
+
+При обработке пакета новый пакет пишется в файл $$PKTCL1.TMP, затем
+исходный файл переименовывается в FFFF1000.PKT...FFFF9999.PKT, затем
+новому файлу присваивается имя и дата исходного, а исходный удаляется.
+Это предотвращает потерю почты при любых сбоях.  Максимум - появятся
+дупы, которые отловит тоссер.
+
+Запуск программы:
+
+PKTCLEAN &lt;путь&gt; {&lt;маска&gt;} [+|-&lt;список_тэгов&gt;]
+
+&lt;Путь&gt; - это путь к директории, куда тоссер распаковывает входящие
+эхо-бандлы.  Если вы пользуетесь тоссером GECHO, вы можете указать
+PKTCLEAN.EXE в External Utilities --&gt; PKT, а в Ext.Uti./Options указать
+"Run PKT program once".
+
+&lt;маска&gt; - групповое имя файлов, которые надо обработать.  По умолчанию -
+*.PKT.
+
+&lt;список_тэгов&gt; - список групп кладжей и/или эх для обработки.
+Тэг - любая буква или цифра, указываемая для списка эх или образцов
+(см. PKTCLEAN.CFG). "+" означает добавить к набору по умолчанию
+(тому, который без тэга), "-" - обрабатывать только перечисленные
+группы кладжей/эх.  Между знаком "+"|"-" и тэгами не должно быть
+пробелов, например : +12WZ
+
+Примеры:
+
+PKTCLEAN L:\MAIL\IN
+
+Обработать *.PKT в каталоге L:\MAIL\IN
+
+PKTCLEAN L:\MAIL\OUT *.CUT *.HUT *.OUT
+
+Обработать *.CUT *.HUT *.OUT в каталоге L:\MAIL\OUT
+
+PKTCLEAN L:\MAIL\OUT *.?UT -N
+
+Обработать *.?UT в каталоге L:\MAIL\OUT, использовать тэг N.
+
+
+Dimmy.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

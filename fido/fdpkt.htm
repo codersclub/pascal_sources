@@ -1,0 +1,107 @@
+<html><head><title>FdPkt - FidoNet unit with .PKT Support</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для работы с .PKT файлами. Позволяет разбирать пакет на отдельные сообщения.  FIDONET UNIT by Kelly Drown, Copyright (C)1988,89-LCP, Modified by Mihail Savchenko'>
+<meta name="keywords" content="pascal, sources, source code, fdpkt, fido, Программы для FIDO ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Программы для FIDO</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fdpkt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FdPkt - FidoNet unit with .PKT Support</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:Mihail@infoc.spb.su">Mihail Savchenko</a></TD>
+<TD class=black align='right'>24.07.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для работы с .PKT файлами.
+Позволяет разбирать пакет на отдельные сообщения. <br>
+FIDONET UNIT by Kelly Drown, Copyright (C)1988,89-LCP,
+Modified by Mihail Savchenko</TD><TD class=black colspan=2 align='right'><br><A HREF="fdpkt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>26k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Unit FidoNet;              { Beta Copy - Rev 6/5/89 Ver. 0.31 }
+
+     { FIDONET UNIT by Kelly Drown, Copyright (C)1988,89-LCP  }
+     {                                   All rights reserved  }
+     { If you use this unit in your own programming, I ask    }
+     { only that you give me credit in your documentation.    }
+     { I ask this instead of money. All of the following code }
+     { is covered under the copyright of Laser Computing Co.  }
+     { and may be used in your own programming provided the   }
+     { terms above have been satisfactorily met.              }
+     {                        * * *                           }
+     { (1) 07/24/92 This source code was changed for          }
+     { TurboPascal/TechnoJock6.0 by Mihail Savchenko,         }
+     { St.Petersburg. Internet: Mihail@infoc.spb.su           }
+     {                          FiDo:     2:5030/27           }
+
+{-------------------------------------------------------------}
+Function PacketName : String;
+         { Creates and returns a unique Packet name }
+
+{-------------------------------------------------------------}
+Function PacketMessage : String;
+         { Returns a Packet message header }
+
+{-------------------------------------------------------------}
+Function PacketHeader : String;
+         { Returns a Packet Header String }
+
+{-------------------------------------------------------------}
+Function NetMessage : String;
+         { Returns a NetMessage header string }
+
+{-------------------------------------------------------------}
+Function GetPath(Var FName : String) : Boolean;
+         { Returns the FULL Path and filename for a filename  }
+         { if the file is found in the path. }
+
+{-------------------------------------------------------------}
+Function MsgDateStamp : String;
+                  { Creates Fido standard- 01 Jan 89 21:05:18 }
+
+{-------------------------------------------------------------}
+Function MsgToNum( Fnm : String ) : Integer;
+                              { Used Internally by LastMsgNum }
+
+{-------------------------------------------------------------}
+Function LastMsgNum( _NetPath : String ) : Integer;
+  { Returns the highest numbered xxx.MSG in NetPath directory }
+
+{-------------------------------------------------------------}
+Function Hex(N : Word) : String;
+         { Converts an integer or word to it's Hex equivelent }
+
+{-------------------------------------------------------------}
+Function ArcName : String;
+         { Returns the proper name of an echomail archive }
+
+{-------------------------------------------------------------}
+Function GetNet( GN : String ) : String;
+         { Returns the NET portion of a Net/Node string }
+
+{-------------------------------------------------------------}
+Function GetNode( GN : String ) : String;
+         { Returns the NODE portion of a Net/Node string }
+
+{-------------------------------------------------------------}
+Procedure ExpandNodeNumbers(Var List : String;
+                            VAR TotalNumber : Integer );
+{ Expands a list of short form node numbers to thier proper }
+{ Net/Node representations. Example:
+  The string:
+  170/100 101 102 5 114/12 15 17 166/225 226
+  Would return:
+  170/100 170/101 170/102 170/5 114/12 114/15 etc.. }
+
+{-------------------------------------------------------------}
+Procedure Conv_NetNode(NetNode : String; VAR Net, Node : Word);
+       { Returns NET and NODE as words from a Net/Node string }</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
