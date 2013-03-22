@@ -1,0 +1,55 @@
+<html><head><title>ZipCrack - Brute Force Attack on PKZIP 2.0 Password</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для подбора пароля в ZIP файле. Использует метод &quot;Brute Force Attack&quot;. Хорошо работает на коротких паролях, но для длинных непригодна.<br><font color=#666666> Brute force attack on PKZIP 2.0 encryption. Works Ok for short passwords, but will take centuries for longer ones. Turbo Pascal source included.</font>">
+<meta name="keywords" content="pascal, sources, source code, zipcrack, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;zipcrack
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ZipCrack - Brute Force Attack on PKZIP 2.0 Password</TD>
+<TD nowrap class=black>&nbsp;Michael A. Quinlan</TD>
+<TD class=black align='right'>17.03.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для подбора пароля в ZIP файле.
+Использует метод "Brute Force Attack".
+Хорошо работает на коротких паролях,
+но для длинных непригодна.<br><font color=#666666>
+Brute force attack on PKZIP 2.0 encryption.
+Works Ok for short passwords, but will take
+centuries for longer ones.
+Turbo Pascal source included.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="zipcrack.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>19k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{---------------------------------------------------------------------}
+{                                                                     }
+{ Program ZIPCRACK Copyright 1993 by Michael A. Quinlan               }
+{                                                                     }
+{ Brute force attack on PKZIP V2 encryption.                          }
+{ Based on the APPNOTE.TXT distributed with the registered version    }
+{ of PKZIP 2.04g.                                                     }
+{                                                                     }
+{ Method: Generate all possible passwords; invoke PKUNZIP -t (test)   }
+{ option to test each password.                                       }
+{                                                                     }
+{ Input: Minimum and maximum password lengths, password character set,}
+{ Zipfile name, name of file to extract.                              }
+{                                                                     }
+{ Options: Interval to save last password attempted; this allows the  }
+{ program to be restarted.                                            }
+{                                                                     }
+{ Performance improvements: placing PKUNZIP and the Zipfile on a RAM  }
+{ disk will improve speed. Increasing the 'save' interval will also   }
+{ increase speed. Making the current directory a RAM disk is _NOT_    }
+{ recommended, since a crash (power hit, etc.) will lose the saved    }
+{ 'last password' and you will have to restart from scratch.          }
+{                                                                     }
+{---------------------------------------------------------------------}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

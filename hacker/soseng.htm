@@ -1,0 +1,115 @@
+<html><head><title>SOS Engine - Low Level Debugging Tool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Инструмент для низкоуровневой отладки программ. Позволяет реагировать на операции доступа к файлам, чтения, записи, выделения блоков памяти и т.д.<br><font color=#666666> SOS Engine - is a debugging tool which records low level application activity such as file accesses, reads, writes, memory allocation requests and more. NEW: includes ASM source plus examples for Basic, Clipper, C, and Turbo Pascal.</font>">
+<meta name="keywords" content="pascal, sources, source code, soseng, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;soseng
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SOS Engine - Low Level Debugging Tool</TD>
+<TD nowrap class=black>&nbsp;Solid Oak Software</TD>
+<TD class=black align='right'>25.10.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Инструмент для низкоуровневой отладки программ.
+Позволяет реагировать на операции доступа к файлам,
+чтения, записи, выделения блоков памяти и т.д.<br><font color=#666666>
+SOS Engine - is a debugging tool which
+records low level application activity
+such as file accesses, reads, writes,
+memory allocation requests and more.
+NEW: includes ASM source plus examples
+for Basic, Clipper, C, and Turbo Pascal.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="soseng.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        SOS ENGINE INTRODUCTION
+
+Have you ever wondered exactly what your application was doing in
+the background, what files it was accessing, how many bytes it was
+reading or writing, or how other low level functions were being
+performed?
+
+We did.  In fact, the first version of this program was born a couple
+of years ago out of desperation when we could not determine why one
+of our applications would not print correctly when run on a network.
+Since then we have saved countless hours during the develpment/alpha/
+beta cycles.
+
+We have also used this program to monitor our clients systems and to
+record problems for later analysis.  The usefullness of this program
+is limited only by your understanding of what it does.
+
+
+                                OVERVIEW
+
+The SOS ENGINE consists of two parts.  The first is the 'ENGINE' which
+is an 11k memory resident module that can be loaded anywhere in memory.
+The engine remains idle in memory until you activate it from your
+application.  When activitated, it begins logging selected activities
+to a pre-determined file.  Each log entry is time stamped, in 24 hour
+time, with a resolution of 1/100th of a second.
+
+The second part consists of a standard OBJ file that you link with
+your application.  The OBJ file contains 18 functions written entirely
+in assembly language, and adds less than 600 bytes to the size of your
+finished application.  Each of the eighteen functions are designed to
+help you tailor the output of the engine to suit your needs as closely
+as possible.
+
+
+                              APPLICATION
+
+The SOS ENGINE can be used as a debugging tool during the development,
+Alpha, and Beta cycles of application development and testing.
+If desired, the code can be left in the application when it is
+finished as it requires very little overhead.  The engine could be
+distributed with the application and loaded only if needed.  This is
+a great way to provide an un-paralleled level of support.
+
+It can be extremely usefull for developers of vertical applications.
+They could easily monitor the execution of their software all the time,
+or at times when errors are likely to occur.  Log files can easily be
+printed out and faxed or mailed to the developer, so he has exact
+documentation as to what the application was doing when a problem
+occurred.
+
+
+                           SOS ENGINE REFERENCE
+
+The SOS ENGINE consists of two very small modules:
+
+SOSENGN.EXE -- This is the memory resident engine portion of the
+program. It can be loaded any time you like prior to running an
+application that activates it.  It can be loaded into 'HIGH' memory
+without problem.
+
+The engine needs no parameters, and will maintain a log file called
+SOSENGN in the directory where the program was first called.
+You can unload the engine from memory by using the /U command line
+parameter. (i.e. SOSENGN /U)
+You may also specify a file name by passing a fully qualified DOS file
+name as a command line parameter. (i.e. SOSENGN C:\LOGS\MYLOG.DAT )
+
+
+
+SOSFUNC.OBJ -- This is the 'LIBRARY' portion of the program.
+This file contains 18 callable functions you may use to control the
+output of the engine module.  It has been tested with Clipper, BASIC,
+Turbo Pascal, and C, and should work with any dialect of those
+languages.  It is written in 100% Assembler, with no language
+particulars, so it should be pretty much generic.
+Source code is provided.
+
+
+                              Solid Oak Software
+                                 P.O. Box 6826
+                           Santa Barbara, CA 93160
+                        805-967-9853  FAX 805-967-1614</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

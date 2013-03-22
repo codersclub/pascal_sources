@@ -1,0 +1,212 @@
+<html><head><title>Sally Tpu PeepHole Optimizer v1.10</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для оптимизации TPU модулей, написанных на BP7. Сначала модуль дизассемблируется, причем распознаются все вызовы из модуля Systems, затем код оптимизируется и компилируется с помощью TAsm. Приведен исполняемый файл и документация. <br><font color=#666666> This command-line utility lets you produce faster programs with Borland Pascal version 7.0 by optimizing the intermidiate code produced by that compiler. As a special bonus of using this program, the longint shift bug in the runtime library will be eliminated.</font>">
+<meta name="keywords" content="pascal, sources, source code, spo110, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;spo110
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Sally Tpu PeepHole Optimizer v1.10</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:terra@diku.dk">Morten Welinder</a></TD>
+<TD class=black align='right'>17.04.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для оптимизации TPU модулей, написанных на BP7.
+Сначала модуль дизассемблируется, причем распознаются все
+вызовы из модуля Systems, затем код оптимизируется
+и компилируется с помощью TAsm. Приведен исполняемый файл и
+документация. <br><font color=#666666>
+This command-line utility lets you produce faster programs
+with Borland Pascal version 7.0 by optimizing the intermidiate
+code produced by that compiler. As a special bonus of using this
+program, the longint shift bug in the runtime library will be
+eliminated.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="spo110.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>109k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">----------------------------------------------------------------------
+            Sally Tpu Peephole Optimizer version 1,10
+                         Morten Welinder
+                       February-March 1993
+----------------------------------------------------------------------
+
+1. Welcome
+
+Welcome to Sally Tpu Peephole Optimizer, Spo.  This program lets you
+produce faster programs with Borland Pascal version 7.0 by optimizing
+the intermidiate code produced by that compiler.
+
+The program and documentation of it (including this file) is copyright
+1993 by Morten Welinder.  "Sally" as the program outputs is also me.
+
+Units compiled for Windows are currently not handled.
+
+As a special bonus of using this program, the longint shift bug in the
+runtime library will be eliminated.
+
+
+2. Terms of use
+
+I do not currently know what I want to do with this program. Therefore
+the following terms apply to all use of Sally Tpu Peephole Optimizer
+version 1,10:
+
+        1. The program may be used in 1993 only.
+        2. The program may be used by private individuals only.
+        3. You don't have to pay for using the program.
+        4. You may distribute copies of the program, if and if only
+           you distribute the whole package unmodified.
+        5. You use the program at your own risc.
+
+
+3. Bug reports and suggestions
+
+Bug reports, comments et cetera can be snail-mailed to
+
+        Morten Welinder
+        Borups Alle 249B, 3tv
+        2400  Koebenhavn NV
+
+or emailed to "terra@diku.dk".  The latter is my graduate student
+account at Department of Computer Science, University of Copenhagen,
+Denmark.
+Please be specific: use the debugging options to localize the bugs and
+include the failing source code.
+
+The mail system at Diku was down some days late in February.
+If you sent bug reports (concerning version 1,00) at that time and
+didn't get a reply, please resubmit!
+
+
+4. Usage
+
+The optimizer is a command-line utility and regognizes lots of options.
+Entering "Spo" without parameters gives you a list:
+
+        Sally Tpu Peephole Optimizer version 1,10
+        Copyright 1993 by Sally
+
+        Usage: Spo Infile(s) [Options]
+          /?     Help
+          /Ax    Assembler           Example: Tasmx.Exe
+          /Tx    Target              86, 186, ... , 486
+          /Rx    Range Check         (B)ounds, (E)liminate
+          /Sx    Stack Check         (U)nfold, (E)liminate
+          /Ix    InOutRes Check      (U)nfold, (E)liminate
+          /Ox    Overflow Check      (I)ntO, (E)liminate
+          /Nx    80n87 instructions  (S)oft, (H)ard
+          /Cx    Target platform     (D)os, (P)rotected, (W)indows
+          /Dx    Debug               Keep (L)ist file.
+                                     (N)o optimization.
+                                     (S)ystem names.
+
+Infile(s) is a list of the units to optimize.
+Wildcards are now allowed.
+Debug information must be present in the unit.
+The optimized versions of the units will be written in the current
+directory with an extension of "Ttt".
+This may very well change in later versions.
+
+Note that options with parameters (e.g., "/Sx") does not accept any
+white space between the "S" and the parameter.
+
+The options are described in greater detail in the following sections.
+In order to run Spo you will need 300-600 KB free memory.
+The presense of Xms memory (up to 64 KB) may improve capacity very
+slightly. See the assembler option for information about how to use an
+assembler with larger capacity.
+
+An alternate version for users with 386 processors is available:
+Spo386. This version runs under Dpmi and you will need some of the
+files that came with Borland Pascal 7.0 (the same files you need to
+start Bp.Exe). The alternate version of Spo doesn't have the 64K
+limit for the assembly buffer and will thus optimize larger units.
+Spo386 has been tested under Borland's dos extender only and since it
+uses some dirty tricks to operate in 32 bit mode it may or may not
+function under other dos extenders.
+Please let me know it you have problems.
+
+
+5. How?
+
+Spo works by a three phase scheme
+
+        1. Disassembly.
+        2. Optimization of the generated assembly code.
+        3. Assembly.
+
+This scheme has the side effect that you cannot rely on a particular
+coding of some instruction.  As an example "Mov Sp,Bp" has two
+different encodings.  This should not concern you.
+
+In generel the speed-up comes from unfolding system procedures and
+functions. A far call and return takes 30 clock cycles plus penalties
+for broken instruction queues on a 486.
+
+Other speed-up sources are use of larger instruction sets and less
+local view on instructions.
+
+
+6. Error messages and warnings
+
+There are found kinds of messages from Spo: information, warnings,
+errors, and internal errors.  This (incomplete) list describes them.
+
+
+
+
+8. New features to come or not
+
+As one might expect this program could be enhanced to input the unit
+(or to output the new unit) in older versions of the tpu file format.
+It would not be very much work but is it worth the while?
+
+The code generated for the Case statement could be improved
+significantly by using jump tables when several braches are present.
+
+The Fpu and Cpu types should be seperated.
+
+Swapping to disk or Xms should be possible in order to prevent the
+assembler from running out of memory.
+
+Other procedures than system procedures should be unfolded, perhaps
+specialized (producing new procedures when knowing the values of some
+of the parameters).  This is a technique in its childhood so you should
+not expect much.  Look up articles on "Partial Evaluation".
+
+Redundant load and save instructions should be eliminated.  Much more
+should be done with 32-bit instructions, i.e., pushing pointers and
+longints.  The reason that it has not already been done is that a
+concept of "dead" registers and flags has to be formulated.
+
+
+9. Keeping the lawyers happy
+
+Borland International holds "Tasm", "Turbo Assembler", and "Borland
+Pascal" as trademarks; Microsoft Corp. holds "Windows" as trademark;
+International Business Machines Corp. holds "Ibm Pc" as trademark;
+Intel Corp. holds the cpu names as trademarks.
+
+
+10. Thanks
+
+Special thanks to William L. Peavy, author of TPU6.  Without his work
+this program would not have been possibly.  If you're out there and
+want some minor corrections to the format of tpu files, contact me.
+
+Thanks to Ralf Brown for the interrupt list.  There's nothing like
+good documentation of technical issues.
+
+Thanks to Duncan Murdoch for keeping the list of known bugs in Borland
+Pascal.  New versions of programs always seem to follow the line
+"old bugs replaced by new and unknown ones."
+
+Thanks to Norbert Juffa for useful comments and for pointing a serious
+bugs in the handling of 8087 instructions.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,139 @@
+<html><head><title>Inside TURBO Pascal 6.0 Units</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="48-страничное описание внутренней структуры TPU модулей в TP6 (engl). Хорошее пособие для тех, кто интересуется восстановлением исходного кода TPU модулей.<br><font color=#666666> It is a 48-pages report describing an internal organization of TP6.0 units. If you  want to  know what is in a .TPU (unit) file produced by Version  6.0 of  Turbo Pascal from Borland International, then this  paper is  for you.    It  doesn't  explain  quite everything since there is no access to secret documents or anything  like that  and since  some of  the data in .TPU files just doesn't have enough auxiliary information to make its role  clear.   However, it  is possible to learn a great deal about  how Turbo  Pascal organizes  the information  it needs to  refer to,  and it  is also  possible to learn just what kind of code the compiler produces.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpu6doc, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpu6doc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Inside TURBO Pascal 6.0 Units</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:70042.2310@Compuserve.com">William L. Peavy</a></TD>
+<TD class=black align='right'>18.04.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">48-страничное описание внутренней структуры TPU модулей в TP6 (engl).
+Хорошее пособие для тех, кто интересуется восстановлением
+исходного кода TPU модулей.<br><font color=#666666>
+It is a 48-pages report describing an internal organization
+of TP6.0 units.
+If you  want to  know what is in a .TPU (unit) file produced
+by Version  6.0 of  Turbo Pascal from Borland International,
+then this  paper is  for you.    It  doesn't  explain  quite
+everything since there is no access to secret documents
+or anything  like that  and since  some of  the data in .TPU
+files just doesn't have enough auxiliary information to make
+its role  clear.   However, it  is possible to learn a great
+deal about  how Turbo  Pascal organizes  the information  it
+needs to  refer to,  and it  is also  possible to learn just
+what kind of code the compiler produces.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpu6doc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>121k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  -----------------------------
+
+                  INSIDE TURBO PASCAL 6.0 UNITS
+
+                  -----------------------------
+
+                                by
+
+                         William L. Peavy
+
+                        -----------------
+
+                     Revised: April 16, 1991
+
+
+
+                             ABSTRACT
+
+   If you  want to  know what is in a .TPU (unit) file produced
+   by Version  6.0 of  Turbo Pascal from Borland International,
+   then this  paper is  for you.    It  doesn't  explain  quite
+   everything since the I don't have access to secret documents
+   or anything  like that  and since  some of  the data in .TPU
+   files just doesn't have enough auxiliary information to make
+   its role  clear.   However, it  is possible to learn a great
+   deal about  how Turbo  Pascal organizes  the information  it
+   needs to  refer to,  and it  is also  possible to learn just
+   what kind of code the compiler produces.
+
+   This is  the third  in a series of reports on the subject of
+   Turbo Pascal  Units, the  first treating  with Turbo  Pascal
+   Version 5.0  and the  second with  Turbo Pascal  5.5.    The
+   evolution  of   these  files   in  the   face  of   changing
+   requirements has  been fascinating to behold and deciphering
+   their contents has been challenging to say the least.
+
+   The programs supplied with this report have been reorganized
+   from their  5.5 style in some ways and many identifiers have
+   been changed.   These  changes were  more for style than for
+   substance.   Other changes  were dictated  by the changes in
+   the organization  of the  TPU file itself and certain errors
+   in the 5.5 programs have been corrected.  In addition, other
+   errors of  interpretation have  been fixed  which has led to
+   some enhanced descriptive capability.
+
+   Since I  have a "real" job which requires my full attention,
+   and since  it doesn't  involve use  of these products in any
+   direct way,  I am  usually hard-pressed to find the personal
+   time to  conduct this  research.    Consequently,  I  always
+   refuse to  commit to follow-up or even error correction.  It
+   would  be  irresponsible  of  me  to  pretend  it  could  be
+   otherwise.  Even so, this is a revised report which contains
+   a few  error fixes  and discusses the newly enhanced program
+   which incorporates  these fixes  and  sports  some  enhanced
+   capabilities.
+
+
+             Files on the Distribution Disk
+
+Filename.x      Description of Contents
+-----------     -------------------------------------------------
+README.!!!      This file (you're reading it now)
+WHATS.NEW       Change History
+
+TPU6DOC.TXT     Report on Research (48 pages; copy to PRN:)
+
+TPU6.EXE        The Supplied Program ready to run
+
+TPU6.PAS        Turbo Pascal Source - The Main Program
+TPU6AMS.PAS     Turbo Pascal Source - Access Methods for .TPU Files
+TPU6EQU.PAS     Turbo Pascal Source - Release-Sensitive Procs
+TPU6RPT.PAS     Turbo Pascal Source - Text File Output Unit
+TPU6UNA.PAS     Turbo Pascal Source - Disassembler Unit
+TPU6UNA.INC     Turbo Pascal Source - Disassembler Tables (included)
+TPU6UTL.PAS     Turbo Pascal Source - High-Level .TPU Analysis Methods
+
+
+                        License & Restrictions
+
+You are free to use this material at your own risk for your own
+personal and NON-COMMERCIAL ends.  You are free to distribute COMPLETE
+copies of all materials via any means to any recipient provided that
+no charge is made therefor save a small and nominal fee whose sole
+purpose is to recover reasonable distribution expenses.  You MAY NOT
+make use of these materials in a commercial manner.  No warranties of
+any kind are made by the author.
+Should your use or distribution of this material result in damages to
+you, the damages are yours to bear.  The opinions and findings
+contained in this material are those of the author and of no other
+person.
+
+
+                       The Author
+
+This work was done by William L. Peavy, Houston Texas as a private
+research endeavor.
+
+I am interested in feedback, suggestions, constructive criticism,
+and success stories.  A few "atta boys" wouldn't hurt either.
+I can be reached via Compuserve (70042,2310), via the HAL-PC
+Telecom-1 BBS or via the HAL-PC Telecom-2 BBS.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

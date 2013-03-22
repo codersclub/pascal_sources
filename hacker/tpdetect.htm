@@ -1,0 +1,78 @@
+<html><head><title>TPDETECT - Checks for TP4+ Executables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Удилита для определения, скомпилирована ли исполняемая программа с помощью TP4+. Распознавание производится по цепочке специфических вызовов в коде инициализации программы. Приведен только исполняемый модуль. <br><font color=#666666> TPDETECT debugs the Turbo Pascal 4+ compiled executables and recognizes the start out with a series of far calls to the initialization sections of the various units.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpdetect, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpdetect
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPDETECT - Checks for TP4+ Executables</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dmurdoch@mast.queensu.ca">D.J. Murdoch</a></TD>
+<TD class=black align='right'>13.08.1992</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для определения, скомпилирована ли исполняемая
+программа с помощью TP4+. Распознавание производится по цепочке
+специфических вызовов в коде инициализации программы.
+Приведен только исполняемый модуль. <br><font color=#666666>
+TPDETECT debugs the Turbo Pascal 4+ compiled executables and
+recognizes the start out with a series of far calls to the
+initialization sections of the various units.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpdetect.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TPDETECT - checks for Turbo Pascal 4+ executables.
+written by D.J. Murdoch for the public domain, August 1992.
+
+Syntax:
+
+   TPDETECT fileset1 [fileset2 ...]
+
+   will look at all the files in the filesets to find those
+   that appear to have been compiled by Turbo Pascal.
+
+Description:
+
+   Since the introduction of "units" with version 4.0 of TP,
+   executables compiled by TP have been recognizable in a debugger by
+   the fact that they start out with a series of far calls to the
+   initialization sections of the various units. I recently got a new
+   package containing a large collection of executables, and was
+   curious whether any of them had been written in TP. Loading each of
+   them into a debugger looked pretty dull, so I whipped this little
+   utility together.
+
+   The tests it uses are very simple:  if a file is in .EXE format,
+   and the first executed instruction is a far call, it is flagged as
+   a possible TP program.  If it's a new executable, and the first and
+   second instructions are both far calls, then it's a TP for Windows
+   program.
+
+   This test correctly detects TP versions 4.0 to 6.0, and TPW versions
+   1.0 and 1.5; it may work for later versions, too.  I don't know of
+   any false positives, but I'm sure there are some, so don't trust it
+   too much.  Just have fun with it!
+
+Bugs:
+
+   TPDETECT is without warranty, is poorly tested, and probably
+   contains lots of bugs. If you find any, please let me know;
+   I might even fix them.
+
+   Duncan Murdoch
+   Internet:    dmurdoch@mast.queensu.ca
+   Compuserve:  71631,122
+   Fidonet:     DJ Murdoch at 1:249/99.5
+
+Registration fee:
+
+   TPDETECT is public domain.  There's no charge! But, if the money
+   is burning a hole in your pocket, donate it to a local charity and
+   let me know, so we'll both feel good about it.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,82 @@
+<html><head><title>Master Unit DisAssembler v2.0 for TP6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Дизассемблер для TPU модулей от TP6.0.<br><font color=#666666> Turbo Pascal 6.0 Master Unit Disassembler.</font>">
+<meta name="keywords" content="pascal, sources, source code, unit6dis, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;unit6dis
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Master Unit DisAssembler v2.0 for TP6.0</TD>
+<TD nowrap class=black>&nbsp;iNFiNiTY</TD>
+<TD class=black align='right'>28.04.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Дизассемблер для TPU модулей от TP6.0.<br><font color=#666666>
+Turbo Pascal 6.0 Master Unit Disassembler.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="unit6dis.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>39k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">         ђђђђђђђ ђђ   ђђ ђђђђђђѓ ђђђђђђѓ ѓђђђђђѓ
+            іђѕ   ђђ   ђђ ђђ   ђђ ђђѓѓѓђј ђђ   ђђ
+             іђѕ   ђђ   ђђ ђђђђђђ  ђђјјјђђ ђђ   ђђ
+              іђѕ   јђђђђђј ђђ  јђђ ђђђђђђј јђђђђђј
+
+            ђђђђђђѓ ѓђђђђђѓ ѓђђђђђѓ ѓђђђђђѓ ѓђђђђђѓ ђђ
+           ђђѓѓѓђђ ђђѓѓѓђђ ђђѓѓѓѓ  ђђ      ђђѓѓѓђђ ђђ
+          ђђјјјј  ђђјјјђђ  јјјјђђ ђђ      ђђјјјђђ ђђ
+         ђђ      ђђ   ђђ јђђђђђј јђђђђђј ђђ   ђђ ђђђђђђђ
+
+                       ѓђђђђђѓ    ѓђђђђђѓ
+                      ђђѓѓѓѓ     ђђ  ѓђђ
+                     ђђјјјђђ    ђђѓј ђђ
+                    јђђђђђј ђђ јђђђђђј
+
+         ѓђђђђђђѓ ѓђђђђђѓ ѓђђђђђѓ ђђђђђђђ ѓђђђђђђ ђђђђђђѓ
+         ђђ ђђ ђђ ђђѓѓѓђђ ђђѓѓѓѓ    іђѕ   ђђѓѓѓѓ  ђђ   ђђ
+         ђђ ђђ ђђ ђђјјјђђ  јјјјђђ   іђѕ   ђђјјјј  ђђђђђђ
+         ђђ ђђ ђђ ђђ   ђђ јђђђђђј   іђѕ   јђђђђђђ ђђ  јђђ
+
+                 ђђ   ђђ ѓђђђђђѓ іђђѕ ђђђђђђђ
+                 ђђ   ђђ ђђ   ђђ  ђђ    іђѕ
+                 ђђ   ђђ ђђ   ђђ  ђђ    іђѕ
+                 јђђђђђј ђђ   ђђ іђђѕ   іђѕ
+
+
+         ђђђђђђѓ іђђѕ ѓђђђђђѓ ѓђђђђђѓ ѓђђђђђѓ ѓђђђђђђѓ
+         ђђ   ђђ  ђђ  ђђѓѓѓѓ  ђђѓѓѓђђ ђђѓѓѓѓ  ђђ ђђ ђђ
+         ђђ   ђђ  ђђ   јјјјђђ ђђјјјђђ  јјјјђђ ђђ ђђ ђђ
+         ђђђђђђј іђђѕ јђђђђђј ђђ   ђђ јђђђђђј ђђ ђђ ђђ
+
+                   ѓђђђђђѓ    ѓђђђђђѓ
+                      ѓѓђђј    ђђ  ѓђђ
+                     ѓђђјј      ђђѓј ђђ
+                      ђђђђђђђ ђђ јђђђђђј
+
+    Copyright (C) 1993, iNFiNiTY Software Productions.
+              All Rights Reserved Worlwide.
+    Turbo Pascal is a Registered Trademark Of Borland,
+    International.
+
+===================================================================
+                            [iSP]
+===================================================================
+
+To run the unit disassembler, type UNIT6DIS at the C:\&gt; prompt in
+the directory of the Turbo Pascal 6.0 unit you want to disassemble.
+When asked for the name of the unit,  type it in, but -=WITHOUT=-
+the .TPU extension.  The unit must be in the current directory or
+in some directory on the current path, either as an individual unit,
+or one in "TURBO.TPL".  You will then be asked whether or not to
+disassemble the object code.  -=WARNING=-!  SYSTEM.TPU will produce
+over 700-800K of output in the list file.
+
+===================================================================
+                            [iSP]
+===================================================================</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

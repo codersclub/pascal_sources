@@ -1,0 +1,96 @@
+<html><head><title>AMI-BIOS Password Reader</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Старенькая программа для АМИ-биоса">
+<meta name="keywords" content="pascal, sources, source code, ami, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ami
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;AMI-BIOS Password Reader</TD>
+<TD nowrap class=black>&nbsp;Вадим Серков</TD>
+<TD class=black align='right'>10.09.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Старенькая программа для АМИ-биоса</TD><TD class=black colspan=2 align='right'><br><A HREF="ami.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">          Hello !
+
+ ML&gt;   Есть ли какая-нить программулька, чтобы корректно читала пароль из
+ ML&gt; CMOSa?
+
+    У меня есть старенькая программа для АМИ-биоса.
+
+ Good luck !
+               Vadim Serkov (SVV)
+--- GoldED 2.50.B0822+
+
+
+{&gt; Cut here. FileName= AMI.PAS }
+{$A-,B-,D-,E-,F-,G-,I-,L-,N-,O-,P-,Q-,R-,S-,T-,V-,X-}
+{$M $400,0,0}
+
+var
+    I, Last, Next, Pwd : Byte;
+
+Procedure ReadPort; assembler;
+asm
+     mov   al, Next
+     mov   Last, al
+     xor   ah, ah
+     mov   al, I
+     mov   dx, $070
+     out   dx, al
+     mov   dx, $071
+     in    al, dx
+     mov   Next, al
+     inc   I
+end;
+
+begin
+     WriteLn('AMI-BIOS CMOS password reader by SVV.');
+     Write('=&gt; ');
+     Pwd:=$FF;
+     I:=$037;
+     ReadPort;
+     While Pwd &lt;&gt; 0 do
+          begin
+           ReadPort;
+           asm
+                   xor    bl, bl
+                   mov    al, Next
+                   cbw
+                   or     ax, ax
+                   jne    @loc5
+                   jmp    @loc6
+           @loc5:  test   al, $80
+                   je     @loc1
+                   test   al, $61
+                   jnp    @loc2
+                   stc
+           @loc2:  rcl    al, 1
+                   jmp    @loc3
+           @loc1:  test   al, $61
+                   jp     @loc4
+                   stc
+           @loc4:  rcl    al, 1
+           @loc3:  inc    bl
+                   cmp    al, Last
+                   jne    @loc5
+                   mov    Pwd, bl
+                   jmp    @loc7
+           @loc6:  mov    Pwd, 0
+           @loc7:
+           end;
+           if Pwd &lt;&gt; 0 then Write(Chr(Pwd));
+          end;
+     WriteLn;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

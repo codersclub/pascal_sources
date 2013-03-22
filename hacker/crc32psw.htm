@@ -1,0 +1,70 @@
+<html><head><title>Восстановление пароля по контрольной сумме в RA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для преобразования контрольной суммы в символьный пароль для популярной BBS &quot;Remote Access 1.0&quot;.<br><font color=#666666> CRC32 to Password Converter v1.0 With example how to find user password in RA</font>">
+<meta name="keywords" content="pascal, sources, source code, crc32psw, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crc32psw
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Восстановление пароля по контрольной сумме в RA</TD>
+<TD nowrap class=black>&nbsp;Юрий Тольский</TD>
+<TD class=black align='right'>18.06.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для преобразования контрольной суммы в символьный пароль
+для популярной BBS "Remote Access 1.0".<br><font color=#666666>
+CRC32 to Password Converter v1.0
+With example how to find user password in RA</font></TD><TD class=black colspan=2 align='right'><br><A HREF="crc32psw.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  CRC32 to Password Converter v1.0
+                          (С) Y.Tolsky 1994
+              With example how to find user password in RA
+
+     К вашему  вниманию  предлагается  програмка  (с  исходным кодом),
+генерящая по  контрольной  сумме  (CRC32),  строку,  чья  CRC32  будет
+соответствовать заданной. Используется для Remote Access BBS.
+
+     Код написан с расчетом на 386 процессор и выше.
+                                               ^^^^ настоятельно
+                                                    рекомендуется.
+---------------------------------------------------------------------
+     Ее например можно использовать для нахождения  паролей  юзеров  в
+RA. Это делается таким образом:
+1)Находим файл 'users.bbs'
+2)Читаем со смещением=(1016*номер_юзера+383)
+     четыре байта. например 89 AB CD EF (в шестнадцатиричном виде)
+     Это CRC32 пароля.
+3)Запускаем програмку CRC2PSW.EXE
+4)Вводим '$EFCDAB89' (так как байты хранятся в обратном порядке)
+5)Дальше вводим минимальную и максимальную возможную длину  пароля
+6)Программа начинает поиск  паролей.  Информация  выводимая  на  экран
+дублируется в файле 'CRC2PSW.OUT'
+----------------------------------------------------------------------
+     В файле 'CRC2PSW.CHR' хранятся допустимые символы.  Чем их меньше
+тем быстрее  расчитываются  пароли.  Если  этот  файл отсутствует,  то
+предполагается, что в пароле могут быть любые символы.
+----------------------------------------------------------------------
+     В асмовском модуле содержатся  две  процедуры:  одна  для  поиска
+паролей используя   все   буквы,  вторая  используя  массив  доступных
+символов. Остальное думаю понятно из исходняков.
+----------------------------------------------------------------------
+     Я старался написать код по-оптимальнее,  но если вам удастся  еще
+оптимизировать (более  чем  на  1%),  просьба отмылить по этому поводу
+(адрес снизу).
+======================================================================
+     P.S. Я этим вопросом не занимался но  по-моему  при  архивации  с
+паролем ARJ,PKZIP  и др.  архиваторы используют подобные алгоритмы для
+проверки паролей,  т.е.  в файле хранится CRC32 пароля (хотя не совсем
+уверен).
+======================================================================
+     По всем вопросам/замечаниям/др мыльте по адресу:
+     2:5020/150.16@fidonet    Yuri Tolsky</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

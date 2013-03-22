@@ -1,0 +1,62 @@
+<html><head><title>TdInfo 0.7 -- Turbo Debug Information Utility</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для анализа отладочной информации в программах, скомпилированных BP7. Предоставляет информации больше, чем стандартная утилита TDUMP. <br><font color=#666666> TdInfo 0.7 - Turbo Debug Information for Borlan Pascal 7.0. This program reports the Turbo Debug Information appended to an .EXE file.  This goes beyond the information provided by Borland's TDUMP. For other information see Borland's Open Architecture Handbook for Pascal, chapter 4 Symbol table format.  The file OA.TXT is my list of errors and omissions in the Borland document.</font>">
+<meta name="keywords" content="pascal, sources, source code, tdinfo70, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tdinfo70
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TdInfo 0.7 -- Turbo Debug Information Utility</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71055.2743@compuserv.com">Andy McFarland</a></TD>
+<TD class=black align='right'>22.09.1993</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для анализа отладочной информации в программах,
+скомпилированных BP7. Предоставляет информации больше,
+чем стандартная утилита TDUMP. <br><font color=#666666>
+TdInfo 0.7 - Turbo Debug Information for Borlan Pascal 7.0.
+This program reports the Turbo Debug Information appended to an .EXE
+file.  This goes beyond the information provided by Borland's TDUMP.
+For other information see Borland's Open Architecture Handbook for
+Pascal, chapter 4 Symbol table format.  The file OA.TXT is my list of
+errors and omissions in the Borland document.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tdinfo70.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>30k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TdInfo 0.7 -- Turbo Debug Information by Andy McFarland [71055,2743]
+
+1. Compile your program with standalone debugging enabled. (/V in BP7)
+2. TDI program.EXE &gt; program.txt
+
+This program reports the Turbo Debug Information appended to an .EXE
+file.  This goes beyond the information provided by Borland's TDUMP.
+For other information see Borland's Open Architecture Handbook for
+Pascal, chapter 4 Symbol table format.  The file OA.TXT is my list of
+errors and omissions in the Borland document.
+
+The first report is the unit dependencies.  Units that are initialized
+_before_ a used unit are flagged.  Next is the Object Hierarchy
+followed by the Data Segment usage.  Last is the TD information
+reports and raw dumps. (0.7 does not include all TD Info)
+
+This program has been tested on Borland Pascal version 7 in
+real and protected mode.  It _should_ work for .EXE's from Turbo
+Assembler, Turbo Pascal for Windows, Stony Brook Pascal, and Borland
+C++.
+
+In the report file '!!!' in the output marks information I have not
+deciphered.  PChar and small sets have been noted.
+
+This program and text files are freeware.  The copyrights are
+reserved, but no payment is required for use of these files.  The
+source code is currently not available, but I intend to send it to
+those who register version 1.0.
+
+Andy</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

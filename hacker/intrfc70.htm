@@ -1,0 +1,128 @@
+<html><head><title>INTRFC 7.0 - Program to Dump BP7 TPU Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для изучения внутренней структуры TPU, TPP и TPW файлов в BP7.0. <br><font color=#666666> INTRFC Version 7.0 - Program to dump TPU files (March, 1994). Dumps TPU, TPP and TPW format files for Borland Pascal 7.0.</font>">
+<meta name="keywords" content="pascal, sources, source code, intrfc70, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;intrfc70
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;INTRFC 7.0 - Program to Dump BP7 TPU Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:xdadok00@dcse.fee.vutbr.cz">Milan Dadok</a></TD>
+<TD class=black align='right'>16.03.1994</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для изучения внутренней структуры TPU, TPP и TPW файлов
+в BP7.0. <br><font color=#666666>
+INTRFC Version 7.0 - Program to dump TPU files (March, 1994).
+Dumps TPU, TPP and TPW format files for Borland Pascal 7.0.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="intrfc70.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>64k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">INTRFC - Program to dump TPU files (March, 1994).
+Version 7.0:  Dumps TPU, TPP and TPW format files.
+
+     Written for the public domain by Milan Dadok.
+     Internet: xdadok00@dcse.fee.vutbr.cz (till September 1995)
+
+INTRODUCTION
+
+Several times I had to write the source of a tpu, because it was
+not available. I started to look for some documentation about TPU
+files and I found INTRFC from D.J. Murdoch, that works with TP 6.0
+tpu files (see history below). Because I needed to dump TPU files
+from BP 7.0 and I was wondering how tpu files are encoded, I
+upgraded it to BP 7.0 files. I also fixed same mistakes and added
+some new features (print enum and set constants etc).
+
+Because D.J. Murdoch does not plan to update INTRFC any more,
+please send bugs only to my Internet address.
+
+The reason I included source code is because it will serve as a bit
+of documentation for the TPU file format:  Borland will never
+publish it.  They want to be free to change the format, tweaking
+performance when they can.
+
+You must compile INTRFC in BP 7.0. Normally it will dump only BP
+7.0 (TPUQ) files. If you want to dump TP 6.0 (TPU9) files, you must
+recompile INTRFC with the symbol UNIT60 defined. Change SWITCHES.INC
+or compile with BPC: BPC intrfc.pas /b /DUNIT60
+
+
+USAGE:
+       INTRFC /options unit [output_file]
+   where options are letters from the following:
+     B - emitted code bytes
+     C - initialized constant blocks
+     D - code blocks
+     E - routine entry records
+     G - emitted global const bytes
+     H - TPU header
+     I - implementation section (if $D was used in compilation)
+     L - proc/fn locals (if $L was used in compilation)
+     M - source line number map
+     N - names in interface
+     O - const relocation records
+     R - relocation records
+     S - source file records
+     U - unit list
+     V - var blocks
+     W - exported name records
+     Z - browser section {$Y+}
+     A - turn all options on
+
+     Options are processed sequentially and toggle the display.
+     Use /Tpath[;path] to set the Turbo directory for TURBO.TPL
+      and referenced units.
+     E.G. To see all but the relocation records in the system unit,
+          use
+        INTRFC /AR /T\bp\bin;\bp\units SYSTEM
+     The default is just the names in the interface section.
+
+LIMITATIONS
+
+     There are tons of limitations to INTRFC.  It doesn't know how to
+     print the values of typed constants. Etc. Etc. Etc. If you want
+     it to do something differently just go ahead and change it!
+
+     I recommend compiling with all possible checks turned on, since
+     it's pretty easy to get lost in all those pointers and records.
+
+FILES
+
+     The following files should be included in this package.
+
+      INTRFC70 DOC    This file
+      TPU9     DOC    TPU structure outline (TP 6.0)
+      TPUQ     DOC    TPU structure outline (BP 7.0)
+      INTRFC   EXE    The executable to dump BP 7.0 tpu files
+
+      INTRFC   PAS    Main program
+      GLOBALS  PAS    Program globals
+
+      HEAD     PAS    TPU header dumper
+      NAMELIST PAS    Prints interface section
+      NAMETYPE PAS    Type definitions for NAMELIST
+      BLOCKS   PAS    Routines for code blocks, etc.
+      SRCFILES PAS    Prints source files & line numbers
+      RELOC    PAS    Prints relocation records
+      CODE     PAS    Code and const dumper
+
+      DUMP     PAS    Various dump routines
+      LOADER   PAS    Reads in .TPU and .TPL files
+      UTIL     PAS    Various utility routines
+      TEST1    PAS    Test file
+      TEST1    INC    Test include file
+      TEST1    ASM    Test assembler file
+      TEST1    OBJ    Test object file
+      PARAMS   PAS    Parses parameters
+
+     Have fun with INTRFC and Turbo (or Borland) Pascal.
+
+Milan Dadok</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,145 @@
+<html><head><title>The Simplest Executable Cracker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простейшая программа для внесения изменений в указанные адреса исполняемых модулей.">
+<meta name="keywords" content="pascal, sources, source code, docrk, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;docrk
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;The Simplest Executable Cracker</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/633.34">Alexey Trizno</a></TD>
+<TD class=black align='right'>18.09.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простейшая программа для внесения изменений в указанные адреса
+исполняемых модулей.</TD><TD class=black colspan=2 align='right'><br><A HREF="docrk.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT -------------------------------------------- It's interesting -
+ Msg  : 104 of 202                    Addr                        Date
+ From : Alexey Trizno        2:5030/633.34                    18.09.97
+ Subj : Простой Кракер
+----------------------------------------------------------------------
+                        Приветствую тебя, Pavel!
+
+Monday September 15 1997 13:42, Pavel beliaev телеграфировал(а) для All
+следующее:
+
+ Pb&gt; Hет ли у кого исходняка на сабже который бы изменял в определенном
+ Pb&gt; файле быйты (крякер короче).
+
+Hу вот _простейший_ примерчик:
+
+Допустим, имеется файлик под именем 'system.crk':
+
+=== Hrm... ===
+00015239: C8 55
+0001523A: 20 8B
+0001523B: 00 EC
+0001523C: 00 90
+=== Hrmm.. ===
+
+Также есть файлик 'system.fpd', который, собственно, и надо крякнуть,
+то есть внести изменения в байты по адресам, указанным в файле .crk
+
+А вот и пример проги docrk.pas:
+
+Можно конечно много чего надобавлять, так что, коль чего,
+так спрашивай :)
+
+С наилучшими пожеланиями, Alexey ( AKA CraZyAleX ).
+
+--- GoldEd/386 3.00a5+
+ * Origin: XHouse Station, St-Petersburg, Russia (2:5030/633.34)
+
+
+{&gt; Cut here. FileName= DOCRK.PAS }
+{----------------------------------------------}
+{ From : Alexey Trizno  2:5030/633.34  18.09.97}
+{ Subj : Простой Кракер                        }
+{----------------------------------------------}
+{ usage: docrk fileforcrack crk_file           }
+{ т.е. в параметрах задаем:                    }
+{        какой_файл_кракнуть                   }
+{        и затем как_кракать (.crk файл)       }
+{----------------------------------------------}
+Const
+
+ hex : String = ('0123456789ABCDEF');
+
+Procedure usage;
+begin
+  writeln(' usage: docrk fileforcrack crk_file');
+  halt;
+end;
+
+Function GetDec(Var s : String) : LongInt;
+Var
+  i : Integer;
+  r : LongInt;
+  b : LongInt;
+ Begin
+  r := 0;
+  For i := 1 to Length(s) do
+   Begin
+    If s[i] &lt; 'A' Then
+     b := Byte(s[i]) - Byte('0')
+    else
+     b := Byte(s[i]) - Byte('A') + 10;
+    r := (r shl 4) + b;
+   end;
+  GetDec := r;
+ end;
+
+Var
+
+ f : File;
+ t : Text;
+ s : String;
+ addr, oldb, newb : String;
+ a : LongInt;
+ o, n : Byte;
+
+ b1 : Byte;
+
+Begin
+ If paramcount &lt;&gt; 2 then usage;
+ Assign(f, paramstr(1));
+ Reset(f, 1);
+ Assign(t, Paramstr(2));
+ Reset(t);
+
+ While not EOF(t) do
+  Begin
+   ReadLn(t, s);
+   addr := Copy(s, 1, 8);
+   oldb := Copy(s, 11, 2);
+   newb := Copy(s, 14, 2);
+
+   a := GetDec(addr);
+   o := GetDec(oldb);
+   n := GetDec(newb);
+
+   Seek(f, a);
+   BlockRead(f, b1, 1);
+
+   If b1 &lt;&gt; o Then
+    Begin
+     Writeln('Bad original byte at offset ', addr, 'h');
+     Break;
+    end;
+   Seek(f, a);
+   BlockWrite(f, n, 1);
+  end;
+
+ Close(t);
+ Close(f);
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

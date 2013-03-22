@@ -1,0 +1,157 @@
+<html><head><title>TWU 1.0 - INSIDE TURBO PASCAL UNITS for TP6.0/TPW1.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Если вы интересуетесь, что находится внутри TPU/TPW модулей от TP6/TPW1.0 - то эта утилита для вас.<br><font color=#666666> If you  want to  know what is in a .TPU (unit) file produced by either  Version 1.0  of Turbo  Pascal for  Windows or  by Version 6.0 of Turbo Pascal from Borland International, then this paper  is for you.  It doesn't explain quite everything since the  I  don't  have  access  to  secret  documents  or anything like  that and since some of the data in .TPU files just doesn't  have enough  auxiliary information to make its role clear.   However,  it is possible to learn a great deal about how Turbo Pascal organizes the information it needs to refer to, and it is also possible to learn just what kind of code the compiler produces.</font>">
+<meta name="keywords" content="pascal, sources, source code, twu1, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;twu1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TWU 1.0 - INSIDE TURBO PASCAL UNITS for TP6.0/TPW1.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:70042.2310@Compuserve.com">William L. Peavy</a></TD>
+<TD class=black align='right'>06.06.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Если вы интересуетесь, что находится внутри TPU/TPW модулей
+от TP6/TPW1.0 - то эта утилита для вас.<br><font color=#666666>
+If you  want to  know what is in a .TPU (unit) file produced
+by either  Version 1.0  of Turbo  Pascal for  Windows or  by
+Version 6.0 of Turbo Pascal from Borland International, then
+this paper  is for you.  It doesn't explain quite everything
+since the  I  don't  have  access  to  secret  documents  or
+anything like  that and since some of the data in .TPU files
+just doesn't  have enough  auxiliary information to make its
+role clear.   However,  it is possible to learn a great deal
+about how Turbo Pascal organizes the information it needs to
+refer to, and it is also possible to learn just what kind of
+code the compiler produces.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="twu1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>136k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                     ------------------------------
+
+                     INSIDE TURBO PASCAL UNIT FILES
+
+                         Version 6.0 for MS-DOS
+                        Version 1.0 for WINDOWS
+
+                     ------------------------------
+
+                                   by
+
+                            William L. Peavy
+
+                            ----------------
+
+                              June 6, 1991
+
+
+
+                                ABSTRACT
+
+      If you  want to  know what is in a .TPU (unit) file produced
+      by either  Version 1.0  of Turbo  Pascal for  Windows or  by
+      Version 6.0 of Turbo Pascal from Borland International, then
+      this paper  is for you.  It doesn't explain quite everything
+      since the  I  don't  have  access  to  secret  documents  or
+      anything like  that and since some of the data in .TPU files
+      just doesn't  have enough  auxiliary information to make its
+      role clear.   However,  it is possible to learn a great deal
+      about how Turbo Pascal organizes the information it needs to
+      refer to, and it is also possible to learn just what kind of
+      code the compiler produces.
+
+      This is  the fourth in a series of reports on the subject of
+      Turbo Pascal Units, the previous reports treating with Turbo
+      Pascal Versions  5.0 through  6.0.   The evolution  of these
+      files  in   the  face  of  changing  requirements  has  been
+      fascinating to  behold and  deciphering their  contents  has
+      been challenging to say the least.
+
+      The programs supplied with this report have been reorganized
+      from their 6.0 style and many identifiers have been changed.
+      There are also a few bug fixes and algorithm changes.  Other
+      changes were  dictated by  the changes in the utilization of
+      the TPU file itself by the Windows Compiler.
+
+      Since I  have a "real" job which requires my full attention,
+      and since  it doesn't  involve use  of these products in any
+      direct way,  I am  usually hard-pressed to find the personal
+      time to  conduct this  research.    Consequently,  I  always
+      refuse to  commit to follow-up or even error correction.  It
+      would  be  irresponsible  of  me  to  pretend  it  could  be
+      otherwise.  Even so, this is a revised report which contains
+      a few  error fixes  and discusses the newly enhanced program
+      which incorporates  these fixes  and  sports  some  enhanced
+      capabilities.
+
+
+      What's NEW
+
+06/03/91 - Code drastically re-structured.  Program now supports
+      units compiled by TURBO PASCAL for WINDOWS as well as TURBO
+      Pascal Version 6.0.  Pointer manipulation code removed for
+      safety.
+      Listing format is (hopefully) improved and size is reduced.
+
+      Program now retrieves units mentioned in "USES" statements and
+      is thus able to provide actual type names (and Array bounds)
+      when displaying most LG's.  Unit version numbers are checked.
+      Source of each unit file successfully retrieved is also printed
+      at beginning of run with the appropriate TURBO Library (.TPL)
+      being searched if necessary to resolve referenced Units.
+
+      Unit files of up to about 320 KB are now fully supported!
+
+      Program now asks if the Unit is for WINDOWS or DOS and bases its
+      .TPL Library search on the response.
+
+      The index has been re-worked to include context info and to
+      improve its utility.
+
+      Several minor mistakes are also fixed in both the program and
+      in its reports including a few minor disassembler bugs involving
+      the AAM and AAD instructions.
+
+      The technical report now describes many of the new features that
+      are found in Units compiled by the WINDOWS compiler.
+
+
+
+                Files on the Distribution Disk
+
+Filename.x      Description of Contents
+-----------     -------------------------------------------------
+README.!!!      This file (you're reading it now)
+WHATS.NEW       Description of new features and fixes, etc.
+
+TWU1DOC.TXT     Report on Research (58 pages; copy to PRN:)
+
+TWU1.EXE        The Supplied Program ready to run
+
+TWU1.PAS        Turbo Pascal Source - The Main Program
+TWU1EQU.PAS	Turbo Pascal Source - General-Purpose Stuff
+TWU1RPT.PAS     Turbo Pascal Source - Text File Output Unit
+TWU1UAM.PAS     Turbo Pascal Source - Access Methods for .TPU Files
+TWU1UNA.PAS     Turbo Pascal Source - Disassembler Unit
+
+
+                                The Author
+
+This work was done by William L. Peavy, Houston Texas as a private
+research endeavor.
+
+I am interested in feedback, suggestions, constructive criticism,
+and success stories.  I can be reached via Compuserve (70042,2310),
+via the HAL-PC Telecom-1 BBS or via the HAL-PC Telecom-2 BBS.
+Especially welcome is feedback regarding new discoveries that you
+might make about .TPU files. 
+
+
+Enjoy!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

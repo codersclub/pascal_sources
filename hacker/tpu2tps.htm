@@ -1,0 +1,119 @@
+<html><head><title>TPU2TPS - Extracts SYSTEM.TPS from TP6.0/TPW1.0 RTL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для преобразования модуля System.Tpu в файл System.Tps, готовый для модификации и перекомпиляции. Такая возможность позволяет уменьшить минимальный размер исполняемой программы с 1400 до 128 байт. <br><font color=#666666> Program to extract SYSTEM.TPS file from SYSTEM.TPU file for a TP 6.0/ TPW 1.0.</font>">
+<meta name="keywords" content="pascal, sources, source code, tpu2tps, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpu2tps
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPU2TPS - Extracts SYSTEM.TPS from TP6.0/TPW1.0 RTL</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dmurdoch@watstat.waterloo.edu">D.J. Murdoch</a></TD>
+<TD class=black align='right'>23.07.1991</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для преобразования модуля System.Tpu в файл System.Tps,
+готовый для модификации и перекомпиляции. Такая возможность
+позволяет уменьшить минимальный размер исполняемой программы
+с 1400 до 128 байт. <br><font color=#666666>
+Program to extract SYSTEM.TPS file from SYSTEM.TPU file
+for a TP 6.0/ TPW 1.0.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpu2tps.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TPU2TPS - Extracts SYSTEM.TPS from TP6.0/TPW1.0 run-time library
+
+Written by D.J. Murdoch for the public domain, July 1991, after
+having my curiosity piqued by Mitch Davis.
+
+Syntax:
+
+  TPU2TPS
+
+will read SYSTEM.TPU, and create SYSTEM.TPS, suitable for recompiling
+into a new version of SYSTEM.TPU.
+
+
+What does it do?
+
+Turbo Pascal keeps most of the run-time library in the SYSTEM unit,
+which is usually stored in SYSTEM.TPU within TURBO.TPL or TPW.TPL.
+To recompile it, you need a special "bootstrap file" called SYSTEM.TPS.
+This program, TPU2TPS, extracts the bootstrap file from a compiled
+version of SYSTEM.TPU.
+
+
+What use is it?
+
+If you have SYSTEM.TPS in the current directory, you can compile a new
+SYSTEM unit and change the run-time library.  Why bother?  Perhaps you
+don't need any of the standard library; if you're writing a tiny
+utility that doesn't use any of its services, there's no point linking
+in several K of it that won't be used.  The included SYSTEM.PAS is an
+absolutely minimal replacement; using it, you can shrink the sample
+TEST.PAS from an .EXE size of 1400 bytes down to 128 bytes.  Everyone
+will think you wrote it in assembler.
+
+
+How do I use it?
+
+First, get a copy of SYSTEM.TPU from TP 6.0 or TPW 1.0 (or compatible
+later versions) in the current directory. You may have to use TPUMOVER
+to get it out of TURBO.TPL or TPW.TPL; the syntax to use is
+
+  TPUMOVER TURBO *SYSTEM
+     or
+  TPUMOVER TPW   *SYSTEM
+
+Then, run TPU2TPS. It'll create SYSTEM.TPS (or tell you that something
+has gone wrong).
+
+Next, get rid of the original SYSTEM.TPU (keeping a copy of course!),
+and compile SYSTEM.PAS.  (You may want to make some changes to it
+first.) This should give you a new version of SYSTEM.TPU. Don't put it
+into *.TPL unless you're very sure of yourself; it is almost certainly
+not the one you want to use as a default.
+
+Finally, hide the old SYSTEM.TPU and *.TPL; be sure they aren't on the
+path, in the .TPU directory, or in the same directory as your compiler.
+Make sure that the new SYSTEM.TPU is available in one of those places,
+and compile TEST.PAS or another program of your choice. Don't use any
+system procedures or functions; don't use strings, sets, longints,
+floating point, or files; don't use dynamic memory or overlays;
+disable stack and range checking, IEEE reals, and floating point
+emulation.  All of those need a real SYSTEM.TPU.
+
+If you use one of those by mistake, you'll be in real trouble:  the
+compiler doesn't expect you to fool around with SYSTEM.TPU this way,
+and it can get very, very confused if it goes looking for services
+that aren't there.  A more robust SYSTEM replacement would halt with
+an error if you tried any of those things, but the included one won't.
+(There are over 130 functions/procedures in the real thing; I was too
+lazy to code that many stubs!)
+
+
+What does it cost?
+
+Absolutely nothing!  Play around with it.  Buy the real run-time
+library if you want something a little less minimalist. If you really
+like it, and want to send money somewhere, send it to a local charity.
+
+
+Where do I complain if it doesn't work?
+
+You expect support for freebies?  Give me a break.  TPU2TPS comes with
+no warranties of any kind; I haven't tested it very well; if you like
+playing with things like this, you'd better be prepared to reboot
+frequently.
+
+
+ D.J. Murdoch
+ DJ Murdoch at Fidonet node 1:221/177.40
+ dmurdoch@watstat.waterloo.edu
+ 71631,122 on Compuserve</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

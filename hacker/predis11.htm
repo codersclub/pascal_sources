@@ -1,0 +1,140 @@
+<html><head><title>Pre-Dis v1.1 - Pre-Disassembler for TP programs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита, облегчающая дизассемблирование турбо-паскальных программ с помощью дизассемблера Sourcer. Делает предварительный проход по программе, формирует файл описаний (.DEF), умеет определять паскальные строки, ряд других данных и вызовы стандартных процедур и функций. Приведен только исполняемый модуль и документация. <br><font color=#666666> This program was written to speed up the first phase of disassembling some old Pascal programs. Detects Pascal strings, other data, and some library calls.</font>">
+<meta name="keywords" content="pascal, sources, source code, predis11, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;predis11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Pre-Dis v1.1 - Pre-Disassembler for TP programs</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sweetman.p.c@xtra.co.nz">Patrick C Sweetman</a></TD>
+<TD class=black align='right'>30.09.1997</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита, облегчающая дизассемблирование турбо-паскальных программ
+с помощью дизассемблера Sourcer. Делает предварительный проход
+по программе, формирует файл описаний (.DEF),
+умеет определять паскальные строки, ряд других данных и
+вызовы стандартных процедур и функций.
+Приведен только исполняемый модуль и документация. <br><font color=#666666>
+This program was written to speed up the first phase of disassembling
+some old Pascal programs. Detects Pascal strings, other data,
+and some library calls.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="predis11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        P R E - D I S
+                      -----------------
+                         Version 1.1
+		         30 Sep 1997
+                      Patrick C Sweetman
+                    sweetman.p.c@xtra.co.nz
+
+    Pre-disassembler for old Turbo Pascal programs.
+
+    Creates a .DEF disassembler directives file for
+    use by the Sourcer disassembler.
+
+    Note:  "Turbo Pascal" and "Sourcer" are trade names
+           owned by their respective owners and have nothing
+           to do with Patrick C Sweetman or this software
+           except as being the subject of discussion.
+
+
+	This program is copyright of Patrick C Sweetman and is
+    hereby released into the public domain where it may be
+    used or disposed of without restraint.
+
+
+This program was written to speed up the first phase of disassembling
+some old Pascal programs.  I didn't know the version of Turbo Pascal,
+didn't have a copy of it, and didn't have much remaining documentation
+from the time that the programs had been written.
+
+The first step was to chose a disassembler and make a first pass at
+one of the programs.  "Sourcer" was the disassembler that I chose,
+and if you're using a different one you will have to adapt the output
+of pre-dis to suit.
+
+Getting the disassembler to produce a clean disassembly involved looking
+at the output and adding directives and labels to the .DEF file.  This
+took ten days for the first program, and nearly a week for the second,
+but by then I had written a number of tools and editor macros to
+partially automate the process.
+
+Then I took a break to write this program.  It incorporates all of the
+lessons I gained through manually configuring the disassembler and
+includes tentative names for some of the Pascal library routines which
+are called by the user code.
+
+As well as labelling some calls to the library, it finds and labels all
+Pascal strings and many other data structures.  These are given labels
+based on their type and address, and one of the first things which you
+should do is to replace these labels with meaningful ones based on your
+assessment of their function in the disassembly.
+
+To use this program specify the .exe file to be pre-disassembled
+on the command line.
+
+    eg.   pre-dis    test
+
+    or    pre-dis test.exe
+
+The program will create two files:
+
+    1.  Directives file with .def extension  eg: test.def
+
+    2.  Comments file with .rem extension    eg: test.rem
+
+Then run the Sourcer disassembler, specifying the directives file
+on the command line.
+
+    eg.   sr  test.def
+
+After the disassembly you should replace the .def file by renaming
+the .sdf file which was created by Sourcer.  Then manually modify
+this on the basis of your examination of the disassembly listing.
+
+With this procedure you should very quickly achieve a clean
+disassembly and you can then proceed with assigning meaningful
+names until the project reaches the stage where you can begin
+to reverse-engineer or produce a functional specification for
+the program.
+
+Notes:
+    1. pre-dis may not be able to identify many library routines
+       if the version of Turbo pascal is different, but it should
+       still be very useful.
+
+       If someone can provide me with a more fully documented
+       disassembly of the library routines I can incorporate
+       those labels into the next version of this program, and
+       that will make it much more useful.  Similarly for other
+       versions of Turbo Pascal.
+
+    2. Although I create a comments file (with .rem extension) I
+       did not get around to using it.  Maybe in the next version,
+       if there is call, I will automatically generate comments on
+       the basis of the contents of Pascal strings, and maybe for
+       library calls.  But for now I don't see much need.
+
+    3. If a .def file or a .rem file larger than the empty one exists
+       already, then pre-dis exits with an error message.  The last
+       thing you want is for your work of the last fortnight to be
+       overwritten.  So rename them, or delete them if you want them
+       replaced.
+
+    4. On a slower machine, please be patient.  A 200k program took
+       about one minute on a 686 P166+ based PC.
+
+    5. All comments and suggestions: email sweetman.p.c@xtra.co.nz
+                       or, if suitable, in comp.lang.pacsal.borland
+
+             ----------- END --------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

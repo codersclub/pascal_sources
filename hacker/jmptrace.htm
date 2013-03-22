@@ -1,0 +1,146 @@
+<html><head><title>Jump Tracer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Инструмент для анализа ветвлений (переходов) в исполняемой программе. Облегчает процесс взлома различных проверок. <br><font color=#666666> this can be used to remove copy protection (this version of Jump Tracer uses only some simple methods to fool anti-debugging code, so it may not always work properly). To do it you need to trace the program to crack at least twice - the first time with the required keydisk, plug in LPT port, entering the correct password, etc.; and the second time without the key. </font>">
+<meta name="keywords" content="pascal, sources, source code, jmptrace, hacker, Хакерские Штучки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Хакерские Штучки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;jmptrace
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Jump Tracer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:solar at openwall.com">Solar Designer</a></TD>
+<TD class=black align='right'>18.09.1996</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Инструмент для анализа ветвлений (переходов) в исполняемой программе.
+Облегчает процесс взлома различных проверок. <br><font color=#666666>
+this can be used to remove copy protection (this version of
+Jump Tracer uses only some simple methods to fool anti-debugging code, so
+it may not always work properly). To do it you need to trace the program
+to crack at least twice - the first time with the required keydisk,
+plug in LPT port, entering the correct password, etc.; and the second time
+without the key. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="jmptrace.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Jump Tracer 
+-------------
+
+Well, I don't feel like writing complete dox right now - I'll do it
+after I add some missing features, such as making .CRK files,
+to Jump Tracer.
+
+I'll just try to explain the Jump Tracer's cracking method now.
+The main idea is to compare two or more different ways of program's
+execution and find where it branches. After that we can change or
+remove the condition so that the program will always run the desired
+way.
+
+For example, this can be used to remove copy protection (this version
+of Jump Tracer uses only some simple methods to fool anti-debugging
+code, so it may not always work properly). To do it you need to trace
+the program to crack at least twice - the first time with the
+required keydisk, plug in LPT port, entering the correct password,
+etc.; and the second time without the key.
+
+Also, you can crack games (Jump Tracer is especially useful when
+cracking things like making it possible to move through walls, that
+couldn't be done with Player's Tool or Game Wizard), remove shareware
+delays (it's done by enabling saving of jumps being executed for
+different periods of time - the first time while in delay loop and
+the second slightly before the loop ends) and finally you can simply
+change program's behavior (for example disable some annoying functions).
+
+ Usage Example
+---------------
+
+Let's suppose we need to disable the F1 key in Volcov Commander. ;)
+BTW, I'm still using its beta version because the 4.0 release does
+not support searching for hex bytes using Alt-F7. ;(
+
+Run Jump Tracer:
+
+jmptrace c:\vc\vc.com
+
+----------------------------------------------------------------------
+Jump Tracer Version 1.2  Copyright (c) 1995-96 by Solar Designer \ BPC
+
+Use &lt;Caps Lock&gt; to turn saving on/off while tracing, left &lt;Shift&gt; to
+abort Trace, Quit? T
+
+Enter program parameters:
+
+The Volkov Commander, Version 4.00.040 beta
+Copyright (C) 1991-1994 by VVV, Kiev.
+
+[Press &lt;Caps Lock&gt;, &lt;F1&gt;, &lt;Esc&gt;, &lt;F10&gt;, &lt;Enter&gt;, &lt;Caps Lock&gt;]
+
+Please, identify this state as:
+1st, 2nd, Nothing? 1
+
+You've saved 1 dump by now; at least 2 different dumps are required
+to crack
+
+Trace, Quit? T
+
+Enter program parameters:
+
+The Volkov Commander, Version 4.00.040 beta
+Copyright (C) 1991-1994 by VVV, Kiev.
+
+[Press &lt;Caps Lock&gt;, &lt;F10&gt;, &lt;Enter&gt;, &lt;Caps Lock&gt;]
+
+Please, identify this state as:
+1st, 2nd, Nothing? 2
+
+You've saved 2 dumps by now; you can compare them
+
+Trace, Compare, Quit? C
+
+Smartly comparing and filtering...
+
+?: Internal offset 364D: ? N
+
+[Some other lines may appear here if, for example, more than a second
+passed while tracing and clock in VC redrawn. If so, make more than 2
+dumps to find the exact offset]
+
+Return, Display? D
+
+The program will now be traced once more, you may have to enable
+saving for a long time to find the desired jump
+
+Enter offset: 364D
+Enter program parameters:
+
+The Volkov Commander, Version 4.00.040 beta
+Copyright (C) 1991-1994 by VVV, Kiev.
+
+[Press &lt;Caps Lock&gt;, &lt;F10&gt;, &lt;Enter&gt;, &lt;Caps Lock&gt;]
+
+PSP+0299:AFA6: 75 06 E8 CB C7 58 EB F1 44 44 C3 55 8B EC 83 EC
+Use 1st state: PATCH NOT AVAILABLE
+Use 2nd state: EB
+
+Please, identify this state as:
+1st, 2nd, Nothing? N
+
+Return, Display? R
+
+You've saved 2 dumps by now; you can compare them
+
+Trace, Compare, Quit? Q
+----------------------------------------------------------------------
+
+Here we got a pattern to search for in VC.COM - do it using VC itself
+and change the first pattern's byte value to EB. If you patch the
+first two bytes with 90 90 instead, you won't be able to exit help. ;)
+However, this state is unstable - that's why Jump Tracer said that
+such patch is not available. The same about question mark in the
+comparison result.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
