@@ -1,0 +1,75 @@
+<html><head><title>Pascal Sources: BitMap Класс для Windows 3.11</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="keywords" content="pascal, sources, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vgi_pcx
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=60% nowrap>&nbsp;BitMap Класс для Windows 3.11</TD>
+<TD nowrap>&nbsp;&nbsp;&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;&nbsp;&nbsp;<A class=blackb href="mailto:vitus@agropc.msk.su">Константин Исаков</A></TD>
+<TD class=blackb width=15% align=right>12.07.1994</TD></TR>
+<TR vALign=middle><TD class=black colSpan=2><p style="margin-left:20px">
+<br>     Модуль  VGIPCX  предназначен  для  работы  с  картинками в
+PCX-формате из  программ  на  Turbo Pascal.  Поддерживаются две
+основные группы функций -  вывод PCX на экран и запись экрана в
+PCX.
+
+</TD><TD class=blackb align=right>&nbsp;</TD></TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Subj: Работа с PCX. Исходник. 256, 16 и менее цветов
+
+Тут давеча просили выслать исходники для работы с PCX.
+Данный модуль позволяет читать(выводить на экран) и
+записывать (с экрана) PCX файлы во всех режимах, на которые у меня
+есть BGI драйверы.
+
+                            Модуль VGIPCX
+
+     Модуль  VGIPCX  предназначен  для  работы  с  картинками в
+PCX-формате из  программ  на  Turbo Pascal.  Поддерживаются две
+основные группы функций -  вывод PCX на экран и запись экрана в
+PCX.
+     Основные особенности:
+     1.   Используется   ввод-вывод   через  объекты-наследники
+TStream,  что позволяет хранить картинки не только на диске, но
+и в памяти, в том числе и в EMS.
+     2.  Поддерживаются  все  графические  режимы  CGA/EGA/VGA,
+режим Hercules  и все 16  и  256-цветные  режимы  SuperVGA (при
+наличии соответствующих BGI-драйверов)
+     3.  Поддерживаются  все  BitBlt  операции,  поддерживаемые
+драйвером   (в  том   числе  такие  экзотические  как   XNOR  и
+Transparent copy в SVGA256.BGI)
+     4.  Не поддерживается вывод на экран изображений выходящих
+за его пределы по горизонтали (по вертикали вниз - пожалуйста)
+     5. Поддерживается работа с 256-цветной палитрой
+     6.   В  16-цветных  режимах  VGA/VESA/SVGA  поддерживается
+палитра 16 из 262144, а не 16 из 64 как в большинстве известных
+библиотек.
+     7. поддерживается Protected Mode
+     8.  Поддерживается  чтение  из  библиотек  в  формате  PCX
+programmer toolkit
+     9.  Вывод картинки  производится  в том  случае,  если она
+совместима с текущим графическим режимом (совпадает число битов
+на   пиксел   и   число   битовых   плоскостей).   Поэтому   не
+поддерживаются такие  экзотические  версии  PCX-формата,  как 4
+бита на  пиксел  при одной  плоскости  (такой  файл  мне как-то
+сделала Scan Gallery).
+
+     Copyright (c) by SoftWeyr,1992-94. Aвтор - Vitus Wagner.
+
+     E-Mail: vitus@agropc.msk.su
+     FIDO    2:5020/358.5
+
+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

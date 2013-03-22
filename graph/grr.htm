@@ -1,0 +1,102 @@
+<html><head><title>GRR v1.0 - GIF File Info Displayer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для вывода информации о конкретном GIF файле или о всех GIF файлах в указанном каталоге. Выдает размер файла, дату и время создания, формат данных и разрешение изображения. Вывод можно переадресовать в файл. <br><font color=#666666> GRR- Free DOS utility: GIF file info displayer v1.00. GRR displays information about GIF files in the current or specified directory.         </font> source.">
+<meta name="keywords" content="pascal, sources, source code, grr, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;grr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRR v1.0 - GIF File Info Displayer</TD>
+<TD nowrap class=black>&nbsp;David D.Anderson</TD>
+<TD class=black align='right'>19.08.93</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для вывода информации о конкретном GIF файле
+или о всех GIF файлах в указанном каталоге.
+Выдает размер файла, дату и время создания,
+формат данных и разрешение изображения. Вывод можно переадресовать
+в файл. <br><font color=#666666>
+GRR- Free DOS utility: GIF file info
+displayer v1.00. GRR displays information about GIF files in the
+current or specified directory.         </font>
+source.</TD><TD class=black colspan=2 align='right'><br><A HREF="grr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                      GRR
+                   Free DOS utility: GIF file info displayer
+                         Version 1.00 - August 19, 1993
+                                    (c) 1993
+                                       by
+                             David Daniel Anderson
+                                   Reign Ware
+
+
+
+
+
+GRR displays information about GIF files in the current or
+specified directory.
+
+Usage:  GRR directory and/or file_spec[.GIF]
+Example:  GRR cindyc*
+Example:  GRR b:\fash-*.gif
+
+Usage is pretty straightforward, just run GRR followed by the
+files you want info about.
+
+GRR can use DOS wildcards (? and *), and can be run on GIF files
+in a drive or directory other than the current one.
+Output is redirectable.
+
+GRR will not check files unless they have a .GIF extension -
+no matter what you specify on the command line.
+
+Here is a sample of the output, explanation follows:
+[start of sample]
+Filename  Filesize Filedate Filetime GIF ver. Image data*  map/gl
+DAX.GIF      71951 02-22-93 01:00:02 GIF87a [640 480  16 ] GCM/--
+DAX-2.GIF    52618 02-22-93 01:00:02 GIF87a [640 480  16 ] GCM/--
+DS9-01.GIF   62679 01-21-93 12:35:42 GIF87a [340 292 256 ] GCM/--
+DS9-02.GIF  150116 01-26-93 18:52:28 GIF89a [346 480 256 ] GCM/--
+DS9-04.GIF  142412 01-26-93 18:52:38 GIF89a [350 480 256 ] GCM/--
+DS9CREW.GIF 136885 02-09-93 20:21:02 GIF87a [630 418 256 ] GCM/--
+KIRA.GIF    227930 05-02-93 23:15:52 GIF87a [582 808 128 ] GCM/--
+KIRA_TO.GIF 105243 05-28-93 01:00:02 GIF87a [304 443 256 ] GCM/--
+LT-DAX.GIF   50538 12-31-92 04:02:20 GIF87a [320 293 256 ] GCM/--
+STDS901.GIF 188070 01-06-93 02:49:42 GIF89a [640 443 256 ] GCM/--
+
+[end of sample]
+
+
+Notes:
+------
+
+Filename/ size/ date/ time should be self-explanatory.
+
+GIF version can be either GIF87a or GIF89a (so far, those are
+the only two versions used).
+
+Image data is WIDTH x HEIGHT x COLORS of image.
+
+The last column will usually be "GCM/--".
+The two fields are map/gl:
+
+Map can be either GCM or LCM [global or local color map].
+GL means that a GIFLITE (tm) header was found, and "--"
+means one was not found.
+
+Since the GIFLITE header can be "erased" by some programs
+(and can be omitted by the registered version of GIFLITE -
+so I hear), a GIF file may be compressed by GIFLITE,
+but GRR will not know it.
+
+The GIFLITE header will (probably) not be detected if the GIF
+version is GIF89a and embedded comments are present.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

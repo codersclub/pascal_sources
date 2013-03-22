@@ -1,0 +1,85 @@
+<html><head><title>FastVESA - Fast VESA Unit for BP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль быстрой графики с использованием VESA. Написан полностью на встроенном ассемблере. Поддерживает обслуживающие функции и основные графические примитивы.'>
+<meta name="keywords" content="pascal, sources, source code, fastvesa, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fastvesa
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FastVESA - Fast VESA Unit for BP7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5033/27">Sergey Korowkin</a></TD>
+<TD class=black align='right'>20.07.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль быстрой графики с использованием VESA.
+Написан полностью на встроенном ассемблере.
+Поддерживает обслуживающие функции и
+основные графические примитивы.</TD><TD class=black colspan=2 align='right'><br><A HREF="fastvesa.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- ...New UUEss... ------------------------------------- UUESTUFF -
+ Msg  : 106
+ From : Sergey Korowkin       2:5033/27       20 Jul 98
+ Subj : FastVesa
+------------------------------------------------------------------
+Здpавствyй, Slava!
+
+ Июль 13 1998, 23:15, Slava Tutushkin (2:5033/21.16) пишет Alexander
+ S Tokareff:
+
+ ST&gt; Hетy ли y кого быстpого модyля по pаботе с pежимом 640*480*256?
+ ST&gt; PS. ;)))
+
+*ћ*&gt;ћВСТАТЬ!ћfastvesa.rarћИДЕТ!ћћћћћћћћћћћћћћћћћћћћћћћћћћћћћћћћћ&lt;*ћ*
+
+Авторы - Alex Kharchevnikov & sergey korowkin [Murmansk;]
+доделан не до конца, pаботает только pеалмоде,
+некотоpые фичи не pаботают, а так в общем ничего...
+
+  procedure VESAInit;
+  procedure VESADone;
+  procedure GetVESAInfo;
+  procedure GetVESAModeInfo(Mode : word);
+  procedure SetVESAMode(Mode : word);
+  function  GetVESAMode : word;
+  procedure SetVESABank(Bank : word);
+  function  GetVESABank : word;
+  procedure ClearScreen(Color : byte);
+  function  GetMaxX : integer;
+  function  GetMaxY : integer;
+  procedure OffMonitor;
+  procedure OnMonitor;
+  procedure Retrace;
+  procedure PutPixel(X,Y : integer; Color : byte);
+  function  GetPixel(X,Y : integer) : byte;
+  procedure Line(X1,Y1,X2,Y2 : integer; Color : byte);
+  procedure Box(X1,Y1,X2,Y2 : integer; Color : byte; Filled : boolean);
+  procedure Fill(X,Y : integer; Color,BorderColor : byte);
+  procedure Circle(X,Y,R : integer; Color : byte);
+  function  ImageSize(X1,Y1,X2,Y2 : integer) : longint;
+  procedure AllocateImage(var Image : PImage; X1,Y1,X2,Y2 : integer);
+  procedure DeallocateImage(var Image : PImage);
+  procedure GetImage(Image : PImage; X1,Y1,X2,Y2 : integer);
+  procedure PutImage(Image : PImage; X1,Y1 : integer; PutType : byte);
+  procedure SetRGBColor(Color,R,G,B : byte);
+  procedure GetRGBColor(Color : byte; var R,G,B : byte);
+  procedure SetRGBPalette(Palette : pointer;FirstColor,LastColor : byte);
+  procedure GetRGBPalette(Palette : pointer;FirstColor,LastColor : byte);
+
+
+with best wishes to you, s.k.
+Sergey.
+
+&gt;&gt;&gt; Windows NT is the emperor's new clothes!
+--- Command'n'Conquer/2 ver. 3.00.Beta4+
+ * Origin: Power Plant BBS * Великие Лyки * Россия (2:5033/27)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

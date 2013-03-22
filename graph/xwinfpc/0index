@@ -1,0 +1,67 @@
+<A HREF="index.htm#intro">Введение</A>
+<br>
+1. <A HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A HREF="basics/htm">Основные понятия</A>
+<BR>
+1.1.1. <A HREF="xinternals.htm">Общее устройство X Window</A>
+<BR>
+1.1.2. <A HREF="xwindow.htm">X-окно</A>
+<BR>
+1.1.3. <A HREF="xwincontrol.htm">Управление окнами</A>
+<BR>
+1.1.4. <A HREF="xgraphics">Графические возможности X Window</A>
+<BR>
+1.1.5. <A HREF="atoms.htm">Свойства и атомы</A>
+<BR>
+1.1.6. <A HREF="example1.htm">Первый пример</A>
+<BR>
+1.1.7. <A HREF="events.htm">События</A>
+<BR>
+1.1.8. <A HREF="window_attr.htm">Атрибуты окна</A>
+<BR>
+1.1.9. <A HREF="win_operation.htm">Операции над окнами</A>
+<BR>
+1.1.10. <A HREF="lab1.htm">Лабораторная работа №1 "Основные понятия Xlib"</A>
+<BR>
+1.2. <A HREF="gr_text.htm">Текст и графика</A>
+<BR>
+1.2.1. <A HREF="gr_context.htm">Графический контекст</A>
+<BR>
+1.2.2. <A HREF="gr_context_prop.htm">Характеристики графического контекста</A>
+<BR>
+1.2.3. <A HREF="text_out.htm">Вывод текста</A>
+<BR>
+1.2.4. <A HREF="colors.htm">Использование цвета</A>
+<BR>
+1.2.5. <A HREF="bitmaps.htm">Битовые и пиксельные карты</A>
+<BR>
+1.2.6. <A HREF="mouse_cursor.htm">Изменение формы мышиного курсора</A>
+<BR>
+1.2.7. <A HREF="lab2.htm">Лабораторная работа №2 "Текст и графика"</A>
+<BR>
+1.3. <A HREF="ext_deice.htm">Работа с внешними устройствами</A>
+<BR>
+1.3.1. <A HREF="keyboard.htm">Клавиатура</A>
+<BR>
+1.3.2. <A HREF="mouse.htm">Мышь</A>
+<BR>
+1.3.3. <A HREF="lab3.htm">Лабораторная работа №3 "Работа с внешними устройствами"</A>
+<BR>
+1.4. <A HREF="resources.htm">Программы и их ресурсы</A>
+<BR>
+1.4.1. <A HREF="res_format.htm">Формат файла ресурсов</A>
+<BR>
+1.4.2. <A HREF="res_access.htm">Доступ к ресурсам программ</A>
+<BR>
+1.4.3. <A HREF="lab4.htm">Лабораторная работа №4 "Программы и их ресурсы"</A>
+<BR>
+1.5. <A HREF="inter_client.htm">Межклиентское взаимодействие</A>
+<BR>
+1.5.1. <A HREF="properties.htm">Механизм свойств</A>
+<BR>
+1.5.2. <A HREF="win_manager.htm">Общение с менеджером окон</A>
+<BR>
+1.5.3. <A HREF="lab5.htm">Лабораторная работа №5 "Межклиентское взаимодействие"</A>
+<BR>
+<A HREF="literature.htm">Литература</A>

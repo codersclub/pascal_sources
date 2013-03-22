@@ -1,0 +1,81 @@
+<html><head><title>HSI2RGB - Convert HSI to RGB Color</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Метод преобразования цвета из представления Hue-Saturation-Intensity в Red-Green-Blue. Приведено описание алгоритма и демонмтрационная программа.  The hsi2rgb procedure converts hue, saturation and intensity values between 0 and 1 into red, green and blue values between 0 and 2, and then converts these into the 0 to 63 range used by the VGA palette.'>
+<meta name="keywords" content="pascal, sources, source code, hsi, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;hsi
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;HSI2RGB - Convert HSI to RGB Color</TD>
+<TD nowrap class=black>&nbsp;Bret Mulvey</TD>
+<TD class=black align='right'>26.06.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=200 height=119 vspace=4 hspace=8 alt="" src="hsi.gif"><p style="margin-left:20px">Метод преобразования цвета из представления
+Hue-Saturation-Intensity в Red-Green-Blue. Приведено описание
+алгоритма и демонмтрационная программа. <br>
+The hsi2rgb procedure converts hue, saturation and intensity
+values between 0 and 1 into red, green and blue values between 0
+and 2, and then converts these into the 0 to 63 range used by the
+VGA palette.</TD><TD class=black colspan=2 align='right'><br><A HREF="hsi.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Hue-Saturation-Intensity is a more natural way of thinking of
+ colors than Red-Green-Blue.  When you see "pink" you don't think
+ of it as mostly red with equal parts of green and blue added,
+ you think of pink as a tint of red (saturation).  Similarly,
+ gold is not red and green, it is a shade of yellow (intensity).
+
+ Computer monitors use the Red-Green-Blue scheme because it is
+ more convenient to implement electronically, but with the new
+ generation of personal computer color adapters which give you
+ hundreds of thousands of combinations of red, green and blue to
+ choose from it can be difficult to find the exact color you
+ want, especially if you have to use trial and error.
+
+ The hsi2rgb procedure converts hue, saturation and intensity
+ values between 0 and 1 into red, green and blue values between 0
+ and 2, and then converts these into the 0 to 63 range used by
+ the VGA palette.
+
+ HUE determines the basic color of a pixel.  As you vary the hue
+ from 0 to 1 the full circle of colors is traversed, starting
+ with blue at hue=0 and continuing through cyan, green, yellow,
+ red, magenta and back to blue again with hue=1.  (Actually, the
+ blue corresponding to the "B" in RGB is obtained with hue = 2/3
+ + 1/4, basic red is hue = 1/3 + 1/4 and green is hue = 1/4.)
+
+ SATURATION determines the "purity" of a color.  A saturation of
+ 1 gives a pure hue and as you decrease the saturation the color
+ becomes more and more gray.
+
+ INTENSITY is the brightness of the color.  Intensity=0 will
+ always produce black.  Intensity=0.5 will produce R,G,B values
+ that are half of those produced by intensity=1, but they ratios
+ between the R,G,B values remain the same.
+
+ The basic formulas used to convert HSI to RGB are as follows:
+
+ щ = 2уH
+ R = 1 + S sin ( щ - 2у/3 )
+ G = 1 + S sin щ
+ B = 1 + S sin ( щ + 2у/3 )
+
+ These give full-intensity R,G,B values between 0 and 2.  You
+ must then multiply by the intensity and adjust to whatever range
+ is needed.
+
+                 <img border=0 width=200 height=119 src="hsi.gif" alt="">
+
+ Documentation copyright 1988 by Bret Mulvey.  Sample program
+ source code is public domain.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

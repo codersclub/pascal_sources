@@ -1,0 +1,262 @@
+<html><head><title>MODEX Pascal Library for 16 bit Protected Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Графическая библиотека для ModeX режимов. Компилируется в 16-битном защищенном режиме. Имеется поддержка мыши и загрузки фонтов.  ModeX Pascal library for 16 bit protected mode. Freeware Borland Pascal library for VGA ModeX. Supports 320x240 and 320x200 paged VGA modes. Has font and mouse support and a simple event handler.'>
+<meta name="keywords" content="pascal, sources, source code, mxprpas, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mxprpas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MODEX Pascal Library for 16 bit Protected Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:71420.560@compuserv.com">Mike Chapin</a></TD>
+<TD class=black align='right'>13.02.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="mxprpas.gif"><p style="margin-left:20px">Графическая библиотека для ModeX режимов.
+Компилируется в 16-битном защищенном режиме.
+Имеется поддержка мыши и загрузки фонтов. <br>
+ModeX Pascal library for 16 bit protected mode.
+Freeware Borland Pascal library for VGA ModeX. Supports
+320x240 and 320x200 paged VGA modes. Has font and
+mouse support and a simple event handler.</TD><TD class=black colspan=2 align='right'><br><A HREF="mxprpas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>32k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 Documentation for MODEX Pascal Library
+                               Written By
+                               Mike Chapin
+
+This library is a set of routines for VGA ModeX written for 16
+bit protected mode. This library came out of seeing all the ModeX
+libraries that are written for C. I thought why should they have
+all the fun. There was no problem with the C code since I work in
+that language most of the time. Borland Pascal is fun to program
+in and I'm not much of a language snob so I decided to port some
+stuff over.
+
+I also like to work in Borland Pascal also. This is because of
+the almost instantanious compile and link times. It is a great
+language for experimentation, And except for the lack of a huge
+data model it will do anything C or C++ will.
+
+I had a lot of code around from a GUI library I have been messing
+with for a while. I also have code for a 16 bit C++ ModeX library
+I did a couple of years back. With the exception of the font
+routines, There is nothing found in here that cannot be found in
+a gillion sources around the networks so I decided to put the
+whole thing into public domain.
+
+Most of the low level code here found its seeds in Michael Abrash
+code that was originally published in "Power Graphics
+Programming". Other code has its basis in the series he did for
+"Dr. Dobb's Journal". Other code is based on stuff from my own
+libraries that I have developed for other uses.
+
+The code is designed to be the basis of a game library. I decided
+to put this in proteced mode since the data requirements for even
+a small 256 color game can require a lot of memory. I don't know
+about you but I am very tired of having to strip my machine down
+to the bare bones just to run a game. Protected mode programs
+typically take about 200k of the lower 640k; just enough to load
+the DOS extender and some code to handle it. I haven't used any
+heavy duty routines from WinAPI yet so feel free to add them if
+you want to.
+
+This whole body of code is released into the public domain. Use
+it and enjoy. Some of this stuff hasn't been tested as much as I
+would like, i.e.  read that I haven't done a game with this code.
+So I assume no responsability if your computer gets offended and
+walks out on you. The stuff that has been tested is in the demos.
+
+
+
+
+                           Low Level Routines
+
+Most of the low level routines are standard fare of setting
+modes, going back to text mode and puting various stuff on the
+screen. They are mostly self explanitory. The ones I will touch
+on are the routines and structures that should have a little more
+explanation.
+
+The first item is that there is no clipping at the moment, even
+on the mouse.
+
+                                  *****
+
+Procedure UsePage(pagenum : Word);
+This routine sets that page that all graphics functions will
+write to.
+
+Procedure ShowPage(pagenum : Word);
+This routine controls what page will be shown on the screen.
+
+Procedure FlipPage;
+Sets the current write page to the current view page and
+vice-versa. This is just a shorthand function for doing it
+yourself each time with UsePage and ShowPage.
+
+Procedure CopyPage(source, dest : Word);
+Copies the full contents of one graphics page to another.
+
+                                  *****
+
+Procedure BlockPageToPage(sourcepage, dest_page,
+                          startx, starty, width, height,
+                          destx, desty : Word);
+This routine moves a portion of one page to another. startx and
+destx will be forced to a DWORD boundry before the move is made.
+This routine transfers a DWORD at a time and is very fast.
+
+                                  *****
+
+Function GetPicMask(Var pic : PictHeader) : BytePtr;
+Procedure CopyScreenToScreenMaskedX(sourcepage,
+                                    SourceStartX,
+                                    SourceStartY,
+                                    SourceWidth,
+                                    SourceHeight,
+                                    DestStartX,
+                                    DestStartY,
+                                    DestPageBase : Word;
+                                    masks        : BytePtr);
+
+These two functions work together to do pretty much the same
+thing that BlockPageToPage does except it will tranfer using a
+mask. GetPicMask will take a PictHeader structure and return an
+array of masks for the picture.  Every place there is a color 0,
+a transparent area is formed. This array is passed to
+CopyScreenToScreenMaskedX. CopyScreenToScreenMaskedX will
+transfer irregular shaped objects from one screen to the other.
+
+
+                            Picture Functions
+
+Procedure GetPic(x, y, width, height : Word; Var pic : PictHeader);
+Procedure PutPic(x, y : Word; Var p : PictHeader);
+Procedure FreePic(Var pic : PictHeader);
+
+These routines work together to save pictures from the screen,
+put them back up and to free the memory associated with them when
+you are finished.  GetPic will make a buffer of the proper size
+and lift an area off the screen. PutPic will place that picture
+at the coordinates of the current Write Page. FreePic will free
+up the buffer associated with PictHeader and zero out all the
+fields. Pictures cannot be larger than 65520 bytes.
+
+The format used for pictures is a planar type for speed. Each
+plane is bytewidth wide and height high.
+
+                                  *****
+
+Procedure PutMaskedPic(x, y : Word; Var p : PictHeader);
+This does the same as PutPic except that color 0 is transparent.
+
+Procedure SetScreenBuffers(Var s : ScreenPic);
+Procedure FreeScreenBuffers(Var s : ScreenPic);
+Procedure PutScreen(page : Word; Var s : ScreenPic);
+Procedure GetScreen(page : Word; Var s : ScreenPic);
+
+SetScreenBuffers allocates the memory needed to hold a full
+screen. I have used four 19200 apiece. I did not use
+GlobalAllocPtr because it simply allocates chunks of 64k and
+another 11k or so with another selector. This would be awkward to
+use for restroring screens.
+
+FreeScreenBuffers frees up the memory allocated in SetScreen
+Buffers.  PutScreen and GetScreen do pretty much what you would
+expect.
+
+
+                                  FONTS
+
+This portion is from a GUI I am developing. It uses font data
+that is similar to that used by PCX fonts with my own header. The
+fonts are versitile enough to be brought in from a file or linked
+in. All three types are demoed in the file FONTDEMO.PAS. The
+original code would let you use the BIOS fonts on the machine but
+the extender returns a bogus selector value so I had to pull that
+code out. If anyone has figured out how to get around this I
+would like to know. I left the original code but commented out.
+
+                 <img border=0 width=200 height=150 src="mxprpas1.gif" alt="">
+
+To use the linked fonts you must have an assembler to assemble
+the font into an object file.
+
+Two utilities are in the package GEM2PRF.EXE and PRF2ASM.EXE.
+GEM2PRF converts a file in Gem format to my own format. This
+allows you to use the gem fonts that come with GENUS and CSource
+libraries. PRF2ASM will output an ASM file for use with a linked
+font.
+
+                                  *****
+
+                              Event Handler
+
+The event handler is a rather simple affair. I just captures
+keystrokes and mouse actions and puts them into a queue. Each
+call to GetEvent will grab an event out of the queue if one is
+availible. If there is a mouse present the handler will hook in
+the interrupt handler to grab mouse events.
+
+Call CloseEvents at the end of your program to unhook the mouse
+event handler and free up the memory used by the queue.
+
+This is a rather simple and safe event handler. I don't hook into
+the keyboard interrupt to grab keystrokes. Instead I just grab
+all the keystrokes and put them in the queue with a BIOS call in
+each call to GetEvent. This makes everything nice and safe. I
+have used this same event handler in conjuction with taking over
+the keyboard interrupt. I haven't tried it under protected mode
+but I'm sure it would work if someone cared to modify the
+routines.
+
+
+
+                                  *****
+
+                                The Mouse
+
+This has all the standard mouse stuff and can be used without
+using the event handler. Just make sure you unhook the interrupt
+handler before leaving your program.
+
+                 <img border=0 width=200 height=150 src="mxprpas2.gif" alt="">
+
+The standard mouse handler does not know how to put a mouse image
+on the screen in ModeX so you have to take over the operation of
+showing and hiding the mouse yourself. The way the mouse is drawn
+is that it uses and 16x16 pixel picture for the mouse. You can
+use MouseSetCursor to change the picture used for the mouse. The
+mouse is always drawn on the current Write Page. The data
+structure rodent carries all the information for the mouse.
+
+The mouse can be displayed two ways. The first method is the
+normal method the mouse is used. To use this method set
+rodent.savebg to True. If you are going to do a lot of page
+flipping and contiually wiping over the area where the mouse is
+you might want to call the mouse routines that put the cursor on
+the screen yourself. For this set rodent.savebg to False and call
+PutMouseImage directly.
+
+Limitations:
+Right now the mouse does not clip. Also you should keep the hot
+spot to 0, 0. I have not put in any code to handle the edges in
+this case. I can almost guarantee a protection fault if you try
+to draw below SegA000.
+
+Have fun!
+
+Mike Chapin
+
+GEnie       M.CHAPIN
+Compuserve  71420,560</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

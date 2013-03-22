@@ -1,0 +1,74 @@
+<html><head><title>640x400 Image Scrolling Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример, демонстрирующий возможности плавного скроллинга изображений в режиме 640x400.  Pascal examples for scrolling huge image arrays in normal vga screen.'>
+<meta name="keywords" content="pascal, sources, source code, vgascrol, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vgascrol
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;640x400 Image Scrolling Example</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:paradise@bachus.umcs.lublin.pl">Marcin Jaskowiak</a></TD>
+<TD class=black align='right'>15.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="vgascrol.jpg"><p style="margin-left:20px">Пример, демонстрирующий возможности плавного скроллинга
+изображений в режиме 640x400. <br>
+Pascal examples for scrolling huge
+image arrays in normal vga screen.</TD><TD class=black colspan=2 align='right'><br><A HREF="vgascrol.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>275k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             јјјђ ђђјђ јјјђ ђђјђ ђђјђ ђђ ђђјђ ђђјђ
+             ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђђ ђ ђђ ђ
+             ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђђѓѓ ђђѓ
+             ђђјј ђђјђ ђђјѓ ђђјђ ђђ ђ ђђ ѓѓ ђ ђђ ѓ
+             ђђ   ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђђ ђ ђђ ђ
+             ђђ   ђђ ђ ђђ ђ ђђ ђ ђђ ђ ђђ ђђ ђ ђђ ђ
+             ђђ   ђђ ђ ђђ ђ ђђ ђ ђђѓђ ђђ ђђѓђ ђђѓђ
+
+               ћ p ћ r ћ e ћ s ћ e ћ n ћ t ћ s ћ
+
+            +------ њ --------------------- ------+
+            |   640x400 image scrolling example   |
+            +----- ------------------------ њ ----+
+
+       <img border=0 width=200 height=125 src="vgascro1.jpg" alt="">       <img border=0 width=200 height=125 src="vgascro2.jpg" alt="">
+
+Some dood asked me a while ago 'bout some pascal examples
+for scrolling huge image arrays in normal vga screen.
+So, i make some.. for him and to test my friends 3d studio.
+The biggest screen that you can scroll on normal vga card
+(no svga) is 640x400. Why? cuz you have 64kb free memory
+in 13h (320x200x256) mode. So, if u use chain-4 mode then
+one byte plot 4 pixels, you can change what pixels must be
+then plotted by setting planes.
+So, if one byte sets 4 pixels then 64kb sets 320*200*4 pixels
+and here you have 4 graphics pages!
+But if you want to scroll 4 pages across then also you must
+change screen width (notmal is 80 cuz 80*4=320) to 160
+(160*4=640 - screen width). And then you can change position
+in 640x400 screen by changing start screen offset.
+So, that is all.. easy isn't it?
+Sorry 4 that [english] language ;)
+
+Btw. you can use that piece of code in yer programs but remember
+to credit or greet me :)
+You can contact me on irc or mpoli bbs or by mail to :
+
+Snail-mail:                        E-mail:
+ Marcin Jaskowiak                  paradise@bachus.umcs.lublin.pl
+ Flat 114, 3 Zarnowiecka Str.
+ 30-640 Lublin, Poland
+
+
+
+                      That's all folks!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Свойства и атомы - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Свойства и атомы.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A class=blue HREF="basics.htm">Основные понятия</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.1.5. Свойства и атомы</h2>
+
+<dir>
+
+В X Window встроены средства для обеспечения обмена информацией между
+программами-клиентами. Для этого используется механизм свойств
+(properties). <I>Свойство</I> - это порция данных, связанная с
+некоторым объектом (например, окном), и которая доступна всем клиентам X.
+
+<br>
+<br>
+
+Каждое свойство имеет имя и уникальный идентификатор -
+<I>атом</I>. Обычно имена свойств записываются большими буквами, например:
+<code>MY_SPECIAL_PROPERTY</code>. Атомы
+используются для доступа к содержимому свойств с тем, чтобы уменьшить
+количество информации, пересылаемой по сети между клиентами и X сервером.
+
+<br>
+<br>
+
+В X предусмотрен набор процедур, позволяющих перевести им
+свойства в уникальный атом, и, наоборот, по атому получить необходимые
+данные.
+
+<br>
+<br>
+
+Некоторые свойства и соответствующие им атомы являются
+предопределенными и создаются в момент инициализации сервера. Этим атомам
+соответствуют символические константы, определенные в файлах-заголовках
+библиотеки Xlib. Эти константы начинаются с префикса <code>XA_</code>.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

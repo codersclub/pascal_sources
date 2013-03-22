@@ -1,0 +1,182 @@
+<html><head><title>VidMem v1.5 - Access Video Memory for Mode 13h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Подключаемый по $include модуль для прямого доступа к видео памяти в режиме 13h. VidMem v1.5 - Access to video memory (320x200x256 mode only) through Turbo Pascal. VidMem v1.5 has been rewritten in assembler for maximum speed and compatibility with different versions of TP.'>
+<meta name="keywords" content="pascal, sources, source code, vm15_obj, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vm15_obj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VidMem v1.5 - Access Video Memory for Mode 13h</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:1:268/310@fidonet">Geoff Speicher</a></TD>
+<TD class=black align='right'>20.08.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Подключаемый по $include модуль для прямого доступа к видео памяти
+в режиме 13h.
+VidMem v1.5 - Access to video memory (320x200x256 mode only)
+through Turbo Pascal. VidMem v1.5 has been rewritten in assembler
+for maximum speed and compatibility with different versions of TP.</TD><TD class=black colspan=2 align='right'><br><A HREF="vm15_obj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">VidMem v1.5 (Copyright 1991 by Geoff Speicher) -
+Access to video memory (320x200x256 mode only) through Turbo
+Pascal.
+
+VidMem v1.5 has been rewritten in assembler for maximum speed and
+compatibility with different versions of TP.
+
+
+The following are the procedures and functions in the VIDMEM.OBJ
+file:
+
+-----
+Procedure
+InitMCGAMode;
+
+This puts your system into it's 320x200x256 graphics mode.  A VGA
+or MCGA card is required.  ----- Procedure DeInitMCGAMode;
+
+This puts your system back into text mode.
+-----
+Procedure
+WriteVidMem(OfsVal: LongInt; Value: Byte);
+
+This writes a value directly to video memory, and thus, is the
+core of the graphics routines you will be using.  The two
+parameters are set as follows:
+
+OfsVal - Offset, or location on the screen at which the pixel
+         will be written.  You have to imagine the screen as
+         being a large array of bytes.  Byte 0 is the upper left
+         corner.  Byte 64000 is the lower right.  So, the center
+         of the screen would be 32099.  An easy rule to follow is
+         this: Add 320 to a number, and it will move down exactly
+         one scan line. Subtract 320, and it will move up one
+         line.  Add 1 and the location moves to the right 1
+         pixel.  Of course, subtract 1 and the location moves 1
+         pixel to the left.
+
+Value - Value to be written at the specific location of video
+        memory.  In other words, the color you want the pixel to
+        be.  This can be set from 0 to 255.
+
+-----
+Procedure ReadVidMem(OfsVal: LongInt; var Color: Byte);
+
+Reads the color of a pixel at a specific video location.  Set
+OfsVal the same way you would if writing a pixel.  The color
+(0-255) will be returned in ReadVidMem.
+
+-----
+Procedure
+SetPaletteColorRGB(Number, RedVal, GreenVal, BlueVal: Byte);
+
+Sets an individual palette color.  Number is the palette color
+(0-255).  RedVal, GreenVal, and BlueVal are the Red, Green, and
+Blue shades that compose the color.  Setting RedVal to 255, and
+GreenVal and BlueVal to 0 will produce a bright Red.  The same is
+true for GreenVal and BlueVal.  You can mix any combination of
+these three colors (setting all three to 255 will give you bright
+white).  You can make almost any color using different
+combinations.  The lower you set the value, the darker the color
+will be.
+
+-----
+Procedure
+GetPaletteColorRGB(Number: Byte;
+                   var RedVal, GreenVal, BlueVal: Byte);
+
+Will return the red, green, and blue values for a certain palette
+color in RedVal, GreenVal, and BlueVal.  Number is the palette
+color (0-255);
+
+-----
+Procedure
+WriteImage(TopLeft, ImageSeg, ImageOfs, ImageSize: LongInt;
+           Width: Integer);
+
+This will write a predefined image to the screen.  The image MUST
+be defined as an array of bytes.  This array can be as large or
+small as you want.  Each byte value will be interpreted as the
+color to write on the screen.  Here is an example of defining an
+image:
+
+Const
+  ManyColors: Array[1..20] of Byte = (16,17,18,19,20,21,22,23,24,
+                              25, 25,24,23,22,21,20,19,18,17,16);
+
+TopLeft is the screen location for the upper left corner of the
+image.  ImageSeg is the segment of the image.  ImageOfs is the
+offset, ImageSize is the size, and Width is the width of the
+image, in pixels.  You could display the above image like this:
+
+WriteImage(32080,Seg(ManyColors),Ofs(ManyColors),
+           Sizeof(ManyColors),5);
+
+The best way to get familiar with this procedure is to just fool
+around with it.  And experiment with different images and width
+settings.  For example, setting the width in the above to 20
+would draw a horizontal line.  However, setting the width to 1
+would draw a vertical line!
+
+-----
+Procedure
+ReadImage(TopLeft, ImageSeg, ImageOfs, ImageSize: LongInt;
+          Width: Integer);
+
+Does the exact opposite of WriteImage.  Pass the parameters the
+same way, and you've got it made!
+
+-----
+
+--------------------------------
+New procedures/functions to v1.5
+--------------------------------
+Procedure
+WritePixel(X,Y: Integer; Color: Byte);
+
+This will perform the same operation as WriteVidMem, but you can
+use an X,Y system of coordinates to name the pixel.
+
+-----
+Procedure
+ReadPixel(X,Y: Integer; var Color: Byte);
+
+Same idea as WritePixel...
+-----
+Function
+XYtoVM(X,Y: Integer): Word;
+
+Returns the single number (0-63999) equivalence of a set of X,Y
+coordinates passed to it.  This enables you to use X,Y
+coordinates with other procedures, such as ReadImage and
+WriteImage.
+
+-----
+
+That's it!  Be on the lookout for future versions and updates!
+
+Any questions or comments can be sent to me by:
+
+1) FidoNet Mail.  Send it to Net/Node 1:268/310, addressed to
+   Geoff Speicher.
+
+2) EMail.  If you don't want to wait for NetMail, you can call up
+   my BBS:  GROUND ZER0!!! BBS (717)876-5869 14.4k bps HST.  And
+   leave EMail to the Sysop (that's me).
+
+3) If you're not really looking for a response, and don't like
+   the first two methods, you can send a "real" letter to:
+   Geoff Speicher
+   P.O. Box 163
+   Archbald, Pa 18403</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

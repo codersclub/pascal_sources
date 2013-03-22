@@ -1,0 +1,136 @@
+<html><head><title>COLLIDE v1.0 - Precision Sprite Collision Detection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример быстрого кода для определения коллизий между спрайтами с точностью до 1 пиксела. Ограничение: максимальная ширина спрайта = 32 пиксела (но может быть увеличена до 64).  A sample code for very fast pixel-precision collision detection. This code should be easy to add to any existing sprite engine that uses bounding-box collision detection. The one limitation is that sprites are assumed to be of less than 32 pixels in width.'>
+<meta name="keywords" content="pascal, sources, source code, collide, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;collide
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;COLLIDE v1.0 - Precision Sprite Collision Detection</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:mdm1004@cus.cam.ac.uk">Mark Mackey</a></TD>
+<TD class=black align='right'>18.04.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример быстрого кода для определения коллизий между спрайтами
+с точностью до 1 пиксела. Ограничение: максимальная ширина
+спрайта = 32 пиксела (но может быть увеличена до 64). <br>
+A sample code for very fast pixel-precision collision detection.
+This code should be easy to add to any existing sprite engine
+that uses bounding-box collision detection. The one limitation is
+that sprites are assumed to be of less than 32 pixels in width.</TD><TD class=black colspan=2 align='right'><br><A HREF="collide.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        A Pixel-Precision Method For Detecting Sprite Collision
+                               COLLIDE
+                                v 1.0
+                           by Mark Mackey
+
+---
+Introduction
+----
+
+A common query on the USENET newsgroup rec.games.programmer over
+the years has been how to do fast pixel-precision collision
+detection. A number of people have presented some excellent
+algorithms for extending and speeding up bounding-box collision
+detection between large numbers of objects (for instance,
+dividing the play area into subfields and sorting the sprites
+into these subfields, thus greatly reducing the number of
+sprite-sprite collisions that have to be checked in the first
+place).
+
+However, there have been little information available on how to
+detect collisions efficiently at the pixel level. I thus present
+here some code from my game XQuest (blatant plug) which checks
+for collisions at the pixel level. The routine assumes that the
+bounding boxes for the two sprites overlap, and hence should be
+relatively easy to add to an existing bounding-box collision
+detection routine. This code is fast, relatively efficient in
+terms of space (requiring 4 bytes per row of each sprite), and
+even works! The one limitation is that sprites are assumed to be
+32 pixels or less in width. For larger sprites, you could either
+treat them as 2 or more 32-pixel wide objects, or with a bit of
+creative thought this routine could be rewritten to allow for
+64-pixel wide objects on the 386 (left as an exercise for the
+reader :).
+
+The code in the enclosed file COLLIDE.PAS is organised as a Turbo
+Pascal unit, but all of the essential code is in assembly
+language and could be easily ported to work under C or in a pure
+asm program. If any of the Pascalisations confuse you just let me
+know and I'll explain :). Also, if you need a version of this
+code to work on a 286 then let me know and I'll send it to you
+(but be warned: it's not nearly as nice :).
+
+---
+The Algorithm
+---
+
+The first step is to create a 'transparency' mask for each
+sprite. The mask consists of a dword for each row of the sprite,
+with each bit being a 0 if the corresponding pixel is 'empty',
+and a 1 otherwise. For example, if a row of your sprite looked
+like (colour indexes, 0 being transparent)
+
+0  0  0  1  23  42  0  1  56  0  0  0  0  0
+
+the the corresponging mask bytes would be
+
+00011101 10000000 00000000 00000000 =  1D 80 00 00
+
+The MakeMask procedure given will produce such a mask from a
+sprite supplied in the XLib linear bitmap format (with pixels of
+colour zero being transparent), and is easily adaptable to your
+own sprite format.
+
+OK, now the hard part. We have found in our general-purpose
+bounding-box collision detection routine that two sprites'
+bounding boxes have collided (ie their masks overlap).
+
+Let the leftmost sprite have (x1,y1) as the coords of its top
+left corner, and the rightmost one (x2,y2). Take the mask entry
+for row |y2-y1| of the topmost sprite and shift it left by the
+difference in the x-coordinates (x2-x1). AND this value with the
+1st mask entry of the lower sprite. If the result is non-zero
+then a collision occurred on this row. If not, then shift row
+|y2-y1+1| and compare it to row 2 of the lower sprite, and so on,
+until you reach the bottom of one of the sprites. If no collision
+has been detected by this time, then the sprites didn't collide.
+Simple, eh?
+
+This routine is quite fast, requiring only a MOV, a SHL and an
+AND for each row checked, and only checking those rows that
+overlap.
+
+---
+The Legal Bit
+---
+
+This software is (C) Copyright 1995 Mark Mackey. Permission is
+given to distribute this code freely, or to distribute modified
+forms of this software provided that the author is acknowledged
+and this copyright notice retained. Permission is also given to
+utilise this code in original or modified form in any software
+provided that the author is acknowledged.
+
+I can be contacted by
+
+Email: mdm1004@cus.cam.ac.uk
+WWW: http://www.ch.cam.ac.uk/MMRG/mdm.html
+Snail: c/o Trinity Hall,
+           Cambridge CB2 1TJ
+           UK
+
+These addresses will be in use until at least October 1996.
+Please let me know if you found this code
+helpful/useful/rubbish/whatever or if you improve it :)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

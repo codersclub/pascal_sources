@@ -1,0 +1,214 @@
+<html><head><title>XVGA rII - 320x200x256 Graphics Library for BP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Графическая библиотека для Mode 13h. 110 графических функций, включая затенение, текстурирование, 3-мерное вращение. Более 22 тысяч строк кода плюс документация и примеры.  XVGA Release II. A graphics library for 320x200x256 color VGA mode, featuring 110+ graphics functions, including gourad-shading, texture-mapping, 3d-rotation, sirds-creation, spacecutting and more. 22000+ lines of pascal/assembly code with documentation and examples.'>
+<meta name="keywords" content="pascal, sources, source code, xvga_r2, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xvga_r2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;XVGA rII - 320x200x256 Graphics Library for BP7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:lassek@tmih.no">Lasse V.Karlsen</a></TD>
+<TD class=black align='right'>20.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=50 vspace=4 hspace=8 alt="" src="xvga_r2.jpg"><p style="margin-left:20px">Графическая библиотека для Mode 13h. 110 графических функций,
+включая затенение, текстурирование, 3-мерное вращение.
+Более 22 тысяч строк кода плюс документация и примеры. <br>
+XVGA Release II. A graphics library for 320x200x256 color
+VGA mode, featuring 110+ graphics functions, including
+gourad-shading, texture-mapping, 3d-rotation, sirds-creation,
+spacecutting and more. 22000+ lines of pascal/assembly code
+with documentation and examples.</TD><TD class=black colspan=2 align='right'><br><A HREF="xvga_r2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>58k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">				     XVGA
+				 ----====----
+
+1. About this document
+======================-------------------------------------------
+This document is part of the XVGA package which has been eagerly
+awaited of quite a few on the internet. Some time ago I released
+a copy of my XVGA graphics library for 320 x 200 in 256 colors
+vga mode. Alas, this didn't include any documentation or examples
+of using this library, so I've had a lot of email asking about
+parameters to procedures, examples, documentation and other
+miscellaneous questions. I started to write a documentation in
+Word for Windows 6.0, but this was lost in a harddisk crash. This
+may have been a blessing in disguise, as I found out that noone
+is running Word when they program. This documentation is written
+and meant to be a dos ascii file, and should be viewable from
+both dos and windows.
+
+The document is written in a particular random order, so you will
+have to do a little search'n'find to get all the relevant
+information you need.
+
+2. About the library
+====================---------------------------------------------
+The library is a graphics library for 320 x 200 in 256 colors
+mode strongly biased towards demo programming. It features 118
+procedures and functions, written in Borland Pascal 7.0, using
+BASM (Borland Inline assembler). It is a 438,856 bytes pascal
+file, consisting of 22,321 lines of pascal code, mostly in
+assembler.
+
+            <img border=0 width=200 height=200 src="xvga_r21.jpg" alt="">    <img border=0 width=200 height=200 src="xvga_r22.jpg" alt="">
+
+            <img border=0 width=200 height=200 src="xvga_r23.jpg" alt="">    <img border=0 width=200 height=200 src="xvga_r24.jpg" alt="">
+
+3. How to contact me
+====================---------------------------------------------
+You may reach me at:
+
+    email:	  lassek@tmih.no
+    isca bbs:	  Lobotomy
+    snail mail:   Lasse VЖgsСther Karlsen
+		  Hans BБlows Gt. 9B
+		  N-3714 SKIEN, Norway
+    Telephone:	  (+047) 35 52 28 59
+
+4. Why should you try to reach me
+=================================--------------------------------
+I, as everybody else, loves praise. Therefore, you should send
+lots of mail to me telling me how good XVGA is.
+
+			REALITY CHECK!
+
+Well, I would really like to have some feedback on the library.
+For starters I would like to hear about problems using it,
+problems it causes, problems with the documentation, bugs and
+other strange things. I know that the library is not the clearest
+thing to use, and you will almost certainly have lots of
+questions about how to use particular parts of it.
+
+In particular, if you change or add to the library, send me an
+updated copy along with any comments as to why you did it, and
+you will be credited for what you did in the next release.
+
+5. System requirements
+======================-------------------------------------------
+To compile the library into a .TPU file (yes, it is a unit), you
+will need at the very least Borland Pascal 6.0. I have not tried
+it under 6.0, since I use Borland Pascal 7.0 myself, and can
+therefore not positively say that it will work or compile under
+6.0. As far as I can see it, it should work, but you will have to
+try for yourselves.
+
+To run a program using the library you will need at least a 386.
+This is because the library makes extensive use of the 32-bit
+math instructions in the 386 and higher processors for optimum
+performance. The library will check this itself (see at the end
+of XVGA.PAS) and report an error if you try to run the program on
+a 286 or lower processor. Also, you will need a VGA compatible
+monitor and video card for this library to work. This is not
+checked by the library, so it will happily churn along on an EGA,
+and possibly creating weird looking images, or possibly hanging
+the computer.
+
+6. Disclaimer
+=============----------------------------------------------------
+Although I have tested 90 % of the routines in this library, I
+have not tested all of them. Quite a few of them (all the XQuadra
+variants as an example) is created by using
+cut-and-past-and-modify so they should all work, but as I
+mentioned, not all of them are tested. I do not think that there
+should be any strange effects from using the libraries, as long
+as you supply valid parameters. For instance, don't supply the
+value 0 as VideoSeg for the procedures needing this parameter.
+This is a sure way to crash the computer.
+
+I do not take responsibility for the use or misuse or results of
+such usage (or misusage; phew) of the library. All damaged
+equipment (doubtful) is your problem, not mine. That said, it is
+extremely difficult to damage any equipment with this library, as
+the most likely culprit (XMode) has been changed; see section 7.
+
+You, the user or programmer, may use this library as you wish.
+You have all rights to modify or extract parts of this library
+for own libraries. The reason for this "all-rights-dropped" is
+that I have in the past done the same myself, and should
+therefore not be sour by anyone doing this. This does not mean
+that the code in this library is stolen from someone. I have
+created the whole of this library from scratch, and almost all of
+the routines are created from my own algorithms. The texture
+mapping algorithm and technique is from Dr. Dobbs Journal (forgot
+which issue) and the PCX algorithm is from ZSoft's reference, but
+the rest is my own work. The library is thus completely
+shareware, public domain, freeware, and anyware. I would like,
+however, that you credit me if you use the library.
+
+7. Change in XMode from last release
+====================================-----------------------------
+For the lot of you who has already downloaded a copy of the first
+release, you might notice that XMode has changed. The old XMode
+let you supply the mode value as the parameter, and one user
+reported to me that his monitor stopped working when he
+experimented with different values for this parameter. Only
+parameter $13 (19 decimal) was valid here, or $3 (back to
+text-mode), so a Boolean parameter was substituted.
+
+8. Debugging the library
+========================-----------------------------------------
+If you want to debug a particular procedure or function in the
+library, you will need to copy the offending procedure or
+function into the program file in order to be able to debug it.
+The reason for this is that debugging information must be turned
+off for the XVGA.PAS file. This is because pascal complaints
+about the "symbol table" becoming full at some point in the file,
+and cannot retain the debugging information.
+
+9. Procedure and Function reference
+===================================------------------------------
+
+General notes.
+
+         All X.., Y.. and Z.. parameters are considered
+          coordinates. Although some procedures and function
+          accepts 32-bit (longint) parameters, you should limit
+          the values to +/- 32767, as the internal graphics
+          engine scales the values up by 65536 in order to gain
+          acceptable accuracy without floating point.
+
+         The VideoSeg parameter is the segment of the screen you
+          want to draw to. This is $A000 (40960 decimal) for the
+          video screen you look at, but if you want to draw
+          graphics to a "hidden" screen, supply the correct
+          segment here. Look at the examples for a better
+          understanding of the usage and reason for this
+          parameter.
+
+         All Glenz??? procedures are special effects versions of
+          the same procedure without the Glenz??? name. For
+          instance, the XQuadra will fill a 4-sided area with the
+          given color, whilst XQuadraGlenzXOR will xor the area
+          with the given color
+
+         All procedure that hasn't got Clip in their names clip
+          at the edge of the screen. The Clip procedures has four
+          parameters ClipX1, ClipY1, ClipX2 and ClipY2 which
+          specifies the area to clip to. This area HAS to be
+          inside the screen (0,0)-(319,199) or strange results
+          may occur. Notice that it is faster to use the
+          procedures that clip at the edge than using the Clip...
+          procedures with the clipping coordinates 0,0,319,199,
+          since the first procedure uses smaller and tighter
+          code.
+
+         Tetragon means 3-sided, quadragon means 4-sided, and
+          polygon means n-sided.
+
+	 3D-coordinates are specified as follows:
+
+                x: -32767..+32767   = Left to right
+                y: -32767..+32767   = Top to bottom
+                z: -32767..+32767   = Front to back of monitor</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

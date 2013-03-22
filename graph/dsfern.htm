@@ -1,0 +1,92 @@
+<html><head><title>Fractal Fern [BGI Graphics]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для рисования фрактального папоротника. Для запуска необходим драйвер <a href="../bgi/egavga2.zip">EGAVGA.BGI</a>.'>
+<meta name="keywords" content="pascal, sources, source code, dsfern, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dsfern
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fractal Fern [BGI Graphics]</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>21.04.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="dsfern.gif"><p style="margin-left:20px">Программа для рисования фрактального папоротника.
+Для запуска необходим драйвер <a href="../bgi/egavga2.zip">EGAVGA.BGI</a>.</TD><TD class=black colspan=2 align='right'><br><A HREF="dsfern.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  <img border=0 width=200 height=150 src="dsfern1.gif" alt="">
+
+program FernIFS;
+uses GRAPH, CRT;
+
+const NUMIT = 128000;
+var  a, b, c, d, e, f : array [1..4] of real;
+
+(*********************************)
+procedure Load_Arrays;
+ begin
+  a[1]:=0; b[1]:=0;
+  c[1]:=0; d[1]:= 0.16;
+  e[1]:=0; f[1]:=0; {p[1]:=0.01;}
+  a[2]:=0.85; b[2]:=0.04;
+  c[2]:=-0.04; d[2]:=0.85;
+  e[2]:=0; f[2]:=1.6; {p[2]:=0.85;}
+  a[3]:=0.20; b[3]:=-0.26;
+  c[3]:=0.23; d[3]:=0.22;
+  e[3]:=0; f[3]:=1.6; {p[3]:=0.07;  }
+  a[4]:=-0.15; b[4]:=0.28;
+  c[4]:=0.26; d[4]:=0.24;
+  e[4]:=0; f[4]:=0.44; {p[4]:=0.07; }
+ end;
+(*********************************)
+ procedure prepit;
+ var driver, mode : integer;
+ begin
+   driver:= DETECT;
+   initgraph(driver, mode, '');
+ end;
+(*********************************)
+ procedure chaos;
+ var currit, rndnum : longint;
+     x, y, plotx, ploty : real;
+     pick : integer;
+
+ begin
+   x:=0; y:=0;
+   randomize;
+   for currit:= 1 to NUMIT do
+   begin
+     pick := random(101) - 84;
+     if (pick &lt;= 0) then rndnum:=2
+      else if (pick&lt;=7) then rndnum:=3
+      else if (pick&lt;=15) then rndnum:=4
+      else rndnum:=1;
+     plotx:= ((a[rndnum]*x + b[rndnum]*y + e[rndnum]));
+     ploty:= ((c[rndnum]*x + d[rndnum]*y + f[rndnum]));
+     x:= plotx;
+     y:= ploty;
+    putpixel(round(plotx*100)+320, round(ploty*100), BLUE);
+   end;
+ end;
+(*********************************)
+ begin
+   prepit;
+   Load_Arrays;
+   Chaos;
+   sound(100); sound(1000);
+   delay(45);
+   nosound;
+   readln;
+   CloseGraph;
+ end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Изменение формы мышиного курсора - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Изменение формы мышиного курсора.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.2. <A class=blue HREF="gr_text.htm">Текст и графика</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.2.6. Изменение формы мышиного курсора</h2>
+
+<dir>
+
+Программы часто модифицируют форму указателя мыши (также называемого
+указателем X) в зависимости от своего состояния. Например, занятое
+приложение часто отображает над своим основным окном песочные часы,
+чтобы дать пользователю визуальный намек, что он должен ожидать.
+Без такого визуального намека пользователь мог бы подумать,
+что приложение зависло.
+
+<br>
+<br>
+
+Есть два основных метода создания курсоров.
+Первый из них - использование набора предопределенных курсоров,
+поставляемых с Xlib. Второй - использование битовых изображений,
+определенных пользователем.
+
+<br>
+<br>
+
+В первом методе используется специальный шрифт
+"<code>cursor</code>" и функция <code>XCreateFontCursor()</code>.
+Эта функция принимает идентификатор формы, и возвращает дескриптор
+на созданный курсор. Список возможных шрифтовых идентификаторов
+находится в файле
+<code>/usr/include/X11/cursorfont.h</code>.
+Всего их более 70; вот некоторые из таких курсоров:
+
+<UL type=square>
+<li><code>XC_arrow</code> - обычный курсор в форме стрелки,
+отображаемый сервером.</li>
+<li><code>XC_pencil</code> - курсор в форме карандаша.</li>
+<li><code>XC_watch</code> - песочные часы.</li>
+</ul>
+<br>
+
+Создать курсор с использованием этих идентификаторов несложно. Из файла
+<code>/usr/include/X11/cursorfont.h</code>
+узнаем номера необходимых идентификаторов и опеределяем их:
+
+<pre>
+const 
+  XC_watch=150;
+
+var
+  (* эта переменная содержит дескриптор создаваемого курсора *) 
+  watch_cursor : TCursor;
+
+  (* создаем курсор "песочные часы" *)
+  watch_cursor := XCreateFontCursor(display, XC_watch);
+</pre>
+
+Другой метод создания курсора - использование пары пиксельных карт
+глубиной 1. Одна пиксельная карта определяет форму курсора,
+а другая работает как маска, определяющая, какие пиксели курсора
+действительно будут нарисованы. Остальная часть пикселей будет прозрачной.
+Создание такого курсора осуществляется с помощью функции
+<code>XCreatePixmapCursor()</code>.
+В качестве примера создадим курсор, используя битовое изображение "icon.bmp".
+Будем предполагать, что оно уже загружено в память и преобразовано
+в пиксельную карту, дескриптор которой сохранен в переменной
+<code>bitmap</code>. Мы хотим, что оно было полностью прозрачным.
+Это означает, что только черные фрагменты нарисуются,
+а белые будут прозрачными. Чтобы достигнуть такого эффекта,
+будем использовать иконку и как пиксельную карту курсора,
+и как маску пиксельной карты.
+
+<pre>
+var
+  (* эта переменная содержит дескриптор создаваемого курсора *)
+  icon_cursor : TCursor;
+
+  (* вначале необходимо определить основной и фоновый цвета курсора *)
+  cursor_fg, cursor_bg : TXColor;
+
+  screen_colormap : TColormap;
+  rc : TStatus;
+
+  (* получаем доступ к палитре экрана по умолчанию *)
+  screen_colormap := XDefaultColormap(display, XDefaultScreen(display));
+
+  (* выделяем черный и белый цвета *)
+  rc := XAllocNamedColor(display,
+               screen_colormap,
+               'black',
+               @cursor_fg,
+               @cursor_fg);
+  if (rc = 0) then begin
+    writeln('XAllocNamedColor - невозможно распределить цвет "black"');
+    halt(1);
+  end;
+  rc := XAllocNamedColor(display,
+               screen_colormap,
+               'white',
+               @cursor_bg,
+               @cursor_bg);
+  if (rc = 0) then begin
+    writeln('XAllocNamedColor - невозможно распределить цвет "white"');
+    halt(1);
+  end;
+
+  (* Наконец, создаем курсор. Горячую точку устанавливаем ближе к *)
+  (* верхнему левому углу курсора - позиции (x=5, y=4). *)
+  icon_cursor := XCreatePixmapCursor(display, bitmap, bitmap,
+                 @cursor_fg, @cursor_bg,
+                 5, 4);
+</pre>
+
+Когда мы определяем курсор, необходимо определить,
+какой пиксель курсора является указателем, доставляемым пользователю
+в различные события от мыши. Обычно, мы выберем позицию курсора,
+которая визуально выглядит похожей на "горячую точку".
+Например, на курсоре в виде стрелки конец стрелки будет определен
+как горячая точка.
+
+<br>
+<br>
+
+Когда курсор больше не нужен, его необходимо освободить,
+используя функцию <code>XFreeCursor()</code>:
+
+<pre>
+XFreeCursor(display, icon_cursor);
+</pre>
+
+После того, как курсор создан, необходимо сообщить X серверу об окне,
+к которому он должен быть подключен. Это делается с помощью
+<code>XDefineCursor()</code>, и заставляет сервер X менять указатель мыши
+на форму этого курсора всякий раз, когда указатель мыши перемещается
+внутри этого окно. Мы можем отключить этот курсор от нашего окна
+с помощью функции
+<code>XUndefineCursor()</code>, которая заставит отображаться
+встроенный курсор.
+
+<pre>
+(* прикрепить курсор к окну *)
+XDefineCursor(display, win, icon_cursor);
+
+(* отключить курсор от окна *)
+XUndefineCursor(display, win);
+</pre>
+
+</dir>
+<br>
+
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

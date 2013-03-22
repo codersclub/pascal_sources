@@ -1,0 +1,58 @@
+<html><head><title>SuperVGA - TP 6.0 unit that for 256-color VGA Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Here's a unit that does a bit of VGA manipulation. It will grab the palette, set the palette, write the palette to a FractInt-style .MAP file, read back from a .MAP, and produce some basic color fades (red, green, blue, grey).'>
+<meta name="keywords" content="pascal, sources, source code, 256colrs, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;256colrs
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SuperVGA - TP 6.0 unit that for 256-color VGA Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sjmadsen@miavx1.acs.muohio.edu">Steve Madsen</a></TD>
+<TD class=black align='right'>31.10.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Here's a unit that does a bit of VGA manipulation.
+It will grab the palette, set the palette,
+write the palette to a FractInt-style .MAP file,
+read back from a .MAP, and produce some basic color fades
+(red, green, blue, grey).</TD><TD class=black colspan=2 align='right'><br><A HREF="256colrs.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">        I have been seeing a heck of a lot of stuff on manipulating the VGA's
+256 color palette in ways that are decent (ie. no flicker or snow).  Well, I
+posted my routine to set the palette without flicker on alt.msdos.programmer a
+few days ago, but these questions keep popping up.
+
+        So, here's a unit I've been using that I wrote that does a bit of VGA
+manipulation.  It will grab the palette, set the palette, write the palette to
+a FractInt-style .MAP file, read back from a .MAP, and produce some basic color
+fades (red, green, blue, grey).  Use it, love it, change it, whatever.  Just
+don't claim it as your own because this is PD stuff...
+
+        As far as doing a fade to black goes, it really doesn't matter what
+color you fade to.  (Note that this is one procedure not in this unit.. haven't
+gotten to that yet.)  Simply tell some procedure the destination RGB values
+(for black that's 0,0,0) and the number of steps you want it to take (say, 30
+changes between normal and faded palettes).  Then just figure the step interval
+for each color in the palette and start doing some subtracting.  It shouldn't
+do too hard, and if I get around to doing it I'll post that code too.  But for
+now here's that unit.  (It's called SuperVGA because I'll add higher-res stuff
+as I get to it.)
+
+        Sorry it's not too well documented..  I just decided to release to all
+the netters about two minutes ago. :)
+
+--
+Steve Madsen
+Miami University  Oxford, OH
+Internet: sjmadsen@miavx1.acs.muohio.edu</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

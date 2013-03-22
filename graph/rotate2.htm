@@ -1,0 +1,94 @@
+<html><head><title>Rotate 2.0 - Rotate Two-Dimensional Objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль и программа, демонстрирующие принцип поворота на экране статических двумерных объектов. Для запуска требуется <a href="../bgi/egavga2.zip">EGAVGA.BGI v2.0</a>.  This UNIT is to provide procedures to rotate two-dimensional objects. A sample program demonstrates rotation of a triangle and a rectangle together.'>
+<meta name="keywords" content="pascal, sources, source code, rotate2, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rotate2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Rotate 2.0 - Rotate Two-Dimensional Objects</TD>
+<TD nowrap class=black>&nbsp;EUROPA Software</TD>
+<TD class=black align='right'>02.06.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=45 vspace=4 hspace=8 alt="" src="rotate2.gif"><p style="margin-left:20px">Модуль и программа, демонстрирующие принцип поворота
+на экране статических двумерных объектов. Для запуска
+требуется <a href="../bgi/egavga2.zip">EGAVGA.BGI v2.0</a>. <br>
+This UNIT is to provide procedures to rotate two-dimensional
+objects. A sample program demonstrates rotation of
+a triangle and a rectangle together.</TD><TD class=black colspan=2 align='right'><br><A HREF="rotate2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">=================================================================
+
+If you find these procedures/functions useful, please help
+support the SHAREWARE system by sending a small donation ( up to
+$5 ) to help with my college education. Reguardless of a
+donation, use these routines in good health (and with a clear
+concious), I hope you find them useful.
+
+
+Send Any Replies To:  EUROPA Software
+                      314 Pleasant Meadows Dr.
+                      Gaffney, SC 29340
+
+Program: Rotate02                            Last Revised: 7/7/89
+
+Author: Jay Clary
+
+Implementation: Turbo Pascal v.4.0 & v.5.0
+
+               <img border=0 width=200 height=150 src="rotate21.gif" alt="">
+
+Rational for Revision:
+
+This is the second release of the Rotataion Unit. The first
+version, while functionally correct, contained a massive
+optimization flaw.  This flaw caused unnecessary repetative calls
+to the SINE COSINE func- tions, which in themseleves are very
+processor intensive. Release two of the Unit, Rotate02, is at
+least 12 fold faster than its predcessor.
+
+
+Purpose:
+
+This UNIT is to provide procedures to rotate two-dimensional
+objects.  The UNIT provides a TYPE definition called
+'COORD_VALS'. This type is a one-dimensional array of integers
+used to pass coordinate values to the ROTATE2D procedure. There
+is a 101 element array for the X-values and a 101 element array
+for the Y-values. Therefore objects may contain up to 100
+coordinates ( this may be modified larger or smaller ). The
+number of coordinates that define an object is held in element
+zero of the X-value array. For instance, given the definition of
+the X-val array as  X_Coords : COORD_VALS; the number of
+coordinates that define this object is held in X_Coords[0]. The
+angle of rotation can be any value in the limits of the INTEGER
+data type. A positive angle yields counter-clockwise rotation, a
+negative angle yields clockwise rotation.
+
+Because of the Aspect Ratio of video monitors, objects will
+distort when it is rotated. It is up to the USER to handle these
+discrepencies.  Perhaps future releases will provide services to
+handle this and other problems releating to the distortion of
+objects when rotated.
+
+
+========================   DISCALIMER   ==========================
+
+These routines are provided to the Public Domain, AS IS. EUROPA
+Software nor any of it's employees shall be held liable for any
+incidental or consequential damage attributed to the ability or
+inability to use this product.
+
+==================================================================</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

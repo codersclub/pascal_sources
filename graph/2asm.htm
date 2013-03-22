@@ -1,0 +1,116 @@
+<html><head><title>2asm v1.2 - Binary to Source Converter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Утилита, аналогичная BinObj, для преобразования бинарных файлов. В отличие от BinObj создает не объектный файл, а исходный код на Asm, C или Pascal. В частности, для паскального варианта создается массив байтов (или пикселов). В качестве примера приведены исходники на Asm, C, Pascal для вывода на экран картинки (raw bitmap), сформированной с помощью этой утилиты. Режим 13h [320x200x256].  2asm v1.2 - a util to generate asm files for use in watcom c programs. some examples included...'>
+<meta name="keywords" content="pascal, sources, source code, 2asm, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;2asm
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;2asm v1.2 - Binary to Source Converter</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:sneaqo@cooldesign.net">Sneaqo/Aardbei</a></TD>
+<TD class=black align='right'>17.08.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Утилита, аналогичная BinObj, для преобразования бинарных файлов.
+В отличие от BinObj создает не объектный файл, а исходный код
+на Asm, C или Pascal. В частности, для паскального варианта
+создается массив байтов (или пикселов).
+В качестве примера приведены исходники на Asm, C, Pascal
+для вывода на экран картинки (raw bitmap), сформированной
+с помощью этой утилиты. Режим 13h [320x200x256]. <br>
+2asm v1.2 - a util to generate asm files
+for use in watcom c programs. some examples included...</TD><TD class=black colspan=2 align='right'><br><A HREF="2asm.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>95k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">+------------------------------------------------------------------+
+| ѓђђђђђђјђђђђђђђѓ ѓђђђђђђјђђђђђђѓ ѓђђђђђђјђђђђђђѓ ѓђђђђђјђјђђђђђѓ |
+|  ѓѓѓѓѓѓѓђђђђђђђј ђђђђђђђѓђђђђђђђ јђђђђђђѓѓѓѓѓѓѓ  ђђђђђђѓ ѓђђђђђђ |
+| ђђђђђђђ ѓѓѓѓѓѓѓѓ ђђђђђђђ ђђђђђђђ ѓѓѓѓѓѓѓ ђђђђђђђ ђђђђђђђ ђђђђђђђ |
+| ђђђђђђђѓђђђђђђђђ ђђђђђђђ ђђђђђђђ јђђђђђђѓђђђђђђј ђђђђђђђ ђђђђђђђ |
++-------------------------------------------[ by sneaqo/aardbei ]--+
+
+this util converts any file (any size) to a db list or a c/pascal
+array the command line is as follows:
+  2ASM.EXE inputfile &lt;options&gt;
+where inputfile is the file you want to convert (duh)
+also, there are quite a lot of options:
+/f filename   saves the output file as &lt;filename&gt;
+              the default output file has the same name as your
+              inputfile but has a .ASM/C/PAS extension, depending
+              on what kind of conversion you selected (read ahead)
+/a filename   appends the output to &lt;filename&gt;
+              this can be useful if you want to use more than one
+              file in your program
+/v varname    uses &lt;varname&gt; as the variable name
+              the default varname of the binfile is the name of
+              the inputfile, having the dot repaced by an
+              underscore so for example: blerg.pcx will be
+              blerg_pcx
+/s size       makes the total size of the array &lt;size&gt; bytes
+              this can be useful if you want to re-use the memory
+              where the data is stored in for other things this
+              option has no effect in pascal mode
+/c            saves the data as an array in a .C file for use with
+              C/C++
+/p            saves the data as an array in a .PAS file for use
+              with Pascal
+/h            writes a header/footer in the output file so that
+              it's ready to compile. in ASM mode, it writes a
+              header for a Watcom ASM (WASM) file.
+/d            writes decimal values instead of hexadecimal values
+/o            writes octal values instead of hexadecimal values
+              this option doesn't work in pascal mode
+/y            automatically overwrites the output file if it
+              exists can be useful for makefiles
+/?            gives info about 2asm and how to contact me
+
+so what did i write this prog for?
+i just got sick of other programs that do the same, but having no
+options like this one does.. i had to change stuff by myself all
+the time..
+and it took loooooooong for them to convert
+so i decided to write my own prog, and then i thought hey, why
+not release it?! so i put in some options that i will personally
+never use, but that can be useful for other ppl, wrote some
+samples, and this infofile.. and i guess i'm done now. and i'm
+pretty happy with the result :)
+anyway, if i can make more people happy by adding some options i
+hadn't thought of, don't hesitate to email me. also any commens,
+remarks, money or other stuff is welcome at sneaqo@cooldesign.net
+
+and now lets go for a dislaimer:
+
+
+copyright (c) 1998 sneaqo/aardbei
+email: sneaqo@cooldesign.net
+
+users of 2ASM must accept this disclaimer of warranty:  "2ASM is
+supplied as is. the author disclaims all warranties, expressed or
+implied, including, without limitation, warranties of
+merchantability and of fitness for any purpose. the author
+assumes no liability for damages, direct or consequential, which
+may result from the use of 2ASM."
+
+feel free to share it with your friends, but do not give it away
+altered or as part of another system. If you find this program
+useful and find that you are using 2ASM and want to continue to
+use it, you are requested to send me some crap telling me you
+used it or so..  anyone distributing 2ASM for any kind of
+remuneration must first contact the author for authorization.
+
+okay enough of that crap, only thing i ask is, if you plan to
+include this on some CD, its fine with me, but it would be nice
+to let me know!
+
+copyright (c) 1998 sneaqo/aardbei
+email: sneaqo@cooldesign.net</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

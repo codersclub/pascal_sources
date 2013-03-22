@@ -1,0 +1,100 @@
+<html><head><title>GUI - Graphical User Interface Release 3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Графический (GUI) интерфейс для DOS-программ в стиле Windows. Поддерживает TrueType шрифты, мышь, графику от 320x200 до 1024x768.'>
+<meta name="keywords" content="pascal, sources, source code, gui-r3, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gui-r3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GUI - Graphical User Interface Release 3</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:arsene@vonwyss.ch">Arsene von Wyss</a></TD>
+<TD class=black align='right'>14.02.2000</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=320 height=200 vspace=4 hspace=8 alt="" src="gui-r3.gif"><p style="margin-left:20px">Графический (GUI) интерфейс для DOS-программ в стиле Windows.
+Поддерживает TrueType шрифты, мышь, графику от 320x200 до 1024x768.</TD><TD class=black colspan=2 align='right'><br><A HREF="gui-r3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>596k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">GUI - Graphical User Interface
+PREVIEW RELEASE 3 (14.02.00)
+ &lt;/pre&gt;&lt;table width=100%&gt;&lt;tr&gt;&lt;td width=320&gt;
+&lt;img src="gui-r3.gif" border=0 width=320 height=200 alt="GUI snapshot"
+ align="right"&gt;&lt;/td&gt;&lt;td&gt;
+One of my latest developments for BP7 is the graphical user interface.
+I do know that I am not the first to start such a project; however, none
+of the other BP GUIs I saw so far could satisfy me. They were usually
+slow, looked ulgy (graphics errors), did not act as expected or simply
+leaked important functioanlity. Most of them are shareware, so that
+one should pay to use 'em. 
+  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;pre&gt;
+My GUI features include:
+ Fully object-oriented interface
+ Driver model (unit based) to allow change of in- and output
+  devices without changes to the actual GUI or application 
+  source code.
+ This includes optional support for hardware accelerated 
+  display output.
+ Fully customizable objects: their shape can be defined as 
+  well as their looks
+ Message driven event system
+ Support for custimized elements
+ Intelligent redraw when moving and resizing (only redraws
+  previously hidden parts)
+ Z-Order, AlwaysOnTop and Modal possibilities
+ Nesting of objects supported
+ Automatic draw clipping (like device contexts in Windows)
+ Lots of information available to the programmer: focus, 
+  input caption, object under mouse, notification on mouse 
+  movement, redraw region detection...
+ Relative size and position for child objects
+ Works in both Real- and Protected mode (depending only on
+  used Driver unit)
+ Device independent bitmap support
+ Multiple fonts (currently supports system 8*8 and TrueType
+  fonts)
+ Full RGB color model even in 256 color modes
+ Drawing to bitmaps and to object shapes
+ Inheritable backgrounds for GUI elements
+ Colorsets for colors groups that can easily be managed
+ Handles for hassle-free message handling (even to already
+  released objects)
+ Referencable objects to share objects and save memory
+
+Many drawing primitives:
+
+ Points and lines (normal, horizontal, vertical, bezier)
+ Filled and empty rectangles
+ Filled and empty circles
+ Filled and empty ellipses (including rotation)
+ Filled and empty polygons
+ Filled and empty polybeziers
+ Full alpha blending on all screen drawing operations
+
+Current driver support:
+
+Included
+ MCGA (320*200*256, RM/PM, reference 256 color driver)
+ VESA (all 15/16 bit modes, RM/PM, reference high color
+  driver)
+ GrafX2 (VESA, PM only)
+
+Others
+ GraphiX 7.4 (VESA, PM) bundled with GraphiX 7.4 for BP7
+  (current release works with R2-f)
+ BGI (640*480*16, RM/PM, no Bitmaps) DISCONTINUED after R2-d
+ GrafX1.4 (VESA, RM [PM unstable]) DISCONTINUED after R2-f
+
+GUI R3, complete with source code, demo application, freetype.
+Not included: the optional LFN unit and non-reference graphics
+packages (GrafX2), but these files aren't necessary to 
+successfully compile and use the GUI.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

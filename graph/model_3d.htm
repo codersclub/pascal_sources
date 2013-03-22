@@ -1,0 +1,97 @@
+<html><head><title>Вращение 3D проволочных объектов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для моделирования трехмерных обьектов'>
+<meta name="keywords" content="pascal, sources, source code, model_3d, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;model_3d
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Вращение 3D проволочных объектов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:463/357.5">Сергей Щербаков</a></TD>
+<TD class=black align='right'>28.12.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для моделирования трехмерных обьектов</TD><TD class=black colspan=2 align='right'><br><A HREF="model_3d.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> From : Sergey Shcherbakov                  2:463/357.5
+ Subj : 3D-modeling
+-------------------------------------------------------------------------------
+Hello, All!
+
+  Hадеюсь программка кому-нибудь пригодится, хотя я не догадался как связать
+мою систему углов поворота с пространственной...
+
+           Программа для моделирования трехмерных обьектов.
+
+Прилагаю 2 файла с моделями: MODEL.DAT и MODEL.DA1
+Кроме того, программа дана в двух вариациях:
+MODEL.PAS    - считывает объект из файла
+MODEL_3D.PAS - описывает объект внутри себя в виде константы OBJ: Obj3d.
+Для работы требуется файл EGAVGA.BGI
+
+
+Для управление объектом на экране используются клавиши (NumLock - включить!):
+
+8 - Сместить вверх
+2 - Сместить вниз
+4 - сместить влево
+6 - сместить вправо
++ - Приблизить объект
+-   удалить (дальше) объект
+0 - Увеличить скорость вращения
+. - уменьшить скорость вращения
+a - Повернуть по Х по часовой стрелке
+A - повернуть по Х против часовой стрелки
+b - Повернуть по Y по часовой стрелке
+B - повернуть по Y против часовой стрелки
+c - Повернуть по Z по часовой стрелке
+C - повернуть по Z против часовой стрелки
+
+
+
+Формат файла данных Model.dat:
+
+  Данные состоят из чисел, последовательно
+
+1. Количество точек (вершин)
+
+{ Данные о точке }
+2. Номер точки в массиве
+3. Кооррдината по X
+4. Кооррдината по Y
+5. Кооррдината по Z
+{ Повтор необходимое кол-во раз }
+
+6. Количество линий для рисунка
+
+{ Данные о линии }
+7. Номер точки начала
+8. Номер точки конца линии
+{ Повтор необходимое кол-во раз }
+
+{ Координаты и положение обьекта }
+ 9. Кооррдината по X
+10. Кооррдината по Y
+11. Кооррдината по Z
+
+12. Угол в градусах A
+13. Угол в градусах B
+14. Угол в градусах C
+
+
+
+Bye, Sergey !
+
+--- GoldED 2.50+
+ * Origin: Vice Versa Stn. (2:463/357.5)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

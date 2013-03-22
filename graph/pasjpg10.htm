@@ -1,0 +1,228 @@
+<html><head><title>PASJPEG 1.0 - JPEG Unit for to TP 7.0 and Delphi 2.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='PASJPEG is a port of the sixth public release of the IJG C source (release 6a of 7-Feb-96) [3], that implements JPEG baseline, extended-sequential, and progressive compression processes to Turbo Pascal 7.0 for DOS (TP). The code has been tested under Delphi 2.0, it can be ported to other Pascal environments, since many compilers try to be compatible to TP.'>
+<meta name="keywords" content="pascal, sources, source code, pasjpg10, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pasjpg10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PASJPEG 1.0 - JPEG Unit for to TP 7.0 and Delphi 2.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:nomssi@physik.tu-chemnitz.de">Jacques Nomssi Nzali</a></TD>
+<TD class=black align='right'>28.08.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">PASJPEG is a port of the sixth public release
+of the IJG C source (release 6a of 7-Feb-96) [3],
+that implements JPEG baseline, extended-sequential,
+and progressive compression processes to Turbo Pascal 7.0 for DOS (TP).
+The code has been tested under Delphi 2.0,
+it can be ported to other Pascal environments,
+since many compilers try to be compatible to TP.</TD><TD class=black colspan=2 align='right'><br><A HREF="pasjpg10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>342k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">_____________________________________________________________________________
+
+PASJPEG                                                  September 18th, 1996
+
+Based on the Independent JPEG Group's free JPEG library rev 6a
+
+Copyright 1996 by NOMSSI NZALI Jacques H. C.   &lt;nomssi@physik.tu-chemnitz.de&gt;
+[kn&n DES]         See "Legal issues" for conditions of distribution and use.
+_____________________________________________________________________________
+
+Introduction
+============
+
+PASJPEG is a port of the sixth public release of the Independent JPEG Group's
+C source (release 6a of 7-Feb-96) [3], that implements JPEG baseline,
+extended-sequential, and progressive compression processes to Turbo
+Pascal 7.0 for DOS (TP). The code has been tested under Delphi 2.0 [6],
+it can be ported to other Pascal environments, since many compilers try
+to be compatible to TP.
+
+JPEG (pronounced "jay-peg") is a standardized familly of algorithms for
+compression of continous tone still images. Most JPEG processes are lossy,
+the output image is not exactly identical to the input image. However, on
+typical photographic images, very good compression levels can be obtained
+with no visible change, and remarkably high compression levels are possible
+if you can tolerate a low-quality image [1],[2]. The Independent JPEG Group
+(IJG) has created a free, portable C library for JPEG compression and
+decompression of JPEG images.
+
+The IJG documentation (system architecture, using the IJG JPEG library,
+usage and file list) is a must read. The files DEMO.PAS, TEST.PAS, CJPEG.PAS,
+DJPEG.PAS and EXAMPLE.PAS demonstrate the usage of the JPEG decompression
+and compression library. The RDJPGCOM application shows how to parse a JFIF
+file.
+
+File list
+=========
+
+A road map to the files in the PASJPEG distribution
+
+readme.txt      Introduction, Documentation
+
+Configuration/installation files
+
+jconfig.inc     Configuration declarations.
+
+jpeglib.pas     JPEG library's exported data and function declarations.
+jmorecfg.pas    Additional configuration declarations; need not be changed
+                for a standard installation.
+jerror.pas      Declares JPEG library's error and trace message codes.
+jinclude.pas
+
+jdct.pas        Private declarations for forward & reverse DCT subsystems.
+
+These files contain most of the functions intended to be called directly by
+an application program:
+
+jcapimin.pas    Application program interface: core routines for compression.
+jcapistd.pas    Application program interface: standard compression.
+jdapimin.pas    Application program interface: core routines for decompression.
+jdapistd.pas    Application program interface: standard decompression.
+jcomapi.pas     Application program interface routines common to compression
+                and decompression.
+jcparam.pas     Compression parameter setting helper routines.
+jctrans.pas     API and library routines for transcoding compression.
+jdtrans.pas     API and library routines for transcoding decompression.
+
+Compression side of the library:
+
+jcinit.pas      Initialization: determines which other modules to use.
+jcmaster.pas    Master control: setup and inter-pass sequencing logic.
+jcmainct.pas    Main buffer controller (preprocessor =&gt; JPEG compressor).
+jcprepct.pas    Preprocessor buffer controller.
+jccoefct.pas    Buffer controller for DCT coefficient buffer.
+jccolor.pas     Color space conversion.
+jcsample.pas    Downsampling.
+jcdctmgr.pas    DCT manager (DCT implementation selection & control).
+jfdctint.pas    Forward DCT using slow-but-accurate integer method.
+jfdctfst.pas    Forward DCT using faster, less accurate integer method.
+jfdctflt.pas    Forward DCT using floating-point arithmetic.
+jchuff.pas      Huffman entropy coding for sequential JPEG.
+jcphuff.pas     Huffman entropy coding for progressive JPEG.
+jcmarker.pas    JPEG marker writing.
+jdatadst.pas    Data destination manager for stdio output.
+
+Decompression side of the library:
+
+jdmaster.pas    Master control: determines which other modules to use.
+jdinput.pas     Input controller: controls input processing modules.
+jdmainct.pas    Main buffer controller (JPEG decompressor =&gt; postprocessor).
+jdcoefct.pas    Buffer controller for DCT coefficient buffer.
+jdpostct.pas    Postprocessor buffer controller.
+jdmarker.pas    JPEG marker reading.
+jdhuff.pas      Huffman entropy decoding for sequential JPEG.
+jdphuff.pas     Huffman entropy decoding for progressive JPEG.
+jddctmgr.pas    IDCT manager (IDCT implementation selection & control).
+jidctint.pas    Inverse DCT using slow-but-accurate integer method.
+jidctfst.pas    Inverse DCT using faster, less accurate integer method.
+jidctflt.pas    Inverse DCT using floating-point arithmetic.
+jidctred.pas    Inverse DCTs with reduced-size outputs.
+jidct2d.pas     Direct 2D Inverse DCT - NOT READY YET
+jdsample.pas    Upsampling.
+jdcolor.pas     Color space conversion.
+jdmerge.pas     Merged upsampling/color conversion (faster, lower quality).
+jquant1.pas     One-pass color quantization using a fixed-spacing colormap.
+jquant2.pas     Two-pass color quantization using a custom-generated colormap.
+		Also handles one-pass quantization to an externally given map.
+jdatasrc.pas    Data source manager for stdio input.
+
+Support files for both compression and decompression:
+
+jerror.pas      Standard error handling routines (application replaceable).
+jmemmgr.pas     System-independent (more or less) memory management code.
+jutils.pas      Miscellaneous utility routines.
+
+jmemmgr.pas relies on a system-dependent memory management module.  The
+PASJPEG distribution includes the following implementations of the system-
+dependent module:
+
+jmemnobs.pas    "No backing store": assumes adequate virtual memory exists.
+jmemdos.pas     Custom implementation for MS-DOS: knows about extended and
+                expanded memory as well as temporary files.
+jmemsys.pas     A skeleton with all the declaration you need to create a
+                working system-dependent JPEG memory manager.
+
+Exactly one of the system-dependent modules should be configured into an
+installed JPEG library (see install.doc for hints about which one to use).
+On unusual systems you may find it worthwhile to make a special
+system-dependent memory manager.
+
+jmemdosa.pas    BASM 80x86 assembly code support for jmemdos.pas; used only
+                in MS-DOS-specific configurations of the JPEG library.
+
+Additional Applications
+
+demo.pas        Demo program, uses example.pas
+example.pas     Sample code for calling JPEG library.
+test.pas        Sample skeleton code for example.pas
+
+cdjpeg.pas      Declarations shared by cjpeg/djpeg modules.
+cderror.pas     Additional error and trace message codes for cjpeg/djpeg.
+                Not used, Those errors have been added to jdeferr.
+
+cjpeg.pas       Main program for cjpeg.
+djpeg.pas       Main program for djpeg.
+jpegtran.pas    Main program for jpegtran.- NOT READY YET
+cdjpeg.pas      Utility routines used by all three programs.
+rdcolmap.pas    Code to read a colormap file for djpeg's "-map" switch.
+rdswitch.pas    Code to process some of cjpeg's more complex switches.
+                Also used by jpegtran. - NOT READY YET
+
+Image file writer modules for djpeg:
+
+wrbmp.pas       BMP file output.
+wrtarga.pas     Targa file output.
+
+Image file reader modules for cjpeg:
+
+rdbmp.pas       BMP file input.
+rdtarga.pas     Targa file input. - NOT READY YET
+
+This program does not depend on the JPEG library.
+
+rdjpgcom.pas	Stand-alone rdjpgcom application.
+
+
+
+Archive Locations:
+==================
+
+[1] Thomas G. Lane, JPEG FAQ
+
+      in comp.graphics.misc and related newsgroups
+
+[2] Wallace, Gregory K.: The JPEG Still Picture Compression Standard
+
+      ftp.uu.net, graphics/jpeg/wallace.ps.Z
+
+[3] The Independent JPEG Group C library for JPEG encoding and decoding,
+    rev 6a.
+
+      ftp://ftp.uu.net/graphics/jpeg/
+
+      or SimTel in msdos/graphics/
+
+[4] JPEG implementation, written by the PVRG group at Stanford,
+      ftp havefun.stanford.edu:/pub/jpeg/JPEGv1.2.tar.Z.
+
+[5] PASJPEG.ZIP at NView ftp site
+
+      ftp://druckfix.physik.tu-chemnitz.de/pub/nv/
+      http://www.tu-chemnitz.de/~nomssi/pub/pasjpeg.zip
+
+[6] Delphi 2.0 Image Viewer Application using PASJPEG, by Detlef Meister,
+
+      http://w3.rz.fthw-berlin.de/~meister/index.html</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

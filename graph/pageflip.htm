@@ -1,0 +1,75 @@
+<html><head><title>Flicker-Free Animation with Page-Flippng</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Использование технологии переключения графических страниц для устранения мерцания при анимации спрайтов.  Using a simple technique called "page-flipping" as a solution to do fast flicker-free animation in TurboPascal.'>
+<meta name="keywords" content="pascal, sources, source code, pageflip, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pageflip
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Flicker-Free Animation with Page-Flippng</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:S_ROHRBACHER@IRAV1.IRA.UKA.DE">Kai Rohrbacher</a></TD>
+<TD class=black align='right'>07.05.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="pageflip.gif"><p style="margin-left:20px">Использование технологии переключения графических страниц
+для устранения мерцания при анимации спрайтов. <br>
+Using a simple technique called "page-flipping"
+as a solution to do fast flicker-free animation in TurboPascal.</TD><TD class=black colspan=2 align='right'><br><A HREF="pageflip.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&gt;From: s_rohrbacher
+Newsgroups: comp.lang.pascal
+Subject: Re: flicker-free animation with TP
+Date: 7 May 90 20:24:27 GMT
+Organization: University of Karlsruhe, FRG
+
+Some days ago, one of you asked for a solution to do fast
+flicker-free animation in TurboPascal. I myself had the same
+problem and circumvented it by a simple technique called
+"page-flipping": nearly every graphic card has 2 independent
+graphic pages, so it is possible to draw at one page while
+showing the other. If the "background" page is finished, you just
+"flip" the pages:  thus, at any time all actions take place in
+the background and you get a smooth animation!  In TP, you choose
+the visible page with "SetVisualPage" and the working page with
+"SetActivePage". - Take the following program as an example: it
+animates a hatched square, either with or without page-flipping
+(adapt proc. "Initialize" if you have a Hercules instead of an
+EGA/VGA).
+
+                 <img border=0 width=200 height=150 src="pagefli1.gif" alt="">
+
+The only thing to notice is that you have to store coordinates
+for 2 cycles to be able to erase a sprite on the correct page.
+There remains one last possibility of (minor) flicker: depending
+on your PC's BIOS, it may happen that programs flip pages while
+the cathode ray is in the midst of displaying data: in that case
+you have to bypass BIOS and synchronize switching directly with
+the "vertical retrace" (the moment while the cathode ray moves
+back from the bottom-right to the upper-left corner). As a
+time-critical task (the corresponding bit at port $3DA, Bitmask 8
+(or $3BA, Bitmask 128 for HGC) toggles with 50Hz), you should do
+that in assembler.
+
+To all of you who hope to program an arcade game completely in
+TP, be warned: TP is just to slow to do the job (try to animate
+-say- 30 sprites at once)! Me too, I had to discover this (3
+years ago) -and came out with a self-written TP-unit,
+spritedesigner and a lot of integrated assembler stuff (for the
+animation itself, background-saving, collision detection,
+scrolling and that things).  I am planning to release this
+package (as shareware) here in FRG very soon, so if you are
+interested, watch out!
+
+
+S_ROHRBACHER@IRAV1.IRA.UKA.DE    (Kai Rohrbacher)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

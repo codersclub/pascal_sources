@@ -1,0 +1,397 @@
+<html><head><title>GX 2b2 - 32 bit Graphical Unit for BP7 and FPC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='GX2 b2. The ultimate graphic unit for BP7. Extremely fast. supports MMX. alot of FX. 32 Bit capable - use ALL available memory and take advantage of Vesa2. Full clipping of all included functions. Loads and saves BMP, PCX, GIF, PNG and JPG. Plays FLIC animations. 51 included Fonts. supports Windows TTF Fonts'>
+<meta name="keywords" content="pascal, sources, source code, gx2b2, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gx2b2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GX 2b2 - 32 bit Graphical Unit for BP7 and FPC</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stefan.goehler@gmx.de">Stefan Goehler</a></TD>
+<TD class=black align='right'>10.09.2000</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">GX2 b2. The ultimate graphic unit for BP7 <br>
+. Extremely fast <br>
+. supports MMX <br>
+. alot of FX <br>
+. 32 Bit capable - use ALL available memory and take advantage of Vesa2. <br>
+. Full clipping of all included functions. <br>
+. Loads and saves BMP, PCX, GIF, PNG and JPG. <br>
+. Plays FLIC animations. <br>
+. 51 included Fonts <br>
+. supports Windows TTF Fonts</TD><TD class=black colspan=2 align='right'><br><A HREF="gx2b2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1674k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  ѓјјј    ђ    ђ   ѓѓѓјђјј  GX2
+ ђ         ђ ѓј     ђ  ђ   The ultimative graphic unit for
+ ђ  ѓѓ     ѓјѓ       ђ ђ   Borland Pascal 7 (and soon FPC ;)
+  јѓѓѓђѓ ѓј   јѓ   ѓѓђѓђѓ b2
+
+          (c) 1998-2000 by Stefan Goehler
+
+Comments Rev 0.55
+
+Split up:
+
+  1. Contacting the author
+  2. Release notes
+  3. Sys requirements, incompatibility warnings
+  4. Features of GX2
+  5. Copyright
+  6. Plans for the future
+  7. Frequently answered questions
+  8. Hints and tricks
+  9. Information about the author, greetinx and thanx
+
+1. Contacting the author
+
+  I'm reachable via Email at this address: stefan.goehler@gmx.de
+  My homepage SourceNET is accessable at this URL:
+  http://sourcenet.home.pages.de/
+  Please link my page only with this URL!
+
+2. Release notes
+
+  The long awaited beta 2 release is finally here! With more features and
+  more stability!
+  GrafX2 is now named 'GX2' to avoid confusion with other, similar named
+  libraries.
+  GX2 allows now to load and use Windows TTF Font files, printing on
+  HP/Epson compatible printers is also no problem anymore.
+  Even more FX and speed!
+
+3. Sys requirements, Incompatibility warnings
+
+  System requirements:
+  Minimum:
+  386, 2 Megs RAM, Vesa 1.2 card with at least 1 Meg mem
+  Recommended:
+  MMX machine (150 Mhz for fast and good FX), 16 Megs RAM, Vesa 2.0 or
+  supported card with &gt;= 2 Meg mem
+
+  For the usage of GX2, BP7 is required. TP7 isn't supported as it doesn't
+  support Protected Mode.
+
+  Incompatibility warnings:
+  -Vesa 1.0/1.1
+   On most Vesa Bioses below version 1.2, GX 2 doesn't work. This is
+   because most of them won't give out all required information about the
+   resolution. GX2 may support these old versions when it's in final
+   state, for now please install UniVBE/SDD or similar
+  -Some Matrox cards may have problems with LFB modes. I wasn't able to
+   encounter the bug yet, but I suppose (not only me) some of those cards
+   have a lousy Vesa2 BIOS extension
+  -Voodoo Banshee cards
+   The Vesa-BIOS of a heap of Banshee cards is the last crap you could ever
+   imagine! If you have a problem with such a card, try to retrieve and
+   load the newest Card-BIOS you can get for this card on the producer's
+   homepage
+  -EMM386
+   On most configurations under DOS with EMM386, GX2 won't run. This is
+   due to the 32-Bits memory tweaking which is used by the unit Newfrontier,
+   which is BTW freely available to everyone.
+   On my machine, this configuration works:
+   DEVICE=C:\WINDOWS\EMM386.EXE 4096 D=64 A=64 /verbose
+   Of course no warranty for that. If also this doesn't help, please work
+   directly under Win9x or under DOS without EMM
+
+4. Features of GX2
+
+  Here a list of the current features GX2 provides:
+  . Full 32 bit capabilities, LFB/Vesa2+ support, NO 64K LIMIT!!
+  . handles even very large images - largest tested one was a
+    4200x2966 JPEG loaded at 32 bpp (47.5 Megs memory size!!)
+  . Flexible object oriented interface, allows virtual screens
+    at every supported BPP and every size (memory is the limit)
+  . Object oriented mouse unit, supports also virtual screens
+    as output
+  . Supports EVERY resolution supported by your card
+  . Source independent file reading/writing (load/save your images, fonts etc.
+    from/to disk/memory/libraries - whatever you want!!)
+  . Extended image drawing (converts color resolutions by fly,
+    addition, subtraction, alphamapping, xor/and/or, sprites)
+  . Switchable color dithering in 24/32 -&gt; 15/16 conversion, allows
+    high quality image putting even in low color resolutions
+  . In alot of situations definitely faster than GrafX 1.x
+  . New font format - unlimited (memory-limited) amount of loadable fonts
+  . 63 included XFN-fonts! 26 of them are converted SMFonts by Remco de Korte,
+    10 of them are converted Borland CHR-fonts, rest are bitmap fonts
+  . supports Windows TTF font files
+  . Transparency effects (add/sub images, filled shapes and text)
+  . Better error checking for critical functions - 'built in' stability
+  . MMX capabilities - especially 24 and 32 bit modes are accelerated
+    this way, also some other things with 8/15/16 bpp work with MMX,
+    64 Bit memory moving/filling - get all out of your AGP-card!
+  . Damn fast color resolution converters (partially MMX)
+  . 70% of the ASM-code is end-optimized and delivers an excellent performance
+  . Antialiased line-, vectorfont-, circle- and ellipse-drawing
+  . Various FAST effects (rotation, blurring, fading, alphablending, upscaling)
+  . Full clipping of ALL functions
+  . printing on HP and Epson printers (free for non-commercial use)
+  . mouse hardware support, more than one mouse supported
+
+  GX2 is able to load AND SAVE the following file formats:
+  . BMP (all uncompressed files)
+  . GX2 (GX2 internal uncompressed format, flexible, supports animation)
+  . JPG (all kinds, optimized loader - 2x faster than original)
+  . PCX (8,24 bit - extremely fast decompression)
+  . PNG (all kinds below and equal to 32 bpp, improved speed)
+  . GIF (well, soon...)
+
+  These formats are only loadable:
+  . FLI/FLC (FLIC animation files, 8 bit, soon maybe 15/16/24)
+
+5. Copyright for GX2
+
+  New copyright agreement, changes reserved
+  All these statements apply, if not explicitely stated different, on ANY
+  unit delivered with the GX2 package.
+
+  1st
+  You can use my units entired in your own programs. Ripping any code off
+  or using parts of the GX2-package somewhere else without GX2 is not
+  allowed without my permission. Exceptions:
+  .If you made any code for GX2, you are allowed to use this special kind
+   of code without GX2 and without my permission (just because it's your
+   work, not mine).
+  .You can get a license for parts of GX2, the respective author of such
+   a part will get a donation from you
+
+  2nd
+  GX2 is Freeware. You can use it freely in any kind of software which
+  uses this and any of the other delivered units with these restrictions:
+  .You need to state the name of GrafX and also the names of the authors
+   who did their hard work in this product on an often seen place of your
+   product (intro/extro etc.).
+  .You have to inform me if you use GX2 in any kind of commercial
+   software and every helping author of GX2 needs to get a free copy of
+   your product if he/she wishes to have one
+
+  3rd
+  You are allowed to do modifications on my units. If they are useful, please
+  let me know what you've done and give me the modifications. Modifications
+  concerning the existence and/or modification of any copyright/author/name
+  statements are generally not allowed. You are not allowed to publish
+  modified units, you may only use them in your own productions (where these
+  sources aren't published). Version publications are restricted to my
+  person (Stefan Goehler). Additionally, you aren't allowed to charge any
+  money for the GrafX-units or any derivates of them, except you put them
+  on some kind of shareware/freeware/sourcecode collection media and the
+  (sell price of collection medium)/(number of stored titles) is &lt;= 0.5 US$.
+
+  4th
+  If not different stated, you aren't allowed use or spread any of the
+  delivered units single, you have to spread GrafX with all files. Spreading
+  units single is only allowed if I gave you my permission or the unit is
+  yours and is not special licensed (see chapter 1).
+
+  If you don't agree with these statements, please erase GX2. If you
+  don't understand a part, feel free to contact me.
+
+  Please note that parts of this copyright agreement don't apply to the
+  printer unit gx_print. That unit needs to be licenced for commercial use.
+  Please have a look at the file's header or contact me for more details.
+
+6. Plans for the future
+
+  I cannot imagine anything better than GX2, so there will be nothing
+  more.... just kidding ;)
+  The main aim will be the conversion of GX2 to other platforms, like
+  FPC.
+  One next thing may be also a gaming platform, called "Project 2" or
+  similar. It will contain a lot of needed things. Sound mixing, joystick
+  interface, data library access. But not for the nearer future as I can
+  really see the effort GX2 needs for its development.
+
+7. Frequently answered questions
+
+  Here a list of questions already asked alot or which I assume to be asked
+  alot:
+  Q: I can't compile GX2, I don't have the winapi.tpu! Can you please
+     send me that file?
+  A: This file isn't available as tpu, it's only available as tpp. This
+     means: if you have BP7, switch the compiler target to protected mode.
+     If you have TP7, forget it - you can't get it working! Don't blame me
+     then, it's already stated on my web-page that it's only for BP7.
+     BTW, BP7 itself contains this file in the tpp.tpl, so don't try to
+     find it ;)
+
+  Q: GX2 doesn't run. What can I do?
+  A: Please read part 3, incompatibility warnings. If there is nothing which
+     helps you, please contact me.
+
+  Q: I see, GX2 is damn fast, but sometimes I can really see that it's
+     drawing. Especially when I use alpha blending, filling with subtraction/
+     addition and antialiasing. Also circle and ellipse are fucking slow
+     without VESA 2.0 (only 1% of vesa 2 speed!!!). And my machine is really
+     fast.
+  A: That's a thing which almost every card has got a problem. Reading from
+     video memory has got in most cases only 10% of the writing speed.
+     GrafX already tries to get the maximum speed by accessing the video
+     memory with 32 respective 64 (MMX) bits - there's normally no way to
+     gain more speed on screen.
+     Try to do such slow things partially in memory. There reading is as
+     fast as writing.
+     To circle and ellipse: The algorithm, which is used when
+     drawing circles calculates only 1/8 of the circle (which is enough,
+     like you may see). This means for each calculated point we need to
+     set eight points. When no linear framebuffer is being used, we need to
+     switch very often the bank (via int 10h!!), so it's damn slow.
+
+  Q: How do I install the help file?
+  A: Start BP, click in the menu on '?', then on 'Install files' and then
+     select the grafx2.tph and click on 'OK'. After the next start you
+     can reach every help topic by the usual way.
+
+  Q: What is the best way to install GX2 into BP?
+  A: Make a sub-directory in you BP\BIN-directory, e.g. named with 'GX2'.
+
+     1st way, if you want to work in another directory (preferable):
+     Copy GX2 without its subdirectories into the created directory,
+     copy the subdirectories in the BP\BIN-directory.
+     Start BP, click on 'Options', then on 'Directories'. Write down the
+     name of the GX2-directory (e.g. 'C:\BP\BIN\GX2\) into your
+     units-path and your obj-path. Done.
+
+     2nd way, if you always wanna change into that directory:
+     Copy the whole GX2 with its sub-directories into that directory.
+
+  Q: How do I recompile all GX2-units?
+  A: I guess, your path of BP is C:\BP. If this isn't the case, type your
+     own path.
+     Type C:\BP\BIN\BPC /M/L /UC:C:\BP\UNITS -$G+ -$L- -CP GRAFX2.PAS
+     However, I recommend to install GX2 into a directory where you
+     keep it, like described above. BP will automatically recompile the
+     unit in this case, if required.
+
+  Q: What about W2k?
+  A: GX2 is able to run under W2k, but only in banked mode. Also, some
+     features of GX2 may hang the system. If you wanna make your program
+     W2k compatible, then use it as programming platform all the time to
+     find and avoid problems. If you got some experiences, please mail
+     them to me!
+
+  Q: Will GrafX support 3D functions?
+  A: There are some projects concerning about 3D-Support in GX2. I think
+     it will be supported soon.
+
+  Q: There are so much files for GX2. Is there no simple solution?
+  A: No, since GrafX is not dedicated to experimenting only, but also really
+     professional software and games, and no one-day-projects, I don't see
+     any reason to push all into one file. It's necessary to hold the
+     overview about all things. I cannot do that when all is in one crappy
+     file. If you don't know about these benefits, then maybe GX2 is
+     nothing for you.
+
+8. Hints and tricks
+
+  Before anyone starts to ask such questions about the speed, I'd prefer to
+  write the answers once in this file.
+
+  . Use preferably 16 bpp
+    If you need more colors, but don't really need 32 bits per pixel, use
+    16. Because it's only the half of the data, some things may be partially
+    twice as fast.
+    If you want to use Hicolor, but don't know which of 15 or 16 bits per
+    pixel would be good, use 16 bpp. You get 1st the double amount of green
+    shades and 2nd most conversion routines with 16 bpp are slightly faster
+    because it needs one or even two cpu commands less per pixel.
+
+  . Use 32 instead of 24 bpp
+    Addressing the memory and putting out something is much slower in 24 bpp,
+    because we cannot use 32 bit commands, but we need to use one 16 bit
+    command and one 8 bit command. Also, 32 bpp are widely MMX-accelerated.
+    The implemented MMX-functions gain 50% more speed, in most cases even
+    more. There are alot of other facilities why to prefer 32 bpp. Everybody
+    who tried to program 24 bpp knows why.
+
+  . Use no screen paging, but memory buffers, when buffering needed
+    If you make use of alpha blending,subtraction or addition or you often
+    need to read from screen, use memory buffers (1 or 2) to gain more
+    speed (in some cases more than 10 times faster!)
+
+  . Use Bitblit for moving
+    If you need to move a rectangle on screen, use bitblit for it, if
+    hardware acceleration is available. This is really damn fast!
+    Also the software blitter is faster than a simple get/draw.
+
+  . Use images with the equal color depth where you draw them to. This
+    means if you have a screen color depth of 16 bpp, load images from
+    disk at this depth. This makes the image putting 2..4 times faster
+    (depending on CPU and GFX-card). For more details see gxmanual.txt,
+    chapter 2 (Handling images).
+
+  . Save PNG images with Paint Shop Pro
+    If you have the choice between PSP and Photoshop for saving PNG images,
+    choose PSP. It has got a more intelligent compressor which can compress
+    &gt;= 24 bit PNG and greyscale images alot better than that one of
+    Photoshop. If you only have Photoshop, choose the PAETH-FILTER for
+    saving. This makes the files at least smaller than with the non-filter
+    option, but won't reach the results of PSP. The smaller the resulting
+    file, the faster the decompression!
+
+
+9. Information about the inventor, history, greetinx and thanx
+
+  The inventor...
+  Yea, well, there was something...
+  My name is Stefan Goehler, I'm 20 years old and live near Rostock,
+  north-east Germany. I started programming with Turbo Pascal some years ago,
+  I think 5..6 years. Now, I'd say, I know almost everything about it, and
+  as you may see, I try to get the best out of it.
+
+  GrafX...
+  The real first GrafX was simply called 'Graphics', and was an additional
+  unit for the BGI. It began somewhere in summer 1996 - I had a program for
+  a competition, but I disliked the speed of scrolling a text in graphical
+  mode, besides that it flickered damnly. So I began trying to work with
+  VESA. The first thing was a 4 times faster putimage, next toppers followed.
+  When I began with Tetris, I had some conflicts with the bankswitching of
+  the BGI and my unit, so I finally did the last important thing for my unit:
+  the vector font output. After some optimizations, it was around three times
+  faster than the outtextxy of the BGI.
+  In summer 1997, I had a (internet-)chat with a girl, which I already knew
+  for some time. She encouraged me to do my own homepage, and after 3 weeks
+  with alot of tries, I finally uploaded on August the 8th 1997, my first
+  homepage. Now, after more than one year, we still mail each other, just
+  chatting is almost impossible, because I have alot longer school a day
+  than in that time.
+  GrafX grew and grew, became better with the time. Some day, I became a mail
+  from a guy who used my unit in his graphical interface. This was more or
+  less the breakthrough of GrafX - with his GUI, really almost EVERY bug got
+  discovered. It was version 1.3, which was the result of this time. It was
+  the most bugfree and most stable version of GrafX1.x ever had! After that
+  GrafX 1.4 followed, but it got not finished - I worked parallel on GrafX
+  1.4 and GX2. Now I got the intention about making GX2 full Freeware,
+  everybody who wants to, can help making it better. I think it was the right
+  idea, persons which I told this idea, responded only positive.
+
+  Thanx...
+  I'm sure this isn't the complete list, but there's still time to enlarge it
+  before the final version ;)
+  Thanx fly to...
+    All testers and helpers,
+    Martin Beck for writing the PNG-saver and spending his time to find bugs,
+    Sandra Below, my ex-girlfriend and also her twin sister Doreen,
+    Johannes Bialek for introducing me into deeper OOP programming,
+    Hristo Chilingirov for giving me some ideas about the driver model,
+    Arno Fleck for writing this TP-helpfile for GX2,
+    Remco de Korte for letting me include his SMFonts into GX2,
+    Thomas Schatzl for lending me his cpu-unit to be part of timebase,
+    Alexander Smirnov for giving me his CHR-unit to write a CHR to XFN-
+     converter,
+    ArsКne von Wyss for giving me some hints and ideas,
+    Maarten van der Zwaart for writing the gif-loader,
+    S3 for sending me manuals on their chips (there are alot of producers
+     which simply ignore people like me!)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

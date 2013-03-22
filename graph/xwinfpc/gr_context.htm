@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Графический контекст - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Графический контекст.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.2. <A class=blue HREF="gr_text.htm">Текст и графика</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.2.1. Графический контекст</h2>
+
+<dir>
+
+Прежде чем начать работу с графикой, программа должна
+выделить себе специальную структуру данных и получить указатель на нее. Эта
+структура называется <I>графическим контекстом</I> (Graphic Context (GC)).
+Указатель на GC используется в качестве одного из параметров при вызове
+"рисующих" функций X. Графический контекст содержит ряд атрибутов, влияющих
+на отображение объектов: текста, линий, фигур и др. Выделенный GC должен быть
+освобожден до завершения работы программы. 
+
+<br>
+<br>
+
+Графический контекст создается процедурой
+<code>XCreateGC()</code>, имеющей следующий прототип:
+
+<pre>
+Function XCreateGC(prDisplay : PDisplay; nDrawable : TDrawable;
+   nValueMask : cardinal; prValues : PXGCValues) : TGC; cdecl;external;
+</pre>
+
+Первый аргумент - это указатель на структуру типа
+<code>TDisplay</code>, который программа
+получает после вызова
+<code>XOpenDisplay()</code>; второй - идентификатор окна (или карты
+пикселей), в котором программа будет рисовать; третий - битовая маска,
+определяющая, какие атрибуты GC задаются; последний аргумент - структура типа
+<code>TXGCValues</code>, определяемая
+следующим образом:
+
+<pre>
+TXGCValues = record
+     Xfunction : longint; { Renamed function to Xfunction }
+     plane_mask : cardinal;
+     foreground : cardinal;
+     background : cardinal;
+     line_width : longint;
+     line_style : longint;
+     cap_style : longint;
+     join_style : longint;
+     fill_style : longint;
+     fill_rule : longint;
+     arc_mode : longint;
+     tile : TPixmap;
+     stipple : TPixmap;
+     ts_x_origin : longint;
+     ts_y_origin : longint;
+     font : TFont;
+     subwindow_mode : longint;
+     graphics_exposures : TBool;
+     clip_x_origin : longint;
+     clip_y_origin : longint;
+     clip_mask : TPixmap;
+     dash_offset : longint;
+     dashes : char;
+  end;
+PXGCValues = ^TXGCValues;
+</pre>
+
+Значения полей данной структуры будут объяснены ниже.
+Каждому из них соответствует бит в маске, которая передается в качестве
+третьего параметра при вызове процедуры
+<code>XCreateGC()</code>. Эти биты обозначаются символическими константами,
+определенными в модуле <code>x</code>. Если
+бит установлен, то значение соответствующего атрибута должно быть взято из
+переданной <code>XCreateGC()</code>
+структуры <code>TXGCValues</code>. Если бит
+сброшен, то атрибут приникает значение по умолчанию.
+
+<br>
+<br>
+
+Следующий пример показывает процесс создания графического
+контекста, в котором устанавливаются два атрибута: цвет фона и цвет переднего
+плана.
+
+<pre>
+. . . . . . .
+var
+  prGC : TGC;
+  rValues : TXGCValues;
+  prDisplay : PDisplay;
+  nScreenNum : integer;
+. . . . . . . .
+  rValues.foreground := XBlackPixel (prDisplay, nScreenNum);
+  rValues.background := XWhitePixel (prDisplay, nScreenNum);
+. . . . . . . .
+  prGC := XCreateGC (prDisplay, XRootWindow (prDisplay, nScreenNum),
+  (GCForeground OE GCBackground), @rValues);
+</pre>
+
+Вызов <code>XCreateGC()</code> - не единственный способ создания графического
+контекста. Так, например, новый контекст может быть получен из уже
+существующего GC с помощью <code>XCopyGC()</code>.
+
+<br>
+<br>
+
+Когда контекст порожден, его атрибуты могут изменяться процедурой
+<code>XChangeGC()</code>. Например:
+
+<pre>
+rValues.line_width := 10;
+XChangeGC (prDisplay, prGC, GCLineWidth, @rValues);
+</pre>
+
+Приведенный фрагмент кода меняет ширину линий, рисуемых с
+помощью графического контекста.
+
+<br>
+<br>
+
+Для того, чтобы получить значение полей GC, используется
+процедура <code>XGetGCValues()</code>.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

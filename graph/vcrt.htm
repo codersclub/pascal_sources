@@ -1,0 +1,134 @@
+<html><head><title>VCRT - Замена CRT с поддержкой графики</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модифицированный модуль CRT для текстового и графического режима для Turbo Pascal 5.5,6.0, корректно работающий с цветами в графических режимах. Включает: рисование рамочек, сохранение/восстановление областей экрана'>
+<meta name="keywords" content="pascal, sources, source code, vcrt, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vcrt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VCRT - Замена CRT с поддержкой графики</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>12.05.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модифицированный модуль CRT для текстового
+и графического режима для Turbo Pascal 5.5,6.0,
+корректно работающий с цветами в графических режимах.
+Включает: рисование рамочек, сохранение/восстановление областей экрана</TD><TD class=black colspan=2 align='right'><br><A HREF="vcrt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   Модуль CRT, корректно работающий с цветами в графических
+   режимах.  Включает ряд расширений, как то:
+
+    рисование рамочек
+    сохранение/восстановление областей экрана
+
+        Задумано было больше, но не доделано, из-за устарелости CRT-based
+        интерфейсов.
+
+--
+Phone: 230-80-61                                Victor B.Wagner
+E-Mail:vitus@agropc.msk.su                      Dokuchaev Soil Institute
+                                                7, Pyzhevsky lane,
+                                                Moscow, Russia
+
+{&gt; Cut here. FileName= VCRT.DOC }
+
+                          Модуль VCRT
+
+  Модуль представляет собой модифицированный стандартный модуль CRT
+для Turbo Pascal 6.0,5.5  в который не добавлено практически ни одной
+новой функции, но работа некоторых весьма стандартных функций
+изменена так, как это казалось автору более логичным. Кроме
+того ряд функций, бывших внутренними выведен в интерфейс.
+
+   Изменение первое - драйвер текстовых файлов :
+   1. В графических режимах CGA 320x200, EGA и VGA атрибуты
+   символов обрабатываются так же как и в текстовых.
+   2. Процедуры READ и READLN допускают редактирование с
+   помощью стрелок, клавиш Home, End, BackSpace и Delete.
+   3. Процедуры READ и Readln в графических режимах эмулируют
+   курсор
+
+   Изменуние второе:
+   Процедуры
+    InsLine, DelLine, ClrEol, ClrScr обрабатывают атрибуты во всех
+    графических режимах
+
+   Изменение третье
+    Добавлены процедуры
+     ReInitCrt - инициализация внутренних переменных
+       необходимо вызывать после изменения режима экрана не
+       средствами VCRT для корректной работы.
+     ReadKeyWord - возвращает двухбайтовый код нажатой клавиши
+      Старший байт - скэнкод.
+     Beep - выдает стандартный звуковой сигнал. Эквивалент
+       Write(#7)
+
+    Изменение третье:
+     Переменная DirectVideo инициализируется в False, если текущий
+     режим графический.
+    Ограничения:
+    1. Вывод на экран всегда через Bios, независимо от значения
+    DirectVideo
+    2. Процедура Readln не позволяет вводить строки,
+    превышающие расстояние до правой границы экрана.
+
+                       Модуль VCRTEXT
+
+    Содержит расширения CRT, весьма полезные и отчасти повторяющие
+    процедуры tpCrt и opCrt (Copyright by TurboPower Software), но,
+    как и VCRT, корректно работающие в графике.
+
+     Procedure FrameWindow(X1,Y1,X2,Y2) - рисует рамку. Символы
+     задаются в переменной Frame. Определены константны
+       SingleFrame и DoubleFrame;
+     Procedure SaveWindow(X1,y1,X2,y2:byte;var SavePtr:Pointer);
+       Работает только в текстовом режиме
+       Динамическую память для буфера окна выделяет сама
+
+     Procedure RestoreWindow(X1,Y1:Byte;Var SavePtr:Pointer);
+      Восстанавливает окно, сохраненное SaveWindow даже и в граф.
+      режимах
+
+     Procedure DisposeWindow(var SavePtr:Pointer);
+      Освобождает буфер окна
+
+     Procedure Inverse(Count:Byte);
+      в текстовых режимах заменаяет атрибуты Count символов слева от
+      курсора  на  атрибут, хранящийся в переменной InverseAttr, в гра-
+      фике делает XOR c ним. В режиме CGA монохром просто инвертирует
+      символы не думая об атрибутах
+
+    Function ReadScreen(X,Y:Byte):Char;
+      Читает символ с 0 страницы (через BIOS)
+
+   Function ReadAttr(X,Y:Byte):Byte;{Works in text mode only}
+     Читает атрибут (только в текстовом режиме)
+
+   Далее пошли инструменты более высокого уровня (пока не реализованы,
+    а потому и не описаны. Три варианта меню.
+     1. Меню с произвольным расположением строк на экране
+ {Clears all internal data for menu}
+ Procedure ClearMenu;
+ {Adds string to menu}
+ Procedure Prompt(S:String;Row,Col:Byte);
+ {Allows selection from ClipperLike menu and returns Choice number or 0 if
+  Escaped}
+ Function Menu:Integer;
+
+ 2 Вертикальное меню в текущем окне (должно быть заполнено до вызова
+   процедуры)
+ Function VertMenu:Integer;
+ 3. Прокручиваемое меню в текущем окне
+ Function LongMenu(ItemFuns:MenuItemType):Integer;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

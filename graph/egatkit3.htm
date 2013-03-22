@@ -1,0 +1,86 @@
+<html><head><title>Enhanced Graphics Toolkit 3.0 for EGA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Enhanced Graphics Toolkit is a collection of low level graphic functions for Turbo Pascal 4.0+, MS Fortan, MS Quick Basic, MS C 5.0 and MASM. Full sources and examples included.'>
+<meta name="keywords" content="pascal, sources, source code, egatkit3, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;egatkit3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Enhanced Graphics Toolkit 3.0 for EGA</TD>
+<TD nowrap class=black>&nbsp;Ed Connell</TD>
+<TD class=black align='right'>25.04.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Enhanced Graphics Toolkit is a collection of low level graphic functions
+for Turbo Pascal 4.0+, MS Fortan, MS Quick Basic, MS C 5.0 and MASM.
+Full sources and examples included.</TD><TD class=black colspan=2 align='right'><br><A HREF="egatkit3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>359k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">	****************************************************************
+	*                Enhanced Graphics Toolkit 3.0.                *
+	*							       *
+	*   Written By:  Ed Connell	Revised: 4/22/88	       *
+	*   Connell Scientific Graphics				       *
+	*   PO Box 1765						       *
+	*   Woodinville, WA  98072-1765				       *
+	*   (206) 485-2828					       *
+	*							       *
+	*   Copyright (C) Connell Scientific Graphics  1986, 1987, 1988*
+	*   All Rights Reserved.				       *
+	****************************************************************
+
+Notes For Turbo Pascal
+
+	The GETADD, INKEY and ST2BIN functions are not implemented in
+turbo pascal.  The Turbo "ofs() and seg()" functions should be used to
+determine the address of an item in place of the GETADD function.  Since
+Turbo allows hex notation in the language, it should be used instead of
+ST2BIN.  Turbo also provides functions for getting keyboard characters
+so INKEY is not needed.
+
+Notes For MS FORTRAN
+
+	MS Fortran now has type checking.  This is helps prevent programming
+errors, but causes compiler errors when a routine can accept variables
+of different data types.  When calling the assembly language routines
+errors F3606 and F3607 may be generated.  If they are, and you know what
+you are doing is correct, ignore the errors. The correct code will be
+generated.  If FORTRAN is going to do type checking then it should also
+have type casting !  Oh well, some day....
+
+
+Notes For MS QuickBasic
+
+	The functions GETADD, INKEY, and ST2BIN were not intended for
+use with BASIC; so there are no BASIC examples for these functions.
+	When using the LDFONT routine there is one difference for BASIC:
+the user does not allocate the space for the font to be loaded.  The LDFONT
+routine allocates the space and returns an offset and segment to the space.
+Please review the example program provided BLDFONT.BAS.
+	XFRVDT is an assembly routine and is called differently than
+the other toolkit functions.  Again please review the example program
+BXFRVDT.BAS
+
+
+Toolkit General Notes:
+
+	We have tried very hard to test and proof the documentation and
+software for v3.0.  If you do however happen to find any typographical
+errors or any other problems, please feel free to notify us by mail
+or phone.  We are always interested in our customers comments and opinions.
+
+
+			Thank you,
+
+			C.S.G.
+			(206) 485-2828</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,101 @@
+<html><head><title>LINES - Draw BitMap Lines [640x480x16]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This  article will cover how to draw lines on a bit map, i.e. convert lines from vector format to raster format with width, shading, dash patterna, and color. Docs, ASM and PAS included'>
+<meta name="keywords" content="pascal, sources, source code, lines, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;lines
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LINES - Draw BitMap Lines [640x480x16]</TD>
+<TD nowrap class=black>&nbsp;Cary Ravitz</TD>
+<TD class=black align='right'>12.07.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This  article will cover how to draw lines on a bit map,
+i.e. convert lines from vector format to raster format
+with width, shading, dash patterna, and color.
+Docs, ASM and PAS included</TD><TD class=black colspan=2 align='right'><br><A HREF="lines.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Cary Ravitz
+
+    This  article will cover how to draw lines on a bit map, i.e.  convert
+lines from vector format to raster format.  Drawing one pel wide lines
+efficiently has been  covered in detail in many  places,  but for  the real
+world this is not sufficient.  Lines need  emphasis  so that they can be
+distinguished or highlighted. This can be accomplished by using wide lines,
+shading patterns, dashed lines, and color.  The algorithms and code presented
+here are simple techniques to accomplish this. They are not meant to be the
+fastest available  algorithms, but  to provide usable, modifiable, straight
+forward code.
+
+WIDE LINES
+    There  are two (at least)  ways to attack the problem  of drawing wide
+lines.  One way is to draw  multiple one pel lines.  Another way is to draw the
+line once  with wide dots.  I have chosen the second way here because it makes
+things simpler when dealing with dashed lines.
+    I have not used Bresenham's method for calculating the points  along a
+line. The routine that draws a dot will be a much bigger computational hit that
+calculating the dot locations, so simplicity is better here.
+    The basic algorithm for drawing a  line  from x1,y1 to  x2,y2 is shown
+here:
+
+  if distance_from_x1_to_x2 &gt; distance_from_y1_to_y2 then
+    for x = x1..x2 draw a dot at x,y_value_at_x
+  else
+    for y = y1..y2 draw a dot at x_value_at_y,y
+
+    For each  step  along  a  line, one  floating  point addition and  one
+floating  point  to  integer conversion  is  done, but  there  are  no
+multiplies or divides.
+
+
+SHADING
+    Shading is accomplished by masking the dots that are ored into the bit map.
+If  you mask a shading pattern  into the dots then, as a line is created with
+dots that overlap by one pel, the patterns will interfere and become solid.
+The trick that  we need is to tie the  shading mask location to the  bit  map,
+not  the dot.  Then  when dots overlap, the shading  will not  interfere.  So
+we will wait until after the dot  is shifted to align with  the bit map in the
+x direction (m:=dot[w,i] shr l; in DRAWDOT)  before  applying  the  shade mask.
+The  dot is  never shifted to align in the y direction and instead the starting
+scan line in the mask is chosen to match the dot.
+
+DASHED LINES
+    Since each point on a  line  is drawn as a large dot,  the line may be
+dashed  by simply leaving out series of dots.  If we keep track of how long
+the  line  is as we draw each point on it, and compare this to a true/false
+pattern, when  the pattern is  true we draw a dot, and when it is false we move
+on to the next point.
+
+COLOR
+    Drawing  in eight  colors (including  the  background) is a  matter of
+using  mulitple color planes.  Eight basic colors -  red, green, blue, cyan,
+magenta, yellow,  white, and black - can be represented in three color planes -
+either red/green/blue or yellow/magenta/cyan.
+
+MIXING COLORS WITH SHADING
+    You can use shading to mix the eight basic colors. For example, draw a line
+solid in one color plane and checkerboard in another color plane. This  mixes
+the two colors and greatly expands the available colors on eight color devices.
+
+SAMPLE CODE
+    A sample program that demonstrates these techniques is available from
+COMPUTER LANGUAGE's CompuServe forum and BBS network. Included in the program
+listing is a  sample program that invokes  VGA 640x480 16  color  mode  and
+draws  a number  of  lines  with  various attributes.  The code  is  mostly in
+Turbo  Pascal,  with  DRAWDOT in assembler (DRAWDOT's constants are in the
+Pascal code).
+
+Independent software developer Cary Ravitz is the author of the Ravitz Editor
+and other shareware products.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

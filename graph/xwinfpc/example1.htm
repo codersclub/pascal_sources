@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Первый пример - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Первый пример.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A class=blue HREF="basics.htm">Основные понятия</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.1.6. Первый пример</h2>
+
+<dir>
+
+Продолжая традиции многих изданий, посвященных
+программированию, начнем с программы, рисующей на экране строку "Hello,
+world!". В этом примере приведены основные шаги, необходимые для работы в X
+Window.
+
+<pre>
+uses x,xlib,x11,xutil,strings;
+
+const
+     WND_X=0;
+     WND_Y=0;
+     WND_WDT=100;
+     WND_HGH=100;
+     WND_MIN_WDT=50;
+     WND_MIN_HGH=50;
+     WND_BORDER_WDT=5;
+     WND_TITLE='Hello!';
+     WND_ICON_TITLE='Hello!';
+     PRG_CLASS='Hello!';
+
+(*
+* SetWindowManagerHints - процедура передает информацию о
+* свойствах программы менеджеру окон.
+*)
+
+procedure SetWindowManagerHints (
+ prDisplay : PDisplay; (*Указатель на структуру TDisplay *)
+ psPrgClass : PChar; (*Класс программы *)
+ argv : PPChar;   (*Аргументы программы *)
+ argc : integer;    (*Число аргументов *)
+ nWnd : TWindow;    (*Идентификатор окна *)
+         x,     (*Координаты левого верхнего *)
+         y,     (*угла окна *)
+         nWidth,
+         nHeight,  (*Ширина и высота окна *)
+         nMinWidth,
+         nMinHeight:integer; (*Минимальные ширина и высота окна *)
+ psTitle     : PChar;  (*Заголовок окна *)
+ psIconTitle : PChar;    (*Заголовок пиктограммы окна *)
+ nIconPixmap : TPixmap    (*Рисунок пиктограммы *)
+);
+var
+ rSizeHints : TXSizeHints ; (*Рекомендации о размерах окна*)
+ rWMHints : TXWMHints ;
+ rClassHint : TXClassHint ;
+ prWindowName, prIconName : TXTextProperty ;
+begin
+
+ if ( XStringListToTextProperty (@psTitle, 1, @prWindowName )=0) or
+    (XStringListToTextProperty (@psIconTitle, 1, @prIconName )=0 ) then
+ begin
+  writeln('No memory!');
+  halt(1);
+ end;
+
+rSizeHints.flags := PPosition OR PSize OR PMinSize;
+rSizeHints.min_width := nMinWidth;
+rSizeHints.min_height := nMinHeight;
+rWMHints.flags := StateHint OR IconPixmapHint OR InputHint;
+rWMHints.initial_state := NormalState;
+rWMHints.input := True;
+rWMHints.icon_pixmap := nIconPixmap;
+
+rClassHint.res_name := argv[0];
+rClassHint.res_class := psPrgClass;
+
+XSetWMProperties ( prDisplay, nWnd, @prWindowName,
+  @prIconName, argv, argc, @rSizeHints, @rWMHints,
+  @rClassHint );
+end;
+
+(*
+*main - основная процедура программы
+*)
+
+//void main(int argc, char *argv[])
+var
+ prDisplay: PDisplay;  (* Указатель на структуру Display *)
+ nScreenNum: integer;    (* Номер экрана *)
+ prGC: TGC;
+ rEvent: TXEvent;
+ nWnd: TWindow;
+begin
+
+ (* Устанавливаем связь с сервером *)
+ prDisplay := XOpenDisplay ( nil );
+ if prDisplay = nil  then begin
+  writeln('Can not connect to the X server!');
+  halt ( 1 );
+ end;
+
+ (* Получаем номер основного экрана *)
+ nScreenNum := XDefaultScreen ( prDisplay );
+
+ (* Создаем окно *)
+ nWnd := XCreateSimpleWindow ( prDisplay,
+     XRootWindow ( prDisplay, nScreenNum ),
+     WND_X, WND_Y, WND_WDT, WND_HGH, WND_BORDER_WDT,
+     XBlackPixel ( prDisplay, nScreenNum ),
+     XWhitePixel ( prDisplay, nScreenNum ) );
+
+ (* Задаем рекомендации для менеджера окон *)
+ SetWindowManagerHints ( prDisplay, PRG_CLASS, argv, argc,
+   nWnd, WND_X, WND_Y, WND_WDT, WND_HGH, WND_MIN_WDT,
+   WND_MIN_HGH, WND_TITLE, WND_ICON_TITLE, 0 );
+
+ (* Выбираем события, обрабатываемые программой *)
+ XSelectInput ( prDisplay, nWnd, ExposureMask OR KeyPressMask );
+
+ (* Показываем окно *)
+ XMapWindow ( prDisplay, nWnd );
+
+ (* Цикл получения и обработки событий *)
+ while ( true ) do begin
+  XNextEvent ( prDisplay, @rEvent );
+
+  case ( rEvent.eventtype ) of
+    Expose :
+    begin
+     (* Запрос на перерисовку *)
+     if ( rEvent.xexpose.count &lt;&gt; 0 ) then
+      continue;
+
+     prGC := XCreateGC ( prDisplay, nWnd, 0 , nil );
+
+     XSetForeground ( prDisplay, prGC,
+       XBlackPixel ( prDisplay, 0) );
+     XDrawString ( prDisplay, nWnd, prGC, 10, 50,
+       'Hello, world!', strlen ( 'Hello, world!' ) );
+     XFreeGC ( prDisplay, prGC );
+    end;
+
+KeyPress :
+    begin
+     (* Нажатие клавиши клавиатуры *)
+     XCloseDisplay ( prDisplay );
+     halt ( 0 );
+    end;
+  end;
+ end;
+end.
+</pre>
+
+<b>Приложение:</b>
+&nbsp;&nbsp;Исходный код программы <a href="hello.zip">hello.pas</a>
+
+<br>
+<br>
+
+Для сборки программы используется команда:
+<br>&nbsp;&nbsp;<code>fpc hello.pas</code>
+
+<br>
+<br>
+
+Здесь <code>fpc</code> - имя исполняемого файла компилятора.
+Как правило, это символическая ссылка на реальное имя компилятора
+(например, <code>ppc386</code>).
+
+<br>
+<br>
+
+В современных версиях UNIX для создания программных
+продуктов используются не только компиляторы командной строки, но и самые
+разнообразные интегрированные среды. Одной из наиболее удобных, по нашему
+мнению, является интегрированная среда разработки <I>Анюта</I> (Anjuta). Ее
+создатель - индийский программист Наба Кумар - позаботился о том, чтобы мы
+чувствовали себя в ней комфортно.
+
+Для того, чтобы разрешить в Анюте поддержку русского
+языка, необходимо добавить в файл свойств этой программы
+(<code>~/.anjuta/session.properties</code>) строку
+
+<br>
+
+&nbsp;&nbsp;<code>character.set=204</code>
+
+<br>
+<br>
+
+Для подключения компилятора FreePascal необходимо
+добавить в диалог "Команды" следующие установки:
+
+<br>
+<br>
+
+<CENTER><IMG SRC="images/image4.gif" WIDTH=659 HEIGHT=441></center>
+
+<br>
+<br>
+
+На рис. 1.3 показан внешний вид приложения после его
+запуска.
+
+<br>
+<br>
+
+<CENTER><IMG SRC="images/image5.gif" WIDTH=108 HEIGHT=128>
+
+<br>
+<br>
+
+Рис. 1.3. Окно приложения xhello в среде KDE
+</center>
+
+<br>
+<br>
+
+Программа использует ряд функций, предоставляемых
+библиотекой Xlib: <code>XOpenDisplay(),
+XCreateSimpleWindow()</code> и др. Их прототипы, стандартные структуры
+данных, макросы и константы описаны в следующих основных файлах-модулях:
+<code>Xlib, Xutil, X, X11</code>.
+
+<br>
+<br>
+
+Перейдем к рассмотрению самой программы. Она начинается
+установлением связи с Х-сервером. Делает это функция
+<code>XOpenDisplay()</code>. Ее аргумент определяет
+сервер, с которым надо связаться. Если в качестве параметра
+<code>XOpenDisplay()</code> получает
+<code>nil</code>, то она открывает доступ к серверу, который
+задается переменной среды (environment)
+<code>DISPLAY</code>. И значение этой переменной, и значение параметра
+функции имеют следующий формат:
+<code>host:server.screen</code>, где
+<code>host</code> - имя компьютера, на котором выполняется сервер,
+<code>server</code> - номер сервера (обычно
+это 0), а <code>screen</code> - это номер
+экрана. Например, запись kiev:0.0 задает компьютер kiev, а в качестве номера
+сервера и экрана используется 0. Заметим, что номер экрана указывать не
+обязательно.
+
+<br>
+<br>
+
+Процедура <code>XOpenDisplay()</code> возвращает указатель на структуру типа
+<code>TDisplay</code>. Это большой набор
+данных, содержащий информацию о сервере и экранах. Указатель следует
+запомнить, т.к. он используется в качестве параметра во многих процедурах
+Xlib.
+
+<br>
+<br>
+
+<code>XOpenDisplay()</code>
+соединяет программу с X сервером, используя протоколы TCP или DECnet, или же
+с использованием некоторого локального протокола межпроцессного
+взаимодействия. Если имя машины и номер дисплея разделяются одним знаком
+двоеточия (:), то
+<code>XOpenDisplay()</code> производит соединение с использованием протокола
+TCP. Если же имя машины отделено от номера дисплея двойным двоеточием (::),
+то для соединения используется протокол DECnet. При отсутствии поля имени
+машины в имени дисплея, то для соединения используется наиболее быстрые из
+доступных протоколов. Конкретный X сервер может поддерживать как все, так и
+некоторые из этих протоколов связи. Конкретные реализации Xlib могут
+дополнительно поддерживать другие протоколы.
+
+<br>
+<br>
+
+Если соединение проведено удачно,
+<code>XOpenDisplay()</code> возвращает указатель на
+структуру <code>TDisplay</code>, которая
+определяется в <code>Xlib.pp</code>. Если же
+установить соединение не удалось, то
+XOpenDisplay()</code> возвращает
+<code>NIL</code>. После успешного вызова
+<code>XOpenDisplay()</code> клиентской программой могут использоваться все
+экраны дисплея. Номер экрана возвращается функцией
+<code>XDefaultScreen()</code>. Доступ к полям структур
+<code>TDisplay</code> и
+<code>TScreen</code> возможен только посредством использования
+макроопределений и функций.
+
+<br>
+<br>
+
+После того, как связь с сервером установлена, программа
+"Hello" определяет номер экрана. Для этого используется функция
+<code>XDefaultScreen()</code>, возвращающий номер
+основного экрана. Переменная
+<code>nScreenNum</code> может иметь значение от 0 до величины
+<code>(ScreenCount(prDisplay)-1)</code>. Макрос
+<code>XScreenCount()</code> позволяет
+получить число экранов, обслуживаемых сервером.
+
+<br>
+<br>
+
+Следующий шаг - создание окна и показ его на дисплее. Для
+этого программа обращается к процедуре
+<code>XCreateWindow()</code> или
+<code>XCreateSimpleWindow()</code>. Для простоты мы используем вторую
+процедуру, параметры которой задают характеристики окна.
+
+<pre>  PrWind := XCreateSimpleWindow (
+      prDisplay, (* указатель на структуру TDisplay,
+                    описывающую сервер *)
+      XRootWindow (prDisplay, nScreenNum),
+            (* родительское окно, в данном случае,
+               это основное окно программы *)
+      WND_X, WND_Y,
+            (* начальные x и y координаты верхнего
+               левого угла окна программы *)
+      WND_WIDTH, WND_HEIGHT,
+            (* ширина окна и высота окна *)
+      WND_BORDER_WIDTH, (* ширина края окна *)
+      XBlackPixel ( prDisplay, nScreenNum ),
+            (* цвет переднего плана окна *)
+      XWhitePixel ( prDisplay, nScreenNum )
+            (* цвет фона окна *)
+     );
+</pre>
+
+Для задания цветов окна используются функции
+<code>XBlackPixel()</code> и
+<code>XWhitePixel()</code>. Они возвращают значения пикселей, которые
+считаются на данном дисплее и экране соответствующими "черному" и "белому"
+цветам. Функция <code>XCreateSimpleWindow()</code>
+ (<code>XCreateWindow()</code>) возвращает значение типа
+<code>TWindow</code>. Это целое число, идентифицирующее
+созданное окно.
+
+<br>
+<br>
+
+Среди параметров функций, создающих окна, есть те, которые
+определяют положение окна и его размеры. Эти аргументы принимаются во
+внимание системой X Window. Исключение составляет случай, когда родительским
+для создаваемого окна является "корневое" окно экрана. В этом случае решение
+о положение окна и его размерах принимает менеджер окон. Программа может
+пытаться повлиять на решение менеджера окон, сообщив ему свои "пожелания" с
+помощью функции
+<code>XSetWMProperties()</code>.
+
+<br>
+<br>
+
+Из листинга видно, что программа может сообщить менеджеру
+следующие параметры:
+
+<UL type=square>
+<LI>имя (заголовок) окна;</LI>
+<LI>имя пиктограммы окна;</LI>
+<LI>саму пиктограмму;</LI>
+<LI>параметры <code>argc</code> и
+<code>argv</code>, передаваемые от UNIX программе;</LI>
+<LI>желаемое положение окна, его размеры, другие рекомендации о его
+геометрии.</LI>
+</UL>
+<br>
+
+Имя окна и имя пиктограммы должны быть в начале
+преобразованы в "текстовые свойства", описываемые структурами типа
+<code>TXTextProperty</code>. Это выполняется процедурой
+<code>XStringListToTextProperty()</code>.
+
+<br>
+<br>
+
+Для передачи информации о желаемой геометрии окна
+используется структура
+<code>TXSizeHints</code>.
+
+<br>
+<br>
+
+X Window позволяет сообщить менеджеру также следующее:
+
+<UL type=square>
+<LI>начальное состояние окна; нормальное или минимизированное;</LI>
+<LI>воспринимает ли окно ввод с клавиатуры;</LI>
+<LI>класс программы и ее имя для чтения ресурсов из базы данных ресурсов.</LI>
+</UL>
+<br>
+
+После того, как "рекомендации" менеджеру окон переданы,
+программа выбирает события, на которые она будет реагировать. Для этого
+вызывается функция
+<code>XSelectInput()</code>. Ее последний аргумент есть комбинация битовых
+масок (флагов). В нашем случае это
+<code>ExposureMask or KeyPressMask</code>.
+<code>ExposureMask</code> сообщает X Window, что программа обрабатывает
+событие <code>Expose</code>. Оно посылается
+сервером каждый раз, когда окно должно быть перерисовано.
+<code>KeyPressMask</code> выбирает событие
+<code>KeyPress</code> - нажатие клавиши клавиатуры.
+
+<br>
+<br>
+
+Теперь окно программы создано, но не показано на экране.
+Чтобы это произошло, надо вызвать процедуру
+<code>XMapWindow()</code>. Заметим, что из-за буферизации событий
+библиотекой Xlib, окно не будет реально нарисовано, пока программа не
+обратится к процедуре получения сообщений от сервера
+<code>XNextEvent()</code>.
+
+<br>
+<br>
+
+Программы для X построены по принципу управляемости
+событиями. Поэтому, после того, как окно создано, заданы необходимые
+параметры для менеджера окон, основная ее работа - это получать сообщения от
+сервера и откликаться на них. Выполняется это в бесконечном цикле. Очередное
+событие "вынимается" процедурой
+<code>XNextEvent()</code>. Само оно есть переменная типа
+<code>XEvent</code>, который представляет собой
+объединение структур. Каждое событие
+<code>Expose</code>, <code>KeyPress</code> и т.д.)
+имеет свои данные (и, следовательно, свое поле в объединении
+<code>XEvent</code>).
+
+<br>
+<br>
+
+При получении сообщения
+<code>Expose</code> программа перерисовывает окно. Это событие является
+одним из наиболее важных событий, которые приложение может получить. Оно
+будет послано нашему окну в одном из различных случаев:
+
+<UL type=square>
+<LI>другое окно перекрыло часть нашего;</LI>
+<LI>наше окно было выведено поверх всех других окон;</LI>
+<LI>наше окно впервые прорисовывается на экране;</LI>
+<LI>наше окно было восстановлено после сворачивания.</LI>
+</UL>
+<br>
+
+Когда мы получаем событие
+<code>Expose</code>, мы должны взять данные события из члена
+<code>xexpose</code> объединения
+<code>XEvent</code>. Он содержит различные интересные
+поля:
+
+<UL type=square>
+<LI><code>count</code> - количество других событий
+<code>Expose</code>, ожидающие в очереди событий сервера.
+Это может быть полезным, если мы получаем несколько таких сообщений
+подряд - рекомендуется избегать перерисовывать окно, пока мы не получим
+последнее из их (то есть пока
+<code>count</code> не равно 0).
+</LI>
+
+<LI><code>window</code> - идентификатор окна, которому было послано сообщение
+<code>Expose</code> (в случае, если приложение зарегистрировало это событие
+в различных окнах).
+</LI>
+
+<LI><code>x</code>, <code>y</code> - координаты верхнего левого угла области окна,
+которая должна быть перерисована.
+</LI>
+
+<LI><code>width</code>, <code>height</code> - ширина и высота области окна,
+которая должна быть перерисована.
+</LI>
+</ul>
+<br>
+
+Действия по обработке
+<code>Expose</code> начинаются с создания графического контекста -
+структуры, которая содержит данные, необходимые для вывода информации, в
+нашем случае - текста:
+
+<br>
+&nbsp;&nbsp;<code>prGC := XCreateGC (prDisplay, prWnd, 0, NIL);</code>
+<br>
+<br>
+
+После этого рисуется строка "Hello, world!". Более графический контекст
+не нужен - он уничтожается:
+<br>
+<br>
+
+&nbsp;&nbsp;<code>XFreeGC (prDisplay, prGC);</code>
+<br>
+<br>
+
+Окно может получить несколько событий
+<code>Expose</code> одновременно. Чтобы не перерисовывать себя многократно,
+программа дожидается прихода последнего из них и только потом осуществляет
+вывод.
+
+<br>
+<br>
+
+Приход события <code>KeyPress</code> означает, что программу надо завершить:
+прекратить связь с сервером:
+<br>
+&nbsp;&nbsp;<code>XCloseDisplay (prDisplay);</code>
+<br>
+и вызвать функцию <code>halt()</code>.
+
+<br>
+<br>
+
+<code>XCloseDisplay()</code> закрывает соединение с Х сервером,
+закрывает все окна и удаляет идентификаторы ресурсов, созданных клиентом
+на дисплее. Для удаления только окна без разрыва связи с Х сервером
+необходимо использовать функции
+<code>XDestroyWindow()</code> и <code>XDestroySubWindows()</code>.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

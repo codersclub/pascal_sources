@@ -1,0 +1,53 @@
+<html><head><title>Slogro Fractals for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Две программы для рисования фракталов SLOGRO - одна на Ассемблере, другая на Паскале. Используется EGAVGA.BGI.<br><font color=#666666> Two programs that implements the SLOGRO fractal process described in Scientific American - Dec 1988.</font>">
+<meta name="keywords" content="pascal, sources, source code, slogro, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;slogro
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Slogro Fractals for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Devin Cook</TD>
+<TD class=black align='right'>26.11.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="slogro.gif"><p style="margin-left:20px">Две программы для рисования фракталов SLOGRO -
+одна на Ассемблере, другая на Паскале.
+Используется EGAVGA.BGI.<br><font color=#666666>
+Two programs that implements the SLOGRO fractal process
+described in Scientific American - Dec 1988.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="slogro.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>57k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Slogro & Slogro2
+By Devin Cook
+
+                 <img border=0 width=320 height=210 src="slogro1.gif" alt="">
+
+These two programs are implementations of the SLOGRO fractal process
+described in Scientific American - Dec 1988.
+
+Slogro.EXE is the standard implementation of SLOGRO.
+
+Slogro2.EXE has is roughly the same process except that the main
+particle movement routine has been redone in assembly ( FRAC.ASM
+), and an alteration has been done to the premise, whereby
+instead of the circle being a fixed radius, it is now a changing
+radius, starting at 10 pixels and working its way to 100.  This
+speeds things up but a factor of 20!  As the resting particles
+approach the radius, the circle is backed off, as to allow for a
+truly random process to still take place.
+
+The plotter routines were written for a Comscriber plotter, but
+could easily be altered to make a box on the paper at the
+relative location of the particle on any plotter.
+
+Finally the graphics are set up to run with a herc graphic card,
+but it should be fairly easy to alter it to work with any
+graphics system.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

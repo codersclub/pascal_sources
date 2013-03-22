@@ -1,0 +1,109 @@
+<html><head><title>Hardware Dirt Cheap Frame Grabber V2.02</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='It is a complex of hardware device and pascal program. The purpose of the DCFG is to simply provide a very simple method to grab video pictures and display them on a computer monitor.'>
+<meta name="keywords" content="pascal, sources, source code, dcfg202, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dcfg202
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Hardware Dirt Cheap Frame Grabber V2.02</TD>
+<TD nowrap class=black>&nbsp;Michael Day</TD>
+<TD class=black align='right'>24.01.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">It is a complex of hardware device and pascal program.
+The purpose of the DCFG is to simply provide a very simple method
+to grab video pictures and display them on a computer monitor.</TD><TD class=black colspan=2 align='right'><br><A HREF="dcfg202.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>54k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 Dirt Cheap Frame Grabber V2.02
+                         by Michael Day
+                     as of 5 January 1992
+                          Public Domain
+
+This device is free and released to the public domain.
+If you actually find a use for it, all the more power to ya!
+
+The purpose of the DCFG is to simply provide a very simple method
+to grab video pictures and display them on a computer monitor.
+
+Version 1.01 of the DCFG only provided 4 levels of gray scale.
+Version 2.01 makes a modification which allows for 12 gray scales
+by reading the port four times and interpolating the results.
+Version 2.02 fixes a schematic error (DO3 is pin 5, not pin 4).
+
+The DCFG requires at least a 80286 or better and a VGA
+display to run. While it is possible to change the program to
+allow operation on a 8086 and/or a different display, I'm not
+doing it. If you want to, you can. My intent was to just prove
+that it was possible.
+
+The frame grabber program at this point is very simple, and as a
+result has some problems. The heart of the program relies on a
+very fast IO port to memory instruction. It can operate as fast
+as the computer can shove data from the port to the memory. This
+is as fast as DMAing the data could do.  This method is sensitive
+to computer speed. As such, you may not get a stable picture at
+first. If you don't, use the left or right arrow keys to adjust
+the horizontal sample size. The up/down arrows adjust the
+vertical sample size, but this normally doesn't need to be done.
+
+You will probably notice some sparkles (pixels shifting left and
+right one pixel position). This is caused by sample jitter and is
+normal. All sampling systems have this problem. Some less than
+others. Even your TV has the problem, but it is normally good
+enough that you don't see it.
+
+The jitter is caused by the fact that the sampler is not
+perfectly synchronized to the incoming video signal. Your TV has
+a lot of circuitry in it to achieve the synchronization. Being
+that this is a dirt cheap frame grabber, there is only limited
+synchronization of the picture, and no synchronization of the
+sampler. If you want to try to improve on it, please do.
+
+To use the Dirt Cheap Frame Grabber, plug it into a PC printer
+port, and attach the other end to the video output from a VCR or
+TV Monitor and run the program. Use the left or right arrow keys
+to adjust the horizontal sample size to obtain a stable picture.
+
+Do not attach the Dirt Cheap Frame Grabber to the computer with a
+long printer cable. We are dealing with high speed signals here
+(up to 4MHz). It requires as short a connection to the computer
+as you can give it. I built my circuit inside the back shell of
+the connector that plugs into the printer port on the computer.
+
+---
+
+Future considerations for someone to do if they wish to improve
+on the design would be to improve the synchronization to reduce
+the jitter problem. At this point I don't have any ideas on how
+to improve the problem.
+
+Another improvement that is possible to do would be to analyze the
+captured video frame to determine the proper values to use for
+capturing the data such as scan line length in pixels, vertical
+sync length, total scan lines, etc.
+
+A mechanism to increase the size of the displayed picture, and
+maintain the best resolution possible while doing so.
+
+Save an image to disk or a series of images to make a movie.
+
+Be able to print a captured image.
+
+Integrate the image with sound.
+
+And of course integrating this stuff into Windows would be nice.
+
+
+That's all folks!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

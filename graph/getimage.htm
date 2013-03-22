@@ -1,0 +1,126 @@
+<html><head><title>Формат представления GETIMAGE в памяти</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Описание структуры для сохранения участка экрана процедурой GetIMage'>
+<meta name="keywords" content="pascal, sources, source code, getimage, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;getimage
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Формат представления GETIMAGE в памяти</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>15.03.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Описание структуры для сохранения участка экрана
+процедурой GetIMage</TD><TD class=black colspan=2 align='right'><br><A HREF="getimage.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Vitus B. Wagner &lt;vitus@agropc.msk.su&gt;
+Subj: Формат GetImage (для тех BGI о которых я знаю)
+Organization: Agroecological problems Center
+
+
+    MAlex@jvd.simbirsk.su (Malinovskiy Alex) 15 Mar 1994 wrote:
+
+&gt;   Subject: Help ! Фоpмат пpедставления GetImage в памяти.
+&gt;
+&gt; Я тут немного pешил заняться гpафикой на PASCALе и
+&gt;может кто подскажет фоpмат пpедставления GetImage в
+&gt;памяти и адpес видеопамяти.
+
+
+    Oleg Ponomarev &lt;oleg@msp.vaz.togliatti.su&gt; отвечал:
+
+&gt;   На сколько я помню, формат такой :
+&gt; 1. первые два слова - размер по X и по Y
+&gt; 2. Собственно имидж (величина его по X д.б. выравнена на границу байта,
+&gt;    т. е., например, если мы берем имидж с X=4, Y=1, то не используемые
+&gt;    биты в байте будут забиты нулями -&gt;   ****0000
+&gt; 3. Два ахинейских байта. Для чего они нужны я, в свое время, так и не
+&gt;    разобрался. Паскаль сует туда что-то непохожее на случайное, но это
+&gt;    что-то не оказывает, IMHO, не какого влияния на PutImage.
+&gt;
+&gt;   Содержание собственно имиджа зависит от типа видеоадаптора и видеорежима,
+&gt; с Геркулесом и CGA все просто, *по-моему*, просто берется соответсвующий
+&gt; кусок видеопамяти, с EGA (640x350x16) и VGA (640x480x16) немного сложней,
+&gt; имидж храниться по слоям, а что получится с VGA 320x200 при 256 цветах я
+&gt; даже не знаю.
+&gt;
+&gt;&gt;    адpес видеопамяти.
+&gt;               Кажись $A000:$0000
+&gt;
+&gt;  Надеюся, что чем-то помог
+&gt;                                           Олег Пономарев
+&gt;
+&gt;(848-2) 39-07-60 (work),    (848-2) 37-10-30 (home)
+
+
+Известно, что размер структуры требуемой для сохранения участка экрана
+процедурой GetIMage равен
+
+     Число_точек* Log (Число цветов) /8 +6 (Проблема округления см. ниже)
+                     2
+
+Как используются лишние 6 байт:
+  4 из них - заголовок структуры
+  XSize:Integer;
+  YSize:Integer;
+
+При этом для большинства BGI -драйверов XSize=X2-X1 , т.е. на 1 меньше, чем
+реальный размер сохраненной области.
+
+Единственное известное мне исключение - VGA256.BGI у которого XSize=X2-X1+1
+
+YSize по-моему у всех драйверов Y2-Y1, во всяком случае это нетрудно проверить,
+а мне в исходники своих процедур, генерирующих данные для PutImage лезть лень.
+
+Далее идут n байтов данных, организованных в соответствии со структурой
+видеопамяти данного режима
+
+Hercules и Cga 640x200 - 1 бит на пиксел, каждая строка начинается с нового
+байта, а в конце последнего - ряд неиспользуемых бит (от 0 до 7)
+
+CGA 320x200 - 2 бита на пиксел, неисп. бит в конце строки не более 6
+
+EGA,VGA   16 цветов (EGAVGA.VGA, VESA16.BGI)
+
+1 бит на пиксел, каждой строке экрана соответствуют 4 строки в образе, по
+одной на битовую плоскость. В каком порядке расположены битовые плоскости -
+не помню, но в PCX формате они строго наоборот.
+
+ то есть
+   последовательно записываются байты
+   первой плоскости первой строки
+   .........
+   четвертой плоскости первой строки
+   первой плоскости второй строки
+   .....
+   четвертой плоскости последней строки
+
+256-цветные режимы (VGA256.BGI, VESA256.BGI)
+ Самое простое - байт на пиксел. Неиспользуемых бит egro нет.
+
+Внутри каждой строки первый байт  - самый левый, внутри байта самый
+левый - старший бит.
+
+Как устроен Image в режиме EGA 640x350x4  не знаю, но думаю, что так же,
+как и в 640х350х16, только битовых плоскостей две.
+
+В конце структуры есть еще два байта. Зачем они нужны  - не знаю.
+Раньше думал, что контрольная сумма, но многолетний опыт показал,
+что от их значения работа PutImage никак не зависит.
+
+                  Надеюсь, что мои скромные советы Вам пригодятся.
+                           Vitus Wagner.
+
+Origin: SoftWeyr</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

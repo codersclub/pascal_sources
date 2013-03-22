@@ -1,0 +1,132 @@
+<html><head><title>3d Tutorial v1.8с for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Обучающее пособие по 3D-графике 320x200x256. Рассмотрены вопросы поворота в пространстве точки, проволочной модели и текстурированного объекта с затенением. <code> 3dTutorial v1.8с in Turbo Pascal (C) 4/29/1996 by fh/GODS</code>'>
+<meta name="keywords" content="pascal, sources, source code, 3dtutor, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;3dtutor
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;3d Tutorial v1.8с for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:fh@viktoria.drp.fmph.uniba.sk">fh/GODS</a></TD>
+<TD class=black align='right'>29.04.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="3dtutor.jpg"><p style="margin-left:20px">Обучающее пособие по 3D-графике 320x200x256.
+Рассмотрены вопросы поворота в пространстве точки,
+проволочной модели и текстурированного объекта
+с затенением. <br><code>
+3dTutorial v1.8с in Turbo Pascal (C) 4/29/1996 by fh/GODS</code></TD><TD class=black colspan=2 align='right'><br><A HREF="3dtutor.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>25k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    4/29/1996 in bratislava, slovakia
+
+another boring intro:
+
+  ... so here's something more about 3d rotation. this package
+  includes all the sources and stuff from the previous version
+  (1.0) so you don't need it in any case. in this tutorial i want
+  to continue with making 3d rotation and adding some more
+  complicated things in it (simple shading, some texture mapping
+  ) plus speeding it up a bit. this tutorial is still in pascal
+  (that is not because pascal is fast/good, but because i can't
+  program in anything else ). since the synergists explanation is
+  too simple and it doesn't cover the perspective, shading and
+  texture  mapping, i decided to write something about it. you'll
+  find the explanations in the .pas files.  i hope you'll enjoy
+  this tutorial.
+
+  *!* warning *!*: this version (1.8) is beta and is not the
+  final product. The final version (2.0) will be released
+
+contains:
+
+  3dbasics.txt - a simple explanation by synergist.
+  3dtutor2.txt - this text.
+  fh.nfo       - something about me, unimportant.
+  gods02.nfo   - something about the demogroup gods.
+  file_id.diz  - guess...
+
+  tut1.pas     - 1st step: 3d-rotation of one point.
+  tut2.pas     - 2nd step: rotation of a cube.
+
+                 <img border=0 width=200 height=125 src="3dtutor1.gif" alt="">
+
+  tut3.pas     - 3rd step: rotation of any object, interactive.
+
+                 <img border=0 width=200 height=125 src="3dtutor2.gif" alt="">
+
+  tut4.pas     - 4th step: a bit faster, with precalculated
+                 sin&cos.
+  tut4.pcx     - helps to understand the perspective
+
+                 <img border=0 width=200 height=125 src="3dtutor3.gif" alt="">
+
+  tut5.pas     - 5th step: simple perspective added + explanation.
+  tut6.pas     - 6th step: flat-shading on a cube + explanation.
+
+                 <img border=0 width=200 height=220 src="3dtutor4.gif" alt="">
+
+  tut7.pas     - 7th step: texture mapping + explanation.
+                 (* soon *)
+  tutunit.pas  - graphical unit with all the procedures and
+                 functions.
+
+  sample objects for tut3.pas, tut4.pas and tut5.pas:
+
+  tutor_1.dat  - old good cube. (8  points, 12 lines)
+  tutor_2.dat  - a pyramid.     (5  points, 8  lines)
+  tutor_3.dat  - something odd. (18 points, 48 lines)
+
+thanx:
+
+  synergist - for his explanation.
+  kmc       - for the shading and some help in pascal.
+
+greetz:
+
+  mato      - you _are_ working on the doom64k, aren't you?
+  thefaker  - now i've got my own unit ...
+  kiwidog   - your tutorial is better, but for how many years
+              have you been coding? (i code for 1 year in general
+              and 4 months in demos).
+
+history of 3dtutorial:
+
+  v1.0  1/1/1996
+   - initial release
+   - four steps + explanation
+   - covered simple rotation (just lines, no fills)
+   - put together in a week after i started to learn 3d
+   - surprisingly it got ***+ in demonews
+
+  v1.2с 2/14/1996
+   - added one more step with simple perspective
+   - some bugfixes
+   - this version was never released due to some problems with my
+     computer
+
+  v1.8с 4/27/1996
+   - one more steps (so now it got 6 steps) with shading
+   - texture mapping will be added *soon*
+   - added a crappy pcx that helps you understand it better
+   - another bugfixes
+   - released just few days after i learned these things myself
+     (after a two months break off the scene having somthing more
+     important to do - school)
+
+   - hope it'll get at least the same rating as the last time... :-)
+
+end-thing:
+
+ - fh (fh@viktoria.drp.fmph.uniba.sk),
+      (http://www.drp.fmph.uniba.sk/~fh).</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,161 @@
+<html><head><title>FreeType 1.1 - TrueType Font Rasterizer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Библиотека для работы TrueType фонтами. Компилируется в Borland Pascal 7 (DOS), Virtual Pascal (OS/2), FPC (Linux, DOS, OS/2), Delphi (16-bit & 32-bit versions).  FreeType 1 is a portable and highly efficient TrueType rendering engine, that is now successfully used to bring TrueType support to a very large variety of platforms and environments. FreeType 1 comes with a Pascal version that now runs on Borland Pascal 7 (DOS), fPrint Virtual Pascal (OS/2), FPC (Linux, DOS, OS/2) as well as Delphi (16-bit & 32-bit versions).'>
+<meta name="keywords" content="pascal, sources, source code, freetype, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;freetype
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FreeType 1.1 - TrueType Font Rasterizer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:turner@enst.fr">David Turner</a></TD>
+<TD class=black align='right'>11.09.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Библиотека для работы TrueType фонтами.
+Компилируется в Borland Pascal 7 (DOS), Virtual Pascal (OS/2),
+FPC (Linux, DOS, OS/2), Delphi (16-bit & 32-bit versions). <br>
+FreeType 1 is a portable and highly efficient TrueType rendering
+engine, that is now successfully used to bring TrueType support to a
+very large variety of platforms and environments.
+FreeType 1 comes with a Pascal version that now runs on Borland
+Pascal 7 (DOS), fPrint Virtual Pascal (OS/2), FPC (Linux, DOS, OS/2)
+as well as Delphi (16-bit & 32-bit versions).</TD><TD class=black colspan=2 align='right'><br><A HREF="freetype.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>332k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">--------	FreeType 1.1	----------
+
+Introduction
+
+DOCUMENT INDEX
+
+     - What is FreeType 1 ?
+     - Features
+     - Requirements
+     - Patent issues
+     - Download
+     - Documentation
+     - Screenshots
+     - Related Projects
+     - OpenType Layout support
+
+
+What is FreeType 1 ?
+--------------------
+     FreeType 1 is a portable and highly efficient TrueType rendering
+     engine, that is now successfully used to bring TrueType support to a
+     very large variety of platforms and environments, be they font
+     servers, graphics libraries or embedded systems.
+
+     FreeType 1 is a clean-room implementation that is not derived from
+     the original TrueType engine developed by Apple and Microsoft. It has
+     been created with the sole help of the published TrueType
+     specifications, which to our great surprise (and pain) turned out to
+     be extremely poor and misleading in critical areas. Much hard work
+     has been undertaken to solve ambiguities.  The end result is a
+     portable and fast renderer.
+
+     Note that FreeType 1 is a library. It is not a font server for your
+     favorite platform, even though it was designed to be used in many of
+     them. Note also that it is not a complete text-rendering library. Its
+     purpose is simply to open and manage font files, as well as load,
+     hint and render individual glyphs efficiently. You can also see it as
+     a "TrueType driver" for a higher-level library, though rendering text
+     with it is easy, as demonstrated by the test programs.
+
+     Its quality matches these of Windows and the Macintosh, while its
+     memory foot-print and code size (between 48 and 55 kByte of Intel
+     code) remain modest. A thing that cannot be said for most other
+     commercial engines available.
+
+     For more information, check our Download page or see the source and
+     its diffs through our ViewCVS interface.
+
+
+Features
+--------
+     The following features are part of FreeType 1:
+
+    Supports TrueType files (TTF) and collections (TTC). Doesn't support
+     GX or OpenType fonts, but these can be opened and used as normal TTF
+     files by the library. (With the exception of OTF OpenType fonts which
+     really embed a Type 1 font file within a TrueType storage).
+
+    Modular design: Memory and I/O operations can be very easily tailored
+     to your own platform/system (the standard release comes with ANSI
+     libc support).
+
+    Font smoothing, a.k.a. gray-scaling. Just like Win95, the renderer
+     only smoothes the parts of a glyph which need it (i.e., diagonals and
+     curves).
+
+    Support for all character mappings defined in the TrueType
+     specification. The client application can select whichever pleases
+     it.
+
+    A full-featured and efficient TrueType bytecode interpreter. The
+     engine is able to produce excellent output at small point sizes. This
+     component has been extremely difficult to get right, due to the
+     ambiguous and misleadings TrueType specifications. However, we now
+     match Windows and Mac qualities.
+
+    Written in portable ANSI C (and Pascal, for older FreeType 1
+     versions).  Should compile well on all kinds of systems (tested on
+     16, 32 and 64 bits processors). With full source code available.
+
+    Open Source License. FreeType can be included in all kinds of
+     commercial systems and software.
+
+    Provides test programs to "show-off" the library, runnable on the
+     following platforms: Dos, Unix, OS/2, Win95, and Amiga. Any porters
+     for other systems are welcome and should contact the developers team.
+
+    Support for extensions. These are separately linkable units which can
+     be used to enhance the engine's functionalities without recompiling
+     it. They can be written to access additional TrueType tables, or even
+     GX and/or OpenType ones (the latter is already available).
+
+    Kerning support: The TrueType kerning data is available through one
+     of the standard extensions that comes in this release. However, it is
+     up to the application to "interpret" the data, as many different
+     `formats' are supported.
+
+    Support for vertical metrics. The engine is able to provide client
+     applications with vertical glyph metrics if they are found in font
+     files (usually in CJKV fonts). If not present, it synthetizes metrics
+     from the horizontal values, ascender, and descender metrics. This
+     means that it is possible to render vertical text correctly.
+
+    Standard extensions are provided to access and load the glyph names
+     in the Postscript table.
+
+Requirements
+------------
+     The ANSI C version of the library should compile with no problems on
+     a great variety of platforms. Some ANSI-compliant compilers may
+     generate a lot of warnings when compiling it. These are not ANSI
+     warnings and can be safely ignored. The reference compiler is gcc
+     with the flags `-Wall' (all warnings) and `-ansi -pedantic', though
+     using it is not a requirement.
+
+     However, the test programs, which are used to demonstrate the engine,
+     are more system-specific as they use a tiny graphics sub-system in
+     order to display the engine's output on the screen or in a window.
+     The sub-system supports right now the following platforms: Dos, OS/2,
+     X11, Win95, and Amiga.  In addition, a platform independent driver
+     for the Allegro graphics library is available.
+
+     FreeType 1 comes with a Pascal version that now runs on Borland
+     Pascal 7 (DOS), fPrint Virtual Pascal (OS/2), FPC (Linux, DOS, OS/2)
+     as well as Delphi (16-bit & 32-bit versions). It is now almost
+     up-to-date with the C version, even though it doesn't include
+     extensions. It is located in the ftpascal CVS module.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

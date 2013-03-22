@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Доступ к ресурсам программ - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Доступ к ресурсам программ.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.4. <A class=blue HREF="resources.htm">Программы и их ресурсы</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.4.2. Доступ к ресурсам программ</h2>
+
+<dir>
+
+Пусть ресурсный файл подготовлен. Как получить доступ к
+его данным во время работы программы? Для этого X предоставляет набор
+процедур, которые совокупно называются <I>менеджер ресурсов</I> (Resource
+Manager), и специальную программу
+<code>xrdb</code>, которая позволяет считать любой ресурсный файл и включить
+его в общую таблицу ресурсов сервера. Последняя называется базой данных
+ресурсов сервера, и представляет собой область памяти, ассоциированную со
+свойством (property)
+<code>XA_RESOURCE_MANAGER</code> корневого окна экрана дисплея.
+
+<br>
+<br>
+
+Наиболее простой является процедура
+<code>XGetDefault()</code>. Она получает имя программы,
+имя ресурса и определяет значение последнего. При этом она последовательно
+совершает следующие шаги:
+
+<UL type=square>
+<LI>сначала ресурс ищется в базе данных сервера (в
+свойстве XA_RESOURCE_MANAGER);</LI>
+
+<LI>если он не найден, то значение ресурса определяется по
+файлу ".Xdefaults", который ищется в домашней (home) директории
+пользователя;</LI>
+
+<LI>если задана переменная среды XENVIRONMENT, то ресурс
+ищется в файле, на который указывает эта переменная.</LI>
+
+</UL>
+<br>
+
+Если ресурс одновременно встречается в
+"<code>.Xdefaults</code>" и файле, определяемом
+<code>XENVIRONMENT</code>, то берется последнее значение.
+
+<br>
+<br>
+
+В примере, приводимом ниже, используется
+<code>XGetDefault()</code>, чтобы получить строку,
+которую надо напечатать в окне программы. Предполагается, что имя программы -
+"<code>hello</code>", а строка - ресурс с
+именем "<code>helloWorld</code>", т.е. в
+файле "<code>.Xdefaults</code>" должна быть
+помещена, например, следующая запись:
+
+<pre>
+. . . . . . .
+hello.helloWorld : Hello, World!
+. . . . . . .
+</pre>
+
+Фрагмент программы, выполняющий чтение из файла ресурсов,
+будет выглядеть следующим образом:
+
+<pre>
+. . . . . . . .
+prDisplay : PDisplay;
+prGC : TGC;
+nWnd : TWindow;
+psString : PChar;
+. . . . . . . .
+(* Устанавливаем связь с сервером, получаем номер экрана. . .*)
+. . . . . . . .
+(* Выбираем события, обрабатываемые программой *) 
+XSelectInput (prDisplay, nWnd, ExposureMask OR KeyPressMask);
+
+(* Получаем рисуемую строку *) 
+psString := XGetDefault (prDisplay, 'hello', 'helloWorld');
+. . . . . . . .
+XDrawString ( prDisplay, nWnd, prGC, 10, 50, psString,
+              strlen (psString) );
+. . . . . . . .
+</pre>
+
+Обратите внимание на то, что после изменения файла
+"<code>.Xdefaults</code>" он должен быть обработан программой
+<code>xrdb</code> для того, чтобы X сервер включил в свою таблицу
+обновленные ресурсы.
+
+<br>
+<br>
+
+Функция <code>XGetDefault()</code> проста в обращении, но не достаточно гибка.
+Так, например, с ее помощью нельзя прочитать содержимое произвольного
+файла ресурсов. Рассмотрим другие более развитые возможности.
+
+<br>
+<br>
+
+Вызов <code>XrmInitialize()</code> инициализирует менеджер ресурсов.
+Обращение к этой функции предшествует вызовам остальных процедур.
+
+<pre>
+Procedure XrmParseCommand(
+    prDB : TXrmDatabase           { database };
+    prOptRec : TXrmOptionDescList { table };
+    nOptRecNum : integer          { table_count };
+    psProgName : pchar            { name };
+    argc : Pointer                { argc_in_out };
+    argv : ppchar                 { argv_in_out }
+);cdecl;external;
+</pre>
+
+сканирует строку, с помощью которой вызвана программа,
+и "достает" из нее ресурсы и их значения, при этом создается специальная
+структура данных - база данных ресурсов. Ресурсы и их значения помещаются
+в нее. Указатель на базу данных передается программе через переменную
+<code>prDB</code>. Параметр <code>psProgName</code> содержит имя программы,
+<code>argc</code> - число опций в командной строке, <code>argv</code> -
+сами опции. Аргумент <code>prOptRec</code> определяет, как разбирать
+командную строку. <code>nOptRecNum</code> задает число элементов массива
+<code>prOptRec</code>.
+
+<br>
+<br>
+
+В примере, приводимом ниже, определяется, что в командной строке опция
+"<code>-bg</code>" задает цвет фона; "<code>-fg</code>" - цвет переднего плана,
+а опция "<code>-xrm</code>" позволяет задать в командной строке любой ресурс
+программы.
+
+<pre>
+. . . . . . . .
+const
+  rOptRec : array [0..2] of TXrmOptionDescRec = (
+   ( '-bg', '*background', XrmoptionSepArg, 'Red'  ),
+   ( '-fg', '*foreground', XrmoptionSepArg, 'White' ),
+   ( '-xrm', NIL,     XrmoptionResArg, NIL  ),
+);
+var 
+  rDB : TXrmDatabase;
+. . . . . . . .
+//void main (int argc, char **argv)
+begin
+  . . . . . . . .
+  XrmInitialize( );
+  XrmParseCommand (rDB, rOptRec,
+     sizeof (rOptRec) / sizeof (rOptRec[0]),
+     argv[0], @argc, argv);
+  . . . . . . . .
+end.
+</pre>
+
+Процедура <code>XrmGetFileDataBase()</code> позволяет считать
+указанный ресурсный файл и создать по нему в памяти базу данных
+ресурсов. Функция
+
+<pre>
+Function XrmGetResource(
+    prDB : TXrmDatabase           { database };
+    psResName : pchar  { str_name };
+    psResClass : pchar  { str_class };
+    psResType : ppchar         { str_type_return };
+    psResVal : PXrmValue              { value_return }
+) : Tbool;cdecl;external;
+</pre>
+
+считывает ресурс с именем
+<code>psResName</code> и классом
+<code>psResClass</code> из базы данных
+<code>*prDB</code>. После возврата
+<code>psResType</code> есть указатель на строку, указывающую тип ресурса. На
+само значение ресурса указывает
+<code>psResVal</code>.
+
+<br>
+<br>
+
+Функция <code>XrmPutResource()</code> сохраняет ресурс в базе данных.
+<code>XrmPutFileDatabase()</code> записывает базу данных
+ресурсов в файл.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

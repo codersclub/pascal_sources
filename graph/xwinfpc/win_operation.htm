@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Операции над окнами - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Операции над окнами.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A class=blue HREF="basics.htm">Основные понятия</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.1.9. Операции над окнами</h2>
+
+<dir>
+
+Манипулировать окнами можно не только с помощью атрибутов:
+Xlib предоставляет набор функций для изменения их размеров,
+перемещения на экране и в стеке окон, сворачивания и т.п.
+
+<br>
+<br>
+
+Первая пара операций, которые можно применить к окну -
+<I>отображение или скрытие</I>. Отображение окна заставляют окно появиться на
+экране, скрытие приводит к удалению с экрана (хотя логическое окно в памяти
+все еще существует). Например, если в вашей программе есть диалоговое окно,
+вместо создания его каждый раз по запросу пользователя, мы можем создать окно
+один раз в скрытом режиме и, когда пользователь запросит открыть диалог,
+просто отобразить окно на экране. Когда пользователь нажимает
+"<code>OK</code>" или
+"<code>Cancel</code>", окно скрывается. Это значительно быстрее создания и
+уничтожения окна, однако стоит ресурсов, как на стороне клиента, так и на
+стороне X сервера.
+
+<br>
+<br>
+
+Отображение окна может быть выполнено с помощью
+<code>XMapWindow()</code>, скрытие - с
+помощью <code>XUnmapWindow()</code>. Функция
+отображения заставит событие
+<code>Expose</code> послаться программе, если только окно полностью не
+закрыто другими окнами.
+
+<br>
+<br>
+
+Другое действие, которое можно выполнить над окнами -
+<I>переместить</I> их в другую позиции. Это может быть выполнено функцией
+<code>XMoveWindow()</code>, которая
+принимает новые координаты окна. Имейте в виду, что после перемещения окно
+может быть частично скрытым другими окнами (или наоборот, открыто ими), и
+таким образом, может быть сгенерировано сообщение
+<code>Expose</code>.
+
+<br>
+<br>
+
+<I>Изменить размер окна</I> можно с помощью функции
+<code>XResizeWindow()</code>. Мы можем также
+объединить перемещение и изменение размеров, используя одну функцию
+<code>XMoveResizeWindow()</code>.
+
+<br>
+<br>
+
+Все приведенные выше функции изменяли свойства одного
+окна. Существует ряд свойств, связанных с данным окном и другими окнами. Одно
+из них - <I>порядок засылки в стек</I>: порядок, в котором окна располагаются
+друг над другом. Говорят, что окно переднего плана находится на верхе стека,
+а окно заднего плана - на дне стека. Перемещение окна на вершину стека
+осуществляет функция
+<code>XRaiseWindow()</code>, перемещение окна на дно стека - функция
+<code>XLowerWindow()</code>.
+
+<br>
+<br>
+
+С помощью функции
+<code>XIconifyWindow()</code> окно может быть <I>свернуто</I>, а с помощью
+<code>XMapWindow()</code> -
+<I>восстановлено</I>. Для того, чтобы понять, почему для
+<code>XIconifyWindow()</code> нет обратной функции,
+необходимо заметить, что, когда окно сворачивается, на самом деле оно
+скрывается, а вместо него отображается окно иконки. Таким образом, чтобы
+восстановить исходное окно, нужно просто отобразить его снова. Иконка
+является на самом деле другим окном, которое просто тесно связано сильно с
+нашим нормальным окном - это не другое состояние нашего окна.
+
+<br>
+<br>
+
+Следующий пример демонстрирует использование операций над
+окнами:
+
+<pre>
+uses x,xlib,xutil,crt,dos;
+
+(*
+ create_simple_window - создает окно с белым фоном заданного размера.
+ Принимает в качестве параметров дисплей, размер окна (в пикселях)
+ и положение окна (также в пикселях). Возвращает дескриптор окна.
+ Окно создается с черной рамкой шириной в 2 пикселя и автоматичсеки
+ отображается после создания.
+*)
+function create_simple_window(display : PDisplay;
+         width, height, x, y : integer): TWindow;
+var
+  screen_num, win_border_width: integer;
+  win: TWindow;
+begin
+ screen_num := XDefaultScreen(display);
+ win_border_width := 2;
+
+(*
+ создаем простое окно как прямой потомок корневого окна экрана,
+ используя черный и белый цвета в качестве основного и фонового, и
+ размещая новое окно в верхнем левом углу по заданным координатам
+*)
+ win := XCreateSimpleWindow(display, XRootWindow(display, screen_num),
+              x, y, width, height, win_border_width,
+              XBlackPixel(display, screen_num),
+              XWhitePixel(display, screen_num));
+
+ (* Отображаем окно на экране. *)
+ XMapWindow(display, win);
+
+ (* Заставляем выполниться все запросы к Х серверу. *)
+ XFlush(display);
+
+ create_simple_window:=win;
+end;
+
+
+//void main(int argc, char* argv[])
+var
+ display: PDisplay; (* указатель на структуру дисплея Х *)
+ screen_num: integer; (* количество экранов для размещения окон *)
+ win: TWindow; (* дескриптор создаваемого окна *)
+ display_width, display_height: word; (* высота и ширина Х дисплея *)
+ win_width, win_height: word; (* высота и ширина нового окна *)
+ display_name: array [0..30] of Char;
+ name: string;
+ i: integer;
+ win_attr: TXWindowAttributes;
+ xx, y, scr_x, scr_y: integer;
+ child_win: TWindow;
+ (* переменная для хранения дескриптора родительского окна *)
+ parent_win: TWindow;
+ (* эта переменная будет хранить дескриптор корневого окна *)
+ (* экрана, на котором отображено наше окно *)
+ root_win: TWindow;
+ (* эта переменная будет хранить массив дескрипторов *)
+ (* дочерних окон нашего окна, *)
+ child_windows: PWindow;
+ (* а эта - их количество *)
+ num_child_windows: integer;
+
+begin
+ name := getenv('DISPLAY'); (* имя Х дисплея *)
+ for i:=1 to byte(name[0]) do
+   display_name[i-1]:=name[i];
+ display_name[byte(name[0])]:=#0;
+ (* устанавливаем соединение с Х сервером *)
+ display := XOpenDisplay(display_name);
+ if (display = NIL) then begin
+  writeln(paramstr(0),': не могу соединиться с Х сервером ',
+      display_name);
+  halt(1);
+ end;
+
+ (* получаем геометрию экрана по умолчанию для нашего дисплея *)
+ screen_num := XDefaultScreen(display);
+ display_width := XDisplayWidth(display, screen_num);
+ display_height := XDisplayHeight(display, screen_num);
+
+ (* создаем новое окно в 1/9 площади экрана *)
+ win_width := (display_width div 3);
+ win_height := (display_height div 3);
+ (* отладочная печать в стандартный вывод *)
+ writeln('ширина окна - ', win_width, '; высота - ', win_height);
+
+ (* создаем простое окно как прямой потомок корневого окна экрана,   *)
+ (* используя черный и белый цвета в качестве основного и фонового, и*)
+ (* размещая новое окно в верхнем левом углу по заданным координатам *)
+ win := create_simple_window(display, win_width, win_height, 0, 0);
+
+ XFlush(display);
+
+ (* отдохнем после трудов праведных *)
+ delay(3000);
+
+ (* пример изменения размеров окна *)
+ begin
+
+  (* в цикле уменьшаем окно *)
+  for i:=0 to 39 do begin
+   dec(win_width,3);
+   dec(win_height,3);
+   XResizeWindow(display, win, win_width, win_height);
+   XFlush(display);
+   delay(20);
+  end;
+
+  (* в цикле увеличиваем окно *)
+  for i:=0 to 39 do begin
+   inc(win_width,3);
+   inc(win_height,3);
+   XResizeWindow(display, win, win_width, win_height);
+   XFlush(display);
+   delay(20);
+  end;
+ end;
+
+ delay(1000);
+
+ (* пример перемещения окна *)
+ begin
+
+  (* вначале получаем текущие атрибуты окна *)
+  XGetWindowAttributes(display, win, @win_attr);
+
+  xx := win_attr.x;
+  y := win_attr.y;
+
+  (* затем находим окно родителя *)
+  begin
+
+   (* выполним запрос необходимых значений *)
+   XQueryTree(display, win,
+         @root_win,
+         @parent_win,
+         @child_windows, @num_child_windows);
+
+   (* мы должны освободить список дочерних дескрипторов, *)
+   (* так как он был динамически выделен XQueryTree()  *)
+   XFree(child_windows);
+  end;
+
+  (* Транслируем локальные координаты в экранные, используя    *)
+  (* корневое окно как окно, относительно которого выполняется *)
+  (* трансляция. Это работает потому, что корневое окно всегда *)
+  (*занимает весь экран, и его левый верхний угол совпадает    *)
+  (* с левым верхним углом экрана                              *)
+  XTranslateCoordinates(display,
+             parent_win, win_attr.root,
+             xx, y,
+             @scr_x, @scr_y,
+             @child_win);
+
+  (* перемещаем окно влево *)
+  for i:=0 to 39 do begin
+   dec(scr_x,3);
+   XMoveWindow(display, win, scr_x, scr_y);
+   XFlush(display);
+   delay(20);
+  end;
+
+  (* перемещаем окно вниз *)
+  for i:=0 to 39 do  begin
+   inc(scr_y,3);
+   XMoveWindow(display, win, scr_x, scr_y);
+   XFlush(display);
+   delay(20);
+  end;
+
+  (* перемещаем окно вправо *)
+  for i:=0 to 39 do  begin
+   inc(scr_x,3);
+   XMoveWindow(display, win, scr_x, scr_y);
+   XFlush(display);
+   delay(20);
+  end;
+
+  (* перемещаем окно вверх *)
+  for i:=0 to 39 do  begin
+   dec(scr_y,3);
+   XMoveWindow(display, win, scr_x, scr_y);
+   XFlush(display);
+   delay(20);
+  end;
+ end;
+
+ delay(1000);
+
+ (* пример сворачивания и восстановления окна *)
+ begin
+  (* сворачиваем окно *)
+  XIconifyWindow(display, win, XDefaultScreen(display));
+  XFlush(display);
+  delay(2000);
+  (* восстанавливаем окно *)
+  XMapWindow(display, win);
+  XFlush(display);
+  delay(2000);
+ end;
+
+ XFlush(display);
+
+ (* короткая передышка *)
+ delay(2000);
+
+ (* закрываем соединение с Х сервером *)
+ XCloseDisplay(display);
+end.
+</pre>
+
+<br>
+
+<b>Приложение:</b>
+&nbsp;&nbsp;Исходный код программы <a class=blueb href="winmove.zip">winmove.pas</a>
+
+</dir>
+<br>
+
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

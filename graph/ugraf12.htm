@@ -1,0 +1,112 @@
+<html><head><title>UGraf v1.2 - SVGA Graphics Library for TP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Небольшая графическая библиотека для TP5 - BP7. Поддерживает мышку, стандартные режимы от GRAPH.TPU, Режим 13h, 256-цветные VESA режимы. Приведено 7 примеров использования.  Small SVGA graphics unit for TP. It supports all VESA 256 and more colors mode, plus mode 13h, plus all mode supported by standard graph unit. It also supports memory bitmaps.'>
+<meta name="keywords" content="pascal, sources, source code, ugraf12, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ugraf12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;UGraf v1.2 - SVGA Graphics Library for TP</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:premelfa@etu.utc.fr">Fabrice Premel</a></TD>
+<TD class=black align='right'>01.03.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="ugraf12.gif"><p style="margin-left:20px">Небольшая графическая библиотека для TP5 - BP7.
+Поддерживает мышку, стандартные режимы от GRAPH.TPU, Режим 13h,
+256-цветные VESA режимы. Приведено 7 примеров использования. <br>
+Small SVGA graphics unit for TP.
+It supports all VESA 256 and more colors mode, plus mode 13h,
+plus all mode supported by standard graph unit.
+It also supports memory bitmaps.</TD><TD class=black colspan=2 align='right'><br><A HREF="ugraf12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>124k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">				UGRAF.PAS
+
+This is a (for the moment) small graphics unit in tp. It supports
+all VESA 256 and more colors mode, plus mode 13h, plus all mode
+supported by standard graph unit. It also supports memory
+bitmaps.
+
+                   <img border=0 width=200 height=125 src="ugraf121.gif" alt="">
+
+This unit is livred as it ... No warranty ....
+
+I tried to designed as a project, which means that any
+improvement from anyone would be grantly appreciated.
+
+                   <img border=0 width=200 height=125 src="ugraf122.gif" alt="">
+
+Instalation of help file :
+the help file given with the unit can be added to your TP help
+system, open the Help/Files menu, and add ugraf.tph there, using
+the "new" button.
+You can then access to the help file like any other hel pfile (ie
+you can use it as crt's one, for example).
+
+                   <img border=0 width=200 height=125 src="ugraf123.gif" alt="">
+
+(see ugraf.pas for more detailled presentation of unit and new
+features)
+
+Revision history :
+
+Version 1.2
+Added :
+      New blitting function that allow an enhacement such as 2
+        times when blitting from memory to screen.
+
+      Added an help file (can be completed, but should be very
+      useful as is).
+
+      Fixed small bugs :
+            . gif loads now really return a value
+            . mode switching did sometimes report false even if
+              it works. Corrected.
+            . corrected 24 bits bug. Modes now works correct.
+
+      Added a new mode selecting function (find_best_mode()) :
+            You now pass the wanted X and Y resolution, and the
+            number of bits per pixel, and the function finds the
+            nearest mode for you.
+            You should use this as often as possible.
+
+Version 1.1
+Added :
+      Keyboard functions
+               New keypressed function, a lot faster than crt's
+               Can handle extended keys
+               Clear buffer function
+      Timer function
+               Timer interrupt function
+      Virtual screens functions All function can be done on
+               normal screen or on virtual screens Actually,
+               there is a problem : only 320*200 mode can have a
+               virtual screen, not because of ugraf limitation,
+               but because of 640Ko limit (don't forget that a
+               point is 4 bytes ...). I will maybe :
+                 . limit size of a pixel to his normal size
+                 . Add xms/ems support
+               But, all theese improvements will slow program, or
+               reduce possibilities (blitting between 2 modes
+               with different bits per pixel)
+      Example programs
+               Quite short and not very good, but they should help.
+
+Version 1.0
+First distributed version.
+
+See ugraf.pas for some comment, interseting stuff, to do, how to
+contact me, thanks ...
+
+Fabrice Premel
+premelfa@etu.utc.fr</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

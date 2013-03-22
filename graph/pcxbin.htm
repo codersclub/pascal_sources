@@ -1,0 +1,56 @@
+<html><head><title>PcxBin - Load and Show PCX Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для вывода изображений в формате PCX, предварительно сконвертированных в объектный файл с помощью утилиты BinObj.  It will display a PCX file in many formats that is converted with BINOBJ and linked in at compile time.'>
+<meta name="keywords" content="pascal, sources, source code, pcxbin, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pcxbin
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PcxBin - Load and Show PCX Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:74146.2552@compuserv.com">Chris Lamb</a></TD>
+<TD class=black align='right'>30.09.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="pcxbin.gif"><p style="margin-left:20px">Программа для вывода изображений в формате PCX,
+предварительно сконвертированных в объектный файл
+с помощью утилиты BinObj. <br>
+It will display a PCX file in many formats that is
+converted with BINOBJ and linked in at compile time.</TD><TD class=black colspan=2 align='right'><br><A HREF="pcxbin.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">A unit to load graphical pictures
+
+                  <img border=0 width=200 height=125 src="pcxbin1.gif" alt="">
+
+This is a conversion of the PCXSHOW program by myself and Dan
+Davis. It will display a PCX file in many formats.  I have
+changed the original to accept a pointer to a procedure.  This
+procedure is a picture converted with BINOBJ and linked in at
+compile time.  At this time you must also pass the size of the
+file to the procedure.  I am trying to figure out how to find the
+size of the linked procedure from within the program.  This would
+enable you to link with any picture file and not worry what the
+size is.
+
+  Formats supported :
+  BSAVE Pic Format                     320 x 200 x 004
+  PC/Microsoft Paintbrush .PCX files : 320 x 200 x 004
+  PC/Microsoft Paintbrush .PCX files : 640 x 350 x 016
+  PC/Microsoft Paintbrush .PCX files : 320 x 200 x 256
+
+I would appreciate you sending me any changes you make to the
+code as I am always eager to learn new approches to problems.
+
+Chris Lamb       [Compuserve PPN - 74146,2552]
+1516 Gardenia
+Allen, TX  75002</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

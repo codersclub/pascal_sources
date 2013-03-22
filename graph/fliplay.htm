@@ -1,0 +1,58 @@
+<html><head><title>FLI-Player v1.1 for TP 6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This program plays animations (sequences of pictures) made by programs like Autodesk Animator (so called .FLI-files). The program decodes the .FLI file, frame by frame, and uses the systemclock for mesuring the time-delay between each frame.'>
+<meta name="keywords" content="pascal, sources, source code, fliplay, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fliplay
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FLI-Player v1.1 for TP 6.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:thaco@solan.unit.no">Eirik Milch Pedersen</a></TD>
+<TD class=black align='right'>12.08.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This program plays animations (sequences of pictures)
+made by programs like Autodesk Animator (so called .FLI-files).
+The program decodes the .FLI file, frame by frame,
+and uses the systemclock for mesuring the time-delay
+between each frame.</TD><TD class=black colspan=2 align='right'><br><A HREF="fliplay.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  .FLI-Player v1.1 by Thaco
+  (c) EPOS, August 1992
+
+  Usage:
+
+  FLIPLAY &lt;options&gt; &lt;filename&gt;
+              |         |
+              |         +--  Filename of .FLI file
+              +------------  -d   = Do not use XMS
+                             -i   = Information about the program
+                             -n   = No checking of MCGA mode support
+                             -sNN = Set playspeed to NN video ticks (0-99)
+                                    ( NN=70 ў frame delay of 1 second )
+
+Program information:
+This program plays animations (sequences of pictures) made by programs like
+Autodesk Animator (so called .FLI-files). The program decodes the .FLI file,
+frame by frame, and uses the systemclock for mesuring the time-delay between
+each frame.
+Basis for the program was the FliLib package made by Jim Kent, but since the
+original source was written in C, and I am not a good C-writer, I decided
+to write my own .FLI-player in Turbo Pascal v6.0.
+This program was made by Eirik Milch Pedersen (thaco@solan.unit.no).
+Copyright Eirik Pedersens Own Softwarecompany (EPOS), August 1992
+
+Autodesk Animator is (c) Autodesk Inc
+FliLib is (c) Dancing Flame
+Turbo Pascal is (c) Borland International Inc</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

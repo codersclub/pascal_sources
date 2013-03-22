@@ -1,0 +1,522 @@
+<html><head><title>GRAFX 1.4b3 - Ultimative Graphical Unit for TP/BP 7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='GRAFX 1.4b3. The ultimative graphical unit for TP/BP 7. Most syntax compatible with BGI, but much more faster!<br>. One Vectorfont, a lot of Bitmap fonts. 8/15/16-bits modes accessable <br>. 386+ code, HW-Acceleration on S3 and Cirrus! <br>. +BMP/PCX-loader/saver (damn fast!) <br>. +PNG-loader,IFF-loader/saver <br>. +JPG-loader/saver(other DL needed->grafx.txt) <br>. +Mouse unit (even animated cursors!) <br>. Full Source code'>
+<meta name="keywords" content="pascal, sources, source code, grafx14, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;grafx14
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GRAFX 1.4b3 - Ultimative Graphical Unit for TP/BP 7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stefan.goehler@gmx.de">Stefan Goehler</a></TD>
+<TD class=black align='right'>14.11.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">GRAFX 1.4b3.
+The ultimative graphical unit for TP/BP 7.
+Most syntax compatible with BGI, but much more faster! <br>
+. One Vectorfont, a lot of Bitmap <br>
+. fonts. 8/15/16-bits modes accessable <br>
+. 386+ code, HW-Acceleration on S3 and Cirrus! <br>
+. +BMP/PCX-loader/saver (damn fast!) <br>
+. +PNG-loader,IFF-loader/saver <br>
+. +JPG-loader/saver(other DL needed->grafx.txt) <br>
+. +Mouse unit (even animated cursors!) <br>
+. Full Source code</TD><TD class=black colspan=2 align='right'><br><A HREF="grafx14.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>309k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    ђјјј ђјјѓ ђјјѓ ђјјј ђ  ђ
+    ђ  ѓ ђѓѓј ђѓѓђ ђѓ   ѓјјѓ
+    јјјј ј  ј ј  ј ј    ј  ј *************************************************
+  ******************************* (c) 1996-1998 by Stefan Goehler, Germany ***
+ ***** GRAFX 1.4b3 ***********************************************************
+*****  Documentation - Version 1.1                                       *****
+****  Find me in the Web @ http://sourcenet.home.pages.de                  ***
+***  Mail me @ stefan.goehler@gmx.de                                         *
+**                                                                           *
+*                                                                            *
+* Thanx fly to Dmitri Chaloupov for doing some corrections on my spelling :) *
+* Also Hristo Chilingirov should be mentioned - he reprogrammed the          *
+* hardware acceleration for Cirrus cards - he had IMHO a good                *
+* documentation, the cirrus-unit seems to run very well.                     *
+* Another thanx flies to Christian Klukas - he made a lot of testing on      *
+* version 1.3. Only with his help I was able to make the newest              *
+* release 1.3 so stable and bugfree (hey ;)!                                 *
+******                                                                       *
+******************************************************************************
+***
+*
+
+Hi!
+
+
+Some release notes:
+GrafX makes use of the S3 and Cirrus hardware accelerated functions.
+On these cards, UNIVBE _won't_ speed up the card in any way. In this
+case UNIVBE is only wasted memory! There may be some incompatibilities
+with such cards.
+There's a procedure to control this: SetAccelerationMode(Mode : byte)
+Following numbers you can use as mode:
+0 : NO acceleration - use ONLY VESA
+1 : Use speedups like scrolling, bankswitching
+2 : Use ALL supported HW-accelerations (default)
+The best way is, you call this procedure BEFORE you use setmode.
+Of course you can change also the acceleration mode by runtime,
+but you should use this only for changes by the user of your
+software by runtime.
+
+I'll revise this text also into html in the next time (I think
+with Grafx2).
+BTW, the manual is not finished. I began making it with version
+1.3a1 or so, where were not all procedures. Don't blame me, I'm
+happy I finally finished version 1.3c (final version) after a
+period of a half year [grin]. The manual will get a bit revised
+with this version, GrafX 1.4, in some time.
+
+STOP!
+Before doing anything, read this COPYRIGHT information:
+1st
+You can use my units entired in your own programs. Ripping any code off
+is not allowed without my permission.
+2nd
+If you wanna use this unit in commercial products, I mean if you wanna get
+ANY money or other for software based on one of my units, you'll have to
+contact me - we'll find a way. If you don't do that, you're breaking the
+laws. In any other way you can see my software as FREEWARE.
+3rd
+You are not allowed to do any modifications on my units without my permission,
+if you wanna use it in commercial products. Otherwise you are allowed to do
+them. If they are useful, please let me know what you've done and give me
+the modifications.
+4th
+You must not use or spread any of the delivered units single. This is
+only allowed if I gave you my permission.
+5th
+'Get my permission' means for me that you have to ask me especially
+for the thing to permit via email or sth.
+
+
+Other partial copyrights:
+.IFFUNIT: Thomas Koos &lt;muetze1@gmx.de&gt;
+.PNGUNIT: Oliver Fromme &lt;fromme@rz.tu-clausthal.de&gt;
+.FLCLIB : Max Maischein &lt;corion@informatik.uni-frankfurt.de&gt;
+.GR_CIRR: Hristo Chilingirov &lt;hgch@usa.net&gt;
+.JPEG   : Joint Picture Experts Group, Jacques Nomssi Nzali
+          (he made the pascal-conversion) &lt;http://www.tu-chemnitz.de/~nomssi&gt;
+
+JPEG:
+Because the sources are very large, I decided to link the site of Jacques
+Nomssi Nzali - he's the person, which converted the C-sources to Pas.
+Thank him for anything related with Jpeg ;)
+Some instructions, how to use it:
+Download his sources at http://www.tu-chemnitz.de/~nomssi, if you haven't
+done this yet. Decompress them and copy the file JIDCTFAST.PAS, which is
+included in the directory LOADER of the GrafX-package, over it's original.
+Why this? Well, this is the unit, which does the DCT-conversion - it's
+essentially for decompressing. Like you may know from me, I always
+optimize slow things - so that one is - it's almost twice as fast as it's
+original ;). And also copy the file JPEGUNIT.PAS in that jpeg-dir - it's
+the interface-unit for GrafX, which contains both load- and save-procedures.
+
+INSTALLING INFORMATION:
+I tried to put the files in a overviewable way into the zip-library, this
+means that they are not at all in the way you'll need them.
+So, just do this: decompress the files WITH SUBDIRS into your tp\bin -
+directory (or whereever your turbo.exe is placed), after that move all
+files from tp\bin\loader to tp\bin and do the same with the directory
+tp\bin\demo. Thereafter delete these subdirs, which are empty now.
+It's your stuff how you do it with the tp\bin\fonts - dir, but I
+suggest to keep it - more than 25 fonts spreaded in your bin - directory
+are not that fine thing ;)
+
+The most important commands:
+.setmode     (setting up a graphical mode)
+.graphresult (needs to be called after setmode)
+.closegraph  (any comments? ;)
+
+What you need to do:
+Add to your USES-line the following units:
+gr_vars,grafx
+Make sure that GrafX is AFTER crt, because the color-constants
+(white, blue, etc.) have other values in hicolor-modes.
+
+shortcuts : i.e. = in example
+
+&gt;&gt; procedure getpal;
+   Get the whole palette and put the colors into the variable pal.
+
+&gt;&gt; procedure setpal;
+   Set the whole palette provided by the variable pal.
+
+&gt;&gt; procedure getuserpal(var pal);
+   Same as getpal, but you can give your own colortable as a parameter.
+
+&gt;&gt; procedure setuserpal(var pal);
+   Same as setpal but you can give your own colortable as a parameter.
+
+&gt;&gt; procedure setrgbpalette(col,r,g,b : integer);
+   Set a color directly. Colornum contains the color number, R,G and B contain
+   the color values. Unlike in older versions the maximum value you can
+   set there, is 255. That's for a more easy handling with hicolor modes.
+   The 2nd virtual palette for image conversion will be filled with the
+   values, use putline8 then for automatic conversion.
+
+&gt;&gt; procedure getrgbpalette(col : byte;var r,g,b : byte);
+   Write the colors of palette index COLOR into the variables R,G and B.
+
+&gt;&gt; procedure setrgbpal(col,r,g,b : byte);
+&gt;&gt; procedure getrgbpal(col : byte;var r,g,b : byte);
+   These 2 procedures run like their pendants with the 'ette' on the end
+   but it does not affect the real color palette but the virtual color
+   palette which is in the variable PAL.
+
+&gt;&gt; function  rgb(r,g,b : byte) : longint;
+   8 Bit mode:
+   Looks for the nearest rgb-value available. You should call getpal
+   prior to this function, to use the actual palette.
+   If you call it very often (for whatever), call therefore initrgb.
+   This procedure fills a color-lookup-table to find a fitting color.
+   That procedure takes some time, but thereafter you have very fast
+   results.
+   Hi/Truecolor:
+   Converts the rgb-values to the current screen mode.
+
+&gt;&gt; procedure loadjascpal(path : string);
+   Load a palette made with Paint Shop Pro. The palette is loaded into the
+   virtual palette. To set the palette you should use setpal thereafter.
+
+&gt;&gt; function  loadpal(name : string;pal : pointer) : boolean;
+   Load a 768-byte-sized palette-file into PAL. To set the palette, loaded by
+   this function, use setuserpal.
+
+&gt;&gt; procedure setmode(resx,resy,colres : word);
+   It's really simple to use, like this: setmode(640,480,16);.
+   After you called this procedure, you should call graphresult to check
+   if there were any errors in the initialization. Otherwise your program
+   may crash when there was a problem ;))).
+
+&gt;&gt; procedure closegraph;
+   You _must_ use this to close a graphical mode. It restores the last
+   textmode and restores the last text screen. It also sets a variable,
+   defining that you are not in graphical mode anymore.
+
+&gt;&gt; function  grapherrormsg(errorcode : integer) : string;
+   Use it with the errorcodes returned by graphresult - you'll get back
+   an error string.
+
+&gt;&gt; function  graphresult : integer;
+   Graphresult will be always equal 0 if there were no errors after a
+   call of a procedure (like setmode, loadfont etc). If it returns
+   nonzero, then use GraphErrorMSG with the returned value to give
+   out the errorstring.
+
+&gt;&gt; function  getdrivername : string;
+   Returns string with the name of detected card. If a special card is
+   supported (like S3 and Cirrus) then it returns the chip
+   information, like 'S3 Trio64 764' otherwise only 'VESA'.
+
+&gt;&gt; procedure waitretrace;
+   Avoids flickering in animations, because it pauses drawing until the
+   vertical beam of the monitor goes back to start (top left point on
+   screen). Use it when finished one frame before drawing the next.
+
+&gt;&gt; procedure hretrace;
+   Waits until the cathode-beam is in the next line. Useful for
+   copperbars.
+
+&gt;&gt; procedure setscreen(on : boolean);
+   Sets the screen on(true) or off(false). If it's set to off,
+   the memory-transferring process gets a little more speed and you can
+   draw slow things(like loading a png-picture) while the user can'n see
+   the process on the monitor.
+
+&gt;&gt; procedure setviewport(x1,y1,x2,y2 : integer;clip : boolean);
+   Sets the actual viewport. Clip means that the draw commands can draw
+   only in the ranges of rectangle (x1,y1),(x2,y2).
+
+&gt;&gt; procedure getviewsettings(var viewport : viewporttype);
+   Get the actual viewport settings.
+
+&gt;&gt; procedure clearviewport;
+   Clear the actual viewport area.
+
+&gt;&gt; function  openimage(var p : pointer;sx,sy : word) : word;
+   Creates a new image in the memory - calculates the memory-size,
+   gets the memory, sets the image size and gives back the getted
+   memory. WARNING: if it returns zero, then there occured a problem.
+   Normally that means that your image would be larger than 64 Kbyte.
+   If you ignore the zero, your program could crash!!
+
+&gt;&gt; procedure closeimage(var p : pointer);
+   Frees the memory of an image - call this, if you don't need the
+   image anymore.
+
+&gt;&gt; procedure clearimage(p : pointer);
+   Clears the image at the pointer P.
+
+&gt;&gt; procedure getimagesize(p : pointer;var x,y : word);
+   Get the sizes of an image captured with getimage or set by setimagesize
+   in memory.
+
+&gt;&gt; procedure setimagesize(p : pointer;x,y : word);
+   Set the sizes of an image in memory.
+   If you wanna use your self-made images (i.e. they're calculated in
+   memory), use this function. Please use the variable
+   ImageDataSize to get the size of this sizedata. At the moment,
+   the datasize is 4, but it'll change in further versions because
+   of the support of Hi/Truecolor. Then the i.e. 2 bytes more are
+   used the specify the colordepth, alphamapping-information,
+   and maybe for 256 color-images if there's any palette at the
+   end of an image (because it's needed in truecolor...)
+
+&gt;&gt; function  imagesize(x1,y1,x2,y2 : word) : word;
+   Returns memory size needed for an image with coordinates
+   (x1,y1),(x2,y2).
+   It returns zero and graphresult &lt;&gt; 0 if the image is too large.
+
+&gt;&gt; procedure scale(image : pointer;px,py,sx,sy : word);
+   Scale image on position PX:PY with the factors SX and SY.
+
+&gt;&gt; procedure putpixel(x,y : word;color : longint);
+   Put a pixel with COLOR at position X:Y.
+
+&gt;&gt; function  getpixel(x,y : word) : longint;
+   Get the pixel color at position X:Y.
+
+&gt;&gt; procedure putimage(x,y : integer;p : pointer);
+   Put image from memory pointer P, previosly captured with getimage or
+   set by setimagesize, at position X:Y.
+
+&gt;&gt; procedure putsprite(x,y : integer;p : pointer;key : byte);
+   Runs almost like putimage with the difference that you can declare any
+   color as transparent through variable KEY.
+
+&gt;&gt; procedure getimage(x,y,x2,y2 : integer;p : pointer);
+   Save an image starting at X:Y and ending at X2:Y2 to the pointer P.
+   You can calculate the size of P with imagesize(x,y,x2,y2) or with the
+   following calculation : abs(x2-x)*abs(y2-y)+4 (the 4 extra bytes are
+   used to save the size of the image).
+
+&gt;&gt; procedure bar(x1,y1,x2,y2: integer);
+   Draw a filled rectangle starting from X1:Y1 and ending at X2:Y2. The
+   filling pattern and the color can be set via setfillstyle. To set
+   only the color of bar, use setfillcolor.
+
+&gt;&gt; procedure line(x1,y1,x2,y2: integer);
+   Draw a line starting from X1:Y1 and ending at X2:Y2. To set the color
+   of line call setcolor before drawing line.
+   The fastest way to draw horizontal lines is hline.
+   The fastest way to draw vertical lines is vline.
+
+&gt;&gt; procedure bitblit(x1,y1,x2,y2,dstx,dsty : integer);
+   Copy the rectangle X1:Y1-X2:Y2 to the position DSTX:DSTY. Remember that
+   this function is very fast with supported gfx-cards, because it uses
+   hardware acceleration.
+
+&gt;&gt; procedure rbar(x1,y1,x2,y2 :integer;r:word);
+   Similar to bar, but draws rounded edges, using radius R. Looks sometimes
+   very nice :)
+
+&gt;&gt; procedure fillcircle(x,y :integer;r:word);
+   Draw a filled circle. Center is defined by X:Y, radius is R. Filling
+   pattern and color can be set via setfillstyle. To set only the color,
+   use setfillcolor.
+
+&gt;&gt; procedure circle(px,py :integer;r:word);
+   Draws a circle. Center is defined by PX:PY, radius is R. Color can be
+   set via setcolor.
+
+&gt;&gt; procedure hline(x1,y1,sizex: integer;col : longint);
+   Draw a horizontal line with the color COL with the length SIZEX from
+   position X1:Y1.
+
+&gt;&gt; procedure vline(x1,y1,sizey: integer;col : longint);
+   Draw a vertical line with the color COL with the length SIZEY from
+   position X1:Y1.
+
+&gt;&gt; procedure putline(x1,y1,sizex: integer;p : pointer);
+   Put a line with the imagedata P and size SIZEX on the screen, starting
+   at point X1:Y1.
+
+&gt;&gt; procedure putline8(x1,y1,sizex: integer;p : pointer);
+   Like putline, but the imagedata must be 8 bits large and it's
+   calculated to the actual colordepth.
+
+&gt;&gt; procedure putline24(x1,y1,sizex: integer;p : pointer);
+   Like putline, but the imagedata must be 24 bits large and it's
+   calculated to the actual colordepth.
+
+&gt;&gt; procedure spriteline(x1,y1,sizex: integer;p : pointer;key : byte);
+   Put a line with the imagedata P and size SIZEX on the screen,
+   starting at point X1:Y1. KEY defines the transparent color.
+
+&gt;&gt; procedure getline(x1,y1,sizex: integer;p : pointer);
+   Get a line from the screen to the pointer P in memory with the length
+   SIZEX starting from point X1:Y1.
+
+&gt;&gt; procedure fillpoly(numpoints : integer;var points : array of pointtype);
+   Draw a filled polygon. Use just like the one in Graph.TPU by Borland.
+
+&gt;&gt; procedure drawpoly(numpoints : integer;var polypoints : array of pointtype);
+   Draw a boundary polygon. Use just like the one in Graph.TPU by Borland.
+
+&gt;&gt; procedure rectangle(x1,y1,x2,y2: integer);
+   Draw a boundary rectangle. Set the color via setcolor.
+
+&gt;&gt; procedure rrectangle(x1,y1,x2,y2 :integer;r : word);
+   Draw a boundary rectangle with rounded edges. The radius is R.
+   Set the color via setcolor.
+
+&gt;&gt; procedure cleardevice;
+   Clear the whole screen.
+
+&gt;&gt; procedure floodfill(x,y : integer;border : longint);
+   Fill an area starting at point X:Y. The color of the border (= the color
+   where the filling stops) is BORDER. Set the filling color and pattern
+   via setfillpattern. To set only the color use setfillcolor.
+
+&gt;&gt; procedure settextjustify(Horiz, Vert : word);
+   Set text justification. Use just like the one in Graph.TPU by
+   Borland.
+
+&gt;&gt; procedure readgraphline(x1,y1,col,maxchars,posx : word;var s2 : string);
+   Read a line from the screen at position X1:Y1. The text color is COL.
+   MAXCHARS means the maximum number of chars to read. POSX is the
+   starting position of the cursor in the string. It should be = 1 for the
+   first char, that means zero is not allowed! S2 contains the output
+   string, it can be empty at the beginning, but it can also have
+   chars in it - these chars would be drawn on screen and you can edit
+   them with the string then.
+
+&gt;&gt; procedure writexy(x,y : integer;s : string);
+   Write the string S at position X:Y. Set color of the text via setcolor.
+
+&gt;&gt; procedure outtextxy(x,y : integer;s : string);
+   Same as writexy. Use just like the one in Graph.TPU by Borland.
+   This is only for compatibility with graph.
+
+&gt;&gt; procedure setfont(fnt,size : byte);
+   Set a font. FNT represents the selected font:
+   0 = Standard font
+   2 = Small font
+   ^^both automatically linked with graph-unit. All other fonts loadable
+   by the user, but only one vectorfont at a time (at the moment).
+   SIZE is the size of the font. Will only affect vector fonts (also
+   at the moment).
+
+&gt;&gt; function  makestr(w : longint) : string;
+   Convert an integer value to a string. Useful with writexy.
+
+&gt;&gt; function  makestrr(r : real;sh,st : byte) : string;
+   Convert a real to a string. Useful with writexy.
+   R is converted like following:   R:SH:ST.
+   To get 2 values after the comma, use it like this:
+   s := makestrr(r,4,2); Write(s);
+   That result will be the same as if you did: Write(r:4:2);.
+
+&gt;&gt; function  textwidth(s : string) : word;
+   Get the width of the textstring S for the currently used font.
+
+&gt;&gt; function  textheight : word;
+   Get the height of the character for the currently used font.
+
+&gt;&gt; function  loadfont(name : string;num : byte) : boolean;
+   Load a font from disk. NUM is the handle which is used to select font
+   later in the program. It must be above 2!
+
+&gt;&gt; function  loadfontmem(p : pointer;num : byte) : boolean;
+   The same as loadfont, but it loads the font from the memory. Useful for
+   linked-in fonts.
+
+&gt;&gt; procedure setactivepage(page : byte);
+   Set the graphical page, you want to draw at. I CANNOT SAY IT ENOUGH:
+   THE FIRST PAGE (default on start) IS PAGE 0 !!!!!!!!!
+
+&gt;&gt; procedure setvisualpage(page : word);
+   Set graphical page, which the user can see. This procedure
+   automatically avoids flickering (for smooth animations).
+
+&gt;&gt; procedure scroll(ypos : word);
+   Set the y-start of the screen. Default (on start) is 0.
+
+&gt;&gt; procedure setcolor(col : byte);
+   Set the current paint color.
+
+&gt;&gt; function  getcolor : byte;
+   Get the current paint color.
+
+&gt;&gt; procedure setfillstyle(pattern : word;col : byte);
+   Use just like the one in Graph.TPU by Borland.
+
+&gt;&gt; procedure setfillcolor(col: byte);
+   Sets only the filling color. Pattern won't change.
+
+&gt;&gt; function  getmaxx : word;
+   Gives back the maximum X - resolution of the screen.
+   Only for compatibility - use variable maxx instead
+
+&gt;&gt; function  getmaxy : word;
+   Gives back the maximum Y - resolution of the screen.
+   Only for compatibility - use variable maxy instead
+
+&gt;&gt; function  getmaxcolor : word;
+   Gives back the number of available colors. It's always 256 at the
+   moment.
+
+&gt;&gt; procedure setwritemode(writemode: integer);
+   Is almost the same like in the unit graph, but affects only the
+   procedure line and there's only the xorput and the normalput mode
+   available (at the moment).
+
+That's all at the moment. Improvements'll come soon (Well, I hope so ;).
+
+
+Known bugs
+. Univbe and other Utilities may make problems (not MY problem ;)
+. older S3-cards may make some problems (some have also a
+  hardware-bug in their bitblitting-engine) - thanx fly
+  to S3 because they did not response any questions about
+  documentation (I tried it about 10 times!!)
+. very late S3-cards won't work in acceleration mode 2 - it seems that
+  S3 changed some registers... :(
+
+****** COMING SOON ***********************************************************
+
+Well, the next Version should be Grafx2. It'll support also Truecolor.
+. maybe gif-support (also anigifs)
+. truetype-support (will use freetype 1.0, also with fontsmoothing!!)
+. OOP-like model
+. faster RLE-sprites
+. more easy using of images with different colordepths
+. Linear frame buffer support
+
+Grafx2 won't be that compatible to Grafx1.3. It could be that
+you have to rewrite your programs.
+I don't know yet, but I think about a FPK-Pascal port of my unit.
+But before I do this, I have to finish Grafx2. Also this depends
+on if FPK-Pas finally gets it's own fully integreated Dos-IDE with
+syntax colors, undo... like the TP-IDE.
+
+
+
+Wanna know more about me?
+Well,
+my name is Stefan Goehler. I'm living in Germany near Rostock. I have brown
+hair and (dark-)brown eyes. I've reached in my 18 years of living here on
+this silly world a size of 1.71m.... that's enough... I'm too lazy to think
+about what I could write any more... ;)
+Ok, have fun with my unit. If you did something really impressing with it,
+let me know :)
+
+Bye,
+Stefan/NooN/Skywalker (I am only ONE person ;)
+******************************************************************************</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

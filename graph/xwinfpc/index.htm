@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Содержание.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+
+<CENTER>
+<FONT SIZE=5>А.П. Полищук, С.А. Семериков</FONT>
+<BR>
+<H1>ПРОГРАММИРОВАНИЕ В
+<BR>
+<IMG SRC="images/image1.gif" WIDTH=408 HEIGHT=404>
+<BR>
+WINDOW
+<BR>средствами Free Pascal</H1>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<H3>От автора:</h3>
+<dir>
+Перед вами учебное пособие, ориентированное на программирующего пользователя,
+посвященное методам программирования в системе X Window.
+Приведен лабораторный практикум по созданию сетевых графических
+приложений средствами Xlib. Изложение ориентировано на ОС Linux,
+однако все приведенные сведения могут быть применены в любой ОС
+семейства UNIX. Особенностью данного пособия является использование
+в качестве средства программирования компилятора FPC (Free Pascal Compiler).
+<br>
+<br>
+Данное пособие использовалось в Криворожском государственном педагогическом
+университете в 2002-2003 учебном году в спецкурсе "Элементы профессионального
+программирования", но это, по-моему, ненужный официоз.
+Все было намного проще - я решил проверить "А можно? А в такой позе?
+А если вот так? А ...?" ;)) Оказалось - можно :))
+<br>
+Книжка слепилась за несколько дней их ранее наработанного материала,
+изменился только язык - с C на Pascal.
+
+<br>
+<br>
+Замечания и предложения присылайте на <a href="mailto:cc@kpi.dp.ua">e-mail</a>.
+
+</dir>
+<hr>
+<BR>
+
+<h3>Содержание</h3>
+
+<dir>
+
+<A class=blue HREF="intro.htm">Введение</A>
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A class=blue HREF="basics.htm">Основные понятия</A>
+<BR>
+1.1.1. <A class=blue HREF="basics.htm">Общее устройство X Window</A>
+<BR>
+1.1.2. <A class=blue HREF="xwindow.htm">X-окно</A>
+<BR>
+1.1.3. <A class=blue HREF="win_control.htm">Управление окнами</A>
+<BR>
+1.1.4. <A class=blue HREF="xgraphics.htm">Графические возможности X Window</A>
+<BR>
+1.1.5. <A class=blue HREF="atoms.htm">Свойства и атомы</A>
+<BR>
+1.1.6. <A class=blue HREF="example1.htm">Первый пример</A>
+<BR>
+1.1.7. <A class=blue HREF="events.htm">События</A>
+<BR>
+1.1.8. <A class=blue HREF="window_attr.htm">Атрибуты окна</A>
+<BR>
+1.1.9. <A class=blue HREF="win_operation.htm">Операции над окнами</A>
+<BR>
+1.1.10. <A class=blue HREF="lab1.htm">Лабораторная работа №1 "Основные понятия Xlib"</A>
+<BR>
+1.2. <A class=blue HREF="gr_text.htm">Текст и графика</A>
+<BR>
+1.2.1. <A class=blue HREF="gr_context.htm">Графический контекст</A>
+<BR>
+1.2.2. <A class=blue HREF="gr_context_prop.htm">Характеристики графического контекста</A>
+<BR>
+1.2.3. <A class=blue HREF="text_out.htm">Вывод текста</A>
+<BR>
+1.2.4. <A class=blue HREF="colors.htm">Использование цвета</A>
+<BR>
+1.2.5. <A class=blue HREF="bitmaps.htm">Битовые и пиксельные карты</A>
+<BR>
+1.2.6. <A class=blue HREF="mouse_cursor.htm">Изменение формы мышиного курсора</A>
+<BR>
+1.2.7. <A class=blue HREF="lab2.htm">Лабораторная работа №2 "Текст и графика"</A>
+<BR>
+1.3. <A class=blue HREF="keyboard.htm">Работа с внешними устройствами</A>
+<BR>
+1.3.1. <A class=blue HREF="keyboard.htm">Клавиатура</A>
+<BR>
+1.3.2. <A class=blue HREF="mouse.htm">Мышь</A>
+<BR>
+1.3.3. <A class=blue HREF="lab3.htm">Лабораторная работа №3 "Работа с внешними устройствами"</A>
+<BR>
+1.4. <A class=blue HREF="resources.htm">Программы и их ресурсы</A>
+<BR>
+1.4.1. <A class=blue HREF="res_format.htm">Формат файла ресурсов</A>
+<BR>
+1.4.2. <A class=blue HREF="res_access.htm">Доступ к ресурсам программ</A>
+<BR>
+1.4.3. <A class=blue HREF="lab4.htm">Лабораторная работа №4 "Программы и их ресурсы"</A>
+<BR>
+1.5. <A class=blue HREF="inter_client.htm">Межклиентское взаимодействие</A>
+<BR>
+1.5.1. <A class=blue HREF="inter_client.htm">Механизм свойств</A>
+<BR>
+1.5.2. <A class=blue HREF="win_manager.htm">Общение с менеджером окон</A>
+<BR>
+1.5.3. <A class=blue HREF="lab5.htm">Лабораторная работа №5 "Межклиентское взаимодействие"</A>
+<BR>
+<A class=blue HREF="literature.htm">Литература</A>
+
+</dir>
+
+<BR>
+<BR>
+
+
+<!--#include virtual="/t_footer.htm"-->

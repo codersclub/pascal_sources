@@ -1,0 +1,153 @@
+<html><head><title>PCX - VGIPCX: Модуль для работы с PCX</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Данный модуль позволяет читать (выводить на экран) и записывать (с экрана) PCX файлы во всех режимах, на которые есть BGI драйверы.'>
+<meta name="keywords" content="pascal, sources, source code, vgipcx, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vgipcx
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PCX - VGIPCX: Модуль для работы с PCX</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>12.11.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Данный модуль позволяет читать (выводить на экран) и
+записывать (с экрана) PCX файлы во всех режимах, на которые
+есть BGI драйверы.</TD><TD class=black colspan=2 align='right'><br><A HREF="vgipcx.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                            Модуль VGIPCX
+
+     Модуль  VGIPCX  предназначен  для  работы  с  картинками в
+PCX-формате из  программ  на  Turbo Pascal.  Поддерживаются две
+основные группы функций -  вывод PCX на экран и запись экрана в
+PCX.
+     Основные особенности:
+     1.   Используется   ввод-вывод   через  объекты-наследники
+TStream,  что позволяет хранить картинки не только на диске, но
+и в памяти, в том числе и в EMS.
+     2.  Поддерживаются  все  графические  режимы  CGA/EGA/VGA,
+режим Hercules  и все 16  и  256-цветные  режимы  SuperVGA (при
+наличии соответствующих BGI-драйверов)
+     3.  Поддерживаются  все  BitBlt  операции,  поддерживаемые
+драйвером   (в  том   числе  такие  экзотические  как   XNOR  и
+Transparent copy в SVGA256.BGI)
+     4.  Не поддерживается вывод на экран изображений выходящих
+за его пределы по горизонтали (по вертикали вниз - пожалуйста)
+     5. Поддерживается работа с 256-цветной палитрой
+     6.   В  16-цветных  режимах  VGA/VESA/SVGA  поддерживается
+палитра 16 из 262144, а не 16 из 64 как в большинстве известных
+библиотек.
+     7. поддерживается Protected Mode
+     8.  Поддерживается  чтение  из  библиотек  в  формате  PCX
+programmer toolkit
+     9.  Вывод картинки  производится  в том  случае,  если она
+совместима с текущим графическим режимом (совпадает число битов
+на   пиксел   и   число   битовых   плоскостей).   Поэтому   не
+поддерживаются такие  экзотические  версии  PCX-формата,  как 4
+бита на  пиксел  при одной  плоскости  (такой  файл  мне как-то
+сделала Scan Gallery).
+
+
+     Особенности компиляции:
+     vgipcx  рассчитан  на  работу  с  интерфуйсной библиотекой
+SoftWeyr Graphic  Interface и использует  модуль VGILOW оттуда.
+Однако он с успехом может быть применен и без  этой библиотеки,
+так как единственное,  что ему  нужно из этого  модуля, это две
+глобальные  переменные  типа  Integer с  именами  GraphDriver и
+GraphMode,  в которых SWGI хранит текущий графический драйвер и
+режим драйвера,  а  также константы VGA256,  VESA16  и VESA256,
+задающие номера нестандартных графических драйверов  (в смысле,
+отсутствующих во  внутренних таблицах модуля  Graph. VESA16.BGI
+входит в поставку Borland Pascal 7.0)
+
+
+                        Процедуры и функции:
+
+1. ShowPcx(var S:TStream;X,Y:Integer;BitBlt:Word);
+
+     Базовая процедура вывода PCX на экран. Получает в качестве
+параметров  поток,  позиционированный на  начало заголовка PCX,
+координаты  левого  верхнего  угла  и  код  растровой  операции
+(XorPut,CopyPut и т.д.)
+     Выводит изображение на экран.
+
+2. ShowPcxFile(FileName:String;X,Y:Integer;BitBlt:Word);
+
+     То же  самое,  но  сама открывает и  закрывает файлы. Даже
+расширение PCX по умолчанию  подставлаяет.
+
+3. Function OpenPcxLib(FileName:String):PStream;
+
+     Открывает библиотеку PCL и возвращает указатель  на поток.
+Если вернула nil, значит что-то не так.
+
+4. Function FindPcxInLib(Lib:PStream;ImageName:String):Boolean;
+
+     Возвращает True,  если картинка с указанным  именем есть в
+библиотеке.  При  этом позиционирует поток  на начало картинки,
+так что вам остается только сделать ShowPcx(Lib^....)
+
+5.ShowPcxFromLib(LibName,ImageId:String;X,Y:Integer;BitBlt:Word);
+
+     Показывает картинку из библиотеки,  заданной именем файла.
+Если  вам лень  возиться  с потоками,  но  не  лень  каждый раз
+закрывать и открывать файл, можете ею пользоваться.
+
+6.WritePcx(var S:TStream;X1,Y1,X2,Y2:Integer);
+
+     Записывает  содержимое  области  экрана  в   поток  в  PCX
+формате.
+
+7. SaveScreen(FileName:String);
+
+        Создает PCX файл, содержащий копию текущего ViewPort'а.
+Если файл уже существует, перезаписывает безжалостно.
+
+                       Переменные и константы
+
+     PcxError :  Integer  ;  место, куда все процедуры помещают
+коды  возникших  ошибок.  Коды  ошибок  могут  быть следующими:
+  pcxOk = 0;
+  {Эти коды ошибок совпадают с теми, что возвращает IOResult}
+  pcxFileNotFound        = 2;
+  pcxPathNotFound        = 3 ;
+  pcxTooManyFiles        = 4;
+  pcxAccessDenied        = 5;
+  pcxReadError           = 100;
+  pcxWriteError          = 101;
+  {Эти коды ошибок уникальны для VGIPCX}
+  pcxInvalidFileFormat   = -1; { Файл не является PCX или PCL файлом}
+  pcxFileTooLarge        = -2; { Файл не влезает на экран}
+  pcxIncompatibleDisplay = -3; { Файл создан для другого графического адаптера}
+  pcxImageNotFound       = -4; { Файл библиотеки существует, но нужной
+                                 картинки нет }
+     Рекомендуется ознакомиться с содержимым этой переменной
+после вызова каждой процедуры модуля.
+
+     SaveMono : boolean = false;
+
+     Предполагается,  что если вы сохраните экран с черно-белой
+картинкой на  EGA/VGA  установив  эту  переменную  в  True, она
+запишется в монохромном формате. Не отлаживалось.
+
+     EnablePcxPalette : Boolean = true;
+
+     Установив эту переменную в False,  вы запретите процедурам
+вывода PCX на экран менять палитру.
+
+
+     Copyright (c) by SoftWeyr,1992-94. Aвтор - Vitus Wagner.
+
+     E-Mail: vitus@agropc.msk.su
+     FIDO    2:5020/358.5</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

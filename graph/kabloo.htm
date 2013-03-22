@@ -1,0 +1,132 @@
+<html><head><title>Kablooie - Pseudo-Programmable Fireworks Simulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Kablooie is a pseudo-programmable fireworks simulator that works on an IBM AT or better with MCGA/VGA/SVGA.  In order to use the high-resolution SVGA modes Kablooie requires a VESA-compatible SVGA system or the appropriate VESA TSR loaded.'>
+<meta name="keywords" content="pascal, sources, source code, kabloo, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;kabloo
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Kablooie - Pseudo-Programmable Fireworks Simulator</TD>
+<TD nowrap class=black>&nbsp;Daniel Egnor</TD>
+<TD class=black align='right'>19.06.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Kablooie is a pseudo-programmable fireworks simulator that works on an IBM
+AT or better with MCGA/VGA/SVGA.  In order to use the high-resolution SVGA
+modes Kablooie requires a VESA-compatible SVGA system or the appropriate
+VESA TSR loaded.</TD><TD class=black colspan=2 align='right'><br><A HREF="kabloo.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>43k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Kablooie (c) 1991 Daniel Egnor
+
+Kablooie is a pseudo-programmable fireworks simulator that works on an IBM
+AT or better with MCGA/VGA/SVGA.  In order to use the high-resolution SVGA
+modes Kablooie requires a VESA-compatible SVGA system or the appropriate
+VESA TSR loaded.
+
+To start Kablooie type "kablooie" from the DOS prompt.  It will display
+an introductory screen and inform you of the video mode selection you
+may make on the command line.  After pressing &lt;return&gt; you should see
+a fireworks display.  If not, check the video mode table and see if it's
+picking an impossible mode for your adapter as default (it sometimes
+does this).  If so, pick a more likely mode to work and start with that
+as instructed.
+
+When you get tired of watching the fireworks I have created you may make
+your own.  This is done by editing the "kablooie.kab" file, which must
+be in the current directory when kablooie is run.  This file consists
+of the descriptions of the various kinds of firework that will be launched.
+Note that any blank line or line that begins with a space is a comment
+and will be ignored by kablooie.
+
+The file consists of a number of entries, each beginning with "firework"
+or "packing" and ending with "end."  All keywords must be on an otherwise
+blank line.  Kablooie will pick an entry from among those designated
+"firework"s at launch time.  Those starting with "packing" must be started
+as part of a "firework."  "Firework"s may also contain other "firework"s,
+but "packing"s will not be launched independently.
+
+The next line after "firework" or "packing" is the name.  This should be
+unique and may be any string up to thirty chars long.  After thirty chars
+the name will be truncated.  It will be used to refer to the entry later,
+as part of another entry.
+
+The line after the name is either "noflash" or "flash."  This line
+determines whether, when this particular firework (or piece of one)
+terminates (completes, fades out), it will flash the screen or not.
+Sparks that just fade out and do nothing should not flash; however,
+it is recommended that fireworks which will explode and launch others
+should flash the screen.
+
+On the next line after "flash" or "noflash" is the color of the firework.
+This must be "red," "blue," "green," or "yellow."  This determines (can you
+guess?) the color of the firework as it travels through the "air."
+
+After that (yet another line down) comes the longevity of the firework.
+This is measured in simulation-clock ticks; 10 is almost instant death (with
+possible explosion), 200 allows a launched firework to travel a graceful
+arc before releasing its contents.
+
+The next line is the gravitational pull.  Usually this ought to be three,
+however, you may want to change this value to suit your needs.  The higher
+the number, the faster the firework will fall.
+
+If the firework will not release anything-like, say, a spark-the next line
+should be "end," and another "firework" or "packing" would come after that.
+If, however, you want it to explode and shoot off other fireworks, you will
+now list those before the "end."
+
+If that is the case, then the next line will be the name of the first
+firework (usually a packing, actually) that will be launched.  This is the
+name you specified after "packing" or "firework" when originally describing
+the sub-firework; its entry must precede the entry of the firework containing
+it.  (Kablooie _will_ allow recursive fireworks which launch more of them-
+selves, but this is not recommended.)
+
+The next line in the sub-launch description is the average number of
+fireworks of that type you want launched.  If you are launching sparks,
+one hundred to three hundred makes a nice chrysanthemum; if you are launching
+fireworks which will themselves launch other things, keep the number low
+or else you may slow down the simulator with a large number of flying
+objects.
+
+The line after that is the maximum random variation from the average number.
+zero will allow no variation; there will always be as many fireworks launched
+from the explosion as you specify.
+
+After that, on the next line, is the strength with which the sub-fireworks
+will be launched.  Five fairly propels them across the screen; one keeps them
+in a tight little bunch; and zero will cause any launched fireworks to follow
+"in the footsteps" of the (now defunct) launching firework.
+
+After that will either be "end," if there are no more kinds of firework to
+be launched upon termination, or the name of another sub-firework if not,
+followed by the relevant data, and so on until finally there will be an
+"end."  The last non-comment line in the file should be "end."  (Without the
+period.)
+
+This is all very confusing, I know.  To get the hang of it, look at the
+included kablooie.kab file; it has some comments explaining what is what.
+
+Kablooie is in the public domain.  Do what you want with it.
+
+Files in the ZIP should be:
+
+kablooie.exe - the main .exe file (run it!)
+kablooie.doc - this file
+kablooie.kab - the included firework definition file
+
+kablooie.pas - main source file (TP 6.0)
+colour.pas   - MCGA/VGA+ color handler unit
+bgi256.obj   - MCGA/VGA/VESA graphics driver by Michael Day
+bgi256.pas   - TP unit which links in the graphics driver</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,198 @@
+<html><head><title>XLIB v2.0 - Graphics Library for Turbo Pascal 7.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This is a port to Turbo/Borland Pascal of XLib Library for C from Themie Gouthas.'>
+<meta name="keywords" content="pascal, sources, source code, xlib201, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xlib201
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;XLIB v2.0 - Graphics Library for Turbo Pascal 7.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:tristant@cogs.susx.ac.uk">Tristan Tarrant</a></TD>
+<TD class=black align='right'>23.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This is a port to Turbo/Borland Pascal of XLib Library
+for C from Themie Gouthas.</TD><TD class=black colspan=2 align='right'><br><A HREF="xlib201.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>345k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">+---------------------------------------------------------------------------+
+|                                                                           |
+|        XLIB v2.0 - Graphics Library for Borland/Turbo Pascal 7.0          |
+|                                                                           |
+|               Tristan Tarrant - tristant@cogs.susx.ac.uk                  |
+|                                                                           |
++---------------------------------------------------------------------------+
+|                                                                           |
+|                                 Credits                                   |
+|                                                                           |
+|                             Themie Gouthas                                |
+|                                                                           |
+|                            Matthew MacKenzie                              |
+|                                                                           |
+|                             Tore Bastiansen                               |
+|                                                                           |
+|                                 Andy Tam                                  |
+|                                                                           |
+|                               Douglas Webb                                |
+|                                                                           |
+|                              John  Schlagel                               |
+|                                                                           |
++---------------------------------------------------------------------------+
+
++---------------------------------------------------------------------------+
+| DISCLAIMER                                                                |
++---------------------------------------------------------------------------+
+
+  This library is distributed AS IS. The author/s specifically disclaim any
+  responsibility for any loss of profit or any incidental, consequential or
+  other damages.
+
++---------------------------------------------------------------------------+
+| IMPORTANT NOTICE                                                          |
++---------------------------------------------------------------------------+
+
+  Hi Xlib users, this is v2.0 of my port of XLib to Turbo/Borland Pascal.
+  I would like to state a few things before you start using this package :
+
+  XLIB 2.0 is NOT complete. I would have liked to add more things before
+  releasing this, but the end of my 2nd year here at Sussex University is
+  coming to an end, and I'm in the middle of my exams. Then I will go home
+  to Italy, and won't have Internet access until I come back in October.
+
+  I wanted to get this finished, including rotation and the such, but, alas,
+  I haven't found the time. In line with these considerations I want you to
+  think this as a BETA.
+
+  I have ported all the useful stuff from Xlib for C v6.0, and added a few
+  things of my own, apart from cleaning up the code and making it more
+  Pascal-friendly.
+
+  If there is any code you have written that you think is worth including in
+  the next release, don't hesitate to send it to me and you will receive due
+  credit.
+
+  Sorry if this isn't up to your expectations but, hey, don't forget : XLIB
+  is a user supported library, so send me your code and let's write the
+  ultimate XMode game !!!
+
+  Share and enjoy.
+
++---------------------------------------------------------------------------+
+| BUGS AND REVISIONS                                                        |
++---------------------------------------------------------------------------+
+	
+  The SplitScreen routines weren't handled by the Virtual VSync handler,
+  sometime resulting in the program waiting twice for a vsync, and causing
+  a choppy effect when scrolling the split screen.
+  Now the mouse handler uses the VVH to redraw the pointer
+  when necessary. Unfortunately it takes a bit too long and, if you are
+  updating the whole palette AND using the mouse at the same time, you'll
+  notice that the tip of the pointer disappears for an instant when it's at
+  the top of the screen.
+  The palette-updating part of the VVH has been sped up a bit.
+
+  I have implemented 32-bit compiled bitmaps, even though they are bigger and
+  (on my machine) slightly slower than normal CBMs. Maybe on VLB/PCI machines
+  this isn't the case.
+
+  Protected mode is still at an experimental stage, but it can do quite a few
+  things already.
+  Things that don't work in protected mode are :
+
+  - The Virtual VSync handler (self-modification works, but the rest doesn't)
+  - VBM's on my machine are faster in pmode (??!?!?!)
+  - I assume that the ROM font is at segment 0C000h because that's where the
+      Video BIOS usually is. I have tested it on a Paradise (WD90c30), a
+      Cirrus Logic (CL-54xx) and a Trident (9000i) with no problems. If you
+      find some board that doesn't work please report it (though I don't know
+      why you'd want to use ROM BIOS fonts anyway :-)
+  - The palette scrolling in the XLIBDEMO is tooooooo slow...
+
+  If you find a way of fixing these, or if you find more routines that don't
+  like protected mode, email me please.
+
+Release v2.01
+
+  XConvert was broken. Fixed.
+  XLArc and XLA2 were broken in DPMI. Fixed.
+  Added file viewing in XLArc.
+  If you want to know how to do CBMs in DPMI, read BLITDEMO.PAS.
+  Makefile fixed.
+  Bugfixes here and there.
+
++---------------------------------------------------------------------------+
+| NOTES                                                                     |
++---------------------------------------------------------------------------+
+
+  A good idea for debugging programs that use XLib is to use Colin Buckley's
+  UNCHAIN v2.1 program. The code for saving the screen information is built
+  in the xsetmode function, but if you don't use UNCHAIN it should not make
+  any difference.
+
++---------------------------------------------------------------------------+
+| APPLICATIONS THAT USE XLIB FOR TP/BP                                      |
++---------------------------------------------------------------------------+
+
+  I have decided to start a list of applications that have been written using
+  a version of XLibPas, and where they can be found. Please mail me any
+  additions.
+
+
+  Chromatiks - The world's first multi-group music disk. Coordinated by
+    Trixter (Jim Leonard).
+
+      Site      : wasp.eng.ufl.edu
+      Directory : /pub/msdos/demos/music/disks
+      Filename  : chromat*.zip
+
+  WadManager v1.50 - A GUI WAD manager for DOOM. Written by Tristan Tarrant.
+
+      Site      : infant2.sphs.indiana.edu
+      Directory : /pub/doom/misc
+      Filename  : wm150.zip
+
++---------------------------------------------------------------------------+
+| CREDITS AND THANKS                                                        |
++---------------------------------------------------------------------------+
+
+    Michael Abrash - The guy who started it all in the first place
+
+    Themie Gouthas - The original maintainer of the XLIB for C library
+
+    Matthew McKenzie - Compiled blits, circles and clipping. What more could
+      I say
+
+    Tore Bastiansen - For the Virtual VSync handler : a true masterpiece
+
+    Andy Tam - For the LZS encoding/decoding routines
+
+    Douglas Webb - For collecting loads of compression algorithms
+
+    John Schlagel - For the bitmap scaling code
+
+    iD Software - For giving me inspiration for XLAs
+
+    Jim Leonard - For beta-testing this beast
+
+    Colin Buckley - For his UNCHAIN program which made debugging hours so much
+      easier
+
+    Kai Rohrbacher - Author of ANIVGA for including so many fonts in his most
+      excellent library
+
+    Paul Silver and Aarron Shaughnessy - For letting me test this code on
+      their machines
+
+    Borland - For their excellent compiler suite
+
+    Anybody on USENET who sent me suggestions</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

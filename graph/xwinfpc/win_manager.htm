@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Общение с менеджером окон - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Общение с менеджером окон.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.5. <A class=blue HREF="inter_client.htm">Межклиентское взаимодействие</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.5.2. Общение с менеджером окон</h2>
+
+<dir>
+
+Менеджер окон - это специальный клиент, в задачи которого входит
+интерактивное перемещение окон по экрану, изменение их размеров,
+минимизация (превращение в пиктограмму) и многое другое.
+Чтобы облегчить менеджеру его нелегкую жизнь, программам рекомендуется
+при инициализации сообщить о себе определенную информацию.
+Передается она через предопределенные свойства,
+которые известны менеджеру и могут быть им прочитаны.
+Некоторые из свойств (так называемые стандартные) задавать обязательно.
+Все остальное определяется по усмотрению программы.
+Наиболее простой способ задать стандартные свойства - обратиться
+к процедурам <code>XSetStandardProperties()</code>
+или <code>XSetWMProperties()</code>.
+
+<br>
+<br>
+
+Ниже перечисляются свойства, создаваемые для менеджера окон программами,
+а также процедуры для работы с ними.
+
+<UL type=square>
+<li><I>Имя (заголовок) окна.</I> Идентифицируется атомом
+<code>XA_WM_NAME</code> и имеет тип "<code>TEXT</code>".
+Данные свойства - структура <code>TXTextProperty</code>.
+Для задания свойства используется процедура <code>XStoreName()</code>
+(<code>XSetWMName()</code>). Получить его можно с помощью
+<code>XFetchName()</code> (<code>XGetWMName()</code>).
+</li>
+<li><I>Имя пиктограммы.</I> Идентифицируется атомом
+<code>XA_WM_ICONNAME</code> и имеет тип "<code>TEXT</code>".
+Данные свойства - структура <code>TXTextProperty</code>.
+Для задания свойства используется процедура <code>XSetIconName()</code>
+(<code>XSetWMIconName()</code>). Получить его можно с помощью
+<code>XGetIconName()</code> (<code>XGetWMIconName()</code>).
+</li>
+<li><I>Рекомендации (hints) о геометрии окна</I>. Идентифицируется
+атомом <code>XA_WM_NORMAL_HINTS</code> и имеет тип
+<code>XA_WM_SIZE_HINTS</code>. Данные свойства - структура типа
+<code>TXSizeHints</code>. Для задания свойства используется процедура
+<code>XSetNormalHints()</code>.
+</li>
+</ul>
+<br>
+
+В ряде случаев стоит сообщить оконному менеджеру о том, какой размер
+окна мы хотим получить, и в каких пределах будут изменяться его размеры.
+Например, для терминальной программы (такой, как <code>xterm</code>),
+хотелось бы, чтобы окно всегда содержало полное количество строк и столбцов.
+В других случаях нежелательно давать возможность менять размер окна
+(например, в диалоговых окнах). Эти пожелания можно передать оконному
+менеджеру, хотя ничто не помешает ему их проигнорировать.
+Для этого необходимо создать структуру данных, заполнить ее необходимыми
+данными и затем использовать функцию <code>XSetWMNormalHints()</code>:
+
+<pre>
+(* указатель на структуру рекомендаций о размерах. *)
+var
+  win_size_hints : PXSizeHints;
+
+win_size_hints := XAllocSizeHints();
+if (win_size_hints=nil) then begin
+  writeln('XAllocSizeHints - нет памяти');
+  halt(1);
+end;
+
+(* Инициализация структуры *)
+(* Вначале укажем, что передаются пожелания о размерах: *)
+(* установим минимальный и начальный размеры. *)
+win_size_hints^.flags := PSize OR PMinSize;
+(* Затем указываем требуемые границы.              *)
+(* в нашем случае - создаем окно минимальным размером 300x200 *)
+(* пикселей и устанавливаем начальный размер в 400x250.       *)
+win_size_hints^.min_width := 300;
+win_size_hints^.min_height := 200;
+win_size_hints^.base_width := 400;
+win_size_hints^.base_height := 250;
+
+(* Передаем пожелания о размерах оконному менеджеру. *)
+XSetWMNormalHints(display, win, win_size_hints);
+
+(* В конце необходимо освободить память из-под структуры. *)
+XFree(win_size_hints);
+</pre>
+
+<I>Дополнительные параметры окна</I>: способ работы с клавиатурой,
+вид и положение пиктограммы. Идентифицируется атомом
+<code>XA_WM_HINTS</code> и имеет тип <code>XA_WM_HINTS</code>.
+Данные свойства - структура типа <code>TXWMHints</code>.
+Для задания свойства используется процедура <code>XSetWMHints()</code>.
+Структура типа <code>XWMHints</code>, передаваемая функции
+<code>XSetWMHints()</code>, должна быть подготовлена с помощью
+<code>XAllocWMHints()</code>:
+
+<pre>
+var
+  win_hints : PXWMHints;
+  icon_pixmap : TPixmap;
+
+const
+  icon_bitmap_width=20;
+  icon_bitmap_height=20;
+  (* Определим битовое изображение в формате Х - *)
+  (* оно может быть создано программой xpaint  *)
+  icon_bitmap_bits : array [0..59] of byte = (
+  $60, $00, $01, $b0, $00, $07, $0c, $03, $00, $04, $04, $00,
+  $c2, $18, $00, $03, $30, $00, $01, $60, $00, $f1, $df, $00,
+  $c1, $f0, $01, $82, $01, $00, $02, $03, $00, $02, $0c, $00,
+  $02, $38, $00, $04, $60, $00, $04, $e0, $00, $04, $38, $00,
+  $84, $06, $00, $14, $14, $00, $0c, $34, $00, $00, $00, $00
+  );
+
+win_hints := XAllocWMHints();
+if (win_hints=nil) then begin
+  writeln('XAllocWMHints - нет памяти');
+  halt(1);
+end;
+
+(* установим пожелания о состоянии окна, позиции его иконки *)
+(* и ее виде                        *)
+win_hints^.flags = StateHint OR IconPositionHint OR IconPixmapHint;
+
+(* Загрузим заданное битовое изображение *)
+(* и создадим из него пиксельную карту Х. *)
+Pixmap icon_pixmap = XCreateBitmapFromData(display,
+                                           win,
+                                           PChar(icon_bitmap_bits),
+                                           icon_bitmap_width,
+                                           icon_bitmap_height);
+if (icon_pixmap=nil) then begin
+  writeln('XCreateBitmapFromData: ошибка создания пиксмапа');
+  halt(1);
+end;
+
+(* Затем детализируем желаемые изменения.             *)
+(* в нашем случае - сворачиваем окно, определяем его иконку    *)
+(* и устанавливаем позицию иконки в левом верхнем углу экрана.   *)
+win_hints^.initial_state := IconicState;
+win_hints^.icon_pixmap := icon_pixmap;
+win_hints^.icon_x := 0;
+win_hints^.icon_y := 0;
+
+(* Передаем пожелания оконному менеджеру. *)
+XSetWMHints(display, win, win_hints);
+
+(* В конце необходимо освободить память из-под структуры. *)
+XFree(win_hints);
+</pre>
+
+Получить данные свойства можно с помощью <code>XGetWMHints()</code>.
+
+<br>
+<br>
+
+<I>Атрибут, характеризующий "временное" окно</I>.
+Идентифицируется атомом <code>XA_WM_TRANSIENT_FOR</code> и имеет тип
+<code>XA_STRING</code>. Свойство задается для окон, появляющихся на экране
+для выполнения вспомогательных функций (диалоги, меню).
+Такие объекты рассматриваются менеджером по особому.
+Например, он может не добавлять к окну заголовок и рамку.
+Данные свойства - идентификатор окна родительского по отношению к данному.
+Задается свойство с помощью процедуры <code>XSetTransientForHint()</code>.
+
+<br>
+<br>
+
+<I>Имена программы и ее класса</I>, идентифицируется атомом
+<code>XA_WM_CLASS</code> и имеет тип <code>XA_STRING</code>.
+Данные свойства - структура типа <code>TXClassHints</code>.
+Задается свойство с помощью процедуры <code>XSetClassHint()</code>
+и может быть получено с помощью <code>XGetClassHint()</code>.
+
+<br>
+<br>
+
+Если окно (окна) программы имеют собственную цветовую палитру,
+то приложение должно соответствующим образом задать для него
+атрибут <code>colormap</code>. Программа заносит идентификатор окна
+(идентификаторы окон) в список, ассоциированный со свойством,
+имя которого <code>WM_COLORMAP_WINDOWS</code>.
+Делается это процедурой <code>XSetWMColormapWindows()</code>.
+Получить список, уже находящийся в свойстве, можно, обратившись к
+<code>XGetWMColormapWindows()</code>.
+
+<br>
+<br>
+
+Когда окно открыто, пользователь посредством менеджера совершает над ним
+разные действия. Программе может быть желательно перехватывать некоторые
+из них. Так, например, если окно представляет собой редактор текста,
+и пользователь пытается его закрыть, то разумно спросить у сидящего за
+компьютером человека, а не желает ли он предварительно сохранить
+результаты редакции. Начиная с X11R4 системой предусматривается
+свойство с именем <code>WM_PROTOCOLS</code>. Оно содержит список атомов,
+и каждый из них идентифицирует свойство, связанное с действиями,
+о которых надо оповещать программу. Эти свойства следующие:
+
+<UL type=square>
+<li><code>WM_TAKE_FOCUS</code> - задается, если программа хочет передавать
+фокус ввода между своими окнами самостоятельно; в этом случае менеджер
+не будет управлять фокусом, ввода, а пошлет приложению событие
+<code>ClientMessage</code>, у которого поле <code>message_type</code>
+равно атому, соответствующему свойству <code>WM_PROTOCOLS</code>,
+а поле <code>data.l[0]</code> равно атому, соответствующему свойству
+<code>WM_TAKE_FOCUS</code>; в ответ на это событие программа должна
+сама обратиться к <code>XSetInputFocus()</code> для задания окна,
+имеющего фокус ввода;
+</li>
+<li><code>WM_SAVE_YOURSELF</code> - задается, если программа хочет
+перехватить момент своего завершения; менеджер окон посылает приложению
+событие <code>ClientMessage</code>, у которого поле <code>message_type</code>
+равно атому, соответствующему свойству <code>WM_PROTOCOLS</code>,
+а поле <code>data.l[0]</code> равно атому, соответствующему свойству
+<code>WM_SAVE_YOURSELF</code>; в ответ программа может сохранить
+свое текущее состояние;
+</li>
+<li><code>WM_DELETE_WINDOW</code> - задается, если программа хочет
+перехватить моменты, когда менеджер окон закрывает принадлежащие ей окна;
+менеджер окон посылает приложению событие <code>ClientMessage</code>,
+у которого поле <code>message_type</code> равно атому,
+соответствующему свойству <code>WM_PROTOCOLS</code>, а поле
+<code>data.l[0]</code> равно атому, соответствующему свойству
+<code>WM_DELETE_WINDOW</code>; далее программа сама решает,
+оставить окно на экране или удалить его с помощью
+<code>XDestroyWindow()</code>.
+</li>
+</ul>
+<br>
+
+Свойство <code>WM_PROTOCOLS</code> задается процедурой
+<code>XSetWMProtocols()</code> и может быть получено с помощью
+<code>XGetWMProtocols()</code>.
+
+<br>
+<br>
+
+Приведем фрагмент программы, задающей свойство <code>WM_PROTOCOLS</code>
+и производящей соответствующую обработку событий.
+
+<pre>
+. . . . . . .
+var 
+  prDisplay : PDisplay;
+  nScreenNum : integer;
+  prGC : TGC;
+  rEvent : TXEvent;
+  nWnd : TWindow;
+  pnProtocol : array [0..1] of TAtom;
+  nWMProtocols : TAtom;
+
+(*
+ *Устанавливаем связь с сервером, получаем номер экрана,
+ *создаем окно, выбираем события, обрабатываемые программой
+ *)
+. . . . . . .
+
+(* Задаем свойство WM_PROTOCOLS *)
+
+pnProtocol [0] := XInternAtom (prDisplay, 'WM_TAKE_FOCUS', True);
+
+pnProtocol [1] := XInternAtom (prDisplay, 'WM_SAVE_YOURSELF', True);
+
+nWMProtocols := XInternAtom (prDisplay, 'WM_PROTOCOLS', True);
+
+XSetWMProtocols (prDisplay, nWnd, pnProtocol, 2);
+
+(* Показываем окно *)
+
+XMapWindow (prDisplay, nWnd);
+
+(* Цикл получения и обработки событий *)
+
+while true do 
+begin
+  XNextEvent (prDisplay, @rEvent);
+
+  case (rEvent.type) of
+    . . . . . .
+    ClientMessage :
+    begin
+      if (rEvent.xclient.message_type = nWMProtocols) then
+      begin
+        if (rEvent.xclient.data.l[0] = pnProtocol[0]) then
+          writeln('Receiving the input focus.')
+        else
+          if (rEvent.xclient.data.l[0] = pnProtocol[1]) then
+          begin
+            XCloseDisplay (prDisplay);
+            halt(0);
+          end;
+      end;
+    end;
+    . . . . . . .
+  end;
+end;
+. . . . . . .
+</pre>
+
+Заказывается реакция на два события: получение фокуса
+ввода (<code>WM_TAKE_FOCUS</code>) и
+завершение программы (<code>WM_SAVE_YOURSELF</code>).
+Когда сервер посылает событие первого типа,
+задача печатает соответствующее сообщение на устройства вывода. При приходе
+события второго типа, программа закрывает связь с сервером и
+завершается.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

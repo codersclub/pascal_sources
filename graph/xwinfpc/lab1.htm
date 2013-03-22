@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Лабораторная работа №1 "Основные понятия Xlib" - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Лабораторная работа №1 "Основные понятия Xlib".'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+1.1. <A class=blue HREF="basics.htm">Основные понятия</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.1.10. Лабораторная работа №1 "Основные понятия Xlib"</h2>
+
+<dir>
+
+<OL>
+<LI>Используя компилятор командной строки, откомпилируйте
+пример из п. 1.1 и выполните полученную программу.</LI>
+
+<P ALIGN="CENTER"><IMG SRC="images/image6.gif" WIDTH=108 HEIGHT=128></P>
+
+<LI>Настройте интегрированную среду Анюта для работы с
+кириллицей и выполните компиляцию в ней предыдущей программы.</LI>
+<br>
+<br>
+<LI>На основе примера напишите программу, которая при
+нажатии клавиши мыши пишет сообщение <code>Pressed</code>, а при отпускании -
+<code>Released</code>.</LI>
+
+<P ALIGN="CENTER"><IMG SRC="images/image7.gif" WIDTH=308 HEIGHT=128></P>
+
+<LI>Используя функции <code>XFlush()/XSync()</code> и <code>delay()</code>,
+напишите программу без цикла обработки сообщений, отображающую черное окно
+размером 100х100 пикселей в течение 5 секунд.</LI>
+
+</OL>
+
+<P ALIGN="CENTER"><IMG SRC="images/image8.gif" WIDTH=108 HEIGHT=128></P>
+
+<br>
+<br>
+
+<b>Приложение:</b>
+<br>
+&nbsp;&nbsp;Демонстрационные исполняемые файлы: <a class=blue href="lab1.zip">lab1.zip</a>
+<br>
+&nbsp;&nbsp;Исходный код модулей (x.pp, x11.pp, xlib.pp, xresource.pp, xutil.pp):
+<a class=blue href="units.zip">units.zip</a>
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,273 @@
+<html><head><title>VGA2 Graphics Library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Графическая библиотека для режима 13h. Поддерживает работу со спрайтами и пользовательскими фонтами. Дополнительно включена утилита для редактирования фонтов.  VGA2 Graphics Library is extremely fast, it has everything you could possibly need to write a realy fast graphical game.'>
+<meta name="keywords" content="pascal, sources, source code, vga2, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vga2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VGA2 Graphics Library</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:lallred@utah.uswest.net">Brad Allred</a></TD>
+<TD class=black align='right'>02.07.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="vga2.gif"><p style="margin-left:20px">Графическая библиотека для режима 13h.
+Поддерживает работу со спрайтами и пользовательскими фонтами.
+Дополнительно включена утилита для редактирования фонтов. <br>
+VGA2 Graphics Library is extremely fast,
+it has everything you could possibly need
+to write a realy fast graphical game.</TD><TD class=black colspan=2 align='right'><br><A HREF="vga2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>23k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">==================================================================
+                        VGA2 Graphics Library
+==================================================================
+     This is the documentation for the VGA2 graphics library.
+This library is extremely fast, it has everything you could
+possibly need to write a realy fast graphical game. Most of the
+Code is my own, but, the rest I just found floating around the
+internet.
+
+                   <img border=0 width=200 height=125 src="vga21.gif" alt="">
+
+==================================================================
+procedure initvga;
+     Simply intiates screen mode 13. Be Sure to call this before
+     using Anything below. You computer may freeze up if you
+     don't.
+
+==================================================================
+procedure closevga;
+     Returns the VGA mode to the Dos text mode.
+
+==================================================================
+PROCEDURE SetClip(X1, Y1, X2, Y2 : INTEGER);
+     Sets the clipping region of the screen. Default is
+     0,0,319,199.
+
+==================================================================
+procedure PutPixel(x,y:word;color:byte);
+     Puts a Pixel of a certain color at X,Y.
+
+==================================================================
+procedure PutPixel_C(x,y:word;color:byte);
+     Same as PutPixel, but clips it to the region specified by
+     SetClip.
+
+==================================================================
+function GetPixel(x,y:integer):byte;
+     Returns a Pixel colors from the active screen.
+
+==================================================================
+procedure Cls(col:byte);
+     Clears the Active screen to the specified color.
+
+==================================================================
+procedure LoadFont(FileName:string);
+     Loads a custom font made with, font.exe.
+
+==================================================================
+procedure ShowChar(x,y:integer;num:byte;clip:boolean);
+     Puts a character of a custom font, at location x,y, num is
+     the character to display, set clip to true to have it
+     clipped;
+
+==================================================================
+procedure Print_F(x,y:integer;text:string;clip:boolean);
+     Prints a string to the screen, uses a custom font. Uses the
+     font's default colors. Set clip to true to clip the string.
+
+==================================================================
+procedure Print_FC(x,y,col:integer;text:string;clip:boolean);
+     Prints a string to the screen, uses a custom font. You
+     specify the color to write it in with col. Set clip to true
+     to clip the string.
+
+==================================================================
+procedure Print(x,y,col:word;txt:string;clip:boolean);
+     Prints a string to the screen, uses a Large ROM font.
+
+==================================================================
+procedure Vsinc;
+     Waits for Vertical retrace to occour, good for smooth
+     animations.
+
+==================================================================
+Procedure Circle(X, Y, Radius:Word; Color:Byte);
+     Draws a circle at X,Y. The radius is how big the circle will
+     be.
+
+     EXAMPLE: circle(150,100,30);
+
+==================================================================
+PROCEDURE HLine(X1, Y, X2 : INTEGER; Color : BYTE);
+     Draws a Horizontal line at X1,Y. ANd draws it to X2.
+
+==================================================================
+PROCEDURE VLine(X, Y1, Y2 : INTEGER; Color : BYTE);
+     Draws a Vertical Line at x,Y1. And draws it to Y2.
+
+==================================================================
+procedure line(x, y, x2, y2 : integer;col:byte;clip:boolean);
+     draws a line from X,Y to X2,Y2. set clip to true to clip it
+     to the specified CLipping range.
+
+     EXAMPLE: line(0,0,319,199,2,true); - draws a green line from
+     the top-left corner to the Bottom-Right corner.
+
+==================================================================
+procedure box(x,y,x1,y1:word;col:byte);
+     Just draws a Box at X,Y and goes to X1,Y1. And fills it with
+     col.
+
+     EXAMPLE: Box(150,100,200,150,15); - Draws a white Box on the
+     screen.
+
+==================================================================
+procedure Square(x,y,x1,y1:word;col:byte);
+     Draws a square at X,Y and goes to X1,Y1.
+
+     EXAMPLE: Square(0,0,319,199,1); - draws a blue square around
+     the screen
+
+==================================================================
+procedure Disk(xc,yc,a,b: integer; col:byte);
+     Draws a filled circle ar XC,YC. A is how high it will be and
+     b if how wide it will be.
+
+==================================================================
+PROCEDURE KillSprite(VAR Sprite : SpriteType);
+     Erases a Sprite from Memory.
+
+==================================================================
+PROCEDURE CreateSprite(VAR Sprite : SpriteType;
+                       Width, Height : INTEGER);
+     Sets up the sprite pointer. YOU DO NOT NEED TO USE THIS.
+     GetSprite does this for you.
+
+==================================================================
+PROCEDURE Get(VAR Sprite : SpriteType; X1, Y1, X2, Y2 : INTEGER);
+     Gets a Sprite from the Active Screen.
+
+==================================================================
+PROCEDURE Put(VAR Sprite : SpriteType; X, Y : INTEGER);
+     Puts a sprite that was gotten by getsprite on the screen.
+     FAST!!!!!
+
+==================================================================
+PROCEDURE Put_c(VAR Sprite : SpriteType; X, Y : INTEGER);
+     Puts a sprite that was gotten with GetSprite and clips it to
+     the screen. FAST!!!!
+
+==================================================================
+PROCEDURE MakeRLE(VAR Sprite : SpriteType);
+     Converts a Sprite that was gotten with GetSprite to An RLE
+     sprite.  This type of sprite is alot better because it
+     compresses the data, therefore saving alot more memory. An
+     RLE sprite is a little slower than a normal sprite but it is
+     hardly noticable, unless you have something like a 286. It
+     also makes color 0 transparent, so you dont have an annoying
+     black background on your sprite.
+
+==================================================================
+PROCEDURE PutRLE(VAR Sprite : SpriteType; X, Y : INTEGER);
+     Puts a sprite converted with MakeRLE to the screen. FAST!!!!
+
+==================================================================
+PROCEDURE PutRLE_C(VAR Sprite : SpriteType; X, Y : INTEGER);
+     Puts a sprite converted with MakeRLE to the screen, and it
+     clips it to the screen clip range. FAST!!!!!
+
+==================================================================
+PROCEDURE SaveSprite(Sprite : SpriteType; Filename : STRING);
+     Saves a sprite to disk.
+==================================================================
+PROCEDURE LoadSprite(VAR Sprite : SpriteType; Filename : STRING);
+     Loads a sprite from disk.
+==================================================================
+PROCEDURE CopySprite(Source : SpriteType; VAR Dest : SpriteType);
+     Copies source to dest.
+
+==================================================================
+procedure Use(what:byte);
+     Lets you use either the virtual screen or the VGA screen.
+     Have "what" = VGA to write to the vga screen.
+     HAve "what" = Virt to write to the Virtual screen.
+
+     EXAMPLE: use(Virt); - make all graphics goto the virtual
+     screen.
+
+==================================================================
+PROCEDURE Flip;
+     Copies the Virtual Screen to the VGA screen. - this is great
+     for No Flicker Programs. FAST!!!!!!
+
+==================================================================
+PROCEDURE LoadPCX(x,y : WORD; name : STRING);
+     Loads a PCX file at location X,Y. FAST!!!!!  NOTE: This
+     Automaticly loads the PCX's Palette, with the picture.
+
+==================================================================
+procedure setpal(VAR colors:paltype);
+     Sets the Palette.
+
+==================================================================
+PROCEDURE SetColor(Index, R, G, B : BYTE);
+     Sets the RGB values of a certain color.
+
+==================================================================
+PROCEDURE ReadColor(Index : BYTE; VAR R, G, B : BYTE);
+     Gets the RGB VAlues of a color.
+
+==================================================================
+Procedure SetBlack;
+     Sets the entire pallette to black. This is VERY usefull.
+
+==================================================================
+Procedure GetPal(var pal:paltype);
+     Gets the colors from the VGA screen and puts them into
+     "pal".
+
+==================================================================
+procedure savepal(var colors:paltype;filename:string);
+     Saves a Palette to disk.
+
+==================================================================
+procedure loadpal(var colors:paltype;filename:string);
+     Loads a Palette from disk.
+
+==================================================================
+procedure intensity(intensity : byte;var pal:paltype);
+     Sets the Brightness of the palette.
+
+==================================================================
+procedure fadeout(t : integer;pal:paltype);
+     Fades the Screen out.
+
+==================================================================
+procedure fadein(t : integer;pal:paltype);
+     Fades the screen in. You should Call "SetBlack: before
+     calling this, but you don't have to.
+
+==================================================================
+
+   Well that just about covers it. You should check out the
+example programs, but just experiment with it, it's not that hard
+to use, I made it as user friendly as I could. Well..  sorta....
+
+   If you find a bug, or you have something to add to it, or if
+you need help using it, or if you just wan't to tell me how cool
+this unit is, then E-Mail me at: lallred@utah.uswest.net
+
+
+	Brad Allred</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

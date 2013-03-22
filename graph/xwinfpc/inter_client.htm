@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Межклиентское взаимодействие. Механизм свойств - Программирование X Window средствами Free Pascal - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курс лекций по программированию на FPC в X Window на платформе Unix. Межклиентское взаимодействие. Механизм свойств.'>
+<meta name="keywords" content="pascal, sources, source code, graph, kde, unix, window, графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='blueb' href="/graph/index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="/img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+<TR><TD colspan=3><p style="margin-left:50px">
+
+
+<CENTER>
+<H1>Программирование в X-Window
+<br>средствами Free Pascal</H1>
+Авторы: А.П. Полищук, С.А. Семериков
+<BR>
+[Оформление в HTML: <a class=blue href="mailto:rswag@sources.ru">Valery Votintsev</a>]
+</CENTER>
+
+<br>
+<A class=blue HREF="../xwinfpc.htm">Содержание</a>
+
+<br>
+1. <A class=blue HREF="xbasics.htm">Основы программирования в системе X Window</A>
+<BR>
+<hr>
+<!-- begin CONTENT -->
+<h2>1.5. Межклиентское взаимодействие</h2>
+
+<dir>
+
+<h3>1.5.1. Механизм свойств</h3>
+
+Как мы уже упоминали ранее, свойство есть набор данных,
+ассоциированных с окном. Они хранятся в специальных таблицах в памяти
+компьютера, на котором работает сервер. Каждое свойство имеет имя.
+Разные окна могут иметь свойства с одинаковыми именами.
+
+<br>
+<br>
+
+Поскольку передача имен - строк произвольной длины - от клиента
+к серверу может увеличить нагрузку на сеть, X идентифицирует свойства с
+помощью целых чисел - <I>атомов</I>. Процедура <code>XInternAtom()</code>
+включает свойство с указанным именем в таблицу сервера и возвращает
+соответствующий атом. Полный список реализуемых X протоколом атомов
+можно найти в файле <code>/usr/include/X11/Xatom.h</code>.
+
+<br>
+<br>
+
+Данные свойства рассматриваются сервером как массив единиц длиной
+8, 16 или 32 бита. Их конкретная интерпретация осуществляется
+программами-клиентами.
+
+<br>
+<br>
+
+Каждое свойство имеет тип, который, в свою очередь, также задается
+тем или иным свойством. Например, свойство, соответствующее атому
+<code>XA_STRING</code>, задает тип "строка".
+
+<br>
+<br>
+
+Для работы со свойствами кроме <code>XInternAtom()</code>
+используются следующие процедуры: <code>XChangeProperty()</code> -
+меняет данные свойства: <code>XGetWindowProperty()</code> -
+позволяет получить данные свойства.
+
+<br>
+<br>
+
+Особую роль играют свойства, данные которых содержат строки текста.
+Они так и называются текстовыми и имеют тип "<code>TEXT</code>".
+Таковыми являются, например, имена (заголовки) окно, имена пиктограмм и т.д.
+Данные текстового свойства описываются структурой <code>TXTextProperty</code>.
+Процедура <code>XStringListToTextProperty()</code> переводит список строк
+в набор данных типа <code>TXTextProperty</code>:
+
+<pre>
+(* Эта переменная будет хранить созданное свойство. *)
+var
+  window_title_property : TXTextProperty ;
+  rc : TStatus;
+
+  (* Строка, преобразуемая в свойство. *)
+const
+  window_title : PChar = 'hello, world';
+
+(* перевод строки в свойство X. *)
+rc := XStringListToTextProperty(@window_title,
+                                1,
+                                @window_title_property);
+(* проверка успешности преобразования. *)
+if (rc = 0) then begin
+  writeln( 'XStringListToTextProperty - нет памяти');
+  halt(1);
+end;
+</pre>
+
+<code>XTextPropertyToString()</code> выполняет обратное преобразование.
+
+</dir>
+<br>
+
+
+<!-- end of CONTENT -->
+<!--#include virtual="/t_footer.htm"-->

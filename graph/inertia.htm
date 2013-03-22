@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Inertia 3D Rendering System - Графика - Исходники.Ру</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Быстрая, хорошо оптимизированная графическая библиотека для трехмерного рендеринга в реальном времени. Реализованы средства для затенения, сглаживания, текстурирования и отражения поверхностей, коррекция перспективы, поддержка 3DFX, импорт моделей из 3D Studio... Компилятор: TP6-BP7, TMT, Watcom, MSVC'>
+<meta name="keywords" content="pascal, sources, source code, 3d, rendering, inertia, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;Inertia
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Inertia 3D Rendering System</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexchalfin@yahoo.com">Alex Chalfin</a></TD>
+<TD class=black align='right'>07.07.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="3dtutor.jpg"><p style="margin-left:20px">
+Быстрая, хорошо оптимизированная графическая библиотека
+для трехмерного рендеринга в реальном времени.
+<br>
+Реализованы средства для затенения, сглаживания, текстурирования
+и отражения поверхностей, коррекция перспективы,
+поддержка 3DFX, импорт моделей из 3D Studio...
+<br>
+Компилятор: TP6-BP7, TMT, Watcom, MSVC
+
+</TD><TD class=black colspan=2 align='right'><br>25k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+
+
+
+<h1>Inertia 3D</h1>
+<div align="right">Перевод: Валерий Вотинцев</div>
+<h2>Что такое Inertia 3D?</h2>
+
+<dir>
+<b>Inertia</b> - это библиотека для трехмерного рендеринга
+в реальном времени, которую вы можете встроить в вашу собственную программу.
+Первоначально этот трехмерный движок был частью графической библиотеки
+GFXFX3 by Bas van Gaalen.
+И хотя библиотека GFXFX3 в настоящее время безнадежно устарела,
+движок <b>Inertia</b> не потерял своей актуальности
+и продолжает развиваться, и будет поддерживаться еще долгое время.
+<br>
+<br>
+
+Изначально Inertia была разработана весной 1996 года
+для Borland Turbo Pascal 6/7, и представляла из себя полностью
+16-битную библиотеку с необольшими 32-битными расширениями
+для растеризации и трансформации.
+<br>
+Зимой 1996-97 я поддерживал и дорабатывал движок Inertia в соответствии
+с возможностями моего новенького сияющего Пентиума,
+и в результате появились более продвинутые версии
+для 32-разрядных компиляторов TMT Pascal и Watcom C.
+<br>
+В связи с этим внутреннее устройство движка претерпело значительные изменения.
+Я полностью переработал системы трансформации с использованием арифметики
+с плавающей точкой, и добавил модули растеризации
+с коррекцией перспективы и текстурирования.
+
+<br>
+<br>
+
+
+Движок Inertia разрабатывался в течение долгого времени
+(ну, может, и не очень долгого, но по крайней мере всё,
+что было разработано до того, как Windows превратилась
+в игровую платформу, и до массового внедрения аппаратных 3D акселераторов,
+можно уже считать историей древнего мира :).
+<br>
+Более 90% всех функций, ранее заложенных мной в движок Inertia,
+на сегодняшний день могут быть легко реализованы
+с помощью 3D API OpenGL или Direct3D.
+В связи с этим, я решил открыть исходный код, который я когда-либо
+написал для Inertia, для всех желающих.
+Мне кажется, что эти исходники могут послужить хорошим учебным
+пособием для тех, кто изучает машинную графику.
+<br>
+В общем, если у вас появятся вопросы по исходному коду,
+не стесняйтесть обращаться ко мне по
+<A href="mailto:alexchalfin@yahoo.com">email</a>.
+
+</dir>
+<br>
+
+<h2>Свойства Inertia 3D</h2>
+
+<ul>
+<li>
+Различные модели затенения: Ambient, Lambert, Gouraud, Phong, без затенения
+</li>
+
+<li>
+Сглаживание, текстурирование и отражение поверхностей
+</li>
+
+<li>
+Любая комбинация эффектов сглаживания и затенения
+</li>
+
+<li>
+Эффект прозрачности для любой модели сглаживания и затенения
+</li>
+
+<li>
+Поддержка множественных объектов и камер
+</li>
+
+<li>
+Импорт моделей объектов из 3D Studio .ASC и .3DS файлов
+</li>
+
+<li>
+Поддержка текстур, хранимых в PCX файлах
+<li>
+
+<li>
+Совместимость с компиляторами: Turbo Pascal 6/7. Borland Pascal 7
+(16-bit DPMI), TMT Pascal (32-bit DOS), Watcom C v10 &amp; v11,
+и MSVC++ v5 &amp; v6.
+</li>
+
+<li>
+Оптимизация операций с плавающей точкой для процессоров Pentium
+(только для TMT Pascal и C/C++).
+</li>
+
+<li>
+Супер-точная растеризация для sub-pixel и sub-texel полигонов
+со 100%-ной оптимизацией ассемблерного кода для процессоров Pentium
+(только для TMT Pascal и C/C++).
+</li>
+
+<li>
+Коррекция перспективы при текстурировании с использованием метода
+16-пиксельных афинных преобразований (только для TMT Pascal и C/C++).
+</li>
+
+<li>
+Быстрое 3D отсечение многоугольников (только для TMT Pascal и C/C++). 
+</li>
+
+<li>
+Поддержа 3DFX с помощью API библиотеки Glide Rasterization (только для Watcom C).
+</li>
+
+<li>
+Полностью открытый исходный код.
+<li>
+
+</ul>
+<br>
+<br>
+
+<h2>Скриншоты</h2>
+
+
+<TABLE border=0 cellPadding=2 width="100%">
+  <TR>
+    <TD align="right"><IMG alt="" height=200 src="inertia/ex06.jpe" width=320></TD>
+    <TD align="left"><IMG alt="" height=200 src="inertia/ex07.jpe" width=320></TD>
+    </TR>
+  <TR>
+    <TD align="right"><IMG alt="" height=240 src="inertia/skull.gif" width=320></TD>
+    <TD align="left"><IMG alt="" height=240 src="inertia/scr2.jpe" width=320></TD></TR>
+  <TR>
+    <TD align="right"><IMG alt="" height=240 src="inertia/scr.jpe" width=320></TD>
+    <TD align="left" valign="top"><IMG alt="" height=200 src="inertia/fongduck.jpe" width=320></TD>
+    </TR>
+</TABLE>
+
+<br>
+<br>
+
+<h2>Файлы Inertia 3D</h2>
+
+<ul>
+<li>
+<A href="inertia/inerdoc.zip">Документация к Inertia</A>
+Включает в себя всю документацию, поставляемую с Inertia.
+Основная часть документации подготовлена в формате MS Word.
+Включена информация о регистрации библиотеки
+(в связи с выпуском иходников она, разумеется, уже не актульна),
+история изменений, описание формата файлов GVO,
+руководство программиста,
+руководство по программированию с использованием Glide
+(для тех моментов, которые специфичны для версии Glide,
+используемой в Inertia), a также справочник по Inertia.
+</li>
+
+<li>
+<A href="inertia/ir16src.zip">Inertia/16.</A>
+Полный исходный код версии Inertia для Turbo Pascal v6 &amp; v7
+и Borland Pascal 7 (16-bit DPMI). Статус - "как есть" (as is).
+</li>
+
+<li>
+<A href="inertia/irtmtsrc.zip">Inertia/TMT</A>.
+Полный исходный код версии Inertia для TMT Pascal.
+Статус - "как есть" (as is).
+</li>
+
+<li>
+<A href="inertia/irwcsrc.zip">Inertia/Watcom C</A>.
+Полный исходный код версии Inertia для Watcom C.
+Статус - "как есть" (as is).
+</li>
+
+<li>
+<A href="inertia/irwinsrc.zip">Inertia/Windows</A>.
+Полный исходный код версии Inertia для Windows (MSVC).
+Представлены только файлы исходников (без файлов проекта).
+Статус - "как есть" (as is).
+</li>
+
+<li>
+<A href="inertia/irexsrc.zip">Примеры и Демо</A>.
+Несколько примеров использования движка, демонстрирующих возможности Inertia.
+Включены исполняемые модули, файлы данных
+(модели, текстуры, таблицы затенения), и исходники для TMT, Watcom C,
+и MSVC.
+Статус - "как есть" (as is).
+</li>
+
+<li>
+<A href="inertia/irtoolsrc.zip">Inertia/Tool Set</A>.
+Набор дополнительных утилит, входящих в состав пакета Inertia.
+Приведены исполняемые модули и исходники.
+В основном, это старые паскальные утилиты для конвертирования
+3DS и ASC файлов в формат GVO, а также рад других утилит.
+</li>
+
+</ul>
+
+<br>
+
+<dir>
+[ <A href="mailto:alexchalfin@yahoo.com">Inertia Email</A> ]
+&nbsp;&nbsp;
+[ <a href="http://alex.casadave.org/inertia/">Inertia Homepage</a> ]
+</dir>
+<br>
+<br>
+
+<!--#include virtual="/t_footer.htm"-->

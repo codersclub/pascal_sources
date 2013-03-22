@@ -1,0 +1,207 @@
+<html><head><title>Spriter v1.01 - Sprite and Icon Editor for TP7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Редактор спрайтов, иконок и фонтов размером 32x32 пиксела для Turbo Pascal 7.0. Поддерживается мышка.<br><font color=#666666> It's a drawing proggy to draw sprites,fonts(libs of sprites) &amp; ICONs. It also produces files in IGA (Insecabilis Graphics Array) format.</font>">
+<meta name="keywords" content="pascal, sources, source code, spriter, graph, Графика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;spriter
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Spriter v1.01 - Sprite and Icon Editor for TP7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dsmits@zorro.ruca.ua.ac.be">Dimitri Smits</a></TD>
+<TD class=black align='right'>13.12.94</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=72 vspace=4 hspace=8 alt="" src="spriter.gif"><p style="margin-left:20px">Редактор спрайтов, иконок и фонтов размером 32x32 пиксела
+для Turbo Pascal 7.0. Поддерживается мышка.<br><font color=#666666>
+It's a drawing proggy to draw sprites,fonts(libs of sprites) & ICONs.
+It also produces files in IGA (Insecabilis Graphics Array) format.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="spriter.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>43k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">+-----------------------------------------------------------------+
+|                       SPRITER V1.01 Beta                        |
++-----------------------------------------------------------------+
+
+                 <img border=0 width=320 height=200 src="spriter1.gif" alt="">
+
++-----------------------------------------------------------------+
+| Disclaimer (Sorry, but this is necessary!)                      |
++-----------------------------------------------------------------+
+The author of this program is not liable for any damage to the
+computer on which this programm will run or has run, nor for any
+loss of DATA whatsoever. The author claims not to have put in any
+Virusses ,Worms, Trojans, or anything else damaging or
+threatening your compu.
+
+When this program was first released, it did NOT have anything in
+it (except for drawing routines, mouse routines, and input/output
+routines for managing files).If you have any trouble whatsoever
+with the program you may report it to me, but you MUST remember
+that the program was provided AS IS! Maybe (IF its a bug in the
+program) I will look after it. If You DON'T like this, then
+DELETE EVERYTHING NOW!
+
++-----------------------------------------------------------------+
+| What this proggy does   (or is supposed to do)                  |
++-----------------------------------------------------------------+
+It's a drawing proggy to draw sprites,fonts(libs of sprites) &
+ICONs.  It also produces files in
+I(nsecabilis)G(raphics)A(rray)-format.  It is not my intention to
+give a complete overview of it's functions, because I have to get
+up early tomorrow, but here is an explanation about getting
+started:
+
++A-------------------+ +B------------+ +C-------------------------+
+|                    | |  32 * 32    | |       CREDIT TO ME       |
+| 32 * 32 raster     | |   pixels    | |            +             |
+|                    | | the result  | |    TITLE PROGRAM & VERS  |
+|                    | | in mode 13H | +S-----------+T------------+
+| Here you draw your | | 320*200*256 | |IN-FileName |Out-FileName |
+|    pictures        | +-+U-+-+V-+---+ +------------+-------------+
+|                    | +D+--+-+--+--------------------------------+
+|                    | | Message Box                              |
+|                    | |                                          |
+|                    | | +--------------------------------------+ |
+|                    | | +-Path---------------------------------+ |
++--------------------+ +------------------------------------------+
++E-----+F-----+   +N+ +O--------------------------++P-------------+
+| SAVE | LOAD |BAR+-+ |                           ||              |
++G-----+H-----+   | | |    256 COLORS             |+Q-------------+
+| QUIT | SIZE |   | | |                           ||              |
++------+------++M-| | |                           |+--------------+
+  Actual Pict &gt;|NR| | |                           ||              |
++I-----+J-----++--+ | |                           || SAVE INFO    |
+|CLEAR | COPY |   | | |                           ||              |
++K-----+L-----+   | | |                           |+R-------------+
+|PASTE | CUT  |   +-+ |                           ||              |
++------+------+   +N+ +---------------------------++--------------+
+
+A =&gt; A 32*32 (4pixel*4pixel)-raster in which you can draw your
+     sprites leftbutton=U, rightbutton=V, middlebutton=0 (erase)
+B =&gt; along with A, you get to see the result Real-Size
+C =&gt; just filling
+D =&gt; here is where you get to see errors (Disk I/O (file not
+     found, ...)) also there is a bar with a path-string, which you
+     can alter
+E =&gt; this saves according to the T extension in IGA-format or
+     ICO-format if the extension is IGA, the program will use
+     P,Q,R to know what to save so, when you want to save
+     something, FIRST check if the settings in P,Q,R are the ones
+     you would like to use for your saving.
+F =&gt; this LOADs into memory from the Picture you are on (M)
+     onwards 'til everything is loaded (when you load a lib from
+     a position, but when the lib contains more than 60-M, it
+     will start at the beginning again (M=1) when it reaches 61)
+G =&gt; Obvious not?!?
+H =&gt; has only effect on P and Q variables
+I =&gt; clears current picture defined by M
+J =&gt; makes a copy of everything in the P & Q variables to a
+     clipboard
+K =&gt; gets the clipboard to the current picture and fills it from
+     X1 Y1, defined in P & Q
+L =&gt; Cuts everything within the range of the P & Q variables
+
++-----------------------------------------------------------------+
+| Spriter Manual By Dimitri Smits, author of SPRITER       04/06  |
++-----------------------------------------------------------------+
+M =&gt; points to current position,by leftclicking the mouse on it,
+     you can change directly to a specified picture (which will
+     alter A & B as well)
+N =&gt; 2 arrows used by clicking on it to alter the position in
+     picture array indirectly changes M and thus A & B also
+     leftclick=1 at a time, rightclick=keep pressed to alter till
+     you artive where you want to be
+O =&gt; colours of palette,which is available leftclicking on them
+     will alter U rightclicking on them will alter V remember
+     that when you want to change an ICON, you MAY ONLY USE
+     colors 0 TO 15 (line 1 in O)
+P & Q =&gt; topleft till bottomright + X-axis & Y-axis length to
+         (cut,copy,...)
+R =&gt; from which picture till which picture to save
+S =&gt; name inputfile
+T =&gt; name outputfile
+U =&gt; color left
+V =&gt; color right
+
++-----------------------------------------------------------------+
+| How to get in touch with the author?                            |
++-----------------------------------------------------------------+
+About Spriter
+Via E-Mail:
+Internet:
+       send to: dsmits@zorro.ruca.ua.ac.be
+                       ^^^-&gt; hey,don't lauch, I didn't choose
+                       its name
+   if about spriter       subscribe: Discordis.IGA
+   anything else (e.g. application for GFX artist)
+                subscribe: INSECABILIS
+
+Via Snail Mail:
+send to: Discordis/Insecabilis
+         Paulus Beyestraat 91
+         2100 Deurne (BELGIUM)
+
++---------------------------------------------------------------+
+| Insecabilis? Never heard of! Who are they?                    |
++---------------------------------------------------------------+
+Insecabilis is the name of a Demo/Intro/Game group I am trying to
+start. At the moment of this writing, there are 3 members
+
+        Dimitri Smits (Discordis): CODER
+        Benjamin De Hondt        : MUSICIAN (has his own CD out
+                                   in a couple of months)
+        Ben Verpoorten           : CODER
+
+If YOU are intersted in 'working' for a group such as ours,
+please contact me, I won't lauch (I'd probably do worse anyway).
+So, if you are a 'GOOD' GFX-artist, a 'GOOD' musician or a 'GOOD'
+CODER (preferably capable of writing his Sourcecode in TP7.0(with
+ASM-based subroutines) and able to create a musicsystem for 8CHN
+MODS(or something)) PLEASE send us some of your work, or tell us
+where to find it (on Internet) and we 'll take a look at it.  We
+are (at least not for now) not yet into commercial demos, becoz
+we want to learn to code better and have more efficiency first,
+maybe we will in a 'near' FUTURE.
+
+
++---------------------------------------------------------------+
+| IGA-Format                                                    |
++---------------------------------------------------------------+
+  + BYTE -+-------- DESCRIPTION --------------------------------+
+  |1 to 3 | IGA (header)                                        |
+  +-------+-----------------------------------------------------+
+  |   4   | Version this file was made with                     |
+  +-------+-----------------------------------------------------+
+  |   5   | number of piccy's in FILE                           |
+  +-------+-----------------------------------------------------+
+  |   6   | Y-axis of each piccy (set for all)                  |
+  +-------+-----------------------------------------------------+
+  |   7   | X-axis of each piccy (set for all)                  |
+  +-------+-----------------------------------------------------+
+  |   8   | number times (y times (x pixels))                   |
+  .   .   .                                                     .
+  .   .   .                                                     .
+  +-------------------------------------------------------------+
+
++---------------------------------------------------------------+
+| Last Minute Note                                              |
++---------------------------------------------------------------+
+This Package should be spread totally, without changes, and
+should contain the following files:
+
+  SPRIV100.DOC  you are reading this
+  SPRIHIST.INS  history file
+  SPRITER.DAT   DATA-file for SPRITER
+  SPRITER.EXE   SPRITER, the executable
+  FILE_ID.DIZ   description-file
+  PALETTE.PAL   palette-file (if you make another palette, this
+                won't change the palette in the program, but if
+                your palette is better, you may always send it
+                in)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
