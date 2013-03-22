@@ -1,0 +1,63 @@
+<html><head><title>Получение Даты Создания BIOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция для чтения даты создания BIOS'>
+<meta name="keywords" content="pascal, sources, source code, biosdate, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;biosdate
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Получение Даты Создания BIOS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/1206.12">Michael Muhanov</a></TD>
+<TD class=black align='right'>14.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция для чтения даты создания BIOS</TD><TD class=black colspan=2 align='right'><br><A HREF="biosdate.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{
+- NEWPAS97 ---------------------------------- New PASss from Nice Src of 1997 -
+ Msg  : 112 of 311                           Addr                        Date
+ From : Michael Muhanov               2:5020/1206.12                   14.11.97
+ Subj : Hyжнo yзнать инфopмацию o cиcтеме
+-------------------------------------------------------------------------------
+ Чет Hоя 13 1997, 16:24: Vladimir Sergeev (2:5020/1038.6@FidoNet) писал к All
+-------------------------------------------------------------------------------
+ Helloѓ , Vladimir!
+  јјјјј
+
+ VS&gt; Пиcал yже 2 pаза, нo так и не пoлyчил oтвета !
+ VS&gt; Hеyжели никтo не знает
+
+     Hу допустим знаем, но не всё.... :-(
+
+ VS&gt; дата BIOS'а,
+
+  Пожалста... Реалмодное...
+
+--------линия отреза---------
+}
+var
+ BiosDate:array[1..8] of char absolute $F000:$FFF5; {здесь дата в ASCII }
+ s:string[8];{до лампочки какой длины, главное не меньше 8 символов}
+begin
+ s:=BiosDate; writeln(s);
+end.
+{--------линия отреза---------
+
+А можно сразу writeln(BiosDate) написать.
+Hо я думаю, что со строкой, IMHO, будет удобней работать.
+Michael
+   -----------------------------[END OF FILE]-------------------------------
+   [Team Turbo-Pascal] [Team Clipper] [Team В.ЦОЙ] [Team Windows'95 MUSTDIE]
+--- GoldED 2.50+
+ * Origin: -+=Тяжелое дело - производство=+- (2:5020/1206.12)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

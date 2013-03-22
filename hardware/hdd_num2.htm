@@ -1,0 +1,110 @@
+<html><head><title>Чтение серийного номера IDE винчестера</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вытаскивание из IDE винчестера серийного номера, модели и др. параметров'>
+<meta name="keywords" content="pascal, sources, source code, hdd_num2, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;hdd_num2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Чтение серийного номера IDE винчестера</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/205.14">Vladimir Papaev</a></TD>
+<TD class=black align='right'>31.03.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вытаскивание из IDE винчестера серийного номера, модели и др. параметров</TD><TD class=black colspan=2 align='right'><br><A HREF="hdd_num2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello!
+
+30 Mar 96 17:00, Egor Popov wrote to All:
+
+ EP&gt; Кто поможет считать subj и модель для IDE винта, очень надо, и если
+ EP&gt; можно с исходничком.
+
+Лови. Имя автора, к сожалению, не сохранилось...
+
+Vladimir
+
+--- Golded 2.50.B0822
+ * Origin:  HOME BBS, 23:00-06:00  (2:5020/205.14)
+
+{&gt; Cut here. FileName= HDD_NUM2.PAS }
+{$IFDEF Windows}
+  uses WinCrt;
+{$ENDIF}
+var
+  InfoArray : array[0..255] of word;
+  IdeInfo  : record
+    Config    : word;
+    CylsTotal : word;
+    Unused    : word;
+    HeadTotal : word;
+    BPT       : word;
+    BPS       : word;
+    SPT       : word;
+    Vendor    : array[0..2] of word;
+    Serial    : array[1..20] of char;
+    BufType   : Word;
+    BufSize   : Word;
+    ECC       : Word;
+    Revision  : array[1..8] of char;
+    Model     : array[1..40] of char;
+  end absolute InfoArray;
+  Count : byte;
+  i : byte;
+begin
+  writeln('Информация о дисководах IDE:'^M^J);
+{$IFDEF WINDOWS}
+  for count := 1 to mem[  $0040:$0075] do begin
+{$ELSE}
+  for count := 1 to mem[Seg0040:$0075] do begin
+{$ENDIF}
+    FillChar(InfoArray, SizeOf(InfoArray), 0);
+    {Проверить готовность}
+    while (port[$1F7] and $80&lt;&gt;0) do ;
+    {Запретить прерывания}
+    port[$3f6] := 2;
+    port[$1f6] := $A0 + ((count-1) shl 4);
+    port[$1f7] := $EC;
+    {Проверить готовность}
+    while (port[$1F7] and $80&lt;&gt;0) do ;
+    {Получить информацию}
+    for i := 0 to 255 do InfoArray[i] := swap(portw[$1F0]);
+    {апечатить информацию}
+    writeln('Информация о физическом диске ',count-1,^M^J);
+    with IdeInfo do begin
+      writeln('Емкость неформатированная :', 9.5367431641E-7* {1/2^20}
+        swap(BPT)*swap(CylsTotal)*swap(HeadTotal):5:0, 'Mb');
+      writeln('Емкость форматированная   :',
+        longint(swap(SPT))*swap(CylsTotal)*swap(HeadTotal) div 2048:5, 'Mb');
+      writeln('Число цилиндров           :', swap(CylsTotal):7);
+      writeln('Число головок             :', swap(HeadTotal):7);
+      writeln('Число секторов на дорожку :', swap(SPT):7);
+      writeln('Число байт на дорожку*    :', swap(BPT):7);
+      writeln('Число байт на сектор*     :', swap(BPS):7);
+      writeln('Размер буфера             :', swap(BufSize):7);
+      writeln('Код ECC                   :', swap(ECC):7);
+      writeln(' * -- неформатированная емкость', ^M^J);
+      writeln('Серийный номер            :', serial);
+      writeln('Версия                    :',revision);
+      writeln('Модель                    :',model);
+    end;
+    write('Hажмите любую клавишу...');
+{$IFDEF WINDOWS}
+    readkey;
+{$ELSE}
+    asm xor ah,ah ; int 16h end;
+{$ENDIF}
+    writeln(^M^J);
+  end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

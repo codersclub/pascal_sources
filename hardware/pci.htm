@@ -1,0 +1,196 @@
+<html><head><title>PCI Hardware Sniffer v0.44с</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для диагностирования PCI шины и распознавания всех подключенных PCI устройств.<br><font color=#666666> PCI information and diagnostics utility 0.35. PCI/AGP Bus scanning and display utility. Displays info about PCI devices in your system, including allocated resources. Identifies over 5000 known devices. Full Pascal source code included. </font>">
+<meta name="keywords" content="pascal, sources, source code, pci, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pci
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PCI Hardware Sniffer v0.44с</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:chart@hyperlink.net.au">Craig Hart</a></TD>
+<TD class=black align='right'>18.02.02</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Утилита для диагностирования PCI шины
+и распознавания всех подключенных PCI устройств.<br><font color=#666666>
+PCI information and diagnostics utility 0.35.
+PCI/AGP Bus scanning and display utility.
+Displays info about PCI devices in your system,
+including allocated resources. Identifies over 5000 known devices.
+Full Pascal source code included. </font></TD><TD class=black colspan=2 align='right'><br><A HREF="pci.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>145k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">+---------------------------------------------+
+| Merlin's PCI Hardware Sniffer Version 0.44с |
+|                                             |
+| The #1 FREEWARE diagnostic tool for modern  |
+|  chipsets just got better! now featuring    |
+|   full CardBus, AGP and PCI support, PCI    |
+| can identify over 4,800 known devices from  |
+| over 1800 hardware vendors.                 |
+|                                             |
+| The #1 tool for resolving resource issues,  |
+| detecting modern devices, automating setup  |
+| procedures and much much more.              |
+|                                             |
+|  An essential tool in any Tech's toolbox!   |
+|                                             |
+|                                             |
+|  Includes full Turbo Pascal 7 source code!  |
++---------------------------------------------+
+ PCI - The PCI System information & Exploration tool.
+
+
+The following is a somewhat rambling text, from which you should be
+able to extract everything you ever wanted to know about this program!
+Please excuse my poor documentation style; I really hate writing the
+docs :-) So read everything, the answer's probably there, somewhere.
+
+
+
+  General
+
+This code is Written by Craig Hart in 1996-2002 and is under constant
+development. It is released as freeware; please use and modify at will.
+No guarantees are made or implied. Commercial use is also specifically
+permitted, without restriction. It's free, use it!
+
+I'd appreciate credit if you find this code useful.
+I'd also be interested to see any code you may develop or modifications
+you create to this code...
+suggestions & bug fixes are _always_ welcomed.
+
+I can be reached by email: chart@hyperlink.net.au
+
+See my home page for the latest version of all my software releases,
+programmers information, updates for PCIDEVS.TXT and much more:
+
+http://members.hyperlink.net.au/~chart
+
+Wherever you see the term PCI in this document, you can substitute AGP
+and/or CardBus, if appropriate, instead. AGP is just a new physical
+and electrical form of the PCI bus; CardBus is the 32-bit "version"
+of PCMCIA; software-wise, they're virtually identical.
+This also covers all the 'other' PCI variants,
+such as SmallPCI, PCI-X, etc.
+
+
+
+   Why create this program, anyhow? What use is it? What does it do?
+
+PCI basically produces a report of the PCI, AGP & CardBus devices
+fitted to a PC, including the system chipset. A plethoria of
+information is reported on, including system resource useage
+(IRQs, Memory ranges, etc), capabilities (busmastering, caching),
+setup data (device latencies, general capabilities, features,
+subsystem info), and much much more. A text-file PCIDEVS.TXT lists
+thousands of known vendors, devices and subsystems, which PCI will
+refer to and display the info from. PCI covers all PCI device
+derivitives, including PCI 64-bit & 66MHz options, AGP (all speeds),
+CompactPCI, CardBus and PCI-X.
+
+PCIDEVS.TXT is a plain text file, so you can update it yourself,
+however it is updated regularly (virtually daily) by the author,
+and the latest revision is always available as a free download from
+the webpage (see general section).
+
+This program was originally written purely for me to learn how to
+program the PCI BIOS found in newer PC's. Since then, this program
+has proven to be vastly more useful, especially in the hands of a
+technician, system builder, and also in the hands of those about to
+purchase or upgrade a PC.
+
+To a technician or system builder, PCI can act as a system
+information and diagnostic tool. It lists the resources devices have
+been assigned (for example, IRQ's, Memory regions, etc)
+so it is handy for finding conflicts.
+Because PCI also identifies the devices fitted, it is handy in
+figuring out _exactly_ what drivers are required when setting up
+a system.
+
+PC buyers don't need to open a PC to see exactly what they're getting:
+your vendor can't tell you fibs about the chipset, graphic-card,
+or whatever, and since the PC doesn't need to be opened to check what
+you ordered is what you got fitted, you aren't loosing any warranties.
+
+Second hand parts hoarders can figure out what they have, just by
+plugging it in and running PCI - no more scratching your head over
+a mystery card you just stumbled across amongst your latest piles
+of aquired junk. As above, finding drivers becomes much easier when
+you can say *exactly* what brand model, and revision of card you have.
+
+To a programmer, PCI is a learning tool, since it's full source code
+is supplied, and the dump configuration-space feature will help a
+programmer discover how a driver alters the hardware to activate
+special features or generally work with a given device.
+
+
+
+
+   Using PCI
+
+Just run it. Read the output. Be happy!
+
+You must place PCI.EXE and PCIDEVS.TXT together in the same directory.
+You must be "in" that directory before running PCI; in other words,
+do NOT run PCI from a path. This is because PCI only looks in the
+CURRENT directory for it's data file.
+
+PCI as of version 0.41с will pause at the end of each screenfull to
+allow you to read the report; press any key for the next page.
+Pausing is disabled if you are using I/O redirection.
+
+PCI's output can be redirected (using MS-DOS pipes), for example to
+a text file on disk or a printer. IE "C:\&gt;PCI &gt; LOG.TXT" will generate
+a file on disk called LOG.TXT  This is handy if you want to keep a
+perminant record of the system under test, print it out, e-mail it to
+me, or whatever.
+
+PCI will be slow to generate it's report if run from a plain DOS
+computer from a floppy disk drive. For best speed run from within
+windows and/or from a hard disk drive. This is because the data file
+is more than 200k in size and is therefore not cached in memory.
+To improve speed under DOS a little, put buffers=20 in your config.sys
+file and reboot.
+
+PCI does not function under Windows 2000 or NT or XP. 3.x/95/98/ME work
+OK, as does OS/2 Warp.  See the bugs and OS/2 sections for more info.
+
+
+
+Syntax: PCI [/H] [/D] [/S] [/T] [/B] [/P] [/I] [/?]
+
+      ([] = optional, see the docs!)
+
+
+  And to the PCI SIG:
+
+Official PCI Programming information is not freely available.
+The controlling body the "PCI Special Interest Group" has determined
+that documentation will be made available only to those willing to pay
+for it. And it's not cheap, or easily obtainable outside the USA.
+I have the following to say to the PCI SIG:
+
+Charging money for your documentation not only restricts programmers
+and end users from adopting the PCI standard, but makes a mockery of
+the concept of open information sharing that the Internet has always
+stood for. Rather than take such a petty attitude towards Joe Average
+programmer, why not release your documentation freely in electronic
+format? It can only help establish your standards further.
+
+Freely releasing formal documentation would also mean that programmers
+such as myself can stop guessing about PCI, and stop writing up
+alternative documentation that may, ultimately, be incorrect.
+I'm sure that the current host of "third party" documentation
+(along with it's errors) can only make PCI look BAD, not good.
+
+Remember MCA? In 1987 we already had what PCI now offers..
+please don't kill PCI the same way IBM killed MCA.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

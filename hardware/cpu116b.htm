@@ -1,0 +1,181 @@
+<html><head><title>CPU/FPU Detection Library v.1.16b</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='-+ TMi0SDGL(tm) V1.16BETA +-  CPU/FPU Feature Detection Library by B-coolWare.   Recognizes 25+ CPUs and about 15 FPUs, checks for V86,   determines CPU clock speed and determines 386dx chip stepping.   ASM/PAS/C[++] sources included!   Windows, OS/2 & DESQview-aware: works fine in DOS box,   even returning correct MHz under Windows and DESQview!   Differs i486 and Cx486 models.   DPMI-compatible.   Make batches and file provided.   Absolutely free of charge!!!'>
+<meta name="keywords" content="pascal, sources, source code, cpu116b, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cpu116b
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CPU/FPU Detection Library v.1.16b</TD>
+<TD nowrap class=black>&nbsp;Владимир Захарычев</TD>
+<TD class=black align='right'>10.01.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">-+ TMi0SDGL(tm) V1.16BETA +- <br>
+CPU/FPU Feature Detection Library by B-coolWare. <br>
+ Recognizes 25+ CPUs and about 15 FPUs, checks for V86,
+  determines CPU clock speed and determines 386dx chip stepping. <br>
+ ASM/PAS/C[++] sources included! <br>
+ Windows, OS/2 & DESQview-aware: works fine in DOS box,
+  even returning correct MHz under Windows and DESQview! <br>
+ Differs i486 and Cx486 models. <br>
+ DPMI-compatible. <br>
+ Make batches and file provided. <br>
+ Absolutely free of charge!!!</TD><TD class=black colspan=2 align='right'><br><A HREF="cpu116b.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>49k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> ... README.1ST ........................... TMi0SDGL(tm) Companion Document ...
+ Document no.: T-0018.94.95M01.06
+
+                        *** A T T E N T I O N ***
+
+ Please read this document before you proceed with the rest of the library.
+
+ Throughout this document
+ "this code" and "the code" Ё "TMi0SDGL(tm) Version 1.16BETA dated 24/04/95".
+
+ The time stamp on all files in this archive should be 01:16:62. If it differs
+ on any of the files then you have modified version of this file.
+
+ WARNING!!! Due to many enhancements made to the code since last release, most
+ of which were not thoroughly tested, you should consider this release as
+ BETA test release. Avoid using this code in your commercial or shareware
+ applications until all possible incompatibilities and bugs will be located
+ and eliminated. If you make use of this code - you do it on your own risk.
+ Please test this code as thorough as you can and report any incompatibilities
+ or bugs you spot.
+
+ Contents
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New features that haven't been tested yet
+  DPMI compatibility issues
+  For those having problems with the code in certain environments
+  How to contact author
+
+
+
+  New features that haven't been tested yet.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ TMi0SDGL 1.16B has following new features that haven't been tested on all
+ systems yet:
+  AMD Am386 detection. It uses the fact that on Intel's 386s LOCK prefix
+ doesn't function as documented with some instructions (partially, NOP).
+ As the documentation says, LOCK NOP sequence should generate an "invalid
+ opcode" exception while it actually doesn't. AMD's CPUs function properly in
+ this case. This "bug" was reported by several people found it on several
+ Intel's 386s. BUT I cannot guarantee that ALL Intel's 386s function this
+ way. This must be proved by more extensive testing. Because I can't perform
+ it by myself, I leave it up to you.
+  Cyrix 486 CPU model detection. This one directly reads and writes to/from
+ chipset registers and thus may not work on certain motherboards. It was
+ initially written for NEAT chipsets and tested on BIOTEQ and HiNT chipsets.
+ Worked fine so far, but it may not on YOUR system.
+ This method possibly can also be used to detect other chips, like Am486?? and
+ likes, but currently I have no information on them.
+  IBM ?86SLC? CPU detection. This method uses RDMSR and WRMSR instructions
+ to obtain necessary information and thus it can work only in real mode or
+ with CPL=0. Only QEMM-386 version 7.04 and newer is known to allow these
+ instructions to work from V86 executing them on ring 0 and returning result
+ to caller. Due to mentioned limitations this method will only work in real
+ mode or under QEMM-386. If you know other memory managers that allow these
+ instructions to work in V86 applications, please let me know (and include
+ a method of detecting them if possible).
+ This method possibly can also be used to detect other chips, like Am486?? and
+ likes, but currently I have no information on them.
+
+
+  DPMI compatibility issues.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This code is fully DPMI compatible. Although only Borland Pascal 7 users
+ can use this code in protected mode programs without any handwork. Because
+ of many differences in different C/C++ compilers' protected mode memory
+ model definitions I do not provide MAKE script for making protected mode
+ applications using TMi0SDGL with C/C++. You should build protected mode
+ library manually:
+
+ 1. compile CPU_HL.ASM and CPUSPEED.ASM with __DPMI__ define and add .OBJes
+    to library you will use with protected mode application (CPUTYPEX.LIB, for
+    example);
+ 2. compile SMM.ASM, CXMODEL.ASM and P5INFO.ASM and add them to the same
+    library;
+ 3. compile CPUTYPE.C with corresponding memory model (DOSX, etc.) and add
+    .OBJ to the library.
+
+ Now (I hope) you should be able to build protected mode applications using
+ TMi0SDGL with your C/C++ compiler.
+
+
+  For those having problems with the code in
+   certain environments.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This code haven't been extensively tested on all CPUs it theoretically should
+ recognize. I performed extensive tests only on systems available to me which
+ include:
+
+ 1. AMD Am386DX-40/Intel 80387DX
+    running MS-DOS 5.0, QEMM 7.04 + DESQview 2.63, Windows 3.11
+ 2. Intel i486DX2-66
+    running MS-DOS 6.2, QEMM 7.04, Personal NW, Stacker 4.0,
+    Windows 3.10 Russian
+ 3. GenuineIntel i486SX-40/None - new generation (supporting CPUID)
+    running MS-DOS 6.2, QEMM 7.01, Windows 3.10
+ 4. Intel 80286-10/Sun SPARCStation 1+ emulating 80286
+ 5. Intel 80386SX-25/Intel 80387SX
+    running MS-DOS 6.2/MemMaker, Windows 3.10 Russian
+ 6. AMD Am386DX-40/Cyrix Cx87SLC
+    running Novell DOS 7, Personal NW, Windows 3.10
+ 7. Intel i486DX-50
+    running MS-DOS 6.2, Windows for Workgroups 3.11
+ 8. Intel Pentium-S/60
+    running MS-DOS 6.2, Windows for Workgroups 3.11
+ 9. Cyrix Cx486DX-40
+    running MS-DOS 5.0, QEMM 7.52, Windows 3.11
+    or OS/2 Warp Version 3 (European Release)
+10. GenuineIntel i486DX-33 - new generation (supporting CPUID)
+    running MS-DOS 6.0/MemMaker, Windows 3.10
+11. AMD Am386DX-40/IIT 3C87
+    running MS-DOS 5.0, QEMM 7.52, Windows 3.10
+12. Cyrix Cx486DX2-50
+    running Windows 95 Final Beta Release (build 337)
+13. P5-66 (step 7, no FPU bug)
+    running MS-DOS 6.22, QEMM 7.52, Windows for Workgroups 3.11
+
+ On all listed systems the code appeared to work fine giving correct results
+ under all listed environments except [1,6] when running Soft-ICE 2.62 -
+ incorrectly stated that CPU is 386SX. I cannot guarantee that the code will
+ run o.k. on systems with other configurations/operating environments, though
+ I hope it will. Please don't bomb me with letters like "wow! this thingie
+ crashes my PC with such and such CPU/FPU under such and such env." - you got
+ full sources, and you should know how to use a debugger if you know how to
+ program, so try to find out the origin of your problem on YOUR system (and
+ maybe a workaround) before reporting it.
+
+  How to contact author.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ If you found a bug or have any questions/suggestions about TMi0SDGL or have
+ some code/information to donate, you can reach me at
+
+   2:5028/52.6@fidonet aka 2:5028/51.10@fidonet (Vladimir Zakharychev)
+
+   or
+
+   xor@cnit.uniyar.ac.ru (internet, ask to forward message to Bobby Z.).
+   For phone and paper mail address see the CPUTYPE.DOC file.
+
+
+ Thanx for yer attention. Now you can proceed with the rest of the library. See
+ HISTORY.DOC for modification history and CPUTYPE.DOC for license agreement,
+ copyrights and contact info.
+
+
+                           &lt;&lt; end of README.1ST &gt;&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

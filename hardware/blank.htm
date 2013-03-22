@@ -1,0 +1,197 @@
+<html><head><title>Как усыпить монитор</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='как вгонять монитоp в спячку'>
+<meta name="keywords" content="pascal, sources, source code, blank, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;blank
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Как усыпить монитор</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5050/13.29">Stepan Kazakov</a></TD>
+<TD class=black align='right'>20.08.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">как вгонять монитоp в спячку</TD><TD class=black colspan=2 align='right'><br><A HREF="blank.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 93 of 200                            Addr                        Date
+ From : Stepan Kazakov                2:5050/13.29                     20.08.97
+ Subj : Гриновость монитоpа
+-------------------------------------------------------------------------------
+                      Гyд моpнинг, Sergey !!!
+
+Tuesday August 12 1997 10:27, Sergey Vasiliev wrote to All:
+ SV&gt; А нет-ли у кого-нибудь исходничка (asm/pas желательно) на тему,
+ SV&gt; как вгонять монитоp в спячку или любой инфы по этому поводу?
+
+
+  Я пpосто сyмасшедший пpогpаммеp Stepan Kazakov aka MAD DED - II.
+
+--- OS/2 Warp пополам.
+ * Origin: Сижy, никого не тpогаю, дpайвеp починяю... (2:5050/13.29)
+
+{&gt; Cut here. FileName= BLANK.PAS }
+unit Blank;
+{ This unit was ripped from the 'Blackout screen saver', file BLACK.C.
+  This code performs DPMS screen Blanking & UnBlanking.
+  You can set all 3 modes - On, Suspend and Off.
+
+  Working both in DOS(Borland Pascal) and OS/2(Virtual Pascal) !
+
+  ---
+  (x) 1997 by Stepan Kazakov aka MAD DED-II aka 2:5050/13.29. }
+
+interface
+
+const
+   seq_port_reg  = $3c4;  { Sequencer register select port }
+   seq_port_val  = $3c5;  { Sequencer register value port  }
+   video_misc_rd = $3cc;  { Video misc. read port   }
+   video_misc_wr = $3c2;  { Video misc. write port   }
+   video_port_reg= $3d4;  { CRT Controller Index - color emulation }
+   video_port_val= $3d5;  { CRT Controller Data Register - c. e. }
+
+type
+{ structure holding original VGA register settings }
+   VGA_reg = record
+      SeqCtrlIndex         :  Byte;  { Sequencer Index reg.   }
+      CrtCtrlIndex         :  Byte;  { CRT-Contr. Index reg.  }
+      CrtMiscIO          :  Byte;  { Miscellaneous register }
+      HorizontalTotal         :  Byte;  { CRT-Controller:00h }
+      HorizDisplayEnd         :  Byte;  { CRT-Controller:01h }
+      StartHorizRetrace         :  Byte;  { CRT-Controller:04h }
+      EndHorizRetrace         :  Byte;  { CRT-Controller:05h }
+      Overflow          :  Byte;  { CRT-Controller:07h }
+      StartVertRetrace         :  Byte;  { CRT-Controller:10h }
+      EndVertRetrace         :  Byte;  { CRT-Controller:11h }
+      ModeControl         :  Byte;  { CRT-Controller:17h }
+      ClockingMode         :  Byte;  { Seq-Controller:01h }
+   end;
+
+procedure VideoBlank(mode:Byte);
+{*  Mode/Status  HSync VSync Video
+ *  -------------------------------------------
+ *  "On"  on on active (mode 0)
+ *  "Suspend" (either) on off blank (mode 1)
+ *       (  or  ) off on blank
+ *  "Off"  off off blank (mode 2) }
+
+implementation
+
+const
+   v_mode          :  Byte = 0;
+
+var
+   vga           :  VGA_reg;
+
+procedure VideoBlank(mode:Byte);
+begin
+   if (v_mode=mode) or (mode&gt;2) then Exit;
+   {$IFNDEF VIRTUALPASCAL} asm cli  end; {$ENDIF}
+   with vga do
+   if mode=0 then
+   begin
+      { mode=0 - Restore 'ON' mode. }
+      Port[video_misc_wr]:=CrtMiscIO;
+      if v_mode=2 then
+      begin
+  Port[video_port_reg]:=$00;       { HorizontalTotal }
+  Port[video_port_val]:=HorizontalTotal;
+  Port[video_port_reg]:=$01;       { HorizDisplayEnd }
+  Port[video_port_val]:=HorizDisplayEnd;
+  Port[video_port_reg]:=$04;       { StartHorizRetrace }
+  Port[video_port_val]:=StartHorizRetrace;
+  Port[video_port_reg]:=$05;       { EndHorizRetrace }
+  Port[video_port_val]:=EndHorizRetrace;
+      end;
+      Port[video_port_reg]:=$07;       { Overflow }
+      Port[video_port_val]:=Overflow;
+      Port[video_port_reg]:=$10;       { StartVertRetrace }
+      Port[video_port_val]:=StartVertRetrace;
+      Port[video_port_reg]:=$11;       { EndVertRetrace }
+      Port[video_port_val]:=EndVertRetrace;
+      Port[video_port_reg]:=$17;       { ModeControl }
+      Port[video_port_val]:=ModeControl;
+      Port[seq_port_reg]:=$01;        { ClockingMode }
+      Port[seq_port_val]:=ClockingMode;
+
+      { restore index/control registers }
+      Port[seq_port_reg]:=SeqCtrlIndex;
+      Port[video_port_reg]:=CrtCtrlIndex;
+   end else
+   begin
+      { mode=1,2 - Set 'Suspend' & 'Off' mode. }
+      SeqCtrlIndex:=Port[seq_port_reg];
+      CrtCtrlIndex:=Port[video_port_reg];
+      CrtMiscIO:=Port[video_misc_rd];
+      if mode=2 then
+      begin
+  Port[video_port_reg]:=$00;       { HorizontalTotal }
+  HorizontalTotal:=Port[video_port_val];
+  Port[video_port_reg]:=$01;       { HorizDisplayEnd }
+  HorizDisplayEnd:=Port[video_port_val];
+  Port[video_port_reg]:=$04;       { StartHorizRetrace }
+  StartHorizRetrace:=Port[video_port_val];
+  Port[video_port_reg]:=$05;       { EndHorizRetrace }
+  EndHorizRetrace:=Port[video_port_val];
+      end;
+      Port[video_port_reg]:=$07;       { Overflow }
+      Overflow:=Port[video_port_val];
+      Port[video_port_reg]:=$10;       { StartVertRetrace }
+      StartVertRetrace:=Port[video_port_val];
+      Port[video_port_reg]:=$11;       { EndVertRetrace }
+      EndVertRetrace:=Port[video_port_val];
+      Port[video_port_reg]:=$17;       { ModeControl }
+      ModeControl:=Port[video_port_val];
+      Port[seq_port_reg]:=$01;        { ClockingMode }
+      ClockingMode:=Port[seq_port_val];
+
+      { assure that video is enabled }
+      { "0x20" is VIDEO_ENABLE_bit in register 01 of sequencer }
+      Port[seq_port_reg]:=$01;
+      Port[seq_port_val]:=ClockingMode or $20;
+
+      { test for vertical retrace in process.... }
+      if (CrtMiscIO and $80)=$80 then Port[video_misc_wr]:=CrtMiscIO and $ef;
+
+      { * Set &lt;End of vertical retrace&gt; to minimum (0) and
+ * &lt;Start of vertical Retrace&gt; to maximum (incl. overflow)
+ * Result: turn off vertical sync (VSync) pulse. }
+      Port[video_port_reg]:=$10;      { StartVertRetrace }
+      Port[video_port_val]:=$ff;      { maximum value }
+      Port[video_port_reg]:=$11;      { EndVertRetrace }
+      Port[video_port_val]:=$40;      { minimum (bits 0..3)  }
+      Port[video_port_reg]:=$07;      { Overflow }
+      Port[video_port_val]:=Overflow or $84; { bits 9,10 of vert. retrace }
+
+      if mode=2 then
+      begin
+  { * Set &lt;End of horizontal retrace&gt; to minimum (0) and
+    *  &lt;Start of horizontal Retrace&gt; to maximum
+    * Result: turn off horizontal sync (HSync) pulse. }
+  Port[video_port_reg]:=$04;      { StartHorizRetrace }
+  Port[video_port_val]:=$ff;      { maximum }
+  Port[video_port_reg]:=$05;      { EndHorizRetrace }
+  Port[video_port_val]:=$00;      { minimum (0) }
+      end;
+
+      { restore both index registers }
+      Port[seq_port_reg]:=SeqCtrlIndex;
+      Port[video_port_reg]:=CrtCtrlIndex;
+   end;
+   v_mode:=mode;
+   {$IFNDEF VIRTUALPASCAL} asm sti  end; {$ENDIF}
+end;
+
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

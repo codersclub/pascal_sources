@@ -1,0 +1,371 @@
+<html><head><title>CPU/FPU Detection Library v.1.14e</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='-+ TMi0SDGL(tm) V1.14e +-  CPU/FPU Feature Detection Library by B-coolWare.   Recognizes 20 CPUs and about 15 FPUs, checks for V86,   determines CPU clock speed and determines 386dx chip stepping.   ASM/PAS/C[++] sources included!   Now is Win, OS/2 & DV-aware: works fine in DOS box,   even returning correct MHz!   Make batches added.   Absolutely free of charge!!!'>
+<meta name="keywords" content="pascal, sources, source code, cpu114e, hardware, Аппаратные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Аппаратные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cpu114e
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CPU/FPU Detection Library v.1.14e</TD>
+<TD nowrap class=black>&nbsp;Владимир Захарычев</TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">-+ TMi0SDGL(tm) V1.14e +- <br>
+CPU/FPU Feature Detection Library by B-coolWare. <br>
+ Recognizes 20 CPUs and about 15 FPUs, checks for V86,
+  determines CPU clock speed and determines 386dx chip stepping. <br>
+ ASM/PAS/C[++] sources included! <br>
+ Now is Win, OS/2 & DV-aware: works fine in DOS box,
+  even returning correct MHz! <br>
+ Make batches added. <br>
+ Absolutely free of charge!!!</TD><TD class=black colspan=2 align='right'><br><A HREF="cpu114e.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>36k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">+-----------+------------------+---------------------------------------------+
+|+--------+ |File: CPUTYPE.DOC |Subject: CPU/FPU feature detection library.  |
+|+--------+++---------------+--+---------------------------------------------+
+||Њ-Њ-+-+­ ||Date: 28/11/94 |       Copyright(c) 1993,94 by B-coolWare.      |
+||І-+-+-|І-||Version: 1.14e | This document should not be changed in any way |
+|+---------+|Revision:03/01 |and should be distributed with related software.|
++-----------+---------------+------------------------------------------------+
+ Document no.: LR-0006.94.93M03.01
+                                           "...Too much is not enough."
+                                                        (Deep Purple)
+                    Contents
+                    License Agreement.
+                    Appendix A. Library Features and Notes.
+                    Appendix B. Credits.
+                    Appendix C. Known incompatibilities.
+                    Appendix D. Files in distribution.
+
+    Too-Much-In-One-So-Don't-Get-Lost(tm) CPU/FPU feature detection library
+                                    License.
+
+ This license regards to the Too-Much-In-One-So-Don't-Get-Lost(tm) CPU/FPU
+   detection library version 1.14e dated 28/11/94, mentioned hereafter as
+   "source code". It describes your rights, obligations and liabilities as for
+   this source code. It took much time to gather all information used to
+   produce this code, so the main purpose of this license is to grant anyone
+   free access to it. Use it free, give away to anyone, but please do not
+   sell or lease it - it's my work, and if you think someone should be paid
+   for it, you're not the rite person anyway.
+
+ Here it goes:
+
+ COPYRIGHT:
+ This source code is copyrighted freeware. This means that author reserves
+   copyright for this code. This doesn't mean however that you cannot use,
+   distribute or modify the code. This just means that you cannot reserve
+   copyright for this code or charge money for it. However you may reserve
+   copyright for any changes/additions you made to it. See details hereafter.
+
+ YOUR RIGHTS AND LIABILITIES:
+ You have legal rights to copy, distribute, modify and use entire code or parts
+   of it in either commercial or noncommercial software, provided that you do
+   not charge additional fee for distribution/incorporation of this code or its
+   parts in your own products. If you do so, your rights automatically void and
+   you'll be liable for violation of the Russian Copyright Law in Computer
+   Programs and Databases as well as other laws and international provisions
+   regarding to intellectual property and copyrights. Parties that acquire this
+   source code from you will still have their rights for the source code as
+   long as they comply with terms of this license.
+
+ YOUR OBLIGATIONS:
+ The source code SHOULD be distributed along with this license and you should
+   document any changes made to it either in source files or in additional
+   documents. The code cannot be distributed partially, you should include all
+   files that builds the library plus any additional files needed to compile it
+   in the distribution archive/set. Regardless of the extent of modifications
+   made by you to this source code, it should remain free, and you should
+   provide a way for anyone (and partially the author :) to obtain his own copy
+   as of original, so as of modified code. Although you can reserve copyright
+   for modifications, the rest of the code will still be copyrighted by
+   B-coolWare and you should keep the B-coolWare's copyright notice in the code
+   unchanged.
+
+ WARRANTIES:
+ This source code is provided "AS IS" with no express or implied warranties,
+   including any implied warranties of fitness for particular purpose. If you
+   modify the source code included herein, please add a notification about it
+   and complete description of what and how you modified, so that subsequent
+   users of this code will know that they use not original but rather modified
+   version of the code.
+
+ AUTHOR'S LIABILITY:
+ In case of any damage caused by use or misuse of this code or any other kind
+   of decease including loss of business profits or valuable information,
+   author shall not be liable for it. I expressly disclaim any warranties
+   regarding to the quality of this code, or its errorlessness.
+
+ AUTHOR'S EXCLUSIVE RIGHTS:
+ Author reserves the right to change this code entirely or partially without
+   notification to its users. He also reserves the right to use this code in
+   any manner in any commercial or non-commercial software of any kind and
+   give it away to anyone who ask.
+
+    If you have any questions, suggestions or usable information on how to
+              improve this product, feel free to contact author at
+
+ e-mail (preferrable):
+
+ 2:5028/52.6@fidonet
+ bob@ymz.yaroslavl.su (Relcom@Internet)
+ do ye think me should arrive on CompuServe? :)
+
+ phones:
+
+ +7-(0852)-274-551 (9:00am to 6:00pm, Moscow Time) voice\data 14400/V.32b
+ +7-(0852)-238-663 (8:00pm to 10:00pm,Moscow Time) voice
+
+ please don't call earlier or later - gimme a break...
+
+ paper mail:
+
+ 150031, 10/4/13,
+ Dobrynina Str.,
+ Yaroslavl,
+ Russia
+
+ Vladimir M. Zakharychev (Владимир Захарычев)
+
+ Calls and letters both in English and in Russian are welcome. Please do not
+ speak/write in any other language if you want to be answered. Letter bombs
+ will be returned to sender :) shhhh-boom-BANG!
+
+ Huh...! Hope I made every effort to keep the lawyers happy... :)
+
+
+ Appendix A. Library Features and Notes.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ The Too-Much-In-One-So-Don't-Get-Lost(tm) CPU/FPU feature detection library
+ allows you to distinguish between following 80x86 family CPUs:
+
+ Intel 8088,8086,80188,80186,80286,80386DX,80386SX,i486DX,i486SX,Pentium and
+ any succeeding CPUs (when they become available),
+ NEC V20 and V30,
+ Cyrix 486SLC, 486SX/DX/DLC and M1 (586),
+ UMC U5-S, U5-D (486s) (??? is U5-D real thing?)
+
+ FPUs:
+
+ Intel 8087,80287,80287XL - not 100% reliable,80387,i487sx and 487 internal,
+ Cyrix 2C87,3C87 and 4C87,
+ IIT 2C87 and 3C87,
+ Weitek 1167 and 1367, both reported simply as Weitek;
+
+ determine whether or not the processor is in V86 mode (for DOS programs only)-
+ generally this one just tests for PM flag and assumes V86 if it is set for DOS
+ + PM combination automatically leads to V86;
+
+ determine 386dx chip step (B0 or earlier,B1,D0 or later) -
+  this one tests for known bugs in chips of these steps, it does not reset CPU
+  to look at EAX value; doesn't work under Windows;
+
+ determine CPU clock speed (for all listed processors, was not checked on some
+ models and may require some adjustments). Works fine under _my_ Windows, but
+ some people stated it produced incorrect results on their systems.
+
+ Notes.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Note 1:
+
+ AMD Am386SX/40 and Am386DX/40 - can be identified as such by using CPU_Type
+ in conjunction with Speed: if CPU is identified as Intel 386 and its clock is
+ more than 33MHz then this is definitely an AMD chip - Intel doesn't produce
+ 40MHz 386s while AMD does. However this method is not implemented in CPU_Type
+ routine because speed computing requires some floating point calculations and
+ I don't want to insert FPU instructions in the code because there may be no
+ FPU... You may implement this method in your high-level routine reporting
+ CPU type if you want (and as I did :). Also you may conclude i486DX2 if it is
+ identified as 486DX and has CPU clock of 66 MHz - afaik Intel do not produce
+ DX chips with such clock frequencies. However I cannot guarantee this is true
+ and don't use this method by myself. If anyone knows of reliable method of
+ identifying DX2, DX4 and other chips with internal clock doubling/tripling/etc.
+ then please let me know (it better be working ASM sources...).
+
+ Note 2:
+
+ The source code is commented so I didn't include its description here. I think
+ there'll be no problem using it. I also included samples in Turbo Pascal and
+ Turbo C, which may be incorporated into your hi-level programs. Lotta probs
+ vanished, heh :)
+
+ Note 3:
+
+ More and more CPUs approaching: DX4, SLC2, SLC3; 486xx series's getting more
+ and more xx modifiers without differences to software... I feel like I'm
+ gonna give up adding new CPU types here - I got too much problems with those
+ I already have. They're all alike, no way to determine which are what. Maybe
+ if vendors add special instructions like CPUID in all their chips and
+ program microcode to give different results - well, then I'll try. For now
+ I'm quit.
+
+ Note 4:
+
+ I have no access to Cyrix M1 machines and thus can't check and fix CPU timings
+ in CPUSPEED.ASM for this processor. This may lead to inadequate MHz
+ reported. If anyone have time and access to an M1-based machine I'd like
+ you to check this and fix CPUFix value if needed. And don't forget to contact
+ me and send me adjusted value so I'll be able to fix it by myself! Also
+ please check if M1 is correctly identified - I'm not quite sure it will.
+
+ Note 5:
+
+ Take a look at the batches I provided to simplify compile process and
+ correct paths and parameters where needed prior to running them. This is
+ especially true for MAKEC.BAT and MLIB.BAT, for they contain paths I used on
+ my PC to compile C version of code.
+
+ Note 6: -- for those having problems in certain environments
+
+ This code haven't been extensively tested on all CPUs it theoretically should
+ recognize. I performed extensive tests only on systems available to me which
+ include:
+
+ 1. AMD Am386DX-40/Intel 80387DX
+    running MS-DOS 5.0, QEMM 7.04 + DESQview 2.63, Windows 3.11
+ 2. Intel i486DX2-66
+    running MS-DOS 6.2, QEMM 7.04, Personal NW, Stacker 4.0,
+    Windows 3.10 Russian
+ 3. GenuineIntel i486SX-40/None - new generation (supporting CPUID)
+    running MS-DOS 6.2, QEMM 7.01, Windows 3.10
+ 4. Intel 80286-10/Sun SPARCStation 1+ emulating 80286
+ 5. Intel 80386SX-25/Intel 80387SX
+    running MS-DOS 6.2/MemMaker, Windows 3.10 Russian
+ 6. AMD Am386DX-40/Cyrix Cx87SLC
+    running Novell DOS 7, Personal NW, Windows 3.10
+ 7. Intel i486DX-50
+    running MS-DOS 6.2, Windows for Workgroups 3.11
+ 8. Intel Pentium-S/60
+    running MS-DOS 6.2, Windows for Workgroups 3.11
+
+ [2] also were running OS/2 2.1 few months ago, but it doesn't now and I can't
+ check if the code still work under it.
+
+ On all listed systems the code appeared to work fine giving correct results
+ under all listed environments except [1,6] when running Soft-ICE 2.62 - code
+ incorrectly stated that CPU is 386SX. I cannot guarantee that the code will
+ run o.k. on systems with other configurations/operating environments, though
+ I hope it will. Please don't bomb me with letters like "wow! this thingie
+ crashes my PC with such and such CPU/FPU under such and such env." - you got
+ full source code, and you should know how to use a debugger if you know how to
+ program, so try to find out the origin of your problem on YOUR system (and
+ maybe a workaround) before reporting it.
+
+
+ Appendix B. Credits.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This appendix contains names and netmail addresses of people who contributed
+  to this product in any way, either by adding any methods or by fixing
+  existing methods given incorrect results. If you do such additions or fixes,
+  please contact me and send modified version of the code so that I'll be able
+  to incorporate it in next releases.
+
+ My thanx to
+
+ 1. Igor Dral of 2:50/321@fidonet
+    who helped me lot in cleaning the code of bugs, testing, etc. Thanx, pal!
+
+ 2. VAP of 2:5028/52.6@fidonet (he's my BOSS),
+    who helped me with C code - I don't like this language myself :)
+
+ 3. Alex B. Shamarokov of 2:5020/205.8@fidonet
+    who awared me of strange behavior of the code on new Intel' chips with
+    CPUID support, so I did an attempt to fix it in v1.14c.
+
+ 4. Janis Smits of 2:5100/25@fidonet
+    who awared me of OS/2 problems and pointed out the origin of them.
+
+ 5. Ilya Tumanov of 2:5030/82.6@fidonet
+    who advised me to add integer CPU MHz calculations for those who want only
+    rough approximation of clock speed. He also advised me not to give up with
+    this library - well, I'll try...
+
+ 6. YOUR NAME MIGHT BE HERE...
+
+ And, of course, thanks to Almighty God for the inspiration and everything,
+   and all of you, who paid attention to this product, spent your invaluable
+   time testing it and maybe even made use of it!
+
+
+ Appendix C. Known incompatibilities.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 1. Under Soft-Ice 2.62 and below incorrectly states 386DX to be 386SX. This
+    is because Soft-Ice's V86 monitor do not allow to toggle ANY flags in
+    CR0 from V86 task. All other CPU identifiers does just such a mistake
+    under Soft-Ice. Let's hope Nu-Mega will fix their monitor in future
+    versions of this nice debugger so we'll be able to get correct results. :)
+
+ 2. Under Windows 3.1 386 chip stepping determination routine crashes DOS
+    session due to "invalid instruction". This routine was originally taken
+    from PharLap TellMe utility. BUT this program just do not perform chip
+    step detection if running under Windows Enhanced Mode! Seems like there's
+    no other way to correct this problem but do not use this routine under
+    Windows... so I finally got rid of it if running under Windows.
+
+ 3. I was awared that on certain systems this code completely craches the OS.
+    The origin of the problem is not figured out yet, so keep an eye on it and
+    if the code causes system crash on your PC, please try to find offending
+    source and/or environment that forces it to crash.
+
+ 4. Under OS/2 2.x running on 486 systems sometimes causes VDM session crashes.
+    Regrettably I couldn't check it by myself but Janis Smits who awared me
+    of the problem also suggested a workaround for it which I included in
+    current release. I still don't know if it helped.
+
+ 5. People say that under OS/2 clock frequency gets divided by 2. I didn't
+    find a workaround yet. Those who can't wait may try this: use isInOSZwei
+    routine to determine if we're under OS/2 and multiply clock frequency by
+    2 (shl 1) if so. This is very rough approach though and I hope to find
+    more elegant way to solve the problem. I tried to find a "begin/end criti-
+    cal section" call to OS/2's DOS CompBox API and failed. If anyone knows of
+    correct and reliable way to enter/leave critical section under OS/2 please
+    let me know.
+
+
+ Appendix D. Files in distribution.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Original issue of the source code as of version 1.14e include:
+
+ File         Description
+ ------------ ----------------------------------------------------------
+ CPU_TYPE.ASH Main library module for ASM programs
+ DOSINOUT.ASH DOS Input/Output routines
+ LSTRING.ASH  Lstring macro to define Pascal-style length,data strings
+ HEADER.ASH   Assembly language header file - memory model definition, etc.
+ UNIDEF.INC   Assembly language macros
+ CPU.ASM      Sample program demonstrating usage of CPU_TYPE.ASH
+ CPUSPEED.ASM CPU clock speed determination routine
+ CPU_HL.ASM   Main library module for use with hi-level languages
+ CPU.C        Sample program in C
+ CPUTYPE.C    C library implementation
+ CPUTYPE.H    C library interface
+ CPU.PAS      Sample program in Pascal
+ CPUTYPE.PAS  Pascal library interface & implementation
+ P5INFO.ASM   Low level routines for P5INFO.C and P5INFO.PAS
+ P5INFO.C     Sample program providing basic info on P5 in C
+ P5INFO.PAS   Sample program providing basic info on P5 in Pascal
+ MAKEA.BAT    Make batch for assembly-language version
+ MAKEP.BAT    Make batch for pascal version
+ MAKEC.BAT    Make batch for C version
+ MLIB.BAT     Make batch to build C/C++ .lib library file
+ YESNO.COM    Batch service program, displays prompt and waits for Y/N.
+ HISTORY.DOC  History of changes
+
+----------------------------
+!!!! ПРИМЕЧАНИЕ СОСТАВИТЕЛЯ:
+     С разрешения автора здесь публикуются только те файлы,
+     которые имеют непосредственное отношение к Паскалю.
+----------------------------
+             &lt;&lt; end of CPUTYPE.DOC &gt;&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
