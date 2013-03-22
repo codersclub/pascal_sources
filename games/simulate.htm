@@ -1,0 +1,83 @@
+<html><head><title>Aircraft Flight Simulator v.4.26 (640x400x16)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='The sources for the article "Modelling Flight" by Thomas Brewster (April 1990 of _IEEE_potentials_). This program draw a pilot control panel that indicates all the flight parameters. Required: GRAPH.TPU and EGAVGA.BGI driver.'>
+<meta name="keywords" content="pascal, sources, source code, simulate, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;simulate
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Aircraft Flight Simulator v.4.26 (640x400x16)</TD>
+<TD nowrap class=black>&nbsp;Thomas Brewster</TD>
+<TD class=black align='right'>21.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">The sources for the article "Modelling Flight" by Thomas Brewster
+(April 1990 of _IEEE_potentials_).
+This program draw a pilot control panel that indicates
+all the flight parameters. Required: GRAPH.TPU and EGAVGA.BGI driver.</TD><TD class=black colspan=2 align='right'><br><A HREF="simulate.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">      (************************  BEGIN  **************************
+      **                                                        **
+      **                                                        **
+      **                    Flight  Simulator                   **
+      **                  Subsonic Jet Aircraft                 **
+      **                      Version  4.26                     **
+      **                                                        **
+      **                                                        **
+      ************************************************************
+
+      ************************************************************
+      *                                                          *
+      *                                                          *
+      *            Captain Larry Thomas Brewster, Ph.D.          *
+      *                                                          *
+      *                University of Missouri-Rolla              *
+      *                Computer Science Department               *
+      *                       Feb 26, 1990                       *
+      *                                                          *
+      *                                                          *
+      ***********************************************************)
+
+
+      (***********************************************************
+      This software is made available only to individuals and only
+      for educational purposes. Any and all commercial use is
+      stricly prohibited.
+      ***********************************************************)
+
+
+      (***********************************************************
+      This program is designed to run on a Toshiba T3100 portable
+      computer using Borlands Pascal Version 4.0 or later compiler.
+      Changes in the graphics routines may be necessary
+      for any other computer.
+      ***********************************************************)
+
+
+      (********              KNOWN BUGS
+
+      program causes math coprocessor stack overflows on an IBM XT
+
+      bank angles of exactly zero, ninety, one-eighty, etc. cause the
+      horizon bar to have a length of zero.
+
+      angle of attack (alpha) is positive in inverted flight
+
+      graphics routines are crude - may require modification if
+      not 640 X 400
+
+      this program is not a polished end product and as such no
+      guarantees as to performance or accuracy is implied
+      it is intended as an educational tool for experimentation
+      ********)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

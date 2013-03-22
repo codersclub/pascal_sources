@@ -1,0 +1,76 @@
+<html><head><title>Gravity Wars 2.0 - Simple VGA Game (640x480x16)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Gravity Wars is a two-player game. The players choose ships and try to shoot down each other by specifying angles and initial velocities for the missiles. Missiles move under the gravitational fields of the various planets in the Gravity Wars universe. EGAVGA.BGI required.'>
+<meta name="keywords" content="pascal, sources, source code, gravwar2, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gravwar2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Gravity Wars 2.0 - Simple VGA Game (640x480x16)</TD>
+<TD nowrap class=black>&nbsp;Sohrab Ismail-Beigi</TD>
+<TD class=black align='right'>25.04.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Gravity Wars is a two-player game.
+The players choose ships and
+try to shoot down each other by specifying angles
+and initial velocities for the missiles.
+Missiles move under the gravitational fields of the
+various planets in the Gravity Wars universe.
+EGAVGA.BGI required.</TD><TD class=black colspan=2 align='right'><br><A HREF="gravwar2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>39k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Gravity Wars
+
+  by Sohrab Ismail-Beigi  completed 4/23/89
+     SYSOP of The 3D Graphics BBS
+     300/1200/2400 baud, N-8-1 Full duplex
+     (201) 444-4154
+
+******************************************************************************
+Note:  This game requires a VGA display capable of the 640x480x16 color mode.
+       The program does no checking, so don't run it without VGA 640x480x16.
+******************************************************************************
+
+INCLUDED FILES:
+
+ Length   Name
+ -------  ------
+    9519  GRAVWARS.DOC   -  This file
+   32172  GRAVWARS.PAS   -  Turbo Pascal 4.0 Source Code
+   42640  GRAVWARS.EXE   -  The actual game program
+    5139  EGAVGA.BGI     -  Required VGA driver
+    5452  SANS.CHR       -  Required Font
+ -------
+   94922
+
+NOTE:  EGAVGA.BGI and SANS.CHR must exist in the same directory that
+       GRAVWARS.EXE is running for the program to run properly
+
+-----------------------------------------------------------------------------
+GENERAL OVERVIEW:
+
+     Gravity Wars is a two-player game (or one-player if he plays against
+himself.)  The players choose ships (one the Enterprise, the other Klingon) and
+try to shoot down each other by specifying angles and initial velocities for the
+missiles.
+     Missiles move under the influence of the gravitational fields of the
+various planets in the Gravity Wars universe.  The planets are the spherical
+and colored (Red, Green, or Blue) with each color representing a density:
+Red=1.0, Green=1.5, Blue=2.0.  The force of gravity is the well known inverse
+square law, namely F=GMm/(r^2) (where ^ means exponent.)
+     There are also black holes (haha!) which appear as the blacking out of the
+stars in the background (you have to watch for them when the scene is drawn.)
+They are not very massive, and from far away, they act like small planets.  But
+when missiles approach them, their behavior becomes quite erratic, SO BE CAREFUL
+WHEN FIRING CLOSE TO A BLACK HOLE!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,61 @@
+<html><head><title>Pentix Auto Player</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа запускает PENTIX и играет в него автоматически сама без участия человека.'>
+<meta name="keywords" content="pascal, sources, source code, apentix, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;apentix
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Pentix Auto Player</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Пархотик</TD>
+<TD class=black align='right'>21.10.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа запускает PENTIX и играет в него автоматически
+сама без участия человека.</TD><TD class=black colspan=2 align='right'><br><A HREF="apentix.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>18k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          APENTIX
+
+   Я очень люблю играть в PENTIX, но через некоторое время стал
+замечать,  что стоит мне закрыть глаза и передо мной появляются
+падающие фигуры. При чтении стал мысленно загонять фигуры между
+строк и абзацев.   Кроме того,  сколько бы я не играл,   больше
+15244 мне набрать не удается.
+
+   В результате пришлось написать программу,  которая запускает
+PENTIX,   в нужный момент считывает с экрана общую обстановку и
+появившуюся фигуру, тупо перебирает  все варианты броска  и по
+нескольким критериям выбирает лучший.  Затем прикидывает, какие
+клавиши нужно нажать,  и запихивает нажатия в буфер клавиатуры.
+
+   Теперь мне остается только смотреть, как она набирает 20, 30
+тысяч... (до 32767 - далее переполняются целые, появляется неч-
+то подобное "/*)-*[" и результат в таблицу не записывается). Но
+APENTIXу, как и человеку бывает везет, бывает - нет.
+
+   Для запуска просто наберите: APENTIX. В одном каталоге с ним
+должен быть файл PENTIX.OVL - так подправленный PENTIX, что при
+появлении новой фигуры вызывается INT 65h,   изнутри которого и
+работает APENTIX. Далее нажмите "9" и смотрите. Буфер клавиату-
+ры не стирается,  поэтому можно в некоторой степени вмешиваться
+в игру.  Выход - "2".
+
+   Вес каждого критерия можно изменить (см. исходный текст -
+apentix.pas) и посмотреть,что из этого получится.   После того,
+как несколько раз переполнились целые, я перестал совершенство-
+вать алгоритм.   APENTIX не умеет "забрасывать" фигуры в дырки,
+слишком рискует, часто броском закрывает следующий ход. Но ког-
+да хороший ход есть, он его находит.
+
+                                                   Пархотик Д.И.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

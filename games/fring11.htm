@@ -1,0 +1,182 @@
+<html><head><title>Fringdus - Incomplete Sprite Game (320x200x256)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Fringdus is a game like old C-64 "Paradroid" but incomplete :-(. It has the same scrolling effect of the graphics as Paradroid. It looks really good!, As you operate the key-pad keys, it looks like the "ground floor" is moving very smooth under you.'>
+<meta name="keywords" content="pascal, sources, source code, fring11, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fring11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fringdus - Incomplete Sprite Game (320x200x256)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:nunn@pandanus.cs.ntu.edu.au">Jason Nunn</a></TD>
+<TD class=black align='right'>17.12.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Fringdus is a game like old C-64 "Paradroid" but incomplete :-(.
+It has the same scrolling effect of the graphics as Paradroid.
+It looks really good!, As you operate
+the key-pad keys, it looks like the "ground floor" is moving
+very smooth under you.</TD><TD class=black colspan=2 align='right'><br><A HREF="fring11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>41k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        READ.ME FILE
+           FRINDGUS (An incomplete game) (14/11/92)
+           ----------------------------------------
+             By Jason Nunn (JsNO BAR----NUNN)
+                 nunn@pandanus.cs.ntu.edu.au
+
+                        A VGA GAME
+                        ----------
+
+ Hello,
+
+- You may freely use is code. You may use it directly in your
+source, even if you make Millions of Dollars on a game you made
+using this code. It only took me a night to write the basic code
+so it's no skin off my nose (I took me alot longer to design the
+graphics though!).
+
+                        DISTRIBUTION
+                        ------------
+
+This distribution comes with:
+
+   fringdus.pas   &lt;game source&gt;
+   pic_make.pas   &lt;sprite maker source&gt;
+   map_mak2.pas   &lt;map maker source for editing the FRING1.MAP file&gt;
+   pack.pas       &lt;transforms *.PIC (sprite graphics) to
+                   the FRINGPC1.PIC file&gt;
+
+   fringdus.exe   &lt;the excutables&gt;
+   pic_make.exe
+   mak_mak2.exe
+   pack.exe
+   pack.ini       &lt;the pic list that pack reads to dtermine which
+                   pic files to append to "fringpc1.pic"&gt;
+
+   flr1.pic thru to-
+   flr32.pic      &lt;the individual sprites&gt;
+
+   b_scr.bmp      &lt;The base screen file (in windows format)&gt;
+
+   bs.bat         &lt;Boot scrap compiling sequence, with the relevent
+                   flags etc&gt;
+
+
+              Very Techical Notes & Discussion Notes
+              --------------------------------------
+
+FRINGDUS.PAS:
+-------------
+
+Have you ever heard of Paradroid?. It was a game I used
+to play on a friends C-64 a long time ago (1987). I reckon
+it was the best game ever written. Fringdus has the same
+scrolling effect of the graphics as Paradroid. It looks really
+good!, I'm really impressed with what I have done. As you operate
+the key-pad keys, it looks like the "ground floor" is moving
+under you. It looks very smooth, but still needs some
+modifications so that it is faster. The computing solutions are
+the first solvable solutions, not the best ones.
+
+Basically, the code that resides in the Pascal source:
+"FringDus.pas" is like a Database Manager. It manages a
+2 entity 1-N relational database. The ERD (Entity
+Relationship Diagram) is below:
+
+
+
+                         ^
+----------------        / \        ---------------
+|              |   1   /   \   N   |             |
+| FRINGPC1.PIC |------/ HAS \-----&gt;| FRING1.MAP  |
+|              |      \     /      |             |
+----------------       \   /       ---------------
+                        \ /
+                         .
+
+
+It copies blocks of graphics contained of the "FRINGPC1.PAS"
+(FRINGdus PiCture 1) file (which is stored in memory), according
+to what the "FRING1.MAP" tells it (also stored in memory). The
+"FRING1.MAP" file is really the "map of the floor", which only
+contains position references to the blocks of graphics in the
+"FRINGPC1.PAS" file.
+
+(Note/ From now on, we'll call the blocks of graphics: "Sprites"-
+from my good old C-64 days :) ).
+
+When "Fringdus.exe" is executed, the computer reads a
+section of the "FRING1.MAP", It reads the relative locations
+of the sprites in the "fringpc1.pic file. It then reads the
+sprite and then copies it the video memory located at decimal
+address 40960 (A000h). The screen dimensions for Fringdus are:
+320*200 pixels (or 64K of memory).
+
+(Note that this for VGA only. You will have to make the relevent
+changes to the code to turn it in to a EGA or CGA game.)
+
+Fringdus provides a quick assembly base to copy chucks of data
+to the video (invisible) memory. As you will see, many of these
+assembly routines are tailor made for certain situtions.
+The problem is with graphic libraries is that they are standardised.
+The problem with standardised anythings, is that they compensate
+for any kind of situation (philosophically speaking). Hence they are
+slow. If you want speed, you need to custom make routines for only
+certain situtions in assembly. Disassembled 3GL's like Pascal are
+very Stack intensive. There is alot of overhead in preparing values
+for the registers. Analagously, they "have a few drinks, watch a
+few porn's, have a couple of games of pool, then go to sleep" before
+they do they they useful. With assembly, you can "contain" the
+processing, within the action registers AX, DX, CX, BX, so that
+processing is very fast.
+
+These routines are in no way efficient. I don't consider myself an
+assembly expert. An assembly expert will look at these routines and
+speed them up by 5 times, because they know what intructions are fast
+and what instructions are slow. A lot can be said about Assembly
+experts, but we won't go in to that now.
+
+
+NB/  A detailed look at how they work, is in the source documentation.
+If your still having problems with how they work, write me. I haven't
+documented them properly, but will. Remember!, I might be documenting
+for a living, so please remember that cooks don't like cooking when
+they get home :).
+
+
+Enjoy :). Feel free to contact me if you don't understand something,
+or can't that something working.
+
+
+                               ooo0ooo
+
+-----------------------------------------------------------------------------
+                              JsNO BAR----NUNN
+
+         Spelling Disclaimer: "MY SUN keyboard is a chunk of shit"
+
+   "Computer Science students learn how to become computing professionals,
+   Business Information Systems students are users learning about themselves"
+                              NTU, DARWIN, OZ
+                        nunn@pandanus.cs.ntu.edu.au
+-----------------------------------------------------------------------------
+
+
+  or
+  snail:
+
+    8 Winton Street,
+    Jingili, Darwin,
+    NORTHERN TERRITORY,
+    0810,
+    AUSTRALIA.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

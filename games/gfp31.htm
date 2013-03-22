@@ -1,0 +1,103 @@
+<html><head><title>GFP 3.1 - Games Factory Pack</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Games Factory Pack 3.1 is a great tutorial and tools for building your own VGA/SVGA games with SVGA.BGI. It consist of:   Map editor for GAMES   Sprite Editor and animator   All the documentation in English and Spanish in order to PROGRAM   with  BITMAPS or sprites   Examples in Turbo Pascal, C, ASM   A great bookstore of sprites   and Utilities that they help you to work   with the graphs of your PROGRAMS'>
+<meta name="keywords" content="pascal, sources, source code, gfp31, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gfp31
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GFP 3.1 - Games Factory Pack</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:esanchez@arrakis.es">Enrique Sanchez Martinez</a></TD>
+<TD class=black align='right'>27.10.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Games Factory Pack 3.1 is a great tutorial and tools for building
+your own VGA/SVGA games with SVGA.BGI. It consist of: <br>
+ Map editor for GAMES <br>
+ Sprite Editor and animator <br>
+ All the documentation in English and Spanish in order to PROGRAM
+  with  BITMAPS or sprites <br>
+ Examples in Turbo Pascal, C, ASM <br>
+ A great bookstore of sprites
+  and Utilities that they help you to work
+  with the graphs of your PROGRAMS</TD><TD class=black colspan=2 align='right'><br><A HREF="gfp31.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>563k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">	 How making a program utilizing sprites?
+
+
+This text pretends explain like make programs
+utilizing sprites, in the language Turbo Pascal, I wait for that
+the programers of Turbo C don't have too much problems to
+the hour of adapting the routines.
+
+Practically all the games that exist in the market
+they are programmed utilizing the graphic manners of the vga, but
+concretely the manner 320 x 200 x 256, then well, the first
+problem that we met to the hour of programming a game,
+or an utility with a graphic environment is the manner of activating
+this manner, we with the languages of Borland could find the
+drivers that activate us the graphic manners required in
+multitude of programs, but not (until the date) the manners of
+256 colors in vga or svga, thanks to the shareware one can
+finding some drivers thought for this in the market, I in
+concrete is going to utilize the driver SVGA256.BGI of Jordan
+Hargrave (Hi, Jordan:-)), in order to register to this driver as
+mere you will have to pay you 20$ to the author, although also
+you will elect another option, that serious activate the vga in ASM
+or Assembler, this is very easy with the interruption 10h of
+the bios, in this way MOV AX, 0013h, INT 10h would already have the
+vga 320x200x256 activated, but we won't rely on all the
+bookstore of graphics that gives with the compiler us,
+although upon programming all the graphic routines in ASM
+we will have something of but rapidity.
+
+
+Then well, in order to activate the vga with the SVGA.BGI driver the
+first that we will have to make is say you to the compiler that
+this driver is not of those that the carries incorporate, or else that
+it is a driver of user apart from the compiler, this will make it
+with the command-&gt; like InstallUserDriver that so:
+Driver:= InstallUserDriver ('SVGA256,' NIL); and then
+initialicer the manner with: Initgraph (Driver,graphmode, '');
+where graphmode could be an number of the 0 at 6 that they represent
+all the manners of svga, we in this way will activate the svga
+loading the driver svga256.bgi of the disk, but it exist a
+more professional form of making this, that is include the driver
+in your same program like an object, avoiding that the driver
+this in an independent file, and time of access to the disk
+giving it but rapidity to the program to the hour of loading, this the
+we could get coverting the driver SVGA256.BGI to obj with
+the command that is included with your BINOBJ compiler of
+this form BINOBJ SVGA256.BGI SVGA256 SVGA256, we already have the
+driver like object, later only it remain us to add this line
+in our program.
+
+
+For the people that are beginning them with the code
+I advise that they revise the books of (Reference to the programer, Guia of the
+user, Guia of the language) that they come with their compiler of Turbo Pascal,
+paying attention above all in the topics related with pointers.
+
+	 A book that also  will be very useful it is: INTERNAL PC of Michael
+Tischer,  Date Becker edition, Marcombo Boixareu editors.
+
+
+		 For but Information:
+
+                 Enrique Sanchez Martinez
+                 Apartado Nз71 Bз Peral (CP:30300)
+                 Cartagena (Spain)
+
+                 Internet
+                 Email: esanchez@arrakis.es</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

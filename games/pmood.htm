@@ -1,0 +1,111 @@
+<html><head><title>The Mood Engine 1.1 - Doom like Graphics 320x200x256</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Это мой первый по-настоящему 3-х мерный движок. Выглядит примерно так, как Doom'овский. Целиком писан на Borland Pascal v7.0 с привлечением Turbo Assembler v3.2.'>
+<meta name="keywords" content="pascal, sources, source code, pmood, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pmood
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;The Mood Engine 1.1 - Doom like Graphics 320x200x256</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexfru@chat.ru">Alex Frounze</a></TD>
+<TD class=black align='right'>27.09.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Это мой первый по-настоящему 3-х мерный движок.
+Выглядит примерно так, как Doom'овский.
+Целиком писан на Borland Pascal v7.0 с привлечением Turbo Assembler v3.2.</TD><TD class=black colspan=2 align='right'><br><A HREF="pmood.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>77k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         -= The Mood engine v1.1 =-
+
+Это мой первый по-настоящему 3-х мерный движок.
+Выглядит примерно так, как Doom'овский.
+Целиком писан на Borland Pascal v7.0 с привлечением Turbo Assembler v3.2.
+И нечего смеяться. На Паскале тоже можно крутые вещи делать.
+Хотя должен признать, что Си несколько удобнее.
+Этот движок не использует BSP, он основан на так называемом методе
+портального рендеринга.
+
+Описание версии на Паскале
+
+- Выпуклые комнаты с разными высотами полов и потолков (окна, лестницы)
+- Взаимно неперпендикулярные стены
+- Текстурированные стены, полы и потолки
+- Возможность поднимать и опускать голову
+- Возможность включать различные методы оптимизации
+- Возможность просмотра игровой карты
+- Счетчик кадров в секунду (FPS)
+- Улучшенный z-буфер, простые полигональные 3d объекты
+  (только в версии, скомпилированной для DPMI/Protected Mode)
+
+
+    This is my first *true* 3d engine. It looks like the great Doom game
+  and has some benefits over the Doom. See features. I wrote another
+  3d engine similar to the Wolfetstain 3d game before - Lab3d.
+    This engine was written in Borland Pascal V7.0 and Turbo Assembler
+  v 3.2. Don't laugh! That's true. Not only C programmers can program
+  cool 3d engines and games.
+    This engine doesn't use BSP trees. It uses simple portal technique.
+
+                               -= Features =-
+
+  - Convex rooms with different height of floors and ceilings
+    (windows, stairs)
+  - Non-orthogonal walls
+  - Texture mapped floors, walls and ceilings
+  - Looking up and down is available now
+  - Different perspective correct texture mappers (1st without optimizations,
+    2nd with linear interpolation for groups of 8 screen pixels and
+    3rd with linear interpolation for groups of 16 screen pixels)
+    which can be switched at the running time
+  - Map viewer (also can be launched at the running time)
+  - FPS counter
+  - Z-buffer and polygonal 3d objects (moodz.pas, moodz.exe, DPMI only)
+
+                              -= How to use =-
+
+    Default map file is the "MAP.MAP" file. But you can specify your own
+  map file as a command line parameter.
+
+                               -= Controls =-
+
+    Esc   - Exit program
+    Tab   - Switch between 3d scene and 2d map
+    T     - Choose next texture mapper (there are 3 available, see above)
+    V     - Switch on/off vertical retrace waiting
+    Left  - Turn left
+    Right - Turn right
+    Up    - Go forward
+    Down  - Go backward
+    Alt+Left - Strafe left
+    Alt+Right - Strafe right
+    A     - Look up
+    Z     - Look down
+    End   - Look forward
+    +     - Zoom in 2d map
+    -     - Zoom out 2d map
+    S     - Save screen shot to the "MOOD.PCX" file
+    F11   - Gamma correction (for old dark displays)
+
+                         -= Contact information =-
+
+  E-mail: alexfru@chat.ru
+  Homepage: http://www.chat.ru/~alexfru
+  ICQ#: 49743820 (I accessible very seldom by ICQ, sorry about that)
+
+  Feel free to leave me your mail. I'll answer any letter.
+
+  Have fun!
+
+                                         Author: Alexei A. Frounze
+                                         Date:   27 of September, 1999</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

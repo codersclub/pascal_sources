@@ -1,0 +1,397 @@
+<html><head><title>Кубик Рубика (BGI) - Графические Игры ( games ) - Pascal.Sources.Ru</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Графическая игра "Кубик Рубика". BGI-графика.
+Кубик можно крутить с помощью цифровой клавиатуры.
+Для запуска необходим драйвер EGAVGA.BGI'>
+<meta name="keywords" content="pascal, sources, source code, games, rubick cube, Графические Игры, кубик рубика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;Кубик Рубика
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Кубик Рубика</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<A href="mailto:evgenij@aport.ru">Евгений Скляревский</A></TD>
+<TD class=black align='right'>16.07.1991</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">
+<br>Графическая игра "Кубик Рубика" для TP5.5-7.0. BGI-графика.
+Кубик можно крутить с помощью цифровой клавиатуры.
+Для запуска необходим драйвер <a href="../bgi/egavga3.zip">EGAVGA.BGI</a>
+</TD>
+<TD class=black colspan=2 align='right'><A HREF="kubrub.zip"><img border=0 align=middle src="../img/dsk.gif"></A>
+<br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><p style="margin-left:50px">
+<big><strong>Кубик Рубика на экране</strong></big>.
+<br>
+<br>
+<b>Примечание от RSWAG:</b>
+<br><small>Эта программа не может служить образцом "как надо писать программы".
+<br>Скорее наоборот - это пример того, как "не надо писать".
+<br>Стиль - просто отвратительный, но...
+во-первых, автор честно сообщает, 
+<br>что это была его _первая_ программа,
+а во-вторых, "вам шашечки или ехать?" :)
+<br>По крайнее мере, алгоритм программы может оказаться для кого-то интересным.
+</small></p>
+<hr width=20%>
+
+<p>
+<table width=100% border=0>
+<tr>
+<td valign="top"><img border=0 width=70 height=80 src="kubrub.gif" vspace=10></td>
+<td>Это моя первая программа на Turbo Pascal'e
+- лет десять назад, все были молодые и...  но,
+учитывая, что текст программы займёт много места,
+прерву воспоминания и коротко о главном. Грани
+кубика на экране можно вращать, используя &quot;правую&quot;
+часть клавиатуры мнемонически: 
+<br>8 - верхняя грань, 
+<br>2 - нижняя, 
+<br>4 - левая, 
+<br>6 - правая, 
+<br>1 - задняя, 
+<br>. - передняя - по часовой стрелке, 
+<br>они же вместе с &quot;Shift&quot; - против. 
+<br>Используя F1 - F6 можно посмотреть кубик с разных сторон. 
+<br>Если вы... в общем, нажав &quot;0&quot;, вы вернете кубик в исходное
+&quot;собранное&quot; состояние, это самое большое
+преимущество перед настоящим кубиком (ещё
+вопрос, какой более настоящий?), опять же не
+уроните. Выход, конечно, &quot;Esc&quot;. 
+<br>Поворот сопровождается настоящим
+скрипом. При движении нет раздражающего мигания потому, 
+что кубик не перерисовывается, а заново
+&quot;заливается&quot; цветом - это ещё и быстрее чем
+перерисовывание. Набирать, конечно, много, но и
+покрутить его на экране приятно. 
+<br>Можно копировать текст через клипборд -
+сразу заработает! Если конечно у вас подключен
+графический модуль и вообще стоит Turbo Pascal:
+</td></tr></table>
+<pre>
+<p style="margin-left:50px">
+<I><font color="#008000">{**** КУБИК РУБИКА ****************************}</font></I></font>
+<I><font color="#008000">{**** первая программа Евгения Скляревского ***}</font></I></font>
+<I><font color="#008000">{**** для Turbo Pascal ************************}</font></I></font>
+<B><font color="#0000FF">USES</font></B> Graph,CRT;
+<B><font color="#0000FF">LABEL</font></B>
+ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,</font>
+ 21,22,23;
+<B><font color="#0000FF">VAR</font></B> CH: CHAR;
+graphdriver,graphmode,I,K:integer;
+FACE:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+UP,RR:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+RIGHT:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+LEFT:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+DARK:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+DOWN:<B><font color="#0000FF">ARRAY</font></B>[1..9] <B><font color="#0000FF">OF</font></B> INTEGER;
+</font>
+<B><font color="#0000FF">procedure</font></B> KUB( X1,X2,X3,X4,Y1,Y2,Y3,Y4,COL:INTEGER);
+<B><font color="#0000FF">BEGIN</font></B>
+setcolor(8);
+LINE(X1,Y1,X2,Y2);SOUND(100*COL);
+LINE(X2,Y2,X3,Y3); LINE(X3,Y3,X4,Y4); LINE(X4,Y4,X1,Y1); NOSOUND</font>
+<I><font color="#008000">{ READLN; }</font></I></font>
+<B><font color="#0000FF">END</font></B>;
+</font>
+<B><font color="#0000FF">procedure</font></B> KUB1( X4,Y4,COL1:INTEGER);
+<B><font color="#0000FF">BEGIN</font></B> SOUND(1000*COL1);
+SetFillstyle(1,COL1); FLOODFILL(X4+5,Y4+5,8); NOSOUND;
+<I><font color="#008000">{ READLN; }</font></I></font>
+<B><font color="#0000FF">END</font></B>;
+</font>
+<B><font color="#0000FF">procedure</font></B> RISUNOK(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,</font>
+C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27: INTEGER);
+<B><font color="#0000FF">CONST</font></B> X00=150;Y00=150;AA=40;D=6;
+<B><font color="#0000FF">VAR</font></B> A1,A2,X0,Y0,A,B,B1,B2,B3,C,YY,E:INTEGER;
+<B><font color="#0000FF">BEGIN</font></B>
+A:=AA; A1:=A*2+D; A2:=A*3+D*2; X0:=X00 ; Y0:=Y00;
+Initgraph(graphdriver,graphmode,<font color="#FF0000">''</font>);
+KUB(X0,X0+A,X0+A,X0,Y0+A,Y0+A,Y0,Y0,C1);
+KUB(X0+A+D,X0+A1,X0+A1,X0+A+D,Y0+A,Y0+A,Y0,Y0,C2);
+KUB(X0+A1+D,X0+A2,X0+A2,X0+A1+D,Y0+A,Y0+A,Y0,Y0,C3);
+KUB(X0+A1+D,X0+A2,X0+A2,X0+A1+D,Y0+A1,Y0+A1,Y0+A+D,Y0+A+D,C6);
+KUB(X0+A+D,X0+A1,X0+A1,X0+A+D,Y0+A1,Y0+A1,Y0+A+D,Y0+A+D,C5);
+KUB(X0,X0+A,X0+A,X0,Y0+A1,Y0+A1,Y0+A+D,Y0+A+D,C4);
+KUB(X0+A1+D,X0+A2,X0+A2,X0+A1+D,Y0+A2,Y0+A2,Y0+A1+D,Y0+A1+D,C9);
+KUB(X0+A+D,X0+A1,X0+A1,X0+A+D,Y0+A2,Y0+A2,Y0+A1+D,Y0+A1+D,C8);
+KUB(X0,X0+A,X0+A,X0,Y0+A2,Y0+A2,Y0+A1+D,Y0+A1+D,C7);
+X0:=X00+A2+D; Y0:=Y00; C:=10;YY:=25;
+A:=AA; A1:=A*2+D; A2:=A*3+D*2; B:=15; B1:=B*2+D; B2:=B*3+D*2;E:=D;
+KUB(X0,X0+B,X0+B,X0,Y0+A,Y0+A-YY,Y0-YY,Y0,C10);
+KUB(X0+B+D,X0+B1,X0+B1,X0+B+D,Y0+A-YY-E,Y0+A-2*YY-E,Y0-2*YY-E,</font>
+Y0-YY-E,C11);
+KUB(X0+B1+D,X0+B2,X0+B2,X0+B1+D,Y0+A-2*YY-2*E,Y0+A-3*YY-2*E,</font>
+Y0-3*YY-2*E,Y0-2*YY-2*E,C12);
+KUB(X0+B1+D,X0+B2,X0+B2,X0+B1+D,Y0+A1-2*YY-2*E,Y0+A1-3*YY-2*E,</font>
+Y0+A+D-3*YY-2*E,Y0+A+D-2*YY-2*E,C15);
+KUB(X0+B+D,X0+B1,X0+B1,X0+B+D,Y0+A1-YY-E,Y0+A1-2*YY-E,</font>
+Y0+A+D-2*YY-E,Y0+A+D-YY-E,C14);
+KUB(X0,X0+B,X0+B,X0,Y0+A1,Y0+A1-YY,Y0+A+D-YY,Y0+A+D,C13);
+KUB(X0+B1+D,X0+B2,X0+B2,X0+B1+D,Y0+A2-2*YY-2*E,Y0+A2-3*YY-2*E,</font>
+Y0+A1+D-3*YY-2*E,Y0+A1+D-2*YY-2*E,C18);
+KUB(X0+B+D,X0+B1,X0+B1,X0+B+D,Y0+A2-YY-E,Y0+A2-2*YY-E,Y0+A1+D-2*YY-E,</font>
+Y0+A1+D-YY-E,C17);
+KUB(X0,X0+B,X0+B,X0,Y0+A2,Y0+A2-YY,Y0+A1+D-YY,Y0+A1+D,C16);
+X0:=X00+2*D ;
+Y0:=Y00-3*YY-3*D; C:=9;YY:=0; A:=25; A1:=A*2+D; A2:=A*3+D*2;
+B:=40; B1:=B*2+D; B2:=B*3+D*2;E:=0;B3:=15;
+KUB(X0+2*B3+6,X0+B+2*B3+4,X0+B+3*B3+6,X0+3*B3+9,Y0+A,Y0+A-YY,</font>
+Y0-YY,Y0,C19);
+KUB(X0+B+D+2*B3+4,X0+B1+2*B3+2,X0+B1+3*B3+3,X0+B+D+3*B3+6,</font>
+Y0+A-YY-E,Y0+A-2*YY-E,Y0-2*YY-E,Y0-YY-E,C20);
+KUB(X0+B1+D+2*B3+3,X0+B2+2*B3,X0+B2+3*B3,X0+B1+D+3*B3+3,</font>
+Y0+A-2*YY-2*E,Y0+A-3*YY-2*E,Y0-3*YY-2*E,Y0-2*YY-2*E,C21); X0:=X00+D;
+KUB(X0+B1+D+B3+1,X0+B2+B3,X0+B2+2*B3,X0+B1+D+2*B3+2,</font>
+Y0+A1-2*YY-2*E,Y0+A1-3*YY-2*E,Y0+A+D-3*YY-2*E,Y0+A+D-2*YY-2*E,C24);
+KUB(X0+B+D+B3+2,X0+B1+B3+1,X0+B1+2*B3+2,X0+B+D+2*B3+4,</font>
+Y0+A1-YY-E,Y0+A1-2*YY-E,Y0+A+D-2*YY-E,Y0+A+D-YY-E,C23);
+KUB(X0+B3+3,X0+B+B3+2,X0+B+2*B3+4,X0+2*B3+6,Y0+A1,</font>
+Y0+A1-YY,Y0+A+D-YY,Y0+A+D,C22); X0:=X00;
+KUB(X0+B1+D,X0+B2,X0+B2+B3,X0+B1+D+B3+1,Y0+A2-2*YY-2*E,</font>
+Y0+A2-3*YY-2*E,Y0+A1+D-3*YY-2*E,Y0+A1+D-2*YY-2*E,C27);
+KUB(X0+B+D,X0+B1,X0+B1+B3+1,X0+B+D+B3+2,Y0+A2-YY-E,Y0+A2-2*YY-E,</font>
+Y0+A1+D-2*YY-E,Y0+A1+D-YY-E,C26);
+KUB(X0,X0+B,X0+B+B3+2,X0+B3+3,Y0+A2,Y0+A2-YY,Y0+A1+D-YY,Y0+A1+D,C25);
+<B><font color="#0000FF">END</font></B>;
+</font>
+<B><font color="#0000FF">procedure</font></B> RISUNOK1(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,</font>
+C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27:INTEGER);
+<B><font color="#0000FF">CONST</font></B> X00=150;Y00=150;AA=40;D=6;
+<B><font color="#0000FF">VAR</font></B> A1,A2,X0,Y0,A,B,B1,B2,B3,C,YY,E:INTEGER;
+<B><font color="#0000FF">BEGIN</font></B> A:=AA;
+A1:=A*2+D; A2:=A*3+D*2; X0:=X00 ; Y0:=Y00; KUB1(X0,Y0,C1);
+KUB1(X0+A+D,Y0,C2);
+KUB1(X0+A1+D,Y0,C3);
+KUB1(X0+A1+D,Y0+A+D,C6);
+KUB1(X0+A+D,Y0+A+D,C5);
+KUB1(X0,Y0+A+D,C4);
+KUB1(X0+A1+D,Y0+A1+D,C9);
+KUB1(X0+A+D,Y0+A1+D,C8);
+KUB1(X0,Y0+A1+D,C7);
+X0:=X00+A2+D ; Y0:=Y00; C:=10;YY:=25; A:=AA; A1:=A*2+D; A2:=A*3+D*2;
+B:=15; B1:=B*2+D; B2:=B*3+D*2;E:=D; KUB1(X0,Y0,C10);
+KUB1(X0+B+D,Y0-YY-E,C11);
+KUB1(X0+B1+D,Y0-2*YY-2*E,C12);
+KUB1(X0+B1+D,Y0+A+D-2*YY-2*E,C15);
+KUB1(X0+B+D,Y0+A+D-YY-E,C14);
+KUB1(X0,Y0+A+D,C13);
+KUB1(X0+B1+D,Y0+A1+D-2*YY-2*E,C18);
+KUB1(X0+B+D,Y0+A1+D-YY-E,C17);
+KUB1(X0,Y0+A1+D,C16);
+X0:=X00+2*D ; Y0:=Y00-3*YY-3*D; C:=9;YY:=0; A:=25; A1:=A*2+D;
+A2:=A*3+D*2; B:=40; B1:=B*2+D; B2:=B*3+D*2;E:=0;B3:=15;
+KUB1(X0+3*B3+9,Y0,C19); KUB1(X0+B+D+3*B3+6,Y0-YY-E,C20);
+KUB1(X0+B1+D+3*B3+3,Y0-2*YY-2*E,C21); X0:=X00+D;
+KUB1(X0+B1+D+2*B3+2,Y0+A+D-2*YY-2*E,C24);
+KUB1(X0+B+D+2*B3+4,Y0+A+D-YY-E,C23);
+KUB1(X0+2*B3+6,Y0+A+D,C22); X0:=X00;
+KUB1(X0+B1+D+B3+1,Y0+A1+D-2*YY-2*E,C27);
+KUB1(X0+B+D+B3+2,Y0+A1+D-YY-E,C26);
+KUB1(X0+B3+3,Y0+A1+D,C25);
+<B><font color="#0000FF">END</font></B>;
+</font>
+<B><font color="#0000FF">begin</font></B>
+<I><font color="#008000">{********************************НАЧАЛО************************}</font></I></font>
+1: <B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> UP[I]:=9;
+FACE[I]:=12;RIGHT[I]:=10;LEFT[I]:=15;DOWN[I]:=5;DARK[I]:=14;
+<B><font color="#0000FF">END</font></B>;
+RISUNOK (FACE[1],FACE[2],FACE[3],FACE[4],FACE[5],FACE[6],FACE[7],</font>
+FACE[8],FACE[9],RIGHT[1],RIGHT[2],RIGHT[3],RIGHT[4],RIGHT[5],</font>
+RIGHT[6],RIGHT[7],RIGHT[8],RIGHT[9],UP[1],UP[2],UP[3],</font>
+UP[4],UP[5],UP[6],UP[7],UP[8],UP[9]);
+</font>
+3: RISUNOK1 (FACE[1],FACE[2],FACE[3],FACE[4],FACE[5],FACE[6],FACE[7],</font>
+FACE[8],FACE[9],RIGHT[1],RIGHT[2],RIGHT[3],RIGHT[4],RIGHT[5],</font>
+RIGHT[6],RIGHT[7],RIGHT[8],RIGHT[9],UP[1],UP[2],UP[3],</font>
+UP[4],UP[5],UP[6],UP[7],UP[8],UP[9]);
+</font>
+2: CH:=ReadKey;
+<B><font color="#0000FF">CASE</font></B> CH <B><font color="#0000FF">OF</font></B>
+<font color="#FF0000">#48</font> : <B><font color="#0000FF">GOTO</font></B> 1; <font color="#FF0000">#54</font> : <B><font color="#0000FF">GOTO</font></B> 12; <font color="#FF0000">'.'</font> : <B><font color="#0000FF">GOTO</font></B> 16; <font color="#FF0000">#52</font> : <B><font color="#0000FF">GOTO</font></B> 14;
+<font color="#FF0000">#56</font> : <B><font color="#0000FF">GOTO</font></B> 18; <font color="#FF0000">#49</font> : <B><font color="#0000FF">GOTO</font></B> 20; <font color="#FF0000">#50</font> : <B><font color="#0000FF">GOTO</font></B> 22; <font color="#FF0000">#27</font> : <B><font color="#0000FF">GOTO</font></B> 4;
+<font color="#FF0000">#0</font> : <B><font color="#0000FF">GOTO</font></B> 11; <B><font color="#0000FF">ELSE</font></B> <B><font color="#0000FF">GOTO</font></B> 2</font>
+<B><font color="#0000FF">END</font></B>;
+</font>
+11: CH:=ReadKey;
+<B><font color="#0000FF">CASE</font></B> CH <B><font color="#0000FF">OF</font></B>
+<font color="#FF0000">#59</font> : <B><font color="#0000FF">GOTO</font></B> 5; <font color="#FF0000">#60</font> : <B><font color="#0000FF">GOTO</font></B> 6; <font color="#FF0000">#61</font> : <B><font color="#0000FF">GOTO</font></B> 7; <font color="#FF0000">#62</font> : <B><font color="#0000FF">GOTO</font></B> 8;
+<font color="#FF0000">#63</font> : <B><font color="#0000FF">GOTO</font></B> 9; <font color="#FF0000">#77</font> : <B><font color="#0000FF">GOTO</font></B> 13; <font color="#FF0000">#83</font> : <B><font color="#0000FF">GOTO</font></B> 17; <font color="#FF0000">#75</font> : <B><font color="#0000FF">GOTO</font></B> 15;
+<font color="#FF0000">#64</font> : <B><font color="#0000FF">GOTO</font></B> 10; <font color="#FF0000">#72</font> : <B><font color="#0000FF">GOTO</font></B> 19; <font color="#FF0000">#80</font> : <B><font color="#0000FF">GOTO</font></B> 23;
+<font color="#FF0000">'O'</font> : <B><font color="#0000FF">GOTO</font></B> 21; <B><font color="#0000FF">ELSE</font></B> <B><font color="#0000FF">GOTO</font></B> 2</font>
+<B><font color="#0000FF">END</font></B>;
+</font>
+5:</font><I><font color="#008000">{************ВРАЩЕНИЕ ВОКРУГ ВЕРТИКАЛЬНОЙ ОСИ**В*ПРАВО*****}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=LEFT[I];LEFT[I]:=DARK[I];
+DARK[I]:=RIGHT[I]; RIGHT[I]:=FACE[I];FACE[I]:=RR[I]; <B><font color="#0000FF">END</font></B>; <B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+6:</font><I><font color="#008000">{***********ВРАЩЕНИЕ ВОКРУГ ВЕРТИКАЛЬНОЙ ОСИ***В ЛЕВО******}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=LEFT[I];LEFT[I]:=FACE[I];FACE[I]:=RIGHT[I];
+RIGHT[I]:=DARK[I];DARK[I]:=RR[I]; <B><font color="#0000FF">END</font></B>; <B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+7:</font><I><font color="#008000">{************ВРАЩЕНИЕ ВОКРУГ ПЕРЕДНЕЙ ГРАНИ ПО ЧАС СТР*****}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=LEFT[I];LEFT[I]:=DOWN[I];DOWN[I]:=RIGHT[I];
+RIGHT[I]:=UP[I];UP[I]:=RR[I]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+8:</font><I><font color="#008000">{*********ВРАЩЕНИЕ ВОКРУГ ПЕРЕДНЕЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=LEFT[I];LEFT[I]:=UP[I];UP[I]:=RIGHT[I];
+RIGHT[I]:=DOWN[I];DOWN[I]:=RR[I]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+9:</font><I><font color="#008000">{**************ВРАЩЕНИЕ ВОКРУГ ПРАВОЙ ГРАНИ ПО ЧАС СТР*****}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=FACE[I];FACE[I]:=DOWN[I];DOWN[I]:=DARK[I];
+DARK[I]:=UP[I];UP[I]:=RR[I]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+10:</font><I><font color="#008000">{**********ВРАЩЕНИЕ ВОКРУГ ПРАВОЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> I:=1 <B><font color="#0000FF">TO</font></B> 9 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> RR[I]:=FACE[I];FACE[I]:=UP[I];UP[I]:=DARK[I];
+DARK[I]:=DOWN[I];DOWN[I]:=RR[I]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+12:</font><I><font color="#008000">{*******************ВРАЩЕНИЕ ПРАВОЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+I:=RIGHT[1];RIGHT[1]:=RIGHT[7];RIGHT[7]:=RIGHT[9];
+RIGHT[9]:=RIGHT[3];RIGHT[3]:=I; I:=RIGHT[2];RIGHT[2]:=RIGHT[2];
+RIGHT[4]:=RIGHT[8];RIGHT[8]:=RIGHT[6];RIGHT[6]:=I; RR[3]:=FACE[3];
+FACE[3]:=DOWN[3];DOWN[3]:=DARK[3];DARK[3]:=UP[3];UP[3]:=RR[3];
+RR[6]:=FACE[6];FACE[6]:=DOWN[6];DOWN[6]:=DARK[6];DARK[6]:=UP[6];
+UP[6]:=RR[6]; RR[9]:=FACE[9];FACE[9]:=DOWN[9];DOWN[9]:=DARK[9];
+DARK[9]:=UP[9];UP[9]:=RR[9];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+13:</font><I><font color="#008000">{*****************ВРАЩЕНИЕ ПРАВОЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B>
+I:=RIGHT[1];RIGHT[1]:=RIGHT[7];RIGHT[7]:=RIGHT[9];RIGHT[9]:=RIGHT[3];
+RIGHT[3]:=I;I:=RIGHT[2];RIGHT[2]:=RIGHT[2];RIGHT[4]:=RIGHT[8];
+RIGHT[8]:=RIGHT[6]; RIGHT[6]:=I;RR[3]:=FACE[3];FACE[3]:=DOWN[3];
+DOWN[3]:=DARK[3]; DARK[3]:=UP[3];UP[3]:=RR[3];RR[6]:=FACE[6];
+FACE[6]:=DOWN[6];DOWN[6]:=DARK[6]; DARK[6]:=UP[6];UP[6]:=RR[6];
+RR[9]:=FACE[9];FACE[9]:=DOWN[9];DOWN[9]:=DARK[9]; DARK[9]:=UP[9];
+UP[9]:=RR[9]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+14:</font><I><font color="#008000">{*********************ВРАЩЕНИЕ LEВОЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+I:=LEFT[1];LEFT[1]:=LEFT[7];LEFT[7]:=LEFT[9];LEFT[9]:=LEFT[3];
+LEFT[3]:=I;I:=LEFT[2];LEFT[2]:=LEFT[2];LEFT[4]:=LEFT[8];
+LEFT[8]:=LEFT[6]; LEFT[6]:=I;RR[1]:=FACE[1];FACE[1]:=UP[1];
+UP[1]:=DARK[1]; DARK[1]:=DOWN[1];DOWN[1]:=RR[1];RR[4]:=FACE[4];
+FACE[4]:=UP[4];UP[4]:=DARK[4]; DARK[4]:=DOWN[4];DOWN[4]:=RR[4];
+RR[7]:=FACE[7];FACE[7]:=UP[7];UP[7]:=DARK[7]; DARK[7]:=DOWN[7];
+DOWN[7]:=RR[7];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+15:</font><I><font color="#008000">{********************ВРАЩЕНИЕ LEВОЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> I:=LEFT[1];LEFT[1]:=LEFT[7];
+LEFT[7]:=LEFT[9];LEFT[9]:=LEFT[3];LEFT[3]:=I;I:=LEFT[2];
+LEFT[2]:=LEFT[2];LEFT[4]:=LEFT[8];LEFT[8]:=LEFT[6]; LEFT[6]:=I;
+RR[1]:=FACE[1];FACE[1]:=UP[1];UP[1]:=DARK[1]; DARK[1]:=DOWN[1];
+DOWN[1]:=RR[1];RR[4]:=FACE[4];FACE[4]:=UP[4];UP[4]:=DARK[4];
+DARK[4]:=DOWN[4];DOWN[4]:=RR[4];RR[7]:=FACE[7];FACE[7]:=UP[7];
+UP[7]:=DARK[7]; DARK[7]:=DOWN[7];DOWN[7]:=RR[7]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+16:</font><I><font color="#008000">{*****************ВРАЩЕНИЕ ПЕРЕДНЕЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+I:=FACE[1];FACE[1]:=FACE[7];FACE[7]:=FACE[9];FACE[9]:=FACE[3];
+FACE[3]:=I; I:=FACE[2];FACE[2]:=FACE[4];FACE[4]:=FACE[8];
+FACE[8]:=FACE[6]; FACE[6]:=I;RR[1]:=RIGHT[1];RIGHT[1]:=UP[7];
+UP[7]:=LEFT[9]; LEFT[9]:=DOWN[3];DOWN[3]:=RR[1];RR[1]:=RIGHT[4];
+RIGHT[4]:=UP[8];UP[8]:=LEFT[6]; LEFT[6]:=DOWN[2];DOWN[2]:=RR[1];
+RR[1]:=RIGHT[7];RIGHT[7]:=UP[9];UP[9]:=LEFT[3]; LEFT[3]:=DOWN[1];
+DOWN[1]:=RR[1];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+17:</font><I><font color="#008000">{*****************ВРАЩЕНИЕ ПЕРЕДНЕЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> I:=FACE[1];FACE[1]:=FACE[7];
+FACE[7]:=FACE[9];FACE[9]:=FACE[3];FACE[3]:=I; I:=FACE[2];
+FACE[2]:=FACE[4];FACE[4]:=FACE[8];FACE[8]:=FACE[6]; FACE[6]:=I;
+RR[1]:=RIGHT[1];RIGHT[1]:=UP[7];UP[7]:=LEFT[9]; LEFT[9]:=DOWN[3];
+DOWN[3]:=RR[1];RR[1]:=RIGHT[4];RIGHT[4]:=UP[8];UP[8]:=LEFT[6];
+LEFT[6]:=DOWN[2];DOWN[2]:=RR[1];RR[1]:=RIGHT[7];RIGHT[7]:=UP[9];
+UP[9]:=LEFT[3]; LEFT[3]:=DOWN[1];DOWN[1]:=RR[1]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+18:</font><I><font color="#008000">{********************ВРАЩЕНИЕ ВЕРХНЕЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+I:=UP[1];UP[1]:=UP[7];UP[7]:=UP[9];UP[9]:=UP[3]; UP[3]:=I;
+I:=UP[2];UP[2]:=UP[4];UP[4]:=UP[8];UP[8]:=UP[6]; UP[6]:=I;
+RR[1]:=RIGHT[1];RIGHT[1]:=DARK[3];DARK[3]:=LEFT[1];
+LEFT[1]:=FACE[1];FACE[1]:=RR[1];
+RR[1]:=RIGHT[2];RIGHT[2]:=DARK[2];DARK[2]:=LEFT[2];
+LEFT[2]:=FACE[2];FACE[2]:=RR[1];
+RR[1]:=RIGHT[3];RIGHT[3]:=DARK[1];DARK[1]:=LEFT[3];
+LEFT[3]:=FACE[3];FACE[3]:=RR[1];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+19:</font><I><font color="#008000">{******************ВРАЩЕНИЕ ВЕРХНЕЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> I:=UP[1];UP[1]:=UP[7];UP[7]:=UP[9];
+UP[9]:=UP[3];UP[3]:=I;I:=UP[2];UP[2]:=UP[4];UP[4]:=UP[8];
+UP[8]:=UP[6]; UP[6]:=I;
+RR[1]:=RIGHT[1];RIGHT[1]:=DARK[3];DARK[3]:=LEFT[1];
+LEFT[1]:=FACE[1];FACE[1]:=RR[1];
+RR[1]:=RIGHT[2];RIGHT[2]:=DARK[2];DARK[2]:=LEFT[2];
+LEFT[2]:=FACE[2];FACE[2]:=RR[1];
+RR[1]:=RIGHT[3];RIGHT[3]:=DARK[1];DARK[1]:=LEFT[3];
+LEFT[3]:=FACE[3];FACE[3]:=RR[1]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+21:</font><I><font color="#008000">{******************ВРАЩЕНИЕ 3AДНЕЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+I:=DARK[1];DARK[1]:=DARK[7];DARK[7]:=DARK[9];DARK[9]:=DARK[3];
+DARK[3]:=I;I:=DARK[2];DARK[2]:=DARK[4];DARK[4]:=DARK[8];
+DARK[8]:=DARK[6]; DARK[6]:=I;RR[1]:=RIGHT[3];RIGHT[3]:=UP[1];
+UP[1]:=LEFT[7]; LEFT[7]:=DOWN[9];DOWN[9]:=RR[1];
+RR[1]:=RIGHT[6];RIGHT[6]:=UP[2];UP[2]:=LEFT[4];
+LEFT[4]:=DOWN[8];DOWN[8]:=RR[1];
+RR[1]:=RIGHT[9];RIGHT[9]:=UP[3];UP[3]:=LEFT[1];
+LEFT[1]:=DOWN[7];DOWN[7]:=RR[1];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+20:</font><I><font color="#008000">{****************************ВРАЩЕНИЕ 3AДНЕЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> I:=DARK[1];DARK[1]:=DARK[7];
+DARK[7]:=DARK[9];DARK[9]:=DARK[3];DARK[3]:=I; I:=DARK[2];
+DARK[2]:=DARK[4];DARK[4]:=DARK[8];DARK[8]:=DARK[6]; DARK[6]:=I;
+RR[1]:=RIGHT[3];RIGHT[3]:=UP[1];UP[1]:=LEFT[7];
+LEFT[7]:=DOWN[9];DOWN[9]:=RR[1];
+RR[1]:=RIGHT[6];RIGHT[6]:=UP[2];UP[2]:=LEFT[4];
+LEFT[4]:=DOWN[8];DOWN[8]:=RR[1];
+RR[1]:=RIGHT[9];RIGHT[9]:=UP[3];UP[3]:=LEFT[1];
+LEFT[1]:=DOWN[7];DOWN[7]:=RR[1];
+<B><font color="#0000FF">END</font></B>; <B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+22:</font><I><font color="#008000">{******************ВРАЩЕНИЕ НИЖНЕЙ ГРАНИ ПO ЧАС СТР******}</font></I>
+I:=DOWN[1];DOWN[1]:=DOWN[7];DOWN[7]:=DOWN[9];DOWN[9]:=DOWN[3];
+DOWN[3]:=I; I:=DOWN[2];DOWN[2]:=DOWN[4];DOWN[4]:=DOWN[8];
+DOWN[8]:=DOWN[6]; DOWN[6]:=I;
+RR[1]:=RIGHT[7];RIGHT[7]:=FACE[7];FACE[7]:=LEFT[7];
+LEFT[7]:=DARK[9];DARK[9]:=RR[1];
+RR[1]:=RIGHT[8];RIGHT[8]:=FACE[8];FACE[8]:=LEFT[8];
+LEFT[8]:=DARK[8];DARK[8]:=RR[1];
+RR[1]:=RIGHT[9];RIGHT[9]:=FACE[9];FACE[9]:=LEFT[9];
+LEFT[9]:=DARK[7];DARK[7]:=RR[1];
+<B><font color="#0000FF">GOTO</font></B> 3;
+</font>
+23:</font><I><font color="#008000">{****************ВРАЩЕНИЕ НИЖНЕЙ ГРАНИ ПPOT ЧАС СТР******}</font></I>
+<B><font color="#0000FF">FOR</font></B> K:=1 <B><font color="#0000FF">TO</font></B> 3 <B><font color="#0000FF">DO</font></B> <B><font color="#0000FF">BEGIN</font></B> I:=DOWN[1];DOWN[1]:=DOWN[7];
+DOWN[7]:=DOWN[9];DOWN[9]:=DOWN[3];
+DOWN[3]:=I; I:=DOWN[2];DOWN[2]:=DOWN[4];DOWN[4]:=DOWN[8];
+DOWN[8]:=DOWN[6]; DOWN[6]:=I;
+RR[1]:=RIGHT[7];RIGHT[7]:=FACE[7];FACE[7]:=LEFT[7];
+LEFT[7]:=DARK[9];DARK[9]:=RR[1];
+RR[1]:=RIGHT[8];RIGHT[8]:=FACE[8];FACE[8]:=LEFT[8];
+LEFT[8]:=DARK[8];DARK[8]:=RR[1];
+RR[1]:=RIGHT[9];RIGHT[9]:=FACE[9];FACE[9]:=LEFT[9];
+LEFT[9]:=DARK[7];DARK[7]:=RR[1]; <B><font color="#0000FF">END</font></B>;
+<B><font color="#0000FF">GOTO</font></B> 3;
+4: CLOSEGRAPH <B><font color="#0000FF">END</font></B>.
+</pre>
+
+<!--#include virtual="/t_footer.htm"-->

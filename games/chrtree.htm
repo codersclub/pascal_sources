@@ -1,0 +1,85 @@
+<html><head><title>Новогодняя шутка - Елочка</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа проигрывает на спикере мелодию "В лесу родилась елочка" на фоне зимнего пейзажа'>
+<meta name="keywords" content="pascal, sources, source code, chrtree, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;chrtree
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Новогодняя шутка - Елочка</TD>
+<TD nowrap class=black>&nbsp;Василий Рабец</TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа проигрывает на спикере мелодию
+"В лесу родилась елочка" на фоне зимнего пейзажа</TD><TD class=black colspan=2 align='right'><br><A HREF="chrtree.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>42k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    !ChrTree.pas - это новогодняя шутка для программистов на
+Паскале - изложение известной новогодней песенки на TP 6.0. Вы
+можете клавишей F8 выполнить программу пошагово и убедиться,
+что назначение каждой процедуры соответствует ее названию -
+строке песенки.
+
+    Назначение модулей:
+
+TreeGvar (Global VARiables) - глобальные переменные и констан-
+           ты, в т.ч. цвета, количество снежинок и пр., длитель-
+           ности процессов и т.д.
+TreeInit - инициализация программы, разбор параметров, справоч-
+           ный экран.
+TreeMain - основные подпрограммы - детализация процедур !ChrTree.pas
+MainUtil - детализация процедур TreeMain.pas
+TreeUtil - различные вспомогательные подпрограммы, в т.ч. изме-
+           нение палитры EGA.
+TreGraph - обеспечивает одновременное выполнение фоновой и
+           foreground графики.
+TreMusic - фоновая музыка.
+EgaVga.obj - драйвер EgaVga.
+
+    К сожалению, текст почти не прокомментирован, но из назва-
+ний переменных и процедур должно быть почти все понятно. Конеч-
+но, ни о какой оптимальности кода здесь и речи нет, особенно в
+TreMusic.
+
+    Некоторые комментарии к TreGraph: процедуры, начинающиеся с
+Tree - это вызов соответствующих процедур модуля Graph с уста-
+новлением признака, что в данный момент работает графика, чтобы
+предотвратить их прерывание фоновыми PutPixel и GetPixel (иначе
+на экране будет твориться безобразие). Остальные процедуры, пе-
+ременные и т.п. - просто вызов одноименных вещей из Graph. Они
+вынесены в TreGraph только для того, чтобы в других модулях не
+писать uses Graph и тем самым исключить случайную ошибку - вы-
+зов какой-либо графической процедуры без установления признака
+ее работы. На результат их вынос в TreGraph никак не влияет -
+файл EXE от этого совершенно не меняется.
+
+    Чтобы убедиться, что мелодия и мигание звезд - фоновые,
+можно в процессе выполнения программы нажать Pause.
+
+    Если есть вопросы и замечания (которых, конечно, должно
+возникнуть много, потому что целью было только нарисовать текст
+.pas и картинки, соответствующие песенке, и не более того) -
+вот координаты, с удовольствием отвечу:
+
+               e-mail:   rabets@icph20.sherna.msk.su
+
+                Адрес:   142 432
+                         Московская обл.
+                         Ногинский р-н
+                         п. Черноголовка
+                         Школьный б-р, 18, кв. 241
+                         Рабцу В.С.
+
+
+              23-11-92                В.С. Рабец</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

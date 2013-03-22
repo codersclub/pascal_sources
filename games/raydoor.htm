@@ -1,0 +1,165 @@
+<html><head><title>Raycasting 1.7 - 3D Engine Like Wolfenstein</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='3D-движок, напоминающий Wolfenstein & Doom, с открыванием дверей.  A great ray-casting doom/wolf 3d-engine with animated doors.'>
+<meta name="keywords" content="pascal, sources, source code, raydoor, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;raydoor
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Raycasting 1.7 - 3D Engine Like Wolfenstein</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vulturejc@hetnet.nl">Vulture/Outlaw Triad</a></TD>
+<TD class=black align='right'>30.11.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">3D-движок, напоминающий Wolfenstein & Doom, с открыванием дверей. <br>
+A great ray-casting doom/wolf 3d-engine with animated doors.</TD><TD class=black colspan=2 align='right'><br><A HREF="raydoor.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>64k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              R A Y C A S T I N G
+
+        			      by
+
+				 Outlaw Triad
+
+ ----------------------------------------------------------------------------
+
+    Project     : Raycasting engine
+    Version     : 1.7
+    Last update : November 30 1998
+    Language    : Pascal/asm
+    Code by     : Vulture/OT
+    Graphics by : Sappy/OT
+    Textfile by : Vulture/OT
+    E-mail      : vulturejc@hetnet.nl (Vulture)
+                  mlimburg@worldonline.nl (Sappy)
+    Homepages   : http://www.tem.nhl.nl/~comma400/otraycst.html
+                  http://www.tem.nhl.nl/~comma400/vulture.html
+
+ ----------------------------------------------------------------------------
+
+  - BASIC INFORMATION -
+
+  Raycasting is a technique to simulate 3d environments in which the viewer
+  can 'walk' around. A famous implementation of this technique is the game
+  Wolfenstein. Really advanced examples of raycasters are the Ultima Underworld
+  1 and 2 games.
+
+  A raycaster doesn't produce a real 3d world, but instead displays a 2d map
+  in 3d. The viewer is unable to look up or down (x-axis usually), which
+  makes this a fake 3d world. It does, however, create an acceptable visual
+  view of a 3d environment and is as such suitable for games, although you
+  can't compare such games to the standards in 3d games today.
+
+  As I've been interested in creating virtual 3d worlds for quite some time
+  now, I decided to get into coding a Wolfenstein clone. Reason for this is
+  the fact that basic raycasting is a relatively simple technique and easy
+  to implement.
+
+  Start the engine by running the executable and move around using the mouse.
+  Keyboard movement has to be implemented, but that's not a priority for me.
+  Pressing the spacebar will open doors in front of the player. Open doors
+  are closed after a period of time.
+
+  - FEATURES -
+
+  Currently this engine supports:
+
+       - Texture mapped walls (various textures)
+       - Seperate 2d maps for the walls and floor/ceiling
+       - Mouse movement (forward and backwards)
+       - Shading (simple depth shading; 16 colour shades)
+       - Floor/ceiling texturing (need a faster method)
+       - Game physics (when you stop walking, you 'slide' a bit further)
+       - Transparent walls and doors (allowing windows)
+       - Animated doors (vertical motion + there is a secret room in here!)
+       - Different textures on X,Y sides of walls (adds more realism)
+       - Collision detection (lame code, must be improved)
+       - Viewport clipping (allowing a frame around the screen)
+
+  This project is still at it's early stages and if a real game is build
+  with this engine, the following needs to be implemented also (at least):
+
+       - Level files / sector files (for easy level loading/handling)
+       - Variable height walls (I need stairs and such)
+       - Sprite handling (characters, objects; I'm busy with this)
+       - Water (animated floors resembling water)
+       - Lava (animated floors resembling lava streams)
+       - Maybe 3d characters (using bone techniques?)
+       - XMS memory for texture storage (already done in unreleased version)
+       - 128x128 textures (already done in unreleased version)
+       - Sound (thrilling background music and scary soundsamples)
+       - More fixed point math and assembler code (raycasting procedures)
+       - Remove the undocumented features (called 'bugs')
+
+  Some of these things are pretty easy to implement (water/lava) and others
+  are very complicated (3d characters). As you can see, there's a lot to do
+  yet.
+
+  - BUGS -
+
+  I suspect there to be a few bugs in this engine, although at this point
+  lame coding is more of a problem. Things can be made more efficient for
+  sure. Drawing operations can be optimized by using more assembler code,
+  which is a real 'must'.
+
+  - HARDWARE -
+
+  This program was made on a Pentium 75, with a 1 MB videocard. As you can
+  see, no videohardware is used in this program, but this can be realised in
+  future versions to enhance speed and visual appearance. It's ill advised
+  to view this program on a machine less than a P75, because it will run
+  terribly slow.
+
+  - SOURCECODE-
+
+  The entire engine is coded using Turbo Pascal 7.0 with inline assembler
+  for drawing operations. Also, a little utility is used to convert the
+  textures from PCX format to a simple data format. Textures are 64x64 and
+  all bytes/pixels are written linear to external data files which are
+  64x64=4096 bytes each. Eventually all textures will be written to 1 big
+  external data file, together with level data, sprite data etc etc.
+
+  I decided to release the sourcecode of what I've accomplished in order
+  to motivate others to start coding virtual 3d worlds too. If you can use
+  these sources, please do so. Give Outlaw Triad a greet if you use it in
+  a demo or something like that. These sources are given AS IS, which means
+  you are using these sources at your own risk.
+
+  - GOALS -
+
+  My final goal at this point is to create an engine which resembles the
+  Doom engine in order to create an adventure game with it which will
+  be much like the Ultima Underworld games. This probably means I'll have
+  to write a sector polygonal engine (linedef engine), but for now I'll
+  try to get as much as possible out of basic raycasting.
+
+  - THANKS -
+
+  I could not have made this program without the help of others, who were
+  so kind to share their knowledge by making their programs/info available
+  on the internet. I would like to thank the following people:
+
+       - Jim (for our discussions on graphics programming)
+       - Telemachos/PXD (for your tutorials and personal help)
+       - F. Permadi (for your excellent html tutorial)
+
+  Thanks very much.
+
+  - CONTACT -
+
+  I would like to get in contact with other people who are trying to create
+  virtual reality programs, wether those programs are raycasters or not.
+  Please feel free to contact me or Sappy/OT using the e-mail adresses stated
+  above!
+
+ ----------------------------------------------------------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

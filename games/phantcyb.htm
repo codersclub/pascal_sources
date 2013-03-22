@@ -1,0 +1,170 @@
+<html><head><title>Phantom Cyber Space v2.4 - WAD File Creator/Player</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа демонстрирует перемещение по сцене, напоминающей эпизоды игры Doom. Кроме того, прилагается дополнительная программа для генерации произвольной карты и WAD файла.<br><font color=#666666> This small programms creates a small map like the DOOM scenes and walks around it. You can modify the map and recompile it to new WAD file.</font>">
+<meta name="keywords" content="pascal, sources, source code, phantcyb, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;phantcyb
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Phantom Cyber Space v2.4 - WAD File Creator/Player</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ADSJBI@SKFERC.NL">Jacco Bikker</a></TD>
+<TD class=black align='right'>15.08.94</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=75 vspace=4 hspace=8 alt="" src="phantcyb.jpg"><p style="margin-left:20px">Программа демонстрирует перемещение по сцене, напоминающей
+эпизоды игры Doom. Кроме того, прилагается дополнительная программа
+для генерации произвольной карты и WAD файла.<br><font color=#666666>
+This small programms creates a small map like the DOOM scenes
+and walks around it. You can modify the map and recompile it to
+new WAD file.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="phantcyb.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>75k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CYBERSPACE SOURCES - BY PHANTOM - A NOSTALGIA DEMOCODER
+
+ <img border=0 width=640 height=400 src="phantcy1.jpg" alt="">
+
+-What the...
+
+At this moment you are the proud owner of a copy of phantom's
+cyberspace-sources. With these sources you can experiment with
+the latest in P.D. virtual-reality.
+
+These sources, when properly compiled, will run on any AT,
+but they will be too slow on anything less than a 386DX/33.
+On some very fast machines the program might be too fast.
+In that case, borrow your neighbours' computer. (They say that
+your neighbours' computer should ALWAYS be slower than yours)
+To run these sources, please compile demo3d.pas and makedata.pas.
+
+To obtain a cool sample WAD file, just run the makedata-program.
+In the current directory a cool file will appear, quite big actually.
+This is a data file, with the texture data in it, and a small map.
+
+Now start Turbo-Pascal 7.0, don't do any checking (especially no
+stack-checking or overflow checking), don't use debug symbols and
+all the slow shit, just compile the program. During this process,
+a special graphics unit (VGA256.PAS) will be compiled, this gives
+you the great VGA256.TPU file. Of course you may use this also in
+your own program.
+
+I said also. Sorry, but I wouldn't like it if you use ANY of my
+routines in commercial stuff or shareware-programs.
+Neither would it be any fun if my cyberspace would magically
+appear in a dazzling new demo.
+
+At this stage, you have probably taken a close look at the running
+program. So now you know what cyberspace is.
+
+
+Nostalgia? What the...
+
+Nostalgia is the newest Dutch demogroup in Holland (A bit redundant,
+that 'Holland', isn't it?). It consists of four successfull screen
+and speaker artists. We have THREE coders: Suave, JAL, and me,
+The Phantom.
+Yes, I know there are quite some Phantoms, but hey, they can't really
+compete in the demoscene, so let THEY change their name.
+If any 'phantom' can out-perform me, I will change my name.
+Just for your information: We won the BiZARRE!'94 compo in Nijmegen,
+Holland. The first day of the compo (saturday) was the first day that
+I met the other guys. So you can image that we had some rough 24 hours
+to get our demo working! Due to this, we where not completely satisfied
+with the result. We won, but we didn't release it.
+At the time you read this, a highly improved version of ECHOES of the
+past is released, and now available on the Internet. If you have a GUS
+you will hear the great music from our musician, The REW. He's one of
+the finest in Holland, and can certainly compete with the world's
+leading musicians. You don't believe it? Get the demo!
+
+
+Sources? What the...
+
+Because I think the current level in public domain-games is rather
+low, these sources are hereby placed in the public domain.
+As  said, don't use it for shareware without my permission!
+If you would like to use Cyberspace, you will have to be a fairly
+good programmer, since some very important bits are missing.
+My routine can not display sprites at the moment, making it rather
+useless for games.
+
+Of course, this can be implemented. If you can do this,
+I think you are qualified to use the sources. If you can't do this,
+the final game would have been shit anyway. If you can prove that
+you can do a good game, but can't program the sprites, contact me.
+
+Maybe you would like some explanation on the sources.
+Here it comes.
+- The floor is a rotated and tilted bitmap.
+  This bitmap consists of little bitmaps, the little bitmaps
+  are 32x32 pixels. You can think of the floor as a giant
+  chess-board. On screen you see approx. 7 squares on the
+  base-line, and more on the other lines.
+  Every square has a number (0..255), because it's directly
+  peeked from the map-memory. This number is the bitmap-index.
+  So, the cool bitmaps that where defined in MakeData are
+  used here.
+  Because these tiles are rather big, and the world can consist
+  of 128x256 tiles, the maximum size of the world is big enough
+  for the average game. In the demo only one half of the
+  maximum-size is used. Of course, you could have more than one map.
+  So, the floor is easy. Now the ceiling.
+- All the tile-edge-coords are mirrored from the floor. So an x-pos
+  in a tile on the floor is equal to an x-coord in a tile on the
+  ceiling. All coord-calculations have to be done only once.
+  So, the ceiling is not so hard either. Now the walls.
+- Every time the algorithm wants to draw a color-0 spot on the floor,
+  a wall is drawn instead. So, a black square on the floor (assuming
+  that color 0 is black) will become a massive block of wall on-screen.
+  Whenever a bar is drawn from the floor to the mirrored coord on the
+  ceiling, that x-pos is blocked. Please note that we are drawing from
+  the bottom of the screen towards the middle, so, we don't first draw
+  the fartest [ :) ] objects, but the nearest!
+  When an x-pos is blocked, all walls and floors behind it are not even
+  calculated any more.
+- As you can see, the walls are not drawn with one color. This is done
+  by taking the value of the ceiling-tile (which you can't see because
+  there's a wall), and find a nice pattern in a pattern-table. Because
+  I draw one bar at a time, I can only assign colors to horizontal
+  lines on a wall, I can't do complete texture-mapping.
+
+So, this draws my world. Things are rather fast because I don't use
+screenswapping; I just overwrite the whole image. On slow computers
+this looks ugly, on all other systems you won't notice, and it spares
+me a clear-screen command.
+
+That's it, I think the average programmer will be able to create
+his own world with this information. If there are questions,
+let me know.
+Please let me know if you improve my world. I would like to work on
+a couple of things:
+- Sprites, as I mentioned before
+- More speed, using 386 registers, especially segment-registers
+- Lower walls (variable hight)
+- Better light-to-dark
+
+I already have routines to tilt the screen. This looks stunning,
+but it's not quite perfected yet. Let me know if you're interested,
+I'll send you a demo.
+
+Well, end of text, to contact me just send some E-mail to:
+
+ADSJBI@SKFERC.NL
+
+That's the E-mail address of:
+
+Jacco Bikker ('The Phantom')
+Gestellaan 44
+3431 GN  Nieuwegein
+Holland
+Phone (in Holland) 03402-33309
+
+See you, and mail me! I need four mails monday!
+(I wanna magnum (insiders))</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

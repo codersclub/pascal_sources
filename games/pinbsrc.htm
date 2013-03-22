@@ -1,0 +1,201 @@
+<html><head><title>PCS-PinBall 1.1 - Classic Pinball Game</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='PCS PINBALL SOURCE. Исходники классической игры ПинБол.  The complete source of the pinball as released in the PC Spiel 12/95! Includes all graphics, utilities, cdrom-player, sb routines, mode X - sprite routines and more...'>
+<meta name="keywords" content="pascal, sources, source code, pinbsrc, games, Графические Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Графические Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pinbsrc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PCS-PinBall 1.1 - Classic Pinball Game</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:j.gelhaus@flight.gun.de">A.Scherp and J.Gelhaus</a></TD>
+<TD class=black align='right'>18.03.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">PCS PINBALL SOURCE.
+Исходники классической игры ПинБол. <br>
+The complete source of the pinball as released in the PC Spiel 12/95!
+Includes all graphics, utilities, cdrom-player, sb routines,
+mode X - sprite routines and more...</TD><TD class=black colspan=2 align='right'><br><A HREF="pinbsrc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1273k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">------------------------------------------------------------------------------
+			  ****************************
+		      ****   PC Spiel Pinball SOURCE  ****
+			  ****************************
+------------------------------------------------------------------------------
+
+  Yes, you guested it:
+  This ist the FULL Source-Code of the pinball as we released it in the
+  PC Spiel 12/95 ! This archive includes also all utilities we wrote for
+  the Pinball and all graphics.
+
+  (c) vIRTUAL tECHNOLOGIES 1993-1996 Ansgar Scherp, Joachim Gelhaus
+
+  You may use this code for personal and commercal use, but you MUST give
+  credits to us, when you use this code or portions in your own productions.
+  Distribition via any media is explicit allowed.
+
+  You'll need TP 6.0 or higher to compile. This program runs only in real
+  mode. Don't run it from the IDE!
+
+  DISCLAIMER:
+  We give no warranty for this code, because it was coded for us, and not
+  for the public. But after lot of people asking us for releasing the
+  source, we decided, to make this source avialable.
+
+------------------------------------------------------------------------------
+ how to contact us:
+------------------------------------------------------------------------------
+    Ansgar Scherp
+    DБrerstraсe 23
+    49377 Vechta Ot LangfФrden
+    Germany
+    scherp.ansgar@informatik.uni-oldenburg.de
+
+  or
+
+    Joachim Gelhaus
+    Erlenweg 3
+    49377 Vechta
+    Germany
+    j.gelhaus@flight.gun.de
+
+  or via our homepage at
+
+    http://www.informatik.uni-oldenburg.de/~virtech/
+
+  or our Mailbox X - Treme BBS
+
+    + 49 (0) 4441 / 851887
+
+------------------------------------------------------------------------------
+ EXTENSIONS:
+------------------------------------------------------------------------------
+*.1,2,3,4 -&gt; the different Graphics for Plane 1-4
+*.GFX     -&gt; Planes 1-4 copied together ( in this order: *.1 *.2 *.3 *.4)
+*.MSK     -&gt; special Masks , e.g. for the Pinballarms
+xxxx.TAB  -&gt; graphic of a table
+xxxx.GRO  -&gt; Maske of a table
+xxxx.COL  -&gt; palette
+xxxx.MPA  -&gt; mini-Palette (color r,g,b)
+*.SND     -&gt; soundfile
+
+------------------------------------------------------------------------------
+ GENERAL MASK COLORS
+------------------------------------------------------------------------------
+  0 -&gt; nothing, ball passes them
+255 -&gt; color of the main frame, (look at the bitmaps!)
+1   -&gt; color of the pinballarms
+2-4 -&gt; bumpercolor
+
+------------------------------------------------------------------------------
+ Colors for the first table: ICE
+------------------------------------------------------------------------------
+0-13 -&gt; Lights like ASMspecial...
+16-21,25 -&gt; the colors will be ignored and manipulatetd!
+	    Colors 17-20,25 are reserved for the Ball
+30 -&gt; Background of the pinballarms and the table. Will be filled up
+      with a light-brown plasma; the background of the arms will then
+      have color 30 and 234
+31-33 -&gt; the other arm-colors
+129,130 -&gt; colors for the LED (led_color_1 & 2)
+217-225 -&gt; Extra-Bumper
+226-234 -&gt; table ackground
+240-248 -&gt; 3 Bumper
+235-255 -&gt; the ball will not be over this colors!
+All other colors are free choseable.
+
+------------------------------------------------------------------------------
+ Colors for the second table: SPACE-RAT
+------------------------------------------------------------------------------
+1-89    -&gt; Foreground, Ball ,flys' over it
+90-119  -&gt; Lights
+150-157 -&gt; Background, Ball ,flys' under it
+200-203 -&gt; RailRoadLines
+210-212 -&gt; RailRoadLines lying over the ball
+Lights:
+90,91,92 -&gt; R, A, T
+93,94,95 -&gt; 5K, 3K, 1K (left  top)
+96       -&gt; 3 Bumper (left)
+97       -&gt; 3 Bumper (right)
+98       -&gt; 4 Bumper (near to the box)
+99,100,101              -&gt; Arrows 2x, 4x, 6x
+102,103,104             -&gt; Array 500, 1000, 1500
+105,106,107,108         -&gt; Array 10.000, 20.000, 30.000, XTRABALL
+109,110,111,112,113,114 -&gt; P, H, A, S, E, R
+115                     -&gt; RL (Relaunch, bottom left and right)
+116,117,118,119         -&gt; 4 arrows in the box (LO, RO, RU, LU)
+
+And, if you dislike then yellow-green Background: 84,85,86,87 :-))
+
+------------------------------------------------------------------------------
+ At least needed configuration:
+------------------------------------------------------------------------------
+		286/16 with 595KB free memory
+		VGA with at least 256KB
+		Sound Blaster or compatible (optional)
+		CD-ROM (optional)
+
+PCS-Pinball was testet on the following machines:
+
+Configuration:  i486DX 33 / 8 MB
+		Trident TVGA 9000 512KB
+		Sound Blaster Pro
+		Sony COR 334 CD-ROM (double Speed)
+		MSCDEX 2.21 / SLCD 1.71a Device Driver
+
+		i386Dx 40Mhz / 8 MB
+		ET4000 1 MB
+		Trust Soundexpert Deluxe II
+		SCSI Mitsumi CD-ROM (double Speed)
+		MSCDEX 2.23
+
+		a386SX 33 / 4 MB
+		OAK Super-VGA OTI-067 512KB
+		Sound Blaster 2.0
+		Mitsumi LU005S CD-ROM (single Speed)
+		MSCDEX 2.23 / MTMCDAE 02.10 Device Driver
+
+		a286 16 / 1 MB
+		OAK VGA-80 256KB
+
+		a386DX25 / 4MB
+		ET3000 512KB
+		Soundblaster 16 ASP
+		Mitsumi FX001D (double speed)
+		MSCDEX 2.23 / MTMCDAE 02.10 Device Driver
+
+		Also runs on 99.999% of all 486er, Pentiums (TM),
+		Graphiccards, CD-ROM-Drives and Soundcards.
+
+If PCS-PINBALL is not running correctly, please try to eliminate the error
+with these hints:
+
+Problem: PCS-PINBALL hangs up, after starting.
+Answer : Try to get at least 595 KB of free RAM!
+	 To achive this, remove any TSR and device drivers.
+	 Maybe, some memory resistend programms are not compatible with
+	 PCS-PINBALL.
+
+Problem: CD-Sound is not functioning correctly.
+Answer : Get a newer MSCDEX Driver. Preferly 2.32 or greater.
+
+Problem: The Sound in the game is not correct or the game hangs up.
+Answer : Your soundcard is not 100% compatible to SoundBlaster cards.
+	 Turn off sound in menu.
+
+Problem: If HIGHRESOLUTION is on, the game is not working correctly.
+Answer : Turn off the HIGHRESOLUTION or buy a better VGA board.
+
+Problem: If OVERSCAN is on, the DOT-MATRIX not fully visible on screen.
+Answer : Fix the problem by fiddling around with the "V-SIZE" at your screen.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
