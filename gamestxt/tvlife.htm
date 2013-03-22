@@ -1,0 +1,143 @@
+<html><head><title>Turbo Vision Life Game v1.0 for TP6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Реализация игры "ЖИЗНЬ" на Turbo Vision. Хороший пример для изучения самого TV.  TVLife is a simple program that illustrates a few of Turbo Visions's features:  1) how to use the Idle event to execute background tasks, and 2) how to incorporate menus inside of Twindows.  It is merely meant to be a demonstration program for Turbo Pascal v6.0'>
+<meta name="keywords" content="pascal, sources, source code, tvlife, gamestxt, Текстовые Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Текстовые Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tvlife
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Vision Life Game v1.0 for TP6</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:bpz4r@virginia.edu">Ben Ziegler</a></TD>
+<TD class=black align='right'>16.02.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Реализация игры "ЖИЗНЬ" на Turbo Vision.
+Хороший пример для изучения самого TV. <br>
+TVLife is a simple program that illustrates a few of Turbo
+Visions's features:  1) how to use the Idle event to execute
+background tasks, and 2) how to incorporate menus inside of
+Twindows.  It is merely meant to be a demonstration program for
+Turbo Pascal v6.0</TD><TD class=black colspan=2 align='right'><br><A HREF="tvlife.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>27k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        Turbo Vision Life  v1.0
+                            by Ben Ziegler
+                          February 16, 1992
+
+
+INTRODUCTION
+
+  TVLife is a simple program that illustrates a few of Turbo
+  Visions's features:  1) how to use the Idle event to execute
+  background tasks, and 2) how to incorporate menus inside of
+  Twindows.  It is merely meant to be a demonstration program for
+  Turbo Pascal v6.0
+
+
+REQUIRED EQUIPMENT
+
+  IBM PC or 100% compatible
+  DOS 2.0 or higher
+
+  Highly Recommended:  Microsoft compatible mouse
+                       16 MHz or faster processor
+
+
+INSTRUCTIONS
+
+  To execute TVLIFE, simply type "TVLIFE" at the DOS prompt.  You
+  will be presented with a blank screen, a Menu Bar, and a Status
+  Line.  To access the Menu Bar, press the F10 key.  To execute
+  any of the commands on the Status Line, simply hit the required
+  Hot Key.
+
+  To get started quickly, press the following keys:
+
+  F9       (This will open up a Life window)
+  F5       (This will expand the window to fill the entire screen)
+  Alt-S    (This will start the Life window running)
+
+  If desired, you may open as many Life windows as you want
+  (within the limits of your machine's free memory.)  To open
+  more windows, press F9.  After opening several windows, it may
+  be desirable to Tile all windows; to tile the windows press
+  Alt-W and then press "T".
+
+  Below is a list of all commands available from the Menu Bar and
+  Status Line:
+
+  Command  Hot Key    Explanation
+  -------  -------    --------------------------------------
+  Exit     Alt-X      Exit TVLife immediately
+  Life     F9         Open a Life window
+  Close    Alt-F3     Close a Life window
+  HighRes  Alt-H      Enter High Res Video Mode
+                      (43/50 lines for VGA)
+  LowRes   Alt-L      Enter Low Res Mode (25 Lines, default)
+  Zoom     F5         Zoom window to fill entire Desktop
+  Next     F6         Switch to next Life window
+  Menu     F10        Activate the Menu
+  Tile     Alt-W,T    Tile all Life windows
+  Cascade  Alt-W,C    Cascade all Life windows
+
+  Note:  For the Tile and Cascade commands, you must press two
+         keys.  For example, you must press Alt-W and then "C" to
+         cascade.
+
+
+  Each Life window has its own Menu Bar.  You may access the Menu
+  Bar by pressing Alt-A.  The Life window's Menu Bar offers the
+  following commands:
+
+  Command  Hot Key    Explanation
+  -------  -------    -----------------------------
+  Start    Alt-S      Start the Life window running
+  Stop     Alt-P      Stop the Life window
+  Clear    Alt-C      Clear the Life window
+  Random   Alt-R      Randomize the Life window
+  Close    Alt-F3     Close the Life Window
+
+  The Random function is provided so that one may view new and
+  interesting life patterns.  The Clear function is used so that
+  one may clear the board and enter one's own pattern (available
+  to mouse users only).
+
+
+FEATURES AVAILABLE TO MOUSE USERS
+
+  If you have a Microsoft compatible mouse, then you may use
+  additional features.  First of all, the Menu Bar and Status
+  Line commands can be accessed easily with mouse clicks.  Life
+  windows may be moved or resized using the mouse.  To move a
+  Life window, click on the top line of the window and drag it to
+  its desired location, then release the mouse button.  To resize
+  the window, click on the resize icon (located on the lower
+  right corner of the window), and click and drag the corner for
+  the desired window size.  The mouse may also be used to click
+  on the close window icon (located on the upper left corner), or
+  the zoom icon (located on the upper right corner).
+
+  Most importantly, the mouse may be used to edit the patterns
+  within the Life window.  Clicking inside the life window will
+  cause a "dot" to appear.  If you click on top of an existing
+  dot, the dot will be erased.  This allows the user to create
+  his/her own patterns.
+
+
+QUESITIONS & COMMENTS
+
+  Send any questions or comments to:
+
+    Ben Ziegler                  Internet Email Address:
+    4010 Terrace Dr              bpz4r@virginia.edu
+    Annandale, VA  22003         (email valid until May 1992)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

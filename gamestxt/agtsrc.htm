@@ -1,0 +1,182 @@
+<html><head><title>Adventure Game Toolkit Version 1.7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Система для разработки собственных приключенческих (adventure) игр в ТЕКСТОВОМ режиме. Приведены исходники самой системы и пример реализации игры "Пещера Колоссов" (Colossal Cave). Adventure Game Toolkit - Turbo Pascal source code to AGT v1.7 - Freeware authoring system.'>
+<meta name="keywords" content="pascal, sources, source code, agtsrc, gamestxt, Текстовые Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Текстовые Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;agtsrc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Adventure Game Toolkit Version 1.7</TD>
+<TD nowrap class=black>&nbsp;David R. Malmberg</TD>
+<TD class=black align='right'>23.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Система для разработки собственных приключенческих (adventure)
+игр в ТЕКСТОВОМ режиме. Приведены исходники самой системы
+и пример реализации игры "Пещера Колоссов" (Colossal Cave).
+Adventure Game Toolkit - Turbo Pascal source
+code to AGT v1.7 - Freeware authoring system.</TD><TD class=black colspan=2 align='right'><br><A HREF="agtsrc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>235k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             +------------------------------------------+
+             |  ¬¬  Adventure Game Toolkit  ¬¬  |
+             | Contains Turbo PASCAL source code to AGT |
+             | Version 1.7.  Create your very own text  |
+             | adventure games with this easy-to-use    |
+             | "authoring system" which can be used to  |
+             | make games as professional as those from |
+             | INFOCOM and others.  384K memory needed. |
+             | Now "freeware" -- No royalties or fees.  |
+             +------------------------------------&lt;ASP&gt;-+
+
+SHORT-DESCRIPTION:
+
+    TURBO PASCAL SOURCE CODE for the ...
+
+    Adventure Game Toolkit (or AGT) -- Version 1.7
+
+    Create and play your own text adventure games with this easy-to-use,
+    award-winning package.  AGT games can be big (200 locations, 100's of
+    objects, people, creatures), sophisticated (500 or more word vocabulary,
+    full-sentence parser), and very professional (numerous reviewers have
+    likened AGT games to those from INFOCOM).  Comes with a sample game,
+    Colossal Cave, and extensive documentation.  384K memory needed.
+    ASP member.  AGT is now "freeware."
+
+    KEYWORDS: ADVENTURE GAME TOOLKIT AGT TEXT ASP FREEWARE SOURCE PASCAL
+
+
+OVERVIEW OF THE ADVENTURE GAME TOOLKIT:
+
+The ADVENTURE GAME TOOLKIT (AGT) lets you design/write your own high-quality
+text adventure games.  Once created, these adventure games can be shared with
+others -- even if they do not have a copy of the AGT themselves.
+
+AGT has a number of features that make it a very comprehensive adventure game
+creation product.  Some of these key features are:
+
+   *     "Look and feel" of Infocom adventure games with similar screen layout
+         and standard vocabulary and routines.
+
+   *     Large standard vocabulary with potential to define many more words
+         unique to your gam.  Typical games can have a vocabulary of 500 words
+         or more.
+
+   *     Sophisticated parser that can understand (1) complex input commands
+         including pronouns (IT, HIM, HER, THEM, MY and ITS), and (2) compound
+         commands separated by AND or THEN or punctuation symbols, and (3)
+         commands addressed to characters within the game.  Here are a few
+         examples of commands AGT can handle with ease:
+
+              GET THE FLASH LIGHT AND THEN SWITCH IT ON
+              PUT ON THE CLOAK, THEN EXAMINE IT; READ ITS LABEL
+              PLACE THE GREEN ROCK AND THE SMALL PEBBLE BEHIND THE TREE
+              ENTER THE HOUSE; GET ALL; EXIT; SOUTH; SOUTH THEN DOWN
+              SULU, SET A COURSE FOR ALPHA 14
+              SCOTTY, BEAM DOWN A TRICORDER AND THE QWERTY MODULE
+              DROP THE FOOD, THE KEY AND THE BOTTLE THEN UNLOCK THE DOOR WITH
+                   THE BRASS KEY AND THEN LEAVE
+
+   *     Function and cursor keys predefined to input frequently used commands
+         and move directions.
+
+   *     SCRIPT and UNSCRIPT commands to echo game output to printer.
+
+   *     Versions for IBM, Macintosh, Atari ST and Amiga.  Games created on
+         one of these computers can be played on all of the others without
+         modifications to the game.
+
+
+WHAT THE REVIEWERS HAVE SAID ABOUT THE ADVENTURE GAME TOOLKIT
+
+     "Using the Adventure Game Toolkit, anyone with an ounce of
+     imagination can create a text adventure game ... similar in layout
+     and sophistication to those made by Infocom and other commercial
+     developers." -- Donald B. Trivette (PC Magazine)
+
+     "The Adventure Game Toolkit (AGT) acts as a compiler which allows
+     for creating remarkably complex and sophisticated games in a fairly
+     simple way .... AGT's parser reminds me of Infocom's." -- Scorpia
+     (Computer Gaming World)
+
+     "If you have ever wondered what it is like to create your own
+     adventure games, but didn't have the programming knowledge to do it,
+     this product is for you .... The process is easy ... and you'll have
+     hours of fun doing it." -- Resul DeMaria (Public Domain Software &
+     Shareware)
+
+     "The Adventure Game Toolkit from Softworks ... provides all the
+     tools you need to build your own text based adventure games .... The
+     Adventure Game Toolkit is an extremely powerful development
+     package." -- Bob Napp (Big Blue Disk)
+
+     Recently, the Adventure Game Toolkit was awarded the "Golden Chalice"
+     Award by the Adventure And Strategy Club (of England).
+
+
+HARDWARE REQUIREMENTS FOR AGT
+
+IBM: The games created by the Adventure Game Toolkit requires a computer with
+at least 384K of memory, MS-DOS 2.1, and at least one disk drive.  It is
+possible to use any kind of monitor and AGT will automatically adjust its
+output to best suit the monitor.
+
+
+FILES
+
+AGT is composed of a Compiler and a Run-time program.  These two programs are
+used to compile and run AGT adventure game source files.
+
+In this ZIP, the AGT Compiler Turbo Pascal source consists of:
+
+    COMPILE.PAS -- the AGT Compiler Main program file
+    *.PA3 -- various Include files
+
+In this ZIP, the AGT Run-time Turbo Pascal source consists of:
+
+    RUN.PAS -- the AGT Run-time Main program file
+    RUNPART1.PAS -- an AGT Run-time Unit file
+    RUNPART2.PAS -- an AGT Run-time Unit file
+    RUNPART3.PAS -- an AGT Run-time Unit file
+    *.PA4 -- various Include files
+
+Note: These programs can be compile successfully with any versio of Borland
+and/or Turbo Pascal after version 3 (i.e., version 4 and above).
+
+In this ZIP, a sample AGT adventure game has been included to allow you to
+test out the compiled COMPILE.EXE and RUN.EXE programs.  This AGT adventure
+is the original ADVENTURE game by Willie Crowther and Don Woods -- most often
+called the "Adventure In Colossal Cave."  The AGT source files to this game
+are named CAVE with various extensions.
+
+To compile this game, give the command COMPILE CAVE at the DOS prompt.  To run
+or play this game, give the command RUN CAVE at the DOS prompt.
+
+To learn more about how to write Adventure Games using AGT, you can read the
+AGT manual in the file AGT-DOC.TXT.
+
+Other AGT games and their source files may be found in the GAMERS forum on
+CompuServe (Just "Browse" with the keyword "AGT") or downloaded from Mr.
+Rogers' Neighborhood BBS in Lexington, KY at (606) 271-0558.  This BBS has
+the largest collection of Adventure related files in the US.
+
+
+THE ADVENTURE GAME TOOLKIT IS NOW "FREEWARE"
+
+AGT is now "freeware."  This means that the authors, David Malmberg and Mark
+Welch, still retain the copyright to AGT and all of its related files, such
+as the documentations and sample games.  However, you or any other user may
+use the AGT system to develop and distribute your own games without paying any
+royalty to the AGT authors.
+
+So enjoy!!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

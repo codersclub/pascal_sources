@@ -1,0 +1,44 @@
+<html><head><title>LIFE - Text Mode "Life" Game</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This is the Game Of Life. It selects a random colony (8x8 cells) and then writes 10 generations in the text mode.'>
+<meta name="keywords" content="pascal, sources, source code, life, gamestxt, Текстовые Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Текстовые Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;life
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LIFE - Text Mode "Life" Game</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>16.08.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This is the Game Of Life. It selects a random colony (8x8 cells)
+and then writes 10 generations in the text mode.</TD><TD class=black colspan=2 align='right'><br><A HREF="life.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                    { This is the Game Of Life }
+
+COMMENTS from Valery Votintsev:
+---------------------------
+
+For use without the TURBO3.TPU do the next corrections:
+1. Comment the TURBO3.TPU in USE clause:
+
+       Uses
+        Crt{, {Unit found in TURBO.TPL}
+        {Turbo3}; {Unit found in TURBO3.TPU}
+
+2. Find out the line
+    read (kbd,response)    { Wait 'till pressed }
+
+   and change it to:
+    response:=readkey      { Wait 'till pressed }</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,141 @@
+<html><head><title>P-ROBOTS - Pascal-Coded Robots War (Text Mode)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='P-ROBOTS ("pee-robots") is a game based on computer programming in PASCAL. The objective of the game is to design and program a "robot" that can triumph over similar robots designed and programmed by others in a real-time battle of wits and flying missiles.  You control your robot by writing a procedure in PASCAL to specify your robot's behavior and strategy in its efforts to vanquish up to three other robots in a battle to the death.'>
+<meta name="keywords" content="pascal, sources, source code, probots, gamestxt, Текстовые Игры ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Текстовые Игры</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;probots
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;P-ROBOTS - Pascal-Coded Robots War (Text Mode)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73435.1277@compuserv.com">David Malmberg</a></TD>
+<TD class=black align='right'>04.06.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">P-ROBOTS ("pee-robots") is a game based on computer programming in PASCAL.
+The objective of the game is to design and program a "robot" that can triumph
+over similar robots designed and programmed by others in a real-time battle of
+wits and flying missiles.  You control your robot by writing a procedure in
+PASCAL to specify your robot's behavior and strategy in its efforts to
+vanquish up to three other robots in a battle to the death.</TD><TD class=black colspan=2 align='right'><br><A HREF="probots.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>89k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                   P-ROBOTS
+
+                A Game for IBM and Macintosh PASCAL Programmers
+
+                                      By
+
+                                David Malmberg
+
+                                Distributed by
+
+                                   Softworks
+                               43064 Via Moraga
+                      Mission San Jose, California  94539
+                                (415) 659-0533
+
+
+                              _______
+                         ____|__     |  MEMBER
+                      --|       |    |-------------------
+                        |   ____|__  |  Association of
+                        |  |       |_|  Shareware
+                        |__|   o   |    Professionals
+                      -----|   |   |---------------------
+                           |___|___|
+
+
+                    Copyrighted 1988 -- All Rights Reserved
+                               By David Malmberg
+
+
+ACKNOWLEDGEMENTS
+
+
+P-ROBOTS owes a great deal to many people and to several previous programs.
+
+The P-Code PASCAL compiler that was used in P-ROBOTS has a long history.  It
+was originally developed and published in 1976 by Nicklaus Wirth, the "father"
+of PASCAL.  In 1982, M. Ben-Ari developed and published a book describing how
+to make the compiler capable of multi-tasking.  Over the years, this compiler
+has been converted to many, many different computers and to many different
+dialects of PASCAL.  In 1986, Charles Schoening converted the compiler to
+Turbo Pascal version 2.0 on the IBM and released his version to the public
+domain.  I have enhanced and converted the compiler to the most recent
+releases of Turbo Pascal (version 4.0 and 5.0 for the IBM and compatibles and
+version 1.1 for the Macintosh).  This version was then adapted to be the
+compiler "engine" for P-ROBOTS.
+
+The inspiration for P-ROBOTS and the basic overall design of the program came
+from a similar program called C-ROBOTS by Tom Poindexter, which was first
+published in 1985.  As might be expected from the name, C-ROBOTS allows the
+programmer to design and program his/her robots in the C language, rather than
+PASCAL.  If you are interested in C-ROBOTS, Tom is selling it as Shareware for
+a $20 registration fee.  The registration fee entitles you to the latest
+version of the program, a large collection of excellent robots, and the source
+code for the C-ROBOTS (written in C -- of course).  C-ROBOTS can be ordered
+from Tom at the following address:
+
+          Tom Poindexter
+          6864 Amherst Court
+          Highlands Ranch, CO
+                    80126
+
+INTRODUCTION
+
+
+P-ROBOTS ("pee-robots") is a game based on computer programming in PASCAL.
+The objective of the game is to design and program a "robot" that can triumph
+over similar robots designed and programmed by others in a real-time battle of
+wits and flying missiles.  You control your robot by writing a procedure in
+PASCAL to specify your robot's behavior and strategy in its efforts to
+vanquish up to three other robots in a battle to the death.  A variety of
+pre-defined P-ROBOTS PASCAL functions allow your robot to track its position
+on the battlefield, monitor its health or damage condition, and calculate the
+distance and angle to opponents from its current battlefield position.  Each
+robot is equipped with a cannon to fire missiles, and a motorized drive
+mechanism to either close in for the kill of a hapless opponent or flee from a
+fierce foe.
+
+P-ROBOTS is an excellent way for the novice programmer to sharpen his/her
+PASCAL skills and have fun at the same time.  However, P-ROBOTS does assumes
+that the robot designer/programmer already knows the fundamentals of
+programming in PASCAL.
+
+For the experienced programmer, P-ROBOTS offers a chance to see just how well
+you program in a programming environment where "bad" code can lead to graphic
+and ignoble defeat and "brilliant" code can bring triumph and glory.
+
+
+FILES ON THE DISK
+
+You should have the following files on your P-ROBOTS disk:
+
+     P-ROBOTS.EXE   The is the main program that is executed whenever you hold
+                    a P-ROBOTS contest.
+
+     P-ROBOTS.DOC   This file contains the documentation for P-ROBOTS.  It is
+                    a text file and can be printed by giving the command at
+                    the DOS prompt: TYPE P-ROBOTS.DOC &gt; PRN
+
+     PR-DEMO.BAT    This is a tiny batch file that gives a demonstration of a
+                    typical P-ROBOTS contest between three robots.
+
+     HOTSHOT.PR     This is a file containing the PASCAL source code for a
+                    robot named HOTSHOT.  This is the robot that is given as
+                    an example later in this manual.
+
+     ????????.PR    These are other PASCAL source code files for other robots.
+                    All P-ROBOTS robots MUST have .PR file extensions.
+                    Without this .PR extension, P-ROBOTS will not compile the
+                    robot and enter it in any robot contests.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
