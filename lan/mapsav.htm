@@ -1,0 +1,61 @@
+<html><head><title>MapSave - Save and Restore Current Drive Mapping</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This program save your current network drive mapping into a BAT file. To restore saved mappings you need just start this BAT file.'>
+<meta name="keywords" content="pascal, sources, source code, mapsav, lan, Локальные Сети ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные Сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mapsav
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MapSave - Save and Restore Current Drive Mapping</TD>
+<TD nowrap class=black>&nbsp;Wolfgang Schreiber</TD>
+<TD class=black align='right'>04.09.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This program save your current network drive mapping into a BAT file.
+To restore saved mappings you need just start this BAT file.</TD><TD class=black colspan=2 align='right'><br><A HREF="mapsav.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">MAPSAVE
+
+Purpose:    Save your current drive mappings.
+
+To execute just type 'MAPSAVE' and the program will read your current
+drive mappings. It will ask you for every mapping if you intend to save
+or discard it.  MAPSAVE does not affect or change your current mappings.
+
+Syntax:     MAPSAVE
+
+The selected mappings will be written to an executable BATCH-file
+named 'MAPGET.BAT' on your default directory. You can call this
+BATCH-file any time.
+
+Syntax:     MAPGET
+
+If you like to save your mappings to different files you can
+also rename the file 'MAPGET.BAT' after running MAPSAVE.
+
+MAPSAVE is a combination of a BATCH-file (MAPSAVE.BAT) that writes
+your current drive mappings to a temporary ASCII-file, and a COM-file
+(MAPSV.COM) that saves selected drives to the executable BATCH-file
+(MAPGET.BAT).
+
+Limitations: You need enough space (less than 1kB) and appropriate
+rights (ROSDCW / FCRE) on your default drive.
+Root mappings will be restored as normal mappings.
+
+S.O.S. 	    (Save Our Search-drives)
+
+Feel free to copy this program and to distribute it to your customers.
+
+
+				Wolfgang Schreiber</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

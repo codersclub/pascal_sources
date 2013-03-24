@@ -1,0 +1,1146 @@
+<HTML>
+<HEAD>
+<TITLE>Модуль IPX для NOVELL-NETWARE</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<meta name="description" content="В настоящей работе описывается библиотека функций для TURBO PASCAL, позволяющая осуществлять передачу и прием данных по локальной сети на базе Novell Netware с использованием протокола IPX.">
+<meta name="keywords" content="pascal, sources, source code, lan, ipx, ipxlib, protocol, novell, netware">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;IPXLib
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Модуль IPX для NOVELL-NETWARE</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;Rene Gilomen</TD>
+<TD class=black align='right'>13.06.1991</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">
+Библиотека функций для TURBO PASCAL,
+позволяющая осуществлять передачу и прием данных
+по локальной сети на базе Novell Netware с использованием протокола IPX.
+В библиотеке предусмотрены элементы  "многозадачности",
+предотвращающие блокирование пользовательского приложения
+во время выполнения функций отправки и приема данных.
+</TD><TD class=black colspan=2 align='right'><br><A HREF="ipxlib.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>18k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+
+
+
+
+
+<CENTER>
+<H1>Модуль IPX для NOVELL-NETWARE</H1>
+<h2>Руководство пользователя</h2>
+
+
+<BR>
+<BR>
+<BR>
+<H2>Школа инженеров, Берн HTL</H2>
+<H2>Дипломная работа, 1991</H2>
+<H2>Rene Gilomen</H2>
+(перевод и оформление: <A class=blueb href="mailto:fucked@spam.net" 
+    onmouseover="this.href='mai'+'lto:'+'rswag'+'%40'+'sources.ru?Subject=IPXLib'">
+Valery Votintsev</A>)
+</CENTER>
+<BR>
+<BR>
+<dir>
+<h3>Оглавление</h3>
+1. <a href="#intro">Введение</a>
+<BR>
+<BR>
+2. <a href="#netware">Novell-NetWare</a>
+<BR>
+<BR>
+3. <a href="#features">Особенности библиотеки</a>
+<BR>
+<BR>
+4. <a href="#structures">Структуры данных</a>
+<BR>
+<BR>
+5. <a href="#functions">Описание функций</a><dir>
+<BR>
+<a href="#IPX_Setup">IPX_Setup</a>
+<BR>
+<a href="#IPX_Open_Socket">IPX_Open_Socket</a>
+<BR>
+<a href="#IPX_Close_Socket">IPX_Close_Socket</a>
+<BR>
+<a href="#IPX_Send">IPX_Send</a>
+<BR>
+<a href="#IPX_Receive">IPX_Receive</a>
+<BR>
+<a href="#IPX_Done">IPX_Done</a>
+<BR>
+<a href="#IPX_Internetwork_Address">IPX_Internetwork_Address</a>
+<BR>
+<a href="#IPX_To_Addr">IPX_To_Addr</a>
+<BR>
+<a href="#IPX_From_Addr">IPX_From_Addr</a>
+</dir>
+<BR>
+6. <a href="#problems">Ограничения и проблемы</a>
+<BR>
+<BR>
+<a href="#literature">Литература</a>
+<hr width="100%" size=1 noshade>
+<BR>
+<BR>
+
+<a name="intro"></a>
+<B>1. Введение</B>
+<BR>
+<BR>
+<DIR>
+В настоящей работе описывается библиотека функций для TURBO PASCAL,
+позволяющая осуществлять передачу и прием данных
+по локальной сети на базе Novell Netware с использованием протокола IPX.
+<BR>
+<BR>
+В библиотеке предусмотрены элементы  "многозадачности", 
+предотвращающие блокирование пользовательского приложения
+во время выполнения функций отправки и приема данных.
+<BR>
+<BR>
+Для работы с библиотекой достаточно простого вызова в программе
+необходимых функций, однако желательно, чтобы пользователь
+имел общее представление об операционной системе,
+языке программирования TURBO PASCAL, а также об аппаратном и программном
+обеспечении Ethernet сетей.
+<BR>
+Основные сведения от сети приведены ниже. 
+</dir>
+<BR>
+<a name="netware"></a>
+<B>2. Novell-NetWare</B>
+<dir>
+<BR>
+NOVELL-NETWARE [<a href="#lit1">1</a>] является очень распространенной сетевой операционной
+системой, базирующейся на Xerox Network System (XNS) [<a href="#lit2">2</a>]. 
+<BR>
+Причиной широкой распространенности NETWARE является большое количество
+различных модификаций, которые доступны даже для небольших организаций.
+Например, доступны системы от Entry Level (ELS) I и II (специально для
+малых сетей - от 4 до 8 пользователей) до
+NETWARE 386 версий 3.x, поддерживающие до 250 пользователей. 
+<BR>
+Кроме того, существуют специальные программные пакеты,
+позволяющие использовать в качестве сервера машины типа DEC-VAX.
+<BR>
+<BR>
+Компоненты сети NETWARE могут быть представлены в виде
+так называемой OSI-модели [Рис. 1]. 
+<BR>
+На "Физическом" уровне и "Уровне данных" используются протоколы
+NOVELL-NETWARE Ethernet, IEEE 802.3, IEEE 802.5, ARCNET и ряд других. 
+<BR>
+На "Сетевом" и "Транспортном" уровнях используются протоколы
+Internetwork Packet Exchange (IPX) и
+Sequenced Packet Exchange (SPX). 
+<BR>
+На "Уровне Сессий" реализована базовая система сетевого ввода-вывода
+(Network Basic Input Output System - NETBIOS).
+<BR>
+На уровне "Представлений" и "Приложений" представлены
+протоколы NETWARE Core Protocols (NCP), дополнительные сервисы,
+оболочка DOS и различные прикладные программы. 
+<BR>
+<BR>
+<BR>
+</DIR>
+<CENTER>
+<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=453>
+<TR align="center">
+<TD WIDTH="33%">
+Application
+<hr width="100%" size=1 noshade>
+Presentation
+</TD>
+<TD WIDTH="33%">
+NCP / DOS-Shell
+</TD>
+<TD WIDTH="33%">
+Прикладные программы
+</TD>
+</TR>
+<TR VALIGN="TOP" ALIGN="CENTER"><TD WIDTH="33%">
+Session
+</TD>
+<TD WIDTH="33%">
+NetBIOS
+</TD>
+<TD WIDTH="33%">&nbsp;</TD>
+</TR>
+<TR VALIGN="TOP" ALIGN="CENTER"><TD WIDTH="33%">
+Transport
+</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+SPX
+</FONT></TD>
+<TD WIDTH="33%" VALIGN="TOP">&nbsp;</TD>
+</TR>
+<TR VALIGN="TOP" ALIGN="CENTER"><TD WIDTH="33%">
+Network
+</TD>
+<TD WIDTH="33%">
+IPX
+</FONT></TD>
+<TD WIDTH="33%" VALIGN="TOP">&nbsp;</TD>
+</TR>
+<TR VALIGN="TOP" ALIGN="CENTER"><TD WIDTH="33%">
+Data Link
+</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+CSMA/CD
+</TD>
+<TD WIDTH="33%" VALIGN="TOP">&nbsp;</TD>
+</TR>
+<TR VALIGN="TOP" ALIGN="CENTER"><TD WIDTH="33%">
+Physical
+</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+802.3 / 802.5
+</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+Потроха NW :)</DIR>
+</TD>
+</TR>
+</TABLE>
+<BR>
+Рис. 1.
+</CENTER>
+
+<DIR>
+
+<BR>
+<BR>
+Приложения могут обращаться к сетевому окружению
+различными способами [Рис. 2].
+<BR>
+На "Сетевом" уровне доступен протокол IPX, 
+обеспечивающий коммуникацию без подтверждений между станциями в сети. 
+<BR>
+Взаимодействие на "Транспортном" уровне обеспечивает протокол SPX,
+поддерживающий коммуникацию с обязательным подтверждением.
+<BR>
+NETBIOS-совместимые приложения могут обращаться непосредственно
+к уровню "Сессий".
+<BR>
+<BR>
+"Workstation Shell" - это ДОС-совместимое сетевое окружение рабочей станции,
+<BR>
+допускающее коммуникацию только между рабочей станцией и сервером.
+<BR>
+Без дополнительного программного обеспечения непосредственная связь 
+между двумя Workstation Shell невозможна.
+<BR>
+<BR>
+<BR>
+
+</DIR>
+
+<CENTER><TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=472>
+<TR><TD WIDTH="20%" VALIGN="TOP" rowspan=3 bgcolor="#e0e0e0">
+Workstation
+<BR>
+Shell</TD>
+<TD WIDTH="20%" VALIGN="TOP">&nbsp;</TD>
+<TD WIDTH="20%" VALIGN="TOP">&nbsp;</TD>
+<TD WIDTH="20%" VALIGN="TOP">&nbsp;</TD>
+<TD WIDTH="20%" VALIGN="TOP">
+Application</TD>
+</TR>
+<TR VALIGN="TOP">
+<TD rowspan=2 bgcolor="#e0e0e0">
+NetBIOS
+<BR>
+Emulator</TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD>
+Session</TD>
+</TR>
+<TR VALIGN="TOP">
+<TD bgcolor="#e0e0e0">
+SPX</TD>
+<TD>&nbsp;</TD>
+<TD>
+Transport</TD>
+</TR>
+<TR VALIGN="TOP">
+<TD colspan=4 align="right" bgcolor="#c0c0c0">
+IPX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD>
+Network</TD>
+</TR>
+</TABLE>
+Рис. 2.
+</CENTER>
+<DIR>
+
+<BR>
+<BR>
+<BR>
+Описываемый здесь "<B>Модуль IPX для
+NOVELL-NETWARE</B>" обеспечивает пользователю возможность
+обмена данными между рабочими станциями в сети Ethernet
+IEEE 802.3, и предоставляет для этого все необходимые
+функции на языке TURBO-PASCAL. Эти функции
+являются интерфейсом к "Сетевому" уровню NOVELL-NETWARE
+за счет реализации протокола IPX.
+<BR>
+<BR>
+IPX является протоколом, не требующим подключения,
+т.е. если одна из рабочих станций должна взаимодействовать
+с другой станцией, то для этого не требуется никакой
+дополнительной промежуточной станции (например, сервера).
+<BR>
+IPX-пакеты содержат адрес получателя и отправляются непосредственно
+к станции-получателю.
+Каждый пакет является самодостаточным и не имеет никакого
+логического отношения к другим пакетам. 
+<BR>
+<BR>
+Протокол IPX работает через так называемые коммуникационные
+сокеты, которые необходимо создать перед любой отправкой или
+приемом данных.
+<BR>
+При передаче данных всегда должен указываться полный
+сетевой адрес, включая номер сети, номер узла, и номер сокета.
+<BR>
+<BR>
+Преимущества протокола IPX:<ul>
+<li>Высокая скорость и эффективность
+<li>Более гибкая "маршрутизация", так как никакое дополнительное
+сочленение с Gegenstation не должно строиться
+<li>Возможность отправки данных сразу нескольким станциям
+(Broadcasting)
+</ul>
+<BR>
+Недостатки протокола IPX:<ul>
+<li>Отсутствие гарантированной доставки пакетов
+</ul>
+</dir>
+<BR>
+<BR>
+<a name="features"></a>
+<B>3. Особенности библиотеки</B>
+<dir>
+<BR>
+Библиотека предназначена для TURBO-PASCAL V6.0 [<a href="#lit3">3</a>].
+(С более старыми версиями библиотека не работает.)
+<BR>
+TURBO-PASCAL поддерживает так называемые "Модули" (UNIT) - 
+это библиотеки, которые компилируются отдельно,
+и подключаются к главной программе с помощью директивы USES.
+<BR>
+Для использования данной библиотеки добавьте в код своей программы
+команду
+<br><b>Uses IPX;</B>. 
+<BR>
+<BR>
+Для нормальной работы библиотеки требуется по крайней мере два
+IBM PC совместимых компьютера, оборудованных сетевой Ethernet картой.
+Компьютеры должны быть соединены в сеть друг с другом
+(по протоколу IEEE 802.3).
+<BR>
+<BR>
+Выделенный сервер для работы с библиотекой не требуется,
+так как в данном случае использутся связь типа ТОЧКА-ТОЧКА
+(Peer to Peer).
+<BR>
+<BR>
+Кроме того, на рабочих станциях должен быть загружен IPX-драйвер.
+<BR>
+<BR>
+Библиотека испытывалась для протокола IPX version 2.12.
+</dir>
+<BR>
+<BR>
+<a name="structures"></a>
+<B>4. Структуры данных</B>
+<dir>
+<BR>
+Для работы некоторых из приведенных ниже функций дополнительно
+требуется описать структуру данных типа RECORD,
+в которую будут заноситься передаваемые данные
+и их длина:<dir><pre><b>SData</b> = RECORD
+	  Data	 : Data_Packet;
+	  Length : WORD;
+	END;
+</pre></dir>
+Для формирования сетевого адреса также требуется структура типа RECORD:
+<dir><pre><b>Network_Address</b> = RECORD
+	  Network : S4Byte;
+	  Node    : S6Byte;
+	  Socket  : WORD;
+	END;
+</pre></dir>
+Data_Packet, S4Byte и S6Byte - это пользовательские типы данных,
+описанные в библиотеке.
+<BR>
+Длина данных для типа Data_Packet составляет 546 байт;
+<BR>
+S4Byte - 4 байта; и S6Byte - соответственно 6 байт.
+<BR>
+<BR>
+Обратите внимание, что значения в каждый байт номера сети и номера
+станции следует заносить не в символьном, а в двоичном виде,
+т.е. каждый байт может содержать значения от нуля до 255
+($00 - $FF).
+<BR>
+<BR>
+
+Кроме описанных выше структур пользователю доступны следующие
+глобальные константы:
+<BR>
+<dir>
+<code><b>MAX_SOCKETS</b></code> - максимальное количество используемых сокетов.
+<BR>
+<BR>
+<code><b>MAX_DATA_SIZE</b></code> - максимальная длина передаваемых данных.
+<BR>
+<BR>
+<code><b>NET_LENGTH</b></code> - длина номера сети (в байтах).
+<BR>
+<BR>
+<code><b>NODE_LENGTH</b></code> - длина номера узла в сети (в байтах).
+</dir>
+</dir>
+<BR>
+<BR>
+<a name="functions"></a>
+<B>5. Описание функций</B>
+<dir>
+<BR>
+
+
+<a name="IPX_Setup"></a>
+FUNCTION <b>IPX_Setup</b> : BYTE;
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция инициализирует сетевое окружение для работы с IPX.
+<BR>
+<BR>
+При вызове функции подготавливается к работе IPX-драйвер,
+<BR>
+и выставляются начальные значения всех необходимых параметров.
+<BR>
+Только после этого возможна работа всех остальных функций
+библиотеки.
+<BR>
+<BR>
+<B>ПРИМЕЧАНИЕ:</B> Данная функция обязательно должна вызываться
+первой,
+<BR>
+т.е. до обращения к остальным IPX-функциям в программе.
+</DIR>
+<BR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Инициализация прошла успешно.
+<BR>
+<BR>
+DEVICE_SW_ERROR
+<BR>
+Сетевой драйвер не загружен или недоступен.
+</DIR>
+<BR>
+Пример:
+<dir><pre>
+VAR State : BYTE;
+:
+:
+State := IPX_Setup;
+IF State &lt;&gt; SUCCESS THEN
+BEGIN
+  Writeln ('IPX не загружен !');
+  EXIT;
+END;
+:
+:
+</pre></dir>
+<BR>
+<BR>
+
+
+<a name="IPX_Open_Socket"></a>
+FUNCTION <b>IPX_Open_Socket</b> ( VAR Socket : WORD ) : BYTE;
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция открывает указанный коммуникационный сокет. 
+</DIR>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Socket = Номер открываемого сокета
+<BR>
+<BR>
+Прием и передача пакетов всегда производятся через сокеты.
+Обычно номер сокета задается в шестнадцатеричной форме.
+<BR>
+Если номер сокета задать нулевым ($0000), то функция
+сама занесет в параметр Socket номер следующего свободного сокета.
+<BR>
+<BR>
+<B>ПРИМЕЧАНИЕ</B>: Некоторые номера сокетов зарезервированы
+для определенных сетевых задач, и пользователю запрещается их
+использовать для своих целей (см. документацию от Novell [1]).
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Коммуникационный сокет открыт успешно.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Сокет с данным номером уже был открыт ранее.
+<BR>
+<BR>
+DEVICE_SW_ERROR
+<BR>
+IPX недоступен.
+<BR>
+<BR>
+SOCKET_TABLE_FULL
+<BR>
+Все доступные сокеты уже заняты.
+</dir>
+<BR>
+Пример:
+<dir><pre>
+VAR
+  State  : BYTE;
+  Socket : WORD;
+:
+:
+  IPX_Setup ....
+:
+:
+  Socket := $8000;
+:
+  State := IPX_Open_Socket (Socket);
+  IF State &lt;&gt; SUCCESS THEN
+  BEGIN
+    Writeln ('Socket Open Error');
+    EXIT;
+  END;
+:
+:
+</pre></dir>
+<BR>
+<BR>
+
+<a name="IPX_Close_Socket"></a>
+FUNCTION <b>IPX_Close_Socket</b> ( Socket : WORD ) : BYTE;
+<BR>
+<BR>
+Описание:
+<dir>
+<BR>
+Функция закрывает указанный коммуникационный сокет.
+<BR>
+<BR>
+При закрытии сокета происходит освобождение занятой сокетом
+памяти.
+</dir>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Socket = Номер закрываемого сокета (обычно в 16-ричной форме)
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Сокет закрыт успешно.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Сокета с указанным номером не существует.
+</DIR>
+<BR>
+Пример:
+<dir><pre>
+VAR
+  State  : BYTE;
+  Socket : WORD;
+:
+:
+  IPX_Setup ...
+:
+  IPX_Open_Socket ...
+:
+  State := IPX_Close_Socket (Socket);
+  IF State &lt;&gt; SUCCESS THEN
+  BEGIN
+    Writeln ('Error ');
+    EXIT;
+  END;
+:
+:
+</DIR>
+<BR>
+<BR>
+
+<a name="IPX_Send"></a>
+FUNCTION <b>IPX_Send</b> ( Socket : WORD; Dest_Addr : Network_Address;
+            Buffer : SData) : BYTE;
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция посылает данные одной или или нескольким станциям в сети. 
+<BR>
+<BR>
+Данные могут посылаться либо конкретной станции, либо сразу
+всем станциям в режиме "Broadcast".
+<BR>
+Должен быть указан полный сетевой адрес.
+<BR>
+Напомним, что номер сети задается сетевым администратором
+при установке Novell NetWare на сервер. 
+<BR>
+Если станция-получатель находится в той же сети, что и передающая станция,
+то в поле "Network" можно задать нулевое значение ($0000).
+<BR>
+Для отправки пакета на все станции в сети
+(режим Broadcast), в качестве номера узла
+необходимо указать значение $FFFFFFFFFFFF,
+т.е. во все шесть байт номера узла должно быть занесено
+значение $FF.
+<BR>
+Максимальная длина передаваемых данных не должна превышать 546 байт.
+<BR>
+Фактическую длину данных нужно обязательно указывать.
+</DIR>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Socket = Номер сокета, через который посылаются данные.
+<BR>
+(номер сокета указывается в 16-ричной форме)
+<BR>
+<BR>
+Dest_Addr = Полный сетевой адрес станции-получателя
+(или нескольких получателей).
+<BR>
+<BR>
+Buffer = Буфер для размещения передаваемых данных
+и указания их длины.
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Запрос на отправку данных успешно принят драйвером IPX.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Либо указанный сокет не существует,
+либо не заполнен адрес сети, либо неправильно заполнен буфер.
+<BR>
+<BR>
+NO_DESTINATION
+<BR>
+Не найден путь к станции-получателю.
+</dir>
+<BR>
+Пример:
+<dir><pre>
+VAR
+  State       : BYTE;
+  Destination : Network_Address;
+  Daten       : SData;
+:
+:
+  IPX_Setup ...
+:
+  IPX_Open_Socket ...
+:
+  WITH Destination DO
+  BEGIN
+    Network[1] := $00;
+    Network[2] := $00;
+    Network[3] := $00;
+    Network[4] := $00;
+
+    Node[1] := $02;
+    Node[2] := $60;
+    Node[3] := $8C;
+    Node[4] := $13;
+    Node[5] := $FF;
+    Node[6] := $AB;
+
+    Socket := $5000;
+  END;
+:
+  WITH Daten DO
+  BEGIN
+    Daten.Data := ...
+    Daten.Length := ...
+  END;
+:
+  State := IPX_Send (Socket,Destination, Daten);
+  IF State &lt;&gt; SUCCESS THEN
+  BEGIN
+    Writeln ('Error');
+    IPX_Close_Socket ...
+    EXIT;
+  END;
+:
+:
+</pre></dir>
+<BR>
+<BR>
+
+<a name="IPX_Receive"></a>
+FUNCTION <b>IPX_Receive</b> ( Socket : WORD ) : BYTE;
+<BR>
+<BR>
+Описание:
+<dir>
+<BR>
+Функция принимает данные от удаленной станции.
+<BR>
+<BR>
+Проверка завершения приема данных осуществляется с помощью
+функции IPX_Done.
+</dir>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Socket = Номер принимающего сокета (задается в 16-чной форме).
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Запрос на прием данных воспринят драйвером IPX с глубоким удовлетворением.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Указанный сокет не существует.
+<BR>
+<BR>
+DEVICE_SW_ERROR
+<BR>
+Драйвер IPX недоступен.
+</DIR>
+<BR>
+Пример:
+<dir><pre>
+VAR
+  State  : BYTE;
+  Socket : WORD;
+
+:
+:
+  IPX_Setup ...
+:
+  IPX_Open_Socket ...
+:
+:
+  State := IPX_Receive (Socket);
+  IF State &lt;&gt; SUCCESS THEN
+  BEGIN
+    Writeln ('Error');
+    IPX_Close_Socket ...
+    EXIT;
+  END;
+:
+:
+</pre></dir>
+<BR>
+<BR>
+
+<a name="IPX_Done"></a>
+FUNCTION <b>IPX_Done</b> ( Socket : WORD; Code : BYTE;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VAR Source_Addr : Network_Address;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VAR Buffer : SData ) : BYTE;
+<BR>
+<BR>
+Описание:
+<dir>
+<BR>
+Функция возвращает статус ранее запущенной операции с IPX.
+<BR>
+Она позволяет определить, завершена или нет последняя операция
+с данным сокетом, а также - готовы ли данные для приема.
+</dir>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Socket = Номер сокета, для которого проверяется завершение операции
+<BR>
+(номер сокета должен указываться в 16-ричной форме).
+<BR>
+<BR>
+Code = Код операции, завершение которой будет проверяться.
+<BR>
+Этот параметр может иметь следующие значения:
+<DIR>
+<BR>
+SEND  - для проверки статуса функции IPX_Send;
+<BR>
+RECEIVE - для проверки статуса функции IPX_Receive.
+</DIR>
+<BR>
+Source_Addr = Возвращаемое функцией значение сетевого адреса
+удаленной станции, от которой получены данные.
+<BR>
+<BR>
+Buffer = Буфер, в который помещаются принятые данные.
+</dir>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Указанная функция завершена успешно.
+<BR>
+<BR>
+NOT_ENDED
+<BR>
+Указанная функция еще не завершена.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Неверный параметр при вызове функции, или указанный сокет
+не существует.
+<BR>
+<BR>
+DEVICE_SW_ERROR
+<BR>
+Драйвер IPX недоступен.
+<BR>
+<BR>
+DEVICE_HW_ERROR
+<BR>
+Отправка пакета физически невозможна из-за аппаратного сбоя.
+<BR>
+<BR>
+PACKET_BAD
+<BR>
+Неверная длина пакета (меньше 30 байт, или больше 546 байт).
+<BR>
+<BR>
+PACKET_UNDELIVERIABLE
+<BR>
+Доставка пакета невозможна (например, в сети не найдена станция-получатель).
+<BR>
+<BR>
+PACKET_OVERFLOW
+<BR>
+Принятый пакет слишком велик, и не помещается в Buffer.
+</DIR>
+<BR>
+
+Пример:
+<dir><pre>
+VAR
+  State   : BYTE;
+  Socket  : WORD;
+  Adresse : Network_Address;
+  Daten   : SData;
+
+:
+:
+  IPX_Setup ...
+:
+  IPX_Open_Socket ...
+:
+  IPX_Send ...
+:
+  State := IPX_Done (Socket, SEND, Adresse, Daten);
+  WHILE State = NOT_ENDED DO
+    State := IPX_Done (Socket, SEND, Adresse, Daten);
+:
+:
+
+ИЛИ
+
+:
+:
+  IPX_Receive ...
+:
+  State := IPX_Done (Socket, RECEIVE, Adresse, Daten);
+  IF State = SUCCESS THEN
+  BEGIN
+    Read Data ...
+:
+:
+</pre></dir>
+<BR>
+<BR>
+
+<a name="IPX_Internetwork_Address"></a>
+FUNCTION <b>IPX_Internetwork_Address</b> ( VAR Network : S4Byte; VAR Node : S6Byte ) : BYTE;
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция возвращает адрес сети и адрес собственного узла,
+т.е. станции, на которой запущена функция.
+</DIR>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Network = Номер сети
+<BR>
+<BR>
+Node = Номер узла
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Функция выполнена успешно.
+</DIR>
+<BR>
+Пример:
+<dir><pre>
+VAR
+  State : BYTE;
+  Net   : S4Byte;
+  Node  : S6Byte;
+:
+:
+  IPX_Setup ...
+:
+  State := IPX_Internetwork_Address (Net,Node);
+:
+:
+</DIR>
+<BR>
+<BR>
+
+<a name="IPX_To_Addr"></a>
+FUNCTION <b>IPX_To_Addr</b> ( Network : String; Node : String;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Socket : String; VAR Addr : Network_Address; ) : BYTE;
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция конвертирует входные строки в стуктуру данных
+типа Network_Address.
+</DIR>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Network = Номер сети
+<BR>
+<BR>
+Node = Номер узла
+<BR>
+<BR>
+Socket = Номер сокета
+<BR>
+<BR>
+Addr = Возвращаемый результат конвертирования.
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Конвертирование прошло успешно.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Входные параметры не могут быть сконвертированы.
+</DIR>
+<BR>
+<BR>
+<BR>
+<BR>
+<a name="IPX_From_Addr"></a>
+
+FUNCTION <b>IPX_From_Addr</b> ( Addr : Network_Address; VAR Network : String;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VAR Node : String; VAR Socket : String;			            				         ) : BYTE;<BR>
+<BR>
+<BR>
+Описание:
+<DIR>
+<BR>
+Функция конвертирует полный сетевой адрес в строковые переменные.
+</DIR>
+<BR>
+Параметры:
+<DIR>
+<BR>
+Addr = Полный сетевой адрес
+<BR>
+<BR>
+Network = Номер сети
+<BR>
+<BR>
+Node = Номер узла
+<BR>
+<BR>
+Socket = Номер сокета
+</DIR>
+<BR>
+Возвращаемое значение:
+<DIR>
+<BR>
+SUCCESS
+<BR>
+Конвертирование прошло успешно.
+<BR>
+<BR>
+PARAMETER_ERROR
+<BR>
+Указанный адрес не может быть сконвертирован.
+</DIR>
+</DIR>
+<BR>
+<BR>
+<BR>
+
+<a name="problems"></a>
+<B>6. Ограничения и проблемы</B>
+<DIR>
+<BR>
+При использовании библиотеки следует обратить особое внимание
+на следующие моменты:
+<BR>
+<BR>
+<UL>
+<LI>После вызова функций IPX_Send и IPX_Receive обязательно
+должна быть запущена функция IPX_Done.
+<BR>
+Следующее обращение к указанным функциям для одного и того же сокета
+допустимо только после завершения предыдущей операции.
+<BR>
+Невыполнение данного требования чревато потерей передаваемых данных.
+<BR>
+<BR>
+<LI>Функция IPX_Send может посылать данные в сеть быстрее,
+чем функции IPX_Receive и IPX_Done могут их принимать. 
+<BR>
+<BR>
+Одним из вариантов решения этой проблемы может служить
+преднамеренное торможение отправки данных, например за счет
+использования функции Delay() после каждого вызова IPX_Send.
+Однако, при этом снижается общая пропускная способность программы.
+<BR>
+<BR>
+Другим вариантом может быть использование на принимающей станции сразу
+нескольких сокетов для приема.
+При этом передающая сторона должна посылать свои данные
+на различные сокеты станции-получателя.
+<BR>
+<BR>
+<LI>
+IPX является протоколом, не требующим подключения,
+т.е. доставка пакетов не гарантирована.
+Если передающая сторона отправляет данные настолько быстро,
+что принимающая станция не успевает их получить или обработать,
+то при этом передающая станция никак не сможет узнать
+об этом прискорбном событии...
+<BR>
+<BR>
+Пользователь должен сам позаботиться (если необходимо) о том,
+чтобы отправленные данные гарантированно были получены принимающей стороной.
+<BR>
+Этого можно добиться, например, с помощью отправки подтверждения о приеме
+с принимающей станции на передающую.
+<BR>
+<BR>
+<LI>
+Следующий важный принцип состоит в том,
+что перед завершением приложения все открытые коммуникационные
+сокеты должны быть закрыты.
+<BR>
+Это необходимо для того, чтобы очистить все внутренние стуктуры
+данных библиотеки и драйвера IPX.
+</UL>
+</DIR>
+<BR>
+<BR>
+<BR>
+<a name="literature"></a>
+<B>Литература</B>
+<DIR>
+<BR>
+
+<a name="lit1"></a>
+[1] NetWare System Interface Technical Overview, Novell Incorporated,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Novell Part # 100-000569-001.
+<BR>
+<BR>
+[1a] NetWare System Calls-DOS Volume I and II, Novell Development Products
+Division,
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Novell Part # 100-0005571-001.
+<BR>
+<BR>
+<a name="lit2"></a>
+[2] LAN Protocol Handbook, Mark A. Miller, P.E.,  M&amp;T Books,
+ISBN 1-55851-099-0
+<BR>
+<BR>
+<a name="lit3"></a>
+[3] Turbo Pascal Version 6.0. Руководство Пользователя, Borland Int.
+</DIR>
+<BR>
+<BR>
+
+<!--#include virtual="/t_footer.htm"-->

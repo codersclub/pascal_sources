@@ -1,0 +1,92 @@
+<html><head><title>PrQue - Capture a Printer with NW311</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='PRQue - is the BP7.0 source code of an object which opens a printque on novell netware 311 without using a LPT port. It can be run in REAL and PROTECTED modes.'>
+<meta name="keywords" content="pascal, sources, source code, prque, lan, Локальные Сети ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные Сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;prque
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PrQue - Capture a Printer with NW311</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:100041.2007@compuserv.com">Michael Fiel</a></TD>
+<TD class=black align='right'>03.11.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">PRQue - is the BP7.0 source code of an object
+which opens a printque on novell netware 311
+without using a LPT port.
+It can be run in REAL and PROTECTED modes.</TD><TD class=black colspan=2 align='right'><br><A HREF="prque.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">------------------------------------------------------------------------------
+This version runs in REAL and PROTECTED mode. If you use PROTECTED mode
+please download the file EZDPMI.PAS in the libary Borland-Pascal-Protectedmode.
+EZDPMI is Copyright (c) 1993 by  Julian M. Bucknall
+Great work Julian.
+
+------------------------------------------------------------------------------
+This Version is only tested with NETWARE 3.11 and PSERVER.NLM .
+May not work with other PrintServers.
+
+------------------------------------------------------------------------------
+
+Sometimes I need more than 3 printers on a Netware 311 workstations, but
+the problem is, that you can only capture LPT1-LPT3 on this station.
+
+With the Object &lt;TNWPrintQueue&gt; in the file nw311.pas you can open a queue
+without the capture command, so you can open as many queues as you want
+and print to the queues no matter in wich order. The Queues will be
+printed the same order you opend them.
+
+The basic thing is that I don't use "Print Services" but "Queue Services".
+
+When initializing the TNWPrintQueue Object I do a "GetBinderyObjectID"
+sytem call. If you have more the one server you need to add a
+"SetPreferredConnectionID" call.
+
+Instad of a "Start LPT Capture" I use the "Create Queue Job and File"
+($E3 ($68)) system call. The Requestbuffer for this call is created in the
+methode &lt;TNWPrintQueue.Capture&gt;. At position 111 in this buffer starts an
+area called "Client record Area". Please read the remarks at this point.
+
+To close the Queue I do a "Close File and Start Queue Job" ($E3 ($69))
+system call.
+
+When doing a "Create Job and File" a dos file called "NETQ" is created
+(by netx i think). Just open this File like "LPT1" and write to it.
+
+The methode &lt;TNWPrintQueue.Capture&gt; opens this file (variable theQueue:Text)
+and closes it with the methode &lt;TNWPrintQueue.EndCap&gt;. If you want to
+write to this file, use the &lt;TNWPrintQueue.Flush&gt; or the
+&lt;TNWPrintQueue.FlushLn&gt; methodes.
+
+------------------------------------------------------------------------------
+
+Feel free to use it but usage is at your own risk.
+If problems send me an e-mail.
+
+Copyright (C) Michael Fiel, Vienna Austria, October 1993.
+
+CompuServe ID :  100041,2007
+
+------------------------------------------------------------------------------
+
+included Files : nw311.txt     &lt;This file&gt;
+                 nw311.pas     &lt;the object&gt;
+                 demo.pas      &lt;demo for capturing 4 queues at the same time&gt;
+                 tools.pas     &lt;tool functions for the object in nw311.pas&gt;
+
+------------------------------------------------------------------------------
+NO WARRANTY IS GIVEN AS TO THE SUITABILITY OF THIS CODE FOR ITS GIVEN PURPOSE.
+THE AUTHOR WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL OR
+INCIDENTAL DAMAGES CAUSED AS A RESULT OF USING THIS CODE.
+------------------------------------------------------------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

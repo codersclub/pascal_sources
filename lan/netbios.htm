@@ -1,0 +1,116 @@
+<html><head><title>Turbo Pascal NetBios Interface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit is an interface to a comunication way used on some LAN systems called NetBios.'>
+<meta name="keywords" content="pascal, sources, source code, netbios, lan, Локальные Сети ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные Сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;netbios
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Pascal NetBios Interface</TD>
+<TD nowrap class=black>&nbsp;Alon Gingold</TD>
+<TD class=black align='right'>21.10.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit is an interface to a comunication way
+used on some LAN systems called NetBios.</TD><TD class=black colspan=2 align='right'><br><A HREF="netbios.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      Turbo Pascal NetBios Interface
+                          Written by Alon Gingold
+                             Hitch Hiker's BBS
+                                  Israel
+
+   This Interface represents many hours of work, and of "why for god's sake
+   does'nt it work ???" so  if you decide to use this Interface in your
+   programs, please send your contributions to me.
+   Anything more then 5 USD will do. Please note that if you send a cheque,
+   then sending less then 10 USD will most likely cost me more then the
+   cheque's value itself !
+
+   Please post your contributions to :
+
+   Alon Gingold
+   P.O.B 450
+   Raanana
+   Israel 43104
+
+
+   Introduction
+   ------------
+
+   This unit is an interface to a comunication way used on some LAN systems
+   called NetBios. As far as I know, the only system on which NetBios is not
+   built in, is NOVEL, but there is a small utility that comes with Novel
+   to give it the NetBios support.
+
+   So, why do I need to comunicate using netbios, if I can simply write to the
+   remote's Disk ??  well, I asked myself the same question some time ago, and
+   decided to try. I wrote a program the sent pages after a request was recived
+   from a remote. the request was written to the host's ramdisk, and the reply
+   was written there as well, and read by the remote. it took about 1 sec. for
+   the screen to be transfered (It takes some time for the host to prepair the
+   screen).
+   After I rewritten the program using this NetBios interface, I could send
+   about 5 screens per sec !
+
+   I have used CBIS's Netbios text file documentation to learn about NetBios.
+   I have included the COMPLETE package of CBIS's text file with no changes
+   to the text. That text file is copyrighted by them , and is only added
+   here to make it easier for you to find it. it is not a part of my work.
+
+   TIPS
+   ----
+
+   1. Never use DataGrams ! they stinks ! when you receive one DataGram , you
+      loose two others.
+
+   2. When local names are added to the list, it is , sometimes, imposible
+      to delete them from the list. The fact is , that adding and deleting
+      names from the list takes quite a while (2 - 3 sec. on lantastic)
+      If you write a program that you run, exit from ,and run it again, you
+      should NOT try to delete the local name , but simply use the NetStatus
+      command , and search to see if the name is allready there. If it is,
+      use it, if not, add it.
+
+   3. Local names must be unique to each computer on the lan. If you write
+      a program that uses a specific name, run it on one computer, then try
+      to run it on another computer, you'll get error. As sometimes it is
+      imposible to delete a name from the local list, you better use unique
+      names on each computer...
+
+   4. Never call non POST netbios functions from a POST routine. a post routine
+      should update a global table, and a global pointer of that table, and
+      then execute the same command that brought up the post, with a post to
+      itself. this is most likely a LISTEN command.
+
+   5. NetBios's CANCEL command does'nt work that good. it is advised not to use
+      it. The way to cancel POST routines is as follows :
+
+      A. add an IF in the post routine , that if a specific boolean is true,
+         don't execute the Post command again.
+
+      B. set that boolean to true.
+
+      C. add another name (save the original name, name nunmber) and send a
+         command to match the post routine (i.e. A CALL to a listen post).
+         then HangUp that session.
+
+
+Included in this archive are :
+
+ NETBIOS.DOC  -  doc file about NetBios. written by Tom Thompson
+                 and copyrighted by CBIS, Inc.
+
+ NETBIOS.PAS  -  full source of NetBios interface unit for Turbo Pascal 6.
+                 this will most likely work just as well on older versions
+                 of pascal as well.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

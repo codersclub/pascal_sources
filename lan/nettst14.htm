@@ -1,0 +1,109 @@
+<html><head><title>NETTEST 1.4 - Тест сетевых сред</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль NetTest. Определяет присутствие сетевой среды'>
+<meta name="keywords" content="pascal, sources, source code, nettst14, lan, Локальные Сети ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные Сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;nettst14
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;NETTEST 1.4 - Тест сетевых сред</TD>
+<TD nowrap class=black>&nbsp;Юрий Василенко</TD>
+<TD class=black align='right'>19.03.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль NetTest. Определяет присутствие сетевой среды</TD><TD class=black colspan=2 align='right'><br><A HREF="nettst14.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Yury Y. Vasilenko &lt;postmaster@igilik.semsk.su&gt;
+Organization: Firm Quest (private venture). Site - Kazakhstan (xUSSR), Semipalatinsk.
+
+Пишет: gpb@class.isrir.msk.su (Павел)
+
+&gt;&gt;&gt; под Windows определение Share работает некорректно. Прерывание всегда
+&gt;&gt;&gt;возвращает Share detect, независимо от действительного состояния.
+&gt;&gt;&gt;Для грамотной работы этой функции под Windows необходимо открыть два раза один
+&gt;&gt;&gt;файл, и в случае возникновения ошибки - Share есть.
+&gt;&gt;
+&gt;&gt;Ну что же, дописана функцию и под винды в соответствии с предложением Павла.
+&gt;&gt;Но все это как-то странно выглядит, согласитесь. Может быть, кто-то знает
+&gt;&gt;более "мягкую" методу определения установки SHARE в памяти для работы по
+&gt;&gt;Windows, чем открытие tmp-файла дважды?
+&gt;
+&gt;Я решил покопать литературу по этому вопросу. И вот нашел в журнале Borland
+&gt;Language Express, выпуск 1, 1992г.
+&gt;
+&gt;Идея такая:
+&gt;
+&gt;function IsShare : boolean;
+&gt;  { true, если Share загружена }
+&gt;var
+&gt;  ShareNotInst : byte;
+&gt;  f : file;
+&gt;begin
+&gt;  assign(f,'delete.me');
+&gt;  rewrite(f);
+&gt;  ShareNotInst:=1;
+&gt;  asm
+&gt;    mov bx, FileRec(f).Handle
+&gt;    mov cx, $0000
+&gt;    mov dx, $0000
+&gt;    mov si, $0000
+&gt;    mov di, $0001
+&gt;    mov ax, $5C00
+&gt;    int $21
+&gt;    jnc @@NoError
+&gt;    dec ShareNotInst
+&gt;   @@NoError
+&gt;   end;
+&gt;   IsShare:= ShareNotInst=0;
+&gt;   close(f);
+&gt;   erase(f);
+&gt;end;
+&gt;
+&gt;Несколько слов о этой функции: используется мультиплексорное прерывание,
+&gt;которое устанавливает флаг: С=1, если файл заблокирован и C=0 если нет. Более
+&gt;"мягкого" метода не знаю.
+&gt;
+&gt;&gt;Хочу также сообщит, что процедура определения сетевого драйва может
+&gt;&gt;(при мелкой переделки) попутно опредедить и наличие CDROM-устройства (но это
+&gt;&gt;уже не сети :-))
+&gt;
+&gt;Ну и что. Модуль можно и переименовать.  =:)
+&gt;
+&gt;Кстати о Windows: могу привести пример как определить, что программа запущена
+&gt;из под Окон.
+&gt;                                                Все тот же,
+&gt;                                                   Павел
+
+Нет, однако! Живут же люди! А у нас [censored] с маком - даже МИР ПК
+не найти :-)), не то что серьезные издания
+
+ОК! Спасибо, прямо вот так и попользуем :-))
+
+Насчет определения Windows - cие уже добавлено.
+Я сейчас "рожаю" определение наличия протоколов
+ipx-spx (точнее, spx) по Б.Нансу - кое-что надо
+отсмотреть-вспомнить-отладить, ибо вызвать функцию по ее точке входа
+Паскаль не допускает (6.0 - про 7.0 не знаю, он ко мне еще едет), а
+Ассемблер мы все (это моя точка зрения) юзаем от случая к случаю =&gt;
+надо бы кое-что вспомнить, уточнить. После этого будет интересовать
+и тестирование на наличие IP/TCP-протокола, естественно.
+
+Итак, Более свежий вариант модуля NetTest.
+      (определяет присутствие сетевой среды)
+
+Буду весьма признателен за отзывы и пожелания.
+
+--
+Yury Y. Vasilenko
+&lt;postmaster@igilik.semsk.su&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

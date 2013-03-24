@@ -1,0 +1,72 @@
+<html><head><title>Turbo Pascal 6.0 NetBios Interface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Full source of NetBios interface unit for Turbo Pascal 6. this will most likely work just as well on older versions of pascal as well. Also included DOC file about NetBios, written by Tom Thompson and copyrighted by CBIS, Inc.'>
+<meta name="keywords" content="pascal, sources, source code, tpnetbio, lan, Локальные Сети ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Локальные Сети</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpnetbio
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Pascal 6.0 NetBios Interface</TD>
+<TD nowrap class=black>&nbsp;Alon Gingold</TD>
+<TD class=black align='right'>21.10.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Full source of NetBios interface unit for Turbo Pascal 6.
+this will most likely work just as well on older versions
+of pascal as well.
+Also included DOC file about NetBios,
+written by Tom Thompson and copyrighted by CBIS, Inc.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpnetbio.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      Turbo Pascal NetBios Interface
+                          Written by Alon Gingold
+                             Hitch Hiker's BBS
+                                  Israel
+
+   Introduction
+   ------------
+
+   This unit is an interface to a comunication way used on some LAN systems
+   called NetBios. As far as I know, the only system on which NetBios is not
+   built in, is NOVEL, but there is a small utility that comes with Novel
+   to give it the NetBios support.
+
+   So, why do I need to comunicate using netbios, if I can simply write to the
+   remote's Disk ??  well, I asked myself the same question some time ago, and
+   decided to try. I wrote a program the sent pages after a request was recived
+   from a remote. the request was written to the host's ramdisk, and the reply
+   was written there as well, and read by the remote. it took about 1 sec. for
+   the screen to be transfered (It takes some time for the host to prepair the
+   screen).
+   After I rewritten the program using this NetBios interface, I could send
+   about 5 screens per sec !
+
+   I have used CBIS's Netbios text file documentation to learn about NetBios.
+   I have included the COMPLETE package of CBIS's text file with no changes
+   to the text. That text file is copyrighted by them , and is only added
+   here to make it easier for you to find it. it is not a part of my work.
+
+
+   This Interface represents many hours of work, and of "why for god's sake
+   does'nt it work ???" so  if you decide to use this Interface in your
+   programs, please send your contributions to me.
+   Anything more then 5 USD will do. Please note that if you send a cheque,
+   then sending less then 10 USD will most likely cost me more then the
+   cheque's value itself !
+
+   Please post your contributions to :
+
+   Alon Gingold
+   P.O.B 450
+   Raanana
+   Israel 43104</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
