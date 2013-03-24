@@ -1,0 +1,193 @@
+<html><head><title>Замена обработчика прерываний клавиатуры</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Кaк пpaвильно зaменить обpaботчик пpеpывaний клaвиaтуpы нa PC'>
+<meta name="keywords" content="pascal, sources, source code, vituskbd, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vituskbd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Замена обработчика прерываний клавиатуры</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>22.11.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Кaк пpaвильно зaменить обpaботчик пpеpывaний клaвиaтуpы нa PC</TD><TD class=black colspan=2 align='right'><br><A HREF="vituskbd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{
+To: netters
+From: "Victor B. Wagner" &lt;vitus@agropc.msk.su&gt;
+Subject: Re: (?) Кaк пpaвильно зaменить обpaботчик пpеpывaний клaвиaтуpы нa PC?
+Date: 22 Nov 1996 12:51:32 +0300
+
+
+&gt;  Имеется погpaммa, в ней цикл ожидaния, условие выходa из него либо
+&gt;пpиход aппapaтного пpеpывaния, либо мaнипуляции с клaвиaтуpой.
+&gt;
+&gt;    while  not PassStarted  do begin  (* assStarted отлaвливaет IRQ *)
+&gt;      if  KeyPressed  then begin      (* KeyPressed - стaндapтнaя ф-ция, *)
+&gt;        PassStarted:=false;           (* отлaвливaет нaжaтие клaвиши *)
+&gt;        exit;
+&gt;      end;
+&gt;    end;
+&gt;
+&gt;  НО! В дaнном вapиaнте выход из циклa ожидaния пpоисходит зa вpемя ~10-20
+&gt;мксек с сеpьезным paзбpосом (пpедположение, обосновaнное, но не пpовеpялось),
+&gt; котоpое зaвисит, по-видимому от того нa кaком учaстке исполнялaсь ф-ция
+&gt;KeyPressed в момент пpиходa IRQ. Попpобовaл отлaвливaть нaжaтие клaвиши
+&gt;нaпpямую, пеpехвaтывaя пpеpывaние $09.
+
+
+KeyPressed вызывает функцию BIOS (INT 16H AH=01H) для проверки
+наличия символа в буфере. Можно сэкономить очень много, обращаясь к буферу
+клавиатуры непосредственно.
+
+Это делается так:
+var KBDHead: word absolute [$0040:$001A]
+var kbdTail: Word absolute [$0040:$001C]
+{Я мог голову с хвостом и перепутать. Для данной задачи это не важно,
+ но рекомендую проверить по любой книжке, где описана область данных BIOS}
+...............
+  While not PassStarted do
+   begin
+    if KbdTail&lt;&gt;KbdHead then
+     begin
+      PassStarted:=False;
+      exit;
+     end;
+   end;
+.............
+Надо только не забыть прочитать символ из буфера клавиатуры, а то
+при повторном входе в цикл выход произойдет сразу же.
+
+Кстати, прямой доступ к буферу клавиатуры открывает неожиданные возможности:
+
+Например, он позволяет отличить Enter на цифровой клавиатуре от обычного
+и обрабатывать Alt-стрелки.
+
+Вариант с перехватом 9-го прерывания имеет свои преимущества.
+Например, выход из цикла может происходить в результате нажатия клавиши,
+которая кода не генерирует и в буфер клавиатуры ничего не пишет,
+например Alt.
+
+Но приведенный в письме обработчик содержит ряд ошибок:
+
+[skipped]
+&gt; Обpaботчик пpеpывaния имеет следующий вид:
+&gt;
+&gt;{$F+}
+&gt;  procedure KeyDown;
+Обработчик прерывания ОБЯЗАН быть описан как Interrupt.
+Собственно, причина зависания именно в этом.
+В конце процедуры выполняется RETF, а не IRET, и, следовательно,
+в стеке остается лишнее слово - регистр флагов, которые туда был
+положен при вызове прерывания. Можно, конечно, извратиться и
+написать
+
+procedure KeyDown(dummy:integer);
+
+заставив процедуру рассматривать это слово как параметр,
+и выполнять RETF 2. Но кто будет заботится о сохранности ВСЕХ регистров
+и флагов? Interrupt это делает.
+
+Короче, писать надо так:
+procedure KeyDown;interrupt;
+
+&gt;  begin
+&gt;    asm CLI end;
+&gt;    inline ($9C); { PUSHF -- Push flags }
+Почему не
+     asm
+      CLI
+      PUSHF
+     end
+
+По-моему смешение в одной процедуре кусков asm и inline - дурной тон,
+если это не вызвано какой-то необходимостью.
+Я бы вообще написал где-нибудь перед ней
+procedure CLI;inline (...);
+procedure PushF; inline($9C);
+
+что сделало бы код более читаемым.
+
+&gt;    OldIntKbdVector;
+&gt;    KeyFlag:=true;
+
+Если вызывается OldIntKbdVector, то нет никакой необходимости
+в нижеследующей ассемблерной вставке. В старом обработчике
+это все равно сделано.
+
+Единственное, к чему может привести повторный сброс контроллера прерываний,
+это потеря СЛЕДУЮЩЕГО аппаратного прерывания. (Какое оно  будет - таймер,
+клавиатура или что еще - это уж как повезет)
+&gt;    asm
+&gt;      MOV AL, $20
+&gt;      OUT $20, AL
+&gt;      MOV AL, $20
+&gt;      OUT $A0, AL
+&gt;      STI
+&gt;    end;
+&gt;  end;
+&gt;{$F-}
+
+Вообще, писать обработчики прерываний на Pascal дело довольно опасное.
+Рекомендую посмотреть в Turbo Debugger сколько кода генерирует
+стандартный заголовок interrupt и сколько места в стеке используется
+при этом.
+
+Надо помнить что при работе вашей программы далеко не всегда активным
+стеком является ваш стек. Может быть, что обработчик аппаратного
+прерывания будет вызван в момент когда активна функция DOS и используется
+стек DOS. Тогда каждый лишний байт в стеке может оказаться смертельным.
+
+Поэтому я в случае аналогичных простых обработчиков использую не
+непосредственный вызов, а функцию (inline) JumpToOldISR из
+Turbo Professional. Она мне экономит как минимум 6 байт в стеке.
+
+В случае сложных обработчиков я пользуюсь явным переключением стека
+ (SwapStackAndCall из той же Turbo Professional)
+
+Вообще, я бы написал обработчик для данной ситуации вот так:
+
+function KeyDown;assembler;
+asm
+ cli
+ push AX
+ push DS
+ mov AX,@DATA
+ mov DS,AX
+ mov ax,True
+ mov KeyFlag,1
+ pushf
+ call dword ptr OldIntKbdVector
+ pop DS
+ pop ax
+ pop BP;{Для компенсации стандартного startup-кода assembler процедуры}
+ iret{ и явный выход по iret}
+end;
+
+По сравнению с процедурой, описанной как Interrupt,
+это экономит место в стеке за счет того, что не сохраняются те регистры
+которые не используются в обработчике.
+
+Команда sti отсутствует потому, что iret все равно восстановит флаги
+(в том числе и IF) из стека.
+
+
+&gt; Все компилиpуется, но после пеpвого же нaжaтия нa клaвишу мaшинa виснет! :-(
+&gt;
+&gt; Подскaжите кaк пpaвильно подменить обpaботчик, либо еще кaк-нибудь отловить
+&gt;мaнипуляции с клaвиaтуpой, чтобы выход из циклa пpоисходил зa ФИКСИPОВAННОЕ
+&gt;вpемя, ну или с ооочень мaленьким paзбpосом ~1 мксек.
+&gt;
+&gt;Зapaнее блaгодapен, Aлексей.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

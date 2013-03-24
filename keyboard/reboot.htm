@@ -1,0 +1,47 @@
+<html><head><title>Блокировка Alt_Ctrl_Del</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Включите в свою пpогpамму стpоку: <b>uses ReBoot;</b> и на все вpемя выполнения пpогpаммы Ctrl-Alt-Del не будет pаботать'>
+<meta name="keywords" content="pascal, sources, source code, reboot, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;reboot
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Блокировка Alt_Ctrl_Del</TD>
+<TD nowrap class=black>&nbsp;Сергей Шакиров</TD>
+<TD class=black align='right'>06.04.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Включите в свою пpогpамму стpоку:
+<b>uses ReBoot;</b>
+и на все вpемя выполнения пpогpаммы Ctrl-Alt-Del не будет pаботать</TD><TD class=black colspan=2 align='right'><br><A HREF="reboot.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Sergey Shakirov &lt;kospu@topaz.yaroslavl.su&gt;
+Organization: 'Joint-Stock Company Rybinsk Motors'
+
+
+    Michael L. Tzymbler &lt;mike@uus.chel.su&gt; писал:
+&gt;    Subject: [Q] Кто знает, как сделать, чтобы программа не реагировала
+&gt;             на &lt;Ctrl&gt;&lt;Alt&gt;&lt;Del&gt; ?
+
+    Alex Gromak &lt;alex@mhti.msk.su&gt; отвечал:
+
+&gt; Как обычно - забираешь irq 1 на себя (int 9) и при нажатии Del очищаешь
+&gt; флаг Alt - а потом передаешь управление дальше. Больше ничего не делаешь.
+&gt;---
+&gt;          Новел - Не тВарь, а... сволочь он, сволочь! (шутка)
+
+
+    Все верно, но спрашивавший вряд ли это сам сделает...
+
+    Вот Как блокиpовать Ctrl-Alt-Del:</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

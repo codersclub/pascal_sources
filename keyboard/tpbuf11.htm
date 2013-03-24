@@ -1,0 +1,87 @@
+<html><head><title>TP-BUFFER v1.1 - Use the Keyboard Buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='TP-BUFFER v1.1. Pascal source to use the keyboard buffer. Read char WITHOUT wait; Read SCAN CODE from buffer; ERASE buffer; Full documentation, Public domain software'>
+<meta name="keywords" content="pascal, sources, source code, tpbuf11, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpbuf11
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TP-BUFFER v1.1 - Use the Keyboard Buffer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:5:7101/45">Lavi Tidhar</a></TD>
+<TD class=black align='right'>30.06.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">TP-BUFFER v1.1. Pascal source to use the keyboard buffer.
+Read char WITHOUT wait; Read SCAN CODE from buffer;
+ERASE buffer; Full documentation, Public domain software</TD><TD class=black colspan=2 align='right'><br><A HREF="tpbuf11.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">(* TP-Buffer unit version 1.1 /Update              *)
+(* Using the keyboard's buffer in Turbo Pascal     *)
+(* This unit is released to the public domain      *)
+(* by Lavi Tidhar on 5-10-1992                     *)
+
+(* This unit adds three special functions not      *)
+(* incuded in the Turbo Pascal regular package     *)
+
+(* You may alter this source code, move the        *)
+(* procedures to your own programs. Please do      *)
+(* NOT change these lines of documentation         *)
+
+(* This source might teach you about how to        *)
+(* use interrupts in pascal, and the keyboard's    *)
+(* buffer. from the other hand, it might not :-)   *)
+
+(* Used: INT 16, functions 0 and 1                 *)
+(*       INT 21, function 0Ch                      *)
+
+(* INT 16 - KEYBOARD - READ CHAR FROM BUFFER, WAIT IF EMPTY
+           AH = 00h
+           Return: AH = scan code
+                   AL = character         *)
+
+(* INT 16 - KEYBOARD - CHECK BUFFER, DO NOT CLEAR
+           AH = 01h
+           Return: ZF = 0 character in buffer
+                       AH = scan code
+                       AL = character
+                       ZF = 1 no character in buffer *)
+
+(* INT 21 - DOS - CLEAR KEYBOARD BUFFER
+        AH = 0Ch
+        AL must be 1, 6, 7, 8, or 0Ah.
+        Notes: Flushes all typeahead input, then executes function specified by AL
+        (effectively moving it to AH and repeating the INT 21 call).
+        If AL contains a value not in the list above, the keyboard buffer is
+        flushed and no other action is taken. *)
+
+(* For more details/help etc, you can contact me on: *)
+
+(* Mail: Lavi Tidhar
+         46 Bantam Dr.
+         Blairgowrie
+         2194
+         South Africa
+
+   Phone:
+          International: +27-11-787-8093
+          South Africa:  (011)-787-8093
+*)
+
+(* Netmail: The Catacomb BBS 5:7101/45 (fidonet)
+            The Catacomb BBS 80:80/100 (pipemail)
+*)
+
+Function GetScanCode:Byte; (* Get SCAN CODE from buffer, wait if empty *)
+Function GetKey:Char;      (* Get Char from buffer, do NOT wait *)
+Procedure FlushKB;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

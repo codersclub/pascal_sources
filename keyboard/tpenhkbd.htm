@@ -1,0 +1,129 @@
+<html><head><title>EnhKbd 1.2 - Enhanced Keyboard Unit for TP 4.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit activates the IBM enhanced keyboard for machines that have one, and simulates an enhanced keyboard for machines that don't. The enhanced scan codes will be returned by all normal calls which read the keyboard, e.g, ReadKey (from CRT), ReadKeyWord (from TPCRT and supplied here), and even when DOS reads from the keyboard. This unit should be USEd early in a program's USES list. There are no procedures to call here -- operation is completely transparent to the program.'>
+<meta name="keywords" content="pascal, sources, source code, tpenhkbd, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpenhkbd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EnhKbd 1.2 - Enhanced Keyboard Unit for TP 4.0</TD>
+<TD nowrap class=black>&nbsp;Kim Kokkonen</TD>
+<TD class=black align='right'>16.11.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit activates the IBM enhanced keyboard
+for machines that have one, and simulates an enhanced keyboard
+for machines that don't. The enhanced scan codes will be returned
+by all normal calls which read the keyboard, e.g, ReadKey (from CRT),
+ReadKeyWord (from TPCRT and supplied here), and even when
+DOS reads from the keyboard. This unit should be USEd early in a program's
+USES list. There are no procedures to call here -- operation is completely
+transparent to the program.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpenhkbd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  Unit EnhKbd;
+
+ This unit activates the IBM enhanced keyboard for machines that have one, and
+ simulates an enhanced keyboard for machines that don't. The enhanced scan
+ codes will be returned by all normal calls which read the keyboard, e.g,
+ ReadKey (from CRT), ReadKeyWord (from TPCRT and supplied here), and even when
+ DOS reads from the keyboard. This unit should be USEd early in a program's
+ USES list. There are no procedures to call here -- operation is completely
+ transparent to the program.
+
+ The unit interfaces a variable, HasEnhancedKbd, which will be True if an
+ enhanced keyboard was detected, False otherwise. It interfaces a second
+ variable, EnableEnhanced, which defaults to true. If you set this variable to
+ False, the ENHKBD special functions will be disabled until you set the
+ variable to true again.
+
+ The following table summarizes the keys which are affected by using this
+ unit. The entries are the values of the scan word in hex. The high byte of
+ the scan word is the scan code, the low byte the ASCII character. If the low
+ byte is 00, the high byte will be returned on the next call to ReadKey. Any
+ keys not listed are returned in the usual manner (see the Turbo Pascal 4.0
+ manual, first printing pages 571-572, for a scan code chart). See Notes,
+ following the table, for the key to special symbols.
+
+               Plain     Shift     Control   Alt
+               -----     -----     -------   ----
+ F11           8500%     8700%     8900%     8B00%
+ F12           8600%     8800%     8A00%     8C00%
+ Esc           011B      011B      011B      0100*
+ Backquote     2960      297E      2960      2900*
+ Backspace     0E08      0E08      0E7F      0E00*
+ Tab           0F09      0F00      9400*     A500*
+ Left Brack    1A5B      1A7B      1A1B      1A00*
+ Right Brack   1B5D      1B7D      1B1D      1B00*
+ Backslash     2B5C      2B7C      2B1C      2B00*
+ Semicolon     273B      273A       -        2700*
+ Quote         2827      2822       -        2800*
+ Enter         1C0D      1C0D      1C0A      1C00*
+ Comma         332C      333C       -        3300*
+ Period        342E      343E       -        3400*
+ Slash         352F      353F       -        3500*
+ Insert        5200      5230      9200*     A200#
+ Del           5300      532E      9300*     A300#
+ Home          4700      4737      7700      9700#
+ End           4F00      4F31      7500      9F00#
+ PgUp          4900      4939      8400      9900#
+ PgDn          5100      5133      7600      A100#
+ Up            4800      4838      8D00*     9800#
+ Down          5000      5032      9100*     A000#
+ Left          4B00      4B34      7300      9B00#
+ Right         4D00      4D36      7400      9D00#
+ Pad-Asterisk  372A       !         !        3700#  (numeric keypad keys)
+ Pad-Minus     4A2D      4A2D      8E00*     4A00#
+ Pad-Plus      4E2B      4E2B      9000*     4E00#
+ Pad-5         4C00*     4C35      8F00*     9C00#
+
+Notes:
+- These keystrokes are ignored.
+* These keystrokes are not normally returned by the non-enhanced keyboard.
+# These keystrokes are not normally returned by the enhanced keyboard.
+! These keystrokes control printscreen and print echoing. They cannot
+  simulate the effect of the enhanced keyboard, which has the Asterisk and
+  PrtSc keys separated.
+% The F11 and F12 keys are returned only if they actually exist on the
+  keyboard.
+
+ With a few exceptions, the EnhKbd unit returns results identical to those of
+ the enhanced keyboard BIOS. One difference makes the enhanced keyboard
+ simpler to use in a program: those scan words which normally contain E0 in
+ the low byte to indicate that the key is specific to the enhanced keyboard
+ (like the dedicated cursor keys) will have the low cleared to zero by EnhKbd.
+
+ Keys marked with # are normally ignored by the enhanced BIOS. By defining
+ these numeric keypad keys when Alt is pressed, the usual ability to enter
+ arbitrary keys on the numeric keypad is disabled. Within applications, the
+ ability to use alt-shifted arrow keys will generally be more useful. The
+ arbitrary keys from the numeric keypad are still available by pressing both
+ Alt and Left Shift simultaneously.
+
+ Because this unit takes over interrupt 9, it will crash the system if
+ SideKick is installed and another TSR that takes over interrupt 9 has been
+ loaded after SideKick. You must exercise similar caution in using this unit
+ in programs that must take over interrupt 9 for other reasons. If you have
+ Turbo Professional, see SMACS.PAS for an example of implementing EnhKbd in a
+ TSR.
+
+ Information pertinent to writing this unit was found in:
+   PC Tech Journal, July 1987, Bob Smith, "Keying on a Standard", page 134.
+   PC Magazine, 1/26/88, Jeff Prosise, "Dress up your Help Screens", page 291.
+
+ Written by Kim Kokkonen, TurboPower Software, 1/3/88.
+ Version 1.2. See ENHKBD.ASM for notes.
+
+ Thanks to Brian Foley for his help with version 1.2, and to Scott Bussinger
+ for pointing out problems in earlier versions.
+ Released to the public domain.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

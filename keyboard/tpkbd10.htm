@@ -1,0 +1,81 @@
+<html><head><title>TPKBD 1.0 - A Keyboard Input Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Turbo Pascal E-Z keyboard interface unit; contains a greatly enhanced readkey function (getkey), error-free numeric input routines for inputting signed and unsigned integers and real numbers (readint, readno, and readreal), string input procedures with line editing and the ability to limit input width (readstr and editstr), and many handy miscellaneous routines. Does not use the CRT unit; requires a compatible BIOS.'>
+<meta name="keywords" content="pascal, sources, source code, tpkbd10, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpkbd10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPKBD 1.0 - A Keyboard Input Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:swingle@duce.cs.ohiou.edu">Tom Swingle</a></TD>
+<TD class=black align='right'>08.07.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Turbo Pascal E-Z keyboard interface unit;
+contains a greatly enhanced readkey function (getkey),
+error-free numeric input routines for inputting signed
+and unsigned integers and real numbers (readint,
+readno, and readreal), string input procedures with line editing
+and the ability to limit input width (readstr and editstr),
+and many handy miscellaneous routines.
+Does not use the CRT unit; requires a compatible BIOS.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpkbd10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>19k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                            A KEYBOARD INPUT UTILITY
+
+
+        If you are like me, you often write programs that use "special"
+        keys like the arrow keys, function keys, etc., but the way these
+        keys are implemented seems frustrating; first you have to read a
+        null character, then do another read, and you have keep track of
+        what code means what.  This detracts from the readability of the
+        program and disrupts your flow of thought.  Or maybe you'd like
+        to read numbers from the keyboard but not have to worry about
+        trapping errors in input to avoid a fatal "Invalid numeric
+        format" error or check to see if the number typed is in the range
+        you want it.  Or maybe you'd like to have a better input routine
+        than ReadLn to input a string.  This unit tackles all those
+        problems, and a few others to enable you to write programs that
+        contain clean, good-looking, error-free input.
+
+Author:  Tom Swingle
+
+Author can be contacted via e-mail at:
+  tswingle@oucsace.cs.ohiou.edu  -or-  swingle@duce.cs.ohiou.edu
+
+or via regular U.S. mail:
+                           Tom Swingle
+                           114 Grosvenor St.     (campus address)
+                           Athens, OH 45701
+
+                           Tom Swingle
+                           Rt. 1 Box 292         (After June, 1992)
+                           Waterford, OH 45786
+
+        Whether or not you send a donation, any feedback you have on this
+        unit is certainly welcome, and I will try to correct any bugs
+        reported, although I think I have tested it thoroughly enough
+        that almost all the bugs are gone (I have tested it quite
+        extensively and used it in several programs of mine).  More than
+        anything, I would like to hear how this unit works with unusual
+        setups, like computers with keystroke buffer extenders or other
+        such things.  I will gladly answer any questions as soon as I
+        can.  If you have access to electronic mail, you can reach me
+        faster at
+
+          tswingle@oucsace.cs.ohiou.edu  or  swingle@duce.cs.ohiou.edu.
+
+        This unit is still undergoing rigorous testing, and bug reports
+        (if any, hopefully there are none) will be coming in as time goes
+        by, so contact me to see if there have been any updates, if this
+        unit interests you!</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

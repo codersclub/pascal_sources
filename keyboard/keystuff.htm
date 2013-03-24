@@ -1,0 +1,98 @@
+<html><head><title>Помещение символов в буфер клавиатуры</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как имитировать нажатие клавиш и определить, какие клавиши нажаты, но еще не отущены.'>
+<meta name="keywords" content="pascal, sources, source code, keystuff, keyboard, Клавиатура ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Клавиатура</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;keystuff
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Помещение символов в буфер клавиатуры</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>19.09.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как имитировать нажатие клавиш и определить,
+какие клавиши нажаты, но еще не отущены.</TD><TD class=black colspan=2 align='right'><br><A HREF="keystuff.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Victor B. Wagner" &lt;vitus@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+&gt;1 - Кто нибудь программировал контроллер клавиатуры ?
+&gt; (конкретно интересует имитация нажатия клавиш,
+&gt;  считывание нескольких нажатых и неотпущенных клавиш).
+
+ А зачем для этого лезть в контроллер клавиатуры?
+
+Для того, чтобы сымитировать нажатие клавиш требуется всего лишь
+запихать код в буфер клавиатуры. В AT-BIOS для этого существует
+функция 5 прерывания 16H, описание которой найти не сложно.
+Не намного сложнее напрямую работать с буфером клавиатуры.
+Вот текст функции для этой цели из TurboProfessional 5.11
+
+
+  procedure StuffKey(W : Word);
+    {-Stuff one key into the keyboard buffer}
+  const
+    KbdStart = $1E;
+    KbdEnd = $3C;
+  var
+    KbdHead : Word absolute $40 : $1A;
+    KbdTail : Word absolute $40 : $1C;
+    SaveKbdTail : Word;
+  begin
+    SaveKbdTail := KbdTail;
+    if KbdTail = KbdEnd then
+      KbdTail := KbdStart
+    else
+      Inc(KbdTail, 2);
+    if KbdTail = KbdHead then
+      KbdTail := SaveKbdTail
+    else
+      MemW[$40:SaveKbdTail] := W;
+  end;
+
+Что же касается считывания нескольких нажатых и неотпущенных клавиш,
+то придется перехватить INT9 и работать со скэнкодами напрямую
+
+Вот простая программка, поэкспериментировав с которой вы найдете ответ
+на ваш вопрос. Обратите внимание на то, что она выдает при нажатии
+клавиши и что при отпускании
+
+Program TestScancode;
+Uses Dos,CRT;{CRT здесь существеннен - не следует пользоваться функциями dos
+              из обработчика клавиатурного прерывания}
+var OldKbdHandler:Pointer;
+Procedure Int9;interrupt;
+var Scancode:Byte;
+begin
+ ScanCode:=Port[$60];
+ Write(ScanCode:4);
+ asm
+  Pushf
+  Call DWORD PTR OldKbdHandler;
+ end;
+end;
+begin
+ GetIntVec($9,OldKbdHandler);
+ SetIntVec($9,@Int9);
+ Repeat
+ Until Readkey=#27;
+ SetIntVec($9,OldKbdHandler);
+end;
+
+--
+Phone: 230-80-61                                Victor B.Wagner
+E-Mail:vitus@agropc.msk.su                      Dokuchaev Soil Institute
+                                                7, Pyzhevsky lane,
+                                                Moscow, Russia</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
