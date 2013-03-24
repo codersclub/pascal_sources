@@ -1,0 +1,114 @@
+<html><head><title>BarMenu - Simple OOP Unit for Text Menu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Простой объектно-ориентированный модуль для создания меню в текстовом режиме. Приведена тестовая программа.'>
+<meta name="keywords" content="pascal, sources, source code, barmenu, menu, Менюшки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Менюшки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;barmenu
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BarMenu - Simple OOP Unit for Text Menu</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>13.09.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=41 vspace=4 hspace=8 alt="" src="barmenu.gif"><p style="margin-left:20px">Простой объектно-ориентированный модуль для создания
+меню в текстовом режиме. Приведена тестовая программа.</TD><TD class=black colspan=2 align='right'><br><A HREF="barmenu.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                <img border=0 width=320 height=200 src="barmenu1.gif" alt="">
+
+Program MenuDemo;
+Uses MenuUnit, Crt;
+Var
+  Choice: Integer;
+  M: BBMenu;
+BEGIN
+  CLRSCR;
+  M.Init( 25, 7, 18);
+  M.AddPrompt('Open a New File');
+  M.AddPrompt('Existing File');
+  M.AddPrompt('Close A File');
+  M.AddPrompt('Quit');
+  Choice:= M.GetChoice;
+  GotoXY(1, 24); ClrEol;
+  Case Choice OF
+    0: Writeln('No Choice Was Made');
+    1: Writeln('Procedure NewFile Should Be Called');
+    2: Writeln('Procedure ExistingFile Should Be Called');
+    3: Writeln('Procedure CloseFile Should Be Called');
+    4: Writeln('Quitting ...');
+  END;
+  M.Done;
+END.
+
+     --------- cut here: filename=menuunit.pas ----------
+UNIT MenuUnit;
+Interface
+USES CRT;
+CONST MaxMsgLen = 32;
+TYPE
+  MessageString = String[MaxMsgLen];
+
+  EntryPointer = ^EntryType;
+  EntryType = Object
+    Prev, Next          : EntryPointer;
+    XCor, YCor, ChoiceNo: Integer;
+    Message             : MessageString;
+    Constructor Init(ipr, inx: EntryPointer;
+                      ix, iy, ic: Integer; im: MessageString);
+    Procedure Draw(Selected: Boolean);
+    Function GetChoice: Integer;
+  END;
+
+  BBMenu = Object
+    XCor, YCor, Wid, Choices: Integer;
+    FirstEntry, CurEntry    : EntryPointer;
+    Constructor Init(ix, iy, iw: Integer);
+    Destructor Done;
+    Procedure AddPrompt(im: MessageString);
+    Procedure Draw;
+    Function GetChoice: Integer;
+  END;
+
+IMPLEMENTATION
+  Constructor BBMenu.Init(ix, iy, iw: Integer);
+  BEGIN
+    XCor:= ix;
+    YCor:= iy;
+    Wid:= iw;
+    IF Wid &gt; MaxMsgLen THEN Wid:= MaxMsgLen;
+    IF XCor + Wid &gt; 80 THEN Wid:= 80 - XCor;
+    FirstEntry:= NIL;
+    Choices:= 0;
+  END;
+
+  Destructor BBMenu.Done;
+  BEGIN
+    IF FIrstEntry &lt;&gt; NIL THEN
+    BEGIN
+      FirstEntry^.Prev^.Next:= NIL;
+      REPEAT
+        CurEntry:= FirstEntry;
+        FirstEntry:= FirstEntry^.Next;
+        Dispose(CurEntry);
+      UNTIL FirstEntry = NIL;
+    END;
+  END;
+
+  Procedure BBMenu.AddPrompt(im: MessageString);
+  VAR EP: EntryPointer;
+  BEGIN
+    INC(Choices);
+    FillChar(im[Length(im) + 1], Wid - Length(im), ' ' );
+    Im[0]:= Char(Wid);
+    IF FirstEntry = NIL THEN
+      BEGIN
+        FirstEntry:= NE

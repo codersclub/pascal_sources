@@ -1,0 +1,54 @@
+<html><head><title>Text Mode Menu Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для создания текстового меню с тенью в стиле Turbo Vision. Управление с помощью стрелок.  This unit provides a quick way to make a bounce bar menu.'>
+<meta name="keywords" content="pascal, sources, source code, menu-u, menu, Менюшки ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Менюшки</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;menu-u
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Text Mode Menu Unit</TD>
+<TD nowrap class=black>&nbsp;Mark Klaamas</TD>
+<TD class=black align='right'>19.12.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=38 vspace=4 hspace=8 alt="" src="menu-u.gif"><p style="margin-left:20px">Модуль для создания текстового меню с тенью в стиле Turbo Vision.
+Управление с помощью стрелок. <br><font color=#666666>
+This unit provides a quick way to make a bounce bar menu.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="menu-u.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">MENU UNIT Documentation:
+
+               <img border=0 width=320 height=200 src="menu-u1.gif" alt="">
+
+Written by Mark Klaamas Copyright 1991.
+Portions came from Langauges (PC MAGAZINE - 24 Sep 1991)
+
+This UNIT is being placed in the Public Domain and can be used
+for any purpose.
+
+  This unit provides a quick way to make a bounce bar menu.  You
+  call it as follows:
+
+  Init object, (TopLeftCol, TopLeftRow, Length : Integer;
+                Title : String;
+                BackgroundColour, HilightColour, Frame style : BYTE;
+                AllowLEFT/RIGHTtoEXIT)  :  Boolean;
+
+  Frame Styles  0-4
+
+  AllowLEFT/RIGHTtoEXIT :  if left arrow key exits, return is -1.
+                           if right arrow key exits, return is -2.
+
+  If ESC is pressed return is 0.
+
+See MENUDEMO.PAS for a good example on how to use it.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
