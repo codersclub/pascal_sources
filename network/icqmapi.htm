@@ -1,0 +1,65 @@
+<html><head><title>ICQ MAPI for TMT Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль Win32 интерфейса к ICQ API для TMT Pascal. Компилируется как консольное приложение для Win32. Демонстрационная программа выводит на экран информацию о владельце ICQ, список активных юзеров из юзер-листа с указанием IP-адресов.">
+<meta name="keywords" content="pascal, sources, source code, icqmapi, network, Сети TCP/IP ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Сети TCP/IP</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;icqmapi
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ICQ MAPI for TMT Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ronin@mutefantasies.com">Ronin</a></TD>
+<TD class=black align='right'>30.03.2001</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль Win32 интерфейса к ICQ API для TMT Pascal.
+Компилируется как консольное приложение для Win32.
+Демонстрационная программа выводит на экран информацию
+о владельце ICQ, список активных юзеров из юзер-листа
+с указанием IP-адресов.</TD><TD class=black colspan=2 align='right'><br><A HREF="icqmapi.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>37k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">         
+¬ђђђђђђ¬¬ђђђђђђ¬ђђђђ¬  ¬ђђђђђ¬¬ђђђђђђђђђђђђђђђђ¬¬ђђђђђђђђђђђђ¬
+¬ђј    јђђ¬ђђј    јђѕ  јђ  ђј   јђ¬ђј              јђђј          јђ¬
+ђј       јђј       јђ   ђ¬¬ђ     јђђѓ              ѓђ            ѓђђ
+ђ     ѓђѓ   ѓђѓ     ђ   јђ¬¬ђј     ѓђ¬ђђђђђђѓ    ѓђђђђј      ѓѓѓѓѓђђ¬
+ђѓ    ђ¬ђѓ ѓђ¬ђ    ѓђ    јђђј      ђ¬¬ђ    ђ¬¬ђ            і¬¬
+¬ђ    ђ¬ђђђ¬ђ    ђѕ             ѓђ     ¬ђ    ђ¬ђ        јјјјјђђ¬
+ђѓ   јђ¬ ¬ђј   ѓђђѓ          ѓђђ¬    ¬ђј    јђ¬ђѓ             јђђ
+¬ђѓ   іђ¬ ђѕ   ѓђ¬¬ђђѓ     ѓђђђ¬     ђѓ      ѓђ¬ђѓ            ѓђ¬
+ ¬ђђђђђ¬ ¬ђђђђђ¬ ¬ђђђђђђђ¬       ¬ђђђђђђђђ¬¬ђђђђђђђђђђђђђђ¬
+  њFњAњNњTњAњSњIњEњSњ            
+                                          Enki 2000 
+ email ronin@mutefantasies.com
+    ('**************************************************************');
+    ('* IP retrieval programm by ronin              Mutefantasies  *');
+    ('**************************************************************');
+
+///////////// ported functions from ICQAPI.DLL ////////////////////////
+
+function ICQAPICall_SetLicenseKey
+function ICQAPICall_GetDockingState
+function ICQAPICall_GetVersion
+function ICQAPICall_GetFirewallSettings
+function ICQAPICall_GetFullUserData
+function ICQAPICall_GetWindowHandle
+function ICQAPICall_SetOwnerState
+function ICQAPICall_GetFullOwnerData
+function ICQAPICall_GetOnlineListDetails
+function ICQAPICall_SendMessage
+procedure ICQAPIUtil_FreeUser
+
+////////////// my own export functions ////////////////////////
+function SetICQLicense:boolean;
+function GetICQAPIVersion:boolean;
+function FillICQUserIPList:boolean;
+function PrintICQownerdetails:boolean;
+procedure PrintICQIPList;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

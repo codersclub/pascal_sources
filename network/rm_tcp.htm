@@ -1,0 +1,64 @@
+<html><head><title>RM_TCP - Simple TCP/IP Unit for BP7 and TPW1.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Удивительно простой в использовании модуль для работы с TCP/IP и Internet из-под Windows с использованием Winsock. Имеет всего несколько простых команд типа Открыть/закрыть соединение, Принять/Передать данные, Проверить соединение. В качестве примера приводятся программы:  Эхо - клиент и сервер, Finger - клиент и сервер.">
+<meta name="keywords" content="pascal, sources, source code, rm_tcp, network, Сети TCP/IP ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Сети TCP/IP</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rm_tcp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RM_TCP - Simple TCP/IP Unit for BP7 and TPW1.5</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:morewood@planeteer.com">Rob Morewood</a></TD>
+<TD class=black align='right'>10.07.1998</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Удивительно простой в использовании модуль для работы с
+TCP/IP и Internet из-под Windows с использованием Winsock.
+Имеет всего несколько простых команд
+типа Открыть/закрыть соединение, Принять/Передать данные,
+Проверить соединение. В качестве примера приводятся
+программы:  Эхо - клиент и сервер, Finger - клиент и
+сервер.</TD><TD class=black colspan=2 align='right'><br><A HREF="rm_tcp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">         TCP_Unit для Borland Pascal 7 и Turbo Pascal for Windows 1.5
+         ------------------------------------------------------------
+                 в переводе Валерия Вотинцева (rswag@sources.ru)
+
+Этот модуль был разработан Робом Морвудом (Rob Morewood), специально
+для учебного класса в средней школе в Бурнаби (Burnaby South Secondary
+School [south.sd41.bc.ca]) для Turbo Pascal for Windows 1.5.
+
+Цель разработки модуля - максимально упростить программирование
+интернет- приложений с использованием протокола TCP/IP. Модуль имеет
+всего несколько простых команд: OpenTCP - устанавливает соединение с
+удаленной машиной, WriteTCP - производит передачу данных, ReadTCP -
+принимает данные, CloseTCP - закрывает соединение. И еще одна команда -
+CheckTCP, служит целям синхронизации.
+
+Для нормальной работы модуля требуется динамическая библиотека WinSock,
+имеющаяся в составе операционной системы Windows практически любой
+версии.  Разумеется, модуль сможет работать только при наличии в
+системе протокола TCP/IP и подключении к локальной сети или к
+интернет-провайдеру.
+
+Основные термины:
+-----------------
+
+TCP/IP - это сокращение от Transport Control Protocol and Internet
+Protocol.  В соответствии с Internet Протоколом каждому узлу в сети
+присваивается 32-битный адрес и обеспечивается механизм передачи
+пакетов сообщений от одной машины к другой. Протокол TCP описывает
+16-битные номера портов для возможности одновременно нескольких
+соединений с конкретной машиной, а также механизм проверки и коррекции
+ошибок и механизм подтверждения получения отправленных пакетов. Таким
+образом для любого "TCP соединения" необходимо задать IP адреса двух
+машин и номер порта, чтобы обеспечить дву-сторонний канал передачи
+данных между этими машинами.
+
+Следует также отметить, что к

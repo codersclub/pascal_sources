@@ -1,0 +1,61 @@
+<html><head><title>VyChat Sniffer for Delphi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Сниффер (перехватчик пакетов) для известного Vypress Chat'а, отслеживает все личные сообщения в сети и строит удобные для чтения логи. Это своеобразный пример работы с драйвером PCap. Компилируется в Delphi, может быть переделан для FPC, TMT или VP.">
+<meta name="keywords" content="pascal, sources, source code, vysniff, network, Сети TCP/IP ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Сети TCP/IP</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vysniff
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VyChat Sniffer for Delphi</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alex@ritlabs.com">Coban</a></TD>
+<TD class=black align='right'>18.10.2001</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Сниффер (перехватчик пакетов) для известного Vypress Chat'а,
+отслеживает все личные сообщения в сети и строит удобные для чтения логи.
+Это своеобразный пример работы с драйвером PCap.
+Компилируется в Delphi, может быть переделан для FPC, TMT или VP.</TD><TD class=black colspan=2 align='right'><br><A HREF="vysniff.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>735k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  Программа "вынюхивает" личные сообщения рассылаемые по сети и
+сохраняет их на диске. Т.е. Вы сможете увидеть всю переписку локальной
+сети :)
+
+  VySniff'у можно передать некоторые параметры (этакое управление с
+  коммандной строки)
+
+  vysniff.exe start или просто vysniff.exe -- запуск
+  vysniff.exe close -- закрыть
+  vysniff.exe status -- посмотреть запущена ли программа
+
+  При работе приложение создает каталог для каждого пользователя,
+который участвует в переписке, например каталог `Вася', внутри
+создаются файлы с именами тех людей кому пишет `Вася' или от кого он
+принимает сообщения (Коля, Петя...),
+если файл внутри каталога с префиксом _pvt -- то тут содержится личная
+переписка по чату (личный чат, не сообщения).
+
+
+  !!Для корректной работы необходим драйвер PCap!
+  Он прилагается в архиве.
+  Самую свежую версию его можно укатать с
+  http://netgroup-serv.polito.it/winpcap
+
+  В коммандной строке программе можно указать сл. параметры:
+    start -- стартовать
+    close -- закрыть
+    status -- вывести статус программы (работает или нет)
+
+  По вопросам обращайтесь на alex@ritlabs.com (ICQ# 4024781)
+
+--
+Best regards,
+ Alex                            mailto:alex@ritlabs.com</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
