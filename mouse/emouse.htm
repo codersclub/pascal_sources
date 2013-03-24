@@ -1,0 +1,77 @@
+<html><head><title>Эмулятор графической мыши в текстовом режиме</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Драйвер эмулирует графический курсор мыши в текстовом режиме'>
+<meta name="keywords" content="pascal, sources, source code, emouse, mouse, Мышинное Программирование ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Мышинное Программирование</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;emouse
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Эмулятор графической мыши в текстовом режиме</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Андрианов</TD>
+<TD class=black align='right'>22.09.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Драйвер эмулирует графический курсор мыши в текстовом режиме</TD><TD class=black colspan=2 align='right'><br><A HREF="emouse.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                     +------------------------------------+
+                     |    ЭМУЛЯТОР ГРАФИЧЕСКОГО КУРСОРА   |
+                     |                                    |
+                     |            ВЕРСИЯ 3.00             |
+                     |                                    |
+                     |          (C) DANSOFT 1992          |
+                     +------------------------------------+
+                       
+
+           Драйвер  эмулирует графический  курсор  мыши  в  текстовом  режиме
+      экрана  и  предназначен  для  использования  в  программах,  написанных
+      на   языке   C  и  Pascal.  Драйвер  разрабатывался  для  использования
+      совместно  с  компиляторами  Turbo  C  и  Turbo  Pascal  фирмы  Borland
+      International,   но   видимо   может   быть  использован  и  с  другими
+      компиляторами.
+           Драйвер работает только с видеоадаптерами EGA и VGA.
+
+                               Изменения и улучшения.
+
+      1. Добавлены следующие функции:
+           CheckAdapter
+           CheckMouse
+           CorrectChar
+      2. Добавлена поддержка TurboPascal
+      3. Добавлена поддержка монохромного режима EGA/VGA.
+      4. Изменены имена следующих функций:
+           MouseInit   -&gt; InitMouse
+           DrawPointer -&gt; DisplayPointer
+           SetArea     -&gt; SetRange
+      5. Исправлена ошибка в ResetHandler ( функция пыталась удалить курсор с
+         экрана не проверяя, находится ли он там ).
+      6. Изменены демонстрационные программы.
+      7. Внутренний  флажок   курсора   (  смотри  описание  DisplayPoiter  и
+         HidePointer ) имеет размер одного слова ( был - байт ).
+
+
+     Список файлов:
+
+     Файлы для компилятора Turbo C
+     -----------------------------
+
+        MOUSE_T.OBJ - Подключаемый модуль для модели памяти TINY
+        MOUSE_S.OBJ - Подключаемый модуль для модели памяти SMALL
+        MOUSE_C.OBJ - Подключаемый модуль для модели памяти COMPACT
+        MOUSE_M.OBJ - Подключаемый модуль для модели памяти MEDIUM
+        MOUSE_L.OBJ - Подключаемый модуль для модели памяти LARGE
+        MOUSE_H.OBJ - Подключаемый модуль для модели памяти HUGE
+
+        MOUSE.H     - Файл описаний ( заголовков )
+
+        MOUSE_C.DOC - Описания функций и переменных
+
+        DEMO_C.C    - Исходный текст программы-

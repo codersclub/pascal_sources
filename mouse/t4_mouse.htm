@@ -1,0 +1,82 @@
+<html><head><title>Includable Mouse Library for TP4+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Простая мышиная библиотека для графического (BGI) и текстового режима, подключаемая директивой Include. Позволяет устанавливать произвольную форму указателя мыши. В качестве примера приведены 2 программы: выбор мышью одного из файлов каталоге и простейший графический редактор в стиле Paint.'>
+<meta name="keywords" content="pascal, sources, source code, t4_mouse, mouse, Мышинное Программирование ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Мышинное Программирование</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;t4_mouse
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Includable Mouse Library for TP4+</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>08.03.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=32 vspace=4 hspace=8 alt="" src="t4_mouse.gif"><p style="margin-left:20px">Простая мышиная библиотека для графического (BGI) и текстового режима,
+подключаемая директивой Include. Позволяет устанавливать произвольную
+форму указателя мыши. В качестве примера приведены 2 программы: выбор
+мышью одного из файлов каталоге и простейший графический редактор
+в стиле Paint.</TD><TD class=black colspan=2 align='right'><br><A HREF="t4_mouse.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">&nbsp;
+                 <img border=0 width=320 height=171 src="t4_mous1.gif" alt="">
+
+PROGRAM MouseDemo;
+  {$M 16384,10000,20000 }
+  uses crt, graph, dos;
+  {$I global.ini }
+  {$I goodies.ini }
+  {$I mouse.ini }
+TYPE
+  poly = RECORD
+           count : word;
+           min_x : word;
+           min_y : word;
+           max_x : word;
+           max_y : word;
+           hot_x : word;
+           hot_y : word;
+           points : ARRAY[1..8] OF point;
+         END;
+
+CONST
+  pencil : mouse_graphics_cursor = (
+    hot_x : 5;
+    hot_y : $FFFF;
+    cursor_mask : (
+      $F7FF,                  {1111011111111111}
+      $E3FF,                  {1110001111111111}
+      $C1FF,                  {1100000111111111}
+      $80FF,                  {1000000011111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F,                  {0000000001111111}
+      $007F                   {0000000001111111}
+      );
+    screen_mask : (
+      $0000,                  {0000000000000000}
+      $0000,                  {0000000000000000}
+      $0000,                  {0000000000000000}
+      $2200,                  {0010001000000000}
+      $4B00,                  {0110101100000000}
+      $6B00,                  {0110101100000000}
+      $6B00,                  {0110101100000000}
+      $6B00,                  {0110101100000000}
+      $6B00,                  {0110101100000000}
+      $6B00, 

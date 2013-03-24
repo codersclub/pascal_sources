@@ -1,0 +1,68 @@
+<html><head><title>MOUSEFIX - TSR to Fix Mouse Driver Bugs with TP6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='MOUSEFIX - 27K TSR to fix bugs in mouse drivers when used with Turbo Pascal 6.0. This Program intercepts mouse calls. Make sure that hide/show mouse calls balance between saves/restores of the mouse state. Required: Turbo Professional OpInt, OpTSR'>
+<meta name="keywords" content="pascal, sources, source code, mousefix, mouse, Мышинное Программирование ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Мышинное Программирование</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mousefix
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MOUSEFIX - TSR to Fix Mouse Driver Bugs with TP6.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:dmurdoch@watstat.waterloo.edu">Duncan Murdoch</a></TD>
+<TD class=black align='right'>29.04.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">MOUSEFIX - 27K TSR to fix bugs in mouse drivers
+when used with Turbo Pascal 6.0. This Program intercepts mouse calls.
+Make sure that hide/show mouse calls balance between saves/restores
+of the mouse state.
+Required: Turbo Professional OpInt, OpTSR</TD><TD class=black colspan=2 align='right'><br><A HREF="mousefix.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    MOUSEFIX - TSR to fix bugs in mouse drivers when used with Turbo
+               Pascal 6.0
+
+    Usage:  Run MOUSEFIX after loading your mouse driver, before running
+            the TP6 IDE. It's a 27K TSR; if it works, you'll probably
+            want to rewrite it in assembler.
+
+    A lot of people have had trouble with TP 6 losing their mouse
+    cursor. I didn't have this problem, until I started using the IDE
+    within Desqview: then using Alt-F5 to view the output screen, and
+    Enter to get back to the editor would confuse Desqview, so that the
+    next time I popped up the Desqview menu and got rid of it my mouse
+    cursor would be lost.
+
+    I recently got a copy of Schulman et al's Undocumented DOS (great
+    book!) and the program Intrspy included with it, so I tried spying
+    on the mouse interrupt to see what was going on. It looks as though
+    the offending code goes something like this:
+
+      ( You hit Alt-F5 )
+      TP saves the mouse state
+      TP turns off the mouse cursor
+      ( You hit enter to get back to the editor )
+      TP restores the mouse state.
+
+    TP seems to assume that restoring the mouse state will restore the
+    cursor, and it does: but Desqview doesn't know that it does, so it
+    thinks the cursor is still hidden.
+
+    I'd guess that similar problems happen with incompatible mouse
+    drivers: they don't restore the cursor when the state gets restored.
+
+    If that's true, then the program MOUSEFIX might fix it. What it does
+    is to keep track of the cursor status between saves & restores, and
+    enforce a balance of shows and hides. It seems to fix the problems
+    within Desqview, so I'm hopeful it'll work elsewhere, too.
+
+    I wrote it in TP using Object Professional's OPINT and OPTSR units
+    for clarity; if you want to really use the thing, you'll probably
+    want to rewrite it in as

@@ -1,0 +1,64 @@
+<html><head><title>True Mouse Cursor in Text Mode for EGA/VGA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='These routines will allow you to interface with the mouse driver in your programs. It works with Microsoft compatible mouse drivers (i.e. Logitech, PC Mouse, Dexxa, etc). The routines have the added feature of displaying a 'true' mouse cursor in text mode on an EGA or VGA by reprograming the font on the fly.'>
+<meta name="keywords" content="pascal, sources, source code, grmintxt, mouse, Мышинное Программирование ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Мышинное Программирование</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;grmintxt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;True Mouse Cursor in Text Mode for EGA/VGA</TD>
+<TD nowrap class=black>&nbsp;Jim Loos</TD>
+<TD class=black align='right'>14.06.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">These routines will allow you to interface with the mouse driver
+in your programs. It works with Microsoft compatible mouse drivers
+(i.e. Logitech, PC Mouse, Dexxa, etc).
+The routines have the added feature of displaying a 'true' mouse cursor
+in text mode on an EGA or VGA by reprograming the font on the fly.</TD><TD class=black colspan=2 align='right'><br><A HREF="grmintxt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>23k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                                  June 14, 1991
+
+   When I saw Dave Kirsch's mouse routines for Turbo and Microsoft C I was
+impressed enough to look for a way to use them in my Turbo Pascal programs.
+After a lot of head scratching I finally came up with an object file that
+could be linked to produce a Turbo Pascal Unit.  MOUSE.TPU is the result.
+
+   MOUSE.TPU is ready to use for Turbo Pascal version 6.  MOUSE.PAS will
+need to be re-compiled for other versions of Turbo Pascal.  DEMO.PAS is,
+of course, a demonstration of the use of many of the routines.  Also included
+are all of Mr. Kirsch's original files.
+
+   Please refer to Mr. Kirsch's original MOU.DOC file for an explanation
+of what each one of the routines does.  In addition to Mr. Kirsch's routines
+I've added two procedures written in Turbo Pascal:
+
+       MOUmove(X, Y: integer)  Moves the mouse cursor to the screen
+          coordinates X, Y.
+
+       MOUconfine(X1, Y1, X2, Y2: integer)  Confines the mouse cursor to
+          an area on the screen.  X1, Y1 is the upper left hand corner and
+          X2, Y2 is the lower right hand corner.
+
+   For an example of how to use these and other procedures in the unit please
+refer to the DEMO.PAS file.
+
+   I've already re-written one of my Pascal programs to use these new mouse
+routines.  It sure is slick to see the mouse cursor glide across the screen
+rather than jerk across.  Run DEMO.EXE and see if you don't agree.
+
+                                      Jim Loos
+                                      2601 Dawn Dr.
+                                      Alexandria, VA 22306
+                                      (703) 765-1054</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

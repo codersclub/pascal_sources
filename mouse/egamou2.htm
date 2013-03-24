@@ -1,0 +1,55 @@
+<html><head><title>EGAMouse v2.0 - Mouse Support for BGI Graphics Modes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль поддержки мыши в графических BGI режимах. Поддерживает несколько разновидностей графического курсора: стрелка, галочка, песочные часы, рука. Для запуска необходим драйвер <a href="../bgi/egavga2.zip">egavga.bgi</a>.  EGAMouse is a TP 4.0 unit that adds Microsoft Mouse support to your TP programs.'>
+<meta name="keywords" content="pascal, sources, source code, egamou2, mouse, Мышинное Программирование ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Мышинное Программирование</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;egamou2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EGAMouse v2.0 - Mouse Support for BGI Graphics Modes</TD>
+<TD nowrap class=black>&nbsp;Lew Paper</TD>
+<TD class=black align='right'>13.03.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<img border=0 align=left width=60 height=47 vspace=4 hspace=8 alt="" src="egamou2.gif"><p style="margin-left:20px">Модуль поддержки мыши в графических BGI режимах.
+Поддерживает несколько разновидностей графического курсора:
+стрелка, галочка, песочные часы, рука. Для запуска необходим
+драйвер <a href="../bgi/egavga2.zip">egavga.bgi</a>. <br><font color=#666666>
+EGAMouse is a TP 4.0 unit that adds Microsoft Mouse support
+to your TP programs.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="egamou2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">EGAMouse is a TP 4.0 unit that adds Microsoft Mouse support to
+your EGA TP programs. Most of the credit for it is due to Richard
+Sadowsky, the author of Mouse4.pas, a unit that adds mouse
+support for text-mode programs. I made some minor adjustments to
+it, added the function CursorShape (with the help of John
+Sieraski; his implementation of it worked, mine didn't, so the
+code for CursorShape is his, with a minor modification added by
+me), and wrote the demo program.
+
+               <img border=0 width=320 height=250 src="egamou21.gif" alt="">
+
+Future releases will include support for mouse functions 29 (get
+CRT page number) and 30 (set CRT page number), and will have a
+few more cursor shapes.
+
+You must have the Microsoft (or compatible) mouse driver
+installed as described in the Microsoft Mouse User's Guide. I
+have version 6 of the Mouse software; EGAMouse might not work
+with earlier versions.
+
+This unit should work with trivial modifications on CGA programs.
+All that has to be changed is the scaling of the X and Y
+coordinates. To change the demo program for CGA, just change the
+grDriver and grMode values at the beginning of the main body.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
