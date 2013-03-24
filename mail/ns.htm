@@ -1,0 +1,70 @@
+<html><head><title>Сортировщик Релкомовской почты</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='News Splitter - разбор пришедшей uucp-почты по теле-конференциям. Письма забираются из почтового ящика и перекладываются в архивные ящики по каждой конференции отдельно'>
+<meta name="keywords" content="pascal, sources, source code, ns, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ns
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сортировщик Релкомовской почты</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5021/2.30">Валерий Вотинцев</a></TD>
+<TD class=black align='right'>19.04.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">News Splitter - разбор пришедшей uucp-почты по теле-конференциям.
+Письма забираются из почтового ящика и перекладываются в
+архивные ящики по каждой конференции отдельно</TD><TD class=black colspan=2 align='right'><br><A HREF="ns.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Valery Votintsev &lt;vot@infolink.tver.su&gt;
+
+   Привет, друзья!
+
+   Программа NS (News Splitter) предназначена для разбора пришедшей  почты по
+теле-конференциям.  Письма  забираются из почтового ящика и перекладываются в
+архивные ящики по каждой конференции отдельно.
+
+   Формат вызова:     NS &lt;Имя_Почтового_Ящика&gt; [/d]
+
+   Для указания, какое письмо в какой архив положить, нужно создать текстовый
+файл NS.CFG, и в нем указать: какую конференцию куда складывать. Вот примерное
+содержание этого файла:
+
+   !in            e:\uupc\mail\boxes ;путь к исходным почтовым ящикам
+   !out           c:\mymail          ;директорий для прочей почты
+   relcom.msdos   d:\prog\msdos      ;путь+имя_файлов для конкретных групп
+   relcom.netnews d:\inform\netnews
+   relcom.talk    f:\talk\talk
+
+   Строка, начинающаяся с "!in" задает путь к почтовым ящикам,  "!out" - путь
+для размещения сообщений, с другими (не указанными в NS.CFG) группами.
+
+   Каждая строчка  соответствует одной из конференций и состоит из имени кон-
+ференции, одного или нескольких пробелов и затем пути и имени архивного файла
+(без расширения!). Письма раскладываются в архивные файлы с расширением .PST.
+Если попадается  письмо со списком новых статей  (при подписке по SUBSCRIBE),
+то оно тоже будет разнесено по конференциям в файлы с расширением .LST.  Если
+сообщение не относится ни к одной из указанных конференций, то оно помещается
+в файл  OTHERS.PST.  Неивестные  группы  из  "List  of  articles"  помещаются
+в OTHERS.LST.
+
+   Порядок строк в NS.CFG играет роль! Чем выше строка в файле, тем выше ее
+приоритет! Так, например, если сообщение относится одновременно к конференциям
+relcom.netnews  и  relcom.msdos, то оно будет помещено в нашем случае  в  файл
+D:\PROG\MSDOS, поскольку строка с MSDOS расположена выше, чем строка с NETNEWS.
+
+   После разбора исходный почтовый файл остается без изменений,  а если задан
+ключ /d - то уничтожается.
+
+   Желаю удачи!
+               Валерий Вотинцев &lt;vot@infolink.tver.su&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

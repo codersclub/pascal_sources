@@ -1,0 +1,80 @@
+<html><head><title>InfoLink MailServer v1.40</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Mailserver InfoLink v1.40 for DOS. It is a simple server for sending files to your abonents by E-mail. Uses UUPC & RMAIL technique.'>
+<meta name="keywords" content="pascal, sources, source code, ilms14, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ilms14
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;InfoLink MailServer v1.40</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5021/2.30">Валерий Вотинцев</a></TD>
+<TD class=black align='right'>05.08.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Mailserver InfoLink v1.40 for DOS.
+It is a simple server for sending
+files to your abonents by E-mail.
+Uses UUPC & RMAIL technique.</TD><TD class=black colspan=2 align='right'><br><A HREF="ilms14.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>27k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">            +-----------------------------------+
+            :   Mail Server "Info-Link" v.1.40  :
+            +-----------------------------------+
+            : (c) 1993-1996 by Valery Votintsev :
+            : E-mail:  vot@infolink.tver.su     :
+            : FIDO:    2:5021/22                :
+            :         Tver, Russia              :
+            +-----------------------------------+
+
+
+        1. ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ
+
+   Настоящее программное обеспечение относится к классу FREEWARE.
+Вы можете свободно копировать и использовать данный продукт.
+Вы также свободно можете распространять данный продукт при
+условии сохранения оригинального комплекта поставки и неизменения
+оригинальных файлов.
+
+   Поставляется по принципу "AS IS" (как есть). Вы можете использовать
+данный продукт на свой собственный страх и риск. Автор не дает
+никаких гарантий и не несет никакой ответственности за возможный ущерб,
+причиненный при использовании (или неиспользовании :-) настоящего
+программного обеспечения.
+
+   Однако, автор будет весьма признателен, если Вы пожелаете внести
+свой идейный, моральный или даже материальный вклад в дальнейшее развитие 
+программы. По всем вопросам Вы можете обращаться непосредственно
+к автору по адресам, указанным ниже.
+
+   Автор с удовольствием примет Ваши замечания о возможных ошибках, а
+также предложения по улучшению и расширению программ.
+
+
+        2. НАЗНАЧЕНИЕ
+
+     Мэйлсервер "InfoLink" - это комплекс программ, предназначенных
+для рассылки файлов адресатам по E-mail.
+
+     Программное обеспечение мэйлсервера InfoLink работает в
+среде MSDOS (ну, или в DOS-окне Windows).  Предназначено для
+совместной работы с комплектом UUPC v6.14 by Andrew Chernov и
+текстовым редактором MultiEdit v7.0.
+
+     Принцип работы мэйлсервера до смешного прост:
+
+- Абоненты сервера отправляют на адрес сервера по E-mail
+  письма, в которых прописывают команды типа "дай то...",
+  "покажи это...";
+- Программа UUPC принимает запросы абонентов, а UUXQT
+  складывает их в почтовый ящик сервера;
+- На почтовый ящичек сервера натравливается программка MS
+  (обработчик запросов), которая читает письма, анализирует
+  команды и вываливает в спул запрошенные ф

@@ -1,0 +1,78 @@
+<html><head><title>SendFile - Отправка бинарных файлов в Relcom</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа SENDFILE предназначена для тех, кому изредка приходится пересылать большие файлы по E-Mail, и кто обычно пользуется диалоговыми почтовыми программами типа DMail или BMail, не поддерживающими автоматическое разбиение файла на части.'>
+<meta name="keywords" content="pascal, sources, source code, sendfile, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sendfile
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SendFile - Отправка бинарных файлов в Relcom</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа SENDFILE предназначена для тех, кому изредка
+приходится пересылать большие файлы по E-Mail, и кто обычно
+пользуется диалоговыми почтовыми программами типа DMail или BMail,
+не поддерживающими автоматическое разбиение файла на части.</TD><TD class=black colspan=2 align='right'><br><A HREF="sendfile.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         SENDFILE.EXE
+                         Version 1.00
+                Copyright(c) by SoftWeyr,1994
+
+
+Программа SENDFILE предназначена для тех, кому изредка
+приходится пересылать большие файлы по E-Mail, и кто обычно
+пользуется диалоговыми почтовыми программами типа
+DMail или BMail, не поддерживающими автоматическое разбиение
+файла на части.
+
+Очевидно, что набрать Sendfile
+в командной строке проще, чем разбивать файл на части с помощью
+UUENCODE а потом вручную посылать их и не запутаться при этом.
+
+для посылки частей файла Sendfile вызывает программу Mail,
+имеющую интерфейс командной строки. Насколько я понимаю,
+DMail делает то же самое. имеющаяся у меня такая программа
+называется mailx.exe (из комплекта DMail) и вызывается по Path.
+Поэтому в SendMail зашито имя MAILX. Но это можно поменять.
+Кроме того можно поменять число строк в одной секции (по
+умолчанию 900).
+
+ В поле Subject письма по умолчанию пишется
+ имя файла uuencoded part ... of ...
+ но можно задать другой Subj, правда слова part ... of ... все
+ равно будут к нему добавлены.
+
+ Формат вызова
+
+ sendfile что кому [ключи]
+
+ Что - имя файла, который посылается
+ Кому - E-Mail адрес куда его посылать
+ Ключей же бывает четыре:
+ -s строка в кавычках - задать Subj
+ -l число - задать число строк в секции
+ -m имя файла - изменить имя почтовой программы
+ -w   - записать новые значения -l и -m в SendMail.exe
+ Значения сопровождающие ключи -s,-l и -m отделяются от самого ключа
+ пробелом (и от следующего ключа тоже).
+
+Обрабатывать файл SendMail.exe упаковщиками типа PKLITE не
+рекомендуется, так как после этого ключ -w перестанет работать и
+более того, его использование может необратимо испортить EXE-файл.
+
+--
+Phone: 230-80-61                                Victor B.Wagner
+E-Mail:vitus@agropc.msk.su                      Dokuchaev Soil Institute
+                                                7, Pyzhevsky lane,
+         

@@ -1,0 +1,63 @@
+<html><head><title>Восстановление Relcom-почты после сбоев</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа RM.EXE предназначена для восстановления почтовых сообщений, которые после сбоев остаются в SPOOL\D или в BAD_JOB при использовании UUCP'>
+<meta name="keywords" content="pascal, sources, source code, rm, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rm
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Восстановление Relcom-почты после сбоев</TD>
+<TD nowrap class=black>&nbsp;Валерий Вотинцев</TD>
+<TD class=black align='right'>13.03.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа RM.EXE предназначена для восстановления почтовых сообщений,
+которые после сбоев остаются в SPOOL\D или в BAD_JOB
+при использовании UUCP</TD><TD class=black colspan=2 align='right'><br><A HREF="rm.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Subject:  Mail Recover v.1.0.
+
+
+    Программа RM.EXE предназначена для восстановления почтовых сообщений,
+которые после сбоев остаются в SPOOL\D (или в BAD_JOB).
+
+
+    Как с ней работать:
+
+    1) Поместите RM.EXE куда-нибудь по пути доступа.
+
+    2) Перейдите в каталог с "плохой" почтой, например C:\UUPC\SPOOL\D
+
+    3) Напустите RM на плохие файлы:
+                 rm *. c:\uupc\mail\boxes\
+
+       здесь 1-й параметр - групповое имя сбойных файлов
+             2-й параметр - полный путь к почтовым ящикам.
+
+    Почта восстанавливается в почтовые ящики, которые указаны в адресе To:
+    этих писем. Ваша личная почта ляжет куда надо. А вот письма из конференций
+    могут лечь в отдельный ящик, напрмер NETTERS.
+
+P.S. Программа имеет статус FreeWare.
+    Извиняйте, программа явно сырая - делал для своих нужд,
+    доводить до кондиции не было времени.
+
+P.P.S.
+    Для желающих поковыряться - прилагаю исходник на паскале.
+    Единственная просьба - если не затруднит - отправьте мне улучшенную
+    версию исходников.
+
+    --------
+    Валерий Вотинцев.      13.03.93
+                           E-mail: vot@infolink.tver.su</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

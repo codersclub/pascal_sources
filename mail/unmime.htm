@@ -1,0 +1,87 @@
+<html><head><title>Mime Base64 Decoder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вашему вниманию предлагается программа, которая незаметно для пользователей dMail декодирует сообщения в формате MIME'>
+<meta name="keywords" content="pascal, sources, source code, unmime, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;unmime
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Mime Base64 Decoder</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>27.12.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вашему вниманию предлагается программа, которая незаметно для
+пользователей dMail декодирует сообщения в формате MIME</TD><TD class=black colspan=2 align='right'><br><A HREF="unmime.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Уважаемые господа!
+Если вы пользуетесь UUCP и dMail или BMail для DOS, вам, наверное,
+уже успели надоесть письма, в которых вместо русских букв вы видите
+что-то вроде:
+
+=ED=FF=D0=AD
+
+или того хуже:
+
+
+4eL35+Tl9vrp6uvs7e7v8PLz9PXm6OP++/34+d/84PENCvzUzyDQ0snNxdIg
+1MXL09TBIM7BINLV09PLz80g0drZy8UuIO3ZINDP09TB0sHFzdPRINPExczB
+1NggxcfPIMTP09TB1M/ezs8NCsTMyc7O2c0sIN7Uz8LZIMvPxMnSz9fLwSDC
+2czBIGJhc2U2NCwgwSDOxSBRdW90ZWQgcHJpbnRhYmxlDQpcZG9jdW1lbnRj
+bGFzc3thcnRpY2xlfQ0KXHVzZXBhY2thZ2V7cnVzc2lhbixhY2FkZW15fQ0K
+
+К сожалению, dMail 2.0 не поддерживает стандарта MIME, которым пользуется
+все больше и больше людей. (dMail for Windows уже, говорят поддерживает,
+но не в этом суть).
+
+Вашему вниманию предлагается программа, которая незаметно для
+пользователей (и для dMail) декодирует сообщения, удовлетворяющие
+этому стандарту.
+
+Естественно, это beta, естественно, она делает не все, что бы вам хотелось,
+но вот вам исходник, и, если вы читаете эту конференцию, вероятно
+вы сможете его сами усовершенствовать.
+
+Как оно работает:
+
+Программа UNMIME должна вызываться из файла uucp.bat между
+uucico (которая собственно звонит) и uuxqt (которая раскладывает
+пришедшую почту по почтовым ящикам пользователей.
+
+Почему именно там? Потому что внутри Quoted-Printable или Base64 кодировки
+русский текст скорее всего имеет переводы строк в соответствии с
+соглашениями Unix, а не DOS и кодировку KOИ-8. uuxqt эти вещи перекодирует.
+Так пусть же перекодирует и для MIME писем, получая их в раскрытом виде.
+
+Кроме того, это единственный момент, когда мы знаем, где лежит вся новая
+ почта, и только новая почта.
+
+Это spool-директория UUPC. В те давние времена, когда у меня стояла UUPC,
+она называлась C:\UUPC\SPOOL\DEMOS\D
+
+В командной строке программа получает шаблон файлов, которые нужно
+проверить на наличие MIME, и при необходимости декодировать.
+
+Соответственно, файл UUPC.BAT должен выглядеть как:
+@echo off
+uucico .... (не помню, какие там параметры)
+unmime c:\uupc\spool\demos\d\*.*
+echo Running xqt...
+uuxqt ...
+
+Чего оно НЕ ДЕЛАЕТ
+
+1. Оно не обрабатывает файлов размером более 64К
+2. Оно не обрабатывает сообщений, состоящих из нескольких частей
+ (Content-Type: MULTIPART/MIXED)
+
+Если кто-нибудь соберется дописать сюда эти 

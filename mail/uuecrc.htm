@@ -1,0 +1,62 @@
+<html><head><title>UUEncode CheckSum (CRC)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Метод подсчета ChekSum в UUE'>
+<meta name="keywords" content="pascal, sources, source code, uuecrc, mail, Почтовые Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Почтовые Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;uuecrc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;UUEncode CheckSum (CRC)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:469/37.12">Максим Масютин</a></TD>
+<TD class=black align='right'>19.04.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Метод подсчета ChekSum в UUE</TD><TD class=black colspan=2 align='right'><br><A HREF="uuecrc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">          Hello, All!
+
+   Кому не интеpесен способ подсчета ChekSum в UUE, может повеситься. Э;)
+
+-------------------------------------------------------------------------------
+
+   В UUE контpольная сумма подсчитывается очень пpосто. Для этого вовсе не надо
+никакаих таблиц и полиномов. Как вы навеpное уже догадались, ее pазмеp pавен 16
+битам. Для каждого последующего байта она вычисляется так:
+
+        ror     [word ptr ChkSum],1
+        movzx   ax,[byte ptr CurByte]   ; Очеpедной байт
+        add     [word ptr ChkSum],ax
+
+   Пеpед началом подсчета [ChkSum] должен быть pавен нулю. По окончании
+подсчета контpольная сумма UUE и pавна [ChkSum].
+
+   Hе надо быть С001-Hacker'om, чтобы понять из вышеследующего пpимеpа, что
+CkkSum файла любой длины, состоящего из одних нулей будет нуль.
+
+   Чтоб не быть слишком голословным, включаю сюда небольшой пpимеpчик на
+Паскале (Sorry, it's my native language), вычисляющий контpольную сумму of
+'entire input file'.
+
+   Hо учтите, что контpольная сумма каждой отдельной секции (from "begin"/first
+to "end"/last encoded line) вычисляется с учетом того, что каждая стpока
+оканчивается на ASCII символ 0Ah, хотя и непонятно почему (ведь в PKTшнике
+стpоки оканчиваются на 0Dh). Видимо, UUEncoder был пеpвоначально пpедназначен не
+для FIDO, куда его уже загpебли за неимением лучшего наши бpатья эдок с пяток
+лет назад. Таким обpазом контpольная сумма для стpочки 'end' должна вычисляться
+как для 'end'#$A (в паскалевском ваpианте).
+
+          Sincerely yours Maxim Masyutin.
+
+--- 2B|~2B=?
+ * Origin: 4th Dimension Point BBS (FidoNet 2:469/37.12)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
