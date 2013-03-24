@@ -1,0 +1,67 @@
+<html><head><title>BP7 Fix for Runtime Error 200</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Исправленные модули turbo.tpl и tpp.tpl, а также программа с исходником для исправления "Runtime error 200" в программах на Borland Pascal 7.0.'>
+<meta name="keywords" content="pascal, sources, source code, bp7_tpl, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bp7_tpl
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BP7 Fix for Runtime Error 200</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexfru@chat.ru">Alex Frounze</a></TD>
+<TD class=black align='right'>27.09.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Исправленные модули turbo.tpl и tpp.tpl,
+а также программа с исходником для исправления "Runtime error 200"
+в программах на Borland Pascal 7.0.</TD><TD class=black colspan=2 align='right'><br><A HREF="bp7_tpl.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>72k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                             -= In Russian =-
+
+  Если на Вашем довольно-таки быстром компьютере (Pentium-II, например) не ра-
+ботают программы, использующие модуль CRT, - выполнение прекращается сразу  же
+после запуска программы с сообщением "Run-time error 200" (деление  на  нуль),
+то Вам понадобятся два следующих файла.
+  Файлы TURBO.TPL и TPP.TPL содержат модули System, CRT, DOS, Printer, Strings
+и еще некоторые, которые прикомпоновываются к Вашей программе на этапе ее ком-
+пиляции.
+  Просто замените старые файлы (в директории BIN\ Вашего Pascal'я)  на  обнов-
+ленные и скомпилируйте полность (build) Ваши программы  заново. Ошибка  должна
+исчезнуть.
+  Если у Вас нету исходного текста программы,  в  которой  возникает  Run-time
+error 200, попробуйте использовать утилиту FIX_CRT.EXE. ВНИМАНИЕ: ПОСЛЕ  ИЗМЕ-
+НЕННИЯ УТИЛИТОЙ FIX_CRT.EXE ВАШЕЙ ПРОГРАММЫ, Ф-ЦИЯ DELAY() ПРОГРАММЫ  ПЕРЕСТА-
+НЕТ ВЫПОЛНЯТЬ ЗАДЕРЖКУ (НИЧЕГО НЕ ДЕЛАЕТ). ПРИМЕЧАНИЕ:  УТИЛИТА  АВТОМАТИЧЕСКИ
+СОЗДАЕТ РЕЗЕРВНУЮ КОПИЮ ИСХОДНОЙ ПРОГРАММЫ С РАШИРЕНИЕМ ".BAK".
+
+                                                         Автор: Алексей Фрунзе
+
+
+                             -= In English =-
+
+  Don't feel sad if you found a "Run-time error 200" (division by zero) in the
+program that uses a CRT unit on your fast machine (Pentium-II, for example).
+  Files TURBO.TPL & TPP.TPL contains System, CRT, DOS,  Printer,  Strings  and
+other units linked with your program on the compile stage.
+  Just update the old versions of these files (see a BIN\ subdirecory of  your
+Pascal) and rebuild your programs again. Bug has to go away.
+  If you don't have source code  of  the  program  where  Run-time  error  200
+occurs, you may try to use the FIX_CRT.EXE utility. ATTENTION: PATCHED PROGRAM
+WILL WORK WITHOUT DELAYS AT ALL (I.E. THE DELAY() ROUTINE  WILL  DO  NOTHING).
+NOTE: THE FIX_CRT.EXE UTILITY AUTOMATICALLY MAKES BACKUP COPY OF THE  ORIGINAL
+PROGRAM WITH THE ".BAK" FILENAME EXTENSION.
+
+                                                     Author: Alexei A. Frounze
+
+Homepage: http://www.chat.ru/~alexfru
+E-mail  : alexfru@chat.ru</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

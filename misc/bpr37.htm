@@ -1,0 +1,90 @@
+<html><head><title>Borland Pascal 7.XX AutoCorrector v3.7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Real time type case convertor for Borland Pascal 7.XX DOS IDE: "tmysuperobject" -> "TMySuperObject" as you type!'>
+<meta name="keywords" content="pascal, sources, source code, bpr37, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bpr37
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Borland Pascal 7.XX AutoCorrector v3.7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/468.8">Александр Петросян</a></TD>
+<TD class=black align='right'>23.08.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Real time type case convertor for Borland Pascal 7.XX DOS IDE:
+"tmysuperobject" -> "TMySuperObject" as you type!</TD><TD class=black colspan=2 align='right'><br><A HREF="bpr37.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>24k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Borland Pascal 7.XX
+AutoCorrector Version 3.7 (c) 1994, 95 Alexander Petrosyan & Slava Gostrenko
+
+Files:
+
+   See DESCRIPT.ION
+
+Installation:
+
+   Copy BP.EXE -&gt; BP.XXX
+   Run CRACKER.EXE
+   Run COMPILE.BAT
+   Copy BP.XXX, BPR.EXE, WORDS to your \BIN directory if you wish.
+
+Using:
+
+   Instead of BP run BPR
+
+   After pressing almost any key...
+     ...identifiers (TMySuperObject)
+       are searched for words from dictionary (WORDS.);
+       found words (case insensetive) are replaced
+       with that words (as is).
+       Parts of identifier that are not parts of words
+       from dictionary are uppercased.
+     ...keywords (begin): are lowercased.
+     ...hexadecimals ($ABCD): are uppercased.
+     ...strings, comments, asms: are keeped unchanged.
+
+   Above are the default settings. You may change them. See BPR.CFG
+   for details.
+
+Keys to activate BPR:
+
+   Alt+Insert:  Insert word to dictionary (case sensitive)
+   Alt+Delete:  Delete word from dictionary (case insensitive)
+
+Comment:
+
+   BP.XXX, dictionary (WORDS.) and configuration file (BPR.CFG) are searched
+     1. In current directory
+     2. By PATH
+     3. In BPR.EXE directory
+
+Options:
+
+   /AutoSave[:N]   Every N seconds F2 key press will be emulated.
+                   Default value = 60 seconds (1 minute).
+                   By default AutoSave feature WILl NOT BE ACTIVATED.
+                   Pass /AutoSave parameter to BPR to activate it.
+                   Note that this feature may be not compiled into
+                   your version of BPR.
+
+   /IdleTime:N     BPR will always wait N seconds after last key press
+                   before AutoSave.
+                   Default = 10 seconds.
+
+   /VideoSubst[:N] IDE will be run in the Nth video mode instead
+                   of 3rd. E.i. IDE's attempts to set 3rd video mode will
+                   be substituted to setting of Nth video mode. If N is
+                   greater than 255 then VESA functions will be used.
+                   By default N = 265 (VESA 132x25 with character 14x8 or 16x8).
+                   By default VideoSubst feature WILL NOT BE ACTIVATED.
+                   Pass /VideoSubst parameter to BPR to activate it.
+  

@@ -1,0 +1,92 @@
+<html><head><title>Обработка исключительных ситуаций в TP4.0-7.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='В данном модуле реализована старая добрая концепция обработки исключительных ситуаций, которая в языке C присутствовала с самого начала - функции SetJump и LongJump. Если вы имеете опыт их использования, можете дальше не читать.'>
+<meta name="keywords" content="pascal, sources, source code, setjmp, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;setjmp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Обработка исключительных ситуаций в TP4.0-7.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>25.04.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">В данном модуле реализована старая добрая концепция
+обработки исключительных ситуаций, которая в языке C
+присутствовала с самого начала - функции SetJump и LongJump.
+Если вы имеете опыт их использования, можете дальше не читать.</TD><TD class=black colspan=2 align='right'><br><A HREF="setjmp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              Модуль SETJMP
+                    Обработка исключительных ситуаций
+                    для Turbo/Borland Pascal 4.0-7.0
+                       Copyright(c) SoftWeyr, 1996
+
+   В  данном   модуле  реализована  старая  добрая  концепция  обработки
+исключительных  ситуаций,  которая  в  языке C присутствовала  с  самого
+начала  -   функции  SetJump  и  LongJump.   Если  вы  имеете   опыт  их
+использования, можете дальше не читать.
+
+Если нет, то это работает так:
+
+    Перед  выполнением  критического участка  программы  вы  запоминаете
+текущий контекст (стэк и указатель на  текущую  выполняемую  команду)  с
+помощью SetJump.
+
+   Когда у вас возникает ошибка, вы в том месте,  где  вы  узнали  о  ее
+возникновении (обычно  в  процедуре  завершения,  на  которую  указывает
+переменная  ExitProc  модуля System) вызываете LongJump и он  возвращает
+управление в ту точку, где был запомнен контекст.
+     Для того, чтобы  вы могли отличить, каким образом управление попало
+в это место - просто после выполнения SetJump или в результате LongJump,
+функция SetJump возвращает  значение. При нормальном выполнении это 0, а
+если  был  выполнен  LongJump,  то значение, переданное ему  в  качестве
+второго параметра.
+
+ Например так.
+
+ {$I+}{Включим обработку ошибок ввода-вывода}
+ uses SetJMP;
+ var JmpBuf:JumpBuffer;
+ Procedure MyExitProc;far;
+ begin
+  if ErrorAddr&lt;&gt;0 then
+   begin
+    { Была ошибка}
+    ErrorAddr:=nil;
+    LongJump(JmpBuf,ExitCode);
+   end;
+ end;
+var F:Text;
+    Name:String;
+    Success:Boolean;
+begin
+ ExitProc:=@MyExitProc;
+ Success:=False;
+ Repeat
+ Write('Введите имя файла=&gt;');
+ Readln(Name);
+ Case SetJump(JmpBuf) of
+ 0:begin
+   Assign(F,Name);
+   Reset(F);
+   Success:=True;
+   end;
+ 2:begin
+   Writeln('Ошибка!!! Не найден файл ',Name);
+   end;
+ 3:begin
+    Writeln('Ошибка!!! Неправильный путь к файлу ',Name);
+   end;
+   {и так далее}
+ end;
+until Success;
+{ а здесь собственно

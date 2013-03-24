@@ -1,0 +1,45 @@
+<html><head><title>Запись параметров настройки в EXE файл</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Инструменты для программиста. EXEWRITE.PAS. Модуль, который позволяет программе записать параметры настройки в собственный EXE файл так, что при следующем запуске она подумает, что эти значения были заданы как типизированные константы в исходном тексте.'>
+<meta name="keywords" content="pascal, sources, source code, exewrite, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;exewrite
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Запись параметров настройки в EXE файл</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>18.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Инструменты для программиста.
+EXEWRITE.PAS. Модуль, который позволяет программе записать
+параметры настройки в собственный EXE файл так,
+что при следующем запуске она подумает, что эти значения были заданы
+как типизированные константы в исходном тексте.</TD><TD class=black colspan=2 align='right'><br><A HREF="exewrite.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Этот модуль позволяет сохранять параметры конфигурации непосредственно
+ в теле EXE-файла. В отличие от TPCLONE этот модуль не производит
+ поиска сигнатуры, а вычисляет смещение переменной в файле по ее адресу,
+ поэтому сохранение возможно только в собственный EXE-файл программы,
+ выполняющей сохранение. Данные, которые сохраняются, должны быть описаны
+ как инициализированные переменные (типизированные константы). Это может
+ быть как одна константа-запись, так и несколько подряд идущих констант.
+ В последнем случае в параметре Size должен быть передан суммарный размер
+ с учетом выравнивания на границу слова. Для успешной работы модуля
+  требуется версия DOS не ниже 3.0  и, естественно, файл который использует
+  данный модуль не должен быть упакован PKLite или чем-то подобным.
+  модуль содержит только процедуру записи ибо в процедуре считывания нет
+  необходимости - при загрузке программы значения типизированных констант
+  считываются автоматически}
+ {Copyright (c) by SoftWeyr, 1994}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

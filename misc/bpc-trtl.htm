@@ -1,0 +1,74 @@
+<html><head><title>Tiny-RTL v1.0 - Компактная Замена SYSTEM.TPU</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='TinyRTL v.1.0 for TP7.0. Replaces the SYSTEM.TPU unit.  Features:   Converts  Turbo  Pascal  into a structured object-oriented ASM!   Only 96 bytes overhead ...   Full source code ...'>
+<meta name="keywords" content="pascal, sources, source code, bpc-trtl, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bpc-trtl
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Tiny-RTL v1.0 - Компактная Замена SYSTEM.TPU</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:solar at openwall.com">Solar Designer</a></TD>
+<TD class=black align='right'>30.05.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">TinyRTL v.1.0 for TP7.0. Replaces the SYSTEM.TPU unit. <br>
+Features: <br>
+ Converts  Turbo  Pascal  into a structured object-oriented ASM! <br>
+ Only 96 bytes overhead ... <br>
+ Full source code ...</TD><TD class=black colspan=2 align='right'><br><A HREF="bpc-trtl.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   TinyRTL V1.0 for TP 7.0
+  -------------------------
+
+ What is TinyRTL
+-----------------
+TinyRTL is a System unit replacement. It allows you to create tiny EXE files
+when using Turbo Pascal. The overhead is only 96 bytes.
+
+The Pascal programs using TinyRTL look a little bit like Assembler ones.
+So, you have to know ASM in order to use TinyRTL. However, you still can
+use all the Pascal structures, such as loops, high-level procedures, and
+even objects (probably future versions will have a better support for them).
+
+ How to install
+----------------
+Simply compile SYSTEM.PAS with TP 7.0 to make SYSTEM.TPU. If you're using
+a different version of TP, use SYSTEM.TPS from its RTL, not the one
+included here. After you got SYSTEM.TPU, copy it to the directory with
+the program you want to compile and either turn off the Options|Environment|
+Startup...|Load TURBO.TPL option, or create a copy of TURBO.TPL and modify
+it with TPUMOVER.
+
+ Restrictions
+--------------
+When using TinyRTL in your programs you can't use all the features that
+the standard RTL has. Here's a list of removed features:
+
+- All System unit procedures, such as WriteLn
+- All runtime error checks (you have to use {$R-,S-,Q-,I-} mode)
+- Return codes (ignore the runtime error messages that IDE shows)
+- Floating-point data types (you have to use {$N-,E-} mode)
+- Heap manager (allocate memory using DOS calls)
+- String handling routines (including the + operation)
++ Some of the LongInt operations: *, /, shr, shl (they still work with Integer)
++ Large variable assignments (that involved a procedure call)
++ Virtual methods
+
+The topics marked with '+' I'm going to implement in the future version of
+TinyRTL (I'll try to implement them w/o increasing the overhead size).
+
+Also, note that you can't compile programs with debug information for
+standalone debugging. However, you can use the integrated debugger, or
+you can compile your program with the standard RTL for debugging (and
+use TinyRTL after the bugs are fixed).
+
+Don't forget t

@@ -1,0 +1,57 @@
+<html><head><title>Оптимизатор времени выполнения EXE файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Optimize the time execution for the DOS executable files.'>
+<meta name="keywords" content="pascal, sources, source code, optexe, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;optexe
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Оптимизатор времени выполнения EXE файлов</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Стефанков</TD>
+<TD class=black align='right'>12.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Optimize the time execution for the DOS executable files.</TD><TD class=black colspan=2 align='right'><br><A HREF="optexe.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{ LIBRARY               SYSTEM UTILITIES                                }
+{ MODULE                OPTIMIZE_EXE_FILE                               }
+{ FILE NAME             OPTEXE.PAS                                      }
+{ PURPOSE               Optimize the time execution for the DOS execu-  }
+{                       table files.                                    }
+{ VERSION               1.10                                            }
+{ DATE                  20-Sep-93                                       }
+{ COMPANY               Freelance Software Engineer                     }
+{ ADDRESS               Isakowskogo str, 4-2-30                         }
+{                       Moscow, 123181                                  }
+{                       USSR                                            }
+{                       Tel. 007 (095) 944-6304                         }
+{ COPYRIGHT NOTICE      Copyright (C) 1987-1993, Dmitry Stefankov       }
+{ RESTRICTED RIGHTS     AVAILABLE ONLY FOR FREE DISTRIBUTION,           }
+{                       NOT FOR COMMERCIAL PURPOSE                      }
+{ COMPUTER              IBM PC or compatible                            }
+{ OPERATING SYSTEM      MS/PC-DOS Version 3.30 or higher                }
+{ COMPILER              Turbo Pascal Version 6.0                        }
+{                       (Borland International Inc.) or compatible      }
+{ ASSEMBLY LANGUAGE     Microsoft MASM 5.10 or compatible               }
+{ ARGUMENTS             &lt;infile&gt;   -  input  stream                     }
+{                       &lt;outfile&gt;  -  output stream                     }
+{ RETURN                None                                            }
+{ REQUIRES              None                                            }
+{ SPECIAL               This program uses simple optimization method:   }
+{                       If image size &lt; 64K then all intersegment calls }
+{                       are replaced to intrasegment calls.             }
+{                       The following table is displayed the time execu-}
+{                       tion taken from the standard INTEL data sheets: }
+{                             &lt;Instr/Clocks/Processor&gt;                  }
+{                                        8086 80186 80286 80386 80486   }
+{                            NOP          3     3     3     3     1     }
+{                     

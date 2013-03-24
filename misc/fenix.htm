@@ -1,0 +1,118 @@
+<html><head><title>Fenix - Самовосстанавливающаяся программа</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Один из вариантов программы, печатающей свой собственный исходник'>
+<meta name="keywords" content="pascal, sources, source code, fenix, misc, Прочие Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Прочие Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fenix
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Fenix - Самовосстанавливающаяся программа</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:gnom@lreri.lviv.ua">Олийнык В.Б.</a></TD>
+<TD class=black align='right'>18.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Один из вариантов программы, печатающей свой собственный исходник</TD><TD class=black colspan=2 align='right'><br><A HREF="fenix.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From news Fri Aug 19 09:55:58 1994
+From: Gorechko &lt;gnom@lreri.lviv.ua&gt;
+Subject: Кто имеет другие решения ? (см.письмо)
+Date: 18 Aug 1994 12:07:32 +0300
+Organization: Radio Engineering Research Institute
+Status: RO
+
+Самовосстанавливающиеся программы.
+У кого есть другие решения ?
+г.Львов, (0322) 64-89-51, Олийнык В.Б.,
+E-Mail: gnom@lreri.lviv.ua
+
+{&gt; Cut here. FileName= FENIX.PAS }
+Program Fenix;
+{
+  Самовосстанавливающаяся программа.
+  Turbo Pascal 6.0  Version 23.06.93
+  (0322) 64-89-51  Олийнык В.Б. г.Львов
+}
+Const
+    N = 63;
+Type
+   SA = array[1..N] of String[80];
+Const
+   S : SA = (
+   'Program Fenix;',
+   '{',
+   '  Самовосстанавливающаяся программа.',
+   '  Turbo Pascal 6.0  Version 23.06.93',
+   '  (0322) 64-89-51  Олийнык В.Б. г.Львов',
+   '}',
+   'Const',
+   '    N = 63;',
+   'Type',
+   '   SA = array[1..N] of String[80];',
+   'Const',
+   '   S : SA = (',
+   '',
+   'Procedure WriteFenix;',
+   'Var',
+   '   I    : Integer;',
+   '   F    : Text;',
+   '   Name : String;',
+   '',
+   'Procedure OutLn(S: String);',
+   'Var',
+   '  I : Integer;',
+   'Begin',
+   '  I := Pos(#96,S);',
+   '  While I &lt;&gt; 0',
+   '  do begin',
+   '     Delete(S,I,1);',
+   '     Insert(#39,S,I);',
+   '     I := Pos(#96,S);',
+   '     end;',
+   '  WriteLn(F,S);',
+   'End;',
+   '',
+   'Begin',
+   '  Name := ParamStr(0);',
+   '  I := Pos(`.`,Name);',
+   '  Delete(Name,I,255);',
+   '  Name := Concat(Name,`.PAS`);',
+   '  Assign(F,Name);',
+   '  ReWrite(F);',
+   '  for I := 1 to 12',
+   '  do WriteLn(F,S[I]);',
+   '  for I := 1 to N - 1',
+   '  do WriteLn(F,`   ```,S[I],```,`);',
+   '  WriteLn(F,`   ```,S[N],````);',
+   '  WriteLn(F,`   );`);',
+   '  for I := 13 to N',
+   '  do OutLn(S[I]);',
+   '  Close(F);',
+   '  Halt(0);',
+   'End;',
+   '',
+   'Var',
+   '  I : Integer;',
+   'Begin',
+   '  WriteLn(`Самовосстанавливающаяся программа.`);',
+   '  WriteLn(`Turbo Pascal 6.0  Version 23.06.93`);',
+   '  WriteLn(`(0322) 64-89-51  Олийнык В.Б. г.Львов`);',
+   '  WriteLn;',
+   '  for I := 1 to ParamCount',
+   '  do if ParamStr(I) = `fenix` then WriteFenix;',
+   '  WriteLn(`Запуск: `,ParamStr(0),` fenix`);',
+   'End.'
+   );
+
+Procedure WriteFenix;
+Var
+   I    : Integer;
+   F    : Text;
