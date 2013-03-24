@@ -1,0 +1,83 @@
+<html><head><title>Многопроцессорный монитор VSTask 1.01</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Улучшенная версия модуля простого многопроцессного монитора VSTasks v1.01 для Turbo Pascal ver 7.0.'>
+<meta name="keywords" content="pascal, sources, source code, vstasks, multtask, Многозадачность в Паскале ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Многозадачность в Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vstasks
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Многопроцессорный монитор VSTask 1.01</TD>
+<TD nowrap class=black>&nbsp;Владимир Кононов</TD>
+<TD class=black align='right'>17.03.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Улучшенная версия модуля простого многопроцессного монитора
+VSTasks v1.01 для Turbo Pascal ver 7.0.</TD><TD class=black colspan=2 align='right'><br><A HREF="vstasks.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  Vladimir P. Kononov &lt;cosha@centr.avb.chernigov.ua&gt;
+Organization: Chernigov AvtoVAZbank
+
+                                   Братьям по бинарному перу посвящается ...
+
+                        Hello All !
+
+        Всем заинтересованным  паскалистам  новая  версия
+многопроцессорного монитора для TP 7.0  - VSTask v1.01...
+
+{  v.1.01  ---  по сравнению с версией 1.0 исправлен выход из процесса- }
+{               процедуры по достижению  END. В предыдущей версии нужно }
+{               было обязательно перед END-ом ставить  HaltCurrentTask, }
+{               иначе  система "висла".  Теперь  при  достижении  конца }
+{               процесса-процедуры автоматом процесс закрывается ...    }
+{                                                                       }
+{                               (c) VVSsoft Group.  Кононов Владимир.   }
+
+
+                                   Кононов Владимир ...
+                                        ( Cosha )
+
+---
+     WWwv    WW     vwWW           Chernigov, AvtoVAZbank
+     oo ^\  &lt;OO&gt;   /^ 00     E-mail: cosha@centr.avb.chernigov.ua
+   (==)/\ \ (==) / / \(==)         Phone:  (046-22) 7-40-32
+          (  ||  )             Vladimir P.Kononov  (dra' Cosha)
+
+
+{&gt; Cut here. FileName= VSTASKS.PAS }
+{*******************************}
+{*         Модуль простого     *}
+{*  многопроцессного монитора  *}
+{*          VSTasks v 1.01     *}
+{*   для Turbo Pascal ver 7.0  *}
+{* (c) Copyright VVSsoft Group *}
+{*******************************}
+{$F+$S-}
+
+{  v.1.01  ---  по сравнению с версией 1.0 исправлен выход из процесса- }
+{               процедуры по достижению  END. В предыдущей версии нужно }
+{               было обязательно перед END-ом ставить  HaltCurrentTask, }
+{               иначе  система "висла".  Теперь  при  достижении  конца }
+{               процесса-процедуры автоматом процесс закрывается ...    }
+{                                                                       }
+{                               (c) VVSsoft Group.  Кононов Владимир.   }
+
+Unit VSTasks;
+
+interface {--------------------------------------------}
+
+Type
+
+ PTaskRec =^TTaskRec;  { ---- описатель процесса -----}
+ TTaskRec =
+  record
+   NumProc  : word;        { уникальный номер процесса }
+  

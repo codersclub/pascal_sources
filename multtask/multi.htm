@@ -1,0 +1,60 @@
+<html><head><title>Multi-Programming Kernel v1.2 for Turbo Pascal 5.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='MULTI unit for Turbo Pascal 4.0 or later. The unit will allow you to run several TP-procedures as concurrent processes. It also provides facilities for synchronizing the processes and for communication between them. The parallellism implied is not strictly true: your computer (presumably) has only one processor and what the unit does is to share that processors time between the various processes to create an illusion of parallel processing. This assembly of concurrently executing procedures is called a multiprogram.'>
+<meta name="keywords" content="pascal, sources, source code, multi, multtask, Многозадачность в Паскале ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Многозадачность в Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;multi
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Multi-Programming Kernel v1.2 for Turbo Pascal 5.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:231/47">Anders Wolf Pedersen</a></TD>
+<TD class=black align='right'>03.06.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">MULTI unit for Turbo Pascal 4.0 or later.
+The unit will allow you to run several TP-procedures
+as concurrent processes. It also provides facilities
+for synchronizing the processes and for communication between them.
+The parallellism implied is not strictly true: your computer (presumably)
+has only one processor and what the unit does is to share that processors time
+between the various processes to create an illusion of parallel processing.
+This assembly of concurrently executing procedures is called a multiprogram.</TD><TD class=black colspan=2 align='right'><br><A HREF="multi.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">       MULTI-PROGRAMMING KERNEL FOR TURBO PASCAL 5.0, VERSION 1.2
+       ==========================================================
+
+      Copyright 1989 Anders Wolf Pedersen. You may use this product on a
+    shareware basis, i.e. if you find it usefull you should send
+    Dkr 150, US$ 20 or what you deem appropriate to
+
+                     Anders Wolf Pedersen
+                     Vejlegade 9,5.th
+                     DK 2100 Koebenhavn
+                     Denmark
+
+   1. Introduction
+   ---------------
+
+   The following is a description of the MULTI unit for Turbo Pascal 4.0 or
+later. The unit will allow you to run several TP-procedures as concurrent
+processes. It also provides facilities for synchronizing the processes and for
+communication between them.
+   The parallellism implied is not strictly true: your computer (presumably)
+has only one processor and what the unit does is to share that processors time
+between the various processes to create an illusion of parallel processing.
+This assembly of concurrently executing procedures is called a multiprogram.
+   The unit will run on any IBM PC or compatible computer with Turbo Pascal
+version 4.0 or 5.0. You may need to change some interrupt numbers, see
+section 8.
+   This file should be a part of a package containing the following files:
+
+             MULTI.PAS     - Source file 

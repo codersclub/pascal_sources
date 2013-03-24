@@ -1,0 +1,81 @@
+<html><head><title>MTASK v2.0 - Multi-Tasking Unit for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для организации простейшей многозадачности  в программах на Turbo Pascal 5.0 - Borland Pascal 7.0. Приведен очень простой пример использования.<br><font color=#666666> MTASK v2.0 is a multi-tasking unit for Turbo Pascal 5.">
+<meta name="keywords" content="pascal, sources, source code, mtask20, multtask, Многозадачность в Паскале ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Многозадачность в Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mtask20
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MTASK v2.0 - Multi-Tasking Unit for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Wayne Conrad</TD>
+<TD class=black align='right'>15.03.90</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для организации простейшей многозадачности 
+в программах на Turbo Pascal 5.0 - Borland Pascal 7.0.
+Приведен очень простой пример использования.<br><font color=#666666>
+MTASK v2.0 is a multi-tasking unit for Turbo Pascal 5.</TD><TD class=black colspan=2 align='right'><br><A HREF="mtask20.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>19k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      MTASK v2.0
+
+MTASK is a unit for Turbo Pascal 5.5, to allow a Turbo Pascal
+program to exhibit simple multi-tasking.  MTASK gives your
+program a non-preemptive, request driven multi-tasking
+capability.  I will explain what I mean by that later.
+
+The file MTASK20.ZIP contains the following files:
+
+     MTASK.DOC      Documentation in Multi-Edit format
+     MTASK.PAS      The source code for the MTASK unit
+     MTASK.PRN      Documentation, ready to print
+     READ.ME        Last minute notes (this file)
+     TEST1.PAS      Demonstration program using MTASK
+
+I hope you have as much fun using MTASK as I did writing it!
+
+MTASK 2.0 was written and donated to the public domain by Wayne
+E. Conrad (me) in March of 1990.  I may be contact via my BBS,
+
+     Pascalaholics Anonymous
+     (602) 484-9356
+     300/1200/2400 bps
+     24 hours/day
+
+or by mail at my home:
+
+     10 E Bell Road #1001
+     Phoenix, AZ  85022
+
+I am interested in any modifications, bug reports, or comments
+you have.
+
+If you modify this package, please keep my name and the name of
+any other programmers who've worked on it intact.  Give credit to
+yourself, too!  Please distribute the complete package, with
+documentation and demonstration programs included.
+
+
+1.1 INTRODUCTION
+
+
+MTASK allows your Turbo Pascal program to do simple multi-tasking.
+I call MTASK's brand of multi-tasking "non-preemptive, request
+driven."
+
+Preemptive means that the switch from one task to another can
+happen at almost any time.  Most preemptive systems have an
+interrupt driver hooked to a hardware timer, which causes a task
+switch every time the hardware timer goes off.  The advantage of
+this kind of multi-tasking is that your programs don't have to be
+written with multi-tasking in mind, and don't even have to know
+that its taking place.  Also, no program can hog the system for
+long, because the interrupt driver switches from one program to
+another fairly often.  Desqview and Double-DOS, and OS/2 are
+operating environments that 

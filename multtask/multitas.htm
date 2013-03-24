@@ -1,0 +1,67 @@
+<html><head><title>MutiTask 2.10 - Graphical Multi Threads for DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для организации псевдо-мультизадачных приложений в DOS [BP7]. Работает в real mode, DPMI, комбинируется с TurboVision, прекрасно работает с графикой. Поддерживается обмен сообщениями между отдельными процессами. Имеется красивый демонстрационный пример, в котором запускается 6 графических процессов. Nice!'>
+<meta name="keywords" content="pascal, sources, source code, multitas, multtask, Многозадачность в Паскале ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Многозадачность в Паскале</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;multitas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MutiTask 2.10 - Graphical Multi Threads for DOS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:avonwyss@beaulieu-software.ch">Arsene von Wyss</a></TD>
+<TD class=black align='right'>12.07.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для организации псевдо-мультизадачных приложений в DOS [BP7].
+Работает в real mode, DPMI, комбинируется с TurboVision,
+прекрасно работает с графикой. Поддерживается обмен сообщениями
+между отдельными процессами. Имеется красивый демонстрационный
+пример, в котором запускается 6 графических процессов. Nice!</TD><TD class=black colspan=2 align='right'><br><A HREF="multitas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Multitask - Preemptive Multithreading in DOS.
+            Handles DOS, BIOS, Mouse and Keyboard interrupts fine,
+            works on a 100Hz basis.
+            Thread messages can be sent, data pipeline between threads.
+            Extended run-time error message with thread indication.
+            Works very well with DPMI (cooperative) and TurboVision.
+            Real-Mode FPU/CLI problem removed.
+DEMO for
+Multitask - Demo application that shows how Multitask works.
+            Graphics, timers, preemprive and cooperative threads.
+            Includes realtime fractal zoom. (German description)
+
+Примечание от RSWAG &lt;rswag@sources.ru&gt;:
+---------------------------------------
+  Все комментарии и диалоги приведены на немецком языке.
+
+  Демонстрационная программа TASKS:
+  При старте экран разбивается на 4 окна,
+  в каждом из которых запускается отдельный процесс:
+
+  1. Цветные радиальные кольца
+  2. Цветные прямоугольники
+  3. Множество цветных точек
+  4. Фрактальная плазма
+
+    Кроме того, запускается еще 2 графических процесса процесса
+    в стиле "Copper Bars", которые работают в областях,
+    перекрывающих сразу по два окна.
+
+  Tasks.pas управляется следующими клавишами:
+
+  Left Shit   - Остановить процесс с кольцами
+  Right Shift - Остановить процесс с прямоугольниками
+  Control     - Остановить процесс с точками
+  Alt         - Остановить процесс с фракталами
+
+  Любая другая клавиша - завершение программы.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
