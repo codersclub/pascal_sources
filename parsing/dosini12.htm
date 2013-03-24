@@ -1,0 +1,78 @@
+<html><head><title>DOSINI.PAS 1.2 - Windows style .INI file for DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='DOSINI.PAS is a Borland Pascal unit for easy access to Windows style INI files in DOS real and pmode programs. Released to the Public Domain.'>
+<meta name="keywords" content="pascal, sources, source code, dosini12, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dosini12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DOSINI.PAS 1.2 - Windows style .INI file for DOS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:tba@m.dia.dk">Thomas Bargholz</a></TD>
+<TD class=black align='right'>26.09.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">DOSINI.PAS is a Borland Pascal unit for easy access
+to Windows style INI files in DOS real and pmode programs.
+Released to the Public Domain.</TD><TD class=black colspan=2 align='right'><br><A HREF="dosini12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{****************************************}
+{*           DOSINI.PAS 1.20            *}
+{*                                      *}
+{*       Author : Thomas Bargholz       *}
+{*     Written : August 10th, 1994      *}
+{*                                      *}
+{*    Donated to the Public Domain      *}
+{****************************************}
+
+This unit implements a Windows style .INI file for DOS applications, by
+supplying easy and fast access to the exact infomation in the .INI file
+of your choise.
+The Windows API supplies functions to retrieve information in .INI files,
+but are (ofcource) directed at Windows. Now DOS real and pmode programs
+can use .INI files just as easy.
+As in Windows, the DOS .INI files must have the format:
+
+[section]
+entry=profile
+
+By supplying the .INI filename, the section name, and the entry name,
+DOSINI will return the profile.
+The .INI file can be placed anywhere, but this unit supplies two functions
+to locate the DOS directory and your applications home directory, so if
+you place your .INI file in one of those directories, you can locate
+your .INI files easily.
+
+This unit requires TurboPowers Objecty Professional (OPRO) to re-compile!
+TurboPower : US phone    : 800-333-4160
+             Other phone : 719-260-9136
+             Fax         : 719-260-7151
+If you don't have OPRO, this is a list of the OPRO functions used by this
+unit, and what they do. You can then create your own versions:
+
+Function StUpCase(S : String) : String; -Turns a string into upper case.
+
+Function JustPathName(Path : String) : String; -Returns only the path of
+a full path file name.
+
+Function ExistOnPath(FileName, FullPath : String) : Boolean; -Checks if a
+file exist on the path. If the function returns true, FullPath will contain
+the full path to the file.
+
+Changes:
+
+06.09.94:     Added DEFINE OPRO. Create simmilar functions of those in
+              OPRO for those of you that don't have OPRO.
+26.09.94:     Removed bug in WriteProfileString. Tanks to Germano Rossi
+              for giving me this bugfix. (germano@chiostro.univr.it)
+
+
+If you have any comments, sugg

@@ -1,0 +1,69 @@
+<html><head><title>Parser 1.0 - Recursive Parser with functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Recursive decent expression parser with +-/*^ and trigonomethric functions for turbo-pascal'>
+<meta name="keywords" content="pascal, sources, source code, parse10, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;parse10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Parser 1.0 - Recursive Parser with functions</TD>
+<TD nowrap class=black>&nbsp;Loewy Ron</TD>
+<TD class=black align='right'>14.06.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Recursive decent expression parser with +-/*^ and
+trigonomethric functions for turbo-pascal</TD><TD class=black colspan=2 align='right'><br><A HREF="parse10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">*******************************************************************************
+*                                   parser                                    *
+* recursive decent expression parser for turbo-pascal, Loewy Ron, 1991.       *
+* parser.doc, Last Update :                  Jun. 14, 1991.                   *
+*******************************************************************************
+
+Introduction
+------------
+
+  Parser is a recursive decent expression parser unit for Turbo-Pascal, this
+ unit includes the 5 basic math. operators (+ - * / ^), and some basic
+ mathematical functions (sin, exp, cos, ln, log10, log2, abs, arctan, sqr,
+ sqrt, tan, cotan, arcsin, arccos) and 2 constants (pi, e). Parser can be
+ used to receive formula input from the user, and perform the neccessary
+ calculations during program runtime. Parser supports 10 general purpose
+ variables (v0, v1, .., v9) that can be set (using the = operator) and used
+ in formulas by the user.
+
+Operation
+---------
+
+  Simply use parser unit in your program using the USES clause, when ever you
+ want to parse a string formula do :
+        macro := stringFormula; { stringFormula is where you've got the formula }
+        myResult := getExpr(validity);
+        if (validity = false) then
+                tellError { the formula has an error at the errAt byte }
+        else
+                tellResult(myResult);
+
+  Please notice - the source code is provided, so you will probably find it
+ easy to understand that example after you will look into the code.
+
+Contact
+-------
+
+  You can contact me on what-ever you want to at my address at :
+
+          Loewy Ron,                            Loewy Ron
+          9 Haneveem st.            Or          20 Smolanskin st.
+          Herzeliya, 46465,                     Haifa, 34366,
+          Israel.                               Israel.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

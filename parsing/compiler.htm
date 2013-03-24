@@ -1,0 +1,109 @@
+<html><head><title>Курсовик - Построение компилятора Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Курсовая работа на тему "Построение компилятора для языка программирования "ПАСКАЛЬ". Реализовано базовое подмножество языка Pascal - процедуры, функции, циклы, условные операторы, логические и арифметические выражения и т.п. Приведен исходный код компилятора для BP7 и примеры для компиляции.'>
+<meta name="keywords" content="pascal, sources, source code, compiler, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;compiler
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Курсовик - Построение компилятора Pascal</TD>
+<TD nowrap class=black>&nbsp;Алексей Попов</TD>
+<TD class=black align='right'>06.06.2000</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Курсовая работа на тему
+"Построение компилятора для языка программирования "ПАСКАЛЬ".
+Реализовано базовое подмножество языка Pascal -
+процедуры, функции, циклы, условные операторы,
+логические и арифметические выражения и т.п.
+Приведен исходный код компилятора для BP7 и примеры для компиляции.</TD><TD class=black colspan=2 align='right'><br><A HREF="compiler.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>100k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">           КУРСОВАЯ РАБОТА
+по дисциплине "СИСТЕМЫ ПРОГРАММИРОВАНИЯ"
+    на тему "Построение компилятора
+  для языка программирования "ПАСКАЛЬ"
+----------------------------------------
+Выполнили студенты 5-го курса ФПМ
+группы КМ-51
+
+Попов Алексей КМ-5119
+Лобенко Максим КМ-5129
+Седых Инна КМ-5122
+
+Руководитель: Россошинский Д.А.
+Киев, 2000
+
+
+СОДЕРЖАНИЕ
+
+ВВЕДЕНИЕ					3
+1.ПОСТАНОВКА ЗАДАЧИ				5
+2.ТЕОРЕТИЧЕСКИЕ ОБОСНОВАНИЯ			6
+2.1.Формализованное решение			6
+2.2.Семантические процедуры			7
+2.3.Структуры данных и спецификация функций	8
+3. ОПИСАНИЕ ЛОГИЧЕСКОЙ СТРУКТУРЫ ПРОГРАММЫ	9
+4.ТЕСТИРОВАНИЕ ПРОГРАММЫ		      101
+5. Выводы				      122
+5. Литература			              133
+
+
+ 1.ПОСТАНОВКА ЗАДАЧИ
+
+В данной работе в качестве языка программирования был выбран
+некоторый урезанный вариант языка Pascal. Подмножество выбиралось
+так, чтобы учесть основные структуры языка - процедуры, функции,
+циклы, условные операторы, логические и арифметические выражения и т.п.
+
+Примерный "шаблонный" макет программы выглядит так: &lt;pre&gt;
+
+
+Var
+  &lt;name1&gt; : &lt;type1&gt;;
+  &lt;name2&gt; : &lt;type2&gt;;
+  ...
+
+procedure &lt;name&gt; ( &lt;in_var_name11&gt;: &lt;type11&gt;;
+		   &lt;in_var_name21&gt; : &lt;type12&gt;;
+		   ...
+		   var &lt;out_var_name11&gt; : &lt;type21&gt;;
+		   var &lt;out_var_name21&gt; : &lt;type22&gt;;
+		   ...);
+var ...
+
+begin
+ &lt;program_code&gt;
+end;
+
+function &lt;name&gt; (  &lt;in_var_name11&gt; : &lt;type11&gt;;
+		   &lt;in_var_name21&gt; : &lt;type12&gt;;
+		   ...
+		   var &lt;out_var_name11&gt; : &lt;type21&gt;;
+		   var &lt;out_var_name21&gt; : &lt;type22&gt;;
+		   ...) : &lt;type&gt;;
+const ...
+var ...
+begin
+ &lt;program_code&gt;
+end;
+
+begin
+  for ... to|downto ... do ...
+  if ... then ... else ...
+  x := a+b*(c-d/e)/f+(-2.3e+5-11)*func(y,t);
+end.
+&lt;/pre&gt;
+
+
+При этом учтены некоторые особенности языка:
+
+1. Большие и маленькие

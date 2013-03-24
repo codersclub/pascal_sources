@@ -1,0 +1,51 @@
+<html><head><title>Интерпретатор Арифметических Выражений</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='SoftWeyr Expression Interpreter Version 1.0. этот модуль содержит средства для интерпретации арифметических выражений (типа Real) передаваемых в виде строковых переменных.'>
+<meta name="keywords" content="pascal, sources, source code, swexpr, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;swexpr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Интерпретатор Арифметических Выражений</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>16.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">SoftWeyr Expression Interpreter Version 1.0.
+этот модуль содержит средства для интерпретации арифметических выражений
+(типа Real) передаваемых в виде строковых переменных.</TD><TD class=black colspan=2 align='right'><br><A HREF="swexpr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{***************************************************************************}
+{*                              SWEXPR.PAS                                 *}
+{*                  SoftWeyr Expression Interpreter                        *}
+{*                              Version 1.0                                *}
+{*               Copyright (c) by SoftWeyr,1994                            *}
+{***************************************************************************}
+{Общие положения:
+ этот модуль содержит средства для интерпретации арифметических выражений
+ (типа Real) передаваемых в виде строковых переменных. Выражения могут
+ содержать:
+ 1. Вещественные константы в формате, принятом в языке Pascal
+ 2. Операции * / + - (вычисление в степень реализовано как стандартная функция)
+ 3. Функции как стандартные, так и определенные пользователем, имеющие
+    до MaxStackDepth параметров
+ 4. Определенные пользователем переменные (тогда пользователю придется
+    самому озаботится, чтобы им было присвоено значение, и как они
+    будут храниться)
+ 5. Круглые скобки в любом количестве.
+При компиляции в Pascal версии 6.0 и выше количество функций и переменных
+ ограничено 16384, в версии 5.x - значениями констант MaxFuncCount и
+ MaxVarCount. Выражения сначала компилируются во внутренний псевдокод,
+ а затем уже он интерпретируется (и, по-моему должен это делать
+ достаточно быстро)}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

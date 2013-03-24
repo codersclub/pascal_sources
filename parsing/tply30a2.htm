@@ -1,0 +1,84 @@
+<html><head><title>TP Lex and Yacc Version 3.0a Sources</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='TP Lex and Yacc version 3.0a Sources - A lexical analyzer generator for MS-DOS/Turbo Pascal. TP Yacc - Yet Another Compiler Compiler for MS-DOS/Turbo Pascal.'>
+<meta name="keywords" content="pascal, sources, source code, tply30a2, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tply30a2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TP Lex and Yacc Version 3.0a Sources</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ag@muwiinfa.geschichte.uni-mainz.de">Albert Graef</a></TD>
+<TD class=black align='right'>13.05.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">TP Lex and Yacc version 3.0a Sources
+- A lexical analyzer generator for MS-DOS/Turbo Pascal.
+TP Yacc - Yet Another Compiler Compiler for MS-DOS/Turbo Pascal.</TD><TD class=black colspan=2 align='right'><br><A HREF="tply30a2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>77k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TP Lex and Yacc Version 3.0a [May 92] Sources
+
+Copyright (c) 1990-92 by Albert Graef, Schillerstr. 18,
+6509 Schornsheim/Germany (ag@muwiinfa.geschichte.uni-mainz.de)
+All rights reserved
+
+NO WARRANTY: The sources are provided as is. The author is not liable for
+any errors in the source modules or any damages or other consequences of
+their use. There also is no warranty that the programs fit any particular
+purpose.
+
+The TP Lex and Yacc programs consist of 23 modules with about 11000 lines
+of code. A short description of each of the source modules is given below.
+
+To compile TP Lex and Yacc, you need Turbo Pascal 6.0 (may also work with
+Turbo Pascal 5.0/5.5, but I have not tested it). Compile the following
+four source files using the built-in make function of Turbo Pascal (or tpc
+command line option /M), with I/O checking turned off (compiler directive
+$I- or tpc command line option /$I-). (Also, you will usually turn the
+debugging options ($D and $L) off.)
+
+- LEXLIB.PAS
+- YACCLIB.PAS
+- LEX.PAS
+- YACC.PAS
+
+You then have a running version of TP Lex and Yacc. The source file of
+the TP Yacc parser and main program (which is implemented with TP Yacc
+itself) is contained in YACC.Y. This file may be fed into TP Yacc to
+generate the YACC.PAS file. To bootstrap TP Yacc, once you have a
+YACC.EXE, you can recompile YACC.Y with TP Yacc as follows:
+
+yacc yacc myyacc
+
+Then try:
+
+fc yacc.pas myyacc.pas
+
+The two files should not differ.
+
+
+Description of the Source Modules
+---------------------------------
+
+LEX      PAS		TP Lex main program
+LEXBASE  PAS		base module (global declarations)
+LEXDFA   PAS		DFA construction algorithm
+LEXLIB   PAS		TP Lex library unit
+LEXLIST  PAS		listing operations
+LEXMSGS  PAS		messages and error handling
+LEXOPT   PAS		DFA optimization algorithm
+LEXPOS   PAS		operations to construct the position table
+LEXRULES PAS		parser for TP Lex grammar rules
+LEXTABLE PAS		internal tables used by the TP Lex program
+
+YACC     PAS		TP Yacc parser and main program
+YACC     Y		TP Yacc source for YACC.PAS
+YACCBASE PAS		base module (global

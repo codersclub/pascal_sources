@@ -1,0 +1,67 @@
+<html><head><title>ReadIni - Библиотека на BP для чтения INI- файлов</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Библиотечка для чтения INI- файлов на Борланд Паскале. Допускаются включаемые секции и файлы. Главный рабочий модуль - READINI, с комментариями. Компилируется под реальный режим, DPMI и в DLL. Для последней модуль экспорта (собственно library) - INIEXPO, модуль импорта - INIIMPORT. Остальные файлы в SOURCE нужны для компиляции READINI, однако имеют и самостоятельную ценность. Реальный пример использования - COMMINI в SAMPLE.'>
+<meta name="keywords" content="pascal, sources, source code, readini, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;readini
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ReadIni - Библиотека на BP для чтения INI- файлов</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:4641/41.73">Alexander Malygin</a></TD>
+<TD class=black align='right'>22.05.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Библиотечка для чтения INI- файлов на Борланд Паскале.
+Допускаются включаемые секции и файлы.
+Главный рабочий модуль - READINI, с комментариями.
+Компилируется под реальный режим, DPMI и в DLL.
+Для последней модуль экспорта (собственно library) - INIEXPO,
+модуль импорта - INIIMPORT.
+Остальные файлы в SOURCE нужны для компиляции READINI,
+однако имеют и самостоятельную ценность.
+Реальный пример использования - COMMINI в SAMPLE.</TD><TD class=black colspan=2 align='right'><br><A HREF="readini.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>35k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/20.30) ------------------ SU.PASCAL.MODULA.ADA -
+ From : Alexander Malygin                   2:4641/41.73    03 Jan 97  21:31:20
+ To   : All                                                 05 Jan 97  09:51:20
+ Subj : О текстовой конфигуpации (readini)
+-------------------------------------------------------------------------------
+    Hi All !
+
+Тут пpосили модуль для pаботы с текстовым файлом конфигуpации..
+Их есть у меня!
+
+Там, в аpхиве, исходники и пpимеpы.
+Работает с файлом, поделенным на секции - как CONFIG.SYS в DOS 6.22+
+или WIN.INI, SYSTEM.INI.
+Сделан на базе модуля чтения файла для компилятоpа, и унаследовал от
+него свойство обpабатывать сложные многостpочные стpуктуpы.
+Допускает включаемые секции и файлы. Единственный недостаток - read only.
+
+
+  Модуль для чтения параметров инициализации из текстового файла в формате,
+  подобном WIN.INI и CONFIG.SYS.
+
+  Строки с параметрами сгруппированы в секции.
+  В строке первым идет ключевое слово, затем одно или несколько значений.
+  Разделители - равно, запятая, пробел и все символы с кодом меньше пробела.
+  Символ комментария-до-конца-строки точка с запятой.
+  Блочные комментарии по паскалевскому типу - между фигурными скобками,
+  допускаются вложенные.
+  Имя секции заключается в квадратные скобки.
+
+  Имеется прямой доступ к началу секции, последовательный или прямой доступ
+  к строке внутри секции по ключевому слову.
+
+  Ключевое слово INCLUDE с последующим именем секции инициирует переход
+  на указанную секцию как на подпрограмму.
+

@@ -1,0 +1,78 @@
+<html><head><title>Разбор параметров командной строки</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Объектно-ориентированный парсер командной строки. Для написания программ, по набору ключей сравнимых с ARJ и PKUNZIP. Требует наличия TurboProfessional или Object Professional'>
+<meta name="keywords" content="pascal, sources, source code, parsers, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;parsers
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Разбор параметров командной строки</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>12.05.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Объектно-ориентированный парсер командной строки.
+Для написания программ, по набору ключей сравнимых с ARJ и PKUNZIP.
+Требует наличия TurboProfessional или Object Professional</TD><TD class=black colspan=2 align='right'><br><A HREF="parsers.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         Модуль PARSERS
+        Разбор параметров для утилит с командной строкой
+
+       (Объектно-ориентированный парсер командной строки.
+        Для написания программ, по набору ключей сравнимых
+                        с ARJ и PKUNZIP)
+
+   Модуль содержит  средства  для  разбора  строки  параметров,
+традиционно применяемых для утилит с командной строкой.
+Он позволяет использовать как ключи в командной строке,  так  и
+файл конфигурации, в котором заданы ключи по умолчанию.
+
+    Для разбора  командной  строки  необходимо  создать  объект
+типа TParser, затем с помощью метода Insert вставить в него все
+ключи  и  параметры,  которые  могут  встретиться  в  командной
+строке,  а  затем  вызвать   процедуру   ParseCommandLine   или
+ParseConfigFile.   Результаты   разбора   будут   запомнены   в
+статических переменных вашей программы, которые  были  переданы
+объектам-насленикам TOption при их инициализации.
+
+ Пример:
+  Const A:Boolean=True;
+        B:Boolean=False;
+        C:Boolean=False;
+        S:String='Заголовок';
+  var FileName:String;
+      P:PParser;
+  begin
+    P:=New(PParser,Init);
+    P^.Insert(New(POffKey,Init('A',@A)));
+    P^.Insert(New(POnKey,Init('B',@B)));
+    P^.Insert(New(POnOffKey,Init('C',@C)));
+    P^.Insert(New(PStringKey,Init('S',@S)));
+    P^.Insert(New(PParameterKey,Init(A,True)));
+    ParseCommandLine(P);
+    Dispose(P,Done);
+
+ Результаты работы этой программы будут таковы:
+ Если в командной  строке  встретится  опция  /A,  то  значение
+переменной A будет установлено в False.
+
+ Если попадется /B, то B будет установлено в TRUE.
+Если  встретится  /C+   или   /C-   то   C   получет   значение
+соответственно True или False, а появление  /C  без  плюся  или
+минуса вызовет сообщение об ошибке.
+
+ Опция  /S,  сопровождаемая  текстом   в   кавычках,   например
+/S"Title" заменит значение переменной S на этот текст.
+
+ Первый параметр, не имеющий префикса / или  -  будет  присвоен
+переменной FileName,  а  если  такого  не  окажется,  то  будет
+выданно сообщение об ошибке, так как он считается обязательн

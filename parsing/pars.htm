@@ -1,0 +1,49 @@
+<html><head><title>Simple Calculator Function with Brackets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Что-то типа калькулятора, который может вычислять выражения со скобками подобного рода: -(2.7^x - 5*x^2) / (3 + x%4). X - это действительный параметр, значение которого можно указывать.'>
+<meta name="keywords" content="pascal, sources, source code, pars, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pars
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Simple Calculator Function with Brackets</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexfru@chat.ru">Alex Frounze</a></TD>
+<TD class=black align='right'>06.02.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Что-то типа калькулятора, который может вычислять выражения
+со скобками подобного рода: -(2.7^x - 5*x^2) / (3 + x%4).
+X - это действительный параметр, значение которого можно указывать.</TD><TD class=black colspan=2 align='right'><br><A HREF="pars.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Function Parse (S : String; Arg : Real; Var Result : Real) : Byte;
+
+(****************************************************)
+(*                    Examples:                     *)
+(* S = "4 * 60 + 10 * 9"         =&gt; Result = 330.0  *)
+(* S = "1.5E2+2.3e-1"            =&gt; Result = 150.23 *)
+(* S = "-(X-3)*(x+5)", Arg = 4.0 =&gt; Result = -9.0   *)
+(* S = "9.0^0.5"                 =&gt; Result = 3.0    *)
+(* S = "x%8", Arg = 15.0         =&gt; Result = 7      *)
+(****************************************************)
+
+(****************************************************)
+(*                 Return values:                   *)
+(* 0 - successfuly - no error                       *)
+(* 1 - error in numeric format like "1e" or "2.e3"  *)
+(* 2 - unknown symbol in expression                 *)
+(* 3 - not balanced brakets i.e. "(x-1)*(x+2"       *)
+(* 4 - positional error like in "4+x-" or ")2"      *)
+(* 5 - expression is empty - nothing to compute     *)
+(* 6 - math error such as division by zero etc.     *)
+(****************************************************)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

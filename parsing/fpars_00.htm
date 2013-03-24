@@ -1,0 +1,70 @@
+<html><head><title>FParser - Translator/Interpreter from Infix to Token</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='FParser (Function PARSER) translates a function or expression written in infix notation (as per Pascal or Ada) and translates it to tokenized RPN (Reverse Polish Notation). The Tokenized RPN can then be interpreted as many times as required with new values in the expression. FParser has a number of standard (built-in) mathematical functions plus a few others from Digital Signal Processing.'>
+<meta name="keywords" content="pascal, sources, source code, fpars_00, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;fpars_00
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FParser - Translator/Interpreter from Infix to Token</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:brown@smd4.jsc.nasa.gov">Keith S. Brown</a></TD>
+<TD class=black align='right'>03.09.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">FParser (Function PARSER) translates a function or expression
+written in infix notation (as per Pascal or Ada)
+and translates it to tokenized RPN (Reverse Polish Notation).
+The Tokenized RPN can then be interpreted as many times as required
+with new values in the expression.
+FParser has a number of standard (built-in) mathematical functions
+plus a few others from Digital Signal Processing.</TD><TD class=black colspan=2 align='right'><br><A HREF="fpars_00.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>24k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  FPARSER  (UNIT) LIBRARY REFERENCE
+
+  Version     - 0.00
+
+  File        - FPARSER.PAS
+
+  Copyright   - None. Public Domain.
+
+  Author      - Keith S. Brown (except where otherwise noted)
+                Surface mail:              Email:(brown@smd4.jsc.nasa.gov)
+                  K.Brown
+                  Code:NASA/JSC/ES64
+                  Houston, TX 77058 (USA)  Voice:713-483-8952
+
+  Purpose     - 1. Translate an infix expression to tokenized RPN.
+                2. Execute a tokenized RPN expression.
+
+  Language    - Borland International's Turbo Pascal V:4.x+ for MS-DOS
+
+  Remarks     - Handles standard Pascal computational assignment expressions.
+                With some differences, ie.:
+
+               as per Ada, numeric values may contain embedded underscores.
+
+               only the first 63 characters of an identifier are significant
+
+               the semi-colon terminating an expression is optional.
+
+               the extended unary functions "ArcCos", "ArcSin", "Log"
+                (base 10), "Sign", "Step", "Tan" are available as well as
+                the standard Pascal unary functions "Abs", "ArcTan", "Cos",
+                "Exp", "Ln", "Round", "Sin", "Sqr", "Sqrt", "Trunc".
+
+               the extended binary operators "^" (as in x^3, cube of x) are
+                available as well as the standard Pascal binary operators
+                of "+", "-", "*", "/", "DIV", and "MOD".
+
+               the extended trinary functions:
+                "Gate(x,cntr,wide:REAL):REAL;"     (rectangular pulse),
+                "Gaus(x,cntr,varia

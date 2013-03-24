@@ -1,0 +1,54 @@
+<html><head><title>EVAL - Компиляция формулы</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для разбора и вычисления  выражений из строковой переменной.'>
+<meta name="keywords" content="pascal, sources, source code, eval, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;eval
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EVAL - Компиляция формулы</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5022/32.3">Pavel Gusev</a></TD>
+<TD class=black align='right'>29.05.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для разбора и вычисления  выражений
+из строковой переменной.</TD><TD class=black colspan=2 align='right'><br><A HREF="eval.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- ZNICE.SOURCES (2:5021/2.30) --------------------------------- ZNICE.SOURCES -
+ From : Pavel Gusev                         2:5022/32.3     29 May 97  19:20:57
+ To   : All                                                 02 Jun 97  11:39:47
+ Subj : Компиляция формулы
+-------------------------------------------------------------------------------
+    Здравствуй, All!
+
+Представляю вашему вниманию вот этот юнит. Это для тех кто интересуется
+разбором выражения. Представлен исходным текстом для BP 7.0 ( делался на нем,
+но думаю пойдет и на ранних ). Есть подробные комменитарии. Отличается от
+других аналогичных вещей, пробегавших тут, тем что приспособлен для
+многократных вычислений типа построения графиков: сначала формула компилируется
+в промежуточный код ( на этой стадии происходит лексический и синтаксический
+разбор, которые и занимают основную массу времени при вычислении ), после чего
+можно многократно вызывать этот код на исполнение ( работает интерпритатор
+промежуточного кода ).
+
+Если встретите глюки, то не пинайте, а лучше сообщите мылом. Может кто-нибудь
+возмется наваять транслятор промежуточного кода в исполняемый код для
+сопроцессора? Так чтобы компилировался в память и потом вызывался. :)~
+
+
+    Hаше Вам.                                                Pavel
+    Я побежал, а то у меня там шведы Кемь взяли 8(((
+
+--- Говорящее письмо. Масса нетто 2.50+ кг
+ * Origin: Графиня ехала в карете со сложеным в гармошку задом (2:5022/32.3)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

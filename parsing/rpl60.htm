@@ -1,0 +1,84 @@
+<html><head><title>RPL 1.21.60b - Pattern Replacer [TP6]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Утилита для поиска и замены частей текста на основе регулярных выражений.<br><font color=#666666> Text replace utility based on regular expressions and pattern matching algorithms.</font>">
+<meta name="keywords" content="pascal, sources, source code, rpl60, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rpl60
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RPL 1.21.60b - Pattern Replacer [TP6]</TD>
+<TD nowrap class=black>&nbsp;Steve Whalen</TD>
+<TD class=black align='right'>01.01.93</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="rpl60.gif"><p style="margin-left:20px">Утилита для поиска и замены частей текста на основе
+регулярных выражений.<br><font color=#666666>
+Text replace utility based on regular expressions and
+pattern matching algorithms.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="rpl60.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>40k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">            ----------------------------------------
+            TurboPower Utilities Programmer's Manual
+                           RPL Utility
+            ----------------------------------------
+             Copyright (C) 1985 TurboPower Software.
+                      All Rights Reserved.
+
+
+1. Introduction
+
+RPL is based on the pattern matching algorithms presented in the
+book "Software Tools in Pascal". However, we have significantly
+extended the capabilities of the tools presented there, and have
+also used more of the powerful data structures available in
+Pascal to improve the performance of the program.
+
+We are very interested in hearing of any general purpose
+match/replace expressions that you develop using RPL.
+
+
+2. Algorithms
+
+For a basic introduction to regular expressions or pattern
+matching algorithms we direct you to the references given in
+section 6.
+
+RPL uses a record and pointer-based approach to storing regular
+expressions. The following type declarations are key to all of
+the operations of RPL.
+
+  TYPE
+    longstring = string[255];
+
+    tokens = (tnil, tlitchar, tccl, tnccl, tclosure, tmaybeone,
+              tany, tbol, teol, tgroup, tbtag, tetag, tditto);
+
+    patptr = ^patrecord;
+
+    sptr = ^longstring;
+
+    patrecord = RECORD
+                  tok : tokens;
+                  one : Char;
+                  nextok : Boolean;
+                  strptr : sptr;
+                  nestptr, next : patptr;
+                END;
+
+Each regular expression used by RPL is stored internally as a
+linked list of PATRECORDs. The function of each record is
+described by the .TOK field of the record. The most
+straightforward function for one of these records is the TLITCHAR
+token type. This indicates that the record will match a single
+literal character, and that character is stored in the .ONE field
+of the record. The record fields perform the following functions:
+
+   TOK - a scalar type that classifies the function of this
+         regular expression token.
+
+   ONE - a single character, only used when the token

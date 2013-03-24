@@ -1,0 +1,66 @@
+<html><head><title>Run-Time Line Compiler Version 1.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вашему вниманию предлагается компилятор математических выражений для TP 6.0 и TP 7.0 . Используя данный компилятор Вы получаете возможность в ходе выполнения Ваших TP-программ строить вполне нормальный код для функций, задаваемых пользователем.  Included: Samples and TPU6.0-7.0 only :('>
+<meta name="keywords" content="pascal, sources, source code, rtc_rtl, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;rtc_rtl
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Run-Time Line Compiler Version 1.5</TD>
+<TD nowrap class=black>&nbsp;Sergey Murashov</TD>
+<TD class=black align='right'>21.12.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вашему вниманию предлагается компилятор
+математических выражений для TP 6.0 и TP 7.0 .
+Используя данный компилятор Вы получаете возможность
+в ходе выполнения Ваших TP-программ строить вполне нормальный код для
+функций, задаваемых пользователем. <br>
+Included: Samples and TPU6.0-7.0 only :(</TD><TD class=black colspan=2 align='right'><br><A HREF="rtc_rtl.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>25k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">      ****************************************************
+      *                                                  *
+      *     Run-Time Line Compiler   Version 1.5         *
+      *      Copyright (c) 1992 Sergey Murashov          *
+      *                                                  *
+      ****************************************************
+
+       Уважаемые Господа, Вашему вниманию предлагается компилятор
+   математических выражений для TP 6.0 и TP 7.0 .
+       Используя данный компилятор (далее RTC) Вы получаете возможность
+   в ходе выполнения Ваших TP-программ строить вполне нормальный код для
+   функций, задаваемых пользователем.
+       Наш компилятор позволит Вам быстро и точно решать уравнения (обычные
+   и дифференциальные) и их системы, брать многомерные интегралы, и делать
+   многое другое, используя функции, вид которых определяет пользователь
+   уже после компиляции Вашей программы.
+       Такое мало кто умеет делать, ИСПОЛЬЗУЯ RTC ВЫ СДЕЛАЕТЕ ЭТО!!!
+
+       RTC работает как в формате Real, так и Extended, что позволяет
+   Вам в Ваших программах использовать возможности математического
+   сопроцессора.
+       RTC поддерживает следующие операторы и функции:
+         '+','-','*','/' а так же '^'-возведение в степень,
+         sin,cos,tg,arctan,sqrt,round,exp,ln
+   имеется также возможность подключения функций пользователя с заданием
+   уникального имени.
+       RTC позволяет создавать несколько фрагментов кода и использовать
+   их в работе в качестве функции пользователя.
+
+       Способы применения RTC ясны из примеров, а для избежания ошибок
+   следует запомнить следующие правила:
+     - не стоит без особой необходимости  перемешивать в своих программах
+   real и extended числа, применяемые в RTC,
+     - число параметров вашей переменной типа function должно соответствовать
+   числу переменных объявляемых в списке констрактора PSmallCompiler.Init
+   или его наследниках,
+     - все ваш

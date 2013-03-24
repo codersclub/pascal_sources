@@ -1,0 +1,63 @@
+<html><head><title>Inline Assembler and DisAssembler v 2.20</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Две утилиты для ассемблирования и дизассемблирования inline-кодов для Turbo Pascal.<br><font color=#666666> INLINE is an assembler designed to produce Inline 8086/8088 and 8087 code for Turbo Pascal v3, 4 and 5 and Turbo C v2.x programs.  Like other assemblers, INLINE accepts as input an assembly language source file and produces an object file.  However, in this case, the 'object' file is an ASCII file consisting of Inline statements which may be inserted into the Pascal or C program.<br> UNINLINE is a disassembler which accepts an 'object' file consisting of Turbo Pascal Inline statements and produces an assembly language source file.  The source file may then be modified and reassembled to Inline statements using INLINE.EXE.</font>">
+<meta name="keywords" content="pascal, sources, source code, inlin220, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;inlin220
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Inline Assembler and DisAssembler v 2.20</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76327.53@compuserv.com">Dave Baldwin</a></TD>
+<TD class=black align='right'>05.10.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Две утилиты для ассемблирования и дизассемблирования
+inline-кодов для Turbo Pascal.<br><font color=#666666>
+INLINE is an assembler designed to produce Inline 8086/8088
+and 8087 code for Turbo Pascal v3, 4 and 5 and Turbo
+C v2.x programs.  Like other assemblers, INLINE
+accepts as input an assembly language source file and produces an
+object file.  However, in this case, the 'object' file is an
+ASCII file consisting of Inline statements which may be inserted
+into the Pascal or C program.<br>
+UNINLINE is a disassembler which accepts an 'object' file
+consisting of Turbo Pascal Inline statements and produces an
+assembly language source file.  The source file may then be
+modified and reassembled to Inline statements using INLINE.EXE.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="inlin220.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>35k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                             October 4, 1988
+
+   INLINE ASSEMBLER    and     UNINLINE--AN INLINE DISASSEMBLER
+      Version 2.20                       Version 1.1
+
+
+
+
+OVERVIEW
+
+INLINE.EXE is an assembler designed to produce Inline 8086/8088
+and 8087 code for Turbo Pascal (tm) versions 3, 4 and 5 and Turbo
+C (tm) version 2.x programs.  Like other assemblers, INLINE
+accepts as input an assembly language source file and produces an
+object file.  However, in this case, the 'object' file is an
+ASCII file consisting of Inline statements which may be inserted
+into the Pascal or C program.
+
+Figure 1 illustrates a Pascal function with Inline code generated
+by INLINE using the source file of Figure 2.  Figures 3 and 4
+show the equivalent for a C function.
+
+
+LOADING AND RUNNING INLINE
+
+First create an EXE file, INLINE.EXE, by compiling INLINE.PAS
+using version 4 or 5 of the Turbo Pascal compiler.
+
+  From the

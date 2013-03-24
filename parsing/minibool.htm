@@ -1,0 +1,79 @@
+<html><head><title>Минимизатор Булевских Функций</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Минимизатор булевских функций + генератор функций возбуждения для d-триггеров'>
+<meta name="keywords" content="pascal, sources, source code, minibool, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;minibool
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Минимизатор Булевских Функций</TD>
+<TD nowrap class=black>&nbsp;Владимир Игнатов</TD>
+<TD class=black align='right'>01.01.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Минимизатор булевских функций +
+генератор функций возбуждения для d-триггеров</TD><TD class=black colspan=2 align='right'><br><A HREF="minibool.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">minibool - минимизатор булевских функций
+d-fl-fl  - генератор функций возбуждения для d-триггеров
+Автор: Владимир Игнатов, 2:5030/37.9
+
+                        *********************
+                   *****    D-Flip-Flop &    *****
+                        * Boolean Functions *
+                         *   Minimizier    *
+                          *(документашки) *
+                           ***************
+                                                                     NC
+                                                                16-Dec-93
+                                                               В. Игнатов
+                                                             г.С.-Петербург
+
+                  ======== ОБЩИЕ ПОЛОЖЕНИЯ ========
+1. Все очень просто.
+2. Обе программы принимают из командной строки два параметра. Первый
+из них - имя входного файла, второй - имя выходного.
+3. После успешного выполнения на экране появляется одна надпись,
+после неудачного - какая-нибудь другая.
+4. Пустые строки во входных файлах недопустимы.
+5. Знаков комментария нет.
+6. Для обозначения инверсии можно применять знаки "^" и "-".
+7. Для обозначения дизъюнкции можно применять знаки "|" и "V".
+
+           ======== ВХОДНОЙ ФАЙЛ ДЛЯ D-Flip-Flop ========
+1. В первой строке должна быть следующая запись: &lt;Base&gt;&lt;StateQty&gt;,
+где &lt;Base&gt; - принимает значения "D" или "B" и означает десятичную или
+двоичную систему счисления для номеров состояний, &lt;StateQty&gt; -
+количество состояний кроме нулевого, записанное в десятичной системе.
+2. Далее идут строки описания состояний:
+2=1*x12|5*^x1*x2|3*x8          - при &lt;Base&gt;=D,
+010=001*x12|101*^x1*x2|011*x8  - при &lt;Base&gt;=B;
+что означает S2=S1*x12|S5*x1*x2|S3*x8.
+3. Все состояния от 1 до StateQty-1 должны быть описаны.
+  Пример входного файла:
+D2
+1=0*x1|1*x2
+2=1*-x2
+
+   ======== ВХОДНОЙ ФАЙЛ ДЛЯ Boolean Functions Minimizier ========
+1. Входной файл должен содержать строки с выражениями, например:
+x1*-x2*q1|q2
+x2*-x1*q2
+
+                             ***********
+                            * Ж Е Л А Ю *
+                           * У С П Е Х А *
+                            *   ! ! !   *
+                             ***********
+                                                                 * NC *</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

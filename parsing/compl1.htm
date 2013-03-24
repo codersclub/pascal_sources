@@ -1,0 +1,50 @@
+<html><head><title>Как Написать Свой Компилятор. Часть 1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Статья М.Черкашина "Компилятор пишется так..." из Журнала "Монитор" № 4 1992.   Модельный компилятор. Лучший способ понять, как писать компилятор - написать его самому. Лучший способ объяснить это - предъявить текст программы. Вот мы и предлагаем статью-программу. Впрочем, ее можно читать и не заглядывая в листинг, но при этом вы много потеряете. Компилятор написан на Паскале, выходной язык - Паскаль, входной язык прост до идиотизма. Читатели, владеющие языком Паскаль, узнают и во входном языке знаковые конструкции.'>
+<meta name="keywords" content="pascal, sources, source code, compl1, parsing, Разбор и Анализ Строк ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Разбор и Анализ Строк</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;compl1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Как Написать Свой Компилятор. Часть 1</TD>
+<TD nowrap class=black>&nbsp;М. Черкашин</TD>
+<TD class=black align='right'>19.06.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Статья М.Черкашина "Компилятор пишется так..."
+из Журнала "Монитор" № 4 1992.  <br>
+Модельный компилятор.
+Лучший способ понять, как писать компилятор - написать его самому.
+Лучший способ объяснить это - предъявить текст программы.
+Вот мы и предлагаем статью-программу.
+Впрочем, ее можно читать и не заглядывая в листинг,
+но при этом вы много потеряете. Компилятор написан на Паскале,
+выходной язык - Паскаль, входной язык прост до идиотизма.
+Читатели, владеющие языком Паскаль, узнают и
+во входном языке знаковые конструкции.</TD><TD class=black colspan=2 align='right'><br><A HREF="compl1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> From : Olejka Akopov               2:5061/22               19 Jun 96  22:49:00
+ To   : All
+ Subj : Кто там компилятор просил?
+--------------------------------------------------------------------------------
+ К атегоpически Вас пpиветствую, уважаемый All!
+
+Пpивожу небольшую статью из жуpнала "Монитоp" за 1992 год. В цикле, по идее,
+было 3 статьи, но втоpой почему-то,не было ни в жуpнале, ни в дисковом ваpианте.
+Думаю, что и пеpвая часть пpигодится:
+
+                                   Искpенне весь, Олежка
+
+--- 3.00.Alpha1+
+ * Origin:  ---- The GodFather... ----  (FidoNet 2:5061/22)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
