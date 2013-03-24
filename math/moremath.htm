@@ -1,0 +1,91 @@
+<html><head><title>More Math Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор математических функций. Включает в себя:  - возведение в степень 10, десятичный логарифм;  - является ли число простым, целым;  - преобразование градов, градусов и радианов;  - вычисление тангенса, секанса, косеканса, котангенса;  - применение теоремы Пифагора;  - площадь треугольника, круга, сектора, эллипса, квадрата,   прямоугольника;  - площадь поверхности куба, поверхности прямоугольной призмы,   сферы, цилиндра, конуса, трапезоида;  - длина окружности и эллипса;  - объем куба, параллелепипеда, призмы, сферы, цилиндра, конуса;  - расстояние между двумя точками;  - факториал; наибольший общий делитель, наименьший общий множитель;  - Дополнительно прилагается модуль с набором строковых функций,   аналогичных используемым в dBase.'>
+<meta name="keywords" content="pascal, sources, source code, moremath, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;moremath
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;More Math Functions</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>22.02.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор математических функций. Включает в себя: <br>
+- возведение в степень 10, десятичный логарифм; <br>
+- является ли число простым, целым; <br>
+- преобразование градов, градусов и радианов; <br>
+- вычисление тангенса, секанса, косеканса, котангенса; <br>
+- применение теоремы Пифагора; <br>
+- площадь треугольника, круга, сектора, эллипса, квадрата,
+  прямоугольника; <br>
+- площадь поверхности куба, поверхности прямоугольной призмы,
+  сферы, цилиндра, конуса, трапезоида; <br>
+- длина окружности и эллипса; <br>
+- объем куба, параллелепипеда, призмы, сферы, цилиндра, конуса; <br>
+- расстояние между двумя точками; <br>
+- факториал; наибольший общий делитель, наименьший общий множитель; <br>
+- Дополнительно прилагается модуль с набором строковых функций,
+  аналогичных используемым в dBase.</TD><TD class=black colspan=2 align='right'><br><A HREF="moremath.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CONST e = 2.7182818;
+
+Function Exponent(Base: Real; Power: Integer): Real;
+{Base can be real, power must be an integer}
+  VAR
+      X: INTEGER;
+      E: REAL;
+
+BEGIN;
+  E:=1;
+  If Power = 0 then E:=1
+  Else If Power = 1 then E:=Base
+       Else For X:=1 to ABS(Power) do E:=E*Base;
+  If Power &lt; 0 then E:=1/E;
+  Exponent:=E;
+END;
+
+Function Log(Base, Expnt: Real): Real;
+{returns common (base 10) logarithm}
+Begin;
+  Log:=ln(Expnt)/ln(Base);
+End;
+
+Function Prime(N: LongInt): Boolean;
+{Determines if argument is prime}
+  Var C: LongInt;
+      S: Real;
+      X: Boolean;
+Begin;
+  N:=ABS(N);
+  S:=SQRT(N);
+  X:=( (N&lt;=2) OR (ODD(N)) AND (S &lt;&gt; INT(S) ) );
+  If X then Begin
+    C:=3;
+    While (X AND (C &lt; Int(S))) do Begin
+      X:=((N Mod C) &gt; 0);
+      C:=C+2;
+    End; {While}
+  End; {If X}
+  Prime:=X;
+End; {Prime}
+
+Function Whole(X: Real): Boolean;
+Begin;
+  Whole:=INT(X) = X;
+End;
+
+Function Seconds_to_Words(Sec: LongInt): String;
+  CONST
+       SecDay=86400;
+        SecHr=3600;
+       

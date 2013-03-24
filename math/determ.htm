@@ -1,0 +1,95 @@
+<html><head><title>Calculate the Determinant of a 3-by-3 Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для вычисления определителя матрицы размером 3x3.  pascal program to calculate the determinant of a 3-by-3matrix'>
+<meta name="keywords" content="pascal, sources, source code, determ, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;determ
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Calculate the Determinant of a 3-by-3 Matrix</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>03.04.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для вычисления определителя матрицы размером 3x3. <br>
+pascal program to calculate the determinant of a 3-by-3matrix</TD><TD class=black colspan=2 align='right'><br><A HREF="determ.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program determ;		{ -&gt; 55 }
+{ pascal program to calculate the determinant of a 3-by-3matrix }
+
+type	ary2	= array[1..3,1..3] of real;
+
+var	a	: ary2;
+	n	: integer;
+	yesno	: char;
+	d	: real;
+
+external procedure cls;
+
+procedure get_data(var a: ary2;
+		   var n: integer);
+
+{ get values for n and arrays x,y }
+
+var	i,j	: integer;
+
+begin
+  n:=3;
+  writeln;
+  for i:=1 to n do
+    begin
+	for j:=1 to n do
+	  begin
+	    write(j:3,':');
+	    readln(a[i,j])
+	end	{ j-loop }
+  end;		{ i-loop }
+  writeln;
+  for i:=1 to n do
+    begin
+	for j:=1 to n do
+	  write(a[i,j]:7:4,' ');
+	writeln
+	end;
+    writeln
+    end;	{ procedure get_data }
+
+
+function deter(a: ary2): real;
+	{ calculate the determinant of a 3-by-3matrix }
+
+var
+	sum	: real;
+
+begin
+  sum:=a[1,1]*(a[2,2]*a[3,3]-a[3,2]*a[2,3])
+	-a[1,2]*(a[2,1]*a[3,3]-a[3,1]*a[2,3])
+	+a[1,3]*(a[2,1]*a[3,2]-a[3,1]*a[2,2]);
+  deter:=sum
+end;
+
+
+
+begin		{ MAIN program }
+  cls;
+  repeat
+    get_data(a,n);
+    d:=deter(a);
+    writeln('The determinant is',d);
+    writeln;
+    write('More?');
+    readln(yesno);
+    cls
+  until (yesno&lt;&gt;'Y')and(yesno&lt;&gt;'y')
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

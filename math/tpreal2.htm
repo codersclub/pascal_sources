@@ -1,0 +1,62 @@
+<html><head><title>Improved Floating Point Subroutines for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This software package is meant to be a superior alternative for Turbo Pascal's built in floating point library for the "real" format. Programs using the "real" format for intensive numeric computation can benefit from this package when run on a computer without a numeric co-processor.'>
+<meta name="keywords" content="pascal, sources, source code, tpreal2, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpreal2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Improved Floating Point Subroutines for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Shankar Ramakrishnan</TD>
+<TD class=black align='right'>26.03.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This software package is meant to be a superior alternative for Turbo
+Pascal's built in floating point library for the "real" format. Programs
+using the "real" format for intensive numeric computation can benefit
+from this package when run on a computer without a numeric co-processor.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpreal2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Improved Floating Point Subroutines for Turbo Pascal
+
+This software package is meant to be a superior alternative for Turbo
+Pascal's built in floating point library for the "real" format. Programs
+using the "real" format for intensive numeric computation can benefit
+from this package when run on a computer without a numeric co-processor.
+To use this package, you should have Turbo Pascal version 4.0 or later.
+The library is in the form of a TPU file. To use this library, you need
+to add the statement "uses rlib;" at the beginning of your program. The
+library consists of subroutines for floating point multiplication,
+division, sqrt, sin, cos, arctan, exp and ln. To get the equivalent of
+x*y in your program, just substitute _mul(x,y). Similarly, to get x/y,
+use _div(x,y).(x and y can themselves be expressions instead of
+variables.) To get the other functions, just add an underscore before
+the equivalent TP definition. For example, _sin(x) for sin(x).
+
+Creating RLIB.TPU
+
+Since TPU files created using different versions of Turbo Pascal are,
+in general, incompatible with one another, the TPU file has to be
+compiled using your current version of Turbo Pascal. To create RLIB.TPU,
+compile RLIB.PAS to disk, making sure that the correct path to the OBJ
+files which come in this package is specified in the compiler. This
+package also comes with a program 'TEST.PAS' which can be used to compare
+this package with Turbo Pascal's. The average speed improvement ranges from
+20% for multiplication to about 1200% for sqrt. The "Savage" option is
+a benchmark to test the accuracy of the routines. The lower the residual
+error, the better is the accuracy of the routines. This package can be
+seen to be superior than Turbo Pascal's by running the "Savage" option.
+
+Error Handling
+
+When a floating point error occurs, the type of error and the address
+where the error occured in the main program are displayed and the
+program is hal

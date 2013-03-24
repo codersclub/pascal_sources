@@ -1,0 +1,118 @@
+<html><head><title>Linear and Non-Linear Regression Analyse</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Восемь программ для линейного и нелинейного регрессионного анализа с помощью метода наименьших квадратов (МНК) и Гаусса-Жордана'>
+<meta name="keywords" content="pascal, sources, source code, leastsqu, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;leastsqu
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Linear and Non-Linear Regression Analyse</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>03.04.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Восемь программ для линейного и нелинейного регрессионного
+анализа с помощью метода наименьших квадратов (МНК)
+и Гаусса-Жордана</TD><TD class=black colspan=2 align='right'><br><A HREF="leastsqu.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program least2;      { --&gt; 203 }
+{ Pascal program to perform a linear least-squares fit }
+{ with Gauss-Jordan routine }
+{ Sperate modules needed:
+         GAUSSJ,
+         PLOT }
+
+
+const   maxr   = 20;      { data prints }
+   maxc   = 4;      { polynomial terms }
+
+type   ary   = array[1..maxr] of real;
+   arys   = array[1..maxc] of real;
+   ary2   = array[1..maxr,1..maxc] of real;
+   ary2s   = array[1..maxc,1..maxc] of real;
+
+var   x,y,y_calc   : ary;
+   resid      : ary;
+   coef,sig   : arys;
+   nrow,ncol   : integer;
+   correl_coef   : real;
+
+
+external procedure cls;
+
+procedure get_data(var x: ary;      { independant variable }
+         var y: ary;      { dependant variable }
+         var nrow: integer);   { length of vectors }
+{ get values for n and arrays x,y }
+
+var   i   : integer;
+
+begin
+  nrow:=9;
+  for i:=1 to nrow do x[i]:=i;
+  y[1]:=2.07;   y[2]:=8.6;
+  y[3]:=14.42;   y[4]:=15.8;
+  y[5]:=18.92;   y[6]:=17.96;
+  y[7]:=12.98;   y[8]:=6.45;
+  y[9]:=0.27;
+end;      { proceddure get data }
+
+procedure write_data;
+{ print out the answers }
+var   i   : integer;
+begin
+  writeln;
+  writeln;
+  writeln('  I      X      Y        YCALC   RESID');
+  for i:=1 to nrow do
+    writeln(i:3,x[i]:8:1,y[i]:9:2,y_calc[i]:9:2,resid[i]:9:2);
+  writeln; writeln(' Coefficients errors ');
+  writeln(coef[1],' ',sig[1],' constant term');
+  for i:=2 to ncol do
+    writeln(coef[i],' ',sig[i]);      { other terms }
+  writeln;
+  writeln('Correlation coefficient is ',correl_coef:8:5)
+end;      { write_data }
+
+procedure square(x: ary2;
+       y: ary;
+        var a: ary2s;
+        var g: arys;
+    nrow,ncol: integer);
+{ matrix multiplication routine }
+{ a= transpose x times x }
+{ g= y times x }
+
+var   i,k,l   : integer;
+
+begin      { square }
+  for k:=1 to ncol do
+    begin
+      for l:=1 to k do
+   begin
+     a[k,l]:=0.0;
+     for i:=1 to nrow do
+       begin
+         a[k,l]:=a[k,l]+x[i,l]*x[i,k];
+         if k&lt;&gt;l then a[l,k]:=a[k,l]
+       end
+   end;      { l-loop }
+      g[k]:=0.0;
+      for i:=1 to nrow do
+   g[k]:=g[k]+y[i]*x[i,k]
+      end   { k-loop }
+end;      { SQUARE }
+
+{external procedure gaussj(var b:   ary2s;
+               y:   arys;
+           var coef:   arys;
+           ncol:      integer;

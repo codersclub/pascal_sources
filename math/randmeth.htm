@@ -1,0 +1,118 @@
+<html><head><title>Реализация pазличных cлучайных величин на Паcкале</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пять методов формирования случайных чисел с исходниками'>
+<meta name="keywords" content="pascal, sources, source code, randmeth, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;randmeth
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Реализация pазличных cлучайных величин на Паcкале</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5045/32.6">Тимур Казимиров</a></TD>
+<TD class=black align='right'>28.02.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пять методов формирования случайных чисел с исходниками</TD><TD class=black colspan=2 align='right'><br><A HREF="randmeth.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello Dmitry!
+
+Wednesday February 22 1995 23:35, Yuri Lapkin wrote to Dmitry Bystrov:
+
+ DB&gt;&gt; А не подcкажите как cделать генеpатоp cлучайных чиcел ноpмального
+ DB&gt;&gt; pаcпpеделения.
+
+
+   Пожалуйста:
+
+1&gt; Точный обратный метод Бокса-Маллера. 
+При этом генерируется пара нормированных (мат.ожидание=0, ст.отклонение=1)
+нормальных чисел из двух стандартных случайных чисел.
+
+Procedure Normal (var Num1, Num2: Real);
+Const
+  PI = 3.14159;
+Var
+  R1, R2: Real;
+Begin
+  R1 := Random;
+  R2 := Random;
+  Num1 := -2 * LN (R1) * COS (2 * PI * R2);
+  Num2 := -2 * LN (R1) * SIN (2 * PI * R2);
+End;
+
+2&gt; Метод Марсальи-Брея. 
+Более быстрый за счет исключения вычислений синусов и косинусов.
+
+Procedure Normal (var Num1, Num2: Real);
+Var
+  R1, R2: Real;
+  S: Real;
+Begin
+  Repeat
+    R1 := 2 * Random - 1;
+    R2 := 2 * Random - 1;
+    S := SQR (R1) + SQR (R2);
+  Until (S &lt; 1);
+  S := SQRT ((-2 * LN (S)) / S);
+  Num1 := R1 * S;
+  Num2 := R2 * S;
+End;
+
+3&gt; Стандартный метод. 
+Основан на центральной предельной теореме. Требует много
+времени на генерацию 12-ти случайных чисел. Hедостатком также является плохое
+соответствие теории за пределами  мат.ож. = 2 * стд.откл.
+
+Procedure Normal (var Num: Real);
+Var
+  S: Real;
+  i: 1..12;
+Begin
+  S := 0;
+  For i := 1 To 12 Do
+    S := S + Random;
+  Num := S - 6;
+End;
+
+4&gt; Метод Тичроу. 
+По сути дела это просто модифицированный 3), однако точность
+метода повышается до мат.ож. = 3 * стд.откл.
+
+Procedure Normal (var Num: Real);
+Const
+  C1 = 0.029899776;
+  C2 = 0.008355968;
+  C3 = 0.076542912;
+  C4 = 0.252408784;
+  C5 = 3.949846138;
+Var
+  S: Real;
+  i: 1..12;
+Begin
+  S := 0;
+  For i := 1 To 12 Do
+    S := S + Random;
+  S := SQR ((S - 6) / 4);
+  Num := ((((C1 * S + C2) * S + C3) * S + C4) * S + C5) * S;
+End;
+
+P.S. В заключение хочу сказать, что если ты получил нормализованное нормальное
+число, то получить нормальное число с заданными характеристиками не представляет
+никакого труда: предположим, что M - требуемое мат. ожидание, STD - требуемое
+стандартное отклонение, а NN - нормализованное нормальное число. Тогда требуемое
+нормальное число N найдется по формуле:
+N := M + NN * STD.
+
+P.P.S. Если нужны генераторы других законов распределения, то пиши - найду.
+
+Удачи, Timur
+
+--- GoldED 2.50.A0204+

@@ -1,0 +1,77 @@
+<html><head><title>MathPack - Compact Mathematical Function Package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пакет математических функций. Включает в себя функции: Sine-Integral, Cosine-Integral, Exponential-Integral, Bessel, Modified-Bessel, Laguerre, Complementary-Normal, Normal-Probability, Complementary-Error, Confluent-2nd-type, 2nd-Fresnel-Integral, 1st-Fresnel-Integral, 2nd-Type-Legendre-(Assc), 1st-Type-Legendre-(Assc), Hermite, Gamma, Gauss-Hypergeometric, Confluent-1st-Type, Generalized-Hyper, Cosine, Sine, Ln, Log10, Exp.  FUNCTION PACKAGE BY CLARKE AND MARWOOD. for TURBO PASCAL  peak exponent 10E(+/- 38) ignore digits precision for sine,cos,exp,ln,log10'>
+<meta name="keywords" content="pascal, sources, source code, mathpack, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;mathpack
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MathPack - Compact Mathematical Function Package</TD>
+<TD nowrap class=black>&nbsp;A.P.Clarke</TD>
+<TD class=black align='right'>01.01.1984</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">Пакет математических функций.
+Включает в себя функции: Sine-Integral, Cosine-Integral,
+Exponential-Integral, Bessel, Modified-Bessel, Laguerre,
+Complementary-Normal, Normal-Probability, Complementary-Error,
+Confluent-2nd-type, 2nd-Fresnel-Integral, 1st-Fresnel-Integral,
+2nd-Type-Legendre-(Assc), 1st-Type-Legendre-(Assc), Hermite,
+Gamma, Gauss-Hypergeometric, Confluent-1st-Type, Generalized-Hyper,
+Cosine, Sine, Ln, Log10, Exp. <br>
+FUNCTION PACKAGE BY CLARKE AND MARWOOD.
+for TURBO PASCAL  peak exponent 10E(+/- 38)
+ignore digits precision for sine,cos,exp,ln,log10</TD><TD class=black colspan=2 align='right'><br><A HREF="mathpack.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program mathpak;
+{(C) Australian Computer Society 1984}
+{based on paper A Compact Mathematical Function Package
+  by A.P. Clarke and W. Marwood,
+  The Australian Computer Journal,
+  Vol 16, No 3, August 1984, pp 107 to 114
+  entered by W F McGee 1 Dec 1984}
+const e=1.0e4;
+      sqrt_pi=1.772453850905;
+      sqrt2  =1.414213562373;
+      eul    =0.577215664901;
+      sqrt12 =3.464101615137;
+      ln2    =0.693147180559;
+      ln10   =2.302585092994;
+      ln17   =2.833213344056;
+      TERMMAX=500;
+type available=(sif,cif,e1f,jnf,mbif,lagf,qf,phif,erff,erfcf,
+     chgf2f,sxf,cxf,qmnf,pmnf,hf,gmf,hgff,chgf1f,ghgff,cf,sf,
+     expf,lf,l10f,done);
+     string25=string[25];
+var prec:real;
+    numparm:array[available]of integer;
+    name:array[available]of string25;
+    sig_dig:integer;
+    sig_dig_flag:boolean;
+    sig_dig_real,Ubound,lngmb,gmb,mc_dig:real;
+    x:real;
+{**********************************************************}
+function lnn(x:real):real;
+{natural log with zero exception}
+begin
+  if x=0 then lnn:=-86 else lnn:=ln(x)
+{IMPLEMENTATION DEPENDENT  38*ln10}
+end;
+{***********************************************************}
+procedure sum_error(var1,dig1,var2,dig2:real);
+var error:real;
+begin
+  error:=abs(var1)*(exp(-dig1*ln10)+prec) +
+         abs(var2)*(exp(-dig2*ln10)+prec);
+  sig_dig:=trunc(ln(abs((var1+var2)/error))/ln10)
+end;
+{**************

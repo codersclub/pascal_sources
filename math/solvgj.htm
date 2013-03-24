@@ -1,0 +1,128 @@
+<html><head><title>Solve Linear Equations System with the Gauss-Jordan</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Четыре варианта программы для решения системы линейных уравнений с использованием метода Гаусса-Жордана. Причем, уравнений может быть больше, чем неизвестных.'>
+<meta name="keywords" content="pascal, sources, source code, solvgj, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;solvgj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Solve Linear Equations System with the Gauss-Jordan</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>03.04.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Четыре варианта программы для решения системы
+линейных уравнений с использованием метода Гаусса-Жордана.
+Причем, уравнений может быть больше, чем неизвестных.</TD><TD class=black colspan=2 align='right'><br><A HREF="solvgj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program solvec;      { -&gt; 119 }
+{ pascal program to perform simultaneous solution
+  by Gauss-Jordan elimination for complex coefficients }
+
+const   maxr   = 8;
+   maxc   = 8;
+
+type   ary   = array[1..maxr] of real;
+   arys   = array[1..maxc] of real;
+   ary2s   = array[1..maxr,1..maxc] of real;
+   aryc2   = array[1..maxr,1..maxc,1..2] of real;
+   aryc   = array[1..maxr,1..2] of real;
+
+var   y   : arys;
+   coef   : arys;
+   a,b   : ary2s;
+   n,m,i,j   : integer;
+   error   : boolean;
+
+external procedure cls;
+external procedure revon;
+external procedure revoff;
+
+
+
+procedure get_data(var a: ary2s;
+         var y: arys;
+         var n,m: integer);
+
+{ get complex values for n and arrays a,y }
+
+var   c   : aryc2;
+   v   : aryc;
+   i,j,k,l   : integer;
+
+procedure show;
+   { print original data }
+var   i,j,k   : integer;
+
+begin   { show }
+  writeln;
+  for i:=1 to n do
+    begin
+      for j:=1 to m do
+   for k:=1 to 2 do
+     write(c[i,j,k]:7:4,' ');
+      writeln(':',v[i,1]:7:4,':',v[i,2]:7:4)
+    end;
+  n:=2*n;
+  m:=n;
+  writeln;
+  for i:=1 to n do
+    begin
+      for j:=1 to m do
+   write(a[i,j]:7:4,' ');
+      writeln(':',y[i]:9:5)
+    end;
+  writeln
+end;      { show }
+
+begin      { procedure get_data }
+  writeln;
+  repeat
+    write('How many equations? ');
+    readln(n);
+    m:=n
+  until n&lt;maxr;
+  if n&gt;1 then
+    begin
+      for i:=1 to n do
+   begin
+     writeln('Equation',i:3);
+     k:=0;
+     l:=2*i-1;
+     for j:=1 to n do
+       begin
+         k:=k+1;
+         write('Real',j:3,':');
+         read(c[i,j,1]);      { read real part }
+         a[l,k]:=c[i,j,1];
+         a[l+1,k+1]:=c[i,j,1];
+         k:=k+1;
+         write('Imag',j:3,':');
+         read(c[i,j,2]);      { imaginary part }
+         a[l,k]:=-c[i,j,2];
+         a[l+1,k-1]:=c[i,j,2]
+       end;      { j-loop }
+     write('Real const:');
+     read(v[i,1]);      { real constant }
+     y[l]:=v[i,1];
+     write('Imag const:');
+     readln(v[i,2]);   { imag constant }
+     y[l+1]:=v[i,2]
+   end;      { i-loop }
+      show      { the original DATA }
+    end      { if n&gt;1 }
+end;   { procedure get_data }
+
+
+procedure write_data;
+
+{ print out

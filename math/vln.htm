@@ -1,0 +1,83 @@
+<html><head><title>Very Large Numbers - up to 1000 Decimal Digits</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Very Large Numbers - allows the Pascal programmer to work with numbers up to 1000 decimal digits or more. VLN can also handle numbers to 1* 10 ^ -1000 or smaller as well as  add, subtract, multiply, divide, and perform with roots and powers.'>
+<meta name="keywords" content="pascal, sources, source code, vln, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vln
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Very Large Numbers - up to 1000 Decimal Digits</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>04.11.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Very Large Numbers - allows the Pascal programmer
+to work with numbers up to 1000 decimal digits or more.
+VLN can also handle numbers to 1* 10 ^ -1000 or smaller
+as well as  add, subtract, multiply, divide,
+and perform with roots and powers.</TD><TD class=black colspan=2 align='right'><br><A HREF="vln.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>67k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Very Large Numbers - VLN
+
+This Object Class allows the user to compute to very high
+precision.  The unique feature of this Object class is that
+numbers are supported  up to 1000 decimal digits or more,
+limited only by available memory.   While only integer data
+is supported, scaled arithmetic allows  numbers to be
+used as small as 1 x 10 ^ -1000 or smaller.
+
+Several basic operations are provided such as add,
+subtract, multiply and divide.  Further useful
+operations include 2^n, 10^n, nth-power  and nth-Root.
+Write Hexadecimal and Write Decimal procedures are included.
+
+    Object definition:
+))))))))))))))))))))))))))))))))))))))))))
+))					))
+))    pWordArray = ^tWordArray 	        ))
+))    tWordArray = object		))
+))       array[1..vlsize] of word;	))
+))	  end;				))
+))					))
+))      pVryLrgNo =^tVryLrgNo;		))
+))      tVryLrgNo = object		))
+))        count : integer;		))
+))        max : integer;                ))
+))        sign : integer;		))
+))        tVLN : tWordArray;		))
+))					))
+))        procedures and functions.	))
+))       end;				))
+))					))
+))))))))))))))))))))))))))))))))))))))))))
+
+One problem in defining this data type, that can contain
+more than a thousand bytes, is that there is no best size
+for 'vlsize' the maximum allowed size.  Some applications
+will need a few numbers of immense size while others will
+need many but not so big.
+
+The user, if he does nothing special  may use the default size
+of 1000 words (which allows 5300 decimal digits) for all variables
+ in his program.
+A way is illustrated to use less memory  assuming he knows how large
+the numbers will actually be.  This method uses
+	GETMEM( name, size)
+
+In the process of initializing a VLN variable, the programmer also
+specifies 'MAX' the maximum size expected and this is tested in
+all arithmetic procedures.
+
+The main program is responsible for  OpenTempRegs at the start
+and CloseTempRegs at the end as well as disposing of any dynamic
+variables that are created.  This is to allow the user to specify maximum
+ size of the VLN 

@@ -1,0 +1,72 @@
+<html><head><title>NRand - Normally-Distributed Random Number Generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция - генератор случайных чисел с нормальным распределением.  NRand --- Return normally-distributed random number'>
+<meta name="keywords" content="pascal, sources, source code, nrand2, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;nrand2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;NRand - Normally-Distributed Random Number Generator</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>15.02.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция - генератор случайных чисел с нормальным распределением. <br>
+NRand --- Return normally-distributed random number</TD><TD class=black colspan=2 align='right'><br><A HREF="nrand2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">(*--------------------------------------------------------------*)
+(*  NRand --- Return normally-distributed random number         *)
+(*--------------------------------------------------------------*)
+
+FUNCTION NRand( Mean : REAL;  StdDev : REAL ) : REAL;
+
+(*--------------------------------------------------------------*)
+(*                                                              *)
+(* Function:  NRand                                             *)
+(*                                                              *)
+(* Purpose:   Returns normally distributed random number.       *)
+(*                                                              *)
+(* Calling sequence:                                            *)
+(*                                                              *)
+(*    Ran := NRand( Mean : REAL; StdDev : REAL ) : REAL;        *)
+(*                                                              *)
+(*       Mean   --- Mean of normal distribution                 *)
+(*       StdDev --- Standard deviation of normal distribution   *)
+(*       Ran    --- Resultant random number                     *)
+(*                                                              *)
+(* Method:                                                      *)
+(*                                                              *)
+(*    The Box-Muller transformation is used to get two normal   *)
+(*    (0,1)-distributed values. The given mean and standard     *)
+(*    deviation are used to scale the results to (Mean, StdDev).*)
+(*    The first random number is returned by this call, and the *)
+(*    second random number by the next call.                    *)
+(*                                                              *)
+(*--------------------------------------------------------------*)
+
+(* STATIC VARIABLES *) CONST
+   NRand_Available : BOOLEAN = FALSE
+                             (* If number already available -- *);
+   Saved_NRand     : REAL    = 0.0
+                             (* saved from last time through.  *);
+
+VAR
+   V1 : REAL;
+   V2 : REAL;
+   R  : REAL;
+   Fac: REAL;
+
+BEGIN (* NRand *)
+                      (* Return 2nd random number calculated *)
+                      (* last time through here.             *)
+   IF NRand_Available THEN
+   

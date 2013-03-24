@@ -1,0 +1,94 @@
+<html><head><title>LineJoin - Find the Intersection of 2 Lines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Поиск координат точки пересечения двух прямых линий на плоскости. LINEJOIN - Pascal Program for Find the Intersection of 2 Lines. Programmed by Allan J. Bremer'>
+<meta name="keywords" content="pascal, sources, source code, linejoin, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;linejoin
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LineJoin - Find the Intersection of 2 Lines</TD>
+<TD nowrap class=black>&nbsp;Allan J. Bremer</TD>
+<TD class=black align='right'>23.02.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Поиск координат точки пересечения двух прямых линий на плоскости.
+LINEJOIN - Pascal Program for Find the Intersection of 2 Lines.
+Programmed by Allan J. Bremer</TD><TD class=black colspan=2 align='right'><br><A HREF="linejoin.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{**********************************************}
+{  Pascal Program for Intersection of 2 Lines  }
+{                                              }
+{       Copyright by F1 Computing 1995         }
+{                                              }
+{       Programmed by Allan J. Bremer          }
+{                                              }
+{   Use or change this code any way ya like!   }
+{                                              }
+{     Mr. Machinist BBS (716)434-1448          }
+{     Allan Bremer      (716)434-7823          }
+{                                              }
+{      Engineering and Pascal Files!           }
+{                                              }
+{  Many functions like this are implemented in }
+{  the Mr. Machinist Program.  Download it and }
+{  check it out!                               }
+{**********************************************}
+
+Program LineJoin;
+Uses Crt;
+Var X1,Y1,X2,Y2,X3,Y3,X4,Y4,Slope1,Slope2,B,C,
+    InterceptX,InterceptY: Real;
+    S1,S2,IX,IY,Xa,Ya,Xb,Yb,Xc,Yc,Xd,Yd: String;
+Begin
+  ClrScr;
+  Writeln;
+  Writeln('      *** Intersection of 2 Lines by F1 Computing ***');
+  Writeln;
+  Writeln('Input the X and Y Coordinate Endpoints'+
+          ' of 2 Different Lines.');
+  Writeln;
+  Writeln('Do Not Input Parallel or Vertical Lines.');
+  Writeln;
+  Write('Press ''Enter'' to Begin...'); Readln;
+  ClrScr;
+  Writeln('Line One');
+  Writeln('--------');
+  Write('Input X1: '); Readln(X1);
+  Write('Input Y1: '); Readln(Y1);
+  Writeln;
+  Write('Input X2: '); Readln(X2);
+  Write('Input Y2: '); Readln(Y2);
+  ClrScr;
+  Writeln;
+  Writeln('Line Two');
+  Writeln('--------');
+  Write('Input X3: '); Readln(X3);
+  Write('Input Y3: '); Readln(Y3);
+  Writeln;
+  Write('Input X4: '); Readln(X4);
+  Write('Input Y4: '); Readln(Y4);
+  Writeln;
+  If (X2-X1=0.0) then
+  Begin
+    Write('Line 1 is Vertical, you must not use a Vertical line!');
+    { This would cause a division by zero error }
+    Readln;
+    Halt;
+  End;
+  If (X4-X3=0.0) then
+  Begin
+    Write('Line 2 is Vertical, you must not use a Vertical line!');
+    { This would cause a division by zero error }
+    Readln;
+    Halt;
+  End;
+  Slope1  := (Y2-Y1)/(X

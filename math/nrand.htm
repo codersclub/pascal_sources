@@ -1,0 +1,69 @@
+<html><head><title>Normal random number generators</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Два модуля для генерации случайных чисел по нормальному закону распределения. Один модуль предназначен для использования без сопроцессора плавающей точки, а второй - с сопроцессором.  The NRAND.ARC file contains code for two different Turbo Pascal units.  One (NRAND0.PAS) contains a Pascal implementation of algorithms that can be found in the November 1988 issue of Communications of the ACM.  The other (NRAND1.PAS) contains the "conventional" methods of generating the same random variates.'>
+<meta name="keywords" content="pascal, sources, source code, nrand, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;nrand
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Normal random number generators</TD>
+<TD nowrap class=black>&nbsp;J. W. Rider</TD>
+<TD class=black align='right'>23.11.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Два модуля для генерации случайных чисел по
+нормальному закону распределения. Один модуль предназначен
+для использования без сопроцессора плавающей точки,
+а второй - с сопроцессором. <br>
+The NRAND.ARC file contains code for two different Turbo Pascal
+units.  One (NRAND0.PAS) contains a Pascal implementation of
+algorithms that can be found in the November 1988 issue of
+Communications of the ACM.  The other (NRAND1.PAS) contains the
+"conventional" methods of generating the same random variates.</TD><TD class=black colspan=2 align='right'><br><A HREF="nrand.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Normal random number generators, by J. W. Rider
+
+The NRAND.ARC file contains code for two different Turbo Pascal
+units.  One (NRAND0.PAS) contains a Pascal implementation of
+algorithms that can be found in the November 1988 issue of
+Communications of the ACM.  The other (NRAND1.PAS) contains the
+"conventional" methods of generating the same random variates.
+
+In the process of testing NRAND0, I discovered that the
+algorithms are extremely sensitive to the use of the 8087 numeric
+coprocessor.  I was surprised to discover that the conventional
+methods worked BETTER than the advertised "fast" algorithms from
+CACM, but only when the 8087 was used.  When the floating point
+processing was done in software, the CACM algorithms performed
+significantly better.
+
+If you use hardware floating point, use NRAND1 to generate your
+normal random variates. (A 2:1 speed advantage over NRAND0.)
+
+If you use software floating point, with or without the Borland
+emulation package, use NRAND0. (A 2.3:1 speed advantage over
+NRAND1.)
+
+If you have a choice, use hardware floating point (NRAND1).
+(A better than 5:1 speed advantage over NRAND0 with software
+processing.)
+
+Both units have identical interfaces.
+
+In the interest of portability, both units use the SYSTEM random
+function to generate uniformly distributed random variates.  This
+could easily be changed to incorporate the RAND unit, which can
+be found in RANDOM.ARC, BPROGA DL2.
+
+Copyright 1988, by J. W. Rider.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

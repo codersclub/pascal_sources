@@ -1,0 +1,81 @@
+<html><head><title>Scientific Subroutine Library for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='The following programs were written by Allen Miller and appear in the book entitled "Pascal Programs For Scientists And Engineers" which is published by Sybex, 1981. They were originally typed and submitted to MTPUG in Oct. 1982   Juergen   Loewner. They have had minor corrections and adaptations for Turbo Pascal by Jeff Weiss.'>
+<meta name="keywords" content="pascal, sources, source code, pas_sci, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pas_sci
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Scientific Subroutine Library for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Jeff Weiss</TD>
+<TD class=black align='right'>27.09.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">The following programs were written by Allen Miller
+and appear in the book entitled "Pascal Programs For Scientists
+And Engineers" which is published by Sybex, 1981.
+They were originally typed and submitted to MTPUG
+in Oct. 1982   Juergen   Loewner.
+They have had minor corrections and adaptations for
+Turbo Pascal by Jeff Weiss.</TD><TD class=black colspan=2 align='right'><br><A HREF="pas_sci.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>55k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">******************************************
+****   Scientific Subroutine Library  ****
+****         for Turbo Pascal         ****
+******************************************
+            September 27, 1985
+
+The following programs were written by Allen Miller
+and appear in the book entitled "Pascal Programs For Scientists
+And Engineers" which is published by Sybex, 1981.
+They were originally typed and submitted to MTPUG
+in Oct. 1982   Juergen   Loewner,
+D-4400 Muenster, Hoher Heckenweg 3, West Germany.
+They have had minor corrections and adaptations for
+Turbo Pascal by Jeff Weiss, 1572 Peacock Ave., Sunnyvale,
+CA 94087.
+
+Full programs have .PAS extension; library procedures and
+functions have .LIB extension and are generally used with
+{$I  ...} INCLUDE statements.
+
+
+MEANS.PAS:     Program to test MEANSTD.LIB.  (p.26)
+
+MEANSTD.LIB:   This routine computes the mean and the standard
+               deviation of a set of numbers. (p.26)
+
+RANDOM.LIB:    A random generator (0..1).  Note the internal routine
+               with Turbo Pascal is superior and used subsequently.
+               (p. 29)
+
+RANTST.PAS:    Program to test RANDOM.LIB,RANDG.LIB.   (p. 32)
+
+RANDG.LIB:     A random generator with gaussian distribution. (p.35)
+
+MATR1.PAS:     A matrix multiplication program.  (p. 50)
+
+DETERM.PAS:    A  program to calculate the determinant of  a  3x3
+               matrix.  (p. 55)
+
+SIMQ1.PAS:     A program to solve three simultaneous equations
+               by Cramer's Rule.  (p. 67)
+
+GAUSS.PAS:     A  program  to  perform simultaneous  solution  by
+               Gaussian elimination.   (p. 75)
+
+SOLVGJ.PAS:    same as above but Gauss-Jordan algorithm. (p. 84)
+
+GAUSSJ.LIB:    Gauss-Jordan matrix inversion and solution. (p. 87)
+
+SOLVGV.PAS:    A  program to perform  simultan.  sol.  by  Gauss-
+               Jordan elimination

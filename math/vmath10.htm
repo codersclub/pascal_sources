@@ -1,0 +1,53 @@
+<html><head><title>VMATH 1.0 - Vector and Matrix Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit contains vector and matrix procedures and functions for TURBO-PASCAL, partly written as inline assembler code for a 387 coprocessor. They are about two to three times faster than the equivalent "pure PASCAL" code.'>
+<meta name="keywords" content="pascal, sources, source code, vmath10, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vmath10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VMATH 1.0 - Vector and Matrix Functions</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:mowl@cc.flinders.edu.au">Wolfgang Lieff</a></TD>
+<TD class=black align='right'>21.05.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit contains vector and matrix procedures and functions for
+TURBO-PASCAL, partly written as inline assembler code for a 387 coprocessor.
+They are about two to three times faster than the equivalent "pure PASCAL"
+code.</TD><TD class=black colspan=2 align='right'><br><A HREF="vmath10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{--------------------------------&gt;  Vmath  &lt;---------------------------------}
+{ This unit contains vector and matrix procedures and functions for TURBO-   }
+{ PASCAL, partly written as inline assembler code for a 387 coprocessor.     }
+{ They are about two to three times faster than the equivalent "pure PASCAL" }
+{ code.                                                                      }
+{ Known features/limitations/bugs etc.:                                      }
+{ - The unit has been written with TP6.0 on an 386SX/IIT387SX machine        }
+{ - The procedure MulM4V4 needs an IIT coprocessor                           }
+{ - The 287 coprocessor needs additional FWAIT commands in of strategic      }
+{   places all over the code, since I don't have one I didn't bother.        }
+{ - All routines PUSH DS on entry, use long pointers (You don't want to      }
+{   be limited to 64K won't You ?) for operand access and POP DS on exit     }
+{ - No testing of the routines has been carried out except that they work    }
+{   fine and fast in my application - NO WARRANTY !                          }
+{ - I wrote the routines as I needed them (or as I wanted to find out how to }
+{   do it, in the case of MulM4V4) but at least the Vector3 operations are   }
+{   quite complete by now. If I find the time some more Matrix3 code may     }
+{   follow.                                                                  }
+{----------------------------------------------------------------------------}
+{ These routines contain no special artifice, but are straightforward        }
+{ coded "mathematical common knowledge", so everybody is free to copy        }
+{ and modify the whole unit or parts of it. And remember: Distributing       }
+{ sourcecode advances the "Art of Computing" by allowing others to learn     }
+{ from Your mistakes !                                                       }
+{----------------------------------------------------------------------------}
+{ I would be pleas

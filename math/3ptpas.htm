@@ -1,0 +1,104 @@
+<html><head><title>Circle Finder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для вычисления центра и радиуса окружности, проходящей через три точки, не лежащие на одной прямой.  This program will find the center and radius of a circle that is formed by three points not in a straight line.'>
+<meta name="keywords" content="pascal, sources, source code, 3ptpas, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;3ptpas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Circle Finder</TD>
+<TD nowrap class=black>&nbsp;Jules H. Gilder</TD>
+<TD class=black align='right'>21.12.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для вычисления центра и радиуса окружности,
+проходящей через три точки, не лежащие на одной прямой. <br>
+This program will find the center and radius of a circle
+that is formed by three points not in a straight line.</TD><TD class=black colspan=2 align='right'><br><A HREF="3ptpas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{================================================}
+{     This program is taken from the book,       }
+{ "PASCAL programs in science and engineering"   }
+{    by Jules H. Gilder & J. Scott Barrus        }
+{   Published by, HAYDEN ISBN 0-8104-6265-6      }
+{                                                }
+{================================================}
+{                                                }
+{ Title:  Circle Finder                          }
+{                                                }
+{ Program Summary: Program will find the center  }
+{ and radius of a circle that is formed by three }
+{ points not in a straight line.                 }
+{                                                }
+{================================================}
+
+Program Circle_Finder;
+
+uses Crt;
+
+var
+  answer,
+  cont     : Char;
+  out      : Text;
+  X1,X2,X3,
+  Y1,Y2,Y3,
+  Part1,
+  Part2,
+  Part3,
+  Part4,
+  X,Y,
+  Radius   : Real;
+
+Procedure Title;
+begin
+  Clrscr;
+  Writeln;
+  Writeln('Circle Finder');
+  Writeln;Writeln;
+  Writeln('This program will find the center and');
+  Writeln('radius of a circle that is determined');
+  Writeln('by any three points in a plane that ');
+  Writeln('does not form a straight line.');
+  Writeln;
+  Writeln('Note: For all entries that require');
+  Writeln('      data entries (x,y); separate ');
+  Writeln('      all data with a space.');
+  Writeln;Writeln;
+end;  { Title }
+
+Procedure Input;
+begin
+  Write('Enter first point  (X,Y):   ');
+  Readln(X1,Y1);
+  Write('Enter second point (X,Y):   ');
+  Readln(X2,Y2);
+  Write('Enter third point  (X,Y):   ');
+  Readln(X3,Y3);
+  Writeln;Writeln;Writeln;
+end;
+
+Procedure Find;
+begin
+  Part1 := ((X2-X1) * (X2+X1) + (Y2-Y1) * (Y2 + Y1)) /
+           (2.0 * (X2-X1));
+  Part2 := ((X3-X1) * (X3+X1) + (Y3-Y1) * (Y3 + Y1)) /
+           (2.0 * (X3-X1));
+  Part3 := (Y2 - Y1) / (X2 - X1);
+  Part4 := (Y3 - Y1) / (X3 - X1);
+  Y := (Part2 - Part1) / (Part4 - Part3);
+  X := Part2 - Part4 * Y;
+  Radius := SQRT (SQR (X3 - X) + SQR (Y3 - Y));
+end;
+
+Procedure Print1;
+begin
+   Writeln('The circle defined by the following'

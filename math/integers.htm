@@ -1,0 +1,104 @@
+<html><head><title>Integer Math Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор математических функций для целочисленных величин:  Sign      - определение знака числа (-1,0,+1)  Min       - минимум из двух целых  Max       - максимум из двух целых  ISwap     - обмен значений двух целых  ISqrt     - квадратный коренб из целого  Condition - перестановка двух целых (Min..Max)  AMin      - минимальное значение в массиве  AMax      - максимальное значение в массиве  Some functions for integer mathematics.'>
+<meta name="keywords" content="pascal, sources, source code, integers, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;integers
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Integer Math Functions</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>25.10.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор математических функций для целочисленных величин: <br>
+Sign      - определение знака числа (-1,0,+1) <br>
+Min       - минимум из двух целых <br>
+Max       - максимум из двух целых <br>
+ISwap     - обмен значений двух целых <br>
+ISqrt     - квадратный коренб из целого <br>
+Condition - перестановка двух целых (Min..Max) <br>
+AMin      - минимальное значение в массиве <br>
+AMax      - максимальное значение в массиве <br>
+Some functions for integer mathematics.</TD><TD class=black colspan=2 align='right'><br><A HREF="integers.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{
+        procedure and functions in this library
+
+  Sign         returns sign (-1,0,+1) of integer value
+  Min          returns minimum of two integers
+  Max          returns maximum of two integers
+  ISwap        trade two integer values
+  ISqrt        returns integer square root of integer value
+  Condition    forces integer into the range Min..Max
+  AMin         returns minimum integer in array
+  AMax         returns maximum integer in array
+
+}
+
+function Sign(Val : Integer) : Integer;
+{
+       purpose       returns sign (-1,0,1) of Val
+       last update   23 Jun 85
+}
+begin
+  if Val &gt; 0
+    then Sign := 1
+  else if Val &lt; 0
+    then Sign := -1
+    else Sign :=  0
+end; { of func Sign }
+
+function Min(Val1,Val2 : Integer) : Integer;
+{
+       purpose       returns minimum of two integers
+       last update   08 Jul 85
+}
+begin
+  if Val1 &lt; Val2
+    then Min := Val1
+    else Min := Val2
+end; { of func Min }
+
+function Max(Val1,Val2 : Integer) : Integer;
+{
+       purpose       returns maximum of two integers
+       last update   08 Jul 85
+}
+begin
+  if Val1 &gt; Val2
+    then Max := Val1
+    else Max := Val2
+end; { of func Max }
+
+procedure ISwap(var Val1,Val2 : Integer);
+{
+       purpose       swaps values of Val1 and Val2
+       last update   08 Jul 85
+}
+var
+  Temp               : Integer;
+begin
+  Temp := Val1;
+  Val1 := Val2;
+  Val2 := Temp
+end; { of proc ISwap }
+
+function ISqrt(Val : Integer) : Integer;
+{
+       purpose       returns integer square root of Val
+       note well:    this routine rounds to the nearest
+                     square root
+       last update   23 Jan 85
+}
+var
+  OddSeq,Square,Ro

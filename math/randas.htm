@@ -1,0 +1,74 @@
+<html><head><title>RandAs - Pseudo Random Generators</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор датчиков псевдослучайных чисел и обслуживающих их процедур, написанных в основном на языке Ассемблера. Модуль ориентирован на использование в TurboPascal.'>
+<meta name="keywords" content="pascal, sources, source code, randas, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;randas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RandAs - Pseudo Random Generators</TD>
+<TD nowrap class=black>&nbsp;В.М.Ульянов</TD>
+<TD class=black align='right'>06.01.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор датчиков псевдослучайных чисел и обслуживающих
+их процедур, написанных в основном на языке Ассемблера.
+Модуль ориентирован на использование в TurboPascal.</TD><TD class=black colspan=2 align='right'><br><A HREF="randas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>18k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">               &lt;&lt; RANDAS &gt;&gt;
+
+           Датчики псевдослучайных чисел.
+
+     Описываемый программный модуль содержит набор датчиков
+псевдослучайных чисел и обслуживающих их процедур, написанных в
+основном на языке Ассемблера. Модуль ориентирован на
+использование его в системе про- граммирования TurboPascal.
+
+     С логической точки зрения модуль содержит два генератора
+псевдослучайных чисел, работающих независимо. Один из них далее
+будет обозначаться AS, другой - MM.
+
+     Генератор AS использует линейный конгруэнтный метод с
+параметрами, подобранными с помощью спектрального теста, и
+обеспечивает большой период (1099511627776 для модулей Rnd51Fnc,
+Rnd52Fnc и Rnd54Fnc; 281474976710656 для модулей Rnd61Fnc,
+Rnd62Fnc и Rnd64Fnc; в каждой из групп модулей генерируется одна
+и та же последовательность). С этим генератором связаны
+псевдослучайные функции RandAs и RandRe, а также об- служивающие
+его процедуры AsIn, AsIni и AsOut.
+
+     Генератор MM использует линейный конгруэнтный метод,
+дополненный методом Макларена - Марсальи, и обеспечивает высокую
+степень независимости порождаемых чисел, что позволяет
+использовать его для моделирова- ния последовательности
+независимых испытаний и в расчетах методом Монте Карло с высоким
+разрешением. Период генерируемой последовательности очень велик
+(во всех шести модулях порождаются различные последовательности).
+С этим генератором связаны псевдослучайные функции RandEx, RandMM
+и RandRM, а также обслуживающие его процедуры MMIn, MMIni и
+MMOut.  Кроме того, пользователю доступен код ошибки RndErr,
+вырабатываемый процедурами AsIn, AsOut, MMIn и MMOut. Для
+распаковки кода ошибки можно использовать процедуру UnpackRndErr.
+
+       Процедуры инициализации и сохранения состояния.
+
+     AsIn('имя файла') - загрузка начального состояния генератора
+AS из заданного файла. Для загрузки из стандартного файла вместо
+имени файла можно указать пустую строку (оператор AsIn('')
+выполняется автоматически при запуске программы).
+
+     MMIn('имя файла') - загрузка начального состояния генератора
+MM из заданного файла. Для загрузки из стандартного файла вместо
+имени файла можно указать пустую строку. Автоматическая
+инициализация не выполняет- ся.
+
+     AsIni(R) 

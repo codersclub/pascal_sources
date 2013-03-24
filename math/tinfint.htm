@@ -1,0 +1,68 @@
+<html><head><title>tInfInt - Unlimited Integers Arithmetic Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для работы с ОЧЕНЬ БОЛЬШИМИ целыми числами. В качестве примера приведены программы для решения уравнения Пэлла abs(x*x - n*y*y)=1 и вычисления чисел Бернулли.  Sometimes it is necessary to do arithmetic with integer numbers that are much bigger than the numbers a ordinary "integer" or "longint" variable can hold, and one has to keep even the last decimal, so using reals is not a solution. The "TInfint" object soves this problem by defining an integer with a size that is only limited by the available heap space.'>
+<meta name="keywords" content="pascal, sources, source code, tinfint, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tinfint
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;tInfInt - Unlimited Integers Arithmetic Object</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:100031.2776@compuserv.com">Christian Sperr</a></TD>
+<TD class=black align='right'>23.07.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для работы с ОЧЕНЬ БОЛЬШИМИ целыми числами.
+В качестве примера приведены программы для решения
+уравнения Пэлла abs(x*x - n*y*y)=1 и вычисления чисел Бернулли. <br>
+Sometimes it is necessary to do arithmetic with integer numbers
+that are much bigger than the numbers a ordinary "integer" or
+"longint" variable can hold, and one has to keep even the last
+decimal, so using reals is not a solution. The "TInfint" object
+soves this problem by defining an integer with a size that is
+only limited by the available heap space.</TD><TD class=black colspan=2 align='right'><br><A HREF="tinfint.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{****************************************************************}
+{*                             INFINT.DOC                        }
+{****************************************************************}
+
+
+         Arithmetic with integers of (almost) unlimited size.
+
+
+{****************************************************************}
+
+The file INFINT.ZIP contains the following files :
+
+- INFINT.DOC    This File
+- INFINT.PAS    BP 7 Source of the TInfInt Object.
+- PELL2.PAS     Demo program, that solves Pell's equation
+                abs(x*x - n*y*y)=1
+- BERNZAHL.PAS  Demo Program, that calculates Bernoulli-numbers.
+
+The Problem
+-----------
+
+Sometimes it is necessary to do arithmetic with integer numbers
+that are much bigger than the numbers a ordinary "integer" or
+"longint" variable can hold, and one has to keep even the last
+decimal, so using reals is not a solution. The "TInfint" object
+soves this problem by defining an integer with a size that is
+only limited by the available heap space.  (under DPMI this can
+be a lot). I wrote the first version of this "library" in 1987 in
+a work to get my diploma in mathematics in Turbo Pascal 3.0.  Now
+I revised it to use the advantages of BP 7.
+
+Copyrights, disclaimer and warnings
+-----------------------------------
+
+The copyright of the programs and the INFINT Unit are held by the
+author.  There is n

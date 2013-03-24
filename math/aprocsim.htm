@@ -1,0 +1,74 @@
+<html><head><title>Интерполяция по методу Эткена</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Метод рисования линии по трем точкам'>
+<meta name="keywords" content="pascal, sources, source code, aprocsim, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;aprocsim
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Интерполяция по методу Эткена</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5063/51.3">Marina Taranova</a></TD>
+<TD class=black align='right'>09.02.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Метод рисования линии по трем точкам</TD><TD class=black colspan=2 align='right'><br><A HREF="aprocsim.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- ...New UUEss... --------------------------------------------------- UUESTUFF -
+ From : Marina Taranova                     2:5063/51.3      9 Feb 98
+ Subj : Интерполяция по методу Эткена
+--------------------------------------------------------------------------------
+Привет, Fedya!
+
+В четверг января 29 1998 23:58, Fedya Mosalov написал(а) для Nicolas Strochkov:
+
+ &gt;&gt;  как нарисовать линию по трем точкам? 
+ NS&gt;&gt; посмотpи yчебник по Численным методам на темы интеpполиpование,
+ NS&gt;&gt; интеpполиpование сплайнами.
+ &gt;
+ &gt; Спасибо, конечно, за совет. Я обязательно посмотpю yчебник. :-)
+ &gt; Hо нет ли на этy темy каких-либо исходников?
+
+Hу у меня есть прога по интерполированию методом "схема Эткена", 
+когда-то делала для численных методов, лови:
+
+
+                С уважением, Marina.
+
+---
+ * Origin: Сегодня все будут учиться плавать. - боцман Borland (2:5063/51.3)
+
+{&gt; Cut here. FileName= READ_ME.TXT }
+Это рабочая прога по интерполяции методом "схема Эткена"
+Подробности метода смотри в книжках, он основан на вычислении различных
+определителей.
+
+Тк прога без коментариев, то немного раз'ясню, где и что.
+
+Прога из задаваемого файла считывает данные: первая строчка пропускается
+(это информационная строка), далее в каждой строке узлы интерполяции:
+значение x и соответственно f(x), кол-во узлов интерполяции ограничено лишь
+размерами доступной памяти(в качестве примера 2_st_x {y=2^x} и fcos {y=cos(x)})
+Данные загоняются в динамический массив xx, при помощи
+function x(n,i:byte):real; можно вытащить любой из них
+        n-index (0..nn - глобальная переменная, определяемая при окончании
+считывания файла),i=0/1 &lt;=&gt; x/y ) }
+
+В проге сам метод это function l (n1,n2:byte;xx:real):real;
+{название из одной буквы для простоты} это рекурсивная функция, значение
+структурированного определителя от n1 до n2 индекса, xx - точка в которой
+вычисляется значение интерполяционного многочлена.
+
+Все остальное, это примочки, если нужно будет что-то об'яснить, ждем
+
+                        Marina.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

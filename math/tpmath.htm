@@ -1,0 +1,108 @@
+<html><head><title>Elementary, Complex and Trigonometry Math Library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Три математических библиотеки, подключаемых дирекстивой Include: Элементарная математика, Комплексная математика, Тригонометрия.  CMPXLIB: Complex math library;  MATHLIB.INC: math utility library;  TRIG.INC: Trigonometrical Function library'>
+<meta name="keywords" content="pascal, sources, source code, tpmath, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpmath
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Elementary, Complex and Trigonometry Math Library</TD>
+<TD nowrap class=black>&nbsp;Ron Finger</TD>
+<TD class=black align='right'>04.06.1986</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Три математических библиотеки, подключаемых дирекстивой
+Include: Элементарная математика, Комплексная математика,
+Тригонометрия. <br>
+CMPXLIB: Complex math library; <br>
+MATHLIB.INC: math utility library; <br>
+TRIG.INC: Trigonometrical Function library</TD><TD class=black colspan=2 align='right'><br><A HREF="tpmath.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{CMPXLIB: Complex math library for Pascal; by Ron Finger}
+
+Procedure CPERM(N:Complex);
+  {to make complex number permanent}
+
+Procedure CERASE(N:Complex);
+  {to release temporary complex variables}
+
+Function CMPLX(R,I:Real): Complex;
+  {to create complex number with cartesian coordinates}
+
+Function RE(N:Complex): Real;
+  {returns real part of complex number}
+
+Function IM(N:Complex): Real;
+  {returns imaginary part of complex number}
+
+Function PHASOR(M,A:Real): Complex;
+  {to create phasor from magnitude and angle}
+
+Function MAG(N:Complex): Real;
+  {returns magnitude part of phasor}
+
+Function ANG(N:Complex): Real;
+  {returns angle part of phasor}
+
+Function CMPXO(N1:Complex;OP:Char;N2:Complex): Complex;
+  {to add, subtract, miltiply, or divide complex numbers}
+
+Function POLAR(N:Complex): Complex;
+  {to convert complex number from cartesian to polar coordinates}
+
+Function CART(N:Complex): Complex;
+  {to convert complex number from polar to cartesian coordinates}
+
+Function CSQR(N:Complex): Complex;
+  {square of complex number, SQR(N)}
+
+Function CSQRT(N:Complex): Complex;
+  {square root of complex number, SQRT(N)}
+
+Function CRECP(N:Complex): Complex;
+  {recripical of complex number, 1/N}
+
+Function CONJG(N:Complex): Complex;
+  {conjugate of a complex number}
+
+Function CABS(N:Complex): Real;
+  {absolute value of complex number, ABS(N)}
+
+------------------------------------------------
+{MATHLIB.INC math utility library by Ron Finger}
+
+Function SIGN(X:Real):Integer;
+  {Returns sign of argument as +1, -1, or 0}
+
+{Common LOG Functions}
+
+Function LOG10(X:Real): Real;
+  {LOG (BASE 10) Function}
+
+Function ALOG10(X:Real): Real;
+  {ANTILOG (BASE 10) Function}
+
+{Power Functions}
+
+Function POWER(X:Real;N:Integer): Real;
+  {Computes Real X raised to Integer power N iteratively}
+
+Function CUBE(X:Real): Real;
+  {Cube Function}
+
+Function CBRT(X:Real): Real;
+  {Cube root function}
+
+Function RPOWER(X,N:Real): Real;
+  {Computes Real X raised TO Real power N}
+
+Function NLEN(X:R

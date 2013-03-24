@@ -1,0 +1,91 @@
+<html><head><title>Matrix Operation Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль работы с матрицами. Включает в себя функции:  - Вычисление определителя  - Транспонирование  - Вычисление ранга матрицы  - Нахождение следа матрицы  - Умножение матриц  - Сложение матриц  - Вычитание матриц  - Тензорное произведение  - Умножение матрицы на число  - Объединение двух матриц (справа и снизу)  - Обращение матрицы  - Псевдообращение методом Фадеева  - Псевдообращение методом Гревиля  - Выделение из матрицы столбцов с k0 по k1  - Cравнение матриц  - Превращение матрицы в вектор  - Превращение вектора в матрицу'>
+<meta name="keywords" content="pascal, sources, source code, matr_op, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;matr_op
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Matrix Operation Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:syn@crhefr.hptula.mednet.com">Ilya Pinaeff</a></TD>
+<TD class=black align='right'>17.02.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль работы с матрицами. Включает в себя функции: <br>
+- Вычисление определителя <br>
+- Транспонирование <br>
+- Вычисление ранга матрицы <br>
+- Нахождение следа матрицы <br>
+- Умножение матриц <br>
+- Сложение матриц <br>
+- Вычитание матриц <br>
+- Тензорное произведение <br>
+- Умножение матрицы на число <br>
+- Объединение двух матриц (справа и снизу) <br>
+- Обращение матрицы <br>
+- Псевдообращение методом Фадеева <br>
+- Псевдообращение методом Гревиля <br>
+- Выделение из матрицы столбцов с k0 по k1 <br>
+- Cравнение матриц <br>
+- Превращение матрицы в вектор <br>
+- Превращение вектора в матрицу</TD><TD class=black colspan=2 align='right'><br><A HREF="matr_op.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">(********************************************************************
+ **  Пример работы с матрицами.                                    **
+ **  (c) S&s aKa Ilya Pinaeff (syn@crhefr.hptula.mednet.com)       **
+ **      DeN Tatyanin (2:5036/10.19@Fidonet aKa 345:8188/3@RANet)  **
+ ********************************************************************)
+{$N+}
+uses Matr_op;
+var
+  A,B:Mp;
+
+procedure Read_(A:Mp);
+var
+  l,j:integer;
+begin
+  with A^ do for l:=1 to n do for j:=1 to m do read(e(l,j)^);
+end;
+
+begin
+  A:=NIL;
+  B:=NIL;
+  A:=new(Mp,Init(3,3));
+  Read_(A);
+  writeln('Матpица A:');
+  Print(A);
+  writeln('Матpица A тpанспониp.:');
+  Print(A^.T);
+  SetM(B,Grevil(A));
+  writeln('Матpица A+.:');
+  Print(B);
+  writeln('Матpица A*A+.:');
+  Print({MMul(A,}MMul(B,A){)});
+end.
+           ------------- Cut here -----------
+
+(********************************************************************
+ **  Модуль работы с матрицами.                                    **
+ **  (c) S&s aKa Ilya Pinaeff (syn@crhefr.hptula.mednet.com)       **
+ **      DeN Tatyanin (2:5036/10.19@Fidonet aKa 345:8188/3@RANet)  **
+ ********************************************************************)
+
+{$N+}
+unit Matr_Op;
+
+interface
+type
+  Rl=^extended;
+  TArray=array[0..3000] of extended;
+  Arl=^TArray;
+  Mp=^Matr;
+  Matr=objec

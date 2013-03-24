@@ -1,0 +1,60 @@
+<html><head><title>TPMath v1.0 - Turbo Pascal Math Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль математических функций для TP4: Тригонометрия, гиперболические и логарифмические  функции.  Mathematical Turbo Pascal unit source (all versions from Turbo Pascal 4). Trigonometric, hyperbolic and logarithm functions.'>
+<meta name="keywords" content="pascal, sources, source code, tpmath10, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpmath10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPMath v1.0 - Turbo Pascal Math Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:husted@login.dknet.dk">Michael Husted</a></TD>
+<TD class=black align='right'>14.10.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль математических функций для TP4:
+Тригонометрия, гиперболические и логарифмические  функции. <br>
+Mathematical Turbo Pascal unit source (all versions from Turbo Pascal 4).
+Trigonometric, hyperbolic and logarithm functions.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpmath10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">unit Math;
+
+interface
+
+(* ---------------------- *)      (* --------------------------- *)
+(* MATH FUNCTIONS TP-UNIT *)      (* LOGARITHM, POWERS AND ROOTS *)
+(* ---------------------- *)      (* --------------------------- *)
+function Power (x,y:real):real;   (* x to the power of y         *)
+function Root (x,y:real):real;    (* the y'th root of x          *)
+function Log (x:real):real;       (* Logarithm of x with base 10 *)
+function Antilog (x:real):real;   (* 10^x                        *)
+function LogBase (x,y:real):real; (* Logarithm of x with base y  *)
+                                  (* --------------------------- *)
+                                  (* TRIGONOMETRIC FUNCTIONS     *)
+                                  (* --------------------------- *)
+function D2R (x:real):real;       (* Degrees to radians          *)
+function R2D (x:real):real;       (* Radians to degrees          *)
+function Tan (x:real):real;       (* Tangent of x                *)
+function ArcSin (x:real):real;    (* Arc sine of x               *)
+function ArcCos (x:real):real;    (* Arc cosine of x             *)
+                                  (* --------------------------- *)
+                                  (* HYPERBOLIC FUNCTIONS        *)
+                                  (* --------------------------- *)
+function Sinh (x:real):real;      (* Sine hyperbolic of x        *)
+function Cosh (x:real):real;      (* Cosine hyperbolic of x      *)
+function Tanh (x:real):real;      (* Tangent hyperbolic of x     *)
+function ArSinh (x:real):real;    (* Ar sine hyperbolic of x     *)
+function ArCosh (x:real):real;    (* Ar cosine hyperbolic of x   *)
+function ArTanh (x:real):real;    (* Ar tangent hyperbolic of x  *)
+                                  (* --------------------------- *)
+                                  (* OTHER FUNCTIONS             *)
+                                  (* --------------------------- *)
+function Fac (n:integer):real;    (* Factorial of n  (n!)        *

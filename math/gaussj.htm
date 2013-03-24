@@ -1,0 +1,158 @@
+<html><head><title>Gauss Jordan Matrix Inversion and Solution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Три программы для решения матричных уравнений методами Гаусса, Гаусса-Зейделя и Гаусса-Жордана.'>
+<meta name="keywords" content="pascal, sources, source code, gaussj, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gaussj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Gauss Jordan Matrix Inversion and Solution</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>03.04.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Три программы для решения матричных уравнений методами
+Гаусса, Гаусса-Зейделя и Гаусса-Жордана.</TD><TD class=black colspan=2 align='right'><br><A HREF="gaussj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program gausid;		{ -&gt; 129 }
+{ pascal program to perform simultaneous solution }
+{ by Gauss-Seidel }
+{ procedure SEID is included }
+
+const	maxr	= 8;
+	maxc	= 8;
+
+type	ary	= array[1..maxr] of real;
+	arys	= array[1..maxc] of real;
+	ary2s	= array[1..maxr,1..maxc] of real;
+
+var	y	: ary;
+	coef	: arys;
+	a	: ary2s;
+	n,m	: integer;
+	first,
+	error	: boolean;
+
+external procedure cls;
+
+procedure get_data
+	(var a	: ary2s;
+	 var y	: ary;
+	 var n,m: integer);
+{ get values for n and arrays a,y }
+
+var	i,j	: integer;
+
+begin
+  writeln;
+  repeat
+    write('How many equations? ');
+    readln(n);
+    if first then first:=false else cls
+  until n&lt;maxr;
+  m:=n;
+  if n&gt;1 then
+    begin
+      for i:=1 to n do
+	begin
+	  writeln('Equation',i:3);
+	  for j:=1 to n do
+	    begin
+	      write(j:3,':');
+	      read(a[i,j])
+	    end;
+	write(' C:');
+	read(y[i]);
+	readln		{ clear the line }
+      end;
+    writeln;
+    for i:=1 to n do
+      begin
+	for j:=1 to m do
+	  write(a[i,j]:7:4,' ');
+	writeln(':',y[i]:7:4)
+      end;
+      writeln
+    end		{ if n&gt;1 }
+  else if n&lt;0 then n:=-n;
+  m:=n
+end;		{ procedure get_data }
+
+procedure write_data;
+{ print out the answers }
+
+var	i : integer;
+
+begin
+  for i:=1 to m do
+    write(coef[i]:9:5);
+  writeln
+end;		{ write_data }
+
+procedure seid
+	(a	: ary2s;
+	y	: ary;
+	var coef: arys;
+	ncol	: integer;
+       var error: boolean);
+{ matrix solution by Gauss Seidel }
+
+const	tol	= 1.0E-4;
+	max	= 100;
+
+var	done	: boolean;
+       i,j,k,l,n: integer;
+
+	nextc,hold,
+	sum,lambda,
+	ab,big	: real;
+
+begin
+  repeat
+    write('Relaxation factor? ');
+    readln(lambda)
+  until (lambda&lt;2) and (lambda&gt;0.0);
+  error:=false;
+  n:=ncol;
+  for i:=1 to n-1 do
+    begin
+      big:=abs(a[i,i]);
+      l:=i;
+      for j:=i+1 to n do
+	begin
+	{ search for largest element }
+	  ab:=abs(a[j,i]);
+	  if ab&gt;big then
+	    begin
+	      big:=ab;
+	      l:=j
+	    end
+      end;		{ j-loop }
+    if big=0.0 then error:=true
+    else
+      begin
+	if l&lt;&gt;i then
+	  begin
+	  { interchange rows to put }
+	  { largest element on diagonal }
+	  for j:=1 to n do
+	    begin
+	      hold:=a[l,j];
+	      a[l,j]:=a[i,j];
+	      a[i,j]:=hold
+	    end;
+	  hold:=y[l];
+	  y[l]:=y[i];
+	  y[i]:=hold
+	end	{ if l&lt;&gt;i }
+      end	{ if big }
+    end;	

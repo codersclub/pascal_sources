@@ -1,0 +1,74 @@
+<html><head><title>Минимизация на графе по алгоритму Дейкстры</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пpограмма ищет кpатчайшие пyти на гpафе'>
+<meta name="keywords" content="pascal, sources, source code, minygraf, math, Математика ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Математика</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;minygraf
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Минимизация на графе по алгоритму Дейкстры</TD>
+<TD nowrap class=black>&nbsp;Сергей Мирончев</TD>
+<TD class=black align='right'>07.12.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пpограмма ищет кpатчайшие пyти на гpафе</TD><TD class=black colspan=2 align='right'><br><A HREF="minygraf.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello All!
+  По многочисленным пpосьбам тpyдящихся кидаю сие твоpение пpям сюды.
+Hапоминаю пpога ищет кpатчайшие пyти на гpафе.
+
+{&gt; Cut here. FileName= MINYGRAF.DOC }
+                             Курсовая работа.
+
+   Программа выполняет минимизацию на графе при помощи алгоритма Дейкстры.
+   Алгоритм Дейкстры строит кратчайшие пути,ведущие из исходной вершины графа
+к остальным вершинам этого графа./Если,конечно,таковые имеются.../
+   В процессе работы алгоритма последовательно помечаються достижимые вершины
+графа.Причем вершина,помеченная последней /на данный момент/ расположена ближе
+к исходной вершине,чем все непомеченные,но дальше,чем все помеченные.
+   Сначала помечается исходная вершина;Следующей,очевидно,будет помечена верши-
+на,ближайшая к исходной,и смежная с ней.
+   Пусть на каком-то шаге уже помечено несколько вершин.Известны кратчайшие пути
+,ведущие из исходной вершины к помеченным.Для каждой из непомеченных вершин про-
+делаем следующее: Рассмотрим все дуги,ведущие из помеченных вершин в одну непо-
+меченную.Каждая такая дуга является последней дугой на пути из исходной вершины
+в эту непомеченную.Выберем из этих путей кратчайший.А из этих кратчайших путей
+ко всем непомеченным вершинам выберем наикратчайший,и пометим вершину,к которой
+он ведет.
+   Алгоритм завершится,когда будут помечены все достижимые вершины.
+   В результате работы алгорима Дейкстры строится Дерево Кратчайших Путей.
+   /Материал взят из книги 'Решение задач с помощью стандартных подпрограмм' -
+А.М.Ветошкин,А.В.Корольков,А.И.Батарин,Т.А.Крылова./
+
+                                   Типы.
+
+   В программе используются следующие типы данных:
+
+   Тип граф:
+     GrafType=record
+             ListVertex:VertexPtr;     - Указатель на список вершин.
+             VertNumber:Byte;          - Количество вершин.
+             UserWeight:Boolean;       - Признак пользовательского веса дуг.
+     end;
+
+   Тип вершина:
+     VertexPtr=^Vertex;                - Указатель на вершину.
+     Vertex=record
+             Vert:Byte;                - Номер вершины.
+             ListArc:ArcPtr;           - Список дуг,идущих от этой вершины.
+             NextVertex:VertexPtr;     - Указатель на следующую вершину.
+             Mark:Boolean;             - Флаг 'помеченности'.
+             X,Y:Integer;              - Координаты на экране.
+     end;
+
+   Тип дуга:
+     ArcPtr=^Arc;                      - Ука
