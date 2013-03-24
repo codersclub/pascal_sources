@@ -1,0 +1,54 @@
+<html><head><title>XMS-Sharp 2.01 - Модуль для Работы с XMS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль поддерживает работу с расширенной (XMS) памятью. Приведен пример использования и краткое описание функций.'>
+<meta name="keywords" content="pascal, sources, source code, x_sharp, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;x_sharp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;XMS-Sharp 2.01 - Модуль для Работы с XMS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vdm_wrc@beep.ru">Ivan Kalininskiy</a></TD>
+<TD class=black align='right'>14.07.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль поддерживает работу с расширенной (XMS) памятью.
+Приведен пример использования и краткое описание функций.</TD><TD class=black colspan=2 align='right'><br><A HREF="x_sharp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> +-------------------------------------------------------------------------+
+ |                             SHARP (2.01)                                |
+ |    Библиотеки для работы с PCX файлами, EMS, XMS памятью и "мышью".     |
+ |              из программ на Turbo / Borland Pascal 7.0                  |
+ |                          All right reserved                             |
+ |                        -= FreeWare  Release =-                          |
+ +-------------------------------------------------------------------------+
+ |                      Описание функций библиотек:                        |
+++-------------------------------------------------------------------------++
+|                               XMS-SHARP                                   |
+|                  Библиотека для работы с XMS памятью.                     |
++---------------------------------------------------------------------------+
+|                                                                           |
+|  XmsInitialized : boolean = false;                                        |
+|     Флаг наличия XMS памяти. Если XmsInitialized = false,                 |
+|     это означает, что XMS память отсутствует или не была                  |
+|     инициализирована.                                                     |
+|                                                                           |
+|  XmsStatus : byte                                                         |
+|     Статус завершения операции с XMS памятью.                             |
+|     Значение XmsStatus, отличное от нуля, означает, что последняя         |
+|     операция с XMS памятью завершилась аварийно.                          |
+|     Подробное описание возможных кодов завершения дано                    |
+|     в спецификации XMS.                                                   |
+|                                                                           |
+|  XmsAddr : pointer = nil;                                                 |
+|     Содержит адрес точки входа диспетчера XMS памяти.                     |
+|     Если Xms_Addr = nil, это означает, что XMS память отсутствует         |
+|     или не была инициализи

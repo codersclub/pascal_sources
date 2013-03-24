@@ -1,0 +1,75 @@
+<html><head><title>Clear Memory to a Fixed Value at the Program Start</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для автоматической инициализации "кучи", стэка или сегмента данных заданным значением, например нулем.  CLEARMEM - A Turbo Pascal unit to automatically initialize the heap, stack, or data segment to a fixed value.'>
+<meta name="keywords" content="pascal, sources, source code, clearmem, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;clearmem
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Clear Memory to a Fixed Value at the Program Start</TD>
+<TD nowrap class=black>&nbsp;D.J. Murdoch</TD>
+<TD class=black align='right'>06.06.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для автоматической инициализации "кучи", стэка или
+сегмента данных заданным значением, например нулем. <br><font color=#666666>
+CLEARMEM - A Turbo Pascal unit
+to automatically initialize the heap, stack, or data segment
+to a fixed value.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="clearmem.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CLEARMEM - A Turbo Pascal unit to automatically initialize the heap, stack, or
+data segment to a fixed value.
+
+Written by D.J. Murdoch for the public domain.
+
+Interface:
+
+  const
+    filler : byte = 0;
+
+This byte is used as the initial value.  A good choice for turning up
+uninitialized variables is $FF - this will often cause a range check, and will
+cause runtime error 207 if you try to use an uninitialized single, double or
+extended.
+
+  procedure clear_heap;
+
+This procedure fills the heap with filler bytes.  Automatically called in the
+initialization section.
+
+  procedure clear_globals;
+
+This procedure fills all global variables (except those in the system unit) with
+filler bytes.  Very dangerous!  *Not* called in the initialization section
+(unless you change it).  Written for TP 6.0; the source code gives hints on how
+to change it for other versions.
+
+  procedure clear_stack;
+
+This procedure fills the unused part of the stack with filler bytes.
+
+SAFETY
+
+It's safe to call clear_heap any time; it'll fill all free blocks of 6 bytes or
+more on the heap with the filler byte.  It won't necessarily do a perfect fill
+if the heap is fragmented, because the free list will overwrite the filler.
+
+It's also safe to call clear_stack any time, but is a bit less effective.  Any
+interrupts that happen after your call will mess up the stack that you've just
+cleared, so local variables won't necessarily be properly initialized.  It
+doesn't touch anything already allocated.
+
+It's definitely *NOT* safe to call clear_globals any time except at the very
+beginning of your program, and only then from the initialization section of this
+unit, and only if this is the very first unit that you Use in the main program.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

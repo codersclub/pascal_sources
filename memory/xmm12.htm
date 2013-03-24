@@ -1,0 +1,74 @@
+<html><head><title>XMM 1.2 - eXpanded Memory Manager for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Менеджер Extended памяти, поддерживающий спецификацию Microsoft XMS level 3.0. Позволяет размещать в верхней памяти не только данные, но и код программы.  XMM is a Turbo Pascal eXtended Memory Manager implementation that supports Microsofts XMS specification level 3.0. It enables programs running on an AT-like, 386-like or 486-like machine to use extended memory (memory above the 1 megabyte barrier) to store data and code.'>
+<meta name="keywords" content="pascal, sources, source code, xmm12, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xmm12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;XMM 1.2 - eXpanded Memory Manager for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Jeroen W. Pluimers</TD>
+<TD class=black align='right'>05.07.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Менеджер Extended памяти, поддерживающий спецификацию
+Microsoft XMS level 3.0. Позволяет размещать в верхней памяти
+не только данные, но и код программы. <br><font color=#666666>
+XMM is a Turbo Pascal eXtended Memory Manager implementation
+that supports Microsofts XMS specification level 3.0.
+It enables programs running on an AT-like, 386-like or 486-like machine
+to use extended memory (memory above the 1 megabyte barrier)
+to store data and code.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="xmm12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>116k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                    Welcome to XMM version 1.2 !
+                  --------------------------------
+              eXpanded Memory Manager for Turbo Pascal
+
+
+Files in this package:
+----------------------
+
+    README.DOC        - This file!
+    DIRECTIV.10       - Compiler directives for Quick Pascal 1.0
+    DIRECTIV.40       - Compiler directives for Turbo Pascal 4.0
+    DIRECTIV.50       - Compiler directives for Turbo Pascal 5.0
+    DIRECTIV.55       - Compiler directives for Turbo Pascal 5.5
+    DIRECTIV.60       - Compiler directives for Turbo Pascal 6.0
+    DIRECTIV.INC      - Compiler directive back-bone
+    XMS.PAS           - Pascal source of XMM driver
+    XMM.ASM           - Assembler source of XMM driver
+    XMM.OBJ           - Object code of XMM driver
+    XMS20.ZIP         - Microsof XMS driver (Public Domain)
+    XMS30.DOC         - XMS 3.0 specifications
+
+
+Short description :
+-------------------
+
+XMM is a Turbo Pascal eXtended Memory Manager implementation that supports
+Microsofts XMS specification level 3.0.
+It enables programs running on an AT-like, 386-like or 486-like machine to
+use extended memory (memory above the 1 megabyte barrier) to store data and
+code.
+Almost all code is written in machine language and Microsofts XMS driver
+version 2.06 (which is public domain) is included.
+
+Usage :
+-------
+
+In order to use the XMM driver, you must compile the XMS.PAS file with
+your Turbo Pascal version to XMM.TPU. You don't need to assemble the
+XMM.ASM file, as the .OBJ file is already included.
+
+    TPC XMM.PAS
+
+Then you can put a uses statement in your application

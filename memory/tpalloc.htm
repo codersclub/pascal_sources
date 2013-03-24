@@ -1,0 +1,83 @@
+<html><head><title>TPALLOC v1.0 - Allocate more than 64K Memory for TP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для выделения блоков памяти размером более 64K.  TPALLOC contains routines that allow you to allocate and deallocate blocks of memory larger than 64K using Turbo Pascal 4.0 or 5.0.'>
+<meta name="keywords" content="pascal, sources, source code, tpalloc, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpalloc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TPALLOC v1.0 - Allocate more than 64K Memory for TP</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76317.3247@compuserv.com">Brian Foley</a></TD>
+<TD class=black align='right'>04.11.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для выделения блоков памяти размером более 64K. <br><font color=#666666>
+TPALLOC contains routines that allow you to allocate and
+deallocate blocks of memory larger than 64K using Turbo
+Pascal 4.0 or 5.0.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpalloc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TPALLOC - Routines for allocating blocks of memory
+larger than 64K
+------------------------------------------------------------------
+Brian Foley
+TurboPower Software
+Compuserve [76317,3247]
+11/88
+Version 1.0
+Released to the public domain
+
+Overview
+------------------------------------------------------------------
+
+TPALLOC contains routines that allow you to allocate and
+deallocate blocks of memory larger than 64K using Turbo Pascal
+4.0 or 5.0. Whether or not these routines will be of use to you
+is hard to say. On the one hand, their usefulness is severely
+limited by the fact that Turbo Pascal does not allow you to
+declare data structures larger than 64K (actually 65521 bytes).
+So it will be up to you to manipulate huge data structures
+allocated with TPALLOC.  On the other hand, we know these
+routines *can* be useful in some cases. After all, we wrote them
+because we needed them for our own software. In any event, we
+didn't feel any overwhelming need to keep these routines to
+ourselves, and you are welcome to use them if you can.
+
+See DEMO.PAS for a demonstration of how to use TPALLOC.
+
+Using TPALLOC
+------------------------------------------------------------------
+
+TPALLOC interfaces the following types and procedures:
+
+type
+  SegOfs =
+    record
+      Ofst, Segm : Word;
+    end;
+
+  This record structure is used to separate a 32-bit pointer into
+  its component parts.
+
+procedure HugeGetMem(var Pt; Bytes : LongInt);
+
+  This routine allocates a block of memory of size Bytes and
+  stores a pointer to it in Pt (a pointer variable of some sort).
+  Pt will be set to nil if Bytes &gt; MaxAvail. HugeGetMem is
+  essentially identical to GetMem except that it can allocate
+  blocks of memory larger than 64K. (It can also allocate blocks
+  less than 64K, of course.)
+
+procedure HugeFreeMem(var Pt; Bytes : LongInt);
+
+  This routine deallocates a block of memory of size Bytes
+  pointed to by Pt (a pointer variable of some sort). Pt is set
+  to nil on

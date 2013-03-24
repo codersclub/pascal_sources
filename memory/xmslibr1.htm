@@ -1,0 +1,69 @@
+<html><head><title>Xmslib - XMS library for TP6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Библиотека для работы с XMS 2.0 памятью для Турбо Паскаль 6.0. Позволяет программе использовать более 640K памяти под динамические переменные.  XMS library for TP6.0 implements the XMS 2.0 API for Turbo-Pascal 6.0. This package allows to use virtual memory references for data in turbo pascal, without the regular limitations of 640K.'>
+<meta name="keywords" content="pascal, sources, source code, xmslibr1, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xmslibr1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Xmslib - XMS library for TP6.0</TD>
+<TD nowrap class=black>&nbsp;Loewy Ron</TD>
+<TD class=black align='right'>11.08.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Библиотека для работы с XMS 2.0 памятью для Турбо Паскаль 6.0.
+Позволяет программе использовать более 640K памяти под
+динамические переменные. <br><font color=#666666>
+XMS library for TP6.0 implements the XMS 2.0 API
+for Turbo-Pascal 6.0. This package allows to use virtual memory
+references for data in turbo pascal, without the regular limitations of
+640K.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="xmslibr1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>17k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">*******************************************************************************
+*                                   xmsLib                                    *
+* xms library for TP6.0, Loewy Ron 1991.                                      *
+* Last update : Aug. 11, 1991                                                 *
+*******************************************************************************
+
+Introduction
+------------
+
+  xmsLib implements the XMS 2.0 API for Turbo-Pascal 6.0. This package is
+ a first step in a project I took that will allow me to use virtual memory
+ references for data in turbo pascal, without the regular limitations of
+ 640K. I have used this library in some in house projects, But I would like
+ to comment that I have used heavily only the extended memory allocation
+ functions. (I have not used the UMB functions). The source of information
+ for the XMS API was the XMS specification Ver 2.0 from July 19, 1988,
+ published and copyrighted by :
+
+Copyright (c) 1988, Microsoft Corporation, Lotus Development
+Corporation, Intel Corporation, and AST Research, Inc.
+
+Technical documantation
+-----------------------
+
+  For technical docs, please refer to the XMS specification published
+ by the mentioned companies. I will give a brief explanation of the
+ functions defined in the UNIT INTERFACE. A demo test program XMSTEST.PAS
+ is included and can be used as a referance for the use of the library.
+
+ Notice : I use the term XMB to describe an eXtended Memory Block, where
+ the XMS specification will discribe this block as EMB!.
+
+Warranty
+--------
+
+  There is no warranty what so ever, The unit and docs. are supplied as is,
+ The author (Loewy Ron), is not, and will not be responsible for any damages,
+ lost profits, or inconveniences caused by the use, or inability to
+ use this unit. The use of the

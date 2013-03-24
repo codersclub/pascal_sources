@@ -1,0 +1,187 @@
+<html><head><title>BigTurbo - Add Extra 64K Code Segment for TP Program</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для добавления к программе дополнительного сегмента кода, позволяющего увеличить размер программы без использования оверлеев.  The BigTurbo system provides control to set up an extra 64K code segment for Turbo Pascal programs. It provides an alternative to overlays and chaining with some advantages over either technique.'>
+<meta name="keywords" content="pascal, sources, source code, bigturbo, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bigturbo
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BigTurbo - Add Extra 64K Code Segment for TP Program</TD>
+<TD nowrap class=black>&nbsp;Kim Kokkonen</TD>
+<TD class=black align='right'>06.11.1985</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для добавления к программе дополнительного сегмента кода,
+позволяющего увеличить размер программы без использования
+оверлеев. <br><font color=#666666>
+The BigTurbo system provides control to set up an extra 64K code
+segment for Turbo Pascal programs. It provides an alternative to
+overlays and chaining with some advantages over either technique.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="bigturbo.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">****************************************************************
+* BigTurbo - (c) 1985 Kim Kokkonen, TurboPower Software.       *
+****************************************************************
+*    written 9/85. (408)-378-3672. Compuserve 72457,2131.      *
+*   This version is a prototype for a commercial product.      *
+*  It is hereby released to the public domain for personal,    *
+*                 non-commercial use only.                     *
+*             We will appreciate any feedback.                 *
+****************************************************************
+
+The BigTurbo system provides control to set up an extra 64K code
+segment for Turbo Pascal programs. It provides an alternative to
+overlays and chaining with some advantages over either technique.
+
+The extra 64K code segment is written and compiled as a separate
+program from the main code segment. The main block of the
+separate segment is never used, unless you want to execute the
+program independently for debug purposes. BigTurbo allows you to
+call the global procedures in the extra code segment directly
+from the main program, or from procedures in the main program. It
+also allows procedures in the extra code segment to call each
+other and to call global procedures in the main code segment.
+The two code segments share a common data segment, heap and
+stack, and communication between the two segments is via global
+variables (parameters are not allowed at present).
+
+BigTurbo requires files MAIN1.INC and MAIN2.INC to be included
+and compiled with the main program, and the files FAR1.INC and
+FAR2.INC to be included and compiled with the code comprising the
+extra code segment.  As described below, the programmer must make
+minor modifications to the include files MAIN2.INC and FAR2.INC
+to make them work in his/her program.
+
+The main program must have heap space reserved for the extra code
+segment when it is compiled to a .COM file (the extra code
+segment is loaded onto the heap of the main program). The extra
+code must be compiled to a .COM file prior to executing the main
+program. The code space, data space and heap/stack space options
+for the extra code segment are never accessed and are therefore
+arbitrary.
+
+Hereafter, we will call the extra code segment the "Far" code
+segment.
+
+Communication between the Main code segment and the Far code
+segment occurs only via global variables, similar to how Chain
+files are used.  As a result the Far program should contain a set
+of global data definitions identical to those of the Main code
+segment. This is best managed by putting the global definitions
+in an include file, and including that file in both the Main and
+Far programs.
+
+Improvements of BigTurbo over using Chain files or Overlays are
+as follows:
+
+ 1) The Far code segment is loaded into memory only once, and
+    remains there until the program completes. You get a full
+    extra 64K segment (less runtime library overhead, about 10K)
+    to use.
+
+ 2) Any global procedure in the Far code segment may be called
+    directly either from the main code segment or from within the
+    Far code segment.
+
+ 3) Any global procedure in the Main code segment may be called
+    directly either from the Far code segment or from within the
+    main code segment (as usual).
+
+ 4) Upon completion of a call to the Far code segment, control
+    returns to the calling procedure. Calls in the other
+    direction work the same way.
+
+ 5) The Main and Far code share the same heap and data segment,
+    which provides adequate means of communication between the
+    two.
+
+ 6) The restrictions on what can call what are fewer than for
+    overlays.
+
+ 7) You can do the equivalent of overlays by DISPOSing of the
+    code on the heap and loading another file's worth of code
+    there. Only one extra code segment is allowed at a time,
+    although the techniques here can clearly be extended to more
+    segments with some logistic headaches.
+
+ 8) These techniques are not specific to any particular version
+    of Turbo, although we have assumed version 3.X (of any
+    flavor).
+
+
+Limitations of BigTurbo are as follows:
+
+ 1) For now, calls across the code segment boundary may not use
+    parameters, and must be made only to procedures (not
+    functions).
+
+ 2) The programmer must do a small amount of manual management to
+    keep the required addressing tables set up (see
+    SetupJumpTable below).
+
+ 3) An extra copy of the Turbo runtime library is loaded into
+    memory for the Far code segment. This costs about 10K bytes
+    of RAM.
+
+ 4) The Far code may not use global variables that are not used
+    in the Main code segment, and vice versa. The order of the
+    global variable definitions must be identical in each to
+    guarantee proper addressing, just as with chain files.
+
+ 5) The Far code should not use EXTERNAL procedures or INLINE
+    code that enters and exits the global procedures in any way
+    but the Turbo Pascal standard.
+
+ 6) Stack checking is not currently implemented for Far calls.
+    Such checking once implemented will be compiler version
+    specific.
+
+ 7) Far calls are somewhat slower than near calls (see the code
+    in FarCallHandler and MainCallHandler to judge the overhead).
+
+ 8) As with Turbo overlays, runtime errors will provide
+    misleading addresses when they occur in the Far segment.
+
+ 9) This hasn't been tested with overlays used being
+    simultaneously, and we have a feeling it wouldn't work well.
+
+Other Comments:
+
+ 1) The procedures in the Far code segment may contain
+    subprocedures, local variables, and typed constants just as
+    usual. Calls to the subprocedures may use parameters as
+    usual. A Far procedure may call itself recursively if
+    desired.
+
+ 2) The main executable block of the Far program may be empty. It
+    will never be accessed, unless you are using it to debug the
+    Far procedures independently.
+
+ 3) The Far code is loaded into a location on the heap of the
+    Main program.  You need to reserve this amount of memory when
+    you compile the Main program.
+
+ 4) Your program should use the {$V-} directive to avoid problems
+    in string length type checking with these routines.
+
+ 5) MAIN1.INC and MAIN2.INC add about 1800 bytes of code to the
+    main segment. FAR1.INC and FAR2.INC add about 700 bytes of
+    code to the far segment.
+
+*******************************************************
+*              See the example files                  *
+*                  MAINEXAM.PAS                       *
+*                  FAREXAM.PAS                        *
+*                    EXAM.GLO                         *
+*   for proper usage of the following include files   *
+*******************************************************</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

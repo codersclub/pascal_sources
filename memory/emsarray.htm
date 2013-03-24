@@ -1,0 +1,101 @@
+<html><head><title>EMSArray - Place Arrays to Expanded Memory</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль, позволяющий размещать массивы в Expanded памяти.  This unit allows to define any array in the Expand Memory and access the array directly.'>
+<meta name="keywords" content="pascal, sources, source code, emsarray, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;emsarray
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EMSArray - Place Arrays to Expanded Memory</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:jialong@neuro.informatik.uni-ulm.de">Jialong He</a></TD>
+<TD class=black align='right'>01.11.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль, позволяющий размещать массивы в Expanded памяти. <br><font color=#666666>
+This unit allows to define any array in the Expand Memory
+and access the array directly.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="emsarray.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    Array in Expand Memory object For Turbo Pascal 6.0  (Ver. 1.0)
+
+                    Written by Jialong He
+
+                         15-Oct-92
+
+This program allows you to define any array in the Expand Memory and access
+the array directly. It is a by-product when I worked on my Ph.D project.
+You may freely distribute it or use it for any purpose, provided this notice
+is attached with it. I would be very happy if you intend to use it in your
+program. Please let me know if you like it.
+
+InterNet:
+          jialong@neuro.informatik.uni-ulm.de
+
+1. Introduction
+   ------------
+ DOS has a 640 Kb memory barrier. When there is a large amount of data,
+ a programmer has to process data separately by reading only part of the data
+ into memory each time. This makes programming very complicated and
+ will degrade the program's performance. Now you can put your data into
+ expanded memory by including this unit into your program. By defining an
+ array in expanded memory, you can access each element directly similar to
+ the way you define an array in the heap memory.
+
+2. What is Expanded Memory?
+   ----------------------
+ Expanded memory is the memory beyond DOS's 640K-byte limit.  The LIM
+ specification supports up to 32M bytes of expanded memory.  Because
+ the 8086, 8088, and 80286 (in real mode) microprocessors can
+ physically address only 1M byte of memory, they access expanded memory
+ through a window in their physical address range.
+ Expanded memory is divided into segments called logical pages.  These
+ pages are typically 16K-bytes of memory.  Your computer accesses
+ logical pages through a physical block of memory called a page frame.
+ The page frame contains multiple physical pages, pages that the
+ microprocessor can address directly.  Physical pages are also
+ typically 16K bytes of memory.
+
+ This page frame serves as a window into expanded memory.  Just as your
+ computer screen is a window into a large spreadsheet, so the page
+ frame is a window into expanded memory.
+
+ A logical page of expanded memory can be mapped into (made to appear
+ in) any one of the physical pages in the page frame.  Thus, a read or
+ write to the physical page actually becomes a read or write to the
+ associated logical page.  One logical page can be mapped into the page
+ frame for each physical page. The page frame is located above 640K
+ bytes.  Normally, only video adapters, network cards, and similar
+ devices exist between 640K and 1024K.
+
+ You may explore the example program EMSTEST.PAS to learn how to
+ use EMS objects.
+
+4. File list
+   ---------
+
+     README              { This file }
+     EMS.PAS             { Source Code of EMS object }
+     EMS.TPU             { Compiled version of EMS object }
+     EMSTEST.PAS         { Example program of using EMS object }
+     EMSTEST.EXE         { Executable file of EMSTEST.PAS }
+
+
+  You may freely distribute it or
+  use it for any purpose, provided this notice is attached with it.
+  I would be very happy if you intend to use it in your program.
+  Please let me know if you like it.
+
+ Home address:
+          Hof Str. 22
+          7906 Blaustein
+          Germany</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

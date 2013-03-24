@@ -1,0 +1,73 @@
+<html><head><title>SPAWNO 4.10 - Disk/EMS/XMS/INT15 Swapping</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль Ральфа Брауна для своппинга на диск или в расширенную память. Версия 4.10.  SPAWNO v4.10 is a disk/EMS/XMS/INT15 swapping replacement for spawn() (c) 1990,1991,1992 Ralf Brown.'>
+<meta name="keywords" content="pascal, sources, source code, spawn410, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;spawn410
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SPAWNO 4.10 - Disk/EMS/XMS/INT15 Swapping</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ralf+@cs.cmu.edu">Ralf Brown</a></TD>
+<TD class=black align='right'>26.04.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль Ральфа Брауна для своппинга на диск или в расширенную
+память. Версия 4.10. <br><font color=#666666>
+SPAWNO v4.10 is a disk/EMS/XMS/INT15 swapping replacement for spawn()
+(c) 1990,1991,1992 Ralf Brown.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="spawn410.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">SPAWNO v4.10	4/26/91    disk/EMS/XMS/INT15 swapping replacement for spawn()
+(c) Copyright 1990,1991,1992 Ralf Brown.  All Rights Reserved.
+
+-----------------
+FILES
+
+The disk or archive you received should contain the following files:
+
+	SPAWNO.DOC	this file
+	SPAWNO.H	the header file providing prototypes for the functions
+	SPAWNx.LIB	versions of the library for each of [T]iny, [S]mall,
+			[C]ompact, [M]edium, [L]arge, and [H]uge memory
+			models.
+	SPAWNTP.OBJ	Turbo Pascal version of SPAWNO
+	SPAWNO.PAS	Turbo Pascal unit encapsulating SPAWNO
+	SPAWN_MS.ZIP	Microsoft C versions of compiler-specific functions
+	MSC.BAT		replace Turbo C specific functions in libraries with
+			Microsoft C versions.
+	NOREPLAC.BAT	remove replacements for the standard spawn..()
+			functions from the libraries.
+	SWAPTEST.C	example program for testing
+	TEST.PAS	example program for testing
+	SOURCE.ZIP	archive containing partial source code for SPAWNO
+	    _SPAWNO.H	    header file for recompiling library
+	    *.C		    source for the spawn..() and spawn...o() functions
+	    RULES.ASI	    shortened and modified Turbo C macro file
+	    SPAWNO.INC	    include file for various important constants
+	    SPAWNPTH.ASM    source for the path search
+	    CHECKEXT.ASM    check for 'file', 'file.EXE', and 'file.COM'
+	    SWAP_EMS.ASM    support routines for swapping to EMS
+	    SWAPLIST.ASM    specify which swap types will be linked in
+	    SPAWNENV.ASM    make an environment block from an array of strings 	
+	    SPAWNERR.ASM    set _doserrno and errno
+	    MAKEFILE
+
+
+-----------------
+WHAT'S NEW
+
+Changes/fixes since version 4.00:
+	Now swaps to disk with non-NULL swap list in large-data memory models
+	Now correctly deletes swap file if child program changes directories
+	If the given program name is "FOO", and both "FOO" and either
+	   "FOO.COM" and/or "FOO.EXE" exist in the same directory, it will
+	   now execute either "FOO.COM" or "FOO.EXE" rather than "FOO", as
+	   both version 4.00 and the Borland library functions do. 

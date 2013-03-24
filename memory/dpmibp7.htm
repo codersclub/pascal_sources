@@ -1,0 +1,113 @@
+<html><head><title>DPMI in BP 7.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Некоторые особенности применения DPMI в BP7'>
+<meta name="keywords" content="pascal, sources, source code, dpmibp7, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dpmibp7
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DPMI in BP 7.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Victor B. Wagner</a></TD>
+<TD class=black align='right'>24.12.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Некоторые особенности применения DPMI в BP7</TD><TD class=black colspan=2 align='right'><br><A HREF="dpmibp7.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From relcom Tue Dec 24 13:34:13 1996
+From: "Victor B. Wagner" &lt;vitus@agropc.msk.su&gt;
+Newsgroups: relcom.comp.lang.pascal
+Subject: Re: DPMI vs. BP 7.0
+Date: 24 Dec 1996 11:10:01 +0300
+
+     Andrew  (2:5020/853.4) wrote:
+[skipped]
+
+Ну, во первых, почему DPMI versus BP 7.0 - versus это все-таки
+значит "против", а DPMI - очень полезная feature
+
+&gt;Hаpод а кто-нибудь писал под сабжем,а то есть некотоpые вопpосы:
+&gt;
+&gt; 1)ЧТО,DPMI пpогpамму нельзя отладить???? :(((
+
+
+Используйте TDX. Вообще, зачастую и REAL программы имеет смысл
+отлаживиать не в среде, а в TD286 (TD386 я не использовал,
+поскольку у меня стоял QEMM в Stealth режиме), поскольку
+для серьезной отладки такие feature как просмотр регистров сопроцессора
+и вызов процедур из окошка Evaluate, равно как и просмотр 
+ассемблерного кода, в который скомпилилась программа,
+весьма полезны.
+
+TDX заодно и DLL позволяет отлаживать, если они в программе используются.
+
+&gt; 2)Как использовать динамическую память &gt;64k,т.е.
+&gt;GlobalAllocate я сделал а вот как к ней обpащаться по индексу!? :((((
+
+Видимо так:
+
+Function HugeIndex(Base:Pointer;Index:longint):Pointer;
+{Получает: указатель на блок &gt;64K и смещение в байтах.
+ Возвращает: указатель на нужный байт в блоке}
+Type TT:record
+         Offset:Word
+         High:Word;
+        end;
+var L:Longint;
+    PT:TT absolute Base;
+    IT:TT absolute L; 
+begin
+ L:=Index+PT.Offset;
+ HugeIndex:=Ptr(PT.High+IT.High*SelectorInc,L.Offset);
+end;
+
+
+
+Примечания:
+1.Переменную L я завел для перестраховки. Указатель, полученный
+с помощью GlobalAllocPtr всегда имеет Offset=0.
+
+2. На слове SelectorInc рекомендую нажать CtrlF1.
+
+3. Никогда не путайте Handle возвращаемый GlobalAlloc с указателем,
+  и, тем более со значением, допустимым для загрузки в сегмегтные регистры.
+
+&gt;Ответь мне о всезнающий All!Очень пpошу!
+&gt;PS Мож кто что почитать посоветует
+
+Что же касается литературы, то, поскольку уже полгода я серьезно
+на Pascal не пишу, то она вся куда-то разбежалась и корректных ссылок
+привести не могу. А выходила очень хорошая книжка, посвящаенная
+как раз работе в DPMI.
+
+Хотя, впрочем родная документация содержит вполне достаточно информации.
+Очень рекомендую внимательно проработать Language Guide.
+
+Для серьезной работы в Protected очень полезен пакет Borland Open Access Pack,
+или, хотя бы модуль DPMI оттуда. 
+Кстати, его исходные тексты весьма поучительны.
+
+Пример работы с большими кусками памяти есть в модуле Huge Collection,
+который валяется много по каким ftp и mail серверам. На garbo.uwasa.fi
+он есть точно.
+
+Еще полезно почитать собственно RTL - исходные тексты модулей DOS и System,
+а также Turbo Professional 5.20 и выше, которая поддерживает DPMI.
+
+Впрочем Professional годится не только для чтения, но и для использования.
+
+---------------------------------------------------------------------------
+Phone: 7(095)230-80-61				Victor B. Wagner
+Fax:   7(095)230-80-42				Dokuchaev Soil Institute
+EMail: vitus@agropc.msk.su			Pyzhevsky lane, 7
+                                                Moscow,109017 Russia</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

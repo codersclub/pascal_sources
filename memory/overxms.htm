@@ -1,0 +1,85 @@
+<html><head><title>OVERXMS - Load Overlays in XMS for TP 5.0+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для размещения оверлеев в XMS памяти.  This package is for users of Turbo Pascal, version 5.0 or later. These files are all you need to add XMS support to overlaying.'>
+<meta name="keywords" content="pascal, sources, source code, overxms, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;overxms
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OVERXMS - Load Overlays in XMS for TP 5.0+</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:500/12.10956">Wilbert van Leijen</a></TD>
+<TD class=black align='right'>05.05.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для размещения оверлеев в XMS памяти. <br><font color=#666666>
+This package is for users of Turbo Pascal, version 5.0 or later.
+These files are all you need to add XMS support to overlaying.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="overxms.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">READ.ME  --  Loading Overlays in XMS
+
+Files
+-----
+
+Apart from this notice, the following files should be present in this
+archive:
+
+OVERXMS.ASM           Source code of XMS overlay support.
+OVERXMS.OBJ           Object code of XMS overlay support.
+OVERXMS.PAS           Declares OvrInitXMS.
+
+Purpose
+-------
+
+This package is for users of Turbo Pascal, version 5.0 or later.
+These three files are all you need to add XMS support to overlaying.
+If you think you can use it, then I probably don't have to explain
+what the benefits are of using XMS memory over EMS memory - or
+emulations thereof.  But I will anyway:
+
+-  XMS is found on more machines than EMS.
+-  All XMS is addressable as one physical unit, not in chunks of 16 kB
+   like EMS.
+-  XMS is faster.  How much faster, depends on the kind of system.
+   It probably doesn't matter much on 386/486 systems, but the speedup
+   is noticable on a 286 with emulated EMS.  Or if you have a typical
+   1 MB 286 clone, configured as 640+384, without either board EMS or
+   emulated EMS (served by e.g. Quarterdeck's QRAM memory manager),
+   then thanks to OVERXMS you'll have fast loading overlays at last.
+
+... and last but not least:
+-  OVERXMS is compact.  It adds a mere 425 bytes of code to your .EXE
+   file.
+
+Using OVERXMS
+-------------
+
+Usage is straightforward.  Just change the "uses" clause, so that it
+includes OVERXMS.  Next, spot the line wherein you initialise the
+overlay manager.  Add two lines, so that it will run something like:
+
+    OverInit(YourApplication);
+    OvrInitXMS;
+    If OvrResult &lt;&gt; OvrOk Then
+      OvrInitEMS;
+
+That's all.  First, we check whether we can load the overlay into XMS;
+if we don't succeed, we resort to EMS allocation and suffer a slight
+loss of performance; if no EMS is available, though luck -- continue
+with overlays on disk.
+
+Status codes
+------------
+
+Possible return codes from OverInitXMS are:
+  OvrOk           (0)      ... success
+  OvrIOError     (-4)      ... something went wrong whilst reading the
+  

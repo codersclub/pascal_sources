@@ -1,0 +1,67 @@
+<html><head><title>Generic2 - Usefull Memory Objects Addition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Дополнения и исправления к пакету <a href="generic.htm">Generic</a>. Удобные и гибкие объекты для организации доступа к памяти с высоким уровнем абстракции. В дополнение к ранее приведенным Динамическому Массиву, Динамическому Стэку и Динамической Куче добавлены новые объекты: Динамическая Хэш-таблица и Динамический Многомерный Массив. Fully Dynamic Hash Tables, Multi-Dimensional MaxArray.'>
+<meta name="keywords" content="pascal, sources, source code, generic2, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;generic2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Generic2 - Usefull Memory Objects Addition</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72070.1015@compuserv.com">Eric C. Wentz</a></TD>
+<TD class=black align='right'>27.01.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Дополнения и исправления к пакету <a href="generic.htm">Generic</a>.
+Удобные и гибкие объекты для организации доступа
+к памяти с высоким уровнем абстракции. В дополнение к ранее приведенным
+Динамическому Массиву, Динамическому Стэку и Динамической Куче
+добавлены новые объекты: Динамическая Хэш-таблица и Динамический
+Многомерный Массив.<br><font color=#666666>
+Fully Dynamic Hash Tables, Multi-Dimensional MaxArray.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="generic2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>37k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   Fully Generic, Fully Dynamic Hash Tables
+
+   Author  : Eric C. Wentz
+   Phone   : 1-703-860-3807  (Before 11 P.M. Eastern)
+   C_Serve : 72070,1015
+
+   UNIT REQUIREMENTS:  Requires Unit GENDATUM
+                       HTable.Arc Includes version 1.1
+                       of Unit GenDatum -- previously
+                       uploaded in GENERI.ARC -- soon to
+                       be uploaded in GENER2.ARC.
+                       (GenTable will work just fine
+                       with either version of GenDatum)
+                       Also requires the all-pervasive
+                       Unit FLEXPNTR -- found in unit
+                       GENERI.ARC (GenDatum needs it)
+                       You're right -- shameless of me
+                       to force you to download another
+                       of my uploads!
+
+   For all you "OverLay Cowboys" out there, GenTable IS
+   compiled in the O+ state.
+
+
+Implements a String-keyed Hash Table of Generic Datum Objects
+
+The Hash Tables defined herein use the External Chaining solution
+for hashing. The Hashing Function used IS case-sensitive.
+
+Data to be entered into the Hash Table is loaded into a Generic
+Object (EntryRec) and then the EntryRec is Inserted/Appended into
+the Hash Table location determined by the Key string associated
+with the entry.  Retrieval is accomplished by a similar, albeit
+reversed, process -- with the obvious exception that the entry is
+not deleted.  Keys may be examined for Membership in the Hash
+Table, or a boolean Found may be returned by Retrieve.  Duplicate
+Keys will not be inserted,

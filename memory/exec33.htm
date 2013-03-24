@@ -1,0 +1,58 @@
+<html><head><title>EXEC 3.3 - EXEC Function with Memory Swap for TP4-6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для организации выгрузки (свопинг) текущей программы на диск или в расширенную память, запуска внешней большой программы, и дальнейшего восстановления исходной программы в памяти. Поддерживается переадресация ввода-вывода.  Swap program to XMS, EMS, or Disk, then spawn. Version 3.3 91-11-26. This file contains full source code (in C, Pascal, and Assembler) for a module that allows you to swap your program to XMS, EMS, or disk, and then spawn any DOS program, including COMMAND.COM. I/O redirection and execution of batch files is handled automatically. Only a small (about 1k) reload stub is left in memory. Compatible with Microsoft C, Turbo C, Watcom C, and Turbo Pascal. Recompilation requires MASM 5.1 or later, or TASM.'>
+<meta name="keywords" content="pascal, sources, source code, exec33, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;exec33
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EXEC 3.3 - EXEC Function with Memory Swap for TP4-6</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:100023.2042@compuserv.com">Thomas Wagner</a></TD>
+<TD class=black align='right'>26.11.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для организации выгрузки (свопинг) текущей программы на диск или в
+расширенную память, запуска внешней большой программы, и дальнейшего
+восстановления исходной программы в памяти. Поддерживается переадресация
+ввода-вывода. <br><font color=#666666>
+Swap program to XMS, EMS, or Disk, then spawn. Version 3.3 91-11-26.
+This file contains full source code (in C, Pascal, and Assembler)
+for a module that allows you to swap your program to XMS, EMS, or disk,
+and then spawn any DOS program, including COMMAND.COM. I/O redirection
+and execution of batch files is handled automatically. Only a small
+(about 1k) reload stub is left in memory. Compatible with Microsoft C,
+Turbo C, Watcom C, and Turbo Pascal. Recompilation
+requires MASM 5.1 or later, or TASM.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="exec33.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>100k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                  An EXEC function with memory swap
+                   Version 3.3, released 91-11-26
+
+                      Public Domain Software by
+                            Thomas Wagner
+                       Ferrari electronic GmbH
+
+This archive contains the sources for an 'EXEC' function that allows
+calling external programs, while optionally swapping out the memory
+image to EMS, XMS, or file. When swapping out, only a few K of main
+memory remain resident. The code and data stub is about 1k, the actual
+memory usage depends on memory fragmentation, and especially on the
+size of the environment variables. The resident memory usage
+typically ranges from 2K to 7K.
+
+The Routines are compatible with
+   Turbo C (Versions 1.x, 2.x, and C++ 1.0)
+   Borland C++ (Version 2.0),
+   Microsoft C (Versions 5.1 and 6.0),
+   Watcom C (Version 8.0),
+   Turbo Pascal (Versions 4.x to 6.x).
+
+EMS (

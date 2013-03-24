@@ -1,0 +1,76 @@
+<html><head><title>Использование FREEPTR в TP6/7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Инициализация переменной FreePtr из Turbo Pascal 5.х под Паскалем 6.0 и 7.0. Обычно эта проблема возникат при попытке использования различных "фирменных" модулей, написанных под старый паскаль, например, Turbo (Object) Professional, B-tree и т.п.'>
+<meta name="keywords" content="pascal, sources, source code, freeptr, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;freeptr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Использование FREEPTR в TP6/7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/68.15">Павел Григоркин</a></TD>
+<TD class=black align='right'>15.04.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Инициализация переменной FreePtr из Turbo Pascal 5.х
+под Паскалем 6.0 и 7.0. Обычно эта проблема возникат при попытке
+использования различных "фирменных" модулей,
+написанных под старый паскаль, например, Turbo (Object) Professional,
+B-tree и т.п.</TD><TD class=black colspan=2 align='right'><br><A HREF="freeptr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">      Привет All!
+
+   Михаил Акопов спрашивал:
+
+&gt;       При использовании Object Professional 1.0 c Borland Pascal 7.0
+&gt;     столкнулся с такой проблемой:
+&gt;     в OP используется встроенный указатель FreePtr, которого нет
+&gt;     в поздних версиях Паскаля.
+&gt;
+&gt;      Кстати такая же проблема при использовании Turbo Professional.
+&gt;
+&gt;   Заранее благодарен,
+&gt;     Михаил Акопов.
+
+
+    Беру на себя смелость подвести итоги по общенародному решению следующей
+проблемы:
+
+    Как инициализировать переменную FreePtr из Turbo Pascal 5.х под
+Паскалем 6.0 и 7.0? (Обычно эта проблема возникат при попытке
+использования различных "фирменных" модулей, написанных под старый
+паскаль, например, Turbo(Object) Professional, B-tree и т.п.).
+
+    Если далее кто-нибудь прочитает для себя прописные истины -
+прошу не ругаться и не плеваться, а просто не читать. а самом деле
+затронутая проблема вызвала дейстительно бурное обсуждение как в
+Relcome, так и в Фидо - чесное слово!
+
+    Ответ, как ни странно, чаще всего находится в докуметации :).
+Посмотрите файл helpme!.doc (лежит в файле online.zip на диске
+'bgi/utilities' TP Professional 6.0.
+
+    Далее частично приведу письмо Вярвельского Андрея (andrew@alta.msk.su),
+которому я весьма благодарен за оказанную помощь.
+
+    Аналога FreePtr в TP6.0 не существует. Дело в том, что в TP6.0
+изменился механизм управления распределением памяти в heap-е (Heap
+manager). Теперь свободные блоки, воэникающие после FreeMem или Dispose,
+не учитываются в таблице свободных блоков, на "хвост" которой и указывал
+FreePtr, а организуются в виде односвязного списка, на "голову" которого
+показывает FreeList, а "хвост" его должен указывать на HeapPtr. Поэтому
+FreePtr просто перестал быть нужным.
+
+    Попробовать решить проблему переноса программ из TP5.x в TP 6.0 можно
+несколькими путями:
+
+    1. Особо не задумываясь, сэмулировать FreePtr, установив его в то
+состояние, которое он имел бы при 

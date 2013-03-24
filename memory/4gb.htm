@@ -1,0 +1,79 @@
+<html><head><title>4GB Memory Addressing in DOS Real Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Этот пример показывает как адресовать всю память компьютера в реальном режиме под ДОС. Работает исключительно в ДОС, в реальном режиме и не любит драйверов памяти (himem.sys, emm.exe, qemm.exe, и т.п.)!!!'>
+<meta name="keywords" content="pascal, sources, source code, 4gb, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;4gb
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;4GB Memory Addressing in DOS Real Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:alexfru@chat.ru">Alex Frounze</a></TD>
+<TD class=black align='right'>27.06.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Этот пример показывает как адресовать всю память компьютера
+в реальном режиме под ДОС. Работает исключительно в ДОС,
+в реальном режиме и не любит драйверов памяти
+(himem.sys, emm.exe, qemm.exe, и т.п.)!!!</TD><TD class=black colspan=2 align='right'><br><A HREF="4gb.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                            -= In Russian =-
+
+  Этот короткий пример показывает как можно сделать доступной всю память
+компьютера из-под DOS'а. Только не смейтесь! Это действительно возможно
+даже в реальном режиме работы центрального процессора. Для меня остается
+загадкой почему столь простой метод не был использован программистами
+ранее. Ведь этим можно было пользоваться с момента выпуска процессоров
+типа i386! И не нужно ни Windows, ни наворотов связанных с менеджерами
+памяти типа himem.sys, emm.exe, qemm.exe и т.д. Все куда проще.
+Если, конечно, вы хорошо знакомы с архитектурой процессоров компании
+Intel. :) В подробности углубляться не буду, но то, что это работает,
+является фактом. Смотрите в исходные тексты.
+
+                              Требования:
+
+  - Процессор i386 или лучше
+  - Наличие памяти выше 1МБ
+  - Чистый DOS (не Windows и без перечисленных ранее менеджеров памяти)
+  - Для более быстрой работы с памятью необходимо хорошее знание языка
+    ассемблера, т.к. паскалевские ф-ции слишком медленны
+
+                                                  Автор: Алексей Фрунзе
+
+
+                            -= In English =-
+
+  This pretty short example shows how to access all memory installed on
+computer. This works under pure DOS. Don't laugh! It's true. Tihs is
+available since i386 processor has been launched! I don't know why
+programmers didn't use this before. It's a sort of mestery. And people
+didn't have to use Windows and those uneasy memory managers such as
+himem.sys, emm.exe, qemm.exe, etc. The way used in this examle is
+the easiest, if you know i386 processor architecture quite good. :)
+I don't want to explain details but this really works. In fact, DOS
+programmers can use all megabytes of their computer memory freely.
+Look through the sources.
+
+                             Requirements:
+
+  - i386 or better processor
+  - more than 1MB memory installed
+  - pure DOS (not Windows, without memory managers listed above)
+  - you should program in assemler language, if you want your program
+    runs fast, because pascal routines are too slow
+
+                                            Author: Alexei A. Frounze
+
+
+E-mail: alexfru@chat.ru
+Homepage: http://www.chat.ru/~alexfru</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

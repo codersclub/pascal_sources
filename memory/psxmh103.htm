@@ -1,0 +1,73 @@
+<html><head><title>Pure Power XMS Heap 1.03 for Turbo Pascal 6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для создания дополнительной "кучи" в XMS памяти, что позволяет увеличить суммарный объем динамической памяти, отводимой для программы.  This unit gives the pascal programmer an access to an XMS heap for Pascal. It uses a similar system to the Pascal standard heap. This unit is ideal for programmers requiring many large blocks of data.'>
+<meta name="keywords" content="pascal, sources, source code, psxmh103, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;psxmh103
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Pure Power XMS Heap 1.03 for Turbo Pascal 6.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:GALLIAS@ph.und.ac.za">Michael Gallias</a></TD>
+<TD class=black align='right'>08.01.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для создания дополнительной "кучи" в XMS памяти,
+что позволяет увеличить суммарный объем динамической памяти,
+отводимой для программы. <br><font color=#666666>
+This unit gives the pascal programmer an access to an XMS heap
+for Pascal. It uses a similar system to the Pascal standard heap.
+This unit is ideal for programmers requiring many large blocks of data.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="psxmh103.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Overview
+
+This unit gives  the  pascal  programmer  access  to  an XMS heap for
+Pascal.  It uses a similar system to the Pascal standard heap.
+
+This unit is ideal  for  programmers  requiring  many large blocks of
+data.
+
+Requirements
+
+Turbo Pascal 6
+TPXMS.TPU       (Public Domain by Vernon E. Davis, Jr.)
+DosMem          (Public Domain by Pure Power Software, PSDSM)
+
+Both PSDSM and TPXMS should  be  available  where  you  obtained this
+file.
+
+Limitations
+
+When running in real  mode  you  cannot  simply  use  the  XMS memory
+provided by HIMEM.SYS with  pointers.   Thus you can't simply plug in
+this unit and assume that your programs will now use XMS.
+
+You can only access  data  in  conventional  memory.   Thus  if  your
+program uses 400 kb and the  PC  only  had  500 kb free, your program
+is still limited to a  largest  block  size  of 100 kb, but with this
+unit you can swap data in and out of the XMS memory.
+
+How it works
+
+HIMEM requires a request  for  memory.   Usually  HIMEM  only permits
+32 blocks, that is, only  32  handles  are  issued.   Thus requesting
+a new handle each  time  is  silly  as  one  often  uses more than 32
+pointers in a program, often more than the 128 HIMEM maximum.
+
+So, when you allocate your XMS  heap  with GetXMSHeap, the unit takes
+a block (one handle)  from  HIMEM.   You  can then access this memory
+in any size chunks  you  wish,  from  blocks  of  1 byte to blocks of
+640 kb.  The unit has its own  handles  and can allocate many handles
+to the XMS heap (set by BMaxPointersB).
+
+Your programs will  now  use  handles  to  the  XMS  heap (not to XMS
+controlled by HIMEM), not only  pointers.   Handles  point to the XMS
+heap, p

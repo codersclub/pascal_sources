@@ -1,0 +1,59 @@
+<html><head><title>Moves 1.0 - 16-bit Move Transfers Unit for TP.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Две процедуры для копирования блоков памяти (замена команды MOVE). Скорость копирования примерно в два раза выше, чем в TP.  Two routines to make a copy of one array of bytes to another. Overlapping is accounted for for. Both routines are about twice as fast the original TP move, because 16-bit transfers are used in lieu of the 8-bit.'>
+<meta name="keywords" content="pascal, sources, source code, moves, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;moves
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Moves 1.0 - 16-bit Move Transfers Unit for TP.</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:76011,217@compuserv.com">James H.LeMay</a></TD>
+<TD class=black align='right'>12.06.1988</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Две процедуры для копирования блоков памяти (замена команды MOVE).
+Скорость копирования примерно в два раза выше, чем в TP. <br><font color=#666666>
+Two routines to make a copy of one array of bytes to another.
+Overlapping is accounted for for. Both routines are about twice
+as fast the original TP move, because 16-bit transfers are used
+in lieu of the 8-bit.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="moves.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Moves.pas - Unit for 16-bit move transfers
+                         ver 1.0, 07-12-88
+
+Makes a copy of one array of bytes to another. Overlapping is
+accounted for for. Both routines are about twice as fast the
+original TP move, because 16-bit transfers are used in lieu of
+the 8-bit.
+
+Move16 - replacement for TP move;
+Move16 is a suitable replacement for TP move and is only 11 bytes
+more.  Just like TP move, it is used for INTRAsegment moves,
+twice as fast.
+
+Move16n - for intersegment moves which normalizes the pointers
+first.  It is is needed for special applications for Pointers
+such as the heap when you need to make absolutely sure there is
+no overlap.  It is used for either INTER- or INTRA-segment moves.
+The "n" stands for normalize which always makes the offset less
+than 16.  Because it normalizes the pointers, it takes a little
+longer to get started.
+
+The NumOfBytes at which these routine surpass the TP move routine
+for speed is 6 and 56 bytes respectively, after which, both get
+to be twice as fast.
+
+Only 112 bytes of code for both procedures.
+
+  by James H. LeMay (CIS: 76011,217)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

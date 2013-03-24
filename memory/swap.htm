@@ -1,0 +1,65 @@
+<html><head><title>SWAP - More Memory for DOS Exec for TP 5.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Расширение возможностей функции EXEC за счет добавления возможности своппинга на диск или в расширенную память.  We've enhanced the DOS Exec function by swapping most of the calling program into expanded memory or to disk, and giving all that free memory to the child process. When the subprocess is complete, the calling program is swapped back into place and continues normally.'>
+<meta name="keywords" content="pascal, sources, source code, swap, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;swap
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SWAP - More Memory for DOS Exec for TP 5.0</TD>
+<TD nowrap class=black>&nbsp;Kim Kokkonen</TD>
+<TD class=black align='right'>13.11.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Расширение возможностей функции EXEC за счет добавления
+возможности своппинга на диск или в расширенную память. <br><font color=#666666>
+We've enhanced the DOS Exec function
+by swapping most of the calling program into expanded memory
+or to disk, and giving all that free memory to the child process.
+When the subprocess is complete, the calling program is swapped back
+into place and continues normally.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="swap.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          More Memory for DOS Exec
+                                Kim Kokkonen
+
+As many have lamented, the 640K of memory available to DOS programs is looking
+smaller every year. With TSR's gobbling up memory on one end, and our
+applications growing larger on the other, it is easy to use up all the space
+and then some. Of course, necessity is the mother of invention, so desperate
+DOS programmers have devised a number of ad hoc methods to cram more functions
+into the same space -- by using expanded and extended memory, overlays, and so
+on.
+
+This article describes another such method. We've enhanced the DOS Exec
+function by swapping most of the calling program into expanded memory or to
+disk, and giving all that free memory to the child process. When the
+subprocess is complete, the calling program is swapped back into place and
+continues normally. This technique is especially valuable for menuing
+environments which must execute other large programs, or modern programming
+editors which are expected to spawn huge compilations at the touch of a key.
+In fact, it's useful for any program that must invoke another.
+
+The swapping Exec function is implemented in a Turbo Pascal 5.0 unit called
+ExecSwap. The real meat of the code is written in assembly language, however,
+and with some changes could be linked into other languages such as C or
+Fortran.
+
+How It's Done
+-------------
+ExecSwap's Pascal source file, EXECSWAP.PAS, is given in Listing 2. It's
+little more than a shell for the assembly language routines in EXECSWAP.ASM,
+Listing 3.
+
+In Summary
+----------
+ExecSwap seems quite reliable. It doesn't depend on any newly discovered
+undocumented features of DOS, and has been tested by thousands of

@@ -1,0 +1,76 @@
+<html><head><title>Check Extended Memory Size by Int $15</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Использование прерывания 15h для определения размера расширенной памяти (Extended).  This small program uses Intr($15) to determine the size of the extended memory - not expanded memory.'>
+<meta name="keywords" content="pascal, sources, source code, atextmem, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;atextmem
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Check Extended Memory Size by Int $15</TD>
+<TD nowrap class=black>&nbsp;David G. Pardue</TD>
+<TD class=black align='right'>18.02.1986</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Использование прерывания 15h для определения размера
+расширенной памяти (Extended). <br><font color=#666666>
+This small program uses Intr($15) to determine the size of the
+extended memory - not expanded memory.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="atextmem.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>10k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">program at_extended_memory_size;          { Copyright 1986 by Freelance, Inc. }
+
+{-----------------------------------------------------------------------------}
+{ The cassette interrupt ( 15 ) has a few surprises when you are running an   }
+{ IBM AT.  One of these surprises is the ability to determine the size of the }
+{ extended memory - not expanded memory.  Altogether there are twelve ( 12 )  }
+{ such surprises.  You can open and close devices, check for SysReq key make  }
+{ and break, support both the joystick and event waiting, block moves, even   }
+{ a way to put the processor into the virtual mode.  IBM must be planning on  }
+{ using some of these for something other than power-on self testing... What  }
+{ do you think?  A complete list of these functions follows:                  }
+{                                                                             }
+{    1. Device Open                                                           }
+{    2. Device Close                                                          }
+{    3. Program Termination                                                   }
+{    4. Event waiting - alarm clock type function                             }
+{    5. Joystick Support                                                      }
+{    6. System Request, SysReq, key press detection                           }
+{    7. Wait a specified period of time before returning to user              }
+{    8. Move a block of memory, 32k word limitation, to extended memory       }
+{    9. Determine extended memory size                                        }
+{   10. Switch the processor to virtual ( real ) mode                         }
+{   11. Device busy loop                                                      }
+{   12. Return the complete interrupt flag set                                }
+{                                                                             }
+{                                                                             }
+{                                                                             }
+{ This program was written by David G. Pardue, the SYSOP of the Bungalow      }
+{ Billboard in Nashville, Tennessee.  You may contact me at (615) 385-9919.   }
+{ Please feel free to leave messages about this program at the main menu. Do  }
+{ not leave comments.  I never read comments.  You may also send monetary     }
+{ donations in any amount, may I suggest $1, to this address:                 }
+{                                                                             }
+{                            David G. Pardue                                  }
+{                            c/o Freelance, Inc                               }
+{                            PO Box 23014                                     }
+{                            Nashville, TN  37202                             }
+{                                                                             }
+{ Those sending $5.00 or more and a Stamped and Self Addressed Envelope will  }
+{ receive in a matter of weeks a missive, hand carried to their door by a     }
+{ representative of the Federal government, containing more information about }
+{ the function numbers other than 88 hex.  88 hex is used in the program.     }
+{                                                                             }
+{ Please distribute the archive freely, but leave all credits and copyright   }
+{ notices intact.  No matter if the code that follows is not in the strictest }
+{ sense good Pascal - you didn't write it! Cannibalize, but do not Plagarize! }
+{-----------------------------------------------------------------------------}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,66 @@
+<html><head><title>OvrUMB 1.2 - Use an Upper Memory as Overlay Buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль позволяет перенести буфер оверлеев в верхнюю память, тем самым увеличивая количество доступной нижней (conventional) памяти.  The purpose of this unit for Turbo Pascal 6/7 is to allow your programs that use overlays to free more conventional memory. This is made possible by the relocation of the overlay buffer in upper memory on systems that support that kind of memory.'>
+<meta name="keywords" content="pascal, sources, source code, ovrumb12, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ovrumb12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OvrUMB 1.2 - Use an Upper Memory as Overlay Buffer</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:Jean-Marc.Lasgouttes@inria.fr">Jean-Marc Lasgouttes</a></TD>
+<TD class=black align='right'>20.09.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль позволяет перенести буфер оверлеев в верхнюю память,
+тем самым увеличивая количество доступной нижней (conventional)
+памяти. <br><font color=#666666>
+The purpose of this unit for Turbo Pascal 6/7 is
+to allow your programs that use overlays to free more conventional memory.
+This is made possible by the relocation of the overlay buffer
+in upper memory on systems that support that kind of memory.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="ovrumb12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   OvrUMB version 1.2
+   by Jean-Marc Lasgouttes
+   -----------------------------
+
+Overview
+---------
+
+The purpose of this unit for Turbo Pascal 6/7 is to allow your programs
+that use overlays to free more conventional memory.  This is made possible
+by the relocation of the overlay buffer in upper memory on systems that
+support that kind of memory.
+
+This unit should be compatible with the use of OvrInitEMS, OvrInitXMS (from
+the unit OverXMS - overxms.zip at garbo.uwasa.fi) or the procedures from the
+Streams unit (streams15.zip by Duncan Murdoch).  The purpose of all these
+procedures is to speed up the overlay reading by keeping the overlay file in
+EMS or XMS memory.  It is recommended to use OvrInitEMS/XMS or the streams
+unit in conjunction with OvrUMB.
+
+This unit is released to the Public Domain.  Feel free to use it in your
+applications and distribute it, as long as this documentation is included.
+You can distribute a modified version of it, as long as credit is given to me
+as the original author; in this case, I would appreciate to get a copy of
+your modifications.  Although this unit has been tested on several systems,
+there is no warranty that it will work for your application and I should
+not be liable of any damage that it may cause.  However, I would be glad
+to try to correct any problem that you may encounter (see my address at the
+end of this document).
+
+
+Why you should use OvrUMB
+--------------------------
+
+If you use overlays in your applications, you are probably aware that
+all the free memory that you can get will be welcome.  One way to gain
+memor

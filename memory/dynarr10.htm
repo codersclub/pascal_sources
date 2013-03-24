@@ -1,0 +1,196 @@
+<html><head><title>DynArray 1.0 - Dynamic Array Object with Disk Swap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Объектно-ориентированный модуль, позволяющий создавать динамические массивы неограниченного размера.  Object oriented unit implements a dynamic array which can grow in size as required during the execution of the program. An array size is unlimmited because of the use of list and a swapfile that is created on disk.'>
+<meta name="keywords" content="pascal, sources, source code, dynarr10, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dynarr10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DynArray 1.0 - Dynamic Array Object with Disk Swap</TD>
+<TD nowrap class=black>&nbsp;De Busscher Rudy</TD>
+<TD class=black align='right'>01.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Объектно-ориентированный модуль, позволяющий создавать динамические
+массивы неограниченного размера. <br><font color=#666666>
+Object oriented unit implements a dynamic array
+which can grow in size as required during the execution of the program.
+An array size is unlimmited because of the use of list
+and a swapfile that is created on disk.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="dynarr10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This unit implements an array and vector which can grow in size as required
+during the execution of the program. The number of observations (rows) is
+almost unlimmited because of the use of list and a swapfile that is created
+on disk. It's written with the object Orientated Filosofie in mind and
+requires Borland Pascal v7.0 (OOP-requirement) and runs in DOS Protected
+Mode (Needs the DLL for the DPMI)
+
+If anyone use this unit or makes desendents of the objects, I would greatly
+appreciate if they mention my name for writing this piece of source. If you
+make your own version of this objects, I would appreciate it, if you send it
+to me for further development of the unit.
+
+
+Contact Adress :
+    De Busscher Rudy
+    Kerselarenstraat 39
+    3071 Kortenberg Belgium
+
+Details:
+    Before using one of the described objects you need to call the function
+    SwapFile_Init which returns True if the creation of a swapfile was
+    succesfull.
+    Swapfile_Done should be called at the end of the program so that
+    everything is cleaned up properly.
+
+    TDynArray implements an array with a fixed number of columns, maximum 100,
+    and an unlimited number of rows (As long as there is enough space on the
+    harddisk)
+
+    Var
+        Array : PDynArray;
+
+    Usage : Before using the array, you have to initialise it by making
+            an instance of the object
+                    New(Array,Init);
+
+            And when you are finished using the array, you deinitialise it
+            by the statement :
+                    Dispose(Array,Done);
+
+            The two most important methods are the Put and Get method for
+            accessing the array.
+                    Array^.Put(X,Y,W);
+                    W := Array^.Get(X,Y);
+            With  Var W = Real; X,Y : Word;
+
+            Put places the real W in the array on the place X,Y (X = Row,
+            Y = Column). And Get retrieves the real at place X,Y.
+
+            Y ranges from 0 to 99, X from 0..???
+
+            If one use the get method with X and Y parameter which are greater
+            than the greatest one you used with put, you get a run-time error
+            203.
+
+            Examples
+                Suppose this code:
+                    New(Array,Init);
+                    W := Random(1);
+                    Array^.Put(0,0,W);
+                    Array^.Put(0,2,W);
+                    Array^.Put(2,0,W);
+                    Array^.Put(2,2,W);
+                    W := Array^.Get(3,3); -&gt; Runtime error 203
+                    W := Array^.Get(1,1); -&gt; Runtime Error 203
+                    W := Array^.Get(0,1); -&gt; Returns 0 in W
+                        See the techincal reference for an explanation of
+                        the last line.
+
+            When you do not need the data in the array anymore, but you don't
+            want to use the Destructor Done (Because you need an array in an
+            other part of your program and want to keep the name), you can
+            use the Clear method:
+                Array^.Clear;
+
+            It is strongly recomended using Clear or Done as soon as you
+            don't need the data or array anymore because of the rather strong
+            memory requirements of the object.
+
+    TDynFrame is a descendent of TDynArray. Besides the functionality of
+    TDynArray, it implements names for variables (Columns) and observation
+    (Rows) and opne can assign a code (Char-type) to each variable.
+
+    Usage: The methods Init, Done, Put, Get and Clear are used in the same
+           way as with TDynArray. The Put method is extended so that the first
+           time you assign a value to a row it recevies the Observation name:
+           Obsxxx (xxx is the row number)
+
+           Procedure Put_VarNaam(Y : Word; T : String;C : Char);
+            Sets the variable name of column Y to string Y to the variable
+            code to character C
+
+           Procedure Put_ObsNaam(X : Word; T : String);
+            Sets the observation name of row X to string T
+
+           Function Get_VarNaam(Y : Word) : String;
+            Retrieves the Variable name of column Y
+
+           Function Get_ObsNaam(X : Word) : String;
+            Retrieves the Observation name of row X
+
+           Function Code(Y : Word) : Char;
+            Retrieves the Code of variable (column) Y
+
+    TDynArray2 is another descendent of TDynArray. If you want to use more
+    than 100 columns, you can swap the X and Y when you call the Put and Get
+    method. But what if you want to allocate a matrix of 200 columns and 200
+    rows? TDynArray2 can allocate a fixed numer of rows (ranging from 1 to ??
+    , as long as there is enough memory) and unlimited number of columns.
+
+    The only difference with TDynArray is that you have the precise the number
+    of rows you want to use when you allocate the object.
+
+    Example
+        Var Array : PDynArray;
+
+        New(Array,Init(300));
+        Array^.Put(100,120,W); -&gt; Ok, no error
+        Array^.Put(310,120,W); -&gt; No error shall be generated, but it is
+                                  likely that another data shall be over-
+                                  written.
+
+    TDynVector implements a vector with unlimited observation. It is very
+    symilar to TDynArray but the Put and Get methods only accepts the X
+    parameter.
+
+Technical documentation
+
+    The implementation is based on small one-dimensional arrays with 50
+    elements, which are combined in list for every variable / Column.
+
+    The definition is :
+
+        PObs = ^TObs;
+        TObs = Record
+            Id : Byte;
+            Obs : Array[0..49] Of Real;
+            Next : PObs;
+        End;
+
+        Id = Number that represent position. Id * 50 -&gt; Starting row
+        Obs = One dimensional array of values
+        Next = Points to the a position in memory where another structure
+              with data is placed. (Nil of it is the last one)
+
+    When you supply an X to the Put methods, it checks of the corresponding
+    Id (X Div 50) exists.
+    If not, it creates the rows with that Id and fills them with zeros.
+
+    Suppose Var Vect : PDynVect;
+            Begin;
+                New(Vect,Init);
+                Vect^.Put(20,8); -&gt; Creates vector observations 0..49 and
+                                    puts at 20 the value 8.
+                Vect^.Put(30,9); Puts in the same datastructure (Has also Id
+                                 0) the value 9 on position 30
+                Vect^.Put(101,7); -&gt; Creates vector observations 100..149.
+                                     The range 50..99 doesn't exist and
+                                     therefore
+                Writeln(Vect^.Get(80)); Gives a runtime error but
+                Writeln(Vect^.Get(15)); Gives zero because of the initial
+                                        filling with zero.
+
+    Before it creates the datastructure TObs, it checks if there is enough
+    memory available. If not, it enlarges the Swapfile with 0.5 Mb.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,70 @@
+<html><head><title>Работа с XMS-памятью в реальном режиме</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Подгружаемый драйвер XMS позволяет достаточно просто и удобно оперировать с extended-памятью.'>
+<meta name="keywords" content="pascal, sources, source code, xms, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xms
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Работа с XMS-памятью в реальном режиме</TD>
+<TD nowrap class=black>&nbsp;Игорь Красиков</TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Подгружаемый драйвер XMS позволяет
+достаточно просто и удобно оперировать с extended-памятью.</TD><TD class=black colspan=2 align='right'><br><A HREF="xms.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">               Работа с XMS-памятью в реальном режиме
+
+                                        Красиков Игорь Владимирович.
+
+
+       Подгружаемый драйвер  XMS  extended-памяти  позволяет  Вам
+ достаточно просто и удобно оперировать с extended-памятью. В от-
+ личие от EMS XMS не имеет страничной адресации,  а располагается
+ непрерывным блоком,  для доступа к  которому  Вам  следует  лишь
+ знать необходимое Вам смещение в этом блоке.  Драйвер предостав-
+ ляет существенно большие возможности, чем 87h функция прерывания
+ 15h.
+       Рассмотрим работу с extended-памятью при помощи  XMS-драй-
+ вера более детально.
+       Определение, загружен ли XMS-драйвер, произволится при по-
+ мощи прерывания 2Fh,  функции 4300h:  если при вызове прерывания
+ 2Fh при AX=4300h мы получаем AL=80h, драйвер установлен и следу-
+ ющим шагом  мы  определяем  адрес,  по которому следует вызывать
+ программу драйвера (в отличие от EMS драйвера,  где все  функции
+ работы с EMS памятью оформлены в виде функций прерывания 67h,  к
+ XMS драйверу следует обращаться через вызов CALL FAR по адресу):
+ для этого  вызывается прерывание 2Fh с AX=4301h и регистры ES:BX
+ содержат адрес программы драйвера.
+       Передача параметров  драйверу производится через регистры,
+ при этом в регистр AH помещается номер вызываемой подфункции,  и
+ после возврата  из  функции AX содержит 1 в случае успешного вы-
+ полнения и 0 в случае неуспешного (что очень приятно при исполь-
+ зовании Turbo Pascal - в нем в assembler - функции возврат буле-
+ вого значения как раз передается через  регистр  AX  и  1  соот-
+ ветствует значению TRUE,  а 0 - FALSE) - за исключением лишь вы-
+ зова подфункции 08h, а в регистре BL - код произошедшей ошибки.
+       Список основных подфункций:
+   00   Получение версии XMS
+        Вход - нет, выход AX - версия в BCD-формате,
+                          BX - номер разработки
+   01   Получение доступа к HMA (High Memory Area)
+        Вход  DX - требуемая память в байтах
+        Выход - нет (здесь и далее отсутствие выходных данных
+                     означает, как уже говорилось, возвращение
+                     кода ошибки в BL и флага выполнения в AX)
+   02   Освобождение HMA
+        Вход - нет, выход - нет.
+   08   Информация о доступной extended памяти
+        Вход - нет, выход -
+                    AX=размер наибольшего доступн

@@ -1,0 +1,60 @@
+<html><head><title>VMM - Virtual Memory Manager for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Менеджер виртуальной памяти для Turbo Pascal. Позволяет динамически выделять блоки памяти, суммарный размер которых превышает размер стандартной "кучи". Осуществляет при необходимости автоматическое перемещение блоков памяти на диск или в EMS и обратно.  The Virtual Memory Manager object (VMM) allows you to allocate memory for dynamic variables without being limited by the size of the Turbo Pascal heap. That is, VMM is not a replacement system for the Turbo Pascal memory manager but it provides you with an easy-to-use complementary package able to temporarily store allocated blocks in EMS or on disk and to automatically move them into RAM when they are needed. Required: Object Professional from TurboPower Software.'>
+<meta name="keywords" content="pascal, sources, source code, vmmngr, memory, Управление Памятью ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Управление Памятью</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vmmngr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VMM - Virtual Memory Manager for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;Patrick Philippot</TD>
+<TD class=black align='right'>16.07.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Менеджер виртуальной памяти для Turbo Pascal.
+Позволяет динамически выделять блоки памяти, суммарный размер
+которых превышает размер стандартной "кучи". Осуществляет
+при необходимости автоматическое перемещение блоков памяти
+на диск или в EMS и обратно. <br><font color=#666666>
+The Virtual Memory Manager object (VMM) allows you to allocate
+memory for dynamic variables without being limited by the size of
+the Turbo Pascal heap. That is, VMM is not a replacement system
+for the Turbo Pascal memory manager but it provides you with an
+easy-to-use complementary package able to temporarily store
+allocated blocks in EMS or on disk and to automatically move them
+into RAM when they are needed.
+Required: Object Professional from TurboPower Software.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="vmmngr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>34k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                   +----------------------------+
+                   |VMM - Virtual Memory Manager|
+                   +----------------------------+
+
+              A complementary unit for Object Professional
+                 a package from TurboPower Software
+
+                  Author : Patrick Philippot - 7/90
+
+
+          +---------------------------------------------------+
+          |This  package  is released to the public domain. It|
+          |can  be  distributed  to  anyone FOR FREE. I DO NOT|
+          |authorize  anyone  to  charge  ANY  AMOUNT of money|
+          |for   this  package  wathever  the  media  used  to|
+          |distribute it.                                     |
+          +---------------------------------------------------+
+
+           First  of  all  let me apologize for my rather poor
+           english.   I   hope   anyone  will  understand  the
+           following documentation.
+
+           WARNING  : You need Turbo Professional version 1.0x
+           to compile this package.
