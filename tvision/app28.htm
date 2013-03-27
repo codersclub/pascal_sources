@@ -1,0 +1,65 @@
+<html><head><title>28/43/50-lines Mode for TurboVision Applications</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пример установки 28/43/50-строчного видеорежима для Turbovision-приложений.  App28 is a Turbo Pascal unit that enables TurboVision applications to be toggled in and out of 28/43/50-lines mode, giving programmers another video option to present to users of their programs.'>
+<meta name="keywords" content="pascal, sources, source code, app28, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;app28
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;28/43/50-lines Mode for TurboVision Applications</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:73004.175@compuserve.com">Ed Jordan</a></TD>
+<TD class=black align='right'>30.09.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пример установки 28/43/50-строчного видеорежима
+для Turbovision-приложений. <br>
+App28 is a Turbo Pascal unit that enables TurboVision applications
+to be toggled in and out of 28/43/50-lines mode, giving programmers
+another video option to present to users of their programs.</TD><TD class=black colspan=2 align='right'><br><A HREF="app28.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>35k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                   28-Line Mode For TurboVision
+
+     If you're a Turbo Pascal programmer, then APP28.PAS will
+give you another video option in your TurboVision programs.
+     As you know, the TurboVision constant smFont8x8 can be used
+to put TurboVision programs into 43 or 50 line mode (depending
+on whether they're running on an EGA or VGA adaptor).
+     APP28.PAS contains a new smXXXX constant, smFont8x14,
+along with TApp28, a simple descendant of TApplication that
+knows what to do with the new smXXXX constant.  TApp28
+overrides only one TApplication method--SetScreenMode.
+     Calling "SetScreenMode(ScreenMode or smFont8x14)" will put a
+TurboVision application into 28-line mode--if it is descended
+from TApp28 instead of TApplication, and IF IT IS RUNNING ON A
+VGA ADAPTOR.  If it is not running on a VGA adaptor, no harm will
+be done, and you will still be able to toggle between 50 and 25
+line modes using smFont8x8.
+     Why use 28 line mode?  Most of the time you won't want to,
+but there may be situations where you'll be glad to have three
+extra lines with little loss in readability.  If you've ever
+tried to work on a 50-line screen, you'll know both that it gives
+you a great over-view of what you're doing, and that it strains the
+heck out of your eyes.  28-line mode gives you more lines to work
+with and doesn't strain your sight at all.
+     Another reason to use TApp28 is to provide the users of your
+program with another video option--it will make your programs
+seem a little spiffier if users can choose from a menu like this:
+
+                VIDEO PREFERENCE
+                 25 Line Mode
+                 28 Line Mode
+                 43/50 Line Mode
+
+     For an example of a way to toggle between modes, see the
+HandleEvent method in TEST28.PAS.
+     TApp28 is completely free.  The source code is provided so
+that you can improve it or cust

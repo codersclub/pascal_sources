@@ -1,0 +1,109 @@
+<html><head><title>Исправление ошибки в tFileDialog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Об исправлении ошибки в TFileDialog, чтобы он правильно "ходил" по подкаталогам'>
+<meta name="keywords" content="pascal, sources, source code, tfd_err, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tfd_err
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Исправление ошибки в tFileDialog</TD>
+<TD nowrap class=black>&nbsp;Александр Тесанов</TD>
+<TD class=black align='right'>07.12.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Об исправлении ошибки в TFileDialog,
+чтобы он правильно "ходил" по подкаталогам</TD><TD class=black colspan=2 align='right'><br><A HREF="tfd_err.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Alexander K. Tesanoff &lt;tes@step.nnov.su&gt;
+Subj: TFileDialog, не ходит по каталогам... Почему, а ?
+Organization: Step Ltd.
+
+    мой вопрос к знатокам довольно чайниковский.
+
+    В стандартной поставке TV 2.0 есть объект TFileDialog.
+На первый взгляд - это то же самое, что и соответствующее окошко
+в самой IDE. Но "ходить по каталогам", в отличие от своего старшего брата
+TFileDialog не может.
+   Люди ! Если кто-то уже победил эту болезнь, и при этом ему не
+жалко поделиться результатами своих трудов - киньте, плиз, исправленный
+вариант, или посоветуйте, что я могу с этим поделать сам.
+
+                                                        Заранее спасибо !
+--
+                                                        Тесанов Александр.
+
+From: val@go.magadan.su (Valera Isaev)
+Date: Thu, 08 Dec 94 18:13:16 +1100
+Organization: GO
+
+&gt;   Люди ! Если кто-то уже победил эту болезнь
+
+    Победил! Дело в том, что подробности этого трабала я неизучал и исправ-
+    лять ничего не стал, а просто взял одноименный Unit из TР6, а там это
+    окно ходит куда хочеш и зачем хочеш!!! А с трабалом этим пускай Borlond'ов-
+    цы сами разбераются если им это нужно. Если от шестерки этого Unit'а неоста-
+    лось, то пиши пришлю.
+
+&gt;                      Заранее спасибо !
+                       Заранее пожалуста!
+
+--
+Valery Isaev "Magadan"        Phone:    home   (413)-004-7411
+                                        modem  (413)-002-8416
+                                        voice  (413)-002-8086
+                              Addr:     fido   2:5047/16
+                                        E-Mail val@go.magadan.su
+
+
+
+From: "Yury P. Smolsky" &lt;bitmmsi@bitmcnit.bryansk.su&gt;
+Subj: Bug in TFileDialog
+Date: Tue, 20 Dec 94 12:08:40 +0300
+Organization: MS&I Chair At Bryansk Inst. of Transport Engineering
+
+
+        Привет всем!
+
+     Недавно кто-то спрашивал, как заставить TFileDialog ходить
+по каталогам. Я порылся в исходниках STDDLG - там в ф-ции
+RelativePath неверно стояла скобочка. Здесь текст исправленной ф-ции.
+
+
+function RelativePath(var S: PathStr): Boolean;
+begin
+  S := LTrim(RTrim(S));
+  RelativePath := not ((S &lt;&gt; '') and (S[1] = '\') or (S[2] = ':'));
+end;
+
+                                            Юра.
+---
+,--------------------------------------,
+| Yury P. Smolsky.  MS&I Chair At BITM |
+| E-mail : bitmmsi@bitmcnit.bryansk.su |
+'--------------------------------------`
+
+
+
+From: Victor V. Ionov &lt;MD@md.kamaz.kazan.su&gt;
+Subj: TFileDialog, не ходит по каталогам... Почему, а ?
+Date: Thu, 08 Dec 94 15:03:02 +0200
+Organization: KAMAZ Inc., General Fin. Dep., STAR
+
+&gt;   мой вопрос к знатокам довольно чайниковский.
+
+Попробуй может вот это подойдет.
+Будут вопросы пиши.
+
+---
+*-=| С уважением Виктор |=-*</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

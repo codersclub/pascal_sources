@@ -1,0 +1,411 @@
+<html><head><title>Русские горячие клавиши в TV</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='2 варианта реализации русских Hot Keys в меню и потомках объекта TCluster в Turbo Vision'>
+<meta name="keywords" content="pascal, sources, source code, tvhotrus, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tvhotrus
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Русские горячие клавиши в TV</TD>
+<TD nowrap class=black>&nbsp;Андрей Вярвельский</TD>
+<TD class=black align='right'>15.06.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">2 варианта реализации русских Hot Keys в меню
+и потомках объекта TCluster в Turbo Vision</TD><TD class=black colspan=2 align='right'><br><A HREF="tvhotrus.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  Andrew Vyarvelsky &lt;andrew@alta.msk.su&gt;
+Organization: ALTA Co.Ltd
+
+  Business News Agency &lt;admin@bimail.donetsk.ua&gt; Fri, 04 Jun writes:
+
+ &gt; Помогите реализовать русские Hot keys в меню и потомках объекта
+ &gt; TCluster в Turbo Vision
+
+Приветствую, admin!  :)
+
+Поскольку вопрос о русских Hot Keys в Turbo Vision задается в этой
+конференции, если мне не изменяет память, уже в третий раз, отвечу на него
+в конференции, а не E-mail-ом.
+
+
+Проще всего, imho, заставить работать русские hot keys, слегка подправив
+исходные тексты модулей drivers, dialogs и menus, взяв их из RTL.  Сразу
+скажу, что у такого способа русификации есть как минимум два серьезных
+недостатка.  Во-первых, при переходе к новой версии Turbo Vision (2.0 из BP
+7.0) модификацию исходных текстов придется повторять.  Во-вторых, если Вы
+делаете свою программу в двух вариантах (русском и английском), вам, возможно,
+придется хранить два комплекта этих файлов (либо все вносимые изменения
+оформлять директивами условной компиляции).  С другой стороны, imho, этот
+способ самый простой и надежный.
+
+
+А теперь сами модификации TV 1.0 из TP 6.0 (в TV 2.0 я еще этого не сделал,
+но не думаю, что там будут принципиальные отличия):
+
+----------------------------------
+Drivers.  Модифицируем функцию GetAltCode так, чтобы она давала Scan-коды
+для символов кириллицы:
+
+const
+  CyrCodes: array[$10..$35] of Char =                { Таблица соответствия }
+  'ЙЦУКЕНГШЩЗХЪ'#0#0'ФЫВАПРОЛДЖЭЁ'#0#0'ЯЧСМИТЬБЮ'#0; { Scan code -&gt; символ  }
+          { или так: здесь #0 --^,    а здесь Ё --^,  }
+          { если Вы считаете, что буква 'Ё' должна    }
+          { располагаться на клавише '/', а не на '`' }
+
+function GetAltCode(Ch: Char): Word;
+var
+  I: Word;
+begin
+  GetAltCode := 0;
+  if Ch = #0 then Exit;
+  Ch := UpCase(Ch);
+  if Ch = #240 then begin
+    GetAltCode := $0200;
+    Exit;
+  end;
+
+  if (Ch &gt; #127) and (Ch &lt; #160) then begin   {&lt;--------------------------}
+    for I:= $10 to $35 do                     { Добавляем поиск скэн-кода }
+      if CyrCodes[I] = Ch then begin          {  для символов кириллицы   }
+        GetAltCode:= I shl 8;                 {  аналогично тому, как это }
+        Exit                                  {  сделано для цифр и       }
+      end                                     {  латиницы (см.ниже)       }
+  end;                                        {&lt;--------------------------}
+
+  for I := $10 to $32 do
+    if AltCodes1[I] = Ch then
+  ...
+
+--------------------------------------
+Dialogs.  В HandleEvent-ах трех объектов (TButton, TCluster и TLabel)
+код символа при обработке нажатия клавиши (Event.CharCode) сравнивается с
+кодом символа Hot Key. Это делается для обработки в пост-процессной фазе
+нажатий горячих клавиш без 'Alt'; нажатия горячих клавиш с 'Alt'
+опознаются путем сравнения Scan-кодов, через вызов функции GetAltCode,
+которую мы уже исправили.  Модифицируем это сравнение кодов так, чтобы
+русские и латинские буквы, расположенные на одной клавише, считались
+совпадающими -- русские Hot Keys должны распознаваться вне зависимости от
+текущего режима клавиатуры (возможно, латинские hot keys тоже должны бы
+распознаваться вне зависимости от режима клавиатуры, но я в этом не уверен,
+потому и не сделал :) ).
+
+
+function IsHotKey(EvChar, HotChar: char): boolean;
+var
+  IsHot: boolean;
+const
+  Cyr: array ['A'..'Z'] of char = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ';
+begin
+  EvChar:=UpCase(EvChar);
+  HotChar:=UpCase(HotChar);
+  IsHotKey:=(EvChar = HotChar) or
+    ((EvChar in ['A'..'Z']) and (Cyr[EvChar] = HotChar)) or
+    (HotChar = 'Х') and (EvChar = '[') or
+    (HotChar = 'Ъ') and (EvChar = ']') or
+    (HotChar = 'Ж') and (EvChar = ';') or
+    (HotChar = 'Э') and (EvChar = '''') or
+    (HotChar = 'Б') and (EvChar = ',') or
+    (HotChar = 'Ю') and (EvChar = '.') or
+    (HotChar = 'Ё') and ((EvChar = '`') or (EvChar = '/'))
+end;
+
+procedure TButton.HandleEvent(var Event: TEvent);
+  ...
+    evKeyDown:
+      begin
+        C := HotKey(Title^);
+        if (Event.KeyCode = GetAltCode(C)) or
+          ((Owner^.Phase = phPostProcess) and (C &lt;&gt; #0) and
+          IsHotKey(Event.CharCode,C)) or                            { &lt;-- }
+          ((State and sfFocused &lt;&gt; 0) and (Event.CharCode = ' ')) then
+        begin
+  ...
+
+procedure TCluster.HandleEvent(var Event: TEvent);
+  ...
+        begin
+          C := HotKey(PString(Strings.At(I))^);
+          if (GetAltCode(C) = Event.KeyCode) or
+             (((Owner^.Phase = phPostProcess) or (State and sfFocused &lt;&gt; 0))
+               and (C &lt;&gt; #0) and IsHotKey(Event.CharCode,C)) then   { &lt;-- }
+          begin
+  ...
+
+procedure TLabel.HandleEvent(var Event: TEvent);
+...
+  else if Event.What = evKeyDown then begin
+    C := HotKey(Text^);
+    if (GetAltCode(C) = Event.KeyCode) or
+       ((C &lt;&gt; #0) and (Owner^.Phase = phPostProcess) and
+        IsHotKey(Event.CharCode,C)) then                            { &lt;-- }
+    begin
+...
+
+-------------------------------------
+Menus.  Поступаем аналогично:
+
+function TMenuView.FindItem(Ch: Char): PMenuItem;
+  ...
+    if (P^.Name &lt;&gt; nil) and not P^.Disabled then begin
+      I:= Pos('~', P^.Name^);
+      if (I &lt;&gt; 0) and IsHotKey(Ch,P^.Name^[I+1]) then begin         { &lt;-- }
+  ...
+-------------------------------------
+
+Есть, однако, один пакостный момент: не следует использовать в качестве Hot
+Keys буквы 'Х', 'Ъ', 'Ж', 'Э', 'Б', 'Ю', 'Ё'.  Они будут работать только
+частично -- при нажатии без 'Alt'. Дело в том, что сочетания 'Alt-[', 'Alt-;'
+и т.п. не попадают в буфер клавиатуры, и эту ситуацию можно исправить imho
+только заменой обработчика int 09h на собственный, чего мне делать не хотелось
+бы.
+
+
+---
+Вярвельский Андрей    (095) 466-7508    Relcom: andrew@alta.msk.su
+                                          FIDO: 2:5020/112.7
+
+
+{&gt; Cut here. FileName= TVHOTRU2.TXT }
+- TVISION ------------------------------------------------------ Turbo Vision -
+ Msg  : 24 of 29                             Addr                        Date
+ From : Сергей Малинин                                                 22.06.93
+ Subj : Русские горячие клавиши в TV (комментарий)
+-------------------------------------------------------------------------------
+From: root@dem.khabarovsk.su (Sergey A. Malinin)
+Subject: Коментарии и дополнения к [News] Re: Руские Hot Keys в Turbo Vision
+Organization: Kompaniy DEM
+
+                       Hi, ALL !
+    Небольшой коменнтарий к варианту русификации.
+
+Andrey Vyarvelsky writes:
+
+&gt;   Проще всего, imho, заставить работать русские hot keys, слегка подправив
+&gt;   исходные тексты модулей drivers, dialogs и menus, взяв их из RTL.
+                                       ^
+                                       |
+             Imho исправлять не нужно вообще, я этот файл не исправлял.
+
+&gt;   ----------------------------------
+&gt;   Drivers.  Модифицируем функцию GetAltCode так, чтобы она давала Scan-коды
+&gt;   для символов кириллицы:
+
+    Но еще нужно также переделать функцию UpCase, чтобы она правильно обраба-
+тывала кириллицу.
+
+
+{ Keyboard support routines }
+
+const
+
+  AltCodes: array[$10..$34] of Char =
+    'ЙЦУКЕНГШЩЗХ`'#0#0'ФЫВАПРОЛДЖЭ'#0#0#0'ЯЧСМИТЬБЮ';
+
+  AltCodes1: array[$10..$32] of Char =
+    'QWERTYUIOP'#0#0#0#0'ASDFGHJKL'#0#0#0#0#0'ZXCVBNM';
+
+  AltCodes2: array[$78..$83] of Char =
+    '1234567890-=';
+
+function GetAltChar(KeyCode: Word): Char;
+begin
+  GetAltChar := #0;
+  if Lo(KeyCode) = 0 then
+    case Hi(KeyCode) of
+      $02: GetAltChar := #240;
+      $10..$32: GetAltChar := AltCodes1[Hi(KeyCode)];
+      $78..$83: GetAltChar := AltCodes2[Hi(KeyCode)];
+    end;
+end;
+
+function GetAltCode(Ch: Char): Word;
+var
+  I: Word;
+
+function UpCaseN(Ch: Char):Char;
+begin
+  if ((Ch&gt;='а') AND (Ch&lt;='п')) then  UpCaseN:=Chr(Ord(Ch)-32)
+    else if (Ch&gt;='р') AND (Ch&lt;='я') then  UpCaseN:=Chr(Ord(Ch)-80)
+            else  UpCaseN:=UpCase(Ch);
+end;
+
+begin
+  GetAltCode := 0;
+  if Ch = #0 then Exit;
+  Ch := UpCaseN(Ch);
+  if Ch = #240 then
+  begin
+    GetAltCode := $0200;
+    Exit;
+  end;
+ if Ch &lt; Chr(128) then
+   begin
+   for I := $10 to $32 do
+     if AltCodes1[I] = Ch then
+     begin
+       GetAltCode := I shl 8;
+       Exit;
+     end;
+   end
+  else
+   begin
+   for I := $10 to $34 do
+     if AltCodes[I] = Ch then
+     begin
+       GetAltCode := I shl 8;
+       Exit;
+     end;
+   end;
+  for I := $78 to $83 do
+    if AltCodes2[I] = Ch then
+    begin
+      GetAltCode := I shl 8;
+      Exit;
+    end;
+end;
+
+---------------------------------------------------------------
+ После этой манипуляции у меня символы кириллицы стали обрабатываться
+везде правильно, кроме Меню.
+
+&gt;   Dialogs.  В HandleEvent-ах трех объектов (TButton, TCluster и TLabel)
+    Imho переделывать не нужно вообще -- оно и так правильно работает.
+
+А  Menus, я переделал немного по другому. Но в принципе почти тоже самое.
+---------------------------------------------
+
+function Eng_Rus(Ch:Char):Char;
+var Cn: Char;
+begin
+ case Ch of
+ 'Й': Cn:='Q';
+ 'Ц': Cn:='W';
+ 'У': Cn:='E';
+ 'К': Cn:='R';
+ 'Е': Cn:='T';
+ 'Н': Cn:='Y';
+ 'Г': Cn:='U';
+ 'Ш': Cn:='I';
+ 'Щ': Cn:='O';
+ 'З': Cn:='P';
+ 'Ф': Cn:='A';
+ 'Ы': Cn:='S';
+ 'В': Cn:='D';
+ 'А': Cn:='F';
+ 'П': Cn:='G';
+ 'Р': Cn:='H';
+ 'О': Cn:='J';
+ 'Л': Cn:='K';
+ 'Д': Cn:='L';
+ 'Я': Cn:='Z';
+ 'Ч': Cn:='X';
+ 'С': Cn:='C';
+ 'М': Cn:='V';
+ 'И': Cn:='B';
+ 'Т': Cn:='N';
+ 'Ь': Cn:='M';
+ else
+  Cn:=Ch;
+ end;
+ Eng_Rus:=Cn;
+end;
+
+
+function TMenuView.FindItem(Ch: Char): PMenuItem;
+var
+  P: PMenuItem;
+  I: Integer;
+begin
+  Ch := UpCase(Ch);
+  P := Menu^.Items;
+  while P &lt;&gt; nil do
+  begin
+    if (P^.Name &lt;&gt; nil) and not P^.Disabled then
+    begin
+      I := Pos('~', P^.Name^);
+      if (I &lt;&gt; 0) and (Ch = Eng_Rus(UpCase(P^.Name^[I + 1]))) then
+      begin
+        FindItem := P;
+        Exit;
+      end;
+    end;
+    P := P^.Next;
+  end;
+  FindItem := nil;
+end;
+
+
+
+&gt;
+&gt;   Есть, однако, один пакостный момент: не следует использовать в качестве Hot
+&gt;   Keys буквы 'Х', '`', 'Ж', 'Э', 'Б', 'Ю', 'Ё'.  Они будут работать только
+&gt;   частично -- при нажатии без 'Alt'. Дело в том, что сочетания 'Alt-[', 'Alt-;'
+&gt;   и т.п. не попадают в буфер клавиатуры, и эту ситуацию можно исправить imho
+&gt;   только заменой обработчика int 09h на собственный, чего мне делать не хотелось
+
+  Imho обработчик int 09h переделывать не нужно, он и так неплохо работает.
+Переделать нужно функцию  GetKeyEvent  в модуле  Drivers. Правда я этим не
+занимался не было необходимости. Но осенью когда этот вопрос обсуждался ,
+был вариант переделки этой функции для Vision под C++.
+Выглядело это так:
+
+/*------------------------------------------------------------*/
+/* filename -       tevent.cpp                                */
+/*                  TEvent member functions                   */
+/*------------------------------------------------------------*/
+
+//          ...........
+#pragma warn -asc
+
+void TEvent::getKeyEvent()
+{
+    asm {
+        MOV AH,1;
+        INT 16h;
+        JNZ keyWaiting;
+        };
+    what = evNothing;
+    return;
+
+keyWaiting:
+
+    what = evKeyDown;
+    asm {
+        MOV AH,0;
+        INT 16h;
+        MOV  BX,AX;
+        MOV  AH,2;
+        INT  16h;
+        TEST AL,08h;
+        JNE  RusAlt;
+        JMP  EndProc;
+        };
+    RusAlt:
+        asm XOR BL,BL;
+    EndProc:
+    asm MOV AX,BX;
+    keyDown.keyCode = _AX;
+    return;
+}
+
+#pragma warn .asc
+
+Правда я не помню, кто это написал.
+
+В общем все, как видите для русификации надо сделать гораздо меньше
+изменений программе.
+
+ Сергей Малинин.      serg@dem.khabarovsk.su</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

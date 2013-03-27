@@ -1,0 +1,103 @@
+<html><head><title>GraphVision v2.01. Графический TV</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='GraphVision представляет собой графическую адаптацию пакета Turbo Vision и предназначен для создания программ с графическим интерфейсом пользователя'>
+<meta name="keywords" content="pascal, sources, source code, gravis2, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;gravis2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;GraphVision v2.01. Графический TV</TD>
+<TD nowrap class=black>&nbsp;Сергей Левов</TD>
+<TD class=black align='right'>22.03.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">GraphVision представляет собой графическую адаптацию
+пакета Turbo Vision и предназначен для создания программ
+с графическим интерфейсом пользователя</TD><TD class=black colspan=2 align='right'><br><A HREF="gravis2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>171k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        GraphVision v2.01
+                        ----------------
+               Сергей Левов (serg@em-isrir.msk.su)
+
+
+GraphVision представляет собой графическую адаптацию пакета Turbo Vision
+и предназначен для создания программ с графическим интерфейсом пользователя.
+
+Что нового в версии 2
+=====================
+
+   1. Поддержка режимов VESA 256 цветов
+   2. Мышиный курсор во всех поддерживаемых режимах
+   3. Потоки в XMS
+   4. Поддержка больших изображений ( &gt; 64 Kb)
+   5. Windows BMP импорт.
+   6. PCX импорт
+   6. Быстрый скроллинг области экрана
+
+
+Список исправленных ошибок
+==========================
+
+   1. GraphStaticBitmap.Done не освобождает память.
+   2. Горячие клавиши кнопок не действуют.
+   3. Процедура SetExclusiveArea работает некорректно.
+   4. Некоторые драйверы мыши портят экран при перемещении мыши.
+   5. Процедура MouseHardInt не восстанавливает значение индекса
+      в Graphics Address register.
+   6. Runtime error 216 при завершении программ защищенного режима.
+   7. Программа иногда рушится при скроллинге окна.
+   8. Неверно работает TXmsStream.Truncate
+   9. Пара мелких багов в GEditors.pas
+
+
+Также исправлены несколько незначительных ошибок и неточности
+в документации.
+
+
+Проблемы
+========
+
+   1. Некоторые русификаторы некорректно работают с INT $10, что может
+      вызывать появление мусора на экране при выводе текста.
+      - Замените русификатор.
+   2. Программа работает, но bitmap кнопки, кнопки скроллбаров и т.д.
+      не рисуются.
+      - Скопируйте файл standard.rsc в рабочий каталог.
+   3. При работе в BP IDE большие изображения не выводятся на экран,
+      но в DOS все работает.
+      - Зарезервируйте часть XMS памяти. Для этого добавьте в autoexec.bat
+        строку:
+        set DPMIMEM=MAXMEM 2048
+   4. И Turbo Vision и GraphVision содержат модули с именем MsgBox.tp*.
+      Компилятор при сборке программ будет использовать модуль, найденный
+      первым, поэтому возможны проблемы. Чтобы избежать этого, скопируйте
+      эти модули в соответствующие рабочие каталоги.
+
+
+Статус
+=======
+
+Shareware.
+
+Регистрационный взнос:
+
+   Новые пользователи                -   25000 руб.
+   Зарегистрированные пользователи
+   предыдущих версий                 -   не требуется.
+
+Свяжитесь с автором для получения более полной информации по
+вопросу оплаты.
+                email: serg@em-isrir.msk.su
+                       serg@riis.ru
+                тел.   (095) 954-55-78</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

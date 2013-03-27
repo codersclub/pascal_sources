@@ -1,0 +1,117 @@
+<html><head><title>Усовершенствованый TResourceFile</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Это усовершенствованый TResourceFile из стандартного модуля Objects.pas:   предотвращает затирание объекта   может работать в сети с возможностью блокировок   работает под Dos/DPMI/Win  Вся остальная работа c TObjectBase соответствует TResourceFile'>
+<meta name="keywords" content="pascal, sources, source code, obase, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;obase
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Усовершенствованый TResourceFile</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:rb@lucie.gf.unity.net">Руслан Бондаренко</a></TD>
+<TD class=black align='right'>13.03.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Это усовершенствованый TResourceFile из стандартного модуля Objects.pas: <br>
+ предотвращает затирание объекта <br>
+ может работать в сети с возможностью блокировок <br>
+ работает под Dos/DPMI/Win <br>
+Вся остальная работа c TObjectBase соответствует TResourceFile</TD><TD class=black colspan=2 align='right'><br><A HREF="obase.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From rb Thu Mar 13 17:48:41 1997
+From: rb@lucie.gf.unity.net (Ruslan Bondarenko)
+To: vot@infolink.tver.su
+Subject: OBase for Russian SWAG
+Date: Thu, 13 Mar 1997 14:01:29 GMT
+Organization: Private
+
+ Привет Валерий!
+
+    Я тут для русского swag'а предложить кое-чего хочу.
+    Если включишь OBase.pas в сваг - черкни мне в какой
+
+ С уважением, Руслан
+
+{   Last modified: 23/01/96                                                   }
+{                                                                             }
+{                     *******************************                         }
+{                     *      Ruslan Bondarenko      *                         }
+{                     *******************************                         }
+{                     *      My Pascal Library      *                         }
+{                     *            (BPL)            *                         }
+{                     *          CopyRight          *                         }
+{                     *  Dniepr, 2:464/39@fidonet   *                         }
+{                     *                             *                         }
+{                     *           1995-96           *                         }
+{                     *******************************                         }
+
+{ Это усовершенствованый TResourceFile из стандартного модуля Objects.pas
+  Как известно TResourceFile имеет один существенный недостаток,
+  при записи в ресурс нового обьекта затирается каталог обьектов и
+  если по каким либо причинам не вызван метод Flush (отключение
+  питания, RunError), то ресурс можно считать потеряным.
+  
+  ! TObjectBase при добавлении нового обьекта проверяет возможность
+  затирания каталога, при необходимости делает Flush, отражает
+  это ресурсе, а уж потом только записывает сам обьект.
+  Вам вызывать метод Flush не обязательно. В вызове коструктора
+  Init дополнитель задается параметр sPage - это размер страницы
+  для размещения новых обьектов. Чем больше sPage, тем реже
+  будет производиться обновление каталога в ресурсе и быстрее будет
+  работать программа при записи обьектов.
+  Поле Page можно изменять "на ходу".
+  
+  + TObjectBase может работать в сети (к одному ресурсу могут
+  обращаться несколько программ как в режиме чтения так и записи)
+  Для этого надо вызвать метод Lock, произвести необходимые действия
+  с ресурсом, а затем UnLock. При вызове Lock необходимо проверять
+  поле ErrorInfo, т.к. ресурс может быть заблокирован другим приложением
+
+-- Пример 1 -------------------------------------
+  with DB^ do
+  begin
+    Lock;
+    if ErrorInfo = 0 then 
+     begin
+      Put(New(PNewObject, Init))
+      Unlock;
+     end  
+     else Reset;
+  end;   
+-------------------------------------------------
+  
+  + В TObjectBase добавлен метод SearchKey
+
+-- Пример 2 -------------------------------------
+  var SearchVar: TSearchMode;
+      MyObject: TMyObject;
+  begin
+    with DB^ do
+    begin
+      SearchVar := mSearchFirst;
+      I := SearchKey('My Object', SearchVar);
+      while I &lt;&gt; 0 do
+      begin
+        SearchVar := mSearchNext;
+        MyObject := TMyObject(Get(I));
+        I := SearchKey('My Object', SearchVar);
+      end;
+    end;
+  end;   
+-------------------------------------------------
+
+  + Возможность работы под Dos/DPMI/Win
+  
+  * Вся остальная работа c TObjectBase соответствует TResourceFile
+
+}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

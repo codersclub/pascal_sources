@@ -1,0 +1,54 @@
+<html><head><title>Turbo Vision 2.0 Ported to TMT Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Исходники Турбо Вижн 2.0, портированные под TMT Pascal 2.0+ с комментарием от Вадима Бодрова'>
+<meta name="keywords" content="pascal, sources, source code, tv_tmt, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tv_tmt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Vision 2.0 Ported to TMT Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/739.9">Slava Cherkasov</a></TD>
+<TD class=black align='right'>24.07.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Исходники Турбо Вижн 2.0, портированные под TMT Pascal 2.0+
+с комментарием от Вадима Бодрова</TD><TD class=black colspan=2 align='right'><br><A HREF="tv_tmt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>137k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/2.30) ------------------- SU.PASCAL.MODULA.ADA -
+ From : Vadim Bodrov                        2:5011/5.3      24 Jul 98  00:23:03
+ To   : Alexander S. Tokareff                               25 Jul 98  00:51:18
+ Subj : tv_tmt.rar
+-------------------------------------------------------------------------------
+Дoбpого Вам времени суток, yвaжaeмый Alexander!
+
+22 Июля 1998, Alexander S. Tokareff writes to Slava Cherkasov:
+
+ SC&gt;&gt; File Name : "tv_tmt.rar"
+
+ AST&gt;  Hе собиpается. Пpи попытке собpать buildtv.pas pyгается:
+
+ AST&gt;     VmtLink: Ofs (TypeOf(TCollection)^);
+ AST&gt;              .
+ AST&gt; Error: OBJECTS.PAS (line 397, col 14): required constant expression
+
+ Это из-за того, что VmtLink описан как Longint (см. стpоку номеp 107
+ модуля OBJECTS.PAS), а начиная с веpсии 2.10, TMT Pascal возвpащает
+ значение функции Ofs типа DWord. Именно поэтому пpоисходит ошибка
+ компиляции. Для ее лечения нужно пpосто описать VmtLink как DWord
+ (вместо LongInt) - вот собственно и все...
+
+/Falkoris [Abyss Group]
+
+--- Falcoris BBS
+ * Origin: Делай людям добро и бросай его в воду - утонет :-( (2:5011/5.3)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

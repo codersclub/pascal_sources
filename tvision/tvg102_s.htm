@@ -1,0 +1,81 @@
+<html><head><title>TVGraph 1.02 - Using TurboVision In EGA/VGA Graphics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль TVGraph позволяет создавать графические приложения с помощью TurboVision.  This unit allows to turn Turbovision applications to EGA/VGA graphics mode.'>
+<meta name="keywords" content="pascal, sources, source code, tvg102_s, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tvg102_s
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TVGraph 1.02 - Using TurboVision In EGA/VGA Graphics</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:3:640/307">Christopher Burke</a></TD>
+<TD class=black align='right'>02.04.2001</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль TVGraph позволяет создавать графические приложения
+с помощью TurboVision. <br>
+This unit allows to turn Turbovision applications
+to EGA/VGA graphics mode.</TD><TD class=black colspan=2 align='right'><br><A HREF="tvg102_s.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>96k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                              TVGRAPH 1.02
+                              TURBO VISION
+                  using TURBO VISION In EGA/VGA graphics
+                           (C) Mindware 1991
+                         Brisbane,QLD,Australia
+                           Fido : 3:640/305.1
+
+0. See Modified TVDEMO program and STYX.PAS to show you how to do things
+
+1. All that is required is to include TVGRAPH in the uses statement in your
+main program and amazing - TVGRAPH will work in graphics mode.
+
+2. Declarations are as follows
+
+type
+ PGRect=^GRect;
+ GRect=Trect;
+
+ PGPoint=^GPoint;
+ GPoint=TPoint;    (* These two just to avoid confusion *)
+
+3. Graphics IDs
+All "text" windows are given a graphics ID of 0, each window you want
+to use graphics in - you need to assign a graphics ID to it, if a line is
+drawn using the internal RawDrawLine - then if the current graphics window
+is the same as the location you are writing to on the screen then the graphics
+will overwrite - else the graphics will be clipped.
+
+function NextGraphId:byte; (* Get next available graphics id *)
+procedure UseGraphId(b:byte); (* Use graphics ID for following graphics *)
+procedure ReleaseGraphId(b:byte); (* release graphics ID for use *)
+
+To assign a graphics id to a character cell ensure you write character n with
+attribute 0FFh into the location using standard TURBO VISION methods.
+
+
+4. Other routines
+procedure TextToGraphics(T:TRect;var G:Grect);
+(*converts a Text rectangle T into a Grect based on current screen locations *)
+
+procedure RawDrawLine(X1,Y1,X2,Y2:integer;Color:word);
+(* draw line from using screen co-ordinates *)
+
+procedure DrawLine(X1,Y1,X2,Y2:integer;Color:word);
+(* draw line using global co-ordinates i.e. *)
+(* X is 0..GraphXMax (10000) *)
+(* Y is 0..GraphYMax=(07500) *)
+
+function ISin(X:integer):integer;
+function ICos(X:integer):integer;
+(* Integer trig functions  - X is number of 16ths of a degree *)
+(* returns number -1024..1024 representing -1.000..+1.000 *)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

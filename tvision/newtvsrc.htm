@@ -1,0 +1,192 @@
+<html><head><title>Enchanced Turbo Vision with Russian Hotkeys</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Переработанные и русифицированные исходники TurboVision, интерфейс стилизован под Norton Utilites 6.'>
+<meta name="keywords" content="pascal, sources, source code, newtvsrc, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;newtvsrc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Enchanced Turbo Vision with Russian Hotkeys</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/200.25">Alex Zimarev</a></TD>
+<TD class=black align='right'>04.04.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Переработанные и русифицированные исходники TurboVision,
+интерфейс стилизован под Norton Utilites 6.</TD><TD class=black colspan=2 align='right'><br><A HREF="newtvsrc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>142k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hi.
+---
+
+Поскольку мне очень надоели всякие переделки TVision, периодически
+подкладываемые на нашу BBS под видом крутых вещей, которые на самом
+деле представляют собой (в основном) фигню, я решил положить туда
+свой вариант. По-моему очень ничего.
+
+Достоинства
+-----------
+
+Выглядит довольно цивильно, хоть и закос под Norton Utilites. Зато
+стремимся к мировым стандартам. Кроме этого к окошку приделана менюшка
+по поводу закрытия, zoom, move/resize. Вызывается по Alt+space, так
+что делайте About в submenu Help.
+
+Кроме всего прочего это русифицированный TV, да и вообще SYSTEM.TPU
+имеет русский Upcase (TURBO.TPL и TPP.TPL прилагаются). Это можно
+счесть недостатком, поскольку Alt+&lt;латинская_буква&gt; уже не поймать,
+ну а можно оптимистически начать писать программы для соотечественников
+(полностью согласен с невозможностью полного и всеобъемлющего перевода
+таких слов как zoom и click на русский язык, но что делать...).
+
+Недостатки
+----------
+
+Неполно работает флажок ofFramed, т.к. в связи с острой нехваткой
+символов пришлось убить всю одинарную псевдографику кроме контуров,
+т.е. остались только
++-+
+| |
++-+.
+Поэтому пересекающиеся views с вкюченым ofFramed будут слегка горбить.
+
+Предупреждения
+--------------
+
+К TWindow.Flag добавлен флажок wfBottomLine. Если его зажечь, то
+нижняя рамка окна будет широкой полосой как заголовок, если нет,
+то тонкой линией (как по бокам). В TWindow.StandardScrollBar он
+зажигается.
+
+Вертикальные scroll bars должны быть шириной 2 символа, а не один,
+как в обычном TV. Соответственно все прилегающие к ним views должны
+быть на симвод уже. Или можно scroll bar подвинуть.
+
+Сильно переделана основная палитра (CAppColor). С CColor вообще ничего
+работать не будет. Палитры CAppBlackWhite и CAppMonochrome не переделаны
+вообще (в смысле подбора цветов).
+Переделка палитры заключается не только в изменении цветов, но и
+в добавлении новых записей.
+
+CAppColor:
+
+128 history window
+129 blue window title passive
+130 blue window title active
+131 cyan window title passive
+132 cyan window title active
+133 gray window title passive
+134 gray window title active
+
+CFrame           -&gt; CWindow
+
+1 frame passive  -&gt; 1
+2 title passive  -&gt; 9
+3 frame active   -&gt; 2
+4 title active   -&gt; 10
+5 frame icons    -&gt; 3
+
+Следует сказать, что цвет frame icons это вовсе не цвет рамки
+окна при его перемещении. Это цвет иконок (black on white).
+А рамка при dragging вообще цвет не меняет.
+
+CWindow
+
+...
+9     title passive
+10    title active
+11-16 local menu colors (from CAppColor 2-7)
+
+CDialog
+
+...
+9-16 (see CWindow)
+17   reserved
+18   reserved
+...
+
+Соответственно все цвета с 9 по 32 переместились на 10 дальше
+(т.е. 11 стал 21 и т.п.).
+
+
+--------------------
+
+Простите, если кое-где (особенно вначале) я был резковат.
+На самом деле написал как думал. Признаю наличие и у меня
+багов, глюков и подобного.
+
+Принимаются отзывы и предложения.
+
+Home:
+
+103536 Россия
+Москва К-536
+корпус 02, ACD Group.
+
+Office:
+
+phones
+ voice (095)535-2222
+       (095)534-4831
+
+ fax   (095)534-4832
+
+ F-Bit BBS, (095)536-4260,14400,CM,V32bis,V42bis,XA,LO
+ SysOp:   Oleg Baranov
+ CoSysOp: Alex Zimarev
+
+Mail:
+2:5020/200.25@fidonet.org
+
+------------------------
+
+Have a nice OS/2 !
+
+Alex Zimarev (ACD Group., F-Bit)
+
+--------------------------------------------------------------------------------
+                     A C D   G r o u p   &   F - B i t
+                             P R E S E N T S
+
+Конструктор тестов Auto Control 2.0:
+  Тесты по любой дисциплине
+  Три типа вопросов
+    Ответ - ключевые слова (одно или несколько слов с синонимами)
+    Выбираемый ответ (один или несколько верных вариантов)
+    Задача (генерация данных, расчет верного ответа по формуле-эталону)
+  Три метода опроса
+    Все вопросы (случайно или по порядку)
+    Часто вопросов (случайно или по порядку)
+    Варианты заданий (случайно или по порядку)
+  Три способа оценки ответов
+    Четырехбалльный (2, 3, 4, 5)
+    Зачетный (зачет, незачет)
+    Рейтинговый
+  Текстовые и графическте вопросы
+  Настройка всех параметров
+  Отличный интерфейс (Borland-like)
+  Контекстный Help
+  Подробное описание
+  Полностью по-русски
+
+В поставку входит оригинальный графический редактор Fast Paint 3.0
+  Десять русских векторных фонтов
+  Плавающий zomm
+  Оконный интерфейс
+  Масштабирование и поворот
+  Макрокоманды
+  Полностью по-русски
+  Подробное описание
+
+----------------------------------
+Координаты для связи даны выше.
+----------------------------------</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

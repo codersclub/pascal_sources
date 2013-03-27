@@ -1,0 +1,70 @@
+<html><head><title>DosShell для Turbo Vision с выгрузкой на диск</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='я написал собственный swapper, исходники которого и прилагаю'>
+<meta name="keywords" content="pascal, sources, source code, atlswap, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;atlswap
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;DosShell для Turbo Vision с выгрузкой на диск</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Victor B. Wagner</a></TD>
+<TD class=black align='right'> 6.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">я написал собственный swapper, исходники которого и прилагаю</TD><TD class=black colspan=2 align='right'><br><A HREF="atlswap.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Victor B. Wagner" &lt;vitus@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+ Aleksey Fetishev пишет:
+
+&gt;Многоуважаемый Олл у меня возникла огpомная необходимость пpи вызове в TV
+&gt;метода DosShell - нужно освобождать память от своей пpогpаммы(частично), а то
+&gt;сидит в памяти кусок килобайт эндак на 300 и ни хpена (извиняюсь за выpажение)
+&gt;пpиличного запустить уже нельзя. Всем кто может помочь я кpичу:"Хееелп! Сос!"
+
+ &lt;alex@alex.mhti.msk.su&gt;
+Громак Алексей предлагает такое решение:
+&gt;Есть библиотечка SPAWN 4.0 (старая, мож у кого новее) под C/C++ и Паскакаль.
+&gt;С BP 7.0 проверял - работает. Оставляет от себя в Шелле порядка 250-300 байт
+&gt;(не помню точно). Свапится EMS/XMS/Disk весьма шустро. Использование -
+&gt;на уровне табуретки: uses Spawn; ... вызов процедурки Shell'а.
+
+   У меня самого опыта работы с именно этой библиотекой нет, но я пробовал 
+аналогичную библиотеку Elefant и, надо сказать, она мне не понравилась.
+Когда у меня возникла аналогичная проблема, я написал собственный swapper,
+исходники которого и прилагаю. Предупреждаю сразу, что адаптирован для
+Turbo Vision в последний момент и от оригинального графического интерфейса
+остались кое-какие хвосты, типа процедур запрещающих выключение графического
+режима при выполнении CloseGraph.
+
+  Работает это так: Вы описываете ваш объект TMYApplication, который делает
+все, что положено делать Turbo Vision овская программа в модуле под названием
+main и компилируете файл Templ.Pas. TMyApplication должен иметь виртуальный
+метод RunProgram, который и служит для выполнения команды DOS со своппингом.
+В памяти при этом остается только то, что являлось главной программой, т.е
+
+Application.Init;
+Application.Run;
+Application.Done;
+и сама процедура своппинга (см. AtlSwap.Asm)
+Для того, чтобы это занимало поменьше места и используется такая нестандартная
+структура. Я чувствую, что мое решение вам не очень понравится, но исходники-
+вот они. Может разберетесь и сделаете что-то свое.
+
+P.S. Немедленную работу не гаранирую, ибо адаптация к TV не отлаживалась
+
+                                                Vitus Wagner
+
+Origin:SoftWeyr</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

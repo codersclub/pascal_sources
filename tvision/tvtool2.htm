@@ -1,0 +1,266 @@
+<html><head><title>TV Tool Box V2.0 for Turbo Pascal 7.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='TV Tool Box V2.0 for Turbo Pascal 7.0. Набор дополнительных модулей, расширяющих возможности TurboVision: маски для ввода, скроллируемые диалоговые окна, выпуклые кнопочки и т.д...  The TV Tool Box library enhances the Turbo Vision framework for Turbo Pascal. TV Tool Box includes formatted data entry with input masks, scrolling dialog boxes, dialog box field locking, check mark menus, string routines, 3D controls, 3D tool bars, iconizable windows, popup menus, virtual list boxes, slider controls, spin controls, and more.'>
+<meta name="keywords" content="pascal, sources, source code, tvtool2, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tvtool2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TV Tool Box V2.0 for Turbo Pascal 7.0</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:70242.3367@compuserve.com">Richard Hansen</a></TD>
+<TD class=black align='right'>12.08.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">TV Tool Box V2.0 for Turbo Pascal 7.0.
+Набор дополнительных модулей, расширяющих возможности TurboVision:
+маски для ввода, скроллируемые диалоговые окна, выпуклые кнопочки и т.д... <br>
+The TV Tool Box library enhances the Turbo Vision framework for Turbo Pascal.
+TV Tool Box includes formatted data entry with input masks,
+scrolling dialog boxes, dialog box field locking, check mark menus,
+string routines, 3D controls, 3D tool bars, iconizable windows,
+popup menus, virtual list boxes, slider controls, spin controls, and more.</TD><TD class=black colspan=2 align='right'><br><A HREF="tvtool2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>232k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">TV TOOL BOX - Version 2.00                                      07/20/93
+------------------------------------------------------------------------------
+OVERVIEW -
+
+The TV Tool Box package was created to fill a few holes in Turbo Vision for
+Turbo Pascal. TV Tool Box includes formatted data entry with input masks,
+scrolling data entry dialogs, dialog box field locking, check mark menus,
+enhancements to TApplication, some handy string routines, scrolling dialog
+boxes, 3D controls, virtual list boxes, spin bars, slider controls, and more.
+
+Version 2.0 of TV Tool Box is for use with Turbo Pascal version 7.0. It adds
+full support for Turbo Vision 2.0 and protected mode programs.
+
+TV Tool Box is distributed as Shareware, IT IS NOT FREE. IF YOU USE TV TOOL
+BOX PLEASE REGISTER IT.
+
+Please contact me with any comments, suggestions, problems, bugs, or
+questions.
+
+Richard Hansen
+PO Box 18571
+Saint Paul, MN  55118-0571  USA
+
+CompuServe : 70242,3367
+InterNet   : 70242.3367@compuserve.com
+FidoNet    : 1:282/115
+
+------------------------------------------------------------------------------
+THE DEMO -
+
+The file DEMO.PAS is the main demo for TV Tool Box.  This demo shows most of
+the features of TV Tool Box. Choose the [Test] option off the main menu bar
+to test them for yourself. Select [Data Entry] to test some new data entry
+features. TV Tool Box supports formatted data entry using programmer supplied
+entry mask strings. You can include literals, such as '(' or '-' in your
+masks, that cannot be typed over by your users. The data entry features also
+include, field locking, hidden password fields, justification, trimming,
+alternate padding chars, required fields, range checking, and support BP 7.0
+validators.
+
+If you ever wanted a little fancier look in your TV apps (dare I say it),
+like Visual Basic for DOS, check out the 3D controls. The 3D controls
+include a vertical or horizontal tool bar (almost like windows!). 3D buttons
+can take up to two lines of text.
+
+Select [Check Marks] and try out the check mark enhancement for menus.
+
+If you have need of a ASCII/HEX editor, like those used in disk utilities,
+now you have got one. Select [Ascii/Hex Editor] to check it out.
+
+Have you ever wanted a simple way to display some text without creating a
+dialog box or window and a specialized Draw method, try the [Text
+Display Window] option. This will display a TbxTextWindow object. With
+TbxTextWindow you just create it and use the Write method to display string,
+almost like writing to the screen without Turbo Vision.
+
+If you select [Message Dialog], you can check out a replacement for the
+MessageBox procedure. A TbxMessageDialog will automatically size itself for
+the number and length of the lines of text you insert into it.
+
+On the [Setup] menu, you can setup a neat idea I stole from my favorite
+programer's text editor "Multi-Edit" from American Cybernetics, Inc. If you
+check the option, the mouse cursor will be turned off whenever the keyboard
+is used. The mouse cursor is restored whenever the mouse is moved or a mouse
+button is pressed.
+
+Included in TV Tool Box is a descendant of TDialog called TbxRunDialog. A
+TbxRunDialog is used to create progress display dialogs for things like
+printing, copying files, etc. TbxRunDialog has easy an method for
+implementing pause, continue, and cancel. There are two ready made
+descendants of TbxRunDialog, TbxPercentDialog and TbxPrintDialog.
+TbxPercentDialog displays the percentage completion with a progress bar.
+TbxPrintDialog is a skeleton for a printing dialog. Select [Progress Dialog]
+or [Print Dialog] to try them out.
+
+[Virtual List Boxes] provide a list box that is perfect for database work or
+whenever you have a list that could be too large a normal TCollection.
+Virtual List Boxes display a only a portion of a larger (perhaps very much
+larger) list. Virtual List Box can page through the list or jump to the
+beginning or end of the list. The demo implements a list of all integers from
+1 - 99999. This is obviously too large for a TCollection which can handle
+a maximum of 16384 elements.
+
+I have added a couple enhancements to TWindows. A TbxWindow can be minimized,
+using the "" icon in the upper right corner. If you hit Alt-Minus, or press
+the right mouse button on the "close" icon, a window control menu will popup.
+
+Please be sure and check out the file SCROLL.EXE for a look at scrolling
+dialogs and data entry windows. Also check out the documentation and *.INT
+files for a more complete view of what is included.
+
+------------------------------------------------------------------------------
+USING TV TOOL BOX -
+
+TV Tool Box is broken into several units. The unit names generally correspond
+with their associated Turbo Vision units. The source code has been included
+to avoid compilation problems. Don't bother trying to read it though, it has
+been pretty well condensed (perhaps squashed describes it better) and is very
+hard to read. THE FULL SOURCE CODE IS INCLUDED WITH THE REGISTERED VERSION.
+
+When you compile you should use the X+, B+, and V- compiler directives.
+
+DEMO.PAS        Source code for the TV.EXE demo program.
+
+SCROLL.PAS      Source code for the SCROLL.EXE demo program.
+
+TVDEFS.INC      Some defs that change the compilation.
+
+TVCONST.PAS     Global constants.
+
+TVTYPE.PAS      Global types.
+
+TVSTRING.PAS    Handy string routines.
+
+TVINPUT.PAS     Data entry extensions.
+
+TVVIEWS.PAS     View extensions.
+
+TVDIALOG.PAS    Dialog extensions.
+
+TVAPP.PAS       Application extensions.
+
+TVMENUS.PAS     Menu extensions.
+
+TVOBJECT.PAS    TObject and TCollection extensions.
+
+TVSCROLL.PAS    Scrolling dialog boxes.
+
+TV3D.PAS        3D dialog boxes and controls.
+
+------------------------------------------------------------------------------
+TV TOOL BOX DEVELOPMENT TOOLS -
+
+TV Tool Box is actively supported by PtGen. PtGen is a Turbo Vision 2.0
+screen generator. You can reach the author of PtGen, Berend de Boer, at:
+
+  CompuServe : 100120,3121
+  InterNet   : berend@contrast.wlink.nl
+  FidoNet    : 2:281/527.23
+
+PtGen can create the layout for a whole application or a single dialog
+box. It is completely visual and interactive. Highlights of PtGen,
+besides supporting TV Tool Box are:
+
+*  creates complete applications or standalone dialog boxes
+*  quick interactive menu building
+*  quick interactive status line building
+*  quick interactive dialog box building
+*  full helptext support for status line help as well as helpfiles (.HLP)
+*  a tutorial, covering creation of status lines, menus, and dialog boxes
+
+PtGen currently supports all 3D controls of TV Tool Box. Basic support for
+the TbxEditLine (including mask definition) is also provided. Planned
+enhancements include supporting all input lines and support for scrolling
+dialog boxes.
+
+Registered users of PtGen receive 25% reduction on their TV Tool Box package,
+just as registered users of TV Tool Box receive 25% reduction on their PtGen
+package. The shareware version of PtGen is shipped with every registered
+version of TV Tool Box.
+
+------------------------------------------------------------------------------
+WHAT'S NEW AND WHAT'S CHANGED -
+
+Turbo Pascal 7.0 and Turbo Vision 2.0 support.
+
+Protected mode support.
+
+All Tv Tool Box objects renamed to start with the prefix "Tbx."
+
+All Tv Tool Box object pointers renamed to start with Pbx.
+
+TbxApplication.ClearBusy renamed to TbxApplication.HideBusy.
+
+Full set of 3D controls implemented.
+
+Actual help colors (not just place holders) included in 3D palette.
+
+TCharBuf renamed to TbxCharArray.
+
+TByteBuf renamed to TbxByteArray.
+
+TLinkedListBox renamed to TbxLinkedBox.
+
+TLinkedInputLine renamed to TbxLinkedLine.
+
+TEditBuffWindow renamed to TbxASCIIHexEditor.
+
+Added Multi-Select list boxes and Paired list boxes.
+
+All stream registration methods and types implemented.
+
+TvKeys unit consolidated into TvConst unit.
+
+gfGrowXYRel changed to gfScrollXY
+
+TbxScrollDialog.InsertToScroll sets the gfScrollXY flag in all inserted views.
+
+Scrolling dialogs scrolls to focused view on Tab.
+
+Scrolling dialog inserts a background covering view.
+
+Scrolling dialogs scroll to focused view on mouse button press.
+
+TbxMultiBuffScrollBar renamed to TbxMultiScrollBar
+
+efXXXX cnstants changed to dfXXXX, there were some efXXXX flags already
+defined by TV.
+
+Added Date edit lines.
+
+Added sliders and spin boxes.
+
+Added documentation and pictures for TPxPictureValidators.
+
+Added virtual list boxes with unlimited colection size.
+
+In TvMenus.pas, changed the names of the constants Marker, MarkerNull, and
+MarkerLen to CheckMark, CheckMarkNull, CheckMarkLen.
+
+scVScroll and scHScroll in TvScroll.pas changed to ofVScrollBar and
+ofHScrollBar for consistency. Old constant names (new values) remain in this
+version for compatibility.
+
+Changed the name of the type BufData to TBufData.
+
+Removed TbxMessageDialog.Process, added an Execute method. Now a message
+dialog can be executed like any other dialog by calling ExecuteDialog.
+
+------------------------------------------------------------------------------
+KNOWN PROBLEMS (FEATURES!) -
+
+Incremental search in the file dialog does not work for drives.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

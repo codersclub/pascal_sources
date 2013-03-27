@@ -1,0 +1,75 @@
+<html><head><title>Русификация Turbo Vision для TP6.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Ниже приводится main module с руссифицированной строкой меню, к которому должны цепляться остальные необходимые для работы программы модули'>
+<meta name="keywords" content="pascal, sources, source code, free, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;free
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Русификация Turbo Vision для TP6.0</TD>
+<TD nowrap class=black>&nbsp;Игорь Мигитко</TD>
+<TD class=black align='right'>30.11.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Ниже приводится main module с руссифицированной строкой меню,
+к которому должны цепляться остальные
+необходимые для работы программы модули</TD><TD class=black colspan=2 align='right'><br><A HREF="free.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: igor@serbi.vologda.su (Migitko Igor)
+Organization: BITPRESS  Ltd
+
+{Ниже приводится main module с руссифицированной строкой меню,    }
+{к которому должны цеплятся остальные                             }
+{необходимые для работы программы модули. Пояснения краткие. Если }
+{что-то непонятно пишите, если смогу объясню.                     }
+{без сомнений, можно сделать и лучше.                             }
+{ igor@serbi.vologda.su     Игорь Мигитко                         }
+(*
+               Основная идея
+               -------------
+    Давайте разберемся, что происходит при нажатии комбинации
+Alt+буква. На мой взгляд следующее:
+ 1. Метод TApplication.GetEvent генерирует событие Event c полями
+      Event.What:= evKeyDown;
+      Event.KeyCode:= kbAlt+буква;
+ 2. Это событие направляется в видимые элементы, в частности,
+    в TMenuBar.
+    Объект TMenuBar имеет метод FindItem(Ch : Char), который возвращает
+    указатель на элемент меню, который имеет Ch как горячую
+    клавишу.
+    Когда искомое событие попадает в TMenuBar.HandleEvent
+    вызывается метод FindItem и если возвращаемый указатель не
+    Nil, то элемент меню с таким Сh в качестве горячей клавиши
+    существует.
+ 3. Если такой элемент найден, то генерируются команды перерисовки
+    для видимых элементов и выбранный элемент делается активным.
+
+    В приведенной ниже программе все действия по руссификации
+полняются в методе TApplication.GetEvent, который оглядываясь
+вокруг, смотрит не произошло ли чего-либо похожего на событие,
+и если произошло, то формирует запись события (Event).
+Вначале вызывается родной GetEvent и делает свое черное дело.
+Нажатие kbAlt+буква генерирует скан-код у которого младшая
+часть т.е. Lo(Event.KeyCode):= 0. Значит, проверяем, вызвано
+ли событие нажатием клавиш kbAlt+буква т.е.
+        If (Event.What = evKeyDown)  и  If (Lo(Event.KeyCode) = 0)
+и, если истина, то на мины.
+
+Find_And_Substitute(Event) - процедурка, которая определяет
+есть ли в строке меню пункт соответствующий данной комбинации,
+и если да, то подменяет название пункта на соотвествующий
+английский символ, запоминает старое название, взводит флаг
+MyReDraw, сигнализирующий, что произошла подмена.
+
+Строки в методе  TApplication.GetEvent
+
+    If ((PView(MenuBar) = Current) Or (M

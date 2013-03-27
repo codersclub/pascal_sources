@@ -1,0 +1,189 @@
+<html><head><title>Ряд соображений о Turbo Vision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='О русификации, Строке Меню и Status Line'>
+<meta name="keywords" content="pascal, sources, source code, tv_answ, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tv_answ
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Ряд соображений о Turbo Vision</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>17.05.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">О русификации, Строке Меню и Status Line</TD><TD class=black colspan=2 align='right'><br><A HREF="tv_answ.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">           Ответы на кое-какие вопросы о Turbo Vision
+
+    Во-первых, о русификации Turbo Vision. С этим надо быть
+осторожнее, а то будет как было с Paradox 4.0, русифицированная
+версия которого несовместима с английской по скриптам, так как
+требует, чтобы все позиции меню указывались по-русски. Если уж
+вы делаете что-то такое, то позаботьтесь о том, чтобы горячие
+клавиши работали независимо от режима клавиатуры. Самый простой
+способ - поступить как в программе BML, известной всем
+пользователям Релкома - в начале каждой позиции меню писать
+латинскую букву:'~M~ - Письмо' или что-нибудь в этом роде.
+После этого потребуется лишь немного изменить HanleEvent от
+TMenuBar и TMenuBox, поставив перед вызовом унаследованного
+HandleEvent такую операцию:
+
+  if (Event.What=evKeyDown)and(Event.CharCode&gt;=#80 {Русское А})
+    then
+     Event.CharCode=GetAltChar(Event.ScanCode*256);
+
+(GetAltChar - стандартная функция TurboVision, и если вы
+хотите, чтобы горячей клавишей была русская буква, менять
+придется именно ее, что нетривиально, ибо она должна возвращать
+либо русскую, либо латинскую букву в зависимости непонятно от
+чего).
+    Переписать GetAltCode намного проще, хотя и для этого
+придется лезть в исходный текст модуля Drivers, но этого мало.
+Придется также изменить обработку горячих клавиш в объекте
+TMenuView, т.к. она сделана через GetAltChar, а не GetAltCode.
+    Вообще, если действовать достаточно аккуратно, то это можно
+сделать и без изменения ядра Turbo Vision - унаследовать
+объекты  TMenuBar и TMenuBox и переписать обоим HandleEvent
+начисто, а заодно и метод, создающий подменю. Не помню, как он
+называется, но было дело - переписывал, правда, с совершенно
+другими целями. Переписывать этот метод надо для того, чтобы
+при открытии подменю создавался объект вашего типа, а не
+стандартный TMenuBox.
+
+  Во-вторых, изменение строки меню. Для того, чтобы сделать это
+не нужны ни исходные тексты Turbo Vision, ни даже родная
+документация - вся необходимая информация есть в On-line help.
+Поскольку пример достаточно компактен, привожу его полностью:
+
+{$B-}
+Function FindMenuItem(Mnu:PMenu,Command:Word):PMenuItem;
+{   Поиск позиции меню, содержащей в поле Command
+    заданный код команды. В качестве первого параметра
+    получает значение поля Menu объекта- наследника
+    TMenuView или поля SubMenu записи TMenuItem
+    Возвращает указатель на позицию меню или
+    nil, если такой позиции нет }
+var P,Q:PMenuItem;
+begin
+ P:=Mnu^.Items;
+ While (P&lt;&gt;nil) and (P^.Command&lt;&gt;Command) do
+   if P^.Command=0 {Позиция имеет субменю}
+    then
+     begin
+       Q:=FindMenuItem(P^.Submenu);
+       if Q&lt;&gt;nil then P=Q else P:=P^.Next;
+     end
+    else P:=P^.Next;
+ FindMenuItem:=P;
+end;
+
+Procedure SetMenuParam(Command:Word;AParam:String);
+{ Меняет текст, содержащийся в поле Param позиции меню
+  Заданной кодом команды. Turbo Pascal IDE делает с позициями
+  Complie/Destignation и Complie/Primary File то же самое }
+var P:PMenuItem;
+begin
+  P:=FindMenuItem(MenuBar^.Menu,Command);
+{$IFOPT R+}
+  if P=nil then RunError (213);
+{$ENDIF}
+  if P^.Param&lt;&gt;nil then DisposeStr(P^.PAram);
+  P^.Param:=NewSTR(AParam);
+end;
+
+    Для тех, кто не пользуется файлом ресурсов, можно
+предложить более простой способ - запомнить указатель на нужную
+позицию меню непосредственно в процессе его создания:
+
+Var PrimaryMenuItem,DestignationMenuItem:PMenuItem;
+Procedure TIDEApp.InitMenuBar;
+var R:TRect;
+begin
+ GetExtent(R);
+ R.B.X:=R.A.X+1;
+ PrimaryMenuItem:=NewItem('~P~rimary file','...',kbNoKey,
+                           cmPrimary,hcPrimary,nil);
+ DestignationMenuItem:=NewItem('~D~estignation','Memory',kbNoKey,
+                           cmDestignation,hcDeatignation,
+                           PrimaryMenuItem);
+ MenuBar:=New(PMenuBar,Init(R,NewMenu(
+          ...
+          NewSubMenu('~C~ompile',hcCompile,NewMenu(
+            ...
+            NewItem('~B~uild','',kbNoKey,cmBuild,hcBuild,
+              DestignationMenuItem)...),
+            ...
+end;
+После этого смена текста в позиции меню делается так:
+DisposeStr(PrimaryMenuItem^.Param);
+PrimaryMenuItem^.Param:=NewStr(PrimaryFileName);
+
+В-третьих, специально для любителей видеть в Status Line имя
+текущего файла , координаты и другую полезную информацию.
+ Для этого в TStatusLine существует специальный метод Hint,
+возвражающий строку, которая будет выведена после всех горячих
+клавиш, отделенная от них вертикальной чертой. Если вы
+присматривались, IDE пишет имя файла именно там.
+
+ Наиболее общий способ, который я придумал для этой цели
+выглядит так:
+
+  Заведите у себя в программе TStringList, содержащий требуемые
+строки для всех HelpCtx , встречающихся у вас. Вставьте в
+некоторые из них спецификаторы формата для функции FormatStr,
+напиример %-13S для имени файла. Заведите глобальную переменную
+HintParams:Pointer, в которую любой объект, желающий поместить
+в StatusLine дополнительную информацию, ,будет записывать адрес
+требуемых параметров. (Естественно, строка в TStringList,
+соответствующая HelpCtx этого объекта должна содержать
+соответствующие спецификаторы.
+Функция Hint должна выглядеть так:
+
+    Function TMyStatusLine.Hint(AHelpCtx:Word):String;
+    var S:String;
+    begin
+     S:=HintStrList^.Get(AHelpCtx);
+     Hint:=FormatStr(S,HintParams);
+    end;
+
+Учтите, только, что смена изображения в StatusLine происходит
+при вызове StatusLine^.Update, которая вызывается из Idle.
+Поэтому, если вам нужно изменить StatusLine из операции
+сохранения файла или чегонибудь в этом роде, то необходимо
+вызвать StatusLine^.Update непосредственно, так как иначе
+изменение HelpCtx не скажется на внешнем виде StatusLine до тех
+пор, пока программа не начнет ожидать ввод с клавиатуры, а
+тогда будет поздно.
+ Это может выглядить так:
+
+ Procedure MyEditor.SaveFile;
+ begin
+  HelpCtx:=hcSaving;
+  HintParams:=@FileName;
+  StatusLine^.Update;
+  TFileEditor.SaveFile;
+  HelpCtx:=hcMyEditor;
+  {Второй раз вызывать Update не надо, т.к. после окончания
+  записи программа начнет ждать ввода с клавиатуры и вызовет
+  Idle}
+ end;
+
+Если вы решитесь воспользоваться этим методом, внимательно
+ознакомьтесь с описанием процедуры FormatStr, чтобы быть
+уверенным, что вы не предлагаете ей данные тогда, когда она
+ожидает указатель на них и наоборот.
+
+                       B.Б.Вагнер
+                       тел 135-46-61
+                      E-Mail: vitus@agropc.msk.su</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

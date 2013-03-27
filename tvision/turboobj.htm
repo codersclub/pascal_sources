@@ -1,0 +1,63 @@
+<html><head><title>Модуль OBJECTS от TurboSoft</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вариант замены модуля OBJECTS'>
+<meta name="keywords" content="pascal, sources, source code, turboobj, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;turboobj
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Модуль OBJECTS от TurboSoft</TD>
+<TD nowrap class=black>&nbsp;Николай Вальтер</TD>
+<TD class=black align='right'>19.05.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вариант замены модуля OBJECTS</TD><TD class=black colspan=2 align='right'><br><A HREF="turboobj.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Nick Walter &lt;nick@ormix.vernet.lv&gt;
+Subject: Bug in Dispose()
+Organization: ORMIX Ltd
+
+   grichenko@venus (ALEX GRICHENKO) недавно боролся с глюками в Dispose().
+Так вот,
+
+     Если у Вас TP7 (BP7), то оригинальный OBJECTS.PAS
+                  стоит заменить на
+              OBJECTS.PAS from TurboSoft
+                (будет меньше глюков)
+
+
+
+From: grichenko@venus (ALEX GRICHENKO)
+Date: 20 May 94 12:01:10 +3000
+Subject: Bug in Dispose()
+Organization: Institute of Theoretical and Experimental Biophysics
+
+ Nick Walter &lt;nick@ormix.vernet.lv&gt; writes:
+
+&gt;               оригинальный OBJECTS.PAS
+&gt;                  стоит заменить на
+&gt;               OBJECTS.PAS from TurboSoft
+&gt;                 (будет меньше глюков)
+
+
+Это, конечно, хорошо. Но чтобы ВСЕ работало правильно, нужны исходники TV
+полностью, чтобы везде заменить Dispose на DisposeObj. Прблема примерно
+такая: я создаю и втыкаю в Application нужное мне окно. Закрывается оно само,
+так что я не могу следить за указателем на него. Application вызывает обычный
+Dispose, так что указатель остается не nil. Единственный способ избавиться от
+этого глюка - следить за командой Close (а, возможно, и за несколькими
+другими). Короче говоря, гунявое это место в паскале.
+Но все равно спасибо за помощь.
+
+        Алексей.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

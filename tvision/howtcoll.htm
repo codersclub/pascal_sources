@@ -1,0 +1,255 @@
+<html><head><title>Как совладать с tCollection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Особенности использования конструктора LOAD в tCollection'>
+<meta name="keywords" content="pascal, sources, source code, howtcoll, tvision, Турбо Вижн ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Турбо Вижн</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;howtcoll
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Как совладать с tCollection</TD>
+<TD nowrap class=black>&nbsp;Константин Поддубный</TD>
+<TD class=black align='right'>13.12.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Особенности использования конструктора LOAD в tCollection</TD><TD class=black colspan=2 align='right'><br><A HREF="howtcoll.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  Constantin Poddubny &lt;const@const.krasnoyarsk.su&gt;
+Subj: Асы потоков! Не могу совладать с TCollection!
+Organization: The Sosnovoborsk Municipal Venture for Housing and
+
+                        Всем привет!
+
+   Захотел я заняться потоками, и столкнулся с проблемой, которую никак не
+могу решить. Создал я некий объект TTestEntry, решил сунуть его в коллекцию
+и записать в файл. Все получилось превосходно - файл создан, данные там лежат
+какие нужно. Затем мне понадобилось прочитать сохранненые данные - и ба!!! -
+машина напрочь виснет - и помогает лишь волшебная кнопка на башне.
+Попробовал я покопаться с отладчиком - куда там! Вроде зависание происходит
+при выходе из S.ReadStr - тогда в es:di записывается какой-то бред, причем
+es = 0, di = 0 !!! Ну понятно, портятся вектора прерываний. А самое интересное,
+что иногда зависание происходит раньше - т.е. до входа в S.ReadStr.
+    Короче, кто может мне чем-нибудь помочь - помогите, please!
+Чтобы получить файл данных уберите комментарные скобки в теле программы и
+поставьте их на строки:
+
+  TestStream.Init( 'docs.dat', stOpen, 1024 );
+  TestList := PCollection( TestStream.Get );
+
+после компиляции и выполнения поставьте комментарии как росли. Попробуете
+теперь прочитать данные!
+
+                                     С надеждой, Константин Поддубный.
+
+
+program Test;
+
+uses Objects;
+
+type
+  PTestEntry = ^TTestEntry;
+  TTestEntry = object( TObject )
+    Name: PString;                      { указатель на строку }
+    Number: word;                       { уникальный номер строки }
+    constructor Init( AName: string; ANumber: word );
+    destructor Done; virtual;
+    procedure Load( var S: TStream );
+    procedure Store( var S: TStream );
+  end;
+
+
+constructor TTestEntry.Init;
+begin
+  Name := NewStr( AName );
+  Number := ANumber
+end;
+
+destructor TTestEntry.Done;
+begin
+  DisposeStr( Name )
+end;
+
+procedure TTestEntry.Load;
+begin
+  Name := S.ReadStr;
+  S.Read( Number, SizeOf( Number ))
+end;
+
+procedure TTestEntry.Store;
+begin
+  S.WriteStr( Name );
+  S.Write( Number, SizeOf( Number ))
+end;
+
+const
+  RTestEntry: TStreamRec = (
+    ObjType: 2000;
+    VMTLink: Ofs( TypeOf( TTestEntry )^ );
+    Load: @TTestEntry.Load;
+    Store: @TTestEntry.Store );
+
+var
+  TestList: PCollection;
+  TestStream: TBufStream;
+
+begin
+  RegisterType( RCollection );
+  RegisterType( RTestEntry );
+{  New( TestList, Init( 10, 10 ));
+  TestList^.Insert( New( PTestEntry, Init( 'First Test Entry', $AAAA )));
+  TestList^.Insert( New( PTestEntry, Init( 'Second Test Entry', $BBBB )));
+  TestList^.Insert( New( PTestEntry, Init( 'Third Test Entry', $CCCC )));
+  TestStream.Init( 'docs.dat', stCreate, 1024 );
+  TestStream.Put( TestList );
+}
+  TestStream.Init( 'docs.dat', stOpen, 1024 );
+  TestList := PCollection( TestStream.Get );
+  TestStream.Done;
+  Dispose( TestList, Done )
+end.
+
+
+
+
+From:  "Igor M. Grossman" &lt;gosha@utg.saratov.su&gt;
+Subj: Асы потоков! Не могу совладать с TCollection!
+Date: Mon, 19 Dec 94 14:54:54 +0300
+Organization: UgTransGaz
+
+&gt;      Захотел я заняться потоками, и столкнулся с проблемой
+&gt;
+&gt;   program Test;
+&gt;     ...
+&gt;     Dispose( TestList, Done )
+&gt;   end.
+
+   Потоки тут нипричем. Смотри предпоследнюю строчку программы: ты
+пытаешься диспознуть объект, который не инициализировал. Замени
+строку
+  TestList := PCollection(TestStream.Get);
+на
+  TestStream := New(PCollection, Load(TestStream));
+и все будет хорошо.
+
+А чтобы подобных проблем больше не возникало, старайся придерживаться
+соглашений, рекомендуемых фирмой. Например слово Load "зарезервировано"
+под конструктор, не надо его "опускать" до примитивной "procedure".
+И в нутри конструкторов и деструкторов ЖЕЛАТЕЛЬНО упомянать inherited.
+В данном случае это не критично, а вот при бета-тестировании BP7.0
+выяснилось, что в модуле VALIDATE в одном из конструкторов (кстати,
+в LOAD) про inherited забыли. Поэтому валидаторы из потока не читались,
+хотя и писались туда. И уж не надо сокращать параметры в разделе
+реализации - самому ж отлаживать! Хотя синтаксис и допускает...
+
+                            Успехов! Игорь Гроссман, Саратов
+
+
+From: Igor V. Kuzewanow &lt;igor@aosvet.vladimir.su&gt;
+Subj: Асы потоков! Не могу совладать с TCollection!
+Date: Wed, 21 Dec 94 08:03:36 +0300
+Organization: aosvet
+
+
+&gt;   машина напрочь виснет - и помогает лишь волшебная кнопка на башне.
+ [...]
+&gt;   procedure TTestEntry.Load;
+&gt;   begin
+&gt;     Name := S.ReadStr;
+&gt;     S.Read( Number, SizeOf( Number ))
+&gt;   end;
+
+ А память для обьекта дядя будет распределять ?
+ Еще бы не висло!  Constructor TTestEntry.Load  !!!!!
+                   К тому же у него параметр есть !!!
+
+---
+
+                         Кузеванов И.В. (igor@aosvet.vladimir.su)
+
+
+From: Evgeniy Evg. Babkin &lt;bee@kpi.kursk.su&gt;
+Subj: Асы потоков! Не могу совладать с TCollection!
+Date: Thu, 22 Dec 94 10:57:15 +0300
+Organization: Kursk Polytechnical Institute
+
+                Привет всем!
+
+    Тут велась полемика:
+
+&gt;  &gt;  Захотел я заняться потоками, и столкнулся с проблемой, которую никак не
+[Skip]
+&gt;   &gt;   Попробовал я покопаться с отладчиком - куда там!
+
+  Прошу обратить внимание на то, что слово PROCEDURE надо заменить
+                                  на слово CONSTRUCTOR!!!
+  И это главная и единственная ошибка, которая может привести к зависанию
+
+&gt;      Потоки тут нипричем. Смотри предпоследнюю строчку программы: ты
+&gt;   пытаешься диспознуть объект, который не инициализировал. Замени
+&gt;   строку
+&gt;     TestList := PCollection(TestStream.Get);
+&gt;   на
+&gt;     TestList := New(PCollection, Load(TestStream));
+&gt;   и все будет хорошо.
+&gt;
+&gt;                               Успехов! Игорь Гроссман, Саратов
+
+        Уважаемый Игорь, абсолютно не обязательно делять так, как Вы
+советуете: поток, читая объект в GET сам все это делает.
+        Тем более Вы не внимательно читали исходный SOS: Константин
+жаловался на зависание при чтении, а это как раз вызвано потерей ссылки
+на VMT объекта из-за применения слова PROCEDURE вместо CONSTRUCTOR.
+В последнем случае компилятор всовывает в стек кроме всего прочего
+еще и @Self параметр. Представляете ЧТО творится в программе, которая
+грузит в сегментные регистры из стека то, чего там нет!?
+
+                                        Успехов по борьбе с паскалем.
+
+PS. В Москве есть такой автор, по фамилии Федоров. Советую обратить
+    внимание на его публикации, даже на мелкие брошюрки.
+---
+ BEE(R)
+
+
+
+From:  Constantin Poddubny &lt;const@const.krasnoyarsk.su&gt;
+Subj: Асы потоков.....
+Date: Tue, 20 Dec 1994 09:08:15 GMT
+Organization: The Sosnovoborsk Municipal Venture for Housing and
+
+                        Всем привет!
+
+   Спасибо, всем тем, кто заметил мою жуткую невнимательность  -  Load
+действительно конструктор, а не процедура. Но в свое  оправдание  могу
+сказать, что в той книжке по TV, которая у меня есть, в главе "Потоки"
+внимание заостряется  лишь  только  на  вывод,  т.е.  Store.  Load  же
+упоминается  вскользь, и  только  лишь  в  одном  месте   есть   слово
+"constructor Load". Так что неудивительно, что я это и проглядел. А  в
+ответ на послание Игоря Гроссмана из Саратова могу сказать следующее:
+
+&gt;          Потоки тут нипричем. Смотри предпоследнюю строчку программы: ты
+&gt;       пытаешься диспознуть объект, который не инициализировал. Замени
+&gt;       строку
+&gt;         TestList := PCollection(TestStream.Get);
+&gt;       на
+&gt;         TestList := New(PCollection, Load(TestStream));
+&gt;       и все будет хорошо.
+
+Обе строчки абсолютно идентичны - метод Get сначала читает  из  потока
+поля TCollection, т.е. Сount, Delta, Limit,  а  затем,  согласно  этих
+данных, испрашивает  память  у  монитора  кучи  под  коллекцию,  затем
+пытается прочитать  каждый  элемент  коллекции.  Так  что  моя  ошибка
+заключалась исключительно в определении метода Load.  А  за  советы  -
+спасибо.
+
+                              С уважением, Константин Поддубный.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
