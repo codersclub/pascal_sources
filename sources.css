@@ -1,0 +1,40 @@
+<STYLE type=text/css> <!--
+BODY 		{BACKGROUND-COLOR:white; MARGIN-LEFT:0; MARGIN-TOP:5; max-heigth:0; max-width:0}
+<TD>		{FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.title		{COLOR:black; FONT-FAMILY: Arial,Verdana; Font-size:12pt; TEXT-DECORATION: none}
+.title:visited	{COLOR:black; TEXT-DECORATION: none}
+.title:hover	{COLOR:black; TEXT-DECORATION: underline}
+.header		{COLOR:white; BACKGROUND-COLOR:#6E94B7; TEXT-ALIGN:center; VERTICAL-ALIGN:bottom; FONT-WEIGHT: Bold; FONT-FAMILY: "MS Sans Serif", sans-serif; Font-size:x-small}
+.border		{BACKGROUND-COLOR:#6394BD;}
+.subheader	{COLOR:black; BACKGROUND-COLOR:#DEE7EF; VERTICAL-ALIGN:middle; FONT-WEIGHT: Bold; FONT-FAMILY: "MS Sans Serif", sans-serif; Font-size:x-small}
+.subheader:hover{COLOR:blue;}
+.lightsilver	{COLOR:black; BACKGROUND-COLOR:#E8E8E8; VERTICAL-ALIGN:middle; FONT-WEIGHT: Bold; FONT-FAMILY: "MS Sans Serif", sans-serif; Font-size:x-small}
+.lightsilver:hover	{COLOR:blue; BACKGROUND-COLOR:#E8E8E8; VERTICAL-ALIGN:middle; FONT-WEIGHT: Bold; FONT-FAMILY: "MS Sans Serif", sans-serif; Font-size:x-small}
+.silver		{COLOR:black; BACKGROUND-COLOR:#DEDFDF; VERTICAL-ALIGN:middle; FONT-WEIGHT: Bold; FONT-FAMILY: "MS Sans Serif", sans-serif; Font-size:x-small}
+.silver:hover	{COLOR:blue;}
+.page		{COLOR: black; VERTICAL-ALIGN:middle; FONT-FAMILY: "MS Sans Serif",sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.black		{COLOR: black; FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.blackb 	{COLOR: black; FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-WEIGHT: Bold; FONT-SIZE: x-small}
+.blackb:hover 	{COLOR: blue; TEXT-DECORATION: underline}
+.blue		{COLOR: #003399; FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.blue:hover	{COLOR: #2776fa; TEXT-DECORATION: underline}
+.blueB		{COLOR: #003399; FONT-WEIGHT: Bold; FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.blueB:hover	{COLOR: #2776fa; TEXT-DECORATION: underline}
+.redB		{COLOR: red; FONT-FAMILY: Arial,Verdana,Tahoma,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+.redB:hover	{COLOR: #2776fa; TEXT-DECORATION: underline}
+<CODE>		{COLOR:black; Font-Size:x-small}
+<PRE>		{COLOR:black; Font-Size:x-small}
+INPUT		{COLOR:black; FONT-FAMILY: Arial,Verdana; Font-size:x-small; TEXT-DECORATION: none}
+TEXTAREA	{COLOR:black; FONT-FAMILY: Arial,Verdana; Font-size:x-small; TEXT-DECORATION: none}
+<UL>		{margin-left:24;}
+.rightbanner {
+	float: right;
+	line-height: 1.5em;
+	width: 150px;
+	border: #CCCCCC 1px dashed;;
+	margin-left:4px;
+	padding: 4px;
+}
+
+-->
+</STYLE>
