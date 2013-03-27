@@ -1,0 +1,90 @@
+<html><head><title>OutFilt 1.0 - Duplicate Screen Output to a File</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='This unit allows you to "invisibly" output to the screen, with an option to enable screen pausing or to "tee" the output to a file. To use, change all references to Write and WriteLn to fWrite and fWriteLn, repectively. Note that fWrite and fWriteLn only accept strings, so numbers will have to be changed to strings beforehand.'>
+<meta name="keywords" content="pascal, sources, source code, outfilt1, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;outfilt1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;OutFilt 1.0 - Duplicate Screen Output to a File</TD>
+<TD nowrap class=black>&nbsp;Robert Rothenburg</TD>
+<TD class=black align='right'>07.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">This unit allows you to "invisibly" output to the screen,
+with an option to enable screen pausing or to "tee" the output to a file.
+To use, change all references to Write and WriteLn to fWrite and fWriteLn,
+repectively. Note that fWrite and fWriteLn only accept strings,
+so numbers will have to be changed to strings beforehand.</TD><TD class=black colspan=2 align='right'><br><A HREF="outfilt1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">OutFilt v1.0 by Robert Rothenburg Walking-Owl, 1994 Public Domain
+==========================================================================
+
+This unit allows you to "invisibly" output to the screen, with an option
+to enable screen pausing or to "tee" the output to a file.
+
+To use, change all references to Write and WriteLn to fWrite and fWriteLn,
+repectively. Note that fWrite and fWriteLn only accept strings, so numbers
+will have to be changed to strings beforehand.
+
+If the PauseBetweenScreens variable is set to "True", an automatic pause
+will occur every 24 lines.
+
+OutFilt seems to work correctly for screen pauses for line-wraps as well as
+for newlines, and should correctly determine the number of columns for the
+given graphics mode: however this version always assumes a page to have 25
+lines.
+
+-----
+
+If you want to duplicate the output to a file, do the following:
+
+  Assign(DuplicateFile, FileName );
+  {$I-}
+  ReSet(DuplicateFile,1);
+  if IoResult&lt;&gt;0                    { if file doesn't exit, create it }
+     then ReWrite(DuplicateFile,1);
+  Seek(DuplicateFile,FileSize(DuplicateFile));
+  {$I+}
+  CopyOutputToFile := True;
+
+And remember at the end of your program to close DuplicateFile.
+
+-----
+
+If you want to use an imbedded help-screen, use the following:
+
+  program ImbedDemo(input,output);
+  uses OutFilt;
+
+  function ImbeddedText: Pointer;  assembler;
+  asm
+     mov  dx, cs
+     mov  ax, offset @Text
+     jmp  @Exit
+   @Text:
+     db 'Imbedded Text Message ... as much text as you want!',13,10
+     db '(well, about 64k of text,',13,10
+     db ' but that is A LOT for a help screen!)',13,10
+
+     db 0 { end of text marker }
+   @Exit:
+ end;
+
+ procedure WriteImbeddedText;
+ var p: ^Char;
+ begin
+   PauseBetweenScreens := True;
+   p := ImbeddedText;
+   repeat
+     fWrite(p^);
+     I

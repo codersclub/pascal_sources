@@ -1,0 +1,60 @@
+<html><head><title>ASS :) - Automatic Screen Saver</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Pascal units (sources) for saving screen image in text or graphic modes. May be used in order to save the screen when the program starts, and restore when it finishes.  Required: Turbo Professional'>
+<meta name="keywords" content="pascal, sources, source code, savescrn, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;savescrn
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ASS :) - Automatic Screen Saver</TD>
+<TD nowrap class=black>&nbsp;Сергей Варюха</TD>
+<TD class=black align='right'>27.06.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Pascal units (sources) for saving screen image in text
+or graphic modes.
+May be used in order to save the screen when the program
+starts, and restore when it finishes. 
+Required: Turbo Professional</TD><TD class=black colspan=2 align='right'><br><A HREF="savescrn.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>23k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px"> Этот модуль предназначен для сохранения вида дисплея с возможностью
+последующего его восстановления.Если вы намерены только использовать его
+то переходите сразу к строке #60;
+ Если Вы хотите добавить новый объект, расширяющий возможности модуля,
+то Вы должны придерживаться следующих правил(предполагается, что Вы знакомы
+с принципами объектного программирования) :
+ 1) Новый объект должен содержать хотя бы 4 правила -
+          Конструктор Init;
+          Деструктор  Done;Virtual;
+          Метод Save;virtual , сохраняющий вид дисплея
+          Метод Restore;Virtual , восстанавливающий вид дисплея
+ 2) Конструктор должен выполнять следующее -
+     вызвать конструктор родителя - Inherited Init;
+     после этого переменные содержат : OrigMode - номер текущего видеорежима
+                                       Page - номер видимой страницы
+                                       CursorPosition(.X;.Y) - Координаты курсора
+                                       CursorSize(.X;.Y)  -  Размер курсора
+                                       Columns - число символов в строке(колонок)
+     выполнить необходимую инициализацию собственного объекта, в частности
+      проверить значение OrigMode и соответственно установить внутреннюю
+      переменную - флаг, сигнализирующий об использовании этого объекта(напр.If ... then MyFlag:=True;)
+ 3) Метод Save должен выполнять следующее -
+     проверить значение внутреннего флага - Saved (If not Saved then begin ... end)
+     проверить значение собственного флага (If Myflag and(not Saved)then begin ... end)
+     если он установлен то считать содержимое экрана в некую область памяти,
+     которую затем сохранить в буфере;
+       для этого следует использовать внутренние методы :
+                       Procedure   GetBuf (var Han:Bufhandle;Size:word);virtual;
+                       Procedure   FreeBuf(var Han:Bufhandle);virtual;
+                       Function    MoveToBuf(var Source;var Han:Bufhandle;Count:word):boolean;virtual;
+                       Function    ReadFromBuf(var Dest;var Han:Bufhandle;Count:word):boolean;virtual;
+       GetBuf выделяет буфер размера Size и возвращает

@@ -1,0 +1,71 @@
+<html><head><title>Почему вредно использовать модуль CRT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Чем плох модуль CRT, и как с этим бороться'>
+<meta name="keywords" content="pascal, sources, source code, crt_bad, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;crt_bad
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Почему вредно использовать модуль CRT</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>03.03.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Чем плох модуль CRT, и как с этим бороться</TD><TD class=black colspan=2 align='right'><br><A HREF="crt_bad.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Vitus B. Wagner &lt;vitus@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+
+    Известно, что модуль CRT вреден. Он  громоздок, т.к. всегда
+линкуется  к   программе   целиком,   не  делясь  на  отдельные
+процедуры, как модуль DOS, например. Он  лишает вас возможности
+переназначить ввод-вывод  средствами DOS. Он создает проблемы с
+графикой, т. к. неопытные любители писать графические программы
+не  знают, что  для  работы с процедурами  Readln  и Writeln  в
+графическом режиме надо сделать DirectVideo:=False.
+  Можно, конечно сделать  ASSIGN(Output,'');Rewrite(Output),  а
+модулем CRT  пользоваться  только  для  управления курсором. Но
+зачем в таком случае цеплять к программе весь  модуль CRT? Ведь
+большую его часть занимает  как  раз драйвер текстового файла с
+прямым доступом к экранной памяти.
+  Конечно, есть в нем и полезные процедуры ReadKey,ClrScr,Sound
+например.  Но лучше бы  было  не  цеплять  вместе с  ними  6  К
+паразитного кода.
+  Предлагаемый модуль MiscTool как раз и позволяет сделать это.
+Он содержит аналоги тех процедур модуля CRT, которые чаще всего
+используются теми,  кто  работает в графике, или ограничивается
+выводом на  стандарнтный  вывод DOS.Большая часть этих процедур
+реализована вообще как Inline, ибо их размер сопоставим с кодом
+команды CALL, а остальные написаны на Pascal, и, следовательно,
+предоставляют Smart Linker'у полный простор для деятельности.
+  Кроме  того,  позволю себе  предложить  вам  ряд  советов  по
+созданию красивого вывода на STDOUT.
+  Шире используйте управляющие коды, поддерживаемые DOS.
+  Это
+ #10 - перевод строки с оставлением курсора в текущей позиции
+ #13 - возврат на ночало текущей строки строки
+(    стандартный    Writeln    записывает   в   конец    строки
+последовательность #13#10)
+ #9  -  табуляция  (увы,  стандартным  CRT  не  поддерживается,
+правда, поддерживается моим VCRT,  который  всячески рекомендую
+тем, кто не может отказаться от CRT, но не хочет  переходить на
+Turbo или Object Professional или работает в графике)
+ #8 - BackSpace - возврат на предыдущую позицию в строке.
+
+Например, такая последовательность:
+Write('Recieving...');
+.....
+Write('Recieved    '#8#8#8#8);
+сделает вам весьма симпатичную картинку
+- сначала   появляется   сообщение  Recieving...,   которое  по
+окончании  операции  заменяется  на   Recieved,   приче

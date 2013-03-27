@@ -1,0 +1,98 @@
+<html><head><title>Гашение палитры для EGA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Плавное гашение для EGA методом подбора палитры'>
+<meta name="keywords" content="pascal, sources, source code, opa, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;opa
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Гашение палитры для EGA</TD>
+<TD nowrap class=black>&nbsp;Павел Орлов</TD>
+<TD class=black align='right'>03.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Плавное гашение для EGA методом подбора палитры</TD><TD class=black colspan=2 align='right'><br><A HREF="opa.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: pavel &lt;pavel@metrol.samen.dvlg.samara.su&gt;
+Organization: Samaraenergo
+
+    Alex Osadchikh wrote:
+
+&gt;   &gt;  Возник вопpос - надо для EGA медленно погасить изобpажение и потом также
+&gt;   &gt; медленно его восстановить (или подменить дpугим) - нечто подобное встpечается в
+&gt;   &gt; игpах. Эту вещь пpидется цеплять к Боpландовскому Паскалю. Игpать пpидется,
+&gt;   &gt; видимо, палитpой, но до меня туго доходит, как это pеализовать.
+&gt;
+&gt;   На EGA, к сожалению, такой фокус не пpойдет. Нужно не менее, чем VGA.
+
+
+   Вообще-то можно сделать подобие такого эфекта, если использовать
+   нижеприведенную процедурку и подобрать соответствующую палитру...
+   (в EGA одновременно на экране м.б. 16 цветов из 64 возможных)
+
+
+ Procedure SwapColor(EGAPalRegister:Byte;NewColor:byte);assembler;
+ asm
+   mov ax,1000h
+   mov bh,NewColor
+   mov bl,EGAPalRegister
+   int 10h
+ end;
+
+
+ А выглядит это примерно так:
+
+
+{&gt; Cut here. FileName= OPA.PAS }
+uses Crt;
+Var  B : Char;
+
+Procedure SwapColor(EGAPalRegister:Byte;NewColor:byte);assembler;
+ asm
+   mov ax,1000h
+   mov bh,NewColor
+   mov bl,EGAPalRegister
+   int 10h
+ end;
+
+begin
+  ClrScr;
+  GoToXY(1,10);
+  WriteLn('               ***************************************************');
+  WriteLn('               * Orlov Pavel OPA-Soft SamaraEnergo Samara Russia *');
+  WriteLn('               *                                                 *');
+  WriteLn('               *   E-mail : pavel@metrol.samen.dvlg.samara.su    *');
+  WriteLn('               ***************************************************');
+  GoToXY(1,17);
+  WriteLn('                    PRESS YOUR FAVOURITE KEY... ESC for Exit');
+  GoToXY(1,25);
+
+  While b &lt;&gt; #27 do
+   begin
+     SwapColor(0,0);  Delay(30);
+     SwapColor(0,8);  Delay(30);
+     SwapColor(0,1);  Delay(30);
+     SwapColor(0,9);  Delay(30);
+     SwapColor(0,11); Delay(30);
+     SwapColor(0,15); Delay(30);
+     SwapColor(0,63);
+     b:= ReadKey;
+     SwapColor(0,15); Delay(30);
+     SwapColor(0,11); Delay(30);
+     SwapColor(0,9);  Delay(30);
+     SwapColor(0,1);  Delay(30);
+     SwapColor(0,8);  Delay(30);
+     SwapColor(0,0);
+   end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,76 @@
+<html><head><title>VCRT - Модифицированный модуль CRT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль представляет собой модифицированный стандартный модуль CRT для Turbo Pascal 6.0,5.5  в который не добавлено практически ни одной новой функции, но работа некоторых весьма стандартных функций изменена так, как это казалось автору более логичным. Кроме того ряд внутренних функций выведен в интерфейс.'>
+<meta name="keywords" content="pascal, sources, source code, vcrt, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;vcrt
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VCRT - Модифицированный модуль CRT</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>12.01.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль представляет собой модифицированный стандартный модуль CRT
+для Turbo Pascal 6.0,5.5  в который не добавлено практически ни одной
+новой функции, но работа некоторых весьма стандартных функций
+изменена так, как это казалось автору более логичным.
+Кроме того ряд внутренних функций выведен в интерфейс.</TD><TD class=black colspan=2 align='right'><br><A HREF="vcrt.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          Модуль VCRT
+
+  Модуль предсавляет собой модифицированный стандартный модуль CRT
+для Turbo Pascal 6.0,5.5  в который не добавлено практически ни одной
+новой функции, но работа некоторых весьма стандартных функций
+изменена так, как это казалось автору более логичным. Кроме
+того ряд функций, бывших внутренними выведен в интерфейс.
+
+   Изменение первое - драйвер текстовых файлов :
+   1. В графических режимах CGA 320x200, EGA и VGA атрибуты
+   символов обрабатываются так же как и в текстовых.
+   2. Процедуры READ и READLN допускают редактирование с
+   помощью стрелок, клавиш Home, End, BackSpace и Delete.
+   3. Процедуры READ и Readln в графических режимах эмулируют
+   курсор
+
+   Изменуние второе:
+   Процедуры
+    InsLine, DelLine, ClrEol, ClrScr обрабатывают атрибуты во всех
+    графических режимах
+
+   Изменение третье
+    Добавлены процедуры
+     ReInitCrt - инициализация внутренних переменных
+       необходимо вызывать после изменения режима экрана не
+       средствами VCRT для корректной работы.
+     ReadKeyWord - возвращает двухбайтовый код нажатой клавиши
+      Старший байт - скэнкод.
+     Beep - выдает стандартный звуковой сигнал. Эквивалент
+       Write(#7)
+
+    Изменение третье:
+     Переменная DirectVideo инициализируется в False, если текущий
+     режим графический.
+    Ограничения:
+    1. Вывод на экран всегда через Bios, независимо от значения
+    DirectVideo
+    2. Процедура Readln не позволяет вводить строки,
+    превышающие расстояние до правой границы экрана.
+
+                       Модуль VCRTEXT
+
+    Содержит расширения CRT, весьма полезные и отчасти повторяющие
+    процедуры tpCrt и opCrt (Copyright by TurboPower Software), но,
+    как и VCRT, корректно работающие в графике.
+
+     Procedure FrameWindow(X1,Y1,X2,Y2) - рисует рамку. Символы
+     задают

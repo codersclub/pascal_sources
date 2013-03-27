@@ -1,0 +1,65 @@
+<html><head><title>Набор Модулей для Графического Интерфейса в DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Набор модулей для Turbo Pascal 7.0 или 6.0. Они позволяют делать Win-подобный интерфейс с:     - верхними и падающими меню,     - выпуклыми кнопочками,     - окном ввода,     - окнами сообщений,     - диалогом открытия файла,     - поддержкой мыши,     - встроенной двуязычностью.  Все в графике, и при всем этом - никакого Turbo Vision, никакого текстового режима, никаких ООП. Обращаться с процедурами не сложнее, чем с таковыми из модуля CRT или Graph.'>
+<meta name="keywords" content="pascal, sources, source code, modules, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;modules
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Набор Модулей для Графического Интерфейса в DOS</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:yurarevich@mtu-net.ru">Юрий Ревич</a></TD>
+<TD class=black align='right'>09.01.1999</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Набор модулей для Turbo Pascal 7.0 или 6.0.
+Они позволяют делать Win-подобный интерфейс с: <br>
+   - верхними и падающими меню, <br>
+   - выпуклыми кнопочками, <br>
+   - окном ввода, <br>
+   - окнами сообщений, <br>
+   - диалогом открытия файла, <br>
+   - поддержкой мыши, <br>
+   - встроенной двуязычностью. <br>
+Все в графике, и при всем этом - никакого Turbo Vision, никакого
+текстового режима, никаких ООП. Обращаться с процедурами не сложнее,
+чем с таковыми из модуля CRT или Graph.</TD><TD class=black colspan=2 align='right'><br><A HREF="modules.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>68k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   Занимаясь поиском различных утилиток, я часто натыкаюсь на программы,
+написанные на TurboPascal. Поразительно, но интерфейс их настолько примитивен,
+что даже стыд берет за старую добрую ДОС - как будто нет требований GUI,
+и сами авторы ни разу не пользовались ничем, кроме командной строки.
+
+   Я предлагаю Вашему вниманию набор модулей для Turbo Pascal 7.0 или 6.0.
+Они позволяют делать Win-подобный интерфейс с:
+   - верхними и падающими меню,
+   - выпуклыми кнопочками,
+   - окном ввода,
+   - окнами сообщений,
+   - диалогом открытия файла,
+   - поддержкой мыши,
+   - встроенной двуязычностью.
+
+   Все в графике, и при всем этом - никакого Turbo Vision, никакого
+текстового режима, никаких ООП. Обращаться с процедурами не сложнее,
+чем с таковыми из модуля CRT или Graph.
+
+   Кроме функций интерфейса, в предлагаемых модулях имеются арифметические
+функции модуля Ariphm (в частности, функции отображения HEX-чисел).
+
+   Процедуры доступа к расширенной памяти (EMSProc) с помощью функций
+драйвера HIMEM.SYS (этот способ выгодно отличается от штатного способа
+доступа с помощью DPMI-сервера тем, что не требует никаких отдельных файлов
+и дополнительных установок драйверов, а от способа с использованием драйвера
+ЕММ - тем, что позволяет выделять память блоками не по 16К, а по 1К),
+кроме собственно доступа, автоматически организуют своп-файл, если размер
+загружаемого массива превышает свободную расширенную память.
+Совместим с QEMM, Win 3.1 и Win 95/98/NT.

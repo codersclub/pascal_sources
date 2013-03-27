@@ -1,0 +1,70 @@
+<html><head><title>WINDO - Simple Windowing Routines for Turbo PASCAL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='WINDO - Simple windowing routines for Turbo PASCAL. Execute the WINTUTOR program for an explanation of use.'>
+<meta name="keywords" content="pascal, sources, source code, wintutor, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;wintutor
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;WINDO - Simple Windowing Routines for Turbo PASCAL</TD>
+<TD nowrap class=black>&nbsp;Michael Burton</TD>
+<TD class=black align='right'>25.01.1986</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">WINDO - Simple windowing routines for Turbo PASCAL.
+Execute the WINTUTOR program for an explanation of use.</TD><TD class=black colspan=2 align='right'><br><A HREF="wintutor.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Note: For use with Borlan Pascal 7.0 change the next:
+
+wintutor.pas:
+
+   {$V-}
+   program WinTutor(input,output);
+   uses crt,dos;
+
+windo.inc:
+   Procedure Set_Cursor (n: byte);
+{   Type
+     regrec = Record
+                ax,bx,cx,dx,bp,si,di,ds,es,flags: integer
+              End;
+   Var regpak: regrec;
+}
+   Var regpak: registers;
+
+{ ===================================================================== }
+{  WINDO - Windowing routines for Turbo PASCAL                          }
+{                                                                       }
+{     Author:   Michael Burton                                          }
+{               15540 Boot Hill Rd.                                     }
+{               Hayden Lake, ID 83835                                   }
+{               (208) 772-9347 (after 1800 PST)                         }
+{     Revision: 2.0                                                     }
+{     Date:     25 January 1986                                         }
+{                                                                       }
+{  Execute the WINTUTOR program for an explanation of use.              }
+{                                                                       }
+{  This is a 'Shareware' program.  If you find it to be of significant  }
+{  use to you, a $10 donation to the above address would be greatly     }
+{  appreciated.  This would also place you on our mailing list to keep  }
+{  you informed of upgrades to Windo and of new programs.               }
+{ ===================================================================== }
+{ GETDISP - Get an array of characters from the CRT display and store   }
+{           them in tostrng.                                            }
+{           The row and column inputs are relative to zero and are      }
+{           also relative to the entire screen, not any open window.    }
+{                                                                       }
+{ ===================================================================== }
+{ DISPALL - Display an array of characters and attributes on the CRT.   }
+{           The array is usually one that has been created using the    }
+{           GetDisp procedure.                                          }
+{          

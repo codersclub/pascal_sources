@@ -1,0 +1,90 @@
+<html><head><title>Turbo Pascal Support Units. Выпуск # 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Фрагменты серии "TURBO PASCAL SUPPORT". Part #2. Процедурное программирование.  Модуль обработки функциональной клавиатуры,  Модуль организации меню,  Модуль многооконного интерфейса,  Демонстрационная программа.'>
+<meta name="keywords" content="pascal, sources, source code, tpsupp2, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpsupp2
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo Pascal Support Units. Выпуск # 2</TD>
+<TD nowrap class=black>&nbsp;Ярослав Мигач</TD>
+<TD class=black align='right'>25.08.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Фрагменты серии "TURBO PASCAL SUPPORT". Part #2.
+Процедурное программирование. <br>
+Модуль обработки функциональной клавиатуры, <br>
+Модуль организации меню, <br>
+Модуль многооконного интерфейса, <br>
+Демонстрационная программа.</TD><TD class=black colspan=2 align='right'><br><A HREF="tpsupp2.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>66k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        Выпуск # 2
+        Предоставляю Вашему вниманию несколько интересных модулей
+  для разработки программ на языке Turbo Pascal V 6.0 из библиотеки
+  "TURBO PASCAL SUPPORT" (c) 1990 - 1992  Мигач Ярослав.
+
+        Этот выпуск в основном посвящен программистам еще не
+  перешедшим к обьектно-ориентированному программированию на
+                      Turbo-Pascal.
+
+        Условия распространения в конце этого файла.
+
+  Список файлов на диске :
+
+  REAME.1ST  -  Этот файл
+
+  DEF.PAS    -  Модуль начальных определений транслированный для
+                Turbo Pascal V 6.0
+                ( Автор приносит свои извинения за допущенные ошибки
+                 в исходном тексте программ модуля, опубликованные в
+                 прошлом выпуске )
+
+  FKEY11   DOC  - документация на модуль обработки функциональной
+                клавиатуры
+
+  FKEY11   PAS  - исходный текст программ модуля обработки
+                функциональной клавиатуры
+
+  FKEY11   TPU  - обьектный код модуля обработки функциональной
+                клавиатуры
+
+  MENU15   DOC  - документация на модуль организации меню
+
+  MENU15   PAS  - исходный текст программ модуля организации меню
+
+  MENU15   TPU  - обьектный код модуля организации меню
+
+  WINDOW17 DOC  - документация на модуль многооконного интерфейса
+
+  WINDOW17 PAS  - исходный текст программ модуля
+                  многооконного интерфейса
+
+  WINDOW17 TPU  - обьектный код модуля многооконного интерфейса
+
+  WINDSHOW PAS  - исходный текст демонстрационной программы
+
+  WINDSHOW EXE  - выполняемый код демонстрационной программы
+
+  WIN      ASM  - модуль подпрограмм низкоуровневого текстового
+                  оконного   интерфейса фирмы Borland
+
+  WIN      OBJ  - обьектный код этого модуля.
+
+
+                        F K E Y    V  1.1
+            Модуль определения процедур по функциональным
+                            клавишам
+                     (c) 1990, Мигач Ярослав
+
+        Основная  часть модуля это обьект по управлению
+   функциональной клавиатурой. Внедряя этот обьект в свои
+  

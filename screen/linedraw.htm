@@ -1,0 +1,68 @@
+<html><head><title>LineDraw - Pseudographics Line Draw for Text Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='LineDraw - is the Pascal source code that allows the programmer to draw line and rectangles on the screen using the ASCII character set. The unit automatically detects where line will intersect, and replace the characters at the intersection with the proper character.'>
+<meta name="keywords" content="pascal, sources, source code, linedraw, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;linedraw
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LineDraw - Pseudographics Line Draw for Text Mode</TD>
+<TD nowrap class=black>&nbsp;Tim Schempp</TD>
+<TD class=black align='right'>13.01.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">LineDraw - is the Pascal source code
+that allows the programmer to draw line and rectangles on the screen
+using the ASCII character set. The unit automatically detects
+where line will intersect, and replace the characters
+at the intersection with the proper character.</TD><TD class=black colspan=2 align='right'><br><A HREF="linedraw.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">DOCUMENTATION FOR UNIT LINEDRAW
+
+Written By Tim Schempp    October 21, 1993
+
+
+	Unit LINEDRAW is a simple unit for drawing single and double lines
+on the screen.  The unit simply allows the programmer to draw line and
+rectangles on the screen using the ASCII character set.  The unit
+automatically detects where line will intersect, and replace the characters
+at the intersection with the proper character.  This is accomplished by a
+rather slow algorithm that creates a code for each line drawing character in
+the ASCII set.  The demo program will make it very clear how to use the
+procedures in this unit.  The source code is provided and you are welcome to
+make any changes you see fit.
+
+	Although these procedures are not particularly fast, you can speed
+them up by setting the variable WRITETOMEMORY to TRUE in your program.
+(The default value is FALSE.)  This will write the characters directly to
+Video Memory causing a 15 to 20% improvement in speed.  There is on drawback,
+in that characters written directly to video memory are written in the current
+screen colors at that memory address.  Attempts to change the text attributes
+through TEXTCOLOR and TEXTBACKGROUND make no changes in the actual output.
+
+	I urge you to step through the demo program with F8 and Alt-F5 to see
+what each statement of the demo does.  Notice how the computer chooses the
+appropriate character when any kind of intersection (or corner) is reached.
+
+	There is one shortcoming to the drawing characters in the ASCII set.
+In some instances, there is no ASCII character to connect a given line.
+Consider the following two situations:
+
+              |
+        ------X------            -------X--------
+              |                         |
+              |                         |
+
+        There is no ASCII character to fill in the missing X.  This is really
+a minor shortcoming, because situations like this almost never arise.
+
+	This program makes it easy to "dress u

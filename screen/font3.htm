@@ -1,0 +1,74 @@
+<html><head><title>FONT 3.0 - Редактор Растровых Фонтов для EGA/VGA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='FONT3 - редактор фонтов и несколько демонстрационных программ. FONT3 позволяет редактировать любые символы от 8x8 до 8x18 и обеспечивает к ним минимальные файловые операции. Кроме того, в EXE-файле расположены описания фонтов 8x8, 8x14 и 8x16 (взяты из комплекта поставки KEYRUS Д. Гуртяка), поэтому FONT3 ничем не свернут для того, чтобы была возможность их редактировать.'>
+<meta name="keywords" content="pascal, sources, source code, font3, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;font3
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;FONT 3.0 - Редактор Растровых Фонтов для EGA/VGA</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:464/46.36">Dmitry Karasik</a></TD>
+<TD class=black align='right'>05.04.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">FONT3 - редактор фонтов и несколько демонстрационных программ.
+FONT3 позволяет редактировать любые символы от 8x8 до 8x18 и
+обеспечивает к ним минимальные файловые операции.
+Кроме того, в EXE-файле расположены описания фонтов 8x8, 8x14 и 8x16
+(взяты из комплекта поставки KEYRUS Д. Гуртяка),
+поэтому FONT3 ничем не свернут для того, чтобы была возможность
+их редактировать.</TD><TD class=black colspan=2 align='right'><br><A HREF="font3.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>154k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                           READ YOURSELF ,DOC !
+
+    Программы, приведенные здесь, основаны на знакогенераторных возможностях
+                            любого GA кроме C
+
+*******************************************************************************
+
+        FONT3  - собственно редактор фонтов, остальные программы просто
+  демонстрационки, поэтому основное внимание было уделено "разработке"
+  FONTа .
+        FONT3 позволяет редактировать любые символы от 8x8 до 8x18 и
+  обеспечивает к ним минимальные файловые операции . Кроме того, в EXE -
+  файле расположены описания фонтов 8x8, 8x14 и 8x16 (взяты из комплекта
+  поставки KEYRUS Д. Гуртяка) , поэтому FONT3 ничем не свернут для того,
+  чтобы была возможность их редактировать .
+
+        Поскольку HELPа не предвидится ,ниже следуют описания клавиш :
+
+      F1,F5,F8,F9  - соотв . очистка,заполнение,восстановление и копи-
+                      рование  редактируемого символа.
+
+      F2,Alt-F4,F7 - сохранение одного и всех символов, просмотр файла
+
+      F3           - загрузка группы символов из файла
+
+      F4, TAB      - выбор символа
+
+      F6           - выбор матрицы
+
+    Alt - F1 .. F3 - загрузка встроенных фонтов.
+
+  Shift - F1 .. F3 - "обращения" буквы - по осям X, Y и негативное.
+
+  Shift - F4 .. F5 - Перерисовка фона
+
+      Ins, Del     - как в текстовом редакторе, только для битов.
+
+    Alt - F5, -, + - TerminateAndStayResident , занимает 83K (на любителя).
+    Побочный эффект - по выгрузке RELEASE не считает ,что память освобождена,
+    и может иногда пакостить.
+    (Для идентификации себя в памяти FONT цепляет int D7)
+
+    Таблица цветов по адресу 0E4B4 , длина 8 байт ,
+ 

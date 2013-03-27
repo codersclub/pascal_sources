@@ -1,0 +1,78 @@
+<html><head><title>Video State Restore Unit for Text Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Video State Restorer Rev. 1.00. Target: Real, Protected. Remark: Uses 1kb of Code and 1 Text Page of Heap, Usually 4kb.         Must be the First Unit in the Uses Clause to Work Correctly.'>
+<meta name="keywords" content="pascal, sources, source code, psvsr100, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;psvsr100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Video State Restore Unit for Text Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:gallias@ph.und.ac.za">Michael Gallias</a></TD>
+<TD class=black align='right'>10.01.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Video State Restorer Rev. 1.00.
+Target: Real, Protected.
+Remark: Uses 1kb of Code and 1 Text Page of Heap, Usually 4kb.
+        Must be the First Unit in the Uses Clause to Work Correctly.</TD><TD class=black colspan=2 align='right'><br><A HREF="psvsr100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">This unit will restore the screen to its original state when your
+program terminates.  All you have to do is add
+
+Uses VidState;
+
+to your code - it does the rest.
+
+It will not restore the screen information if you change the
+constant KeepVideoData to False or if there is not enough Heap
+space free.  Saving a screen requires 2 kb to 12 kb (up to 12 kb in
+a Super VGA mode).
+
+The cursor size, cursor position and video mode are always restored.
+Graphic modes are never restored as they can require up to 2 Mb
+of storage - and very few people use DOS in graphics mode.
+
+If you place VidState after CRT in the Uses clause it WILL NOT
+work.  It must be first because CRT sometimes clears the screen.
+
+The test program TESTVS goes into graphics mode, places colour on
+the screen and then exits.  Note how VIDSTATE restores the screen,
+even Super VGA text modes!  Also note that adding
+
+{$M 8196,0,0}
+
+to the top of the program stops VidState from working.
+
+                                *
+
+This  software  is copyright by Michael Gallias.   You may use this
+software free of charge if you are  simply  using it for private use
+or if you are using it to write freeware, postware or public domain
+software.
+
+Please send  me a postcard with your name and address and a small
+comment  so  I  know  that  someone  out  there   actually appreciates
+my software and hard work.
+
+If  you  are  writing  commercial software, working in a business,
+writing shareware, or using the software to make a profit, you are
+expected to make a reasonable donation to the author.
+
+Any comments or suggestions are always welcomed by the author.
+Please feel free to EMail me or write to me at any time.
+
+If  the product is source code,  you are welcome to use it in any of
+your programs.  Furthermore,  you are welcome to modify the  code
+anyway  you  wish  for  your  personal requirements.  You may not
+however  redistribute the modified source code.  If you use any
+part or all of the source code in your programs,  please make
+sure you credit me in y

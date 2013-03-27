@@ -1,0 +1,102 @@
+<html><head><title>Изменение палитры</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Изменение палитры в графическом режиме'>
+<meta name="keywords" content="pascal, sources, source code, palitr1, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;palitr1
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Изменение палитры</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5025/15.8">Олег Смагин</a></TD>
+<TD class=black align='right'>23.01.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Изменение палитры в графическом режиме</TD><TD class=black colspan=2 align='right'><br><A HREF="palitr1.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Oleg Smagin &lt;Oleg_Smagin@p8.f15.n5025.z2.fidonet.org&gt;
+Subject: Изменение палитры в graph mode.
+Date: Mon, 23 Jan 1995 16:30:24 +0300
+Organization: Phantom of Infinity Soft Labs (Gid:fidonet.org)
+
+Hello MD@md.kamaz.kazan.su!
+
+18 Jan 95 04:08, MD@md.kamaz.kazan.su wrote to All:
+
+ M&gt; Hi All.
+ M&gt; Есть вопросик.
+ M&gt; Можно-ли в графическом режиме 13H производить плавное
+ M&gt; затухание экрана т,е, изменение палитры.
+ M&gt; Видел исходник на цэ но они там в порт нецелое значение как-то
+ M&gt; пишут а в Паскале так нельзя.
+ M&gt; А если это значение округлять то плавного перехода
+ M&gt; нет и экран скачет :(
+ M&gt; Помогите please кто сталкивался.
+
+Вот тебе кусочек моей программы, в котором плавно затухает палитра (делать это
+можно в любом режиме, а не только в графическом :)
+
+type
+  arpal = array [0..767] of byte;                  {  палитра  }
+
+var
+  pal1,palt           : arpal         ;
+
+Procedure AsmPalt;              { процедура работы с палитрой }
+begin                           { сохраняем палитру в массив }
+  asm
+    mov     ax,1017h
+    mov     bx,Seg palt
+    mov     es,bx
+    mov     dx,offset palt
+    xor     bx,bx
+    mov     cx,256
+    int     10h
+  end;
+end;
+
+Procedure AsmPal1;             { процедура работы с палитрой }
+begin                          { загружаем палитру из массива }
+  asm
+    mov     ax,1012h
+    mov     bx,seg pal1
+    mov     es,bx
+    mov     dx,offset pal1
+    xor     bx,bx
+    mov     cx,256
+    int     10h
+  end;
+end;
+
+begin
+  AsmPalt;
+  for i:=0 to 767 do pal1[i]:=palt[i];        { считывание палитры }
+  for j:=1 to 12 do begin                      { эффект угасания }
+    for i:=0 to 767 do begin
+      if Trunc(pal1[i]-4) &gt; 0 then pal1[i]:=Trunc(pal1[i]-4)
+      else pal1[i]:=0;
+    end;
+    AsmPal1;
+  end;
+...
+end.
+
+Единственно, что нехорошо в этой программе, то что я не отлавливал обратный ход
+луча при изменении палитры. Hа моей тройке итак все неплохо выглядело, а на
+двойке изменения палитры сопровождались нежелательными мерцанием и снежением :(
+
+За сим откланиваюсь,
+                    Oleg W. Smagin.
+
+--- GoldED 2.50.A0531+
+ * Origin: Hе вовpемя pассказ, что музыка во вpемя печали ... (2:5025/15.8)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

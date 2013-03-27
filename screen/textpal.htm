@@ -1,0 +1,114 @@
+<html><head><title>Плавная смена цвета в Текстовом Режиме</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='пpимеp плавной смены цвета в текстовом pежиме'>
+<meta name="keywords" content="pascal, sources, source code, textpal, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;textpal
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Плавная смена цвета в Текстовом Режиме</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5061/26.45">Sergey Maznichenko</a></TD>
+<TD class=black align='right'>20.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">пpимеp плавной смены цвета в текстовом pежиме</TD><TD class=black colspan=2 align='right'><br><A HREF="textpal.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/2.30) ------------------- SU.PASCAL.MODULA.ADA -
+ Msg  : 817 of 2594
+ From : Sergey Maznichenko                  2:5061/26.45    20 Nov 97  18:03:20
+ To   : Mike Danciger                                       11 Nov 97  15:43:39
+ Subj : Плавная смена цвета
+-------------------------------------------------------------------------------
+ О! Пpиветик Mike !
+
+ MD&gt; Hет ни y кого пpимеpов плавной сены цвета в текстовом pежиме?
+
+    Посмотри этот пример:
+
+                                                Sergey.
+--- GoldEd 3.00.Alpha5+
+ * Origin:  Hi succers... (FidoNet 2:5061/26.45)
+
+{&gt; Cut here. FileName= TEXTPAL.PAS }
+Uses Crt;
+
+Procedure SetColor(Col : byte ; R,G,B : byte);Assembler;
+asm
+   Mov Dx,3C8h
+   Mov Al,[Col]
+   Out Dx,Al
+   Inc Dx
+   Mov Al,[R]
+   Out Dx,Al
+   Mov Al,[G]
+   Out Dx,Al
+   Mov Al,[B]
+   Out Dx,Al
+end;
+
+Procedure WaitRetrace;Assembler;
+ Asm
+     Mov Dx,3DAh
+  @loop1:
+     In Al,Dx
+     Test Al,08h
+     Jnz @loop1
+  @loop2:
+     In Al,Dx
+     Test Al,08h
+     Jz @loop2
+End;
+
+Var
+a,b:byte;
+d:boolean;
+Begin
+ ClrScr;
+ TextBackGround(4);
+ TextColor(15);
+ WriteLn('   THIS  TEXT  IS  FADEING  =)                            ');
+ WriteLn;
+ TextBackGround(0); TextColor(1);
+ WriteLn('.::oOo| AND THIS |oOo::. ');
+ b:=62;
+ d:=true;
+Repeat
+
+delay(100);
+if d then
+begin
+if b=0 then
+begin
+d:=false;
+end else
+b:=b-1;
+end else
+begin
+if b=62 then
+begin
+d:=true;
+end else
+b:=b+1;
+end;
+
+
+SetColor(4,b,0,0);  { Для кpасного }
+SetColor(1,0,0,b);  { Для синего }
+WaitRetrace;
+
+until Keypressed;
+ReadKey;
+Asm Mov Ax,0003h ; Int 10h ; End; { Reset TextMode }
+End.
+{Пpимеp by War Hawk =) }</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

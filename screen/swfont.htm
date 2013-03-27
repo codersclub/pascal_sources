@@ -1,0 +1,74 @@
+<html><head><title>SWFont - Встроенный в программу русификатор</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='как сделать Вашу программу независимой от русификатора и дисплея'>
+<meta name="keywords" content="pascal, sources, source code, swfont, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;swfont
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SWFont - Встроенный в программу русификатор</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>18.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">как сделать Вашу программу независимой от русификатора и дисплея</TD><TD class=black colspan=2 align='right'><br><A HREF="swfont.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          Модуль SWFONT
+                              или
+     как сделать Вашу программу независимой от русификатора
+                            дисплея
+                Copyright (С) by SoftWeyr, 1994
+
+                            ВВЕДЕНИЕ
+                            ========
+
+    Какой разнобой творится в  области  программной русификации
+IBM-совместимых компьютеров, знают все. Только-только более-ме-
+нее справились с  войной кодировок под DOS, как снова-здорово -
+ни в Windows,  ни в Unix всеми любимую альтернативную кодировку
+использовать нельзя. Но  речь не об этом. С русификаций тексто-
+вых режимов EGA/VGA сейчас видимо уже ни у кого проблем нет. Но
+вот вам захотелось поработать в текстовом  режиме 132xnn, благо
+любая SuperVGA это позволяет, и  вы  с  удивлением увидели, что
+его не поддерживает ваш любимый русификатор и ваш любимый драй-
+вер мыши.  Но без мыши  в текстовом режиме еще кое-как обойтись
+можно, а вот без русских букв...
+    Русификатор для SuperVGA сейчас достать можно, но можете ли
+Вы быть уверены, что у пользователя вашей программы он есть?
+    Мы предлагаем Вам другой путь решения - вшейте шрифты в Ва-
+шу программу и вы будете уверены, что даже  на вообще нерусифи-
+цированой машине пользователь  увидит  на экране именно то, что
+вы хотели ему сказать.
+    В графическом режиме  проблем меньше. Если у Вас есть руси-
+фицированные CHR файлы,  то проблемы могут быть только со шриф-
+том Default. Они также могут быть решены нашим модулем.
+Здесь, правда есть одно исключение  -  на  некоторых старых EGA
+предложенное нами решение не работает. Что с этим  сделать - не
+знаю, разве что купить новую плату видеоадаптера.
+
+                       КОМПЛЕКТ ПОСТАВКИ
+                       =================
+
+    1. SWFONT.PAS   - исходный текст модуля
+    2. PARSECPI.PAS - программа для разбора файлов шрифтов DOS
+
+    3. MAKE.BAT     - командный файл для компиляции SWFONT со шриф-
+                      тами DOS
+    4. FONT8X14.OBJ - шрифт 8X14  { см. файл          }
+    5. FONT8X8.OBJ  - шрифт 8x8    {         FONTS.UUE }
+    6. SWFONT.DOC   - то, что вы сейчас читаете.
+
+                     КАК ЭТИМ ПОЛЬЗОВАТЬСЯ
+                     =====================
+
+                        Текстовый режим
+                        ----------

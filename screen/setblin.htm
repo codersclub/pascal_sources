@@ -1,0 +1,80 @@
+<html><head><title>Установка/Сброс Бита Мерцания (TXT Mode)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Корректная работа с битом мерцания. Пример работает на любых видах мониторов'>
+<meta name="keywords" content="pascal, sources, source code, setblin, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;setblin
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Установка/Сброс Бита Мерцания (TXT Mode)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/103.38">Dimon Shvetsov</a></TD>
+<TD class=black align='right'>20.05.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Корректная работа с битом мерцания.
+Пример работает на любых видах мониторов</TD><TD class=black colspan=2 align='right'><br><A HREF="setblin.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 9 of 204                             Addr                        Date
+ From : Dimon Shvetsov                2:5020/103.38                    20.05.95
+ Subj : Установка/Сброс Бита Мерцания (TXT Mode)
+-------------------------------------------------------------------------------
+Hello Sergey!
+
+17 May 95 12:03, Sergey Temrezov wrote to All:
+
+ KK&gt;&gt; Киньте мне мылом процедурку для получения subj, pls. Тут
+ KK&gt;&gt; пробегали они, но я пропустил как-то...
+ ST&gt;  И мне тоже.
+
+      Hу если ловилка pаботает...)
+Пример работает на любых видах мониторов.
+
+Поймали?-)
+
+Hi! Dimon.
+
+--- GEcho 1.02+ Hi!
+ * Origin: /103.38 AKA /158.18 /350.2 Hi from White Fang BBS! (2:5020/103.38)
+
+{&gt; Cut here. FileName= SETBLIN.PAS }
+Procedure SetBlink(On:Boolean);        
+{Turn blinking off to get more colors}
+{Enable text mode attribute blinking if On is True}
+
+Const PortVal:array[0..4] of Byte=($0C,$08,$0D,$09,$09);
+Var PortNum:Word; Index,PVal:Byte;
+begin
+  Case GrDriver of
+  HercMono:begin PortNum:=$3B8; Index:=4; end;
+       CGA:begin
+             PortNum:=$3D8;
+               Case LastMode of
+                 0..3:Index:=LastMode;
+                 else Exit;
+               end;{Case}
+           end;
+     MCGA..VGA:begin
+             Inline(
+               $8A/$5E/&lt;On/                                 {mov bl,[bp+&lt;On]}
+               $B8/$03/$10/                                 {mov ax,$1003}
+               $CD/$10);                                    {int $10}
+             Exit;
+           end;
+    else Exit;
+  end;
+  PVal:=PortVal[Index];
+  if On then PVal:=PVal or $20;
+  Port[PortNum]:=PVal;
+end;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

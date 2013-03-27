@@ -1,0 +1,82 @@
+<html><head><title>Border. Установка цвета границы экрана</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как установить цвет бордюра'>
+<meta name="keywords" content="pascal, sources, source code, border, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;border
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Border. Установка цвета границы экрана</TD>
+<TD nowrap class=black>&nbsp;Сергей Варюха</TD>
+<TD class=black align='right'>10.04.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как установить цвет бордюра</TD><TD class=black colspan=2 align='right'><br><A HREF="border.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{   ¬¬¬¬¬¬¬¬¬   S l o n W a r e   ¬¬¬¬¬¬¬¬¬
+
+   Обратите внимание - используются модули Turbo Prof.
+
+             S.Varjukha
+}
+{$A-,B-,D-,E-,F-,I-,L-,N-,O-,R-,S-,V-}
+{$M 1024,0,0}
+program Border;
+uses
+  TPCrt,
+  Dos,
+  TPString;
+const
+  Copyright : string [80] =
+    'Set Screen Border Color '#4' Copyright (c) by Slon. '#4' Tallinn 1991';
+
+  Colors : array [0..15] of string [20] = (
+    'Black', 'Blue', 'Green', 'Cyan', 'Red', 'Magenta', 'Brown',
+    'LightGray', 'DarkGray', 'LightBlue', 'LightGreen', 'LightCyan',
+    'LightRed', 'LightMagenta', 'Yellow', 'White');
+  ShortColors : array [0..15] of string [3] = (
+    'Bk', 'Bl', 'Gr', 'Cn', 'Rd', 'Mg', 'Br',
+    'LGy', 'DG', 'LB', 'LGn', 'LC',
+    'LR', 'LM', 'Ye', 'Wh');
+
+  I : integer = -1;
+  J : integer = -1;
+
+  procedure WriteHelp;
+  begin
+    TextAttr := $07;
+    Writeln(^M, Copyright);
+    Writeln('Available only with CGA, EGA and VGA video cards.');
+    Writeln('Usage: BORDER color');
+    Writeln('  where color - word from the next set:');
+    for I := 0 to 15 do Writeln(' ':3, Pad(ShortColors[I],3),' ':5, Colors[I]);
+    Writeln;
+    Writeln('Examples:     border red        - set red border');
+    Write  ('   or         border ye         - set yellow border');
+    Halt(1)
+  end;
+
+begin
+  for J := 0 to 15 do if StUpcase(ParamStr(1)) = StUpcase(Colors[J])
+    then I := J;
+  for J := 0 to 15 do if StUpcase(ParamStr(1)) = StUpcase(ShortColors[J])
+    then I := J;
+  if I = -1 then WriteHelp;
+  I := I shl 4;
+  ReinitCrt;
+  if CurrentDisplay in [CGA, EGA, VGA] then
+    SetCrtBorder(Lo(I))
+  else WriteHelp;
+end.
+{eof border.pas}</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

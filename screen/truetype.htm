@@ -1,0 +1,75 @@
+<html><head><title>Using TrueType Fonts for DOS Programs Version 1.6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Использование TrueType фонтов в DOS-овских Паскальных программах.  This is a Pascal programming package, providing full-featured access to TrueType fonts within your DOS programs. Additional fonts supported are Windows scalable and bitmapped fonts, BGI fonts and BIOS fonts. Output and metric procedures are interface-compatible with Graph's text routines.'>
+<meta name="keywords" content="pascal, sources, source code, truetype, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;truetype
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Using TrueType Fonts for DOS Programs Version 1.6</TD>
+<TD nowrap class=black>&nbsp;Matthias KФppe</TD>
+<TD class=black align='right'>14.07.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Использование TrueType фонтов в DOS-овских Паскальных программах. <br>
+This is a Pascal programming package,
+providing full-featured access to TrueType fonts
+within your DOS programs. Additional fonts supported
+are Windows scalable and bitmapped fonts, BGI fonts and BIOS fonts.
+Output and metric procedures are interface-compatible
+with Graph's text routines.</TD><TD class=black colspan=2 align='right'><br><A HREF="truetype.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>79k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">MyFonts		Using non-BGI fonts within Pascal programs.
+ver 1.53	Copyright (c) 1993 by Matthias KФppe.
+
+1  General Information
+----------------------
+
+MyFonts is a Turbo Pascal unit. With MyFonts, you can use non-BGI fonts
+within pascal programs. Following font types are supported:
+
+ * VGA BIOS fonts		8, 14, 16 pixels high
+ * DOS CPI fonts		code-page dependent, 8, 14, 16 pixels high
+ * Windows bitmap fonts		(if present in your system)
+ * Windows vector fonts		NEW! (if present in your system)
+ * BGI fonts			NEW: direct utilization - better output
+
+ + And additional - TrueType Fonts!
+
+At the program start-up, the used fonts are declared. Then, you can access
+these fonts by identifying numbers. So you will be able to exchange fonts
+dynamically.
+
+Font output is done with routines which are compatible to the Graph unit.
+MyFonts provides the following techniques:
+ * clipping (limitting output to a rectangle)
+ * TV text markers switch the text color
+ * Windows-compatible text metrics
+ * synthesization of bold font variants (for Windows and BGI)
+ * character space justification
+ * text alignment also at the base line and the leading line
+
+The MyFonts unit is part of the MyMouse software package. It is based on
+the following units:
+
+- Gr	    This unit is the commonly used graphic interface. The graphics
+	    mode is to be set by SetGrMode first. Please read Gr's
+  documentation for more information.
+
+- Memory    This Turbo Vision unit is used for dynamically reserving memory
+	    for the font glyphs and releasing it again if it is needed.
+  Before MyFonts is used, Memory must be initialized by an InitMemory call.
+  If you wish to use many big fonts, you should largen the buffer area by
+  changing the Memory.MaxBufMem variable.
+
+
+ New in Version 1.5

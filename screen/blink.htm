@@ -1,0 +1,133 @@
+<html><head><title>Установка Режима Мерцания (Text Mode Blink)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='как закрасить в видеопамяти ряд символов; как на одном символе задействовать сразу все 16 цветов'>
+<meta name="keywords" content="pascal, sources, source code, blink, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;blink
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Установка Режима Мерцания (Text Mode Blink)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:464/46.36">Dmitry Karasik</a></TD>
+<TD class=black align='right'>26.05.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">как закрасить в видеопамяти ряд символов;
+как на одном символе задействовать сразу все 16 цветов</TD><TD class=black colspan=2 align='right'><br><A HREF="blink.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 98 of 110                            Addr                        Date
+ From : Dmitry Karasik                2:464/46.36                      26.05.97
+ Subj : Blink
+-------------------------------------------------------------------------------
+++e||o Aleksey!
+|` ``
+`
+
+Вcк Май 25 1997 18:22, Aleksey Skripka wrote to All:
+
+ AS&gt;     Интересует инфа по поводу того как :
+ AS&gt;     1) как закрасить в видеопамяти ряд символов ?
+ AS&gt;     2) как на одном(!) символе(8х16)  заюзать сразу все 16 цветов ?
+ AS&gt;         (это точно видел, и вот стало интересно)
+
+
+    Вот, посмотри BLINK.PAS ...
+
+                               С наилучшими, Dmitry
+
+--- Бешеный Маньяк 2.50+
+ * Origin: Remember - Crazy Chickatilo's watching you! (2:464/46.36)
+
+
+
+{&gt; Cut here. FileName= BLINK.PAS }
+{-cd}
+Procedure DOS_Text_Blink(BlinkState : Byte); Assembler; Asm
+  mov ax, 1003h
+  mov bl, BlinkState
+  int 10h
+End;
+
+Procedure DOS_Text_VideoAddr; Near; Assembler; Asm
+  mov dx, SegB800
+  mov es, dx
+  mov dx, 160
+  mul dx
+  mov di, bx
+  shl di, 1
+  add di, ax
+End;
+
+
+Procedure DOS_TextOut(S : String; X, Y : Integer); Assembler; Asm
+  mov ax, y
+  mov bx, x
+  call DOS_Text_VideoAddr
+  push ds
+  lds si, s
+  lodsb
+  xor ch, ch
+  mov cl, al
+  jcxz @@1
+@@2:
+  lodsb
+  stosb
+  inc di
+  loop @@2
+@@1:
+  pop ds
+End;
+
+Procedure DOS_ChangeAttribute(Number, X, Y, Color : Integer); Assembler; Asm
+  mov ax, y
+  mov bx, y
+  call DOS_Text_VideoAddr
+  mov cx, Number
+  jcxz @@1
+  mov al, byte ptr Color
+@@2:
+  inc di
+  stosb
+  loop @@2
+@@1:
+End;
+
+Function DOS_KeyPressed : Boolean; Assembler; Asm
+  mov ah, 1
+  int 16h
+End;
+
+Function DOS_ReadKey : Word; Assembler; Asm
+  xor ax, ax
+  int 16h
+End;
+
+Const
+  VideoStatus = $3DA;
+  KeyStatus   = $60;
+  BackRay     = 8;
+  NoTracing   = 1;
+  ScanLines   = 16;
+  Colors      : Array[1..ScanLines] of Byte = (
+  $F0, $E0, $D0, $C1, $B2, $2C, $9E, $7E,
+  $6F, $3F, $2E, $1F, $02, $F0, $C1, $30
+  );
+
+Var
+  Count : Byte;
+
+
+Begin
+  DOS_Text_Blink(0);
+  DOS_TextOut('Hello !', 0, 0);
+  Repeat
+    Repeat Until (Port[Vide

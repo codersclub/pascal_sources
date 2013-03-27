@@ -1,0 +1,73 @@
+<html><head><title>Вывод на экран большими буквами</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Вывод на экран текста "здоровыми" символами'>
+<meta name="keywords" content="pascal, sources, source code, bigchar, screen, Экранные Средства ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Экранные Средства</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bigchar
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Вывод на экран большими буквами</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5054/2.44">Виктор Шантар</a></TD>
+<TD class=black align='right'>12.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Вывод на экран текста "здоровыми" символами</TD><TD class=black colspan=2 align='right'><br><A HREF="bigchar.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  Это старье, конечно...  Вроде все уже такое умеют.
+  Hу все-равно...
+                                                  &lt;&lt;Vic&gt;&gt;
+                                                  [ Team Daemon's Hedgehog ]
+--- Дедуля/386 2.50.Beta4+
+
+
+
+{&gt; Cut here. FileName= BIGCHAR.PAS }
+uses crt;
+{ Здоpовые символы }
+
+procedure writes(x,y:byte;s:string);
+type fnt=array[1..16] of byte;
+const bites:array[1..8] of byte = ( 128,64,32,16,8,4,2,1 );
+var font:array[0..255] of fnt;
+    f1,f2,f3,f4,f5:byte;
+
+Procedure LoadChar(CharNum: Byte; var Pic:array of byte);
+Begin
+  Inline($FA);PortW[$3C4]:=$0402;PortW[$3C4]:=$0704;PortW[$3CE]:=$0204;
+  PortW[$3CE]:=$0005;PortW[$3CE]:=$0006;
+  Move(Mem[$A000:CharNum*32],Pic, 16);
+  PortW[$3C4]:=$0302;PortW[$3C4]:=$0304;PortW[$3CE]:=$0004;PortW[$3CE]:=$1005;
+  PortW[$3CE]:=$0E06;Inline($FB);
+end;
+
+procedure loadfont; var ff:byte;
+begin for ff:=0 to 255 do loadchar(ff,font[ff]); end;
+
+begin
+  loadfont;
+  for f1:=1 to length(s) do begin
+    f2:=f1*8+x;
+    for f3:=1 to 16 do begin
+      f4:=y+f3;
+      for f5:=1 to 8 do begin
+ gotoxy(f2+f5,f4);
+ if (font[ord(s[f1]),f3] and bites[f5]) = bites[f5] then write('');
+      end;
+    end;
+  end;
+end;
+
+begin
+  writes(5,5,'Привет');readln;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
