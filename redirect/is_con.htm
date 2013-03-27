@@ -1,0 +1,87 @@
+<html><head><title>Определение переназначения вывода в файл</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='2 варианта определения, переназначен ли вывод с экрана в файл'>
+<meta name="keywords" content="pascal, sources, source code, is_con, redirect, Переадресация Ввода-Вывода ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Переадресация Ввода-Вывода</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;is_con
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Определение переназначения вывода в файл</TD>
+<TD nowrap class=black>&nbsp;Сергей Топ</TD>
+<TD class=black align='right'>19.01.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">2 варианта определения, переназначен ли вывод с экрана в файл</TD><TD class=black colspan=2 align='right'><br><A HREF="is_con.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  "Sergey Top" &lt;stop@stop.karaganda.su&gt;
+Sub: Как определить переназначен ли вывод на экран в файл. - Solution Here !!!
+
+Hello All !
+
+Тут недавно пробегала проблемка subj, и было предложено решение.
+
+-------8&lt;---------------------------------------------------------------
+(*
+From: "Kirill V. Karpov" &lt;kirill@permavers.perm.su&gt;
+Newsgroups: relcom.comp.lang.pascal
+Subject: Re: Как определить, переназначен ли вывод на экран в файл? Help!
+Date: Thu, 08 Dec 94 08:24:42 GMT
+Organization: JSCB "Perm-Avers"
+&gt;
+&gt;     Всем привет!
+&gt;
+&gt;    Возникла тут такая проблемка: пишу утилитку, которая выдает на экран
+&gt; несколько страниц хелпа с ожиданием нажатия клавиши после каждой страницы.
+&gt; В ней модуль CRT _не_ используется, поэтому можно переназначить средствами
+&gt; MS_DOS'а вывод в файл. Так вот, очень хотелось бы, чтобы при выводе в файл
+&gt; программа не ожидала нажатия клавиши, а кидала бы все подряд (на манер ARJ).
+&gt; Вот в этом-то собственно и проблема: как определить, переназначен вывод в
+&gt; файл или нет.
+&gt;   Кто что посоветует?
+&gt;
+&gt; Всего наилучшего, И.Катаев
+&gt;
+Здесь Вы найдете то, что нужно
+Взято из SWAG за 1994 год
+Автор: FRED JOHNSON
+*)
+
+{
+Here's a neat little ditty I converted from a C++ tip I saw in a mag a few
+years ago.  It tests to see if its own output has been redirected and
+returns a 1 if TRUE (redirected) or a 0 if FALSE (not redirected). This
+function includes a sample prog that demonstrates its use. SIDE NOTE: I
+put this function in the U_FILE.pas.tpu for use with all of my home-grown
+file related functions and procedures.
+
+TEST WITH: Test_Red (enter)
+   [you should see a NOT REDIRECTED msg, 10 lines and a FINISHED msg.]
+
+TEST WITH: Test_Red &gt; this.dat (enter)
+   [you should see a REDIRECTED msg, (no lines) and a FINISHED msg
+    and the output of the lines will be in the this.dat file]
+}
+
+program test_red;
+
+{$A+,B-,D-,E-,F-,G-,I+,L-,N-,O-,P-,Q-,R-,S+,T-,V+,X-}
+{$M 1024,0,655360}
+
+{*******************************************************************!HDR**
+** Function Name: fn_bRedirected()
+** Description  : Determines if output has been redirected;
+** Returns      : Integer to be treated as boolean;
+** Calls        :
+** Special considerations:
+** Modification history:
+** Created: 11/03/93 20:23
+*****************************************************************

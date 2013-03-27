@@ -1,0 +1,121 @@
+<html><head><title>Переназначение StdIn в файл</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как переназначить стандартный ввод на файл'>
+<meta name="keywords" content="pascal, sources, source code, dosexec, redirect, Переадресация Ввода-Вывода ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Переадресация Ввода-Вывода</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;dosexec
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Переназначение StdIn в файл</TD>
+<TD nowrap class=black>&nbsp;Роман Димов</TD>
+<TD class=black align='right'>21.07.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как переназначить стандартный ввод на файл</TD><TD class=black colspan=2 align='right'><br><A HREF="dosexec.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: roma@mark-nv.izhmark.udmurtia.su (Roma Dimov)
+Organization: Communication Company MARK ITT, машина в углу
+
+   andy@hq.icc.tsaritsyn.su спрашивал:
+
+&gt;     Мужики, help me, please!
+&gt;
+&gt;procedure MyApp.RunExtApp;
+&gt;begin
+&gt;  DoneSysError;
+&gt;  DoneEvents;
+&gt;  DoneVideo;
+&gt;  DoneDosMem;
+&gt;  SwapVectors;
+&gt;  Exec('ExtApp.exe', '-t123 -p3 &lt; command.lst')
+&gt;                                ^^^^^^^^^^^^^^
+&gt;  SwapVectors;
+&gt;  InitDosMem;
+&gt;  InitVideo;
+&gt;  InitEvents;
+&gt;  InitSysError;
+&gt;  Redraw;
+&gt;end;
+&gt;
+&gt;     В чем  пpоблема:   После  запуска ExtApp.exe, последняя упоpно не
+&gt;хочет бpать данные из command.lst, а ожидает ввод с клавиатуpы :(
+&gt;Как сделать пеpеназначение, что бы ввод шел не с клавы, а с файла ?
+&gt;
+&gt;   Заpанее, THX!
+&gt;
+&gt;   С уважением, Andy.
+
+Вот так работает:
+
+{&gt; Cut here. FileName= DOSEXEC.PAS }
+Procedure tmyapp.dosexec (command: String);
+Var buf: pointer;
+  aa: Array [0..12] Of Char;
+  reg: Registers;
+  i, j: Word;
+Function force_dup (existing, second: Word): Boolean;
+Begin
+  reg. AH := $46;
+  reg. BX := existing;
+  reg. CX := second;
+  MsDos (reg);
+  If (reg. Flags And fCarry) &lt;&gt; 0 Then
+    force_dup := False
+  Else force_dup := True;
+End;
+Begin
+  DoneSysError;
+  DoneEvents;
+  DoneVideo;
+  DoneDosMem;
+  WriteLn;
+  StrPCopy (aa, TmpDir+TmpFileName);
+  reg. AH := $3D;
+  reg. AL := 0;
+  reg. DS := Seg (aa);
+  reg. DX := Ofs (aa);
+  MsDos (reg);
+  j := reg. AX;
+  reg. BX := 0;
+  reg. AH := $45;
+  MsDos (reg);
+  i := reg. AX;
+  If force_dup (j, 0) Then Begin
+    SwapVectors;
+    Exec (sendmail, command);
+    SwapVectors;
+    force_dup (i, 0);
+    reg. BX := j;
+    reg. AH := $3e;
+    MsDos (reg);
+    reg. BX := i;
+    reg. AH := $3e;
+    MsDos (reg);
+  End;
+  InitDosMem;
+  InitVideo;
+  InitEvents;
+  InitSysError;
+  Redraw;
+  If DosError &lt;&gt; 0 Then Begin { Error? }
+    Str (DosError, command);
+    MessageBox (^C + 'Dos error #' + command ,
+    Nil, mfInformation + mfOKButton);
+  End
+  Else  Begin
+    Str (DosExitCode, command);
+    MessageBox (^C + 'Exec successful.' + #13 + ^c'Child process
+exit code = ' + command,    Nil, mfInformation + mfOKButton);
+  End;
+End;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

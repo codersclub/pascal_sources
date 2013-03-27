@@ -1,0 +1,90 @@
+<html><head><title>Переназначение ввода/вывода для EXEC()</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='О переназначении стандартного ввода для программ на TP6.0'>
+<meta name="keywords" content="pascal, sources, source code, redir, redirect, Переадресация Ввода-Вывода ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Переадресация Ввода-Вывода</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;redir
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Переназначение ввода/вывода для EXEC()</TD>
+<TD nowrap class=black>&nbsp;Дмитрий Речкин</TD>
+<TD class=black align='right'>03.09.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">О переназначении стандартного ввода для программ на TP6.0</TD><TD class=black colspan=2 align='right'><br><A HREF="redir.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Dmitry RECHKIN &lt;dimer@gis.iems.msk.su&gt;
+Subject: Переназначение ввода/вывода для Exec() - для DOS 3.3+ TP6.0+ASM(inline)
+Organization: Institute of Economics of Mineral resources
+
+     Был тут как-то вопрос о переназначении стандартного ввода для
+программ на TP6.0. Так вот, свои соображения на эту тему излагаю в
+нижеследующей программе. Не знаю, как из TVision (не пробовал), а
+просто в MS DOS 5.0 работает. Если откомпилировать и пустить, будет
+веселый эффект.
+     Если кто будет гонять под TVision - скажите, как оно там. Из
+общих соображений должно пахать, но - "... есть многое на свете,
+друг Горацио, что и не снилось нашим Паскалям..."
+     Просьба ко всем, кто будет брать - черкните отзыв, интересно
+знать мнение коллег, знаете ли...
+
+     С лучшими пожеланиями -
+     Д.Речкин (dimer@gis.iems.msk.su)
+
+{&gt; Cut here. FileName= REDIR.PAS }
+{$M 8191,0,0}
+program RedirectionDemo;
+      { Запускать - только из ДОСа !!! }
+uses DOS;
+const { Стандартные дескрипторы ДОСа ------------------- }
+  StdIn : Word = 0; { стандартный ввод - то, что прет с кнопок }
+  StdOut: Word = 1; { стандартный вывод - обычно на экран }
+  StdErr: Word = 2; { стандартные сообщения - обычно на экран }
+var
+  f     : Text;
+  InH   : Word;
+
+procedure RedirHandle (Src, Dst: Word);
+{ RedirHandle - переназначение операций ввода-вывода через
+  дескрипторы (handle); действие переназначения сохраняется
+  до завершения текущего процесса и распространяется на все
+  процессы, порожденные данным (через exec и т.п.)
+
+  Src - дескриптор, который надо переназначить;
+  Dst - собственный дескриптор, определенный в программе,
+        на который надо переназначить операции ввода-вывода. }
+var
+  Source, Target : Word;
+begin
+  Source := Src;
+  Target := Dst;
+  asm
+    mov ah, 46h
+    mov bx, Target
+    mov cx, Source
+    int 21h
+  end
+end;
+
+begin { тело программы }
+      { сначала надо открыть файл, для которого будет делаться
+        переназначение }
+  Assign (f, 'redirect.pas');
+  Reset (f);
+      { теперь надо узнать его дескриптор в системе (handle) }
+  InH := TextRec(f).Handle;
+      { и можно переназначать - процедура для этого есть }
+  RedirHandle (StdIn,InH);
+      { после этого StdIn переназначен на файл с дескриптором InH }
+  Writeln ('********** Перед EXEC с переназначением ...');
+  SwapVectors;
+  Exec (GetEnv(

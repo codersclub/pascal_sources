@@ -1,0 +1,79 @@
+<html><head><title>Отключение Вывода на Экран</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для отключения вывода на экран'>
+<meta name="keywords" content="pascal, sources, source code, video, redirect, Переадресация Ввода-Вывода ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Переадресация Ввода-Вывода</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;video
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Отключение Вывода на Экран</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/944.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>30.04.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для отключения вывода на экран</TD><TD class=black colspan=2 align='right'><br><A HREF="video.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- 4INT ----------------------------------------------------- It's interesting -
+ Msg  : 37 of 204                            Addr                        Date
+ From : Sly Golovanov                 2:5020/944.13                    30.04.97
+ Subj : Отключение Вывода на Экран
+-------------------------------------------------------------------------------
+Так это вы, Ilya, таскали мои плюшки?!
+
+ Когда часы с дятлом пробили Четверг Апрель 24 1997 20:26 и стену, сквозь дыру
+стало слышно разговор Ilya Gershman и All:
+
+ IG&gt;   Тут как-то давно пробегал модуль для паскаля, который умел отрубать
+ IG&gt; вывод на экран (не просто через перехват или перенапраление 10h).
+ IG&gt; Покапался в intlist'е, нашел только вообще отключение считывания
+ IG&gt; видеопамяти, а мне надо просто запустить внешнюю программку, и чтобы
+ IG&gt; она ничего на экран не вывела. 
+
+Сначала попpобуй запустить эту прогу с параметром "&gt; nul"
+
+Hе получится - вот тебе юнит. 
+Единственный минус - под чикагой в окне не pаботает. 
+Если кто поделится таким, котоpый pаботает - спасибо скажу.
+
+    Hе пpощаюсь                                            [Стадо Котов]
+      &gt; SLY &lt;
+--- Я себя чувствую. Hо плохо.
+ * Origin: Гигаз варез рулез! Шаре варез вайдер! (заклинание) (2:5020/944.13)
+
+{&gt; Cut here. FileName= VIDEO.PAS }
+{ From : Sly Golovanov                 2:5020/944.13               30.04.97
+ Subj : Отключение Вывода на Экран
+}
+unit video;
+interface
+procedure screenoff;
+procedure screenon;
+implementation
+procedure screenoff;assembler;
+asm
+     mov    dx,03cch
+     in     al,dx
+     and    al,11111101b
+     mov    dx,03c2h
+     out    dx,al
+end;
+procedure screenon;assembler;
+asm
+     mov    dx,03cch
+     in     al,dx
+     or     al,00000010b
+     mov    dx,03c2h
+     out    dx,al
+end;
+end.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
