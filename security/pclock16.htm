@@ -1,0 +1,70 @@
+<html><head><title>PC-Lock v.1.6 - Защита дисков и директориев</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Резидентный драйвер для закрытия дисков и каталогов'>
+<meta name="keywords" content="pascal, sources, source code, pclock16, security, Защита Программ и Данных ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Защита Программ и Данных</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pclock16
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;PC-Lock v.1.6 - Защита дисков и директориев</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/110.29">Сергей Назаренко</a></TD>
+<TD class=black align='right'>12.10.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Резидентный драйвер для закрытия дисков и каталогов</TD><TD class=black colspan=2 align='right'><br><A HREF="pclock16.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>16k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hello Andrey!
+
+Thursday October 03 1996 22:27, Andrey Martushov wrote to All:
+
+ AM&gt; Народ ! Я ставлю 1 литр пива "FAXE" тому кто найдет мне протектор -
+ AM&gt; который бы сидел резидентом в памятми и обламывал вывод на экран
+ AM&gt; какого-либо каталога. (как будто его и нет) Тоесть ни какая утилита
+ AM&gt; (Ndd ,Scandisk ,Chkdsk , ...) не могла бы его показать
+
+Держи
+Serg.
+
+--- GoldED 3.00.Alpha1+
+ * Origin: Это qram насмех! (2:5020/110.29)
+
+
+{&gt; Cut here. FileName= PCLREAD.ME }
+  PCLOCK.SYS Version 1.6 (C) 1991 Sergdesign & VVS Computers.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ PCLOCK.SYS включается в CONFIG.SYS : DEVICE=PCLOCK.SYS
+Он защищает себя, CONFIG.SYS и три директории (или файлы),
+имена которых устанавливаются инсталлятором INST_PCL.EXE.
+Все изменения действительны только после перезагрузки машины.
+При запуске инсталлятор запрашивает пароль SuperUser.
+ При инсталляции можно защитить жесткий диск - при загрузке
+с дискеты он будет недоступен на логическом уровне.
+Для этого на вопрос "Install PC Lock partition ?" ответьте "Yes".
+
+ Два уровня защиты :
+  1) Открываются только дисководы, закрытые директории
+     остаются закрытыми - пароль 'drive password'.
+  2) Пароль SuperUser - защита снимается полностью.
+
+ Для включения защиты вводится неправильный пароль.
+
+ По умолчанию :
+  SuperUser password : 'rabbit',
+  Drive password : 'unlock',
+  First directory : 'GAME',
+  Second directory : '',
+  Third directory : ''.
+
+ Вызов - нажатием hot-key 'Alt_Tab'.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
