@@ -1,0 +1,78 @@
+<html><head><title>ArtCopy 1.0 - BGI Drivers for Printers and Plotters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='BGI Device Drivers for Hewlett Packard LaserJet, Epson Compatible Dot Matrix Printers and HPGL Pen Plotters'>
+<meta name="keywords" content="pascal, sources, source code, artcopy, printing, Принтеры и Печать ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Принтеры и Печать</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;artcopy
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ArtCopy 1.0 - BGI Drivers for Printers and Plotters</TD>
+<TD nowrap class=black>&nbsp;B. McAra Software</TD>
+<TD class=black align='right'>12.04.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">BGI Device Drivers for Hewlett Packard LaserJet,
+Epson Compatible Dot Matrix Printers and HPGL Pen Plotters</TD><TD class=black colspan=2 align='right'><br><A HREF="artcopy.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                                   A R T C O P Y
+
+                                   Version 1.00
+
+                                BGI Device Drivers
+
+                           for Hewlett Packard LaserJet
+
+                       Epson Compatible Dot Matrix Printers
+
+                                        and
+
+                                 HPGL Pen Plotters
+
+
+                      Copyright (C) B. McAra Software 1991
+                                All Rights Reserved
+
+
+
+          ArtCopy
+          Introduction
+
+                  ArtCopy is a collection of printer driver files which
+          make use of the Borland Graphic Interface to provide programmers
+          who use Borland compilers (Turbo Pascal, Turbo C, C++ and Prologue)
+          with a convenient way of producing hard-copy output of screen
+          graphics.
+
+                  These drivers do not merely "dump" screen buffers to the
+          printer.  The full resolution of the output device can be used.
+          Graphic library calls such as Line, Circle, PieSlice etc. produce
+          output on printers and plotters.
+
+                  ArtCopy is written in assembler to maximize speed and
+          to minimize memory requirements leaving as much memory as possible
+          for your programs and data.  Since printers like the HP LaserJet
+          can produce full page output at 300 dots per inch the graphics
+          buffer could be as large as 1 megabyte.  ArtCopy uses temporary
+          files to swap data to disk thus keeping memory demands of the
+          driver and graphics buffer to about 5000 bytes. The temporary
+          file can be directed to a RAM disk to maximize speed (Developers
+          Package only).
+
+                  ArtCopy is available in two versions: an Introduction
+          Package which provides basic printer functionality with BGI
+          files for laser printers, dot matrix printers and HPGL plotters
+          and The BGI Developers Package which provides more advanced
+          printer support including user configuration settings and
+          complete source code.
+
+                  The Introduction Package is available for free - include $5
+          for shipping and handling and can be used to create program

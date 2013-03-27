@@ -1,0 +1,43 @@
+<html><head><title>Печать символа с проверкой готовности</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Ассемблерная процедура печати символа с проверкой готовности'>
+<meta name="keywords" content="pascal, sources, source code, sendchar, printing, Принтеры и Печать ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Принтеры и Печать</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sendchar
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Печать символа с проверкой готовности</TD>
+<TD nowrap class=black>&nbsp;Сергей Касандров</TD>
+<TD class=black align='right'>07.10.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Ассемблерная процедура печати символа с проверкой готовности</TD><TD class=black colspan=2 align='right'><br><A HREF="sendchar.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  "Super User" &lt;root@niimet.kaluga.su&gt;
+Subj: печать через 17h
+Organization: NIIMET
+
+                   Привет всем !
+
+   Недавно пару часов провозился с распознаванием нажатия
+Off Line на принтере (Epson LX-1050) при печати через
+прерывание 17h, и сделал приводимую ниже процедуру; если
+принтер выбран и Off Line, то она завершается с установлен-
+ными 4 и 3 ($18) битами внешней переменной LptStatus, за
+исключением того (маловероятного) cлучая, когда принтер
+перешел в Off Line после завершения цикла ожидания готовности
+и перед посылкой символа на принтер - тогда процедура будет
+ждать перевода принтера в On Line. Есть другие решения?
+
+                                       Сергей.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

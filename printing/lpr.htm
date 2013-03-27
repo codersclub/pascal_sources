@@ -1,0 +1,80 @@
+<html><head><title>Печать на Laser Jet в среде DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Простая утилита для печати текстовых файлов на HP Laser Jet в среде DOS плюс 2 моноширинных фонта'>
+<meta name="keywords" content="pascal, sources, source code, lpr, printing, Принтеры и Печать ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Принтеры и Печать</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;lpr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Печать на Laser Jet в среде DOS</TD>
+<TD nowrap class=black>&nbsp;Валерий Вотинцев</TD>
+<TD class=black align='right'>12.09.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Простая утилита для печати текстовых файлов
+на HP Laser Jet в среде DOS плюс 2 моноширинных фонта</TD><TD class=black colspan=2 align='right'><br><A HREF="lpr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>15k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    LPR - Простая утилита для печати текстовых файлов
+            на HP Laser Jet в среде DOS.
+
+    (c) 1993 by Valery Votintsev, Info-Link.ltd
+
+    Как-то однажды мне потребовалось распечать какой-то текст
+на лазернике, но ни Windows, ни WinWord, ни даже Лексикона на
+том компьютере не оказалось :-( . Инсталлировать Windows очень
+уж не хотелось, да и не всегда это возможно (у некоторых
+заказчиков до сих пор эксплуатируются 286-е машины).
+
+    В тот раз выкрутиться удалось - нашел у себя на дискетах
+несколько лазерных PCL фонтов, и "ручками" сделал
+                COPY/B FONT.SFP PRN
+Ну, а затем и текст отправился туда же.
+
+    В принципе этот метод не так уж и плох, но ведь
+"лень-матушка вперед родилась". Вот тогда и пришла идея
+быстренько написать программку для загрузки в лазерник сначала
+фонта, а затем и собственно теста прямо из командной строки
+DOC.
+
+    Программа была благополучно написана, но вот с фонтами была
+напряженка. Тексты-то Русские! А фонтов русских маловато...
+Или они неполные... Или пропорциональные - и тогда все Ваши
+рамочки, нарисованные в МЕ - печатаются вкривь и вкось :-(
+
+    Пришлось поизучать формат PCL и искать инструмент для
+проектирования своих фонтов. Инструментов оказалось
+предостаточно! Но как-то больше всего понравился пакет "Проза",
+входящий в стандартную поставку Лексикона. Идея там очень
+проста: "Проза" просто конвертирует фонты из одного вида в
+другой и обратно. Конвертируете из PCL в текстовый вид, правите
+нарисованные буковки как хотите, добавляете свои, и затем
+конвертируете обратно в формат для LaserJet. И все.
+
+    Ниже приводится текст этой простой программы и 2 фонта:
+один - "стандартный" (lprs.fnt - PICA), а другой - "плотный"
+(lprc.fnt - ELIT).  Обратите внимание - оба фонта
+НЕПРОПОРЦИОНАЛЬНЫЕ, т.е.  у них все буквы одинаковой ширины.
+
+    Кстати, эти фонты можно использовать и без программы.
+Просто из DOS-а предварительно копируете один из фонтов на
+принтер, а потом печатаете свои тексты как на обычный матричный
+принтер.
+
+    В параметрах программы, я думаю, разберетесь.
+
+    В общем, пробуйте.
+
+
+    Валерий Вотинцев    E-Mail: vot@infolink.tver.su
+                          FIDO: 2:5021/2.30</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
