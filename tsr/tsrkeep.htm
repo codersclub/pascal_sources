@@ -1,0 +1,66 @@
+<html><head><title>Об использовании KEEP() в резидентах</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Небольшая статья Виктора Вагнера об использовании KEEP для создания резидентных программ'>
+<meta name="keywords" content="pascal, sources, source code, tsrkeep, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tsrkeep
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Об использовании KEEP() в резидентах</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>12.12.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Небольшая статья Виктора Вагнера об использовании KEEP
+для создания резидентных программ</TD><TD class=black colspan=2 align='right'><br><A HREF="tsrkeep.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: vitus@agropc.msk.su (Vitus Wagner)
+Organization: Agroecological problems Center
+
+     Процедура Keep - объявляет программу резидентной и делает это тупо и в
+лоб.  Как и EXEC она не сделает ничего хорошего если вы не измените
+распределение памяти в вашей программе, поскольку она резервирует всю память,
+принадлежащую Вашей программе. Поэтому по умолчанию после ее выполнения Ваша
+программа займет вообще всю память и работать после ее загрузки станет
+невозможно.
+
+     Поэтому
+     1. поставьте в начале программы (до слова program или uses) управллящий
+комментарий {$M xxx,0,zzz} где xxx - размер стека - минимум 1024, обычно
+достаточно 4096 для резидентной программы, а по умолчанию 16384, 0 -
+минимально допустимый размер динамической памяти (как правило ни на что не
+влияет) zzz - максимально допустимый размер динамической памяти. Ваша
+программа займет в памяти 256+CodeSize+DataSize+xxx+zzz байт, где Codesize и
+DataSize - информация, которую выдает компилятор TPC после успешной
+компиляции или которую можно увидеть выполнив команду меню File/Get Info в
+среде turbo. Не надейтесь, что и после этого память занимаемая Вашей
+программой будет меньше 13К
+
+     2. Процедура Keep не выполняет ExitProc и не освобождает перехваченные
+программой вектора прерываний, поэтому перед ее вызовом вызовите SwapVectors.
+
+     3. Позаботьтесь о том, чтобы можно было как-то добраться до того кода
+который вы сажаете резидентным, для чего опишите хотя бы одну процедуру типа
+interrupt и с помощью процедуры SetIntVec установите на нее вектор
+какого-нибудь прерывания. Процедуры interrupt вообще темы для отдельного
+разговора, но вот вам совет -  не заводите в них локальных переменных (лучше
+совсем) ибо локальные переменные живут в стеке, а стек во время выполнения
+процедуры interrupt это даже не тот килобайт, который вы выделили диррективой
+$M а то, на что расщедрилась DOS. А она выделяет иногда всего несколько
+десятков байт, куда еще перед началом процедуры запихивается содержимое ВСЕХ
+регистров процессора.
+
+     И вообще - хотите написать хороший резидент - пишите на ассемблере ;-)
+
+Origin  "All dragons can fly"</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

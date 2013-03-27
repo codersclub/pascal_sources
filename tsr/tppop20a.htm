@@ -1,0 +1,79 @@
+<html><head><title>Turbo POP 2.0a - Memory Resident PopUp Routines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='TURBO POP - это модуль для для быстрой и легкой разработки резидентных ( TSR ) программ. Приведены примеры использования и простая оконная система для использования внутри резидента.  The Turbo Pascal Units contained in this package will enable you to quickly and easily create popup programs. Also included TSR samples and very simple windowing package. All source code is included so that you may modify it to your hearts desire.'>
+<meta name="keywords" content="pascal, sources, source code, tppop20a, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tppop20a
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Turbo POP 2.0a - Memory Resident PopUp Routines</TD>
+<TD nowrap class=black>&nbsp;Ross Neilson Wentworth</TD>
+<TD class=black align='right'>01.11.1989</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">TURBO POP - это модуль для для быстрой и легкой разработки
+резидентных ( TSR ) программ. Приведены примеры использования
+и простая оконная система для использования внутри резидента. <br>
+The Turbo Pascal Units contained in this package
+will enable you to quickly and easily create popup programs.
+Also included TSR samples and very simple windowing package.
+All source code is included so that you may modify it to your
+hearts desire.</TD><TD class=black colspan=2 align='right'><br><A HREF="tppop20a.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>57k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                          T U R B O    P O P
+
+             Memory Resident PopUp Routines Version 2.0a
+                     for Turbo Pascal Version 5.0
+
+                          Copyright (c)1988
+                       Ross Neilson Wentworth
+
+
+                              DISCLAIMER
+
+                    This software is provided without
+                     warranty, expressed or implied.
+
+
+The Turbo Pascal Units contained in this package will enable you to
+quickly and easily create popup programs.  Also included is a very simple
+windowing package.
+
+All source code is included so that you may modify it to your hearts
+desire.  Do NOT release modified versions of this package under any
+circumstances.
+
+Turbo Pascal Version 5.0 is required to use this package.  TASM 1.01
+or MASM 5.1 is required to to re-assemble the low-level modules.  Minor
+modifications are required for proper assembly with MASM.
+
+
+Features of This Package
+========================
+
+  o Easily create memory resident popup programs (SideKick-like).
+  o Automatic program detection to prevent multiple loading.
+  o Allows TSR's with conflicting hot-keys
+  o Simple program removal
+  o Uses proven TSR techniques.
+  o All DOS functions allowed from within resident program (except
+    I/O redirection), you can safely access the disk!
+  o No load-order limitations (except those imposed by other TSR's).
+  o Low code overhead, slightly over 1k EXE size increase to standard
+    application.
+
+
+SAMPLE PROGRAMS
+===============
+
+POPDICE is a fully functional sample pop-up program.  After loading, pressing
+ALT-LeftShift-D will 

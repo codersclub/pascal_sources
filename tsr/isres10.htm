@@ -1,0 +1,66 @@
+<html><head><title>ISRES v1.0 -  Check if a Program is Already Resident</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='IsRes - Набор процедур, позволяющих программе определить, загружена ли уже в память копия данной резидентной программы, что позволяет предотвратить повторную загрузку TSR.  unit IsRes - Routines that allow a program to determine if another copy of itself is already resident in memory. The supplied example program, RESTEST, illustrates the use of ISRES in such a case.'>
+<meta name="keywords" content="pascal, sources, source code, isres10, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;isres10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;ISRES v1.0 -  Check if a Program is Already Resident</TD>
+<TD nowrap class=black>&nbsp;Brian Foley</TD>
+<TD class=black align='right'>19.10.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">IsRes - Набор процедур, позволяющих программе определить,
+загружена ли уже в память копия данной резидентной программы,
+что позволяет предотвратить повторную загрузку TSR. <br>
+unit IsRes - Routines that allow a program to determine
+if another copy of itself is already resident in memory.
+The supplied example program, RESTEST, illustrates
+the use of ISRES in such a case.</TD><TD class=black colspan=2 align='right'><br><A HREF="isres10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">ISRES - Routines to determine if a program is already resident
+--------------------------------------------------------------
+Brian Foley
+TurboPower Software
+1/90
+Version 1.0
+Released to the public domain
+
+Overview
+----------------------------------------------------------------------------
+
+The main purpose of ISRES is to provide a facility for non-resident programs
+similar to TPTSR/OPTSR's standard module interface. That is, it provides
+routines that allow a program to determine if it is being loaded for a
+second time. The typical use for ISRES is in a program that allows other
+programs to be executed, and needs to prevent the user from loading a second
+copy of the same program. The supplied example program, RESTEST, illustrates
+the use of ISRES in such a case.
+
+A secondary use of ISRES is to provide a communication channel between
+programs. When you call ISRES's Install routine, you can specify a pointer
+to a data structure or routine that might be of interest to other programs.
+This hook can be used to allow other programs access to a program's data, by
+passing Install the address of that data. Or it can be used to allow other
+programs to call a special routine, by passing Install the address of that
+routine.
+
+When using the hook for the latter purpose, keep in mind that the routine in
+question must either 1) be compiled FAR or 2) be of type interrupt. If the
+routine is *not* of type interrupt, it cannot refer to any data stored in
+the data segment unless it sets up the DS register first. Practically
+speaking, this means that the routine must be written in assembly language.
+If the procedure *is* of type interrupt, the DS register will be set up
+automatically, so the routine may refer to global data.
+
+If you plan

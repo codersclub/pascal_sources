@@ -1,0 +1,93 @@
+<html><head><title>Применение Interrupt в TP6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как написать свою процедуру обработки прерывания'>
+<meta name="keywords" content="pascal, sources, source code, tp6intr, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tp6intr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Применение Interrupt в TP6</TD>
+<TD nowrap class=black>&nbsp;Петр Портянский</TD>
+<TD class=black align='right'>26.07.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как написать свою процедуру обработки прерывания</TD><TD class=black colspan=2 align='right'><br><A HREF="tp6intr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From:  Pete E. Portyansky &lt;pete@cnii.tula.su&gt;
+Subject: Re: int21
+Organization: cniisu,Tula,Russia
+
+   Fri, 23 Jul 1993 vitaly@stc.simbirsk.su (Vitaly Nikolaev) писал:
+
+&gt;     Мне нужно написать программу которая оставалась бы в
+&gt;     памяти резидентом и активировалась при вызове 21 пре-
+&gt;     рывания при этом она должна проверять какая функция
+&gt;     и если это открытие файла то выполняются определенные
+&gt;     действия а потом также как и в случае другой
+&gt;     функции управление передается стандартному обработчику
+&gt;     так чтобы другие программы ничего не заметили.
+&gt;
+&gt;   Дело вот в чем: когда я объявляю процедуру interupted
+&gt;   то она автоматически запоминает регистры в стеке
+&gt;   после этого она выполняет действия и вызывает исходное
+&gt;   int21 которое возвращает какие то результаты которые
+&gt;   надо бы передать вызывающей программе, но в конце
+&gt;   моего обработчика опять же автоматически востанавливaются
+&gt;   регистры и получается, как будто ничего и не вызывалось.
+&gt;   Вот как с этим бороться ???????????????????
+
+
+  cut from user's guide 6.0 . my !!!
+
+                   Написание процедур прерывания.
+
+     Процедура прерывания  объявляется  с   директивой   Interrupt.
+Каждая  процедура  прерывания должна иметь следующий заголовок (или
+часть его, как описано ниже):
+
+     procedure IntHandler(Flags, CS, IP, AX, BX, CX, DX,
+                          SI, DI, DS, ES, BP: Word);
+     interrupt;
+     begin
+     ...
+     end;
+
+     Как Вы  видите,  все регистры передаются как псевдо-параметры.
+Так,  что Вы можете их использовать и модифицировать в Вашем  коде.  !!!!!
+Вы  можете опустить некоторые или все параметры,  начиная с Flags и
+до BP.  Будет ошибкой - объявить больше параметров, чем приведено в
+предыдущем  примере  или  же  пропустить параметр без пропуска всех
+стоящих до него (но сообщения об ошибке не будет). Пример:
+
+     procedure IntHandler(DI,ES,BP : Word); {неверно}
+
+     procedure IntHandler(SI,DI,DS,ES,BP : Word); {неверно}
+
+     На входе   процедура   обработки   прерываний    автоматически
+сохраняет все  регистры  (вне зависимости от заголовка процедуры) и
+инициализирует регистр DS :
+
+     push   ax
+     push   bx
+     push   cx
+     push   dx
+     push   si
+     push   di
+     push   ds
+     push   es
+     push   bp
+     mov    bp,sp
+     sub    sp, LocalSize
+     mov    ax, SEG DATA
+     mov    ds,ax
+
+     Заме

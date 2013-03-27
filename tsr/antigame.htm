@@ -1,0 +1,72 @@
+<html><head><title>Резидентный перехватчик ANTIGAME</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Резидентная программа, запрещающая переход в графический режим'>
+<meta name="keywords" content="pascal, sources, source code, antigame, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;antigame
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Резидентный перехватчик ANTIGAME</TD>
+<TD nowrap class=black>&nbsp;Ярослав Мигач</TD>
+<TD class=black align='right'>17.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Резидентная программа, запрещающая переход в графический режим</TD><TD class=black colspan=2 align='right'><br><A HREF="antigame.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         AntiGame V 1.0
+                     (c) 1992 Ярослав Мигач
+
+      Представляю Вашему вниманию одну интересную программу.
+  Она может быть полезна как в качестве примера резидентного
+  перехватчика на языке Turbo Pascal, так и для практического
+  использования в качестве средства борьбы с чересчур большими
+  любителями игрушек на машинах коллективного пользования.
+  ( Житья от них нет. ).
+      Толчком для написания программ явились частые вызовы к заказчикам,
+  которые постоянно зараждают вирусами свои машины, занося их с
+  новыми игрушками, в результате чего страдает прикладное ПО и
+  базы данных. Программа была использована из AUTOEXEC.BAT.
+      AntiGame при запуске с параметром вызывает из текущего каталога
+  программу AIDSTEST ( да простит меня Лозинский ) и тестирует
+  диск передавая указанный параметр AIDSTESTу. Программа перехватывает
+  INT 10 - функцию переключения видеорежимов и запрещает переключение
+  видеорежимов старше 3, т. е. всю графику. Однако существует специальное
+  средство временного отключения блокировки для "своих" программ.
+  Тексты программ снабжены комментариями, так что разобратся не составит
+  труда. Желаю успехов!  Надеюсь, что приведенные материалы будут
+  Вам полезны.
+
+     Программа распространяется как FREEWARE. Вы модете использовать
+   тексты приведенных программ как Вам заблагорассудится.
+
+
+   ANTIGAME.ASM - модуль перехватчика INT 10
+
+   ANTIGAME.PAS - описываемая программа
+
+   SCR.INC      - ноты созданные программой MELODY
+
+   SGP.PAS      - модуль установки доступа ко всем
+                видеорежимам через AntiGame
+
+   SETGAME.PAS  - программа установки доступа ко всем
+                  видеорежимам на заданное количество раз
+
+   WIN.ASM      - Процедуры низкоуровневого текстового
+                оконного интерфейса фирмы Borland
+
+
+   г. Киев  1992
+   тел. 441-40-81 (раб)  518-09-01 (дом)
+   Ярослав Мигач</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,87 @@
+<html><head><title>Кое что о резидентах</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Статья Виктора Вагнера о резидентных программах'>
+<meta name="keywords" content="pascal, sources, source code, abouttsr, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;abouttsr
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Кое что о резидентах</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>17.05.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Статья Виктора Вагнера о резидентных программах</TD><TD class=black colspan=2 align='right'><br><A HREF="abouttsr.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                      Кое-что о резидентах
+
+ В 6 номере "Монитора" за 93 год автор статьи "Резидентный
+будильник на Turbo Pascal" задает вопрос "почему не работает
+обработчик прерывания 2F в резидентном режиме, хотя он
+прекрасно работает в нерезидентном?". Ответ очевиден - все дело
+в размерах стека. Процедура , описанная как interrupt в Turbo
+Pascal при входе сохраняет в стеке содержимое всех регистров
+процессора, да еще и размещает в нем свои локальные переменные.
+В нерезидентной программе это не страшно, так как для этого
+используется ее стек, который по умолчанию равен 16К, а при
+работе резидентного обработчика объем стека может быть
+существенно меньше. Поскольку прерывание 2F перехватывают все,
+кому не лень, и каждый из обработчиков занимает по меньшей мере
+6 байт стека (флаги+адрес возврата), при попытке запихать туда
+все регистры стек может переполниться со всеми вытекающими
+последствиями. Единственный выход из этой ситуации - описывать
+процедуру не как interrupt и писать ее на встроенном
+ассемблере, вставляя в конец кода IRET вручную. (не забудьте
+поставить перед IRET POP BP, так как в начало каждой процедуры
+на встроенном ассемблере добавляется
+ PUSH BP
+ MOV BP,SP
+При этом, если у процедуры нет локальных переменных, вы теряете
+только 2 байта стека. После этого необходимо переключить стек
+на свой и далее можно делать все что угодно.
+  Вообще, если вы пишете обработчик прерывания на Turbo Pascal
+рекомендуется разбить его на две процедуры:
+  Procedure DoHandle;
+   var
+      .....
+   {Имеет столько локальных переменных, сколько вам надо}
+   begin
+     {Делает то, что вам надо}
+   end;
+ и
+  Procedure HandleInt(...);interrupt;
+  begin
+   {Запись нужных вам регистров в глобальные переменные}
+   GlobalAX:=AX;
+  ...
+   {переключение стека}
+   asm
+    MOV CallerSP,SP
+    MOV CallerSS,SS
+    MOV SS,MySS
+    Mov SP,MYSP
+   end;
+   {Вызов собственно обработчика}
+   DoHandle;
+   {переключение стека обратно}
+   asm
+    MOV SS,CallerSS
+    MOV SP,CallerSP
+   end;
+   {Модификация тех регистров, которые вы хотите изменить}
+   AX:=GlobalAX;
+  end;
+где использование глобальных переменных GlobalAX и т.д.
+необходимо потому, что после переключения стека доступ к
+параметрам процедуры interrupt будет невозможен, назначение
+переменных  CallerSS и CallerSP очевидно (они тоже должны быть
+глобальными, либо описанными в 

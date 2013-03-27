@@ -1,0 +1,69 @@
+<html><head><title>TSR 1.0 - Functions for TSR programming</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для создания резидентных программ. В качестве примера приводится 3 тестовых TSR - программы.  Units and 3 example programs for TSR programming. Inspired by article published in german magazine "DOS International" june 1992 by Reiner Wahler.'>
+<meta name="keywords" content="pascal, sources, source code, pptsr10, tsr, Резидентные Программы ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Резидентные Программы</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pptsr10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TSR 1.0 - Functions for TSR programming</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:pp@win.tue.nl">Peter Peters</a></TD>
+<TD class=black align='right'>12.02.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для создания резидентных программ.
+В качестве примера приводится 3 тестовых TSR - программы. <br>
+Units and 3 example programs for TSR programming.
+Inspired by article published in german magazine "DOS International"
+june 1992 by Reiner Wahler.</TD><TD class=black colspan=2 align='right'><br><A HREF="pptsr10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>20k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">GENERAL
+
+This is another go at writing TSR programs using turbo pascal. The
+units and example programs shown here are mainly from the German
+magazine 'DOS international', as is stated in the program text as well.
+I modified this stuff :
+
+   1 - because it did not work.
+   2 - because I thought I had do do it differently :-)
+
+Think of it what you like, it's always nice to see that somebody
+else did it in a different way, and learning from that....
+
+You can use this stuff as you wish, just give credit where it's due.
+
+I'm willing to answer any questions about this stuff. You drop me
+an e-mail (address at end of this file).
+
+Use and re-use of this stuff is at your own risk.
+
+INSTALLATION
+
+Well, you extracted the archive, so let's not talk about that...
+Just use the makefile (if you have make and sed). Or do the next:
+
+If you have tasm (turbo assembler) copy from tsr.pas the tsr.asm
+module part into a file "tsr.asm" (you cannot miss it, just look
+inside the tsr.pas file). Compile tsr.asm using tasm after removing
+all the ";" that are at the first position on every line.
+If you do not have tasm, use "tsr.obj" from the archive.
+Compile the applications "filer", "beeper" and "funfunk" using
+tpc or the integrated environment. DO NOT run the TSR's from
+within the environment !, run them at DOS level.
+The application program "keycode" is useable determining which
+key code to use for hotkeys in the tsr stuff.
+
+Good luck !
+
+Peter Peters. (pp@win.tue.nl)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
