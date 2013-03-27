@@ -1,0 +1,93 @@
+<html><head><title>MED v2.95 - Simple Text Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простой полноэкранный текстовый редактор. Компилируется в TP5.0...BP7 в реальном и защищенном режиме. Позволяет обрабатывать файлы размером более 64k. Вместо горизонтального скроллинга экрана используется свертка (wrapping) строки до ширины 80 символов.<br><font color=#666666> med295.pas: full screen editor, Version: 295 (of Feb-95). (GNU-CopyLeft) Mohsin Ahmed, mosh@cs.albany.edu Free for non-commercial use, can be used as an editor toolbox! Compiles with: Turbo Pascal 5.0, used and tested on IBM/XT &amp; AT. Speed: Good enough on a 286 AT with all range checks on.</font>">
+<meta name="keywords" content="pascal, sources, source code, med295, text, Текстовые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Текстовые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;med295
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;MED v2.95 - Simple Text Editor</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:mosh@cs.albany.edu">Mohsin Ahmed</a></TD>
+<TD class=black align='right'>13.02.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<img border=0 align=left width=60 height=60 vspace=4 hspace=8 alt="" src="med295.gif"><p style="margin-left:20px">Простой полноэкранный текстовый редактор.
+Компилируется в TP5.0...BP7 в реальном и защищенном режиме.
+Позволяет обрабатывать файлы размером более 64k.
+Вместо горизонтального скроллинга экрана используется
+свертка (wrapping) строки до ширины 80 символов.<br><font color=#666666>
+med295.pas: full screen editor, Version: 295 (of Feb-95).
+(GNU-CopyLeft) Mohsin Ahmed, mosh@cs.albany.edu
+Free for non-commercial use, can be used as an editor toolbox!
+Compiles with: Turbo Pascal 5.0, used and tested on IBM/XT & AT.
+Speed: Good enough on a 286 AT with all range checks on.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="med295.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>9k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  med295.pas: full screen editor, Version: 295 (of Feb-95).
+  (GNU-CopyLeft) Mohsin Ahmed, mosh@cs.albany.edu
+  Free for non-commercial use, can be used as an editor toolbox!
+  Compiles with: Turbo Pascal 5.0, used and tested on IBM/XT & AT.
+  Speed: Good enough on a 286 AT with all range checks on.
+  ----------------------------------------------------------------------
+  Usage:
+    C:\&gt; editor FileName
+  Max line length is LineSz (80) chars, it will split longer lines.
+  Edit keys:
+             BackSpace    :  delete char before cursor.
+             Delete       :  delete char under cursor.
+             Insert       :  toggle insert/overwrite mode.
+             Return       :  Break line in Insert mode, else next line,
+             Tab          :  Insert 10 spaces,
+             F1,F2        :  +/- Foreground Color.
+             F3,F4        :  +/- Background Color.
+  &lt;&lt; Arrow keys &gt;&gt;
+             Left/Right   : Char Left/Right,
+             C-Left/Right : Word Left/Right,
+             C-Home/End   : Delete to line begin/end,
+             Up/Dn        : Prev/Next line,
+             PgUp/PgDn    : Prev/Next Page,
+             C-PgUp/PgDn  : First/Last Line,
+  &lt;&lt; Control (C-) keys &gt;&gt;
+             C-J          : Join with next line.
+             C-T          : Delete word.
+             C-Y          : Delete line.
+  &lt;&lt; Esc (Meta-) keys &gt;&gt;
+             M-d          : Delete this line,
+             M-D          : Delete lines upto the marked line,
+             M-f          : Change current File Name,
+             M-j          : Join this and next line,
+             M-m          : Mark this line,
+             M-p/P        : Put yanked/Yanked line, at eol,
+             M-q          : Quit.
+             M-r          : Read from another file,
+             M-u          : Undo current line, restore deleted line,
+             M-x          : Write file and quit,
+             M-y/Y        : Yank line, to eol,
+             M-w          : Write to another file,
+             M-/string    : search for string (case sensitive),
+
+  &lt;&lt; SCREEN-LAYOUT &gt;&gt;
+  01 Date and Time.                       RowDate
+  02 Col,Row,Lines,Mode Info.             RowMode
+  03--------------------------            RowTop
+  04                                      RowMin
+  ..
+  19 CurPtr^.prev^.dat
+  20 CurPtr^.dat                          Row
+  21 CurPtr^.next^.dat
+  22                                      RowMax
+  23--------------------------            RowBot
+  24 Reading/Writing/:ESC-Cmds/FileName   RowMeta
+  25 Line Number                          RowNum
+
+  If you have a job, I have the time and skills, send email to
+    mosh@cs.albany.edu, also try finger mosh@cse.iitb.ernet.in
+    Tel. 518-432-9662 (H) (USA).</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

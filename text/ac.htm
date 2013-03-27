@@ -1,0 +1,81 @@
+<html><head><title>Перекодировщик текстов с выделенными шрифтами</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Attribute Convertor. Конвертер шрифтовых выделений между форматами распространенных текстовых редакторов'>
+<meta name="keywords" content="pascal, sources, source code, ac, text, Техтовые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Техтовые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;ac
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Перекодировщик текстов с выделенными шрифтами</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:vitus@fe.msk.ru">Виктор Вагнер</a></TD>
+<TD class=black align='right'>24.03.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Attribute Convertor. Конвертер шрифтовых выделений
+между форматами распространенных текстовых редакторов</TD><TD class=black colspan=2 align='right'><br><A HREF="ac.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>8k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">    Attribute converter. Программа перекодирующая шрифтовые выделения между
+    форматами Лексикон, Микромир, Слово и Дело и некоторыми другими. В
+    частности позволяет удалить шрифтовые выделения из файла совсем.
+
+
+                          ПРОГРАММА AC
+                 Конвертер шрифтовых выделений
+     между форматами распространенных текстовых редакторов
+
+                       (С) SoftWeyr,1994
+
+                          Version 3.10
+
+    Программа AC позволяет взять файл, набранный в одном из ис-
+пользуемых форматов (например  Лексиконовском) с использованием
+шрифтовых выделений (жирность, подчеркивание и т.д.) и перевес-
+ти в другой формат (например в формат редактора "Слово и Дело")
+с сохранением этих выделений.
+
+    Программа поддерживает следующие форматы файлов:
+    Лексикон
+    Микромир (МИМ)
+    Слово и Дело
+    PrintFX
+    Управляющие коды Epson-совместимого принтера (файл в  таком
+         формате может быть распечатан с помощью команды
+            Copy filename prn
+         и получен в таких пакетах как FrameWork или Word с по-
+         мощью печати в файл. (это естественно  не касается си-
+         туации когда пакет печатает в графическом режиме, как
+         например ChiWriter))
+    Unix-style  выделения  - подчеркивание  символа  с  помощью
+         комбинации  BackSpace-подчерк,  выделение жирностью  с
+         помощью Backspace и повторного вывода символа.
+
+    Кроме того возможен перевод файла  в  формат  Plain Ascii -
+удаление всех шрифтовых выделений.
+
+    Конвертирование файла  из  формата  Plain ASCII естественно
+невозможно, так как откуда программа возьмет  информацию о том,
+где ставить шрифтовые выделения, если в исходном файле их нет.
+Кроме того, оно и не нужно, так как все вышеперечисленные прог-
+раммы и устройства  прекрасно понимают Plain ASCII как файл без
+шрифтовых выделений.
+
+    Использование программы:
+
+ac имя-входного-файла [вх_формат] [имя-выходного-файла] [вых_формат]
+
+где имя файла это и есть имя файла а формат - один из нижепере-
+численных ключей.  Параметры  в квадратных скобках являются не-
+обязательными. При запуске программы набирать квадратные  скоб-
+ки, естественно не нужно.
+
+Коды форматов:
+  /A plain  ASCII - файл  без 

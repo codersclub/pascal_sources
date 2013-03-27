@@ -1,0 +1,67 @@
+<html><head><title>EdVert - Вертикальный Редактор</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа предназначена для вертикального редактирования текстовых файлов (действие команд относится к одним и тем же позициям всех строк)'>
+<meta name="keywords" content="pascal, sources, source code, edvert, text, Техтовые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Техтовые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;edvert
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;EdVert - Вертикальный Редактор</TD>
+<TD nowrap class=black>&nbsp;Павел Северов</TD>
+<TD class=black align='right'>12.09.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа предназначена для вертикального редактирования текстовых
+файлов (действие команд относится к одним и тем же позициям всех строк)</TD><TD class=black colspan=2 align='right'><br><A HREF="edvert.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>3k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                +-----------------------+
+               ++ ВЕРТИКАЛЬНЫЙ РЕДАКТОР |
+               ||  Северов Павел  1991  |
+               |+----------------------++
+               | ИФЗ АН СССР 254-93-35 |
+               +-----------------------+
+
+Форма обращения:
+
+    EDVERT  PROGRAM.EXT  OTKUDA.EXT  KUDA.EXT
+
+       PROGRAM.EXT - файл содержащий команды для EDVERT;
+       OTKUDA.EXT  - входной файл;
+       KUDA.EXT    - выходной файл.
+
+   Программа предназначена для вертикального редактирования текстовых
+файлов (действие команд относится к одним и тем же позициям всех строк)
+
+  Команда должна начинаться с первой позиции строки, конец строки служит
+разделителем между командами. Пробел в первой позиции является признаком
+строки - комментария
+
+                         Команды EDVERT:
+
+= &lt;нач.поз.&gt; &lt;кон.поз.&gt; &lt;комментарий&gt; - определение столбца текста,
+                   без изменений попадающего в выходной файл;
+
++ &lt;некий текст&gt;  - данный текст будет вставлен во все выходные строки
+                   в соответствующей позиции;
+
+
+  ПРИМЕР:         PROGRAM.EXT        OTKUDA.EXT        KUDA.EXT
+  -------        +-----------+      +----------+     +------------+
+                 |  год рожд.|      |Вася  1962|     |1962,"Вася "|
+                 |= 7 10     |      |Петя  1961|     |1961,"Петя "|
+                 |  имя      |      |Маша  1963|     |1963,"Маша "|
+                 |+ ,"       |      |Basil 1960|     |1960,"Basil"|
+                 |= 1 5      |      |Piter 1965|     |1965,"Piter"|
+                 |+ "        |      |Mary  1963|     |1963,"Mary "|
+                 +-----------+      +----------+     +------------+</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

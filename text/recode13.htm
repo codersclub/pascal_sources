@@ -1,0 +1,80 @@
+<html><head><title>Перекодировка Текстов с Использованием XLT-Таблиц</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа перекодировки текстовых файлов с использованием XLT-таблиц в формате Dos Navigator'a.'>
+<meta name="keywords" content="pascal, sources, source code, recode13, text, Техтовые Утилиты ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Техтовые Утилиты</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;recode13
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Перекодировка Текстов с Использованием XLT-Таблиц</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5003/28.32">Max Filenko</a></TD>
+<TD class=black align='right'>16.05.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа перекодировки текстовых файлов с использованием XLT-таблиц
+в формате Dos Navigator'a.</TD><TD class=black colspan=2 align='right'><br><A HREF="recode13.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>13k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/2.30) ------------------- SU.PASCAL.MODULA.ADA -
+ From : Max Filenko                         2:5003/28.32    16 May 98  14:02:50
+ To   : Alexander Brichkin                                  19 May 98  13:52:07
+ Subj : Win -&gt; dos
+-------------------------------------------------------------------------------
+И чем ты меня обрадуешь, Alexander?
+
+14 May 98 18:32, Alexander Brichkin wrote to All:
+
+ AB&gt; Подкиньте кто-нить исходник сабжевого перекодаровщика текста этого
+ AB&gt; дела на паскале... Или универсального с юзанием внешних таблиц...
+
+Лови в трех письмах далее. Там полный исходник, модуль к нему, скомпилированная
+прога, набор xlt 18 штук (из комплекта Dos Navigator'a, самопальные, кое-что
+пролетало по RU.SHELL.DN), кое-какое описание. Hе самый быстрый алгоритм, но
+оптимизировался на минимальную работу с винтом. Писан на BP7.
+
+Hу раз это все, я пошел... привет родным...
+
+
+---
+ * Origin:  (2:5003/28.32)
+
+{&gt; Cut here. FileName= README.!!! }
+
+ Программа предназначена для перекодировки ТЕКСТОВЫХ файлов
+ с использованием XLT-таблиц в формате Dos Navigator'a.
+
+ Формат таблиц:  &lt;CharFrom&gt;&lt;CharTo&gt;...[&lt;CharFrom&gt;&lt;CharTo&gt;]
+
+ где &lt;CharFrom&gt; - символ, который перекодировать, а &lt;CharTo&gt; - на который.
+ Между блоками (&lt;CharFrom&gt;&lt;CharTo&gt;) могут стоять символы 0Dh, 0Ah,
+ программа их просто пропускает.
+
+ Формат запуска: ReCode.Exe &lt;FileIn&gt; &lt;FileOut&gt; &lt;XLT-Table&gt;
+
+ &lt;FileIn&gt; - файл который перекодировать.
+ &lt;FileOut&gt; - файл В который перекодировать.
+ &lt;XLT-Table&gt; - XLTфайл с помощью которого перекодировать.
+
+  В комплекте с программой идет архив (XLT.RAR) содержащий все известные мне
+  на данный момент таблицы перекодировки, и исходные тексты программы
+  (RECODE.PAS, THEMAXFI.PAS)
+
+  В некоторых парах таблиц (например Alt2Koi и Koi2Alt) перевод не
+  соответсвует действительности, прозьба не винить в этом программу.
+
+  Для  преобразования  XLT-файла  в  обратный ищите программу XLTRevers
+  By The Max.
+
+   History:
+
+ v1.0   Первая версия программы.
+ v1.1   В XLT-архив добавлен один XLT, программа немного оптимизированна.
+ v1.2 
