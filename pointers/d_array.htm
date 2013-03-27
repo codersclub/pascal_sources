@@ -1,0 +1,61 @@
+<html><head><title>Dynamic Array - Динамические Массивы</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль, pеализующий динамический массив.  - "постепенное" фоpмиpование массива    (добавлением в конец, если не известно     количество элементов).  - оpганизация всего массива "сpазу", если   количество элементов заpанее известно.  - удаление элемента (с освобождением памяти,   остальные элементы "сдвигаются" назад).  - два метода соpтиpовки.  - поиск.  - огpаничение по памяти - conventional.'>
+<meta name="keywords" content="pascal, sources, source code, d_array, pointers, Указатели ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Указатели</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;d_array
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Dynamic Array - Динамические Массивы</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:467/84.1">Constantin Pivovarov</a></TD>
+<TD class=black align='right'>03.11.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль, pеализующий динамический массив. <br>
+- "постепенное" фоpмиpование массива
+   (добавлением в конец, если не известно
+    количество элементов). <br>
+- оpганизация всего массива "сpазу", если
+  количество элементов заpанее известно. <br>
+- удаление элемента (с освобождением памяти,
+  остальные элементы "сдвигаются" назад). <br>
+- два метода соpтиpовки. <br>
+- поиск. <br>
+- огpаничение по памяти - conventional.</TD><TD class=black colspan=2 align='right'><br><A HREF="d_array.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Hi!
+
+По просьбам трудящихся :) кидаю версию организации динамических массивов.
+
+--- Terminate 5.00/Pro
+ * Origin: Все течет, все из меня... (2:467/84.1)
+
+Вкратце, как этим пользоваться.
+Например, самый тривиальный случай - нужно организовать массив из Word.
+Что делаем:
+1. Описываем переменную типа MemoryType (Var MyArray: MemoryType)
+2. _Обязательно_ инициализиpуем ее. (MyArray.Init(SizeOf(Word)).
+   Word - это, в данном случае, наш тип.
+3. Если известно число элементов заранее - делаем MyArray.InitArray(Count),
+   где Count - число элементов.
+4. Для того, чтобы добавить элемент в конец - MyArray.AddElement(@MyVar),
+   где MyVar - переменная типа Word (в нашем примере).
+5. Количество элементов в массиве - MyArray.RecCount.
+6. Самое мерзкое - как получить элемент массива:
+   Word(MyArray.TopPtr(I)^), где Word - наш тип, I - порядковый номер.
+7. Записать элемент на конкретное место можно двумя способами:
+   а) Рекомендуемый - MyArray.UpDateElement(@MyVar,I)
+   б) Не рекомендуемый (может не поддерживаться в следующих версиях при
+      использовании XMS/EMS/Disk) - Word(MyArray.TopPtr(I)^):=MyVar
+8. После использования желательно выполнить MyArray.Done</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
