@@ -1,0 +1,84 @@
+<html><head>
+<TITLE>Assembler Opcodes
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_prefixes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Prefixes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assembler_registers.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Registers"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Opcodes
+</h2></dir>
+<!-- Page content -->
+The opcodes are either instruction mnemonics or assembly directives.
+The list of supported instruction opcodes is given below.
+The only assembly directives that are allowed in TMT Pascal are
+DB, DW, and DD.
+<br>
+<br>
+<B>Example</B>
+<pre><B>asm</B>
+   DB  'a','b','c'
+   DB  'This code was copyrighted by GnueWare'
+   DW  1,2,4,8,16,$20,40h
+   DD  Offset HeapLo
+<B>end</B>;</pre>
+The DB, DW, and DD directive allow variable number of arguments,
+separated by commas. The other commonly used assembly directives
+can be emulated with Pascal statements. For instance, the EQU directive
+is emulated with <B>const</B>, while STRUCTs can be defined with the
+<B>type record</B> declaration.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_prefixes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Prefixes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_registers.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Registers"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Prefixes</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Registers</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.7 -</B></CENTER>
+</BODY></HTML>

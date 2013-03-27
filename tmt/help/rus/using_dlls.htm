@@ -1,0 +1,139 @@
+<html><head>
+<TITLE>Using DLL's
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="about_dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: About DLL's"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="writing_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing DLL's"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dlls.htm"><small>Dynamic-Link Libraries (DLL's)</small></a><dir><h2>Using DLL's
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: OS/2, Win32</B></center>
+<br>
+<br>
+TMT Pascal provides three ways to import procedures and functions:
+<br> 
+<br> 
+<B>By new name:</B>
+<br> 
+When a procedure or function is imported with a <B>name</B> clause specified,
+it is imported by a different name than its identifier.
+<br> 
+<br> 
+<B>By index:</B>
+<br> 
+When a procedure or function is imported with an <B>index</B> clause specified,
+it is imported by an ordinal (i.e. a given index).
+<br> 
+<br> 
+<B>By name:</B>
+<br> 
+When a procedure or function is imported with no <B>index</B> or <B>name</B>
+clause specified, it is imported explicitly by it's identifier name.
+<br> 
+<br> 
+<B>Example:</B>
+<br> 
+<br> 
+This external declaration imports the function ExitProcess from the system DLL
+called KERNEL32 (the Windows 32 kernel):
+<pre><B>procedure</B> ExitProcess <B>conv</B> arg_stdcall (uExitCode: DWORD);
+                   <B>external</B> kernel32dll <B>name</B> 'ExitProcess';</pre>
+<B>Example:</B>
+<br> 
+This example program imports ArcCos and ArcSin functions from the DLL called
+ARCs (see <a href="writing_dlls.htm">Writing DLLs</a>):
+<pre>program</B> TestDLL;
+<B>uses</B>
+  Strings;
+
+<B>const</B>
+  ARCs = 'arcs.dll';
+
+<font color = #000080>// import by name</font>
+{$ifdef __WIN32__}
+  <B>function</B> ArcCos <B>conv</B> arg_stdcall (X: Extended): Extended;
+                                <B>external</B> ARCs <B>name</B> 'ArcCos';
+{$else}
+  <B>function</B> ArcCos <B>conv</B> arg_os2 (X: Extended): Extended;
+                                <B>external</B> ARCs <B>name</B> 'ArcCos';
+{$endif}
+ 
+<font color = #000080> // import by index</font>
+{$ifdef __WIN32__}
+  <B>function</B> ArcSin <B>conv</B> arg_stdcall (X: Extended): Extended;
+                                     <B>external</B> ARCs <B>index</B> 1;
+{ $else}
+  <B>function</B> ArcSin <B>conv</B> arg_os2 (X: Extended): Extended;
+                                     <B>external</B> ARCs <B>index</B> 1;
+{$endif}
+ 
+<B>var</B> Arg: Extended;
+ 
+<B>begin</B>
+  <B>repeat</B>
+    Write('Argument ? ');
+    Readln(Arg);
+    <B>if</B> (Arg &lt; -1) <B>or</B> (Arg &gt; 1) <B>then</B>
+      Writeln('Argument must be in range: [-1..1]');
+   <B>until</B> (Arg &gt;= -1) <B>and</B> (Arg &lt;= 1);
+   Writeln('ArcCos(', Fls(Arg), ') = ', Fls(ArcCos(Arg)));
+   Writeln('ArcSin(', Fls(Arg), ') = ', Fls(ArcSin(Arg)));
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="about_dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: About DLL's"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="writing_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing DLL's"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">About DLL's</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Writing DLL's</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.2 -</B></CENTER>
+</BODY></HTML>

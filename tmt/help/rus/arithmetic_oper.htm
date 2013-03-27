@@ -1,0 +1,101 @@
+<html><head>
+<TITLE>Arithmetic Operators
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="expressions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Expressions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="boolean_oper.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Boolean Operators"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.8.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="expressions.htm"><small>Expressions</small></a><dir><h2>Arithmetic Operators
+</h2></dir>
+<!-- Page content -->
+Standard arithmetic operators listed below.
+<dir>
+<table border=1>
+<tr><th>&nbsp;Operator&nbsp;</th><th>Operation</th></tr>
+<tr><td align="center"><B>@</B></td><td>&nbsp;Pointer formation&nbsp;</td></tr>
+<tr><td align="center"><B>+</B></td><td>&nbsp;Unary sign identity&nbsp;</td></tr>
+<tr><td align="center"><B>-</B></td><td>&nbsp;Unary sign negation&nbsp;</td></tr>
+<tr><td align="center"><B>+</B></td><td>&nbsp;Addition&nbsp;</td></tr>
+<tr><td align="center"><B>-</B></td><td>&nbsp;Subtraction&nbsp;</td></tr>
+<tr><td align="center"><B>*</B></td><td>&nbsp;Multiplication&nbsp;</td></tr>
+<tr><td align="center"><B>Div</B></td><td>&nbsp;Integer division&nbsp;</td></tr>
+<tr><td align="center"><B>/</B></td><td>&nbsp;Real division&nbsp;</td></tr>
+<tr><td align="center"><B>Mod</B></td><td>&nbsp;Integer remainder&nbsp;</td></tr>
+<tr><td align="center"><B>And</B></td><td>&nbsp;Logical AND&nbsp;</td></tr>
+<tr><td align="center"><B>Xor</B></td><td>&nbsp;Logical XOR&nbsp;</td></tr>
+<tr><td align="center"><B>Not</B></td><td>&nbsp;Logical NOT&nbsp;</td></tr>
+<tr><td align="center"><B>Or</B></td><td>&nbsp;Logical OR&nbsp;</td></tr>
+<tr><td align="center"><B>Shl</B></td><td>&nbsp;Shift bits left&nbsp;</td></tr>
+<tr><td align="center"><B>Shr</B></td><td>&nbsp;Shift bits right&nbsp;</td></tr>
+</table>
+</dir>
+During binary operations both operands must be of compatible type.
+If the operands are of compatible type then the operation results in the
+same type of the operand. If the types are different then the result is
+the larger type.
+<br>
+<br>
+For integer operations, operands are converted to Longint and results are
+of the same type as the destination type. Longint or 32 bit operations
+are faster on the 80386 and 80486.
+<br>
+<br>
+During real operations, operands are converted to extended type and
+results are of the same type as the destination.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="expressions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Expressions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="boolean_oper.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Boolean Operators"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Expressions</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Boolean Operators</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.8.1 -</B></CENTER>
+</BODY></HTML>

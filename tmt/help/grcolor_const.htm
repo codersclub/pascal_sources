@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>Color constants
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="clipping_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Clipping constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="fillpattern_const.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Fill pattern constants"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.1.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_types_const_var.htm"><small>Graph Unit Types, Constants and Variables</small></a><dir><h2>Color constants
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Graph unit defines the following color constants:
+<pre> clBlack:        DWORD =0;
+ clBlue:         DWORD =1;
+ clGreen:        DWORD =2;
+ clCyan:         DWORD =3;
+ clRed:          DWORD =4;
+ clMagenta:      DWORD =5;
+ clBrown:        DWORD =6;
+ clLightGray:    DWORD =7;
+ clDarkGray:     DWORD =8;
+ clLightBlue:    DWORD =9;
+ clLightGreen:   DWORD =10;
+ clLightCyan:    DWORD =11;
+ clLightRed:     DWORD =12;
+ clLightMagenta: DWORD =13;
+ clYellow:       DWORD =14;
+ clWhite:        DWORD =15;</pre>
+<B>Remarks:</B>
+<br>
+All assigned values above are listed for 256-colored modes only.
+In HiColor and TrueColor SVGA modes those values will be automatically
+toned up by the Graph unit to a concrete graphic mode.
+I.e. those constants actually are constant-variables, which initialize
+whenever the current color mode changes. You may use color variables
+to display the same colors in different graphic modes (256-colored,
+HiColor or TrueColor).
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="clipping_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Clipping constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="fillpattern_const.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Fill pattern constants"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Clipping constants</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Fill pattern constants</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.1.5 -</B></CENTER>
+</BODY></HTML>

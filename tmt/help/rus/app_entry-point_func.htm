@@ -1,0 +1,138 @@
+<html><head>
+<TITLE>Application Entry-Point Function
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="app_responsibilities.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Application Responsibilities and Operation"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="writing_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing Dinamic-Link Libraries (DLLs)"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.8 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Application Entry-Point Function
+</h2></dir>
+<!-- Page content -->
+Every Control Panel application must export the standard entry-point function,
+<B>CPlApplet</B> (<!--1P4ANS3@-->WIN32.HLP). This function receives requests,
+in the form of Control Panel (CPL) messages, and carries out the requested
+work, such as initializing the application, displaying and managing the dialog
+box(es), and closing the application. 
+<br>
+<br>
+When the controlling application first loads the Control Panel application,
+it retrieves the address of the <B>CPlApplet</B> function and subsequently
+uses the address to call the function and pass it messages. The controlling
+application may send the following messages:
+<br>
+<br>
+<B>CPL_DBLCLK</B> (<!-- STZTW_@-->WIN32.HLP)
+<br>
+Sent to notify <B>CPlApplet</B> that the user has chosen the icon associated
+with a given dialog box. <B>CPlApplet</B> should display the corresponding
+dialog box and carry out any user-specified tasks.
+<br>
+<br>
+<B>CPL_EXIT</B> (<!--4N3ETFE@-->WIN32.HLP)
+<br>
+Sent after the last <B>CPL_STOP</B> message and immediately before the
+controlling application uses the <B>FreeLibrary</B> function
+(<!--3MCS_PM@-->WIN32.HLP) to free the DLL containing the Control Panel
+application. <B>CPlApplet</B> should free any remaining memory and prepare
+to close.
+<br>
+<br>
+<B>CPL_GETCOUNT</B> (<!--1AIFMFP@-->WIN32.HLP)
+<br>
+Sent after the <B>CPL_GETCOUNT</B> message (<!--1AIFMFP@-->WIN32.HLP) to prompt
+<B>CPlApplet</B> to return a number indicating how many dialog boxes it
+supports.
+<br>
+<br>
+<B>CPL_INIT</B> (<!--4N3IJFE@-->WIN32.HLP)
+<br>
+Sent immediately after the DLL containing the Control Panel application is
+loaded, to prompt <B>CPlApplet</B> to perform initialization procedures,
+including memory allocation.
+<br>
+<br>
+<B>CPL_INQUIRE</B> (<!--1OJ4CXW@-->WIN32.HLP)
+<br>
+Sent after the <B>CPL_GETCOUNT</B> message, to prompt <B>CPlApplet</B> to
+provide information about a specified dialog box. The lParam2 parameter of
+<B>CPlApplet</B> points to a <B>TCPLInfo</B> structure (<!--2J5U13@-->WIN32.HLP).
+<br>
+<br>
+<B>CPL_NEWINQUIRE</B> (<!--6B6PI7@-->WIN32.HLP)
+<br>
+Sent after the <B>CPL_GETCOUNT</B> message, to prompt <B>CPlApplet</B> to
+provide information about a specified dialog box. The lParam2 parameter is
+a pointer to a <B>TNewCPLInfo</B> structure (<!--2EDWYN3@-->WIN32.HLP).
+For better performance on Windows 95 and Windows NT version 4.0, your
+application should process <B>CPL_INQUIRE</B> and not <B>CPL_NEWINQUIRE</B>.
+<br>
+<br>
+<B>CPL_SELECT</B> (<!--ENNW76@-->WIN32.HLP)
+<br>
+This message is obsolete. Current versions of Windows do not send this message.
+<br>
+<br>
+<B>CPL_STOP</B> (<!--JR6SA7@-->WIN32.HLP)
+<br>
+Sent once for each dialog box before the controlling application closes.
+<B>CPlApplet</B> should free any memory associated with the given dialog box.
+<br>
+<br>
+You will find an example of Control Panel Application in
+<br>
+\TMTPL\SAMPLES\WIN32\CPL subdirectory.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="app_responsibilities.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Application Responsibilities and Operation"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="writing_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing Dinamic-Link Libraries (DLLs)"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Application Responsibilities and Operation</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Writing Dinamic-Link Libraries (DLLs)</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.8 -</B></CENTER>
+</BODY></HTML>

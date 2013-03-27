@@ -1,0 +1,6 @@
+.menu 	{COLOR: #D0D0F0; FONT-FAMILY: Arial,Verdana,Geneva,sans-serif; FONT-SIZE: 12pt; TEXT-DECORATION: none}
+.menu:hover {COLOR: #E0E000; FONT-FAMILY: Arial,Verdana,Geneva,sans-serif; FONT-SIZE: 12pt; TEXT-DECORATION: none}
+UL 	{margin-top:5; FONT-FAMILY: Arial,Verdana,Geneva,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+DD 	{margin-top:5; margin-left:25; FONT-FAMILY: Arial,Verdana,Geneva,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+TD 	{FONT-FAMILY: Arial,Verdana,Geneva,sans-serif; FONT-SIZE: x-small; TEXT-DECORATION: none}
+PRE 	{FONT-FAMILY: Courier, serif; FONT-SIZE: x-small; TEXT-DECORATION: none}

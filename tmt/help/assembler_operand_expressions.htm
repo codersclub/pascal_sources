@@ -1,0 +1,109 @@
+<html><head>
+<TITLE>Assembler Operand Expressions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_opcode_mnemonics.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Opcode Mnemonics"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assembler_operands.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operands"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.10 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Operand Expressions
+</h2></dir>
+<!-- Page content -->
+Operand expressions are built from operands and operators.
+Operands are constants, registers, labels, and memory locations.
+Operators combine operands and alter their attributes.
+Each instruction allows only certain combinations of operands.
+<br>
+<br>
+Operand expressions can be classified into three classes:
+<ul>
+<li>Immediate operands or constants.</li>
+<li>Registers.</li>
+<li>Memory and label operands.</li>
+</ul>
+<B>Immediate operands</B>
+<pre>  PUSH  10
+  MOV   AX, 10
+  MOV   AX, offset Start</pre>
+Here <I>10</I>, and <I>Start</I> are immediate operands.
+The values of <I>AX</I> and <I>10</I> can be determined immediately;
+the value of <I>offset Start</I> is determined during linking.
+<br>
+<br>
+<B>Registers</B>
+<br>
+TMT Pascal built-in assembler allows use of any 8, 16, or 32-bit
+80386 registers.
+<pre>  XOR  AH, AL
+  LSL  EAX,EAX
+  MOV  AX, FX</pre>
+<B>Memory and label operands</B>
+<br>
+Memory operands refer to the data stored in memory locations.
+Usually, one uses the square brackets [..] or the <I>type ptr</I>
+operator to ensure that the argument is treated as a memory location.
+Label operands refer to locations in code.
+<pre>  MOV      EBX,[0]
+  POP      Word Ptr [88]
+  POP      Word Ptr 88  <font color = #000080>// same as above</font>
+  JMP      @exit
+  LOOP16   @loop</pre>
+Memory and immediate operands can be either absolute or relocatable.
+An operand is absolute if its value or offset is entirely known during
+compilation. An operand is relocatable if its offset will become known
+only during linking.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_opcode_mnemonics.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Opcode Mnemonics"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_operands.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operands"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Opcode Mnemonics</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Operands</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.10 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,119 @@
+<html><head>
+<TITLE>DetectSVGAMode procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="closegraph_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: CloseGraph procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="drawellipse_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DrawEllipse procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.12 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>DetectSVGAMode procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS only</B></center></B>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Returns a valid VESA VBE mode number for the requested video mode.
+If the requested video mode is not supported, returns a zero value.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>function</B> DetectSVGAMode(XRes, YRes, BPP, VMode: Word): Word;</pre>
+<B>Remarks:</B>
+<br>
+This function may be used with the
+<a href="setgraphmode_proc.htm">SetGraphMode</a> procedure. The following
+example tries to set the SVGA mode 640x480 with maximum color depth:
+<pre><B>uses</B>
+  Crt, Graph;
+<B>function</B> SetSVGA640x480: String;
+<B>const</B>
+  Bps: <B>array</B> [0..4] <B>of</B> Word = (32, 24, 16, 15, 8);
+<B>var</B>
+  Mode,i: Word;
+<B>begin</B>
+  <B>for</B> I := 0 <B>to</B> 4 <B>do begin</B>
+    Mode:=DetectSVGAMode(640, 480, bps[i], LfbOrBanked);
+    <B>if</B> Mode &gt; 0 <B>then begin</B>
+      SetGraphMode(Mode);
+      <B>if</B> GraphResult = grOk <B>then begin</B>
+        Str(bps[i], Result);
+        exit;
+      <B>end</B>;
+    <B>end</B>;
+  <B>end</B>;
+  RestoreCrtMode;
+  Result := '';
+<B>end</B>;
+
+<font color = #000080>// main program</font>
+<B>var</B>  S: String;
+<B>begin</B>
+  S := SetSVGA640x480;
+  if S &lt;&gt; '' <B>then begin</B>
+    SetTextJustify(CenterText, CenterText);
+    OutTextXY(320, 240, 'This is SVGA mode 640x480 ' + S + ' bps');
+    OutTextXY(320, 260, 'Press any key...');
+    ReadKey;
+    RestoreCrtMode;
+  <B>end else</B>
+    Writeln('SVGA mode 640x480 not supported.');
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="closegraph_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: CloseGraph procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="drawellipse_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DrawEllipse procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">CloseGraph procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">DrawEllipse procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.12 -</B></CENTER>
+</BODY></HTML>

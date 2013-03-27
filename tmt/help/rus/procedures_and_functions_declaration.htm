@@ -1,0 +1,98 @@
+<html><head>
+<TITLE>Procedures and Functions Declaration
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="procedures_and_functions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Procedures and Functions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="forward_declaration.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Forward Declaration"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="procedures_and_functions.htm"><small>Procedures and Functions</small></a><dir><h2>Procedures and Functions Declaration
+</h2></dir>
+<!-- Page content -->
+Procedures and functions take the following form:
+<pre><B>procedure</B> identifier [(Parameterlist)]}</pre>
+or
+<pre><B>function</B> identifier [(Parameterlist)] : ReturnType}</pre>
+<I>ReturnType</I> is the type of the value returned by the function.
+<I>Parameterlist</I> is defined as:
+<pre>  Parameter [;Parameter]}</pre>
+where <I>Parameter</I> is:
+<pre>  [<B>var</B>] identifier [,identifier] [: TypeName]}</pre>
+or
+<pre>  [<B>const</B>] identifier [,identifier] [: TypeName]}</pre>
+<B>var</B> specifies a variable parameter. <B>const</B> specifies a constant
+parameters. <I>var</I> and <I>const</I> parameters are passed by reference
+as opposed to being passed <I>var</I> and <I>const</I> parameters are passed
+by reference as opposed to being passed by value.
+<br>
+<br>
+The body of a procedure or function takes the following form:
+<pre>[Declarations]
+<B>begin</B>
+  statement [; statement]
+<B>end</B>;</pre>
+Types, labels, constants, and variables declared in the declaration section
+prior to the <B>begin</B> statement are local variables. Space for these
+variables is allocated only when the procedure is called. Like all variable
+declarations their data is undefined until initialized. TMT Pascal procedures
+and functions may be called recursively.
+<br>
+<br>
+All identifiers must be declared prior to being referenced. The same rule
+applies to procedures and functions.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="procedures_and_functions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Procedures and Functions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="forward_declaration.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Forward Declaration"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Procedures and Functions</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Forward Declaration</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.1 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,1083 @@
+<html><head><title>TMTStub - DOS экстендер для TMT Pascal 3.50SP2 (часть 2)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Описание на русском языке DOS экстендера для TMT Pascal 3.50SP2 - TMTStub. Часть 2'>
+<meta name="keywords" content="tmt pascal, pascal, tmtstub, dos, extender, description, Описание на русском языке DOS экстендера для TMT Pascal 3.50SP2, часть 2">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top">
+    <!-- begin upper right body table -->
+    <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78">
+
+<br>
+<center>
+<hr size=1 width=80%>
+<a name="top"></a>
+<p><h3>TMTSTUB
+<br>DOS ЭКСТЕНДЕР ДЛЯ TMT PASCAL
+<br>( Часть 2 )</h3>
+</p>
+<p>
+Автор: Рустам Гадеев, 15 May 98
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br>просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+<p>
+<b>СОДЕРЖАНИЕ:</b>
+<br>
+<br><a href="tmtstub.htm#0_1">ВВЕДЕНИЕ</a>
+<br><a href="tmtstub.htm#0_2">ПРОГРАММНЫЙ ИНТЕРФЕЙС (API) TMTSTUB</a>
+<br>&nbsp;&nbsp;<a href="tmtstub.htm#1_0">1. ПОДДЕРЖКА DOS32 API</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#1_1">Установка текущей позиции в файле</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#1_2">Загрузить и/или выполнить программу</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#1_3">Получить информацию о DOS32 адресе</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#1_4">Отменить предыдущее выделение памяти</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#1_5">Выделить блок памяти</a>
+<br>&nbsp;&nbsp;<a href="tmtstub.htm#2_0">2. ПОДДЕРЖКА ИНТЕРФЕЙСА WDOSX API</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#2_1">2.1. Прерывания и исключения</a>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#2_2">2.2. Распределение памяти</a>
+<br>&nbsp;&nbsp;<a href="tmtstub.htm#3_0">3. ПРОГРАММНЫЙ ИНТЕРФЕЙС WDOSX (API)</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub.htm#3_1">3.1. Поддерживаемые функции DPMI 0.9</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3_2">3.2. Расширенный интерфейс DOS INT 21H (EXTENDED DOS API)</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3_3">3.3. Расширенные функции поддержки МЫШИ</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3_4">3.4. Прочие функции WDOSX</a>
+<br><a href="tmtstub2.htm#4_0">ПЛАНЫ НА БУДУЩЕЕ</a>
+</p>
+
+<hr size=1 width=80%>
+
+<p>
+<a name="3_2"></a>
+<p><br>
+<b>3.2. РАСШИРЕННЫЙ ИНТЕРФЕЙС DOS INT 21H (EXTENDED DOS API)</b>
+
+<p>
+Перечень поддерживаемых функций:
+
+<p>
+<table border=0>
+<tr bgcolor="#ccccff"><td> 09h</td><td>Вывод строки на консоль</td>
+   <td>Write string to console</td></tr>
+<tr bgcolor="#ccccff"><td> 1Ah</td><td>Установить адрес DTA (disk transfer area)</td>
+   <td>Set disk transfer area address</td></tr>
+<tr bgcolor="#ccccff"><td> 1Bh</td><td>Получить характеристики текущего диска</td>
+   <td>Get allocation information for default drive</td></tr>
+<tr bgcolor="#ccccff"><td> 1Ch</td><td>Получить характеристики указанного диска</td>
+   <td>Get allocation information for specific drive</td></tr>
+<tr bgcolor="#ccccff"><td> 1Fh</td><td>Получить DPB (drive parameter block)
+              для текущего диска</td>
+   <td>Get drive parameter block for default drive</td></tr>
+<tr bgcolor="#ccccff"><td> 25h</td><td>Установить обработчик прерывания
+              (Set interrupt vector)</td>
+   <td>Set interrupt vector</td></tr>
+<tr bgcolor="#ccccff"><td> 2Fh</td><td>Получить адрес DTA (disk transfer area)</td>
+   <td>Get disk transfer area address</td></tr>
+<tr bgcolor="#ccccff"><td> 32h</td><td>Получить DPB (drive parameter block)
+              для указанного диска</td>
+   <td>Get drive parameter block for specific drive</td></tr>
+<tr bgcolor="#ccccff"><td> 34h</td><td>Получить адрес флага InDos</td>
+   <td>Get address of InDos flag</td></tr>
+<tr bgcolor="#ccccff"><td> 35h</td><td>Получить адрес обработчика прерывания</td>
+   <td>Get interrupt vector</td></tr>
+<tr bgcolor="#ccccff"><td> 39h</td><td>Создать каталог (директорий)</td>
+   <td>Create subdirectory</td></tr>
+<tr bgcolor="#ccccff"><td> 3Ah</td><td>Удалить каталог (директорий)</td>
+   <td>Remove subdirectory</td></tr>
+<tr bgcolor="#ccccff"><td> 3Bh</td><td>Изменить текущий каталог</td>
+   <td>Change current directory</td></tr>
+<tr bgcolor="#ccccff"><td> 3Ch</td><td>Создать новый файл</td>
+   <td>Create new file</td></tr>
+<tr bgcolor="#ccccff"><td> 3Dh</td><td>Открыть существующий файл</td>
+   <td>Open existing file</td></tr>
+<tr bgcolor="#ccccff"><td> 3Fh</td><td>Чтение из файла</td>
+   <td>Read from file</td></tr>
+<tr bgcolor="#ccccff"><td> 40h</td><td>Запись в файл</td>
+   <td>Write to file</td></tr>
+<tr bgcolor="#ccccff"><td> 41h</td><td>Удалить файл с диска</td>
+   <td>Delete file</td></tr>
+<tr bgcolor="#ccccff"><td> 43h</td><td>Получить/Установить атрибуты файла</td>
+   <td>Get/set file attributes</td></tr>
+<tr bgcolor="#ccccff"><td> 44h</td><td>IOCTL</td>
+   <td>IOCTL</td></tr>
+<tr bgcolor="#ccccff"><td> 47h</td><td>Получить имя текущего каталога</td>
+   <td>Get current directory</td></tr>
+<tr bgcolor="#ccccff"><td> 48h</td><td>Выделить блок памяти DOS</td>
+   <td>Allocate DOS memory block</td></tr>
+<tr bgcolor="#ccccff"><td> 49h</td><td>Освободить блок памяти DOS</td>
+   <td>Free DOS memory block</td></tr>
+<tr bgcolor="#ccccff"><td> 4Ah</td><td>Изменить размер блока памяти DOS</td>
+   <td>Resize DOS memory block</td></tr>
+<tr bgcolor="#ccccff"><td> 4Bh</td><td>Загрузить и выполнить программы</td>
+   <td>Load and execute child program</td></tr>
+<tr bgcolor="#ccccff"><td> 4Eh</td><td>Найти первый файл по маске (Find first)</td>
+   <td>Find first matching file</td></tr>
+<tr bgcolor="#ccccff"><td> 4Fh</td><td>Найти следующий файл по маске (Find next)</td>
+   <td>Find next matching file</td></tr>
+<tr bgcolor="#ccccff"><td> 56h</td><td>Переименовать файл</td>
+   <td>Rename file</td></tr>
+<tr bgcolor="#ccccff"><td> 5Ah</td><td>Создать временный файл</td>
+   <td>Create temporary file</td></tr>
+<tr bgcolor="#ccccff"><td> 5Bh</td><td>Создать новый файл</td>
+   <td>Create new file</td></tr>
+</table>
+<p>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+Подробное описание функций WDOSX для расширенного интерфейса DOS INT 21h:
+
+<p>
+<b>9h - Вывод строки на консоль</b>
+<blockquote><pre>
+Вход:
+     AH = 09h
+     DS:EDX -> адрес строки, завершающейся символом '$'
+
+Примечание:
+     Размер выводимой строки не должен превышать 16k, 
+     поскольку именно такой размер у буфера передачи WDOSX.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<b>1Ah - Установить адрес DTA (disk transfer area)</b>
+
+<blockquote><pre>
+Вход:
+     AH = 1Ah
+     DS:EDX -> Новый адрес DTA (Disk Transfer Area)
+
+Примечание:
+     WDOSX имеет свой внутреннй буфер для DTA. 
+     При вызове FindFirst / FindNext, WDOSX производит
+     необходимое копирование в него, чтобы сделать прозрачным 
+     доступ к DTA из пользовательской программы.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>1Bh - Получить характеристики текущего диска</b>
+<blockquote><pre>
+Вход:
+     AH = 1Bh
+
+Выход:
+     AL = Количество секторов в кластере
+     CX = Количество байт в секторе
+     DX = Общее количество кластеров
+     DS:EBX -> Байт идентификации (media ID byte)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>1Ch - Получить характеристики указанного диска</b>
+<blockquote><pre>
+Вход:
+     AH = 1Bh
+     DL = номер диска (0 = текущий, 1 = A: и т.д.)
+
+Выход:
+     AL = Количество секторов в кластере
+     CX = Количество байт в секторе
+     DX = Общее количество кластеров
+     DS:EBX -> Байт идентификации (media ID byte)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>1Fh - Получить DPB (drive parameter block) для текущего диска</b>
+<blockquote><pre>
+Вход:
+     AH = 1Fh
+
+Выход:
+     AL = статус (0 = успешно, -1 = неверно указан диск)
+     DS:EBX -> Адрес DBB (Drive Parameter Block)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>25h - Установить обработчик прерывания</b>
+<blockquote><pre>
+Вход:
+     AH = 25h
+     AL = номер прерывания
+     DS:EDX -> адрес нового обработчика прерывания
+
+Примечание:
+     Эта функция устанавливает обработчик для защищенного 
+     режима с использованием функции 0205h DPMI.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>2Fh - Получить адрес DTA (disk transfer area)</b>
+<blockquote><pre>
+Вход:
+     AH = 2Fh
+
+Выход:
+     ES:EBX -> Адрес DTA (Disk Transfer Area)
+
+Примечание:
+     Если новый адрес DTA не был установлен,
+     то будет возвращен адрес DTA по умолчанию (PSP:80h).
+     В противном случае возвращается адрес, 
+     ранее установленный с помощью функции 1Ah.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>32h - Получить DPB (drive parameter block) указанного диска</b>
+<blockquote><pre>
+Вход:
+     AH = 32h
+     DL = номер диска (0 = текущий, 1 = A: и т.д.)
+
+Выход:
+     AL = статус (0 = успешно, -1 = неверно указан диск)
+     DS:EBX -> адрес DPB (Drive Parameter Block)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>34h - Получить адреса флага InDos</b>
+<blockquote><pre>
+Вход:
+     AH = 34h
+
+Выход:
+     ES:EBX -> Адрес флага InDos
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>35h - Получить адрес обработчика прерывания</b>
+<blockquote><pre>
+Вход:
+     AH = 35h
+     AL = номер прерывания
+
+Выход:
+     ES:EBX -> адрес обработчика указанного прерывания
+
+Примечание:
+     Эта функция возвращает адрес обработчика защищенного 
+     режима с помощью функции 0204h DPMI.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>39h - Создать каталог</b>
+<blockquote><pre>
+Вход:
+     AH = 39h
+     DS:EDX -> Имя каталога в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно,
+     CF = установлен, если произошла ошибка
+        (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>3Ah - Удалить каталог</b>
+<blockquote><pre>
+Вход:
+     AH = 3Ah
+     DS:EDX -> Имя каталога в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно,
+     CF = установлен, если произошла ошибка
+        (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>3Bh - Изменить текущий каталог</b>
+<blockquote><pre>
+Вход:
+     AH = 3Bh
+     DS:EDX -> Имя каталога в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно,
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>3Ch - Создать новый файл</b>
+<blockquote><pre>
+Вход:
+     AH = 3Ch
+     CX = байт атрибутов файла
+     DS:EDX -> Имя файла в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (AX - дескриптор файла),
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>3Dh - Открыть существующий файл</b>
+<blockquote><pre>
+Вход:
+     AH = 3Dh
+     AL = Режим открытия (access mode)
+     DS:EDX -> Имя файла в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно 
+          (AX - дескриптор файла),
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>3Fh - Чтение из файла</b>
+<blockquote><pre>
+Вход:
+     AH = 3Fh
+     BX = дескриптор файла
+     ECX = количество байт для чтения
+     DS:EDX -> адрес буфера для записи считанных данных
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (EAX - количество фактически прочитанных байт),
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+Примечание:
+     Эта функция позволяет прочитать за одно обращение до 
+     4 гигабайт. В отличие от чистого DOS, здесь нет 
+     ограничения в 64k.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>40h - Запись в файл</b>
+<blockquote><pre>
+Вход:
+     AH = 40h
+     BX = дескриптор файла
+     ECX = количество записываемых байт
+     DS:EDX -> адрес буфера с данными
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (EAX - количество фактически записанных байт),
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+Примечание:
+     Эта функция позволяет записать за одно обращение до 
+     4 гигабайт. В отличие от чистого DOS, здесь нет 
+     ограничения в 64k.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>41h - Удалить файл</b>
+<blockquote><pre>
+Вход:
+     AH = 41h
+     DS:EDX -> Имя файла в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно,
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>43h - Получить/установить атрибуты файла</b>
+<blockquote><pre>
+Вход:
+     AH = 43h
+     AL = номер подфункции (0 = получить, 1 = установить)
+     DS:EDX -> Имя файла в формате ASCIZ
+
+     Если на входе AL = 1, то
+       CX = новые атрибуты файла
+
+Выход:
+     CF = сброшен, если операция прошла успешно,
+     CF = установлен, если произошла ошибка
+        (AX = код ошибки)
+     CX = полученные атрибуты файла
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>44h - IOCTL</b>
+<blockquote><pre>
+Вход:
+     AH = 44h
+     AL = номер подфункции
+
+
+     Расширены следующие подфункции функции 44h:
+
+     <b>AL = 2</b> (чтение из символьного устройства)
+       BX = дескриптор файла
+       ECX = количество байт для чтения
+       DS:EDX -> буфер для прочитанных данных
+
+     Выход:
+       CF = сброшен, если операция прошла успешно
+            (EAX - количество фактически прочитанных байт),
+       CF = установлен, если произошла ошибка
+            (AX = код ошибки)
+
+     Примечание:
+       Эта функция позволяет прочитать за одно обращение 
+       до 4 гигабайт. В отличие от чистого DOS, здесь нет 
+       ограничения в 64k.
+       Перед вызовом оригинальной функции DOS, производится 
+       копирование максимального количества байт (ECX,16k) 
+       из DS:EDX в буфер передачи для реального режима для 
+       обеспечения передачи структуру запроса.
+
+
+     <b>AL = 3</b> (запись в символьное устройство)
+       BX = дескриптор файла
+       ECX = количество записываемых байт
+       DS:EDX -> буфер с данными для записи
+
+     Выход:
+       CF = сброшен, если операция прошла успешно
+          (EAX - количество фактически записанных байт),
+       CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+     Примечание:
+       Эта функция позволяет записать за одно обращение до 
+       4 гигабайт. В отличие от чистого DOS, здесь нет 
+       ограничения в 64k.
+
+
+     <b>AL = 4</b> (чтение из устройства блочного типа)
+       BL = номер диска (0 = текущий, 1 = A: и т.д.)
+       ECX = количество байт для чтения
+       DS:EDX -> буфер данных
+
+     Выход:
+       CF = сброшен, если операция прошла успешно
+          (EAX - количество фактически прочитанных байт),
+       CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+     Примечание:
+       Эта функция позволяет прочитать за одно обращение 
+       до 4 гигабайт. В отличие от чистого DOS, здесь нет 
+       ограничения в 64k.
+       Перед вызовом оригинальной функции DOS, производится 
+       копирование максимального количества байт (ECX,16k) 
+       из DS:EDX в буфер передачи для реального режима для 
+       обеспечения передачи структуру запроса.
+
+
+     <b>AL = 5</b> (запись в устройство блочного типа)
+       BL = номер диска (0 = текущий, 1 = A: и т.д.)
+       ECX = количество записываемых байт
+       DS:EDX -> буфер данных
+
+     Выход:
+       CF = сброшен, если операция прошла успешно
+          (EAX - количество фактически записанных байт),
+       CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+     Примечание:
+       Эта функция позволяет записать за одно обращение
+       до 4 гигабайт. В отличие от чистого DOS, здесь нет 
+       ограничения в 64k.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>47h - Получить имя текущего каталога</b>
+<blockquote><pre>
+Вход:
+     AH = 47h
+     DL = номер диска (0 = текущий, 1 = A: и т.д.)
+     DS:ESI -> 64-байтный буфер для имени каталога
+               в формате ASCIZ
+
+Выход:
+     DS:ESI -> имя каталога в формате ASCIZ
+     CF = сброшен, если операция прошла успешно
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>48h - Выделить блок памяти DOS</b>
+<blockquote><pre>
+Вход:
+     AH = 48h
+     BX = количество выделяемых параграфов
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (AX = селектор выделенного блока)
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки,
+           BX = размер максимального блока)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>49h - Освободить блок памяти DOS</b>
+<blockquote><pre>
+Вход:
+     AH = 49h
+     ES = селектор освобождаемого блока
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>4Ah - Изменить размер блока памяти DOS</b>
+<blockquote><pre>
+Вход:
+     AH = 4Ah
+     BX = новый размер блока в параграфах
+     ES = селектор изменяемого блока
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки,
+           BX = размер максимального блока)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>4Bh - Загрузить и выполнить программу</b>
+<blockquote><pre>
+Вход:
+     AH = 4BH
+     AL = 0 (прочие подфункции НЕ поддерживаются)
+     DS:EDX -> имя выполняемой программы
+               в формате ASCIZ
+     ES:EBX -> блок параметров (см. ниже)
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+Примечание:
+     В отличие от чистого DOS, WDOSX имеет
+     следующий формат блока параметров:
+
+     Смещение 00000000: 48-битный дальний указатель
+                        защищенного режима на используемое
+                        окружение
+     Смещение 00000006: 48-битный дальний указатель
+                        защищенного режима на переданную
+                        программе командную строку
+
+     Такой же метод используют и большинство других DOS
+     экстендеров, так что проблем с совместимостью
+     возникнуть не должно.
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>4Eh - Поиск первого файла по маске (Find first)</b>
+<blockquote><pre>
+Вход:
+     AH = 4Eh
+     AL = флаг, используемый командой APPEND
+     CX = маска атрибутов файла
+     DS:EDX -> маска имени файла в формате ASCIZ,
+               включая путь
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (используется DTA, установленный функцией 1Ah)
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>4Fh - Поиск следующего файла по маске (Find next)</b>
+<blockquote><pre>
+Вход:
+     AH = 4Fh
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (используется DTA, установленный функцией 1Ah)
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+
+Примечание:
+     При повторном поиске используется информация из DTA, 
+     содержащая параметры, установленные при предыдущем 
+     вызове Find First (функция 4Eh).
+</pre></blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+
+<p>
+<b>56h - Переименовать файл</b>
+<blockquote><pre>
+Вход:
+     AH = 56h
+     DS:EDX -> старое имя файла в формате ASCIZ
+     ES:EDI -> новое имя файла в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<b>5Ah - Создать временный файл</b>
+<blockquote><pre>
+Вход:
+     AH = 5Ah
+     CX = атрибуты файла
+     DS:EDX -> буфер, содержащий полный путь
+               к создаваемому файлу,
+               завершающийся обратным слэшем ("\")
+               + 13-ю нулевыми байтами.
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          DS:EDX -> полное имя временного файла.
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+
+<p>
+<b>5Bh - Создать новый файл</b>
+<blockquote><pre>
+Вход:
+     AH = 5Bh
+     CX = атрибуты файла
+     DS:EDX -> имя и путь создаваемого файла
+               в формате ASCIZ
+
+Выход:
+     CF = сброшен, если операция прошла успешно
+          (AX = дескриптор файла (file handle))
+          DS:EDX -> полное имя временного файла.
+     CF = установлен, если произошла ошибка
+          (AX = код ошибки)
+</pre></blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p><br>
+<a name="3_3"></a>
+<p>
+<b>3.3 РАСШИРЕННЫЕ ФУНКЦИИ ПОДДЕРЖКИ МЫШИ</b>
+
+<p>
+WDOSX расширяет возможности следующих функций прерывания INT 33H:
+
+<pre>
+  AX = 0009H - Задать форму графического курсора
+  AX = 000CH - Установка обработчика прерываний от мыши
+               (Custom Event Handler)
+  AX = 0016H - Сохранить состояние драйвера мыши
+  AX = 0017H - Восстановить состояние драйвера мыши
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+
+<b>0009H - Задать форму графического курсора</b>
+<pre>
+     AX = 0009H
+     ES:EDX -> указатель на битмап формы курсора
+     BX = номер позиционирующего столбца в битмапе
+          (hot spot column)
+     CX = номер позиционирующей строки в битмапе
+          (hot spot row)
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<b>000CH - Установка обработчика прерываний от мыши</b>
+<pre>
+     AX = 000CH
+     ES:EDX -> дальний (FAR) указатель на обработчик мыши
+     CX = маска вызова обработчика (см. оригинальный INT33h/0Ch)
+
+     Примечание:
+     Вызов данной функции с адресом 0000:00000000 приведет к 
+     деактивации (uninstall) ранее установленного обработчика.
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<b>0016H - Сохранить состояние драйвера мыши</b>
+<pre>
+     AX = 0016H
+     ES:EDX -> адрес буфера для сохранения
+     BX = размер буфера
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<b>0017H Восстановить состояние драйвера мыши</b>
+<pre>
+     AX = 0017H
+     ES:EDX -> адрес буфера для сохранения
+     BX = размер буфера
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p><br>
+<a name="3_4"></a>
+<p>
+<b>3.4. ПРОЧИЕ ФУНКЦИИ WDOSX</b>
+<p>
+<b>INT 21H / AX = 0FFFFH "Изменить размер начального блока памяти"</b>
+<pre>
+     Вход:
+          AX  = 0FFFFH
+          EDX = новый размер блока в байтах
+
+     Выход:
+          CF = сброшен, если операция
+               прошла успешно, при этом размер блока
+               изменен, и селекторы переустановлены
+          CF = установлен в случае ошибки
+
+     Примечание:
+          Эта функция необходима в связи с тем,
+          что программа, работающая с DPMI,
+          не может самостоятельно изменить размер
+          блока памяти, в котором она сама выполняется.
+          Однако, функцию не рекомендуется выполнять
+          изнутри HLL кода, поскольку задействованные
+          в программе библиотеки самостоятельно следят
+          за выделением необходимой для их работы памяти,
+          что может вызвать конфликт при изменении
+          размеров основного блока памяти.
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+
+<b>INT 31H / AX = EEFFH  "Идентификация DOS экстендера"</b>
+<pre>
+     Вход:
+          AX = EEFFh
+
+     Выход:
+          CF  = сброшен
+          EAX = 'WDSX'
+          ES:EBX = дальний указатель на ASCIIZ
+                   строку с копирайтами
+          CH = метод выделения памяти
+               (0=INT15, 1=XMS, 2=VCPI, 3=DPMI)
+          CL = тип процессора (3=386, 4=486, ... )
+          DH = старшие цифры версии экстендера
+               ( в данный момент = 0 )
+          DL = младшие цифры версии экстендера
+               ( в данный момент 94 )
+
+     Примечание:
+          Поскольку данная функция поддерживается
+          большинством существующих DOS экстендеров,
+          она может служить удобным средством определения,
+          под каким именно экстендером запущена программа.
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p><br>
+<a name="4_0"></a>
+<p>
+<b>ПЛАНЫ НА БУДУЩЕЕ</b>
+
+<p>
+Перечислю только самые первые пункты из моего списка пожеланий:
+
+<blockquote>
+<p>
+<b>1</b>. Задействовать действительно плоскую модель памяти (True flat model)
+   (с нулевым базовым адресом) для прочих перемещаемых форматов исполняемых
+   файлов (в т.ч. PE формат), такую же, как вариант WDOSX для WATCOM.
+<p>
+   Главной сложностью на этом пути является обеспечение обратной совместимости
+   с предыдущими версиями. Однако, не-перемещаемые форматы, такие как MZ или
+   "flat form binary" никогда не будут вызываться с дескрипторами с нулевым
+   базовым адресом, поскольку просто не существует способа перемещать такие
+   исполняемые модули.
+
+<p>
+<b>2</b>. Улучшение Win32 эмулятора. Это улучшение может включать 
+   или не включать поддержку DLL, плюс возможность для пользователя 
+   добавлять новые функции для эмуляции.
+<p>
+   Это достаточно трудная задача, поскольку потребуется привести исходный
+   код эмулятора Win32 в удобочитаемый вид, чтобы выпустить его как релиз.
+
+<p>
+<b>3</b>. Изменение в Британском законодательстве, чтобы разрешить публичным
+   домам быть открытыми после 11 часов, если (и только если) у них имеется 
+   в продаже пиво Radeberger (клевая вещь! ;)
+</blockquote>
+<p>
+Вот, собственно, и всё. Успехов!
+
+<p>
+Wuschel a.k.a Michael Tippach
+
+<p>
+Рустам Гадеев, 15 May 98
+
+
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

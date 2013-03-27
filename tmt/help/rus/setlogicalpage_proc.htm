@@ -1,0 +1,145 @@
+<html><head>
+<TITLE>SetLogicalPage procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="setlinestyle_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetLineStyle procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setnormalmode_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetNormalMode procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.106 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>SetLogicalPage procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Sets the logical page size. The <I>SX</I> and <I>SY</I>
+values are the new logical size.
+<br>
+<br>
+<B>Declaraton:</B>
+<pre><B>procedure</B> SetLogicalPage(SX, SY: Word);</pre>
+<B>Remarks:</B>
+<br>
+Many SVGA adapters support logical pages.
+A logical page can exceed the size of the physical screen.
+For instance, it is possible to install a logical page 1280 x 480
+with a screen of physical resolution 640x480. In this case only half the
+logical page will be seen on the screen. Logical pages are used for hardware
+scrolling. The maximum size logical pages depend on the SVGA adapter and
+the size of the video memory. Use the function
+<a href="getlogicalpage_proc.htm">GetLogicalPage</a>
+to get the current logical page size.
+Remember that the number of available graphic pages depends
+on the logical page size. Thus <I>SetLogicalPage</I>
+influences the number of available graphic pages and resets viewport to
+the whole logical page size. Keep in mind, that <I>SX</I>
+and <I>SY</I> can't be less than the physical screen
+size. Here is an example of use of the logical page:
+<pre><font color = #000080>// This example sets a logical page 1280x600
+// and performs hardware scrolling
+// VESA-compatible SVGA card with 1Mb required
+//</font>
+<B>uses</B> Graph,Crt;
+<B>var</B>
+  ErrorCode,i: Longint;
+  SX, SY: Word;
+<B>begin</B>
+  <font color = #000080>// setup SVGA mode 640x480x256</font>
+  SetSVGAMode(640, 480, 8, LfbOrBanked);
+  ClearDevice;
+  <B>if</B> GraphResult &lt;&gt; 0 <B>then begin</B>
+    ErrorCode:=GraphResult;
+    CloseGraph;
+    Writeln(GraphErrorMsg(ErrorCode));
+  <B>end;</B>
+  <font color = #000080>// setup logical page 1280x600</font>
+  SetLogicalPage(1280, 600);
+  <font color = #000080>// check logical page size</font>
+  GetLogicalPage(SX, SY);
+  <B>if</B> (SX = 640) <B>and</B> (SY = 480) <B>then begin</B> 
+    CloseGraph;
+    Writeln(' Logical pages not supported...');
+  <B>end</B>;
+  <font color = #000080>// draw on logical page</font>
+  SetLineStyle(SolidLn, 0, ThickWidth);
+  SetColor(clRed);
+  Line(0, 0, GetMaxX, GetMaxY);
+  Line(GetMaxX, 0, 0, GetMaxY);
+  SetColor(clWhite);
+  Rectangle(0, 0, GetMaxX, GetMaxY);
+  <font color = #000080>// scroll the screen left</font>
+  <B>for</B> i := 0 <B>to</B> (SX - 640) div 4 <B>do</B>
+    SetScreenStart(i * 4, 0, True);
+  <font color = #000080>// scroll the screen up</font>
+  <B>for</B> i := 0 <B>to</B> (SY - 480) div 4 <B>do</B>
+    SetScreenStart(SX - 640, i * 4, True);
+  <font color = #000080>// scroll the screen right</font>
+  <B>for</B> i := (SX - 640) div 4 <B>downto</B>  0 <B>do</B>
+    SetScreenStart(i * 4, SY - 480, True);
+  <font color = #000080>// scroll the screen down</font>
+  <B>for</B>  i := (SY - 480) div 4 <B>downto</B> 0 <B>do</B>
+    SetScreenStart(0, i * 4, True);
+  <font color = #000080>// Wait a key</font>
+  ReadKey;
+  <font color = #000080>// Close Graph and restore old video mode</font>
+  CloseGraph;
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="setlinestyle_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetLineStyle procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setnormalmode_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetNormalMode procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SetLineStyle procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetNormalMode procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.106 -</B></CENTER>
+</BODY></HTML>

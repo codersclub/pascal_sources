@@ -1,0 +1,88 @@
+<html><head>
+<TITLE>Tokens and Identifiers
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="lang_struct.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Pascal Language Structure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="reserved_w.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Reserved Words"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>Tokens and Identifiers
+</h2></dir>
+<!-- Page content -->
+Contiguous characters in a source file, not including the space character (32),
+are called tokens. Tokens are separated by any number of spaces and control
+characters (in the range of 0 to 32 decimal). For instance in the following
+segment,
+<pre>  Writeln('Hello, World!');</pre>
+there are five tokens: the identifier <I>Writeln</I>, left and right
+parentheses, the semicolon and the string <I>'Hello, World!'</I>. Programs are
+sequences of tokens that tell the compiler what code to generate.
+<br>
+<br>
+There are several different types of tokens; for instance, identifiers,
+reserved words, operators, and so on. Each type of token is explained further
+ahead in this manual.
+<br>
+<br>
+Identifiers are tokens that have a special meaning in TMT Pascal. Identifiers
+begin with a letter (A-Z or a-z) or underscore, and may contain letters,
+underscores, and digits (0-9). The maximum length of an identifier is 255
+characters, however only the first 63 characters are significant. TMT Pascal
+is not case sensitive, therefore the identifiers <I>WriteLn</I>,
+<I>writeln</I>, and <I>WRITELN</I> are all identical. Reserved words,
+procedure names, and variables, are examples of identifiers.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="lang_struct.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Pascal Language Structure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="reserved_w.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Reserved Words"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Pascal Language Structure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Reserved Words</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.1 -</B></CENTER>
+</BODY></HTML>

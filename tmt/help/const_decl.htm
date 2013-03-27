@@ -1,0 +1,106 @@
+<html><head>
+<TITLE>Constant Declarations
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="str_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: String Constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="types.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.5.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="constants.htm"><small>Constants</small></a><dir><h2>Constant Declarations
+</h2></dir>
+<!-- Page content -->
+There are two types of constants and TMT Pascal interprets them
+both differently.
+<br>
+<br>
+Constants that are declared without a type may not be changed in the program.
+Constants that are typed are the same as variables (described below),
+however they contain an initial value. These constants may be changed in
+the program. A constant declaration is preceded bythe <B>const</B>
+reserved word.
+<pre><B>const</B>
+  identifier [:IdentifierType] = expression;</pre>
+<I>Identifier</I> is the actual name of the constant defined.
+<I>IdentifierType</I>, which is optional, specifies the type of the constant.
+Again, if a type is specified, the constant is the same as a variable with
+an initial value.
+<br>
+<br>
+<I>Expression</I> is assigned to the constant and must be evaluated at
+compile time. The following are untyped constants and may not be modified:
+<pre><B>const</B>
+  Digit   = '0'..'9';
+  MaxSize = 100;
+  Msg     = 'This is a string constant';</pre>
+Typed constants may be of any type except for file, procedure, or function.
+Some examples of typed constants are:
+<pre><B>type</B>
+  Coordinate = <B>record</B>
+    x,y: Integer;
+  <B>end</B>;
+<B>const</B>
+  Originpos: Coordinate = (x:0; y:0);
+  Name     : String = 'Hello World!';
+  StrSize  : Integer = 100;
+  Ary      : <B>array</B> [False..True] <B>of</B> Byte = (10,15);</pre>
+<B>See also:</B>
+<br>
+<a href="int_and_real.htm">Integer and Real Number Constants</a>
+<br>
+<a href="str_const.htm">String Constants</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="str_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: String Constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="types.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">String Constants</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.5.3 -</B></CENTER>
+</BODY></HTML>

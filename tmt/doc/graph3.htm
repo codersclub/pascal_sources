@@ -1,0 +1,614 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 3)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 3'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a>
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+<!--/LOGO-->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 3</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+<p><a name="Variables"></a>
+<h3>Описание Переменных</h3>
+</p>
+
+<dl><a name="DrawBorder"></a>
+<dt><b>DrawBorder</b>
+<dd>
+ Задавая значение этой переменной, Вы можете разрешить или запретить
+ прорисовку границы области с помощью процедур
+ <a href="#FillEllipse">FillEllipse</a>, <a href="#FillCircle">FillCircle</a>
+ и <a href="#FillTriangle">FillTriangle</a>.
+<dd><br>
+ Объявление:
+<dd>
+ var DrawBorder: Boolean
+<dd><br>
+ Пояснения:
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Описание&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td rowspan=2>&nbsp;DrawBorder&nbsp;</td><td align="center">True </td><td>&nbsp;Граница рисуется (по умолчанию)&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td align="center">False</td><td>&nbsp;Отрисовка границы запрещена&nbsp;</td></tr>
+</table>
+</dl>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<p><a name="Constants"></a>
+<br>
+<h3>Константы и Типы</h3>
+</p>
+
+<p><a name="Bar3DConstants"></a>
+<dl>
+<dt><b>Константы Bar3D</b>
+
+<dd>Эти константы используются для указания, нужно ли рисовать верхнюю грань
+ параллелепипеда, придающую ему 3-х мерную объемность (См. <a href="#Bar3D">Bar3D</a>).
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Описание&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;TopOn &nbsp;</td><td align="center">True </td><td>&nbsp;Объемность разрешена&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;TopOff&nbsp;</td><td align="center">False</td><td>&nbsp;Объемность запрещена&nbsp;</td></tr>
+</table>
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="BitBlt"></a>
+<br>
+ <b>Операторы BitBlt</b>
+<dd>
+ Эти операторы устанавливают метод вывода изображения на экран
+ с помощью процедуры <a href="#PutImage">PutImage</a>.
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp; Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Метод вывода&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp; NormalPut&nbsp;</td><td align="center">   0   </td><td align="center"> MOV        </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp; CopyPut  &nbsp;</td><td align="center">   0   </td><td align="center"> MOV        </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp; XORPut   &nbsp;</td><td align="center">   1   </td><td align="center"> XOR        </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp; OrPut    &nbsp;</td><td align="center">   2   </td><td align="center"> OR         </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp; AndPut   &nbsp;</td><td align="center">   3   </td><td align="center"> AND        </td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ClippingConstants"></a>
+<br>
+ <b>Константы отсечения</b>
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Описание&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;ClipOn &nbsp;</td><td align="center">True </td><td>&nbsp;Отсечение разрешено&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;ClipOff&nbsp;</td><td align="center">False</td><td>&nbsp;Отсечение запрещено&nbsp;</td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GraphResultConstants"></a>
+<br>
+ <b>Константы результата вывода графики</b>
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp; Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Описание&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grOK              &nbsp;</td><td align="center">  0  </td><td>&nbsp;Все просто замечательно :)&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grInvalidMode     &nbsp;</td><td align="center">  1  </td><td>&nbsp;Неверно задан режим&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grModeNotSupported&nbsp;</td><td align="center">  2  </td><td>&nbsp;Заданный режим не поддерживается&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grSetModeError    &nbsp;</td><td align="center">  3  </td><td>&nbsp;Ошибка при установке режима&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grLFBSetupError   &nbsp;</td><td align="center">  4  </td><td>&nbsp;Ошибка при установке LFB режима&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grError           &nbsp;</td><td align="center">  5  </td><td>&nbsp;Прочие ошибкт при выводе графики&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grVESANotFound    &nbsp;</td><td align="center">  6  </td><td>&nbsp;Режимы VESA не поддерживаются&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;grVESAError       &nbsp;</td><td align="center">  7  </td><td>&nbsp;Ошибка при работе с VESA&nbsp;</td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Alignment"></a>
+<br>
+ <b>Константы методов выравнивания текста</b>
+<dd>
+ Эти константы используются для указания метода горизонтального
+ и вертикального выравнивания текста для <a href="#SetTextJustify">SetTextJustify</a>.
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы выравнивания по горизонтали&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LeftText  &nbsp;</td><td align="center"> 0 </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;CenterText&nbsp;</td><td align="center"> 1 </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;RightText &nbsp;</td><td align="center"> 2 </td></tr>
+<tr><td>&nbsp;</td>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы выравнивания по вертикали&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;BottomText&nbsp;</td><td align="center"> 0 </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;CenterText&nbsp;</td><td align="center"> 1 </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;TopText   &nbsp;</td><td align="center"> 2 </td></tr>
+</table>
+
+
+<dd>
+ Обратите внимание на то, как каждая константа выравнивания влияет на
+ на положение текста относительно координат вывода:
+<pre>
+      TopText     TopText  TopText   TopText
+      LeftText      CenterText        RightText
+      BottomText    BottomText       BottomText
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="LineSettingsType"></a>
+<br>
+ <b>Тип LineSettingsType</b>
+<dd>
+ Данный тип описывает запись, которая определяет стиль, образец (pattern),
+ и толщину линии.
+<dd><br>
+ Объявление:
+<pre>
+ LineSettingsType = record
+   LineStyle : Word;
+   Pattern   : Word;
+   Thickness : Word;
+ end;
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="LineStyleConstants"></a>
+<br>
+ <b>Константы стиля и толщины линии</b>
+<dd>
+ Эти константы используются в функциях
+ <a href="#GetLineSettings">GetLineSettings</a>
+ и <a href="#SetLineStyle">SetLineStyle<a>:
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы стиля линии&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Вид линии&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;SolidLn  &nbsp;</td><td align="center"> 0 </td><td>&nbsp;Сплошная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;DottedLn &nbsp;</td><td align="center"> 1 </td><td>&nbsp;Пунктирная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;CenterLn &nbsp;</td><td align="center"> 2 </td><td>&nbsp;Штрих-пунктирная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;DashedLn &nbsp;</td><td align="center"> 3 </td><td>&nbsp;Штриховая линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;UserBitLn&nbsp;</td><td align="center"> 4 </td><td>&nbsp;Стиль, определяемый пользователем&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы толщины линии&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Вид линии&nbsp;</font></tr>
+<tr bgcolor=#ccccff><td>&nbsp;NormWidth &nbsp;</td><td align="center"> 1 </td><td>&nbsp;Тонкая линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;ThickWidth&nbsp;</td><td align="center"> 3 </td><td>&nbsp;Утолщенная линия</td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FontConstants"></a>
+<br>
+ <b>Константы выбора типа текстового шрифта</b>
+<dd>
+ Эти константы используются в функциях
+ <a href="#SetTextStyle">SetTextStyle</a>
+ и <a href="#GetTextSettings">GetTextSettings</a>.
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Пояснение&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;SmallFont &nbsp;</td><td align="center"> 0 </td><td> растровый фонт 8x8  бит </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;MediumFont&nbsp;</td><td align="center"> 1 </td><td> растровый фонт 8x14 бит </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LargeFont &nbsp;</td><td align="center"> 2 </td><td> растровый фонт 8x16 бит </td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+<dt><a name="PaletteType"></a>
+<br>
+ <b>Тип PaletteType</b>
+<dd>
+ Этот тип описывает запись, определяющую размер палитры и набор цветов в ней.
+ Используется в <a href="#GetPalette">GetPalette</a>,
+ <a href="#GetDefaultPalette">GetDefaultPalette</a>,
+ и <a href="#SetAllPalette">SetAllPalette</a>.
+<dd>
+ Объявление:<pre>
+ type
+    PaletteType = record
+      Size    : Byte;
+      Colors  : array[0..MaxColors] of DWord;
+    end;
+</pre>
+<dd>
+ В поле "Size" заносится количество цветов в палитре для установленного
+ драйвера и видео-режима. Поле "Colors" является массивом, содержащим
+ действующие цвета с номерами 0..Size - 1.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="PointType"></a>
+<br>
+ <b>Тип PointType</b>
+<dd>
+ Тип, введенный для удобства пользователя, и описывающий координаты точки.
+ Обратите внимание, что поля координат в записи имеют тип LongInt,
+ а не Integer.
+<dd>
+ Объявление:<pre>
+ PointType = record
+    X, Y : LongInt;
+  end;
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+<dt><a name="RGBType"></a>
+<br>
+ <b>Тип RGBType</b>
+<dd>
+ Этот тип используется для удобства доступа к RGB составляющим (Red, Green,
+ Blue) каждого элемента палитры.
+<dd>
+ Объявление:<pre>
+ RGBType = record
+  Blue,Green,Red,Aligment: Byte;
+ end;
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+<dt><a name="SvgaConstants"></a>
+<br>
+ <b>Константы SVGA режимов</b>
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Пояснение&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LFBorBanked&nbsp;</td><td align="center"> 0 </td><td>Разрешает режим SVGA LFB (если он поддерживается) <br>или режим переключения банков</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;BankedOnly &nbsp;</td><td align="center"> 1 </td><td>Разрешает только режим SVGA с переключением банков                             </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LFBOnly    &nbsp;</td><td align="center"> 2 </td><td>Разрешает только SVGA LFB режим                                                </td></tr>
+</table>
+
+<br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="TextSettingsType"></a>
+<br>
+ <b>Тип TextSettingsType</b>
+<dd>
+ Этот тип определяет атрибуты текста, используемые в
+ <a href="#GetTextSettings">GetTextSettings</a>.
+<dd><br>
+ Объявление:<pre>
+ TextSettingsType = record
+   Font          : Pointer;
+   FontSize      : DWord;
+   FirstChar     : DWord;
+   Width         : DWord;
+   Height        : DWord;
+   Space         : DWord;
+   Direction     : DWord;
+   Horiz         : DWord;
+   Vert          : DWord;
+ end;
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ViewPortType"></a>
+<br>
+ <b>Тип ViewPortType</b>
+<dd>
+ Тип, определяющий состояние видимой части изображения (viewport).
+ <br>Используется функцией
+ <a href="#GetViewSettings">GetViewSettings</a>.
+<dd><br>
+ Объявление:<pre>
+ ViewPortType = record
+   x1, y1, x2, y2 : LongInt;
+   Clip           : Boolean;
+ end;
+</pre>
+<dd>
+ Пояснения:
+<dd>
+ Точки с координатами (X1, Y1) и (X2, Y2) задают размер видимой части
+ изображения и должны задаваться в абсолютных координатах экрана.
+<br> Поле "Clip" - булевская переменная, управляющая отсечением невидимой
+ части изображения.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="VbeInfoType"></a>
+<br>
+ <b>Тип VbeInfoType</b>
+<dd>
+ Данный тип предназначен для хранения блока информации VESA VBE.
+ <br> Используется функцией GetVbeInfo.
+<dd><br>
+ Объявление:<pre>
+ VbeInfoType = record
+   VbeSignature       : DWord;
+   VbeVersion         : Word;
+   OemStringPtr       : DWord;
+   Capabilities       : DWord;
+   VideoModePtr       : DWord;
+   TotalMemory        : Word;
+   OEMSoftwareRev     : Word;
+   OEMVendorNamePtr   : DWord;
+   OEMProductNamePtr  : DWord;
+   OEMProductRevPtr   : DWord;
+   Reserved           : array [0..221] of Byte;
+   OEMData            : array [0..255] of Byte;
+ end;
+</pre>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="VbeInfoModeType"></a>
+<br>
+ <b>Тип VbeInfoModeType</b>
+<dd>
+ Данный тип предназначен для хранения блока информации об установленном
+ VESA VBE режиме.
+<br> Используется функцией
+ <a href="#GetVbeModeInfo">GetVbeModeInfo</a>.
+<dd><br>
+ Объявление:<pre>
+ VbeModeInfoType = record
+   ModeAttributes     : Word;
+   WinAAttributes     : Byte;
+   WinBAttributes     : Byte;
+   WinGranularity     : Word;
+   WinSize            : Word;
+   WinASegment        : Word;
+   WinBSegment        : Word;
+   WinFuncPtr         : Pointer;
+   BytesPerScanLine   : Word;
+   XResolution        : Word;
+   YResolution        : Word;
+   XCharSize          : Byte;
+   YCharSize          : Byte;
+   NumberOfPlanes     : Byte;
+   BitsPerPixel       : Byte;
+   NumberOfBanks      : Byte;
+   MemoryModel        : Byte;
+   BankSize           : Byte;
+   NumberOfImagePages : Byte;
+   Reserved           : Byte;
+   RedMaskSize        : Byte;
+   RedFieldPosition   : Byte;
+   GreenMaskSize      : Byte;
+   GreenFieldPosition : Byte;
+   BlueMaskSize       : Byte;
+   BlueFieldPosition  : Byte;
+   RsvdMaskSize       : Byte;
+   RsvdFieldPosition  : Byte;
+   DirectColorModeInfo: Byte;
+   PhysBasePtr        : DWord;
+   OffScreenMemOffset : DWord;
+   OffScreenMemSize   : Word;
+   Reserved2          : Array [0..205] of Byte;
+ end;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+</dl>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

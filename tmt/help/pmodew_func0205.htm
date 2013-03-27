@@ -1,0 +1,88 @@
+<html><head>
+<TITLE>Function 0205 - Set Protected Mode Interrupt Vector
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0204.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0204 - Get Protected Mode Interrupt Vector"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0300.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0300 - Simulate Real Mode Interrupt"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.20 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0205 - Set Protected Mode Interrupt Vector
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Sets the address of the protected mode interrupt handler for the
+specified interrupt.
+<pre><B>In:</B>
+   AX     = 0205h
+   BL     = interrupt number
+   CX:EDX = selector offset of protected mode interrupt handler
+<B>Out:</B>
+   if successful:
+     carry flag clear
+   if failed:
+     carry flag set</pre>
+<B>Notes:</B>
+<br>
+The value passed in CX must be a valid protected mode selector, not a real mode
+segment address.
+<br>
+<br>
+If you wish to hook one of the low 8 interrupts, you must hook it as an
+exception. It will not be called if you hook it with function 0205h.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0204.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0204 - Get Protected Mode Interrupt Vector"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0300.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0300 - Simulate Real Mode Interrupt"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0204 - Get Protected Mode Interrupt Vector</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0300 - Simulate Real Mode Interrupt</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.20 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,121 @@
+<html><head>
+<TITLE>SearchRec type
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="registers_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Registers type"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="dos_proc_and_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Dos Unit Procedures and Functions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.1.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_const_and_var.htm"><small>Dos Unit Constants and Variables</small></a><dir><h2>SearchRec type
+</h2></dir>
+<!-- Page content -->
+<B>Targets: MS-DOS, OS/2, Win32</B>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>
+<br>
+<br>
+The <a href="findfirst_proc.htm">FindFirst</a> and
+<a href="findnext_proc.htm">FindNext</a> procedures use variables of type
+<I>SearchRec</I> to scan directories:
+<br>
+<br>
+<B>Declaration:</B>
+<br>
+<br>
+<B>MS-DOS target</B>
+<pre><B>type</B>
+  SearchRec = <B>record</B> 
+    Fill : <B>array</B>[1..21] <B>of</B> Byte;
+    Attr : Byte;
+    Time : Longint;
+    Size : Longint;
+    Name : string[12];
+  <B>end</B>;</pre>
+<B>OS/2 target</B>
+<pre><B>type</B>
+  SearchRec = <B>record</B> 
+    Fill : <B>array</B> [1..21] <B>of</B> Byte;
+    Attr : Byte;
+    Time : Longint;
+    Size : Longint;
+    Name : string;
+  <B>end</B>;</pre>
+<B>Win32 target</B>
+<pre><B>type</B>
+  SearchRec = <B>record</B>   
+    Fill : <B>array</B> [1..21] <B>of</B> Byte;
+    Attr : Byte;
+    Time : Longint;
+    Size : Longint;
+    Name : TFileName;
+    ExcludeAttr: Longint;
+    FindHandle: THandle;
+    FindData: TWin32FindData;
+  <B>end</B>;</pre>
+Information for each file found by FindFirst or FindNext is reported
+back in a <I>SearchRec</I>.
+<dir><table border=1>
+<tr><th>&nbsp;Field&nbsp;</th><th>&nbsp;Meaning&nbsp;</th></tr>
+<tr><td align="center">Attr</td><td>&nbsp;File's attributes</td></tr>
+<tr><td align="center">Time</td><td>&nbsp;File's packed date and time&nbsp;</td></tr>
+<tr><td align="center">Size</td><td>&nbsp;File's size, in bytes</td></tr>
+<tr><td align="center">Name</td><td>&nbsp;File's name</td></tr>
+</table></dir> 
+The <I>Fill</I> field is reserved by DOS and should never be modified.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="registers_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Registers type"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="dos_proc_and_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Dos Unit Procedures and Functions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Registers type</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Dos Unit Procedures and Functions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.1.7 -</B></CENTER>
+</BODY></HTML>

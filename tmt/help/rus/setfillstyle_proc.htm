@@ -1,0 +1,103 @@
+<html><head>
+<TITLE>SetFillStyle procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="setfillpattern_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetFillPattern procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setgraphbufsize_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetGraphBufSize procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.102 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>SetFillStyle procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Sets the fill pattern and color.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> SetFillStyle(Pattern: DWORD; Color: DWORD);</pre>
+<B>Remarks:</B>
+<br>
+Sets the pattern and color for all filling done by
+<a href="fillpoly_proc.htm">FillPoly</a>,
+<a href="bar_proc.htm">Bar</a>,
+<a href="bar3d_proc.htm">Bar3D</a>,
+<a href="fillcircle_proc.htm">FillCircle</a>,
+<a href="fillellipse_proc.htm">FillEllipse</a> and
+<a href="filltriangle_proc.htm">FillTriangle</a>
+procedures. The Graph unit does not support pattern fill for
+<a href="floodfill_proc.htm">FloodFill</a> and
+<a href="expandfill_proc.htm">ExpandFill</a> procedures.
+If invalid input is passed to <I>SetFillStyle</I>,
+<I>GraphResult</I> returns a value of <I>grError</I>,
+and the current fill settings will be unchanged.
+If <I>Pattern</I> equals <I>UserFill</I>,
+the user-defined pattern (set by a call to <I>SetFillPattern</I>)
+becomes the active pattern.
+<br>
+<br>
+<B>See also:</B>
+<br>
+<a href="setfillcolor_proc.htm">SetFillColor</a>
+<br>
+<a href="setfillpattern_proc.htm">SetFillPattern</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="setfillpattern_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetFillPattern procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setgraphbufsize_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetGraphBufSize procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SetFillPattern procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetGraphBufSize procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.102 -</B></CENTER>
+</BODY></HTML>

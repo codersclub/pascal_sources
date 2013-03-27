@@ -1,0 +1,110 @@
+<html><head>
+<TITLE>Procedures and Functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="import_units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Import Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="procedures_and_functions_declaration.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Declaration"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.12 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>Procedures and Functions
+</h2></dir>
+<!-- Page content -->
+Procedures are a sequence of instructions that are separate from the main
+code block. Functions are procedures that return a value. Other than this
+difference, both procedures and functions are the same.
+<br>
+<br>
+Procedures are blocks of code that are called from one or more places
+throughout your program. Procedures make source code more readable and reduce
+the size of the executable because repetitive blocks of code are replaced
+with a call to a procedure. Both procedures and functions accept parameters.
+Parameters allow the calling routine to communicate with a procedure.
+<br>
+<br>
+Parameters can be passed by value or by reference or by constant reference.
+<br>
+<br>
+If passed by value, only the value of the parameter is passed and the procedure
+has no access to the actual variable. One can modify the value parameter.
+It will have an effect only inside of the procedure body and will not change
+the actual variable.
+<br>
+<br>
+If passed by reference, also known as <B>var</B> parameters, an address of
+the memory location containing the value is passed thus making it possible
+to modify the variable.
+<br>
+<br>
+If passed by constant reference, also known as <B>const</B> parameters,
+an address of the memory location containing the value is passed but the
+compiler does not allow one to modify a constant parameter and does not
+allow passing one as an actual variable parameter to another procedure
+or function.
+<br>
+<br>
+<a href="procedures_and_functions_declaration.htm">Procedures and Functions Declaration</a>
+<br>
+<a href="forward_declaration.htm">Forward Declaration</a>
+<br>
+<a href="external_declaration.htm">External Declaration</a>
+<br>
+<a href="interrupt_procedure.htm">Interrupt Procedure</a>
+<br>
+<a href="procedural_value.htm">Procedural Value</a>
+<br>
+<a href="using_statement_as_proc.htm">Using Statement as Procedure</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="import_units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Import Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="procedures_and_functions_declaration.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Declaration"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Import Units</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Declaration</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.12 -</B></CENTER>
+</BODY></HTML>

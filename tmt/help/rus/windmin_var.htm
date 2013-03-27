@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>WindMin variable
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="windmax_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: WindMax"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="crt_proc_and_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: CRT Unit Procedures and Functions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.8.2.10 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="crt_unit.htm"><small>Crt Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="crt_variables.htm"><small>CRT Unit Variables</small></a><dir><h2>WindMin variable
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32 console</B></center>
+<br>
+<br>
+<a href="crt_unit.htm">CRT Unit</a>
+<br>
+<br>
+Stores the screen coordinates of the current window.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>var</B> WindMin: Word;</pre>
+<B>Remarks:</B>
+<br>
+These variables are set by calls to the
+<a href="window_proc.htm">Window</a> procedure.
+<I>WindMin</I> defines the upper left corner.
+<a href="windmax_var.htm">WindMax</a> defines the lower right corner.
+<br>
+<br>
+The X coordinate is stored in the low byte, and the Y
+coordinate is stored in the high byte.
+<br>
+<br>
+For example, <I>Lo(WindMin)</I> produces the X coordinate
+of the left edge, and <I>Hi(WindMax)</I> produces the Y coordinate
+of the bottom edge.
+<br>
+<br>
+The screen's upper left corner corresponds to (X,Y) = (0,0),
+but for coordinates sent to
+<a href="window_proc.htm">Window</a> and
+<a href="gotoxy_proc.htm">GotoXY</a>, the upper left corner is at (1,1).
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="windmax_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: WindMax"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="crt_proc_and_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: CRT Unit Procedures and Functions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">WindMax</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">CRT Unit Procedures and Functions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.8.2.10 -</B></CENTER>
+</BODY></HTML>

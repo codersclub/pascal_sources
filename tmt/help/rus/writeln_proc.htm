@@ -1,0 +1,122 @@
+<html><head>
+<TITLE>WriteLn procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="write_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Write procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="tlhelp32_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TlHelp32 Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.99 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_proc_and_func.htm"><small>System Unit Procedures and Functions</small></a><dir><h2>WriteLn procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<a href="system_unit.htm">System Unit</a>
+<br>
+<br>
+Executes the Write procedure, then outputs an end-of-line
+marker to the file.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> Writeln([ <B>var</B> F: Text;] P1 [, P2, ...,Pn ] );</pre>
+<B>Remarks:</B>
+<br>
+<I>F</I>, if specified, is a file variable. If omitted Output is assumed.
+<I>P1</I> may be of char, string, integer, real, or Boolean type.
+<I>P1</I> through <I>Pn</I> are output to <I>F</I>.
+Each <I>P</I> parameter may be formatted as follows:
+<pre>  P [:MinWidth [:Decimals]]</pre>
+where <I>P</I> is the value to output.
+<I>MinWidth</I>, which must be greater than zero,
+specifies the minimum width of <I>P</I>.
+Decimals specifies the number of decimal places to be output
+when <I>P</I> is of real type.
+<br>
+<br>
+The file used by <I>WriteLn</I> must be open for output.
+An end of line marker is written to <I>F</I> after output.
+<br>
+<br>
+<B>Example:</B>
+<pre><font color = #000080>{$ifndef __CON__}
+  This program must be compiled as console application only
+{ $endif}</font>
+<B>var</B>  
+  Name: String;
+  Age:  DWORD;
+<B>begin</B>
+  Write('Enter your name: ');
+  ReadLn(Name);
+  Write('Enter your age : ');
+  ReadLn(Age);
+  <B>if</B> Age &lt; 21 <B>then</B> 
+    WriteLn('You ''re so young, ', Name, '!')
+  <B>else if</B> Age &lt; 40 <B>then</B> 
+    WriteLn(Name, ', you''re still in your prime!')
+  <B>else if</B> Age &lt; 60 <B>then</B> 
+    WriteLn('You''re over the hill, ', Name, '!')
+  <B>else if</B> Age &lt; 80 <B>then</B> 
+    WriteLn('I bow to your wisdom, ', Name, '!')
+  <B>else</B>
+    Writeln('Are you really ', Age, ', ', Name, '?');
+<B>end</B>.</pre>
+<B>See also:</B>
+<br>
+<a href="user_def_writer.htm">__writer</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="write_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Write procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="tlhelp32_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TlHelp32 Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Write procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">TlHelp32 Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.99 -</B></CENTER>
+</BODY></HTML>

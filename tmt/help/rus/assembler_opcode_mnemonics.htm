@@ -1,0 +1,366 @@
+<html><head>
+<TITLE>Assembler Opcode Mnemonics
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_registers.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Registers"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assembler_operand_expressions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operand Expressions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.9 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Opcode Mnemonics
+</h2></dir>
+<!-- Page content -->
+This section lists valid opcode mnemonics. Please consult an 80386 reference
+book for additional details. The list uses the following abbreviations:
+<ul>
+<li>acc   - accumulator register (AL, AX, EAX)</li>
+<li>brm   - byte register or memory operand</li>
+<li>cdt   - control, debug or test register</li>
+<li>imm   - byte</li>
+<li>label - offset in code</li>
+<li>mem   - memory operand</li>
+<li>none  - no operands</li>
+<li>reg   - register</li>
+<li>rm    - register or memory operand</li>
+<li>seg   - segment register</li>
+<li>st    - coprocessor top of stack register</li>
+<li>st(i) - coprocessor register</li>
+</ul>
+<pre>  <B>Opcode:</B>     <B>Possible arguments</B>
+     AAA:      none
+     AAD:      none
+     AAM:      none
+     AAS:      none
+     ADC:      rm,reg | reg,rm | rm,imm
+     ADD:      rm,reg | reg,rm | rm,imm
+     AND:      rm,reg | reg,rm | rm,imm
+    ARPL:      rm,reg
+   BOUND:      reg,mem
+     BSF:      reg,rm
+     BSR:      reg,rm
+     BTC:      rm,reg | rm,imm
+     BTR:      rm,reg | rm,imm
+     BTS:      rm,reg |rm,imm
+      BT:      rm,reg | rm,imm
+    CALL:      label | rm
+     CBW:      none
+     CDQ:      none
+     CLC:      none
+     CLD:      none
+     CLI:      none
+    CLTS:      none
+     CMC:      none
+     CMP:      rm,reg | reg,rm | rm,imm
+   CMPSB:      none
+   CMPSD:      none
+   CMPSW:      none
+   CPUID:      none
+     CWD:      none
+    CWDE:      none
+     DAA:      none
+     DAS:      none
+     DEC:      rm
+     DIV:      rm
+   ENTER:      imm,imm
+   F2XM1:      none
+    FABS:      none
+    FADD:      none | st,st(i) | st(i),st | mem
+   FADDP:      st(i),st
+    FBLD:      mem
+   FBSTP:      mem
+    FCHS:      none
+   FCLEX:      none
+    FCOM:      none | st(i) | mem
+   FCOMP:      none | st(i) | mem
+  FCOMPP:      none
+ FDECSTP:      none
+   FDISI:      none
+    FDIV:      none | st,st(i) | st(i),st | mem
+   FDIVP:      st(i),st
+   FDIVR:      st(i),st
+  FDIVRP:      st(i),st
+    FENI:      none
+   FFREE:      st(i)
+   FIADD:      mem
+  FICOMP:      mem
+   FICOM:      mem
+  FIDIVR:      mem
+   FIDIV:      mem
+    FILD:      mem
+   FIMUL:      mem
+   FIMUL:      mem
+ FINCSTP:      mem
+   FINIT:      none
+    FIST:      mem
+   FISTP:      mem
+   FISUB:      mem
+  FISUBR:      mem
+     FLD:      st(i) | mem
+    FLD1:      none
+   FLDCW:      mem
+  FLDENV:      none
+  FLDL2E:      none
+  FLDL2T:      none
+  FLDLG2:      none
+  FLDLN2:      none
+   FLDPI:      none
+    FLDZ:      none
+    FMUL:      none | st,st(i) | st(i),st | mem
+   FMULP:      none | st(i),st
+  FNCLEX:      none
+  FNDISI:      none
+   FNENI:      none
+  FNINIT:      none
+    FNOP:      none
+  FNSAVE:      none
+  FNSTCW:      none
+ FNSTENV:      none
+  FNSTSW:      none
+  FPATAN:      none
+   FPREM:      none
+  FPREM1:      none
+   FPTAN:      none
+ FRNDINT:      none
+  FRSTOR:      mem
+   FSAVE:      mem
+  FSCALE:      none
+  FSETPM:      none
+   FSQRT:      none
+     FST:      st(i) | mem
+    FSTP:      st(i) | mem
+   FSTCW:      mem
+  FSTENV:      mem
+   FSTSW:      mem | AX
+    FSUB:      none | st,st(i) | st(i),st | mem
+   FSUBP:      none | st(i)st
+   FSUBR:      none | st,st(i) | st(i),st | mem
+  FSUBRP:      none | st(i),st
+    FTST:      none
+   FWAIT:      none
+    FXAM:      none
+    FXCH:      none
+ FXTRACT:      none
+ FYL2XP1:      none
+   FYL2X:      none
+     HLT:      none
+    IDIV:      rm
+    IMUL:      rm | reg,imm | reg,rm,imm
+      IN:      acc,imm | acc,DX
+     INC:      rm
+    INSB:      none
+    INSD:      none
+    INSW:      none
+     INT:      imm
+    INTO:      none
+   IRETD:      none
+    IRET:      none
+      JA:      label
+     JAE:      label
+      JB:      label
+     JBE:      label
+      JC:      label
+    JCXZ:      label
+      JE:      label
+   JECXZ:      label
+      JG:      label
+     JGE:      label
+      JL:      label
+     JLE:      label
+     JMP:      label | rm
+     JNA:      label
+    JNAE:      label
+     JNB:      label
+    JNBE:      label
+     JNC:      label
+     JNE:      label
+     JNG:      label
+    JNGE:      label
+     JNL:      label
+    JNLE:      label
+     JNO:      label
+     JNP:      label
+     JNS:      label
+     JNZ:      label
+      JO:      label
+      JP:      label
+     JPE:      label
+     JPO:      label
+      JS:      label
+      JZ:      label
+    LAHF:      none
+     LAR:      reg,rm
+     LDS:      reg,mem
+   LEAVE:      none
+     LEA:      reg,mem
+     LES:      reg,mem
+     LFS:      reg,mem
+    LGDT:      mem
+     LGS:      reg,mem
+    LIDT:      mem
+    LLDT:      rm
+    LMSW:      rm
+   LODSB:      none
+   LODSD:      none
+   LODSW:      rm
+    LOOP:      label
+  LOOP16:      label
+  LOOP32:      label
+   LOOPE:      label
+  LOOPNE:      label
+  LOOPNZ:      label
+   LOOPZ:      label
+     LSL:      reg,rm
+     LSS:      reg,mem
+     LTR:      reg,mem
+     MOV:      reg,rm|rm,reg|rm,imm|rm,seg|seg,rm|reg,cdt|cdt,reg
+   MOVSB:      none
+   MOVSD:      none
+   MOVSW:      none
+   MOVSX:      reg,rm
+   MOVZX:      reg,rm
+     MUL:      rm
+     NEG:      rm
+     NOP:      none
+     NOT:      rm
+      OR:      none
+     OUT:      imm,acc | DX,acc
+   OUTSB:      none
+   OUTSD:      none
+   OUTSW:      none
+     POP:      rm
+    POPA:      none
+   POPAD:      none
+    POPF:      none
+   POPFD:      none
+    PUSH:      rm
+   PUSHA:      none
+  PUSHAD:      none
+   PUSHF:      none
+  PUSHFD:      none
+     RCL:      rm,1 | rm,CL | rm,imm
+     RCR:      rm,1 | rm,CL | rm,imm
+     RET:      none,imm
+    RETF:      none,imm
+    RETN:      none,imm
+     ROL:      rm,1 | rm,CL | rm,imm
+     ROR:      rm,1 | rm,CL | rm,imm
+    SAHF:      none
+     SAL:      rm,1 | rm,CL | rm,imm
+     SAR:      rm,1 | rm,CL | rm,imm
+     SBB:      rm,reg | reg,rm | rm,imm
+   SCASB:      none
+   SCASD:      none
+   SCASW:      none
+   SEGCS:      none
+   SEGDS:      none
+   SEGES:      none
+   SEGSS:      none
+   SEGFS:      none
+   SEGGS:      none
+    SETA:      brm
+   SETAE:      brm
+    SETB:      brm
+   SETBE:      brm
+    SETC:      brm
+    SETE:      brm
+   SETGE:      brm
+    SETG:      brm
+    SETL:      brm
+   SETLE:      brm
+   SETNA:      brm
+  SETNAE:      brm
+  SETNBE:      brm
+   SETNB:      brm
+   SETNC:      brm
+   SETNE:      brm
+  SETNGE:      brm
+   SETNG:      brm
+  SETNLE:      brm
+   SETNL:      brm
+   SETNO:      brm
+   SETNP:      brm
+   SETNS:      brm
+   SETNZ:      brm
+    SETO:      brm
+   SETPE:      brm
+   SETPO:      brm
+    SETP:      brm
+    SETS:      brm
+    SETZ:      brm
+    SGDT:      mem
+    SHLD:      rm,reg,imm
+     SHL:      rm,1 | rm,CL | rm,imm
+    SHRD:      rm,reg,imm
+     SHR:      rm,1 | rm,CL | rm,imm
+    SIDT:      mem
+    SLDT:      rm
+    SMSW:      rm
+     STC:      none
+     STD:      none
+     STI:      none
+   STOSB:      none
+   STOSD:      none
+   STOSW:      none
+     STR:      rm
+     SUB:      rm,reg | reg,rm | rm,imm
+    TEST:      rm,reg | reg,rm | rm,imm
+    VERR:      rm
+    VERW:      rm
+    WAIT:      none
+    XCHG:      reg,rm | rm,reg
+    XLAT:      none
+     XOR:      rm,reg | reg,rm | rm,imm</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_registers.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Registers"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_operand_expressions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operand Expressions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Registers</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Operand Expressions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.9 -</B></CENTER>
+</BODY></HTML>

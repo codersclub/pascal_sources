@@ -1,0 +1,131 @@
+<html><head>
+<TITLE>Debugger Commands (Debug)
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="idew32_dbg_shortcuts.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Compiler and Debugger Shortcuts"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="win32_programming.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Win32 Programming"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 5.10 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="idew32.htm"><small>IDE (Integrated Development Environment)</small></a><dir><h2>Debugger Commands (Debug)
+</h2></dir>
+<!-- Page content -->
+To start debugging, choose the <I>Run</I> or <I>Run To Cursor</I> command from
+the <I>Debug</I> menu. The following table lists the <I>Start Debug</I> menu
+commands that may appear and their actions.
+<br>
+<br>
+<B><U>R</U>un/<U>C</U>ontinue</B>
+<br>
+Executes code from the begin or from the current statement until a breakpoint
+(left-click with a mouse on the editor's gutter to set/remove a breakpoint)
+or the end of the program is reached, or until the application pauses for
+user input.
+<br>
+<br>
+<B><U>S</U>ingle Step</B>
+<br>
+Single-steps through instructions in the program, and enters each function
+call that is encountered. Note that the execution speed of program may be
+very slow while in Single Step mode. Also we do not recommend that you use
+the <I>Single Step</I> command while in the body of a callback function such as
+<b>WindowProc</b> one (WIN32.HLP). In such a situation, the debugger might
+reset the single step mode after exiting from the callback function.
+We recommend that you use the Run To Cursor command instead.
+<br>
+<br>
+<B>Run To <U>C</U>ursor</B>
+<br>
+Executes the program as far as the line that contains the insertion point.
+This is equivalent to setting a temporary breakpoint at the insertion point
+location. You can use <I>Run To Cursor</I> to run your program and pause before the
+location of a suspected problem. 
+<br>
+<br>
+<B>Program R<U>e</U>set</B>
+<br>
+Terminates the debugging session, and returns to a normal editing session.
+When resetting a program, Windows may not properly release all resources
+allocated by the code.
+<br>
+<br>
+<B>Add <U>W</U>atch</B>
+<br>
+By choosing the Add Watch command you can create and modify debugging watches.
+After you create a watch, it will be added to the Watches window, which is
+located at the bottom of IDE's Editor.
+<br>
+<br>
+<B><U>I</U>nspect...</B>
+<br>
+Select <I>Inspect</I> to display information about the specified expression
+(variable, record field or array element). <I>Inspect</I> is only available
+if the debugging session is in suspended mode (for instance, after stopping at
+breakpoint or after execution of the <I>Single Step</I> command). The Inspect
+doesn't work when the expression has no value.
+<br>
+<br>
+<B>Show Program <U>V</U>ariables</B>
+<br>
+Shows a window which displays all local and global variables visible in the
+debugging application. <I>Show Program Variables</I> is only available if the
+debugging session is in suspended mode.
+<br>
+<br>
+<B>Show <U>CPU</U> State</B>
+<br>
+Shows a window which displays the CPU registers. <I>Show Program Variables</I>
+is only available if the debugging session is in suspended mode.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="idew32_dbg_shortcuts.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Compiler and Debugger Shortcuts"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="win32_programming.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Win32 Programming"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Compiler and Debugger Shortcuts</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Win32 Programming</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 5.10 -</B></CENTER>
+</BODY></HTML>

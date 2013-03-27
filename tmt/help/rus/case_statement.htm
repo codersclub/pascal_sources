@@ -1,0 +1,96 @@
+<html><head>
+<TITLE>Case Statement
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="compound_statements.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Compound Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="for_statement.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: For Statement"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.9.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="statements.htm"><small>Statements</small></a><dir><h2>Case Statement
+</h2></dir>
+<!-- Page content -->
+The <B>case</B>  statement selects from a list of statements basing
+it's decision on the value of an expression. <B>case</B> statements
+take the following form:
+<pre><B>case</B> expression <B>of</B>
+  Selector : statement
+  [<B>else</B> statement]
+<B>end</B>;</pre>
+where expression is a value of ordinal type. The <B>case</B> expression
+value is matched against each <I>Selector</I>. If a match exists the
+statement following the matching <I>Selector</I> is executed.
+<I>Control</I> is then transferred out of the <B>case</B>.
+If no <I>Selector</I> matches the <B>case</B> expression then control is
+passed to an optional else clause. <I>Selector</I> must evaluate to a
+constant at compile time and is defined as:
+<pre>  expression [..expression] [,expression [..expression]]}</pre>
+If <B>..</B> is specified followed by another expression the <B>case</B>
+applies to the entire range between the first expression and the second
+expression. The following is an example of the <B>case</B> statement:
+<pre><B>case</B> Int <B>of</B>
+  5       : WriteLn('Int is 5');
+  7..12,15: WriteLn('Between 7..12 or 15');
+  <B>else</B>
+    <B>begin</B>
+      WriteLn('Undefined.');
+      GetNextInt;
+    <B>end</B>;
+  <B>end</B>;</pre>
+Performance for large <B>case</B> statements improves if the most common
+subcases are listed first.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="compound_statements.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Compound Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="for_statement.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: For Statement"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Compound Statement</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">For Statement</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.9.3 -</B></CENTER>
+</BODY></HTML>

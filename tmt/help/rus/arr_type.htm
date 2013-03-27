@@ -1,0 +1,89 @@
+<html><head>
+<TITLE>Array Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="ptr_deref.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Pointer Dereference"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="str_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: String Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.9 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Array Types
+</h2></dir>
+<!-- Page content -->
+Array types contain a sequence of components of a different type.
+Each component is referenced by an index which also has a specific
+type. Arrays are defined as follows:
+<pre><B>array</B> [<I>Ordinalindex</I> [,<I>OrdinalIndex</I>]] <B>of</B> <I>Arraytype</I>;</pre>
+where <I>OrdinalIndex</I> is one of the following ordinal types: integer, char,
+enumeration, Boolean, or subrange. <I>Arraytype</I> can be of any type,
+including another array type. The following are examples of array types:
+<pre>  <B>array</B> [Boolean] <B>of</B> Char;
+  <B>array</B> [Char] <B>of</B> Integer;
+  <B>array</B> [1..255] <B>of</B> Double;</pre>
+Subscripts are used to refer to a component of an array.
+Subscripting an array is specified as follows:
+<pre>  Arrayname [expression [,expression]];</pre>
+where <I>expression</I> is of the same type as the index. <I>Expression</I>
+must also lie within the range of the index. A runtime error is generated
+if <I>expression</I> lies outside the index range and range checking is
+turned on, {$R+}.
+<br>
+<br>
+<B>See also</B>
+<br>
+<a href="range_checking_switch.htm">{$R} - Range-Checking Switch</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="ptr_deref.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Pointer Dereference"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="str_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: String Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Pointer Dereference</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">String Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.9 -</B></CENTER>
+</BODY></HTML>

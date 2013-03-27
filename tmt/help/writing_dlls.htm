@@ -1,0 +1,127 @@
+<html><head>
+<TITLE>Writing DLL's
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="using_dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Using DLL's"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="global_variables_in_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Global variables in DLL's"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dlls.htm"><small>Dynamic-Link Libraries (DLL's)</small></a><dir><h2>Writing DLL's
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: OS/2, Win32</B></center>
+<br>
+<br>
+The structure of a TMT Pascal DLL is identical to that of a program,
+except that a DLL starts with a library header (<B>Library</B>) instead of
+a program header (<B>Program</B>).
+<br>
+<br>
+All procedures and functions which to be exported by a DLL, must be compiled
+with the export procedure directive.
+<br>
+<br>
+If you want your DLL to be available to applications written in other
+languages, it’s safest to specify <I>arg_stdcall</I> calling convention
+in the declarations of exported functions. Other languages may not support
+TMT Pascal’s default register calling convention.
+<br>
+<br>
+<B>Example:</B>
+<pre><font color = #000080>// This implements a very simple DLL
+// with two exported functions:</font>
+
+<B>library</B> ARCs;
+
+<font color = #000080>// The export procedure directive prepares ArcCos
+// and ArcSin for exporting</font>
+
+<B>uses</B> Math;
+
+<font color = #000080>{$ifdef __WIN32__}</font>
+  <B>function</B> ArcCos <B>conv</B>  arg_stdcall (X: Extended): Extended;
+<font color = #000080>{$else}</font>
+  <B>function</B> ArcCos <B>conv</B> arg_os2 (X: Extended): Extended;
+<font color = #000080>{$endif}</font>
+
+<B>begin</B>
+  Result := RadToDeg(ArcTan2(Sqrt(1 - X * X), X));
+<B>end</B>;
+
+<font color = #000080>{$ifdef __WIN32__}</font>
+  <B>function</B> ArcSin <B>conv</B> arg_stdcall ( X: Extended): Extended;
+<font color = #000080>{$else}</font>
+  <B>function</B> ArcSin <B>conv</B> arg_os2 ( X: Extended): Extended;
+<font color = #000080>{$endif}</font>
+
+<B>begin</B>
+  Result := RadToDeg(ArcTan2(X, Sqrt(1 - X * X)));
+<B>end</B>;
+
+<font color = #000080>// The exports clause actually exports the two routines,
+// supplying an optional ordinal number for each of them</font>
+
+<B>exports</B>
+
+  ArcCos <B>name</B> 'ArcCos',  <font color = #000080>// export by name</font>
+  ArcSin <B>index</B> 1;        <font color = #000080>// export by index</font>
+
+<B>begin</B>
+<font color = #000080>  // Do nothing</font>
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="using_dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Using DLL's"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="global_variables_in_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Global variables in DLL's"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Using DLL's</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Global variables in DLL's</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.3 -</B></CENTER>
+</BODY></HTML>

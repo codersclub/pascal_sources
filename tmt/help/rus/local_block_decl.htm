@@ -1,0 +1,119 @@
+<html><head>
+<TITLE>Local Block Declarations
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="variable_decl.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Variable Declarations"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="expressions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Expressions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.7.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="decl.htm"><small>Declarations</small></a><dir><h2>Local Block Declarations
+</h2></dir>
+<!-- Page content -->
+It is very often necessary to declare a local variable with a short life-span.
+One has to do this at the declaration part of a program or in the procedure
+body. This is not always convenient, especially if there is a huge program
+with a complicated algorithm. For that case a special construction has been
+added in TMT Pascal. It is called a Local or Nested Block. Such a block is an
+ordinary compound statement which begins with the new reserved word
+<B>declare</B> and consists of two parts - declaration and execution:
+<pre><B>declare</B>
+   &lt;declaration part&gt;
+<B>begin</B>
+  &lt;execution part&gt;
+<B>end</B>;</pre>
+This statement can be used in any place where a structured statement can be
+placed.
+<br>
+<br>
+<B>Example:</B>
+<pre><B>program</B> DeclDemo;
+<B>var</B>
+  b: Integer;
+<B>begin</B>
+  <B>declare</B>
+  <font color = #000080>// first local block</font>
+  <B>var</B>
+    a: Integer;
+    <B>procedure</B> pr_int(a: Integer);
+    <B>var</B>
+      i: Integer;
+    <B>begin</B>
+      <B>for</B> i := 1 <B>to</B> a <B>do</B>
+        <B>declare</B>
+        <font color = #000080> //second local block</font>
+        <B>var</B>
+          k: Integer;
+        <B>begin</B>
+          k := a <B>div</B> i;
+          Writeln(a, ' div ', i, ' =  ', k);
+        <B>end</B>;
+    <B>end</B>;
+  <B>begin</B>
+    a := 1;
+    Writeln(a);
+    b := 10;
+    pr_int(b);
+  <B>end</B>
+<B>end</B>.</pre>
+This example contains two local blocks one of them is in the program body
+and another is in the routine body. The first local block declares variable
+<I>a</I> and procedure <I>pr_int</I>, the second declares one local variable
+<I>k</I>. It should be understood that the scope of 'a' and <I>pr_int</I>
+is the interior of the &quot;first local block,&quot; and the scope of
+<I>k</I> is the interior of the &quot;second local block.&quot;
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="variable_decl.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Variable Declarations"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="expressions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Expressions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Variable Declarations</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Expressions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.7.5 -</B></CENTER>
+</BODY></HTML>

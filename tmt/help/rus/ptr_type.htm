@@ -1,0 +1,90 @@
+<html><head>
+<TITLE>Pointer Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="real_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Real Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="ptr_deref.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Pointer Dereference"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Pointer Types
+</h2></dir>
+<!-- Page content -->
+Pointer types contain the address of an identifier or dynamically allocated
+memory. Pointer types require a double word (32 bits for storage).
+While in protected mode, pointers contain a 32-bit offset and the segment
+is assumed to be the data segment. Inthis way pointers are similar to the
+integer type Longint. To allocate dynamic variables see the chapter on Heap
+Management. A pointer type must point to specific type. Pointer types are
+defined as follows:
+<pre>  ^Typename</pre>
+The pointer type can be assigned the constant <B>nil</B>. When <B>nil</B> is
+assigned, the pointer does not refer to any location in memory. Pointer is
+a predefined pointer type that is untyped. Pointer is compatible with all
+other pointer types.
+<br>
+<br>
+TMT Pascal supports the following arithmetical operations on pointers.
+<br>
+<br>
+<B>Examples:</B>
+<pre>  p2 := p1 + 1000;
+  p1 := p2 - $FF;
+  inc(p1, 15);
+  dec(p2);</pre>
+Where <I>p1</I> and <I>p2</I> are variables of Pointer Type.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="real_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Real Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="ptr_deref.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Pointer Dereference"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Real Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Pointer Dereference</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.7 -</B></CENTER>
+</BODY></HTML>

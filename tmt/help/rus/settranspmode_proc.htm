@@ -1,0 +1,95 @@
+<html><head>
+<TITLE>SetTranspMode procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="setsplinesteps_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetSplineLineSteps procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setviewport_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetViewPort procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.115 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>SetTranspMode procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Sets/resets transparent mode for BitMaps output.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> SetTranspMode(Mode: Boolean; Color: DWORD);</pre>
+<B>Remarks:</B>
+<br>
+TMT Graph supports transparent BitMaps blt.
+If <I>Mode</I> parameter is True, all pixels consisting of
+BitMap pixels with a color which is different from the given
+<I>Color</I> value will be put to the screen.
+Any pixel which coincides with the value <I>Color</I> will be ignored
+(will not be placed on the screen). This is very useful
+for games programming.  Transparent BitMaps blt are supported in any graphic
+mode (MCGA/VGA, SVGA 256, 32K, 64K, 16M and 16M+A colored modes,
+with LFB and banked modes)!
+<br>
+<br>
+<I>SetTranspMode</I> affects calls to the following routines only:
+<a href="puthtextel_proc.htm">PutHTextel</a>,
+<a href="putsprite_proc.htm">PutSprite</a> and
+<a href="putimage_proc.htm">PutImage</a>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="setsplinesteps_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetSplineLineSteps procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setviewport_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetViewPort procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SetSplineLineSteps procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetViewPort procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.115 -</B></CENTER>
+</BODY></HTML>

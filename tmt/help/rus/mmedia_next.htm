@@ -1,0 +1,90 @@
+<html><head>
+<TITLE>TMMedia.Next
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="mmedia_gotofirstaudiotrack.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GotoFirstAudioTrack"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="mmedia_open.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Open"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.47.2.18 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="mmedia_unit.htm"><small>MMedia Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="tmmedia_methods.htm"><small>TMMedia Object Methods</small></a><dir><h2>TMMedia.Next
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+<a href="mmedia_unit.htm">MMedia Unit</a>
+<br>
+<br>
+Moves to the beginning of the next track of the currently loaded media.
+<br>
+<br>
+<B>Declaration:</B>
+<pre>  <B>procedure</B> Next;</pre>
+<B>Remarks:</B>
+<br>
+If the current position is at the last track when the <I>Next</I> method is
+called, <I>Next</I> makes the current position the beginning of the last track.
+If the multimedia device doesn't use tracks, <I>Next</I> goes to the end of
+the medium.
+<br>
+<br>
+The <a href="mmedia_wait.htm">Wait</a> field determines whether control
+is returned to the application before the <B>Next</B> method has finished.
+The <a href="mmedia_notify.htm">Notify</a> field determines whether
+<I>Next</I> generates a MM_MCINOTIFY message.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="mmedia_gotofirstaudiotrack.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GotoFirstAudioTrack"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="mmedia_open.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Open"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">GotoFirstAudioTrack</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Open</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.47.2.18 -</B></CENTER>
+</BODY></HTML>

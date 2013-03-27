@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>TMT Pascal по-Русски! Анкета пользователя</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="Author" content="Valery Votintsev and Vadim Bodrov">
+<meta name="Description" content="Анкета для пользователей компилятора TMT Pascal.">
+<META content="custom software, custom development, custom projects, software development, Pascal, compiler, 32-bit, 32 bit, Turbo, DOS compiler, graphics library, DPMI, DOS extender, PMODE/W, WDOSX, DOS/4GW, TMT, MSDOS, MS-DOS, VESA, LFB, MMX, Win32, Windows,&#10; Windows'95, Windows'98, Windows NT, OS/2, Multi-target, AMD, 3DNow!" name=keywords>
+<link rel="stylesheet" type="text/css" href="tmt.css">
+</head>
+<body bgcolor="#FFFFFF">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18" align="top"><a
+        class=menu href="index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="news.htm">TMT Pascal 5.0</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/sel.gif" width="18"><a
+        class=menu href="download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="samples.htm">Примеры кода</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../index.htm"><img src="../img/pas.gif" height="31" width="88" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+
+
+</td>
+    <!-- end left top cell of outer table -->
+
+
+<SCRIPT><!--
+
+function isEmpty(str) {
+  for (var intLoop = 0; intLoop < str.length; intLoop++)
+    if (" " != str.charAt(intLoop))
+      return false;
+  if (str == "--выбор--")
+    return false;
+  return true;
+}
+
+function isValidEmail(str) {
+  var rf1 = 0;
+  var rf2 = 0;
+  for (var intLoop = 0; intLoop < str.length; intLoop++)
+  {
+    if ("@" == str.charAt(intLoop))
+      rf1++;
+    if ("." == str.charAt(intLoop))
+      rf2++;
+  }
+  if (rf1 != 1 || rf2 == 0)
+    return false;
+  else
+    return true;
+}
+
+function checkRequired(f) {
+  for (var intLoop = 0; intLoop < f.elements.length; intLoop++) {
+    if (isEmpty(f.elements[intLoop].value) && intLoop != 4) {
+        alert("Пожалуйста, заполните ВСЕ поля в регистрационной форме.\n");
+        return false;
+    };
+   };
+  // Check email
+  if (!isValidEmail(f.elements[2].value)) {
+      alert("Неверно введен EMail адрес.\n");
+      return false;
+    };
+  return true;
+}
+
+// --></SCRIPT>
+
+    <TD vAlign=top><!-- begin upper right body table -->
+      <TABLE border=0 cellPadding=3 cellSpacing=10 width="100%">
+        <TBODY>
+      <tr>
+        <td valign="top"><blockquote><img src="img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+        <TR>
+          <TD vAlign=top>
+            <BLOCKQUOTE>
+              <HR>
+              <P align=left><!-- begin upper right body table --></P>
+              <P><FONT face=Arial size=2><BR clear=all></FONT><FONT
+              face=Arial size=4><STRONG>Скачать TMT Pascal
+              Lite</STRONG></FONT><FONT face=Arial size=2><BR
+              clear=all></FONT></P>
+
+              <P align=left><FONT face=Arial size=2><BR clear=all>
+              С этой страницы Вы можете совершенно бесплатно скачать версию "Lite"
+              компилятора TMT Pascal для DOS. Эта версия компилятора
+              является ознакомительной и поставляется по принципу "КАК ЕСТЬ" (AS IS),
+              без каких-либо гарантийных обязательств с нашей стороны.
+              <br>Мы надеемся, что компилятор Вам понравится.
+              <br>Кроме того, мы будем весьма рады Вашим отзывам,
+              которые Вы можете отправить по электронной почте
+              в нашу службу техподдержки.</FONT></P><FONT
+              face=Arial size=-1>
+              <P></FONT><FONT face=Arial size=2>
+              Для получения бесплатной версии компилятора
+              мы просим Вас заполнить приведенную ниже форму.
+              Заполненная Вами форма позволит нам информировать Вас
+              о выпуске новых версий компилятора и связанных с ним продуктов.
+              <br>Введенная Вами информация ни в каком виде не будет кому-либо
+              передана без Вашего на то разрешения!.</FONT></P>
+
+              <FORM action=/cgi-bin/form2file?template.txt+success-url=http://pascal.sources.ru/tmt/pub/tmtp350d.zip
+              method=post onsubmit="return checkRequired(this);"><FONT
+              face=Arial,Helvetica size=-1>
+              <DIV align=center>
+              <CENTER>
+              <TABLE border=0 cellPadding=0 cellSpacing=6 height=387
+              cellpading="6">
+                <TBODY>
+                <TR></FONT>
+                  <TD align=right height=25><FONT face=Arial size=2>
+                    <B>Ваше Имя и Фамилия:</B></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><INPUT maxLength=48
+                    name=name size=30></FONT></TD><FONT face=Arial,Helvetica
+                  size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=16><FONT face=Arial size=2>
+                    <B>Название организации:</B></FONT></TD>
+                  <TD height=16><FONT face=Arial size=2><INPUT name=company
+                    size=30></FONT></TD><FONT face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=25><B><FONT face=Arial
+                    size=2>EMail:</FONT></B></TD><FONT face=Arial,Helvetica
+                  size=-1>
+                  <TD height=25></FONT><FONT face=Arial size=2><INPUT
+                    maxLength=96 name=email size=30></FONT></TD></TR>
+                <TR>
+                  <TD align=right height=25><FONT face=Arial
+                    size=2><B>Страна:</B></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><SELECT name=country
+                    size=1>
+                      <OPTION selected value=--Select-->--выбор--</OPTION>
+                      <OPTION value=AM>Армения</OPTION>
+                      <OPTION value=AZ>Азербайджан</OPTION>
+                      <OPTION value=BY>Беларусь</OPTION>
+                      <OPTION value=BG>Болгария</OPTION>
+		      <OPTION value=GE>Грузия</OPTION>
+		      <OPTION value=IL>Израиль</OPTION>
+		      <OPTION value=KZ>Казахстан</OPTION>
+		      <OPTION value=KG>Киргизстан</OPTION>
+                      <OPTION value=LV>Латвия</OPTION>
+		      <OPTION value=LT>Литва</OPTION>
+		      <OPTION value=MD>Молдавия</OPTION>
+		      <OPTION value=RU>Россия</OPTION>
+		      <OPTION value=TJ>Таджикистан</OPTION>
+		      <OPTION value=TM>Туркмения</OPTION>
+		      <OPTION value=UZ>Узбекистан</OPTION>
+		      <OPTION value=UA>Украина</OPTION>
+		      <OPTION value=EE>Эстония</OPTION>
+                      </SELECT></FONT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=25><FONT face=Arial size=2>
+                    <B>Штат (только для США):</B></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><INPUT maxLength=2
+                    name=state size=3></FONT></TD><FONT face=Arial,Helvetica
+                  size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=25><FONT face=Arial size=2>
+                    <B>Улица:</B></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><INPUT maxLength=96
+                    name=street size=30></FONT></TD><FONT face=Arial,Helvetica
+                  size=-1></TR>
+                <TR>
+                  <TD align=right height=25></FONT><FONT face=Arial
+                    size=2><B>Город:</B></FONT><FONT face=Arial,Helvetica
+                    size=-1></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><INPUT maxLength=96
+                    name=city size=30></FONT></TD></TR>
+                <TR>
+                  <TD align=right height=25><FONT face=Arial
+                    size=2><B>Почтовый индекс:</B></FONT></TD>
+                  <TD height=25><FONT face=Arial size=2><!--webbot bot="Validation" startspan
+                S-Data-Type="Integer" S-Number-Separators="x" B-Value-Required="TRUE"
+                I-Maximum-Length="12" S-Validation-Constraint="Greater than or equal to"
+                S-Validation-Value="0" S-Validation-Constraint="Less than or equal to"
+                S-Validation-Value="999999999999" --><!--webbot bot="Validation" endspan --><INPUT
+                    maxLength=12 name=zip size=13></FONT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=16><FONT face=Arial
+                    size=2><B>Род занятий:</B></FONT></TD>
+                  <TD height=16><FONT face=Arial size=2><SELECT
+                    name=occupation size=1> <OPTION selected
+                      value="">--Выбор--</OPTION> <OPTION
+                      value=exec>executive/managerial</OPTION> <OPTION
+                      value=prof>professional (doctor, lawyer, etc.)</OPTION>
+                      <OPTION value=academic>academic/educator</OPTION> <OPTION
+                      value=it>computer technical/engineering</OPTION> <OPTION
+                      value=service>service/customer support</OPTION> <OPTION
+                      value=admin>clerical/administrative</OPTION> <OPTION
+                      value=mark>sales/marketing</OPTION> <OPTION
+                      value=skilledworkers>tradesman/craftsman</OPTION> <OPTION
+                      value=cstudent>college/graduate student</OPTION> <OPTION
+                      value=student>студент</OPTION> <OPTION
+                      value=homemaker>homemaker</OPTION> <OPTION
+                      value="selfemp/own company">self-employed/own
+                      company</OPTION> <OPTION value=unemp>безработный
+                      </OPTION> <OPTION value=retired>retired</OPTION>
+                      <OPTION value=other>other</OPTION></SELECT></FONT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=16><FONT face=Arial
+                    size=2><B>Отрасль деятельности:</B></FONT></TD>
+                  <TD height=16><FONT face=Arial size=2><SELECT name=industry
+                    size=1> <OPTION selected>--выбор--</OPTION> <OPTION
+                      value=fin>banking/finance/real estate</OPTION> <OPTION
+                      value=it>computer-related (IS, MIS, DP, Internet)</OPTION>
+                      <OPTION value=hardware>computer-related
+                      (hardware)</OPTION> <OPTION
+                      value=software>computer-related (software)</OPTION>
+                      <OPTION value=edu>education, research</OPTION> <OPTION
+                      value=eng>engineering/construction</OPTION> <OPTION
+                      value=manu>manufacturing/distribution</OPTION> <OPTION
+                      value=busupp>business supplies or services</OPTION>
+                      <OPTION value=medical>medical/health services</OPTION>
+                      <OPTION
+                      value=entertainment>entertainment/media/publishing</OPTION>
+                      <OPTION value=consumer>consumer retail/wholesale</OPTION>
+                      <OPTION value=gov>government</OPTION> <OPTION
+                      value=legal>legal services</OPTION> <OPTION
+                      value=none>none, not employed</OPTION> <OPTION
+                      value=other>other</OPTION></SELECT></FONT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=16><FONT face=Arial
+                    size=2><B>Используемая OS:</B></FONT></TD>
+                  <TD height=16><SELECT name=os size=1> <OPTION selected
+                      value=--Select-->--выбор--</OPTION> <OPTION
+                      value=MS-DOS>MS-DOS</OPTION> <OPTION value=OS/2>IBM
+                      OS/2</OPTION> <OPTION value="Windows 3.xx">MS Windows
+                      3.xx</OPTION> <OPTION value="Wundows'95">MS Windows'
+                      95</OPTION> <OPTION value="Windows'98">MS Windows'
+                      98</OPTION> <OPTION value="Windows Me">MS Windows
+                      Me</OPTION> <OPTION value="Windows NT 3, 4">MS Windows NT
+                      3</OPTION> <OPTION value="Windows NT 4">MS Windows NT
+                      4</OPTION> <OPTION value="Windows 2000 (NT 5)">MS Windows
+                      2000 (NT 5)</OPTION> <OPTION
+                    value=Other>Other</OPTION></SELECT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=right height=16><FONT face=Arial size=2><B>Процессор:
+                    </B></FONT></TD>
+                  <TD height=16><FONT face=Arial size=2><SELECT name=cpu
+                    size=1> <OPTION selected
+                      value=--Select-->--выбор--</OPTION> <OPTION
+                      value="Intel 80386">Intel 80386</OPTION> <OPTION
+                      value="Intel 80486">Intel 80486</OPTION> <OPTION
+                      value="Intel Pentium">Intel Pentium</OPTION> <OPTION
+                      value="Intel Pentium II / Celeron">Intel Pentium II /
+                      Celeron</OPTION> <OPTION value="Intel Pentium III">Intel
+                      Pentium III</OPTION> <OPTION value="Intel Pentium 4">Intel
+                      Pentium 4</OPTION> <OPTION value="AMD K5">AMD K5</OPTION>
+                      <OPTION value="AMD K6">AMD K6</OPTION> <OPTION
+                      value="AMD Athlon / Duron">AMD Athlon / Duron</OPTION>
+                      <OPTION value=Other>Other</OPTION></SELECT></FONT></TD><FONT
+                  face=Arial,Helvetica size=-1></TR>
+                <TR></FONT>
+                  <TD align=middle colSpan=2 height=46><FONT face=Arial
+                    size=2><BR><INPUT type=submit value="Скачать">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<INPUT type=reset value="Сброс"></FONT></TD><FONT
+                  face=Arial,Helvetica
+              size=-1></TR></TBODY></TABLE></CENTER></DIV></FONT></FORM>
+              <P align=left><FONT face=Arial size=2><BR clear=all></FONT><!-- end upper right body table --></P></BLOCKQUOTE></FONT></FONT></TD></TR><!-- end upper right body table --></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD vAlign=bottom><!-- begin bottom left copyright info table -->
+      <TABLE border=0 cellPadding=0 cellSpacing=0>
+        <TBODY>
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+       </TBODY></TABLE>
+      <P><!-- end bottom left copyright info table --></P></TD>
+    <TD vAlign=bottom><!-- begin bottom right navigational table -->
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+        <TBODY>
+        <TR>
+          <TD align=middle><!-- begin navigational bar --><FONT
+            face=Arial,Helvetica,sans-serif size=1><A
+            href="http://www.tmtdev.com/news.htm">[What's New]</A> &nbsp; <A
+            href="http://www.tmtdev.com/products.htm">[Products]</A> &nbsp; <A
+            href="http://www.tmtdev.com/purchase.htm">[Purchase]</A> &nbsp; <A
+            href="http://www.tmtdev.com/download.htm">[Downloads]</A> &nbsp; <A
+            href="http://www.tmtdev.com/updates.htm">[Updates]</A> &nbsp; <A
+            href="mailto:support@tmt.com">[Support]</A><BR><A
+            href="http://www.tmtdev.com/faq.htm">[FAQ]</A> &nbsp; <A
+            href="http://www.tmtdev.com/contribs.htm">[Contributions]</A> &nbsp;
+            <A href="http://www.tmtdev.com/links.htm">[Links]</A> &nbsp; <A
+            href="http://www.tmtdev.com/contact.htm">[Contact TMT]</A> &nbsp; <A
+            href="http://www.tmtdev.com/index.htm">[Home]</FONT><FONT size=1> <!-- end navigational bar --></FONT></A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>GetPixel function</TITLE>
+<META content="text/html; charset=windows-1251" 
+http-equiv=Content-Type><KEYWORDS="">
+<META content="Valery Votintsev" name=Author>
+<STYLE type=text/css>
+BODY	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+A	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {COLOR: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+TD	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+TH	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+PRE	{FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small}
+CODE	{FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small}
+H2	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium}
+H1	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large}
+DIV.closed {DISPLAY: none; MARGIN-LEFT: 20px}
+</STYLE>
+</HEAD>
+<BODY>
+<!-- Top Navigation -->
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TR>
+    <TD align=left vAlign=top width="35%"><A 
+      href="getpalette_proc.htm"><IMG 
+      alt="Previous: GetPalette procedure" border=0 
+      src="images/prev.gif"></A></TD>
+    <TD align=middle vAlign=top><A 
+      href="index.htm"><IMG 
+      alt="To the Table of Content" border=0 
+      src="images/index.gif"></A></TD>
+    <TD align=right vAlign=top width="35%"><A 
+      href="getrgbpalette_proc.htm"><IMG 
+      alt="Next: GetRGBPalette procedure" border=0 
+      src="images/next.gif"></A></TD></TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+
+<CENTER><B>- 4.37.2.53 -</B></CENTER>
+<IMG border=0 height=12 src="images/corner.gif" width=12><A 
+href="std_units.htm"><SMALL>Standard Units</SMALL></A>
+<BR><IMG border=0 height=12 src="images/1.gif" width=12><IMG
+border=0 height=12 src="images/corner.gif" width=12><A
+href="graph_unit.htm"><SMALL>Graph Unit</SMALL></A>
+<BR><IMG border=0 height=12 src="images/1.gif" width=12><IMG
+border=0 height=12 src="images/1.gif" width=12><IMG
+border=0 height=12 src="images/corner.gif" width=12><A 
+href="graph_proc_and_func.htm"><SMALL>Graph Unit Procedures and Functions</SMALL></A>
+<DIR>
+<H2>GetPixel function </H2></DIR>
+<!-- Page content -->
+<CENTER><B>Targets: MS-DOS, Win32</B></CENTER>
+<br>
+This function gets the pixel value (color) at (<I>X,Y</I>).
+<b>Declaration:</b> 
+<blockquote> <b>function</b> GetPixel(X, Y: Longint): DWORD;</blockquote>
+<b>Return Value</b>:
+<dir>For 256-color modes - number from the color table. For HiColor/TrueColor 
+modes - real color as it is shown below: 
+<table width="75%" border="0" align="center">
+  <tr> 
+    <td> 
+      15-bit modes 
+    </td>
+    <td> 
+      <table width="190" border="1" align="center">
+        <tr> 
+          <td> 
+            <div align="center"><i><b>X</b></i></div>
+          </td>
+          <td bgcolor="#FF0000"> 
+            <div align="center"><i><b> 5 bits</b></i></div>
+          </td>
+          <td bgcolor="#00FF00"> 
+            <div align="center"><i><b>5 bits</b></i></div>
+          </td>
+          <td bgcolor="#0000FF"> 
+            <div align="center"><i><b>5 bits</b></i></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td>16-bit modes </td>
+    <td> 
+      <table width="190" border="1" align="center">
+        <tr> 
+          <td bgcolor="#FF0000" width="59"> 
+            <div align="center"><i><b> 5 bits</b></i></div>
+          </td>
+          <td bgcolor="#00FF00" width="55"> 
+            <div align="center"><i><b>6 bits</b></i></div>
+          </td>
+          <td bgcolor="#0000FF" width="58"> 
+            <div align="center"><i><b>5 bits</b></i></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td>24-bit modes </td>
+    <td> 
+      <table width="240" border="1" align="center">
+        <tr> 
+          <td bgcolor="#FF0000"> 
+            <div align="center"><i><b> 8 bits</b></i></div>
+          </td>
+          <td bgcolor="#00FF00"> 
+            <div align="center"><i><b>8 bits</b></i></div>
+          </td>
+          <td bgcolor="#0000FF"> 
+            <div align="center"><i><b>8 bits</b></i></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td>32-bit modes </td>
+    <td> 
+      <table width="320" border="1" align="center">
+        <tr> 
+          <td bgcolor="#FF0000"> 
+            <div align="center"><i><b> 8 bits</b></i></div>
+          </td>
+          <td bgcolor="#00FF00"> 
+            <div align="center"><i><b>8 bits</b></i></div>
+          </td>
+          <td bgcolor="#0000FF"> 
+            <div align="center"><i><b>8 bits</b></i></div>
+          </td>
+          <td> 
+            <div align="center"><i><b>8 Bits</b></i></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</dir>
+<b>Typical Usage: </b>
+<blockquote> Color:=GetPixel(100, 200);<br>
+  If GetPixel(myX, myY) then ...</blockquote>
+<b>Sample Code: </b>
+<dir><font color="#000000"><b><font color="#0000FF">Program</font></b><font color="#000000">&nbsp;GetPixelDemo;</font><br>
+  <i><font color="#008000">{&nbsp;Linquistic&nbsp;High&nbsp;School&nbsp;#&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;}</font></i><br>
+  <i><font color="#008000">{&nbsp;GetPixel&nbsp;Sample&nbsp;program&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></i><br>
+  <b><font color="#0000FF">Uses</font></b><font color="#000000">&nbsp;Crt,Graph;</font><br>
+  <b><font color="#0000FF">const</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;r&nbsp;&nbsp;=&nbsp;20;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">	
+  {&nbsp;Radius&nbsp;of&nbsp;targets&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;NumberOfBombs=100;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Number&nbsp;of&nbsp;bombs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></i><br>
+  <b><font color="#0000FF">type</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;PlazmaBall=</font><b><font color="#0000FF">record</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;x,y:&nbsp;Integer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Coordinates,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;OldX,OldY:&nbsp;Integer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;old&nbsp;coordinates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;Color:Integer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;and&nbsp;color&nbsp;for&nbsp;an&nbsp;object}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <b><font color="#0000FF">var</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Oops,&nbsp;we&nbsp;are&nbsp;crashed&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;buzz:&nbsp;boolean;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{A&nbsp;loop&nbsp;variable}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;i:Integer;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Temp&nbsp;color&nbsp;variable&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;col:&nbsp;Integer;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Initial&nbsp;coordinates&nbsp;for&nbsp;targets&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;startx,starty:Integer;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{Object&nbsp;vertical&nbsp;coordinates&nbsp;increment}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;dy&nbsp;:Integer;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Here&nbsp;we&nbsp;will&nbsp;store&nbsp;colors&nbsp;and&nbsp;coordinates&nbsp;for&nbsp;our&nbsp;objects}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;MyPlazma:&nbsp;</font><b><font color="#0000FF">array</font></b><font color="#000000">&nbsp;[1..NumberOfBombs]&nbsp;</font><b><font color="#0000FF">of</font></b><font color="#000000">&nbsp;PlazmaBall;</font><br>
+  <b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Initialize&nbsp;the&nbsp;random&nbsp;numbers&nbsp;generator&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;Randomize;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Set&nbsp;256-colours&nbsp;graphics&nbsp;mode&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;SetSVGAMode(640,480,8,LfbOrBanked);</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{Set&nbsp;random&nbsp;initial&nbsp;color&nbsp;and&nbsp;coordinates&nbsp;for&nbsp;each&nbsp;object&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;</font><b><font color="#0000FF">for</font></b><font color="#000000">&nbsp;i:=1&nbsp;</font><b><font color="#0000FF">to</font></b><font color="#000000">&nbsp;NumberOfBombs&nbsp;</font><b><font color="#0000FF">do</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].x:=Random(GetMaxX);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].y:=Random(GetMaxY&nbsp;</font><b><font color="#0000FF">div</font></b><font color="#000000">&nbsp;2);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].Color:=Random(15)+1;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Draw&nbsp;our&nbsp;targets&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;SetFillStyle(SolidFill,Blue);</font><br>
+  <font color="#000000">&nbsp;&nbsp;SetColor(Blue);</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><b><font color="#0000FF">for</font></b><font color="#000000">&nbsp;i:=1&nbsp;</font><b><font color="#0000FF">to</font></b><font color="#000000">&nbsp;15&nbsp;</font><b><font color="#0000FF">do</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startY:=GetMaxY-150+Random(80);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StartX:=GetMaxX-i*40;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Draw&nbsp;saucer&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FillEllipse(StartX,&nbsp;StartY,&nbsp;r,&nbsp;(r&nbsp;</font><b><font color="#0000FF">div</font></b><font color="#000000">&nbsp;3)+2);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Line(StartX+7,&nbsp;StartY-6,&nbsp;StartX+10,&nbsp;StartY-12);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Circle(StartX+10,&nbsp;StartY-12,&nbsp;2);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Line(StartX-7,&nbsp;StartY-6,&nbsp;StartX-10,&nbsp;StartY-12);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Circle(StartX-10,&nbsp;StartY-12,&nbsp;2);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><b><font color="#0000FF">while</font></b><font color="#000000">&nbsp;</font><b><font color="#0000FF">not</font></b><font color="#000000">&nbsp;KeyPressed&nbsp;</font><b><font color="#0000FF">do</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:=1;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buzz:=True;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">while</font></b><font color="#000000">&nbsp;buzz&nbsp;</font><b><font color="#0000FF">do</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Increment&nbsp;the&nbsp;object&nbsp;coordinates&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dy:=Random(2)+1;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].y:=MyPlazma[i].y+dy;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Check&nbsp;color&nbsp;at&nbsp;current&nbsp;position&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;col:=&nbsp;GetPixel(MyPlazma[i].x,MyPlazma[i].y);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">if</font></b><font color="#000000">&nbsp;col=Black&nbsp;</font><b><font color="#0000FF">then</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Move&nbsp;on&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x,MyPlazma[i].y,MyPlazma[i].color);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delay(1);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].OldX,MyPlazma[i].OldY,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Change&nbsp;old&nbsp;coordinates&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].OldX:=MyPlazma[i].x;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].OldY:=MyPlazma[i].y;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">else</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">begin</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Boom!}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x+1,MyPlazma[i].y,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x,MyPlazma[i].y+1,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x,MyPlazma[i].y-1,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x-1,MyPlazma[i].y,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PutPixel(MyPlazma[i].x,MyPlazma[i].y,Black);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buzz:=False;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Begin&nbsp;new&nbsp;bomb&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].y:=0;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyPlazma[i].x:=Random(GetMaxX);</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Next&nbsp;bomb?&nbsp;Otherwise&nbsp;start&nbsp;all&nbsp;over&nbsp;again&nbsp;}</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">if</font></b><font color="#000000">&nbsp;i&gt;NumberOfBombs&nbsp;</font><b><font color="#0000FF">then</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:=1</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">else</font></b><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:=i+1;</font><br>
+  <font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <font color="#000000">&nbsp;&nbsp;</font><b><font color="#0000FF">end</font></b><font color="#000000">;</font><br>
+  <font color="#000000">&nbsp;&nbsp;ReadKey;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Get&nbsp;the&nbsp;key&nbsp;pressed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }</font></i><br>
+  <font color="#000000">&nbsp;&nbsp;CloseGraph;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><i><font color="#008000">{&nbsp;Return&nbsp;to&nbsp;the&nbsp;text&nbsp;mode}</font></i><br>
+  <b><font color="#0000FF">end</font></b><font color="#000000">.</font><br>
+  </font><font color="#000000"> </font><font color="#000000"> </font><font color="#000000"> 
+  </font>
+</dir>
+<!-- End of Page content -->
+<BR>
+<BR>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TR>
+    <TD align=left vAlign=top width="35%"><A 
+      href="getpalette_proc.htm"><IMG 
+      alt="Previous: GetPalette procedure" border=0 
+      src="images/prev.gif"></A></TD>
+    <TD align=middle vAlign=top><A 
+      href="index.htm"><IMG 
+      alt="To the Table of Content" border=0 
+      src="images/index.gif"></A></TD>
+    <TD align=right vAlign=top width="35%"><A 
+      href="getrgbpalette_proc.htm"><IMG 
+      alt="Next: GetRGBPalette procedure" border=0 
+      src="images/next.gif"></A></TD></TR>
+  <TR>
+    <TD align=left vAlign=top width="35%">GetPalette procedure</TD>
+    <TD align=middle vAlign=top>Table of Content</TD>
+    <TD align=right vAlign=top width="35%">GetRGBPalette 
+  procedure</TD></TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.53 -</B></CENTER>
+</BODY></HTML>

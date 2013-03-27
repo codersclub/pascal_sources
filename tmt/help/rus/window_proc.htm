@@ -1,0 +1,113 @@
+<html><head>
+<TITLE>Window procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="wherey_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: WhereY function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="writeattr_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: WriteAttr procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.8.3.14 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="crt_unit.htm"><small>Crt Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="crt_proc_and_func.htm"><small>CRT Unit Procedures and Functions</small></a><dir><h2>Window procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32 console</B></center>
+<br>
+<br>
+<a href="crt_unit.htm">CRT Unit</a>
+<br>
+<br>
+Defines a text window on the screen.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> <I>Window</I> (X1, Y1, X2, Y2: Byte);</pre>
+<B>Remarks:</B>
+<br>
+<I>X1</I> and <I>Y1</I> are the coordinates of the upper left
+corner of the window, and <I>X2</I> and <I>Y2</I> are the coordinates
+of the lower right corner. The upper left corner of the screen
+corresponds to (1, 1). The minimum size of a text window is one
+column by one line. If the coordinates are invalid in any way,
+the call to <I>Window</I> is ignored.
+<br>
+<br>
+The default window is (1, 1, 80, 25) in 25-line mode,
+and (1, 1, 80, 43) in 43-line mode, corresponding to the entire screen.
+<br>
+<br>
+All screen coordinates (except the window coordinates themselves)
+are relative to the current window. For instance,
+<pre>  GotoXY(1, 1)</pre>
+will always position the cursor in the upper left
+hand corner of the current window.
+<br>
+<br>
+Many CRT procedures and functions are window-relative,
+including <a href="clreol_proc.htm">ClrEOL</a>,
+<a href="clrscr_proc.htm">ClrScr</a>,
+<a href="delline_proc.htm">DelLine</a>,
+<a href="gotoxy_proc.htm">GotoXY</a>,
+<a href="insline_proc.htm">InsLine</a>,
+<a href="wherex_func.htm">WhereX</a>,
+<a href="wherey_func.htm">WhereY</a>,
+<a href="write_proc.htm">Write</a> and
+<a href="writeln_proc.htm">WriteLn</a>.
+<a href="windmin_var.htm">WindMin</a> and
+<a href="windmax_var.htm">WindMax</a>
+store the current window definition.
+A call to the <I>Window</I> procedure always moves the cursor to (1, 1).
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="wherey_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: WhereY function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="writeattr_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: WriteAttr procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">WhereY function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">WriteAttr procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.8.3.14 -</B></CENTER>
+</BODY></HTML>

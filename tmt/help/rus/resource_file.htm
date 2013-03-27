@@ -1,0 +1,90 @@
+<html><head>
+<TITLE>$R: Resource File
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="range_checking_switch.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: $R: Range-Checking Switch"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="stack_checking_switch.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: $S: Stack-Overflow Checking Switch"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 3.2.21 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="compiler_directives.htm"><small>Compiler Directives</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="switch_dirs.htm"><small>Switch and Parameter Directives</small></a><dir><h2>$R: Resource File
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="compiler_directives.htm">Compiler directives</a>
+<br>
+<br>
+Specifies the name of a resource file to be included in an application or
+library. The named file must be valid resource file (Windows 32-bit or OS/2
+format) and the default extension for filenames is .RES.
+<br>
+<br>
+<B>Syntax:</B>
+<pre>  {$R filename.RES}</pre>
+<B>Remarks:</B>
+<br>
+When a {$R filename} directive is used in a unit, the specified file name
+is simply recorded in the resulting unit file. No checks are made at that
+point to ensure that the filename is correct and that it specifies an
+existing file.
+<br>
+<br>
+<B>Win32 target:</B>
+<br>
+Old 16-bit Windows resource format is not allowed.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="range_checking_switch.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: $R: Range-Checking Switch"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="stack_checking_switch.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: $S: Stack-Overflow Checking Switch"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">$R: Range-Checking Switch</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">$S: Stack-Overflow Checking Switch</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 3.2.21 -</B></CENTER>
+</BODY></HTML>

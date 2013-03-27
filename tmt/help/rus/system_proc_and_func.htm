@@ -1,0 +1,168 @@
+<html><head>
+<TITLE>System Unit Procedures and Functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="test8087_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Test8087 variable"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="abs_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Abs function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a><dir><h2>System Unit Procedures and Functions
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<ul>
+<li><a href="abs_func.htm">Abs</a></li>
+<li><a href="addr_func.htm">Addr</a></li>
+<li><a href="append_proc.htm">Append</a></li>
+<li><a href="arctan_func.htm">ArcTan</a></li>
+<li><a href="assert_proc.htm">Assert</a></li>
+<li><a href="assign_proc.htm">  Assign</a></li>
+<li><a href="assigned_func.htm">Assigned</a></li>
+<li><a href="blockread_proc.htm">BlockRead</a></li>
+<li><a href="blockwrite_proc.htm">BlockWrite</a></li>
+<li><a href="break_proc.htm">Break</a></li>
+<li><a href="chdir_proc.htm">ChDir</a></li>
+<li><a href="chr_func.htm">Chr</a></li>
+<li><a href="close_proc.htm">Close</a></li>
+<li><a href="comparemem_func.htm">CompareMem</a></li>
+<li><a href="concat_func.htm">Concat</a></li>
+<li><a href="continue_proc.htm">Continue</a></li>
+<li><a href="copy_func.htm">Copy</a></li>
+<li><a href="cos_func.htm">Cos</a></li>
+<li><a href="dec_proc.htm">Dec</a></li>
+<li><a href="delete_proc.htm">Delete</a></li>
+<li><a href="dispose_proc.htm">Dispose</a></li>
+<li><a href="eof_func.htm">Eof</a></li>
+<li><a href="eoln_func.htm">Eoln</a></li>
+<li><a href="erase_proc.htm">Erase</a></li>
+<li><a href="exit_proc.htm">Exit</a></li>
+<li><a href="exclude_proc.htm">Exclude</a></li>
+<li><a href="exp_func.htm">Exp</a></li>
+<li><a href="filepos_func.htm">FilePos</a></li>
+<li><a href="filesize_func.htm">FileSize</a></li>
+<li><a href="fillchar_proc.htm">FillChar</a></li>
+<li><a href="flush_proc.htm">Flush</a></li>
+<li><a href="frac_func.htm">Frac</a></li>
+<li><a href="freemem_proc.htm">FreeMem</a></li>
+<li><a href="getdir_proc.htm">GetDir</a></li>
+<li><a href="getlocalestr_func.htm">GetLocaleStr</a></li>
+<li><a href="getmem_proc.htm">GetMem</a></li>
+<li><a href="halt_proc.htm">Halt</a></li>
+<li><a href="hi_func.htm">Hi</a></li>
+<li><a href="high_func.htm">High</a></li>
+<li><a href="inc_proc.htm">Inc</a></li>
+<li><a href="include_proc.htm">Include</a></li>
+<li><a href="insert_proc.htm">Insert</a></li>
+<li><a href="int_func.htm">Int</a></li>
+<li><a href="ioresult_func.htm">IOResult</a></li>
+<li><a href="length_func.htm">Length</a></li>
+<li><a href="ln_func.htm">Ln</a></li>
+<li><a href="lo_func.htm">Lo</a></li>
+<li><a href="locase_func.htm">LoCase</a></li>
+<li><a href="low_func.htm">Low</a></li>
+<li><a href="maxavail_func.htm">MaxAvail</a></li>
+<li><a href="memavail_func.htm">MemAvail</a></li>
+<li><a href="mkdir_proc.htm">MkDir</a></li>
+<li><a href="move_proc.htm">Move</a></li>
+<li><a href="new_proc.htm">New</a></li>
+<li><a href="odd_func.htm">Odd</a></li>
+<li><a href="ofs_func.htm">Ofs</a></li>
+<li><a href="ord_func.htm">Ord</a></li>
+<li><a href="paramcount_func.htm">ParamCount</a></li>
+<li><a href="paramstr_func.htm">ParamStr</a></li>
+<li><a href="pi_func.htm">Pi</a></li>
+<li><a href="pos_func.htm">Pos</a></li>
+<li><a href="pred_func.htm">Pred</a></li>
+<li><a href="ptr_func.htm">Ptr</a></li>
+<li><a href="qsort_proc.htm">QSort</a></li>
+<li><a href="random_func.htm">Random</a></li>
+<li><a href="randomize_proc.htm">Randomize</a></li>
+<li><a href="read_proc.htm">Read</a></li>
+<li><a href="readln_proc.htm">ReadLn</a></li>
+<li><a href="rename_proc.htm">Rename</a></li>
+<li><a href="reset_proc.htm">Reset</a></li>
+<li><a href="rewrite_proc.htm">ReWrite</a></li>
+<li><a href="rmdir_proc.htm">RmDir</a></li>
+<li><a href="round_func.htm">Round</a></li>
+<li><a href="round64_func.htm">Round64</a></li>
+<li><a href="runerror_proc.htm">RunError</a></li>
+<li><a href="seek_proc.htm">Seek</a></li>
+<li><a href="seekeof_proc.htm">SeekEof</a></li>
+<li><a href="seekeoln_proc.htm">SeekEoln</a></li>
+<li><a href="setstring_proc.htm">SetString</a></li>
+<li><a href="settextbuf_proc.htm">SetTextBuf</a></li>
+<li><a href="sin_func.htm">Sin</a></li>
+<li><a href="sizeof_func.htm">SizeOf</a></li>
+<li><a href="sqr_func.htm">Sqr</a></li>
+<li><a href="sqrt_func.htm">Sqrt</a></li>
+<li><a href="str_proc.htm">Str</a></li>
+<li><a href="succ_func.htm">Succ</a></li>
+<li><a href="swap_func.htm">Swap</a></li>
+<li><a href="swapargs_proc.htm">SwapArgs</a></li>
+<li><a href="trunc_func.htm">Trunc</a></li>
+<li><a href="trunc64_func.htm">Trunc64</a></li>
+<li><a href="truncate_proc.htm">Truncate</a></li>
+<li><a href="upcase_func.htm">UpCase</a></li>
+<li><a href="val_proc.htm">Val</a></li>
+<li><a href="win32buildnumber_func.htm">Win32BuildNumber</a></li>
+<li><a href="win32majorversion_func.htm">Win32MajorVersion</a></li>
+<li><a href="win32minorversion_func.htm">Win32MinorVersion</a></li>
+<li><a href="win32platform_func.htm">Win32Platform</a></li>
+<li><a href="write_proc.htm">Write</a></li>
+<li><a href="writeln_proc.htm">WriteLn</a></li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="test8087_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Test8087 variable"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="abs_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Abs function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Test8087 variable</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Abs function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2 -</B></CENTER>
+</BODY></HTML>

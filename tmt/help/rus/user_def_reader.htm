@@ -1,0 +1,96 @@
+<html><head>
+<TITLE>User Defined Reader Procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="user_def_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: User Defined Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="user_def_writer.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: User Defined Writer Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.17 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>User Defined Reader Procedure
+</h2></dir>
+<!-- Page content -->
+TMT Pascal compiler allows one to define a reader procedure for ones own types
+including objects and structures by means of the <B>__reader</B> reserved word.
+The syntax of the custom reader procedure is the following:
+<pre><B>procedure</B> <B>__reader</B> (<B>var</B> f: text; <B>const</B> value: &lt;Custom Type&gt;);
+<B>begin</B>
+  ...
+<B>end</B>;</pre>
+The <B>__reader </B> example below showed the use of a
+<a href="datetime_type.htm">DateTime</a> structure defined in the
+<a href="dos_unit.htm">DOS</a> unit. This code reads a date using the
+<a href="read_proc.htm">Read</a> procedure:
+<pre><font color = #000080>{$ifdef __GUI__}</font>
+  <B>uses</B> DOS, WinCRT;
+<font color = #000080>{$else}</font>
+  <B>uses</B> DOS;
+<font color = #000080>{$endif}</font>
+
+<B>procedure</B> __reader (<B>var</B> f: text; <B>const</B> value: DateTime);
+<B>begin</B>
+  Read(f, value.Month, value.Day, value.Year);
+<B>end</B>;
+ 
+<B>var</B>
+  date: DateTime;
+
+<B>begin</B>
+  Read(date);
+<B>end</B>.</pre>
+<B>See also:</b>
+<br><a href="user_def_writer.htm">User Defined Writer Procedure</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="user_def_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: User Defined Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="user_def_writer.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: User Defined Writer Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">User Defined Operators</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">User Defined Writer Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.17 -</B></CENTER>
+</BODY></HTML>

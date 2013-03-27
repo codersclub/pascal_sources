@@ -1,0 +1,90 @@
+<html><head>
+<TITLE>Writting Win32 GUI Applications
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="win32_programming.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Win32 Programming"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="structure_of_window_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Structure of Window Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Writting Win32 GUI Applications
+</h2></dir>
+<!-- Page content -->
+TMT Pascal produces native Win32<SUP>&reg;</SUP> GUI applications. This chapter is based
+on the Microsoft<SUP>&reg;</SUP> Win32<SUP>&reg;</SUP> Programmer's Reference
+and describes particularities of GUI application development using
+TMT Pascal Multi-target.
+The TMT Pascal compiler comes with a set of units which define function and
+procedure headers for the Windows API.
+<br>
+<br>
+<img border=0 src="images/open.gif"> For more information refer to
+<B>Microsoft Win32 Programmer's Reference</B>. Also, you will find source of
+all Win32 API interface units in the \TMTPL\SOURCE\WIN32 subdirectory.
+<br>
+<br>
+Every graphical Win32-based application creates at least one window (called
+the main window), that serves as the main window for the application. This
+window serves as the primary interface between the user and the application.
+Most applications also create other windows, either directly or indirectly,
+to perform tasks related to the main window. Each window plays a part in
+displaying output and receiving input from the user.
+<br>
+<br>
+At the start of an application, the system associates a taskbar button
+with the application. The taskbar button contains the program icon and the
+title. When the application is active, its taskbar button is displayed in
+the pushed state.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="win32_programming.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Win32 Programming"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="structure_of_window_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Structure of Window Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Win32 Programming</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Structure of Window Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.1 -</B></CENTER>
+</BODY></HTML>

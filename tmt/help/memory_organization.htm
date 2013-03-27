@@ -1,0 +1,128 @@
+<html><head>
+<TITLE>Memory Organization
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="implementation_issues.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Implementation Issues"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="calling_conventions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Calling Conventions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.1.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="implementation_issues.htm"><small>Implementation Issues</small></a><dir><h2>Memory Organization
+</h2></dir>
+<!-- Page content -->
+The TMT Pascal compiler uses the TMTSTUB (based on WDOSX) and PMWSTUB
+(based on PMODE/W) extenders for a protected-mode program.
+<br>
+<br>
+The segment registers are not used in protected mode.
+Instead all address space is separated into 4Kb pages.
+<br>
+<br>
+You do not need to add a special _zero variable to get access to the
+physical addresses.
+<br>
+<br>
+For example:
+<pre><B>procedure</B> clr_video(filler: char);
+<B>var</B>
+  i: Integer;
+
+<B>begin</B>
+  <B>for</B> i := 0 <B>to</B> 80 * 25 - 1 <B>do</B>
+    Mem[$B8000 + i * 2] := filler;
+<B>end</B>;</pre>
+This procedure fills the video memory of the VGA adapter with the filler
+symbol. Note that the linear address $B8000 is used as the physical address -
+not the segment address $B800.
+<br>
+<br>
+Some another special variables are described in the SYSTEM unit. The
+<I>_psp</I> variable contains the logical 32-bit address of the PSP of the
+program, and the <I>_environ</I> variable contains the environment address.
+<br>
+<br>
+Although you can access the interrupt vectors by using this method,
+we do not suggest doing this.
+<br>
+<br>
+Also keep in mind that MS-DOS interrupt handlers use memory addresses in
+the 1st Mb of physical memory while your program and its data are loaded
+beyond the 1st Mb. The TMTSTUB intercepts and correctly handles some, but
+not all, calls to MS-DOS. Thus, if you are using <I>Intr</I> or <I>MsDos</I>
+calls, or call MS-DOS from the assembler, you will need to modify the code.
+<br>
+<br>
+Absolute memory addressing Mem, MemW, MemL, and MemD pseudo-arrays may be
+used in BP-compatible manner:
+<pre><B>var</B>
+  x: type <B>absolute</B> seg:offs Mem[seg:offs];</pre>
+Here the effective address is computed as seg*16+offs. The Ptr(seg, offs)
+function works similarly. The Seg(v) function still always returns 0.
+<br>
+<br>
+These new functions should substantially simplify the conversion of the
+programs that use absolute addressing.
+<br>
+<br>
+An example of using these functions can be found in file
+<br>
+TMTPL\SAMPLES\MSDOS\FLAME\FLAME.PAS
+<br>
+<br>
+<B>See also:</B>
+<br>
+<a href="pmodew.htm">PMODE/W API</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="implementation_issues.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Implementation Issues"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="calling_conventions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Calling Conventions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Implementation Issues</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Calling Conventions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.1.1 -</B></CENTER>
+</BODY></HTML>

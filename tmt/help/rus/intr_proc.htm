@@ -1,0 +1,105 @@
+<html><head>
+<TITLE>Intr procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="getverify_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GetVerify procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="keep_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Keep procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.23 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_proc_and_func.htm"><small>Dos Unit Procedures and Functions</small></a><dir><h2>Intr procedure
+</h2></dir>
+<!-- Page content -->
+<B>Targets: MS-DOS only</B>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>, <a href="windos_unit.htm">WinDos Unit</a>
+<br>
+<br>
+Executes a specified software interrupt.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> Intr(IntNo: Byte; <B>var</B> Regs: TRegisters);</pre>
+<B>Remarks:</B>
+<br>
+Before calling <I>Intr</I>, load <I>Regs</I> with the appropriate parameters
+needed for the interrupt. <I>Regs</I> returns the values of the registers
+after the interrupt call. Calls that depend on ESP and SS cannot be executed.
+For more information about software interrupt calls consult your BIOS and DOS
+reference manual.
+<br>
+<br>
+Note that all segment resgisters (DS,ES,FS,GS) must contain valid segment
+descriptors  or be set to zero prior to calling <I>Intr</I>.
+All interrupt calls that require an offset must be passed a 32 bit offset.
+<br>
+<br>
+<B>Example:</B>
+<pre><B>uses</B>
+  Dos;
+<B>function</B> GetVideoMode: Byte;
+<B>var</B>
+  Regs: Registers;
+<B>begin</B>
+  Regs.AX := $0F00;
+  Regs.DS := DSeg;  Regs.ES := 0;
+  Regs.FS := 0;     Regs.GS := 0;
+  Intr($10, Regs);
+  GetVideoMode := Regs.Al;
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="getverify_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GetVerify procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="keep_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Keep procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">GetVerify procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Keep procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.23 -</B></CENTER>
+</BODY></HTML>

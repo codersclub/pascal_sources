@@ -1,0 +1,122 @@
+<html><head>
+<TITLE>Messaging Applications Programming Interface Unit
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="lzexpand_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: LZExpand Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="math_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Math Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.44 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a><dir><h2>Messaging Applications Programming Interface Unit
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+This module provides the interface to the Microsoft's Simple Messaging
+Application Programming Interface (MAPI).
+<br>
+<br>
+<b>About the Simple MAPI:</b>
+<br>
+Microsoft's Simple Messaging Application Programming Interface (MAPI)
+is a set of functions that applications use to create, manipulate,
+transfer, and store messages. Simple MAPI gives application developers
+freedom to define the purpose and content of messages, and flexibility
+in their management of stored messages. MAPI provides a common interface
+that application developers use to create messaging-enabled and
+messaging-aware applications independent of the underlying messaging system.
+<br>
+<br>
+Simple MAPI includes routines intended for use by applications, such as
+spreadsheet programs and word processors that must become messaging-aware.
+You can also use Simple MAPI to build custom messaging applications such as
+a calendaring and scheduling program. These applications are typically
+concerned with the easy exchange of datafiles and simple messages generated
+by these applications.
+<br>
+<br>
+This small, easy-to-use set of APIs allows applications to access inbound
+and outbound messages. Although designed to be called from C programs,
+you can call the functions with little or no parameter modification from
+application-specific and standalone scripting packages such as Visual Basic,
+Actor, Smalltalk, and Object Vision. The target audience is application
+developers who have documents or other application data within their
+applications that they want to send or receive as messages. Because of
+its ease of use, Simple MAPI allows applications to become messaging-aware.
+Consider the following example:
+<dir>
+A network monitoring application generates a network usage report.
+Instead of printing the report or requiring a user to cut/paste it
+into a message, the application can mail the report directly to a
+Microsoft Excel or Toolbook application that consolidates the information
+and forwards it on to a network operations center.
+</dir>
+The Simple MAPI functions include a user interface, but you can call
+the APIs non-interactively (not generating any user interface (UI)).
+The implementation provides the user interface is provided to allow
+the user to address the message, enter a note, and send the message.
+MAPI does not define the exact style of the user interface, and it can
+be different on each platform that implements Simple MAPI.
+<br>
+<br>
+If the user has not yet logged-in to the messaging system, the calls
+prompt, as appropriate, for the required session parameters, for example,
+user name and password.
+<br>
+<br>
+For more info look the "Simple MAPI" in WIN32.HLP
+and MAPI.HLP.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="lzexpand_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: LZExpand Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="math_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Math Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">LZExpand Unit</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Math Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.44 -</B></CENTER>
+</BODY></HTML>

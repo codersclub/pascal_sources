@@ -1,0 +1,141 @@
+<html><head>
+<TITLE>Function 0300 - Simulate Real Mode Interrupt
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0205.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0205 - Set Protected Mode Interrupt Vector"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0301.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0301 - Call Real Mode Procedure With Far Return Frame"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.21 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0300 - Simulate Real Mode Interrupt
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Simulates an interrupt in real mode. The function transfers
+control to the address specified by the real mode interrupt vector. The real
+mode handler must return by executing an IRET.
+<pre><B>In:</B>
+   AX     = 0300h
+   BL     = interrupt number
+   BH     = must be 0
+   CX     = number of words to copy from the protected
+            mode stack to the real mode stack
+   ES:EDI = selector:offset of real mode register data
+            structure in the following format:
+
+   <B>Offset    Length  Contents</B>
+     00h      4        EDI
+     04h      4        ESI
+     08h      4        EBP
+     0ch      4        reserved, ignored
+     10h      4        EBX
+     14h      4        EDX
+     18h      4        ECX
+     1ch      4        EAX
+     20h      2        CPU status flags
+     22h      2        ES
+     24h      2        DS
+     26h      2        FS
+     28h      2        GS
+     2ah      2        IP (reserved, ignored)
+     2ch      2        CS (reserved, ignored)
+     2eh      2        SP
+     30h      2        SS
+<B>Out:</B>
+   if successful:
+     carry flag clear
+     ES:EDI = selector offset of modified real mode register
+              data structure
+   if failed:
+     carry flag set</pre>
+<B>Notes:</B>
+<br>
+The CS:IP in the real mode register data structure is ignored by this function.
+The appropriate interrupt handler will be called based on the value passed in
+BL.
+<br>
+<br>
+If the SS:SP fields in the real mode register data structure are zero, a real
+mode stack will be provided by the host. Otherwise the real mode SS:SP will be
+set to the specified values before the interrupt handler is called.
+<br>
+<br>
+The flags specified in the real mode register data structure will be put on the
+real mode interrupt handler's IRET frame. The interrupt handler will be called
+with the interrupt and trace flags clear.
+<br>
+<br>
+Values placed in the segment register positions of the data structure must be
+valid for real mode. That is, the values must be paragraph addresses, not
+protected mode selectors.
+<br>
+<br>
+The target real mode handler must return with the stack in the same state as
+when it was called. This means that the real mode code may switch stacks while
+it is running, but must return on the same stack that it was called on and must
+return with an IRET.
+<br>
+<br>
+When this function returns, the real mode register data structure will contain
+the values that were returned by the real mode interrupt handler. The CS:IP and
+SS:SP values will be unmodified in the data structure.
+<br>
+<br>
+It is the caller's responsibility to remove any parameters that were pushed on
+the protected mode stack.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0205.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0205 - Set Protected Mode Interrupt Vector"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0301.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0301 - Call Real Mode Procedure With Far Return Frame"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0205 - Set Protected Mode Interrupt Vector</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0301 - Call Real Mode Procedure With Far Return Frame</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.21 -</B></CENTER>
+</BODY></HTML>

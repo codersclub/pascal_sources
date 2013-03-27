@@ -1,0 +1,90 @@
+<html><head>
+<TITLE>Function 0503 - Resize Memory Block
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0502.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0502 - Free Memory Block"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0800.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0800 - Physical Address Mapping"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.12 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0503 - Resize Memory Block
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Changes the size of a memory block previously allocated
+with the Allocate Memory Block function (0501h).
+<pre><B>In:</B>
+   AX     = 0503h
+   BX:CX  = new size of block in bytes (must be non-zero)
+   SI:DI  = memory block handle
+<B>Out:</B>
+   if successful:
+     carry flag clear
+     BX:CX  = new linear address of memory block
+     SI:DI  = new memory block handle
+   if failed:
+     carry flag set</pre>
+<B>Notes:</B>
+<br>
+After this function returns successfully, the previous handle for the memo
+block is invalid and should not be used anymore.
+<br>
+<br>
+It is the client's responsibility to update any descriptors that map the memory
+block with the new linear address after resizing the block.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0502.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0502 - Free Memory Block"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0800.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0800 - Physical Address Mapping"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0502 - Free Memory Block</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0800 - Physical Address Mapping</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.12 -</B></CENTER>
+</BODY></HTML>

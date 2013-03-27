@@ -1,0 +1,104 @@
+<html><head>
+<TITLE>Reset procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="rename_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Rename procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="rewrite_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: ReWrite procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.70 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_proc_and_func.htm"><small>System Unit Procedures and Functions</small></a><dir><h2>Reset procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<a href="system_unit.htm">System Unit</a>
+<br>
+<br>
+Opens an existing file.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> Reset(<B>var</B>  F [: File; RecSize: Longint ] );</pre>
+<B>Remarks:</B>
+<br>
+<I>F</I> is a file variable of any type which was previously
+associated with a file name by a call to Assign.
+The external file must exist.
+<br>
+<br>
+<I>RecSize</I> indicates the size in bytes of each record
+and can only be passed if <I>F</I> is an untyped file.
+Note that <I>RecSize</I> is not limited to 65,535 (64K) bytes.
+<br>
+<br>
+If <I>F</I> is open when <I>Reset</I> is called, <I>F</I>
+is first closed and then reopened. If <I>F</I> is
+assigned to an empty string (‘’) then standard input is used.
+Text files are opened as read-only. A record size of 128 bytes
+is assumed if <I>F</I> is not a text file and <I>RecSize</I> is not passed.
+<br>
+<br>
+<I>Reset</I> sets the file pointer to the top of the file.
+With {$I-}, <a href="ioresult_func.htm">IOResult</a> returns an error code
+if an error occurred, otherwise it is set to zero.
+<br>
+<br>
+<B>See also:</B>
+<br>
+<a href="io_switch.htm">{$I} - I/O Checking Switch</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="rename_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Rename procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="rewrite_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: ReWrite procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Rename procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">ReWrite procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.70 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,117 @@
+<html><head>
+<TITLE>DDEML API interface Unit
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="d3dx8_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: D3DX8 Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="ddraw_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DDraw Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.18 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a><dir><h2>DDEML API interface Unit
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+This module contains the Dynamic Data Exchange Management Library
+interface.
+<br>
+<br>
+In Microsoft Windows, <i>Dynamic Data Exchange</i> (DDE) is a form of
+interprocess communications that uses shared memory to exchange
+data between applications. Applications can use DDE for one-time
+data transfers and for ongoing exchanges and updating of data. 
+<br>
+<br>
+DDE differs from the clipboard data-transfer mechanism that is
+also part of the Windows operating system. One difference is that
+the clipboard is almost always used as a one-time response to a
+specific action by the user ? such as choosing the Paste command
+from a menu. Although DDE may also be initiated by a user,
+it typically continues without the user's further involvement.
+<br>
+<br>
+The <i>Dynamic Data Exchange Management Library</i> (DDEML) provides
+an application programming interface (API) that simplifies the task
+of adding DDE capability to a Windows application. Instead of sending,
+posting, and processing DDE messages directly, an application uses
+the functions provided by the DDEML to manage DDE conversations.
+A DDE conversation is the interaction between client and server
+applications. The DDEML also provides a means for managing the strings
+and data shared among DDE applications. Instead of using atoms and
+pointers to shared memory objects, DDE applications create and exchange
+string handles, which identify strings, and data handles, which identify
+DDE objects. The DDEML provides a function (DdeNameService) that enables
+a server application to register the service names it supports.
+The service names are then broadcast to other applications in the system,
+which use the names to connect to the server. The DDEML also ensures
+compatibility among DDE applications by requiring them to implement
+the DDE protocol in a consistent manner. 
+<br>
+<br>
+Existing applications using the message-based DDE protocol are fully
+compatible with those that use the DDEML; that is, an application
+using message-based DDE can establish conversations and perform
+transactions with applications using the DDEML. Instead of using
+DDE messages in your new application, take advantage of the DDEML
+and the many improvements it offers. 
+<br>
+<br>
+To use the API elements of the DDEML, you must USE DDEML.PAS unit
+in your source files.
+<br>
+<br>
+For more info look the "Dynamic Data Exchange Reference" in WIN32.HLP.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="d3dx8_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: D3DX8 Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="ddraw_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DDraw Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">D3DX8 Unit</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">DDraw Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.18 -</B></CENTER>
+</BODY></HTML>

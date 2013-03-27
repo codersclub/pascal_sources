@@ -1,0 +1,91 @@
+<html><head>
+<TITLE>Structure of Window Procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="writing_win32_gui_app.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Writing Win32 GUI Applications"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="designing_a_window_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Designing a Window Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Structure of Window Procedure
+</h2></dir>
+<!-- Page content -->
+A window procedure is a function that has four parameters and returns a 32-bit
+signed value (Longint). The parameters consist of a window handle, a UINT
+message identifier, and two message parameters declared with the WParam and
+LParam data types. For more information, see the <b>WIN32.HLP</b>.
+<!-- 3NLH53@WIN32.HLP -->
+<br>
+<br>
+Message parameters often contain information in both their low-order and
+high-order words. The Microsoft<SUP>&reg;</SUP> Win32<SUP>&reg;</SUP>
+application programming interface (API) includes several macros an
+application can use to extract information from the message parameters.
+The LOWORD function, for example, extracts the low-order word
+(bits 0 through 15) from a message parameter.
+Other functions include HIWORD, LOBYTE, and HIBYTE. 
+<br>
+<br>
+The interpretation of the return value depends on the particular message.
+Consult the description of each message to determine the appropriate return
+value. 
+<br>
+<br>
+Because it is possible to call a window procedure recursively, it is important
+to minimize the number of local variables that it uses. When processing
+individual messages, an application should call functions outside the window
+procedure to avoid excessive use of local variables, possibly causing the stack
+to overflow during deep recursion.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="writing_win32_gui_app.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Writing Win32 GUI Applications"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="designing_a_window_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Designing a Window Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Writing Win32 GUI Applications</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Designing a Window Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.2 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,754 @@
+<html><head><title>TMTStub - DOS экстендер для TMT Pascal 3.50SP2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Описание на русском языке DOS экстендера для TMT Pascal 3.50SP2 - TMTStub'>
+<meta name="keywords" content="tmt pascal, pascal, tmtstub, dos, extender, description, Описание на русском языке DOS экстендера для TMT Pascal 3.50SP2">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top">
+    <!-- begin upper right body table -->
+    <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78">
+
+<br>
+<center>
+<hr size=1 width=80%>
+<a name="top"></a>
+<p><h3>TMTSTUB
+<br>DOS ЭКСТЕНДЕР ДЛЯ TMT PASCAL</h3>
+</p>
+<p>
+Автор: Рустам Гадеев, 15 May 98
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br>просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+<p>
+<b>СОДЕРЖАНИЕ:</b>
+<br>
+<br><a href="#0_1">ВВЕДЕНИЕ</a>
+<br><a href="#0_2">ПРОГРАММНЫЙ ИНТЕРФЕЙС (API) TMTSTUB</a>
+<br>&nbsp;&nbsp;<a href="#1_0">1. ПОДДЕРЖКА DOS32 API</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1_1">Установка текущей позиции в файле</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1_2">Загрузить и/или выполнить программу</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1_3">Получить информацию о DOS32 адресе</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1_4">Отменить предыдущее выделение памяти</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1_5">Выделить блок памяти</a>
+<br>&nbsp;&nbsp;<a href="#2_0">2. ПОДДЕРЖКА ИНТЕРФЕЙСА WDOSX API</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2_1">2.1. Прерывания и исключения</a>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2_2">2.2. Распределение памяти</a>
+<br>&nbsp;&nbsp;<a href="#3_0">3. ПРОГРАММНЫЙ ИНТЕРФЕЙС WDOSX (API)</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3_1">3.1. Поддерживаемые функции DPMI 0.9</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub2.htm#3_2">3.2. Расширенный интерфейс DOS INT 21H (EXTENDED DOS API)</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub2.htm#3_3">3.3. Расширенные функции поддержки МЫШИ</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="tmtstub2.htm#3_4">3.4. Прочие функции WDOSX</a>
+<br><a href="tmtstub2.htm#4_0">ПЛАНЫ НА БУДУЩЕЕ</a>
+</p>
+
+<hr size=1 width=80%>
+<a name="0_1"></a>
+<p>
+<strong>ВВЕДЕНИЕ</strong>
+
+<p style="margin-left:25">
+TMTSTUB основан на экстендере "WDOSX 0.94 extender by TIPPACH".
+Он предназначен для замены экстендера PASSTUB, основанного,
+в свою очередь, на экстендере PMODE, поставлявшегося с TMT Pascal.
+Экстендер TMTSTUB поддерживает все функции, что и PASSTUB,
+и, плюс к этому, в него добавлены несколько новых функций и возможностей.
+Основное преимущество экстендера TMTSTUB v.0.31 заключается в том,
+что он поддерживает обработку исключений (exceptions support).
+Благодаря этому, при завершении "повисшей" программы в регистрах
+процессора будет установлено корректное значение.
+<br>
+<br>
+В отличие от PASSTUB, экстендер TMTSTUB поддерживает функцию 800h
+DPMI сервиса (MapPhysicalToLinear). Эта функция необходима для поддержки
+режима LFB.
+<br>
+<br>
+Заметим, однако, что LFB режимы не поддерживаются в модуле GRAPH,
+входящем в бесплатную версию TMT PASCAL. Если Вам нужна поддержка LFB
+для работы с графикой, Вам стоит приобрести полную версию компилятора.
+<br>
+<br>
+Опция "LOGO-" в файле PLT.CFG запрещает вывод на экран логотипа TMTSTUB
+при старте программы.
+<br>
+<br>
+Размер стуб-файла составляет всего 12436 байт.
+<br>
+<br>
+ Для анализа скорости работы функции MEMAVAIL приведем некоторые
+статитистические данные, полученные при использовании тестовой
+программой различных экстендеров:
+</p>
+<pre style="margin-left:25">
+program test; {$Q-,R-}
+function ticks:longint;
+begin
+ {$ifndef __TMT__}
+ ticks:=meml[$40:$6c];
+ {$else}
+ ticks:=memd[$40:$6c+_zero]; {Переменная "_zero"
+                              не нужна для TMTSTUB}
+ {$endif}
+end;
+var tt,i,temp:longint;
+begin
+ i:=0;
+ tt:=ticks; while tt=ticks do;
+ tt:=ticks+20;
+ while tt>ticks do
+ begin
+  temp:=memavail;
+  temp:=memavail;
+  inc(i);
+ end;
+ writeln(i);
+end.
+</pre>
+<p style="margin-left:25"
+    Результаты, полученные за 20 тиков таймера
+    на iPentium-133 24mb:
+</p>
+
+<pre style="margin-left:25"><small>
+             Голый DOS  XMS(HIMEM) VCPI (EMM386, QEMM)  DPMI(WIN95) Экстендер
+PASSTUB      - 30021,   6488,      ???,         6,         47       PMODE3.07
+DOS32        - 1235,    998,       749,         334,       47       DOS32
+TMTSTUB31    - 16152,   16151,     16223,       16224,     82       WDOSX
+PMWSTUB      - 25571,   24107,     25544,       25563,     47       PMODE/W
+
+BP7.0 (Prot) - 143907,  143907,    143844,      143860,    143000   RTM
+BP7.0 (Real) - 1147008, 1147011,   1146926,     1147000,   1130000  real
+</small></pre>
+
+<p style="margin-left:25">
+<b>Предупреждение!</b>
+<br>
+  Экстендер PASSTUB не работает с оболочкой (IDE), поставляемой в составе
+  TMT Pascal. Вы можете использовать данный экстендер только с бесплатной
+  версией TMT Pascal для компиляции Ваших программ с помощью PLT.EXE.
+  Экстендер TMTSTUB НЕЛЬЗЯ использовать для отладки Ваших программ.
+  При отладке программ из оболочки следует использовать экстендер
+  PMWSTUB.EXE (основанный на PMODE/W).
+</p>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<a name="0_2"></a>
+<p>
+<br>
+<strong>ПРОГРАММНЫЙ ИНТЕРФЕЙС (API) TMTSTUB</strong>
+</p>
+<p style="margin-left:25">
+Как было отмечено выше, экстендер TMTSTUB поддерживает все функции,
+что и PASSTUB, но, плюс к этому, в него добавлены несколько новых
+функций и возможностей.
+
+<p>
+<a name="1_0"></a>
+<b>1. ПОДДЕРЖКА DOS32 API</b> (на основе файла API.DOC by Adam Seychell)
+
+<blockquote>
+<a name="1_1"></a>
+<b>Установка текущей позиции в файле</b>  (V3.0+)
+<pre>
+Вход:
+     AH = 42h
+     AL = признак, откуда отсчитывать смещение (база):
+         00h от начала файла
+         01h от текущей позиции
+         02h от конца файла
+     BX = номер дескриптора файла (file handle)
+     EDX = смещение относительно базы до новой позиции
+
+Выход:
+     CF сброшен, если операция прошла успешно
+            EAX = новая позиция в файле относительно начала
+     CF установлен, если произошла ошибка
+            AX = код ошибки (01h,06h)
+Примечание:
+     Обычная DOS функция для реального режима использует
+     пару регистров CX:DX в качестве смещения и возвращает
+     новую позицию в паре регистров DX:AX.
+     В защищенном режиме вместо CX:DX используется EDX,
+     а вместо DX:AX - EAX.
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<a name="1_2"></a>
+<p><br>
+<b>Загрузить и/или выполнить программу</b> (V3.0+)
+<pre>
+Вход:
+     AH = 4Bh
+     AL = тип загрузки
+         00h загрузить и выполнить
+         01h загрузить, но не выполнять
+     DS:EDX -> имя программы в коде ASCIZ
+               (включая расширение)
+     DS:EDI -> Окружение программы для копировани
+               в дочерний процесс
+               (если EDI равно нулю, то копируетс
+               окружение вызывающей программы)
+     DS:ESI -> указатель на параметры командной
+               строки, которые должны быть скопированы
+               в дочерний PSP
+Выход:
+     CF сброшен, если операция прошла успешно
+
+     CF установлен, если произошла ошибка
+          AX = код ошибки (01h,02h,05h,08h,0Ah,0Bh)
+
+Примечание:
+     В отличие от функции DOS 4Bh, данная функция не
+     требует установки блока параметров.
+     Окружение и параметры командной строки адресуютс
+     через DS:EDI и DS:ESI соответственно.
+     См. примеры, поставляемые с DOS32, и объясняющие
+     использование данной функции.
+     Казалось бы, что MS-DOS после вызова данной функции
+     должна переадресовывать текущий DTA адрес,
+     однако, при вызове данной функции текущий DTA
+     адрес сбрасывается в значение по умолчанию,
+     т.е. на 80h-байтную область в начале PSP.
+</pre>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<a name="1_3"></a>
+<br>
+<b>Получить информацию о DOS32 адресе</b> (V3.01+)
+<pre>
+Вход:
+     AX = EE02h
+
+Выход:
+     EBX = 32-битный линейный адрес программного сегмента
+     EDX = Размер .EXE файла программы после линковки.
+     ESI = Смещение для PSP ( Program Segment Prefix )
+     EDI = Смещение для окружения (Program Environment)
+     ECX = Смещение для имени и пути .EXE файла программы
+           (в формате ASCIZ, т.е. завершающееся нулем)
+     AX  = Сегмент реального режима для 8Kb буфера,
+           используемого для операций чтения/записи.
+</pre>
+Примечание: <ul>
+<li>Все возвращаемые смещения адресуются относительно основного
+сегмента программы.</li>
+<li>Размер .EXE файла программы используется, в основном,
+для подгрузки дополнительных данных, добавленных в конец
+файла программы. Для получения доступа к этим данным программа
+может просто сместиться в файле на величину размера выполняемой
+части программы.</li>
+<li>Имя .EXE файла, на которое указывает ECX, фактически являетс
+именем файла, содержащимся в последней строке сегмента окружения,
+на который указывает EDI.</li>
+<li>Адрес PSP указывает на оригинальный PSP, создаваемый DOS.
+Таким образом, указатели, хранимые в нем, по прежнему содержат
+сегментные значения для реального режима (segment:offset).
+Кроме того, этот адрес PSP может отличаться от адреса,
+возвращаемого функцией DOS Int 21h AH=62h (Get PSP),
+поскольку DOS32 может загрузить стуб родительской программы.</li>
+<li>Поскольку возвращаемый в AX сегментный адрес 8Kb буфера
+используется виртуальным сервисом 32 битного чтения/записи файлов
+(INT 21h AH=3Fh/40h), то содержимое этого буфера после вызова
+этого сервиса будет разрушено. Однако, прикладная задача
+все-таки может временно пользоваться этим буфером для передачи
+данных между реальным и защищенным режимом вместо того,
+чтобы отдельно выделять специальный DOS блок для этих целей.
+Ближний указатель на этот буфер может быть вычислен как
+(16*AX - EBX).</li>
+<li>Эта функция может быть использована в обработчиках прерываний,
+работающих в защищенном режиме.</li>
+</ul>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<br>
+<a name="1_4"></a>
+<b>Отменить предыдущее выделение памяти</b>  (v3.00+)
+<br>
+<br>
+Эта функция освобождает предварительно выделенный блок памяти
+<br>(функция AX =EE41h) или DMA буфер (функция AX=EE42h).
+При вызове этой функции несколько раз будут поочередно,
+в обратном порядке освобождаться блоки памяти, выделявшиес
+перед этим (т.е. по принципу стека).
+Например, если сначала был выделен блок памяти, а затем DMA буфер,
+то при первом вызове данной функции сначала будет освобожден
+DMA буфер, а при повторном вызове - ранее выделенный блок памяти.
+Если же вызвать функцию еще и в третий раз, то функция вернет
+флаг ошибки в виде выставленного флага переноса ( CF ),
+поскольку освобождать уже больше нечего.
+<pre>
+Вход:
+     AX = EE40h
+
+Выход:
+     CF сброшен, если операция прошла успешно
+     CF установлен в случае ошибки
+</pre>
+
+Примечание:<ul>
+<li>Функция возвращает флаг ошибки, если освобождать нечего.</li>
+<li>При завершении задачи вся ранее выделенная ей память будет
+освобождена автоматически.</li>
+</ul>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<a name="1_5"></a>
+<b>Выделить блок памяти</b> (V3.00+)
+<br>
+<br>
+Обычно прикладная задача вместе с кодом, данными и стеком
+располагается в одном большом блоке памяти.
+Данная функция позволяет выделить дополнительный блок памяти
+для программы.
+<pre>
+Вход:
+     AX  = EE42h
+     EDX = Размер блока памяти в байтах,
+           который нужно выделить
+
+Выход:
+     EAX = Фактический размер выделенного блока
+           памяти в байтах
+     EDX = Ближний указатель на базовый адрес
+           выделенного блока памяти относительно
+           сегмента основной программы.
+
+     CF сброшен, если операция прошла успешно
+     CF установлен в случае ошибки
+        (если блок нужного размера выделить
+        не удалось).
+</pre>
+
+Примечание:<ul>
+<li>Размер фактически выделяемого блока памяти (EDX) всегда
+кратен 4KB. Например, если мы попросим выделить 51001h байт,
+то фактически будет выделено 52000h байт.</li>
+<li>Данную функцию НЕЛЬЗЯ использовать в обработчиках прерываний
+или после выполнения команты "terminate and stay resident"
+( AX=EE30h ).</li>
+<li>Если в EAX возвращено нулевое значение, то это значит,
+что память не была выделена, и значение EDX неопределено.</li>
+<li>Функция возвращает флаг ошибки,
+если просят выделить ноль байт.</li>
+<li>Выделять память можно не более 64-х раз!
+Если Вашей программе требуется большее количество выделений
+памяти, рекомендуем использовать функции управления памятью
+Петера Андерсона (Peter Anderson) из библиотеки PAL.
+С библиотекой поставляются примеры ее использования.
+Данная же функция может быть использована только дл
+ограниченного количества выделений памяти.</li>
+<li>Если программа запущена не под DPMI сервером
+(например, под чистым DOS, XMS или VCPI), то сначала выделяетс
+имеющаяся расширенная память, и только затем -
+основная (conventional).
+Т.е. основная память будет выделена только в том случае,
+если расширенная уже полностью исчерпана. В любом случае,
+DOS32 настраивает таблицу страниц памяти таким образом,
+чтобы выделенная память адресовалась как один линейный
+блок памяти, хотя физически она может быть разбросана
+по всему адресному пространству RAM.</li>
+</ul>
+<b>Внимание!</b><blockquote>
+     Функции 42h и 4Bh прерывания int 21h имеют другие
+     назначения регистров для совместимости с DOS32 и
+     TMT Pascal. См. выше.
+</blockquote>
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<a name="2_0"></a>
+<p>
+<b>2. ПОДДЕРЖКА ИНТЕРФЕЙСА WDOSX API</b>
+<br>&nbsp;&nbsp;&nbsp; (см. README.TXT by Wuschel a.k.a Michael Tippach)
+
+
+<blockquote>
+<a name="2_1"></a>
+<p>
+<b>2.1. Прерывания и исключения</b>
+
+<p>
+Если программа запускается под голым DOS без DPMI хоста, то WDOSX
+автоматически запустит свой встроенный DPMI хост.
+Ниже приводится описание поведения DPMI хоста WDOSX в ряде случаев.
+При запуске из под Windows и др. систем, имеющих свой DPMI хост,
+будут использоваться возможности имеющегося хоста.
+
+<p>
+Если в Вашей программе установлен обработчик IRQ в защищенном режиме,
+то все аппаратные прерывания реального (или V86) режима будут переданы
+Вашему обработчику. Если же такой обработчик не установлен, то аппаратные
+прерывания будут переданы обработчику прерываний реального (V86) режима.
+
+<p>
+WDOSX может обрабатывать глубину прерываний не более 16. В программе иногда
+важно знать, находимся ли мы всегда внутри обработчика IRQ при переключении
+режимов, или же работа обработчика перерываний может быть прервана другим
+прерыванием.
+
+<p>
+Все программные прерывания вплоть до 0Fh интерпретируются как исключения.
+Поэтому при попытке вызвать вызвать INT 5 для печати содержимого экрана
+Вы получите вместо него исключение. Для того, чтобы INT 5 выполнял то,
+что ему предназначено, необходимо воспользоваться сервисом трансляции
+прерываний в DPMI.
+
+<p>
+В отличие от спецификации DPMI, WDOSX не передает исключения с номерами
+0..7 в обработчик прерываний реального режима.
+
+<p>
+Если в Вашей программе установлен обработчик исключений, он будет вызван
+в соответствии со спецификацией DPMI. В противном случае буде запущен
+стандартный обработчик исключений, выдающий на экран состояние регистров
+и завершающий работу программы.
+
+<p>
+Когда WDOSX устанавливает свой собственный DPMI хост, Ваша программа работает
+с нулевым уровнем привилегий. Поэтому процессор самостоятельно не переключает
+стек при возникновении исключения. Это может привести к краху программы,
+если содержимое стека в данный момент разрушено.
+
+<p>
+Исключение 0F передается обработчику реального режима в любом случае.
+Это сделано специально для использования замечательной возможности
+контроллера прерываний генерировать побочные прерывания IRQ 7.
+<br>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<a name="2_2"></a>
+<b>2.2. Распределение памяти</b>
+
+<p>
+После того, как WDOSX устанавливает свой встроенный DPMI хост, начальный
+линейный стартовый адрес блока памяти Вашей программы становится равным
+400000h. При запуске из-под Windows или другой многозадачной операционной
+системы этот адрес может быть совершенно другим, но здесь мы это не
+рассматриваем.
+
+<p>
+При старте программы ESP будет указывать на начало блока памяти, поэтому
+обращение к памяти через [esp] будет недопустимой операцией, которая может
+вызвать ошибку адресации страницы памяти. Однако, доступ через [esp-4]
+(если занести какое-нибудь значение в стек) ошибки не вызовет.
+
+<p>
+Дескрипторы cs: ds: (= ss:) инициализируются на лимит в 4GB. Однако,
+Windows NT 3.5, например, изменяет лимиты дескрипторов по своему усмотрению.
+Поэтому, если Вы пожелаете узнать фактическое значение лимитов, то следует
+воспользоваться инструкцией LSL.
+
+<p>
+В некоторых руководствах рекомендуется использовать отрицательные смещени
+для доступа к видео-памяти или к блоку памяти в первом мегабайте. Обращаем
+Ваше внимание, что у этого метода есть свои подводные камни! DPMI хост может
+изменить линейный базовый адрес Вашего сегмента в случае, если Вы меняете
+его размер. Соответственно, вычисленные ранее отрицательные смещения станут
+неверными, и Вам потребуется вычислять их заново. Гораздо удобнее и
+предпочтительнее выделять дескриптор с нулевым базовым адресом и лимитом в
+4GB, что позволит легко получать доступ к любому участку используемой памяти.
+
+<p>
+!!! Никогда не используйте функцию INT 31h/0503h для изменения размера
+сегмента, в котором сейчас выполняется программа. Чтобы предостеречь Вас
+от модификации размеров Вашего начального сегмента, мы даже не будем
+сообщать Вам, какой дескриптор DPMI хост возвращает, когда WDOSX выделяет
+блок памяти для Вашей программы.
+
+<p>
+WDOSX предоставляет удобную в использовании интерфейсную функцию
+(INT 21h/FFFFh), которая позволяет изменить размер Вашего начального
+сегмента. Эта функция ДОЛЖНА ВЫЗЫВАТЬСЯ ТОЛЬКО ИЗНУТРИ НАЧАЛЬНОГО СЕГМЕНТА!
+Вообще говоря, это не лучшая идея - иметь более одногоe DPMI блока памяти
+(правда, отладчик обычно использует два таких блока, но это совсем друга
+песня).
+
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<a name="3_0"></a>
+<p>
+<br>
+<b>3. ПРОГРАММНЫЙ ИНТЕРФЕЙС WDOSX (API)</b>
+
+<p>
+WDOSX API можно разделить на 3 функциональные части:
+<ul>
+<li>Интерфейс DPMI 0.9</li>
+<li>Расширенный интерфейс DOS INT 21H</li>
+<li>Прочие функции</li>
+</ul>
+
+<p>
+В настоящее время WDOSX поддерживает практически все DPMI функции,
+описанные в спецификации DPMI0.9. Кроме того, "по просьбам 
+телезрителей" специально добавлена функция 801h.
+
+<p>
+Если Вы еще не знакомы с DPMI, рекомендуем оснакомиться с его спецификацией,
+которую можно найти, например, здесь:
+
+<blockquote>
+   <a href="ftp://x2ftp.oulu.fi/pub/msdos/programming/specs/dpmispec.arj">ftp://x2ftp.oulu.fi/pub/msdos/programming/specs/dpmispec.arj</a>
+</blockquote>
+
+<p>
+Поддержка расширенного INT 21H осуществляется аналогично любому
+другому DOS экстендеру, поддерживающему расширенный INT 21H DOS API.
+Отвечая на часто задаваемый вопрос, отметим, что функции DOS, 
+не требующие передачи сегментного регистра (в любую сторону), 
+могут вызываться в программе напрямую, поскольку WDOSX поддерживает 
+их "в живую"! Для многих это очевидно, но, все-таки, не для всех.
+<p>
+<div align="right"><a href="#top">к содержанию</a></div>
+<p>
+<a name="3_1"></a>
+<p>
+<b>3.1. ПОДДЕРЖИВАЕМЫЕ ФУНКЦИИ DPMI 0.9</b>
+<p>
+<table border=0>
+<tr bgcolor="#ccccff"><td>0000h</td><td>Выделить дескрипторы в LDT</td><td>ALLOC LDT DESCRIPTORS</td></tr>
+<tr bgcolor="#ccccff"><td>0001h</td><td>Освободить дескрипторы из LDT</td><td>FREE LDT DESKRIPTORS</td></tr>
+<tr bgcolor="#ccccff"><td>0002h</td><td>Преобразовать сегмент в селектор</td><td>SEGMENT -> SELECTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0003h</td><td>Получить инкремент селектора</td><td>GET SELECTOR INCRMENT</td></tr>
+<tr bgcolor="#ccccff"><td>0006h</td><td>Получить базовый адрес сегмента</td><td>GET SEGMENT BASE</td></tr>
+<tr bgcolor="#ccccff"><td>0007h</td><td>Установить базовый адрес сегмента</td><td>SET SEGMENT BASE</td></tr>
+<tr bgcolor="#ccccff"><td>0008h</td><td>Установить лимит сегмента</td><td>SET SEGMENT LIMIT</td></tr>
+<tr bgcolor="#ccccff"><td>0009h</td><td>Установить права доступа</td><td>SET ACCESS RIGHTS</td></tr>
+<tr bgcolor="#ccccff"><td>000Ah</td><td>Создать псевдоним</td><td>CREATE ALIAS</td></tr>
+<tr bgcolor="#ccccff"><td>000Bh</td><td>Получить дескриптор</td><td>GET DESCRIPTOR</td></tr>
+<tr bgcolor="#ccccff"><td>000Ch</td><td>Задать значение дескриптора</td><td>SET DESCRIPTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0100h</td><td>Выделить блок DOS-памяти</td><td>ALLOC DOS- MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0101h</td><td>Освободить блок DOS-памяти</td><td>FREE DOS- MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0102h</td><td>Изменить размер блока DOS-памяти</td><td>RESIZE DOS- MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0200h</td><td>Получить адрес обработчика прерывания реального режима</td><td>
+        GET REALMODE INTERRUPT VECTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0201h</td><td>Установить обработчик прерывания реального режима</td><td>
+        SET REALMODE INTERRUPT VECTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0202h</td><td>Получить адрес обработчика исключения</td><td>
+        GET EXCEPTION HANDLER</td></tr>
+<tr bgcolor="#ccccff"><td>0203h</td><td>Установить обработчик исключения</td><td>
+        SET EXCEPTION HANDLER</td></tr>
+<tr bgcolor="#ccccff"><td>0204h</td><td>Получить адрес обработчика прерывания защищенного
+        режима</td><td>GET PM INTERRUPT VECTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0205h</td><td>Установить обработчик прерывания защищенного режима</td><td>
+        SET PM INTERRUPT VECTOR</td></tr>
+<tr bgcolor="#ccccff"><td>0300h</td><td>Моделировать прерывание реального режима</td><td>
+        SIMULATE REAL MODE INTERRUPT</td></tr>
+<tr bgcolor="#ccccff"><td>0301h</td><td>Вызвать процедуру реального режима
+        <br>(с возвратом по RETF)</td><td>CALL REALMODE PROCEDURE (RETF)</td></tr>
+<tr bgcolor="#ccccff"><td>0302h</td><td>Вызвать процедуру реального режима
+        <br>(с возвратом по IRET)</td><td>CALL REALMODE PROCEDURE (IRET)</td></tr>
+<tr bgcolor="#ccccff"><td>0303h</td><td>Создать и возвратить адрес функции обратного вызова
+        реального режима DOS</td><td>ALLOCATE REALMODE CALLBACK</td></tr>
+<tr bgcolor="#ccccff"><td>0304h</td><td>Освободить адрес CallBack, созданный функцией 0303h</td><td>
+        FREE REALMODE CALLBACK</td></tr>
+<tr bgcolor="#ccccff"><td>0400h</td><td>Получить версию DPMI</td><td>GET DPMI VERSION</td></tr>
+<tr bgcolor="#ccccff"><td>0500h</td><td>Определить количество свободной памяти</td><td>GET FREE MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0501h</td><td>Выделить блок памяти</td><td>ALLOC MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0502h</td><td>Освободить блок памяти</td><td>FREE MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0503h</td><td>Изменить размер блока памяти</td><td>RESIZE MEM</td></tr>
+<tr bgcolor="#ccccff"><td>0600h</td><td>Блокироваить линейный участок памяти</td><td>
+        LOCK LINEAR REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0601h</td><td>Разблокировать линейный участок памяти</td><td>
+        UNLOCK LINEAR REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0602h</td><td>Разблокировать блок памяти реального режима</td><td>
+        UNLOCK REALMODE REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0603h</td><td>Повторно блокировать блок памяти реального режима</td><td>
+        RELOCK REALMODE REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0604h</td><td>Получить физический размер страницы памяти</td><td>
+        GET PHYSICAL PAGE SIZE</td></tr>
+<tr bgcolor="#ccccff"><td>0702h</td><td>Пометить страницу как разрешенную к выгрузке на диск</td><td>
+        MARK PAGE PAGEABLE</td></tr>
+<tr bgcolor="#ccccff"><td>0703h</td><td>Исключить страницу из списка занятых</td><td>DISCARD PAGE</td></tr>
+<tr bgcolor="#ccccff"><td>0800h</td><td>Отразить область физической памяти на линейную память</td><td>
+        MAP PHYSICAL REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0801h</td><td>Отменить действие функции 0800h</td><td>UNMAP PHYSICAL REGION</td></tr>
+<tr bgcolor="#ccccff"><td>0900h</td><td>Выключить виртуальный флаг прерываний
+        <br>и возвратить его прежнее значение</td><td>GET AND DISABLE VI STATE</td></tr>
+<tr bgcolor="#ccccff"><td>0901h</td><td>Включить виртуальный флаг прерываний
+        <br>и возвратить его прежнее значение</td><td>GET AND ENABLE VI STATE</td></tr>
+<tr bgcolor="#ccccff"><td>0902h</td><td>Получить текущее значение виртуального флага прерываний</td><td>
+        GET VI STATE</td></tr>
+</table>
+<p>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+<p>
+<div align="center"><a href="tmtstub2.htm">продолжение документа...</a></div>
+
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

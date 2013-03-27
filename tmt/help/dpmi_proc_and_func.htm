@@ -1,0 +1,116 @@
+<html><head>
+<TITLE>DPMI Unit Procedures and Functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="tdescriptor_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: TDescriptor type"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="allocatedescriptors_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: AllocateDescriptors function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.28.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dpmi_unit.htm"><small>DPMI Unit</small></a><dir><h2>DPMI Unit Procedures and Functions
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS only</B></center></B>
+<br>
+<br>
+<li><a href="allocatedescriptors_func.htm">AllocateDescriptors</a></li>
+<li><a href="allocdosmemoryblock_func.htm">AllocDosMemoryBlock</a></li>
+<li><a href="allocrealmodecallback_func.htm">AllocRealModeCallBack</a></li>
+<li><a href="allocatespecificdescriptor_func.htm">AllocateSpecificDescriptor</a></li>
+<li><a href="callrealmodefar_proc.htm">CallRealModeFar</a></li>
+<li><a href="callrealmodeiret_proc.htm">CallRealModeIRet</a></li>
+<li><a href="clearrmregs_proc.htm">ClearRmRegs</a></li>
+<li><a href="createcodealias_func.htm">CreateCodeAlias</a></li>
+<li><a href="createcodedescriptor_func.htm">CreateCodeDescriptor</a></li>
+<li><a href="createdataalias_func.htm">CreateDataAlias</a></li>
+<li><a href="createdatadescriptor_func.htm">CreateDataDescriptor</a></li>
+<li><a href="dosmemoryalloc_func.htm">DosMemoryAlloc</a></li>
+<li><a href="dosmemoryfree_func.htm">DosMemoryFree</a></li>
+<li><a href="fargetbyte_func.htm">FarGetByte</a></li>
+<li><a href="fargetdword_func.htm">FarGetDWord</a></li>
+<li><a href="fargetword_func.htm">FarGetWord</a></li>
+<li><a href="farputbyte_proc.htm">FarPutByte</a></li>
+<li><a href="farputdword_proc.htm">FarPutDWord</a></li>
+<li><a href="farputword_proc.htm">FarPutWord</a></li>
+<li><a href="freedescriptor_func.htm">FreeDescriptor</a></li>
+<li><a href="freedosmemoryblock_func.htm">FreeDosMemoryBlock</a></li>
+<li><a href="freephysicalmap_func.htm">FreePhysicalMap</a></li>
+<li><a href="freerealmodecallback_func.htm">FreeRealModeCallBack</a></li>
+<li><a href="getcs_func.htm">GetCS</a></li>
+<li><a href="getdisableinterruptstate_func.htm">GetDisableInterruptState</a></li>
+<li><a href="getdpmiintvec_func.htm">GetDPMIIntVec</a></li>
+<li><a href="getdpmiver_func.htm">GetDPMIVer</a></li>
+<li><a href="getds_func.htm">GetDS</a></li>
+<li><a href="getenableinterruptstate_func.htm">GetEnableInterruptState</a></li>
+<li><a href="getexceptionhandler_func.htm">GetExceptionHandler</a></li>
+<li><a href="getfreememoryinfo_func.htm">GetFreeMemoryInfo</a></li>
+<li><a href="getinterruptstate_func.htm">GetInterruptState</a></li>
+<li><a href="getrealmodeintvec_func.htm">GetRealModeIntVec</a></li>
+<li><a href="getsegmentbaseaddress_func.htm">GetSegmentBaseAddress</a></li>
+<li><a href="getselectoraccessrights_func.htm">GetSelectorAccessRights</a></li>
+<li><a href="mapphysicaltolinear_func.htm">MapPhysicalToLinear</a></li>
+<li><a href="realmodeint_func.htm">RealModeInt</a></li>
+<li><a href="resizedosmemoryblock_func.htm">ResizeDosMemoryBlock</a></li>
+<li><a href="segmenttodescriptor_func.htm">SegmentToDescriptors</a></li>
+<li><a href="selectorinc_func.htm">SelectorInc</a></li>
+<li><a href="setdpmiintvec_func.htm">SetDPMIIntVec</a></li>
+<li><a href="setexceptionhandler_func.htm">SetExceptionHandler</a></li>
+<li><a href="setrealmodeintvec_func.htm">SetRealModeIntVec</a></li>
+<li><a href="setselectoraccessrights_func.htm">SetSelectorAccessRights</a></li>
+<li><a href="setselectorbaseaddress_func.htm">SetSelectorBaseAddress</a></li>
+<li><a href="setselectorlimit_func.htm">SetSelectorLimit</a></li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="tdescriptor_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: TDescriptor type"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="allocatedescriptors_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: AllocateDescriptors function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">TDescriptor type</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">AllocateDescriptors function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.28.2 -</B></CENTER>
+</BODY></HTML>

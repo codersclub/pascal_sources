@@ -1,0 +1,89 @@
+<html><head>
+<TITLE>TMMedia.Wait
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="mmedia_stopatclose.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: StopAtClose"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="tmmedia_methods.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TMMedia Object Methods"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.47.1.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="mmedia_unit.htm"><small>MMedia Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="tmmedia_fields.htm"><small>TMMedia Object Fields</small></a><dir><h2>TMMedia.Wait
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+<a href="mmedia_unit.htm">MMedia Unit</a>
+<br>
+<br>
+Determines whether a TMMedia method returns control to the application only
+after it has been completed.
+<br>
+<br>
+<B>Declaration:</B>
+<pre>  Wait: Boolean;</pre>
+<B>Remarks:</B>
+If <I>Wait</I> is TRUE, the TMMedia object waits until the next TMMedia object
+method has finished before returning control to the application. If <I>Wait</I>
+is FALSE, the application won't wait for the next TMMedia object method to
+finish before continuing.
+<br>
+<br>
+<I>Wait</I> is set to FALSE by default, so it is recommended to set
+<a href="mmedia_notify.htm">Notify</a> to TRUE so the application is
+notified when the TMMedia object method finishes.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="mmedia_stopatclose.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: StopAtClose"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="tmmedia_methods.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TMMedia Object Methods"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">StopAtClose</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">TMMedia Object Methods</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.47.1.7 -</B></CENTER>
+</BODY></HTML>

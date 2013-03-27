@@ -1,0 +1,159 @@
+<html><head>
+<TITLE>Using Statement as Procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="procedural_value.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Procedural Value"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="oop_extensions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: OOP Extensions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.6 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="procedures_and_functions.htm"><small>Procedures and Functions</small></a><dir><h2>Using Statement as Procedure
+</h2></dir>
+<!-- Page content -->
+With TMT Pascal you can use any statement as a procedure body, except for
+the assignment and the procedure calls.
+<br>
+<br>
+The RESULT variable in the body of such functions denotes the variable
+that contains the return value. The RESULT is of the function return type
+and may be used as a variable without any restrictions.
+<br>
+<br>
+With TMT Pascal you can enter the procedure body directly as a procedure
+parameter. The procedure or function header (if not specified) takes the
+procedural parameter type. If the procedure header is specified,
+the procedure name is omitted.
+<br>
+<br>
+<b>Example:</b>
+<pre><b>function</b> Integral(<b>function</b> f(a: Real):Real;
+                   low, high, step: Real): Real;
+<b>begin</b>
+ ... 
+<b>end</b>;
+ ...
+Writeln(integral (<b>function</b>(x: Real): Real;
+                  <b>begin</b> Result := sqrt(x) <b>end</b>, 0, 10, 0.1));
+Writeln(integral(<b>begin</b> Result := sqrt(a) <b>end</b>, 0, 10, 0.1));
+Writeln(integral(<b>function</b>;     <font color=#000080>// function keyword needed</font>
+                 <b>var</b> x: Real;  <font color=#000080>// for local declaration</font>
+                 <b>begin</b> x := sqrt(a); Result := x <b>end</b>, 0, 10, 0.1)
+                );
+Writeln(integral(<b>declare</b>;      <font color=#000080>// other way</font>
+                 <b>var</b> x: Real;  <font color=#000080>// for local variable declaration</font>
+                 <b>begin</b>
+                   x := sqrt(a);
+                   Result := x 
+                 <b>end</b>, 0, 10, 0.1)
+                 );</pre>
+TMT Pascal allows exit from a local procedure to the one that contains it.
+This feature is listed in the Pascal's ANSI standard but not realized in
+Borland Pascal. Together with procedural values, this is very useful for
+error handling:
+<pre><b>program</b> Test;
+<b>var</b>
+  on_eof: <b>procedure</b>;
+  <b>function</b> read_char: char;
+<b>var</b> c: char;
+
+<b>begin</b>
+  <b>if</b> Eof (Input) <b>then</b> on_eof;
+  Read(c);
+  Read_char := c;
+<b>end</b>;
+<b>procedure</b> MyProc;
+<b>label</b> eof_reached;
+  <b>procedure</b> go_eof; 
+  <b>begin</b> 
+    <b>goto</b> eof_reached; 
+  <b>end</b>;
+  <b>begin</b>
+    on_eof := go_eof;
+    <b>while</b> True <b>do</b> Write (read_char);
+
+Eof_reached:
+    writeln ('*** EOF ***');
+    on_eof := nil;
+  <b>end</b>;
+<b>begin</b>
+  MyProc;
+<b>end</b>.</pre>
+<B>Restriction:</B>
+<b>Break</b> and <b>Continue</b> operators cannot be used for exit from
+a procedure. Use <b>Goto</b> instead.
+<br>
+<br>
+<b>Example:</b>
+<pre>{ incorrect example }
+<b>for</b> i := 1 to 10 <b>do</b>
+  Writeln ( integral(            <font color=#000080>// from previous example</font>
+            if a < 0 then break  <font color=#000080>// incorrect</font>
+            else result := sqrt (a), i, i + 1, 0.01)
+          );
+
+{ correct example }
+declare
+  label L;
+begin
+  for i := 1 to 10 do Writeln (
+  integral(
+           if a < 0
+           then goto L  <font color=#000080>// correct</font>
+           else result := sqrt (a), i, i + 1, 0.01)
+          );</pre>
+Functions may return any values of any type, including structures and arrays.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="procedural_value.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Procedural Value"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="oop_extensions.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: OOP Extensions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Procedural Value</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">OOP Extensions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.6 -</B></CENTER>
+</BODY></HTML>

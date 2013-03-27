@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>Real Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="subr_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Subrange Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="ptr_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Pointer Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.6 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Real Types
+</h2></dir>
+<!-- Page content -->
+Real data types contain integer values as well as a fractional portion.
+Also known as floating point numbers, each real type consists of a significant,
+the fractional part, and an exponent, which is a power of ten.
+<br>
+<br>
+TMT Pascal follows the IEEE standard for floating point
+number representation. There are five real data types available under TMT
+Pascal: Real48, Real, Single, Double, and Extended.
+<br>
+<dir>
+<table border="1" cellpadding="4">
+<tr><th>Type</th><th>Range</th><th>Format</th></tr>
+<tr><td>Single</td><td align="center">1.5 x 10<sup>-45</sup> .. 3.4 x 10<sup>38</sup></td>
+<td>6 to 7 significant digits,<br>32-bit</td></tr>
+<tr><td>Real48</td><td align="center">2.9 x 10<sup>-39</sup> .. 1.7 x 10<sup>38</sup></td>
+<td>11 to 12 significant digits,<br>48-bit</td></tr>
+<tr><td>Double</td><td align="center">5.0 x 10<sup>-324</sup> .. 1.7 x 10<sup>308</sup></td>
+<td>15 to 16 significant digits,<br>64-bit</td></tr>
+<tr><td>Real</td><td align="center">5.0 x 10<sup>-324</sup> .. 1.7 x 10<sup>308</sup></td>
+<td>15 to 16 significant digits,<br>64-bit</td></tr>
+<tr><td>Extended</td><td align="center">1.9 x 10<sup>-4951</sup> .. 1.1 x 10<sup>4932</sup></td>
+<td>19-20 significant digits,<br>80-bit</td></tr>
+</table>
+</dir>
+<img border="0" src="images/attention.gif"> The internal format of TMT Pascal's
+real type differs to Borland's one. Actually the generic type Real is
+equivalent to Double.
+<br>
+<br>
+Real48 is maintained for backward compatibility with older versions of compiler.
+Since its storage format is not native to the Intel CPU's, it results in slower
+performance than other floating-point types.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="subr_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Subrange Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="ptr_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Pointer Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Subrange Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Pointer Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.6 -</B></CENTER>
+</BODY></HTML>

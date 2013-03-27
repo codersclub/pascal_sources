@@ -1,0 +1,113 @@
+<html><head>
+<TITLE>FSearch function
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="findnext_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FindNext procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="fsplit_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FSplit procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.13 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_proc_and_func.htm"><small>Dos Unit Procedures and Functions</small></a><dir><h2>FSearch function
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>
+<br>
+<br>
+Searches for a file.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>function</B> FSearch(Path: PathStr; DirList: string): PathStr;</pre>
+<B>Remarks:</B>
+<I>Path</I> is of type PathStr which is defined in the Dos unit.
+<I>DirList</I> is a list of the directories to include in the search each
+delimited with a semicolon (;).
+<br>
+<br>
+<I>FSearch</I> returns the directory and file name if the file has been
+located. If <I>Path</I> is not found then an empty string is returned.
+<I>FSearch</I> always begins with the current directory and then checks
+the directories listed in <I>DirList</I> in the order that they appear.
+<br>
+<br>
+<B>Example:</B>
+<pre><B>uses</B>
+  Dos,Strings;
+<B>var</B>
+  DosPath,
+  TreePath: String;
+  File    : PathStr;
+<B>begin</B>
+  DosPath := GetPath;
+  File    := 'TREE.COM';
+  TreePath:= FSearch(File, DosPath);
+  <B>if</B> Empty(TreePath) <B>then</B>
+    Halt(1);
+  TreePath := AppendBKSlash(TreePath);
+  Exec(TreePath + File,'');
+<B>end</B>.</pre>
+<B>See also:</B>
+<br>
+<a href="findfirst_proc.htm">FindFirst</a>
+<br>
+<a href="fexpand_func.htm">FExpand</a>
+<br>
+<a href="fsplit_proc.htm">FSplit</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="findnext_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FindNext procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="fsplit_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FSplit procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">FindNext procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">FSplit procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.13 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,836 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 5)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 5'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 5</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+
+
+<p><a name="Procedures"></a>
+<br>
+<h3>Процедуры и Функции</h3>
+</p>
+<p><a name="AnalizeRGB"></a>
+<br>
+
+<dl>
+
+<dt><a name="GetActivePage"></a><br>
+ <h4>GetActivePage (функция)</h4>
+<dd>
+ Возвращает номер текущей активной страницы.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetActivePage: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetAspectRatio"></a><br>
+ <h4>GetAspectRatio (процедура)</h4>
+<dd>
+ Возвращает коэффициент пропорциональности для установленного графического
+ режима.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetAspectRatio (var AspectRatio: Real);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Более подробная информация приведена в описании процедуры SetAspectRatio.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetBitsPerPixel"></a><br>
+ <h4>GetBitsPerPixel (функция)</h4>
+<dd>
+ Возвращает размер (в битах), необходимый для задания цвета точки в
+ установленном графическом режиме.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetBitsPerPixel: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetBkColor"></a><br>
+ <h4>GetBkColor (функция)</h4>
+<dd>
+ Возвращает текущий цвет фона.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetBkColor: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Цвет фона может принимать значение от нуля до GetMaxColor,
+ в зависимости от использующегося графического драйвера и установленного
+ графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetBytesPerScanLine"></a><br>
+ <h4>GetBytesPerScanLine (функция)</h4>
+<dd>
+ Функция возвращает длину линии сканирования в байтах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetBytesPerScanLine: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Длина логической линии сканирования - это ширина логического экрана.
+ Размеры логического окна могут быть не только равны физическому разрешению
+ установленного графического режима, но и превышать его.
+ Данная функция возвращает длину линии сканирования именно дл
+ логического экрана.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetColor"></a><br>
+ <h4>GetColor (функция)</h4>
+<dd>
+ Возвращает текущий цвет для рисования.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetColor: Word;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetDefaultPalette"></a><br>
+ <h4>GetDefaultPalette (функция)</h4>
+<dd>
+ Возвращает структуру описания палитры по умолчанию.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetDefaultPalette(var Palette: PaletteType);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ GetDefaultPalette возвращает запись типа PaletteType,
+ содержащую палитру, устанавливаемую автоматически при инициализации
+ нового графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetGraphBufSize"></a><br>
+ <h4>GetGraphBufSize (функция)</h4>
+<dd>
+ Возвращает размер внутреннего графического буфера в байтах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetGraphBufSize: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Более подробную информацию см. в описании процедуры SetGraphBufSize.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetGraphMode"></a><br>
+ <h4>GetGraphMode (функция)</h4>
+<dd>
+ Возвращает VESA-совместимый номер режима для установленного графического
+ режима.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetGraphMode: Word;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Номер режима, возвращаемый функцией GetGraphMode, может быть использован
+ для установки режима с помощью процедуры SetGraphMode.
+ Ниже приводится пример установки графического режима.
+
+<dd><br>
+ Примечание переводчика:
+<dd>
+ Пример для этой функции неудачен, поскольку в нем нет использовани
+ ни GetGraphMode, ни SetGraphMode :-(.
+
+<pre>
+ uses Graph,Crt;
+
+ var ErrorCode,i: LongInt:=0;
+     SX,SY: DWord:=0;
+ begin
+  { Установить SVGA режим 640x480x256 }
+  SetSVGAMode(640,480,8,LfbOrBanked);
+  ClearDevice;
+  { Режим установлен успешно? }
+  if GraphResult<>0 then begin
+   ErrorCode:=GraphResult;
+   CloseGraph;
+   Writeln(GraphErrorMsg(ErrorCode));
+  end;
+  SetLogicalSize(1280,600);
+  GetLogicalSize(SX,SY);
+  if (SX=640) and (SY=480) then begin
+   CloseGraph;
+   Writeln(' Логические страницы не поддерживаются...');
+  end;
+  SetLineStyle(SolidLn,0,ThickWidth);
+  SetColor(clRed);
+  Line(0,0,GetMaxX,GetMaxY);
+  Line(GetMaxX,0,0,GetMaxY);
+  SetColor(clWhite);
+  Rectangle(0,0,GetMaxX,GetMaxY);
+  for i:=0 to (SX-640) div 4 do SetScreenStart(i*4,0,True);
+  for i:=0 to (SY-480) div 4 do SetScreenStart(SX-640,i*4,True);
+  for i:=(SX-640) div 4 downto 0 do SetScreenStart(i*4,SY-480,True);
+  for i:=(SY-480) div 4 downto 0 do SetScreenStart(0,i*4,True);
+  ReadKey;
+  CloseGraph;
+ end.
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetImage"></a><br>
+ <h4>GetImage (процедура)</h4>
+<dd>
+ Сохраняет в буфер заданную прямоугольную область изображения.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetImage(x1, y1, x2, y2: Integer; var BitMap);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ X1, Y1, X2, Y2 - координаты двух диагонально противоположных точек
+ прямоугольной области на экране. Размер безтипового параметра BitMap
+ должен быть больше, по крайней мере, на 4 байта, чем размер памяти,
+ занимаемой данной областью изображения, поскольку в двух первых словах
+ BitMap сохраняется ширина и высота сохраняемой области.
+
+<dd>
+ Оставшаяся часть BitMap используется для сохранения собственно изображения.
+ Для определения размера буфера BitMap можно воспользоваться функцией
+ ImageSize.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetLfbAddress"></a><br>
+ <h4>GetLfbAddress (функция)</h4>
+<dd>
+ Возвращает физический адрес буфера LFB (linear flat frame buffer).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetLfbAddress: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если режим LFB не поддерживается, то функция возвращает ноль.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetLineSettings"></a><br>
+ <h4>GetLineSettings (процедура)</h4>
+<dd>
+ Возвращает текущие параметры линии: стиль, образец и толщину, установленные
+ процедурой SetLineStyle.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetLineSettings(var LineInfo: LineSettingsType);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetLogicalPage"></a><br>
+ <h4>GetLogicalPage (процедура)</h4>
+<dd>
+ Возвращает текущий размер логической страницы.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetLogicalPage(var SX,SY: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Подробная информация приведена в описании процедуры SetLogicalPage.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetMaxColor"></a><br>
+ <h4>GetMaxColor (функция)</h4>
+<dd>
+ Возвращает максимальный номер цвета, который может быть указан в процедуре
+ SetColor.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetMaxColor: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если установлен 256-цветный VGA/SVGA режим, то GetMaxColor вернет значение
+ 255. Это значит, что при обращении к SetColor можно задавать цвета только
+ в диапазоне 0..255.
+ Если установлен один из многоцветных SVGA режимов, то GetMaxColor вернет,
+ соответственно, значение 32767 или 65535.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetMaxPage"></a><br>
+ <h4>GetMaxPage (функция)</h4>
+<dd>
+ Возвращает номер последней доступной графической страницы.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetMaxPage: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetMaxX"></a><br>
+ <h4>GetMaxX (функция)</h4>
+<dd>
+ Возвращает максимальное разрешение по X.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetMaxX: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Возвращает номер крайнего правого столбца точек (разрешение по X)
+ логической видео-страницы для установленного графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetMaxY"></a><br>
+ <h4>GetMaxY (функция)</h4>
+<dd>
+ Возвращает максимальное разрешение по Y.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetMaxY: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Возвращает номер самой нижней строки точек (разрешение по Y)
+ логической видео-страницы для установленного графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetOemProductName"></a><br>
+ <h4>GetOemProductName (функция)</h4>
+<dd>
+ Возвращает строку, содержащую название установленной видео-карты.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetOemProductName: String;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если видео-карта не поддерживает VESA VBE 2.0+, то функция вернет пустую
+ строку.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetOemProductRev"></a><br>
+ <h4>GetOemProductRev (функция)</h4>
+<dd>
+ Возвращает строку, содержащую версию или номер установленной видео-карты.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetOemProductRev: String;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если видео-карта не поддерживает VESA VBE 2.0+, то функция вернет пустую
+ строку.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetOemString"></a><br>
+ <h4>GetOemString (функция)</h4>
+<dd>
+ Возвращает OEM-идентификатор графического контроллера.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetOemString: String;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Возвращаемая строка может быть использована для идентификации типа
+ графического контроллера или семейства OEM-продуктов для конкретного
+ видео-драйвера.
+
+<dd>
+ Если видео-карта не поддерживает VESA VBE 1.2+, то функция вернет пустую
+ строку.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetOemVendorName"></a><br>
+ <h4>GetOemVendorName (функция)</h4>
+<dd>
+ Возвращает строку, содержащую наименование изготовителя видео-карты.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetOemVendorName: String;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если видео-карта не поддерживает VESA VBE 1.2+, то функция вернет пустую
+ строку.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetPageSize"></a><br>
+ <h4>GetPageSize (функция)</h4>
+<dd>
+ Возвращает размер логической видео-страницы для установленного
+ графического режима (в байтах).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetPageSize: DWord;
+</pre>
+
+<dd>
+ Размер графической страницы зависит как от установленного графического
+ режима, так и размеров логической страницы, установленных процедурой
+ SetLogicalPage.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetPalette"></a><br>
+ <h4>GetPalette (процедура)</h4>
+<dd>
+ Возвращает в переменной типа PaletteType текущую палитру и ее размер.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetPalette(var Palette: PaletteType);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetPixel"></a><br>
+ <h4>GetPixel (функция)</h4>
+<dd>
+ Возвращает цвет точки (пиксела) с координатами (X,Y).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetPixel(X,Y: LongInt): DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetScreenHeight"></a><br>
+ <h4>GetScreenHeight (функция)</h4>
+<dd>
+ Возвращает высоту физического экрана в пикселах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetScreenHeight: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetScreenWidth"></a><br>
+ <h4>GetScreenWidth (функция)</h4>
+<dd>
+ Возвращает ширину физического экрана в пикселах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetScreenWidth: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetTextSettings"></a><br>
+ <h4>GetTextSettings (процедура)</h4>
+<dd>
+ Возвращает параметры вывода текста в графическом режиме.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetTextSettings(var TextInfo: TextSettingsType);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Функция возвращает параметры текста: установленный фонт (шрифт),
+ направление, размер и метод выравнивания, установленные процедурами
+ SetTextStyle или SetCustomFont и SetTextJustify.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetTranspSettings"></a><br>
+ <h4>GetTranspSettings (процедура)</h4>
+<dd>
+ Возвращает текущие установки для режима прозрачности.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetTranspSettings (var Mode: Boolean; Color: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Более подробная информация приведена в описании процедуры SetTransparentMode.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

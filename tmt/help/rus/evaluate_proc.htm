@@ -1,0 +1,103 @@
+<html><head>
+<TITLE>Evaluate procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="degtorad_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: DegToRad function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="fahrtocels_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FahrToCels function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.45.2.26 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="math_unit.htm"><small>Math Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="math_proc_and_func.htm"><small>Math Unit Procedures and Functions</small></a><dir><h2>Evaluate procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="math_unit.htm">Math Unit</a>
+<br>
+<br>
+Evaluates the given expression.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> Evaluate(Expr: String;
+                    <B>var</B> Result: Extended;
+                    <B>var</B> ErrCode: Longint);</pre>
+<B>Remarks:</B>
+<br>
+Use <I>Evaluate</I> to evaluate any valid expression given in
+<I>Expr</I>. The <I>Result</I> variable returns the evaluated
+expression. If it succeeds, the <I>ErrCode</I> variable is 0.
+<br>
+<br>
+<B>Examples:</B>
+<pre><B>uses</B>
+  Math, Strings;
+<B>const</B>
+  Expr = 'cos(0)*(5^2-3.1)';
+<B>var</B>
+  Result: Extended;
+  ErrCode: Longint;
+<B>begin</B>
+  Evaluate(Expr, Result, ErrCode);
+  <B>if</B> ErrCode = 0 <B>then</B> 
+    Writeln(Expr, ' = ', Fls(Result))
+  <B>else</B>   
+    Writeln('Invalid expression');
+<B>end</B>.</pre>
+The example above will print 21.9.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="degtorad_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: DegToRad function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="fahrtocels_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FahrToCels function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">DegToRad function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">FahrToCels function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.45.2.26 -</B></CENTER>
+</BODY></HTML>

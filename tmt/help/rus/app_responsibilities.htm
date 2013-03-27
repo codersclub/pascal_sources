@@ -1,0 +1,89 @@
+<html><head>
+<TITLE>Application Responsibilities and Operation
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="control_panel_app.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Control Panel applications"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="app_entry-point_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Application Entry-Point Function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Application Responsibilities and Operation
+</h2></dir>
+<!-- Page content -->
+The primary responsibility of any Control Panel application is to display
+a dialog box and to carry out any tasks specified by the user.
+Despite this responsibility, Control Panel applications do not provide menus
+or other direct means for users to access their dialog boxes. Instead, these
+applications operate under the control of another application and display
+their dialog boxes only when requested by the controlling application.
+<br>
+<br>
+Control Panel applications are usually controlled by a Windows system utility
+specifically designed to give users access to these applications. However,
+any application can load and manage Control Panel applications, as long as
+the controlling application sends messages and processes return values in the
+way that the Control Panel applications expect.
+<br>
+<br>
+Most Control Panel applications display and manage a single dialog box,
+giving the user control of the settings and operational modes of a single
+system component. However, any given Control Panel application can provide
+any number of dialog boxes to control any number of system components.
+(These individual dialog boxes are sometimes called applets.) To distinguish
+between dialog boxes, a Control Panel application typically supplies the
+controlling application with a unique icon for each dialog box. The controlling
+application displays these icons and the user can choose a dialog box by
+choosing the corresponding icon.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="control_panel_app.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Control Panel applications"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="app_entry-point_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Application Entry-Point Function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Control Panel applications</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Application Entry-Point Function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.7 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,121 @@
+<html><head>
+<TITLE>Lan Manager Interface Unit
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="testkey_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: TestKey function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="lzexpand_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: LZExpand Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.42 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a><dir><h2>Lan Manager Interface Unit
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+This module imports the structures, constants an functions
+of the Ported LAN Manager.
+<br>
+<br>
+<b>About:</b>
+<br>
+The set of ported LAN Manager functions supported by Microsoft<SUP>&reg;</SUP>
+Windows<SUP>&reg;</SUP> is based on the set of LAN Manager functions specified
+in the LAN Manager 2.x Programmer's Reference. They are not a part
+of the Microsoft<SUP>&reg;</SUP> Win32<SUP>&reg;</SUP> application programming
+interface (API).
+<br>
+Certain LAN Manager functions are obsolete.
+Other LAN Manager functions have been superseded.
+In addition, the Microsoft<SUP>&reg;</SUP> Windows NT<SUP>&reg;</SUP>
+operating system adds
+to the set of networking functions introduced by LAN Manager.
+<br>
+<br>
+For OS/2-based servers, the MicrosoftR LAN Manager functions provided much
+of the functionality required for a network operating system;
+this functionality was missing from the local operating system.
+Windows NT has much of this network functionality built in.
+Therefore, some of the LAN Manager functions are not supported.
+However, the set of LAN Manager functions is extended to provide
+additional capability not included in Windows NT. In addition,
+you may use these functions to monitor and administer OS/2-based
+LAN Manager servers.  
+<br>
+<br>
+The functions specified in this module are designed to provide some
+of the API functionality that was available in LAN Manager 2.x.
+They are not the base Windows networking functions. Windows NT
+also provides a network-independent set of network functions
+(WNet functions) that allow network functions to work across
+different network vendors' products. If a base function or
+WNet function exists that could be used by your application,
+you should convert your code to use the WNet equivalent.
+There are at least two reasons to make the change: 
+<ol><li>The WNet functions are network independent, while the ported
+LAN Manager functions work only on LAN Manager networks.</li>
+<li>Some of the Windows networking functions documented in this SDK
+may not be supported in future releases of Windows or Windows NT
+if they have been superseded by base functions or WNet functions.
+Microsoft does not plan to remove specific functions unless equivalent
+or better functionality is available.</li>
+</ol>
+In this documentation, equivalent functions are listed that could be used
+in place of a ported LAN Manager function. These are the functions
+your application should use if at all possible.
+<br>
+<br>
+For more info look the "Ported LAN Manager Functions" in WIN32.HLP.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="testkey_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: TestKey function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="lzexpand_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: LZExpand Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">TestKey function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">LZExpand Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.42 -</B></CENTER>
+</BODY></HTML>

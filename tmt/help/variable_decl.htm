@@ -1,0 +1,104 @@
+<html><head>
+<TITLE>Variable Declarations
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="const_decl2.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Constant Declarations"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="local_block_decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Local Block Declarations"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.7.4 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="decl.htm"><small>Declarations</small></a><dir><h2>Variable Declarations
+</h2></dir>
+<!-- Page content -->
+Variables store data during program execution. A variable declaration is
+preceded by the <B>var</B> reserved word.
+<pre>  <B>var</B> identifier [,identifier]: Identifiertype;</pre>
+<I>Identifier</I> is the actual name of the variable defined.
+<I>Identifiertype</I> specifies the type of the variable. Variables, unlike
+constants, are not initialized. Their content prior to initialization is
+undefined. It is also possible to specify the absolute address of a variable.
+Following the <I>Identifiertype</I> specify the Absolute reserved word.
+<pre>  <B>var</B> identifier [,identifier]: Identifiertype <B>absolute</B> address;</pre>
+<I>Address</I> may be either an identifier or an integer number indicating an
+offset. If <I>Address</I> is an identifier then TMT Pascal computes it's offset.
+<I>Absolute</I> maps the variable to the address following the <I>Absolute</I>
+statement. This identifier must be declared prior to using <I>Absolute</I>.
+If a variable is the absolute of another, both address the same data however
+the types may be different.
+The following are examples of variable declarations.
+<pre><B>const</B>
+  BuffSize = 900000;  <font color = #000080>// 900K</font color = #000080></font>
+
+<B>var</B>
+  HugeBuff : <B>array</B> [0..BuffSize] <B>of</B> Char;
+  i,j,k,l  : Integer;
+  Buffptr  : Longint;
+  p        : Pointer <B>absolute</B> Buffptr;
+  Alpha    : Char;</pre>
+The absolute may refer to fields of records and objects. Also, the address of
+a global record/object field can be used within the initialization of typed
+constants. Furthermore one can use recursive initialization:
+<pre><B>type</B>
+  rec = <B>record</B>
+    next:    ^rec;
+    buffer:  <B>array</B> [1..10] <B>of</B> char;
+    buf_adr: pointer;
+  <B>end</B>;
+ 
+<B>const</B>
+  cyclic: rec = (next: @cyclic; buf_adr: @cyclic.buffer);</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="const_decl2.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Constant Declarations"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="local_block_decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Local Block Declarations"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Constant Declarations</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Local Block Declarations</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.7.4 -</B></CENTER>
+</BODY></HTML>

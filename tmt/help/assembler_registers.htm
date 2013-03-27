@@ -1,0 +1,104 @@
+<html><head>
+<TITLE>Assembler Registers
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_opcodes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Opcodes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assembler_opcode_mnemonics.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Opcode Mnemonics"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.8 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Registers
+</h2></dir>
+<!-- Page content -->
+The following registers can appear in built-in assembler:
+<dir>
+<table border=1 cellpadding=4>
+<tr><td>8-bit:</td><td>AL BL CL DL AH BH CH DH</td></tr>
+<tr><td>16-bit:</td><td>AX BX CX DX SI DI BP SP</td></tr>
+<tr><td>32-bit:</td><td>EAX EBX ECX EDX ESI EDI EBP ESP</td></tr>
+<tr><td>Segment:</td><td>CS DS ES SS FS GS</td></tr>
+<tr><td>8087:</td><td>ST</td></tr>
+<tr><td>Control:</td><td>CRn</td></tr>
+<tr><td>Debug:</td><td>DRn</td></tr>
+<tr><td>Test:</td><td>TRn</td></tr>
+</table></dir>
+The segment register can be used for segment overrides. 32-bit registers
+can be used for indexation following the standard 80386 conventions. 16-bit
+registers should never be used for addressing, unless your entire program
+does not exceed 64K. Even then,addressing with 16-bit registers is inefficient.
+Generally, an address is formed as
+<pre>  Base + Index * Scale + Displacement</pre>
+where <I>Base</I> is any of the 32-bit registers, <I>Index</I> is any
+32-bit register but not ESP, and <I>Scale</I> should be 1,2,4, or 8.
+Finally, the <I>Displacement</I> is a 32-bit integer quantity.
+<br>
+<br>
+Here are some valid and invalid indexing modes:
+<dir>
+<table border=1 cellpadding=4>
+<tr><td>[EAX+EBX]</td><td>ok</td></tr>
+<tr><td>[EAX+EAX]</td><td>ok, EAX is both base and index.</td></tr>
+<tr><td>[ESP]</td><td>ok, ESP is index, no base.</td></tr>
+<tr><td>[EDX*2]</td><td>ok, use this to index a global array of words.</td></tr>
+<tr><td>[EAX*4+EBP]</td><td>ok, use this to index a local array of longints.</td></tr>
+<tr><td>[SI]</td><td>ok, but is likely to lead to hard-to-find bugs.</td></tr>
+<tr><td>[ESI+BX]</td><td>illegal, mix of 16- and 32- bit registers.</td></tr>
+<tr><td>[SI*4]</td><td>illegal, 16-bit registers cannot be scaled.</td></tr>
+<tr><td>[ESP*4]</td><td>illegal, ESP cannot be an index.</td></tr>
+</table></dir>
+<img border=0 src="images/open.gif"> Please consult
+<B>Intel<sup>™</sup>&nbsp;80386 programmer's reference</B> for more details.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_opcodes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Opcodes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_opcode_mnemonics.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Opcode Mnemonics"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Opcodes</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Opcode Mnemonics</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.8 -</B></CENTER>
+</BODY></HTML>

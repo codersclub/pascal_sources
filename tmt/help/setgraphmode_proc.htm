@@ -1,0 +1,92 @@
+<html><head>
+<TITLE>SetGraphMode procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="setgraphbufsize_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetGraphBufSize procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setlinestyle_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetLineStyle procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.104 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>SetGraphMode procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Sets the system to graphics mode and clears the screen.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> SetGraphMode(Mode: Word);</pre>
+<B>Remarks:</B>
+<br>
+Mode must be a valid mode for the current video adapter.
+This procedure supports all VESA VBE graphic modes (100h - FFFh),
+which are supported by video adapter.
+<br>
+<br>
+<B>Example:</B>
+<pre>  SetGraphMode($101); <font color=#000080>//set SVGA 256-colored mode 640x480</font>
+  SetGraphMode($114); <font color=#000080>// set SVGA 64K-colored mode 800x600</font>
+  SetGraphMode($12A); <font color=#000080>// set SVGA 16M+A-colored mode 1024x768</font></pre>
+Keep in mind what your video card may not support all these modes.
+See <a href="getvbemodeslist_proc.htm">GetVbeModesList</a> and
+<a href="totalvbemodes_func.htm">TotalVbeModes</a>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="setgraphbufsize_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetGraphBufSize procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setlinestyle_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetLineStyle procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SetGraphBufSize procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetLineStyle procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.104 -</B></CENTER>
+</BODY></HTML>

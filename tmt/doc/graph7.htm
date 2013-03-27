@@ -1,0 +1,818 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 7)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 7'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 7</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+
+
+<p><a name="Procedures"></a>
+<br>
+<h3>Процедуры и Функции</h3>
+</p>
+<p><a name="AnalizeRGB"></a>
+<br><dl>
+
+<dt><a name="Rectangle"></a><br>
+ <h4>Rectangle (процедура)</h4>
+<dd>
+ Рисует незакрашенный прямоугольник текущим цветом и стилем линии.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Rectangle(x1, y1, x2, y2: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ (X1, Y1) - левый верхний угол прямоугольника
+<br> (X2, Y2) - правый нижний угол прямоугольника
+<br>
+ Прямоугольник может пересекать границы физического экрана.
+
+<dd>
+ Цвет и стиль линии прямоугольника определяется процедурами SetLineStyle и
+ SetColor. Метод вывода на экран (Copy или XOR) задается процедурой
+ SetWriteMode.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="RestoreCrtMode"></a><br>
+ <h4>RestoreCrtMode (процедура)</h4>
+<dd>
+ Восстанавливает видео-режим, который был ранее установлен до инициализации
+ графической системы.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure RestoreCrtMode;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура восстанавливает оригинальный видео-режим, запоминаемый при
+ парвом обращении к процедуре SetGraphMode или SetSVGAMode.
+ Процедура RestoreCrtMode может быть использована совместно с SetGraphMode
+ и SetSVGAMode для переключения из гафического режима в исходный текстовый,
+ и обратно.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Retrace"></a><br>
+ <h4>Retrace (процедура)</h4>
+<dd>
+ Ожидает обратного вертикального хода луча.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Retrace;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="RGBColor"></a><br>
+ <h4>RGBColor (функция)</h4>
+<dd>
+ Преобразует указанные значения RGB составляющих цвета в номер цвета,
+ который используется процедурами рисования графических примитивов.
+
+<dd><br>
+ Объявление:
+<pre>
+ function RGBColor(R, G, B: Byte): DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура предназначена для упаковки RGB значений в нормальный цвет
+ с учетом установленного графического режима. Обычно используется в
+ многоцветных режимах (15, 16, 24 и 32 бита на пиксел), и гарантирует
+ корректную работу с цветами для любого доступного графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetActivePage"></a><br>
+ <h4>SetActivePage (процедура)</h4>
+<dd>
+ Устанавливает активную страницу для графического вывода.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetActivePage(Page: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура делает активной страницу, номер которой задается в переменной
+ Page, направляя в нее весь графический вывод.
+
+<dd>
+ Несколько графических страниц поддерживаются только в SVGA видео-картах.
+ При использовании нескольких страниц, программа имеет возможность
+ осуществлять прямой графический вывод на разные страницы и затем быстро
+ отображать их с помощью простого переключения посредством процедуры
+ SetVisualPage. Такая технология особенна удобна для анимации изображений.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetAllPalette"></a><br>
+ <h4>SetAllPalette (процедура)</h4>
+<dd>
+ Заменяет текущую палитру на заданную.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetAllPalette(var Palette);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetAspectRatio"></a><br>
+ <h4>SetAspectRatio (процедура)</h4>
+<dd>
+ Изменяет текущий коэффициент пропорциональности.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetAspectRatio(AspectRatio: Real);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура SetAspectRatio используется для изменения коэффициента
+ пропорциональности, установленного по умолчанию для текущего графического
+ режима. Коэффициент пропорциональности используется при рисовании
+ окружностей. Если Вы видите, что нарисованная окружность выглядит как
+ эллипс, значит Ваш монитор настроен неправильно. В такой ситуации
+ можно воспользоваться либо ручками (или кнопками) настройки на самом
+ мониторе, либо сделать программную коррекцию коэффициента пропорциональности
+ с помощью процедуры SetAspectRatio.
+<dd>
+ Для получения текущего коэффициента пропорциональности можно воспользоватьс
+ процедурой GetAspectRatio.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetBkColor"></a><br>
+ <h4>SetBkColor (процедура)</h4>
+<dd>
+ Устанавливает цвет фона (один из установленной палитры).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetBkColor(ColorNum: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Цвет фона может принимать одно из значений в диапазоне 0..GetMaxColor,
+ который, в свою очередь, зависит от используемого графического драйвера
+ и установленного графического режима. Цвет фона используется процедурами
+ ClearViewPort и ClearPage для очистки изображения. Процедура SetBkColor
+ не изменяет самый первый цвет в активной палитре! Для изменения одного
+ из цветов палитры необходимо воспользоваться процедурами GetRGBPalette и
+ SetRGBPalette.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetColor"></a><br>
+ <h4>SetColor (процедура)</h4>
+<dd>
+ Устанавливает цвет для рисования (один из установленной палитры).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetColor(Color: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Цвет рисования может принимать одно из значений в диапазоне 0..GetMaxColor,
+ который, в свою очередь, зависит от используемого графического драйвера
+ и установленного графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetCustomFont"></a><br>
+ <h4>SetCustomFont (процедура)</h4>
+<dd>
+ Устанавливает фонт (шрифт), созданный пользователем.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetCustomFont (AddrPtr: Pointer;
+                          Width,Height,Start,Space: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Указатель AddrPtr указывает на размещение в памяти буфера с пользовательским
+ фонтом. Параметр Width задает горизонтальный размер символа в пикселах,
+ деленный на 8. Параметр Height - высота символов в пикселах.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetFillColor"></a><br>
+ <h4>SetFillColor (процедура)</h4>
+<dd>
+ Устанавливает звет для заполнения закрашенных областей.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetFillColor (Color: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура устанавливает цвет заполнения, который используется в процедурах
+ FillPoly, Bar, Bar3D, FillCircle, FillEllipse, FloodFill и ExpandFill.
+ Модуль TMT Graph в настоящее время не поддерживает заполнение с помощью
+ образца заполнения. Образец заполнения раньше часто использовался в CGA,
+ EGA и 16-цветных VGA режимах для рисования диаграмм.
+ Модуль TMT Graph не поддерживает устаревшие 16-цветные режимы.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetGraphBufSize"></a><br>
+ <h4>SetGraphBufSize (процедура)</h4>
+<dd>
+ Изменяет размер графического буфера, используемого для рисования эллипса.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetGraphBufSize (BufSize: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Вы можете изменить размер внутреннего графического буфера, задав его новое
+ значение в параметре BufSize. Память под внутренний графический буфер
+ выделятся при обращении к процедурам SetGrapMode и SetSVGAMode.
+ Процедура CloseGraph освобождает память, выделенную под графический буфер.
+ Для выяснения текущего размера графического буфера можно воспользоватьс
+ функцией GetGraphBufSize.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetGraphMode"></a><br>
+ <h4>SetGraphMode (процедура)</h4>
+<dd>
+ Устанавливает заданный графический режим и очищает экран.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetGraphMode(Mode: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Задаваемый в параметре Mode режим должен быть доступен для используемой
+ видео-карты. Процедура SetGraphMode поддерживает все VESA VBE графические
+ режимы (100h - FFFh), которые поддерживает установленная видео-карта.
+
+<dd><br>
+ Примеры:
+
+<dd>
+ SetGraphMode($101) - установить SVGA режим 640x480, 256-цветов;
+<br> SetGraphMode($114) - установить SVGA режим 800x600, 64K-цветов;
+<br> SetGraphMode($12A) - установить SVGA режим 1024x768, 16M-цветов + Alpha;
+
+<dd><br>
+ Учитывайте, что не любая видео-карта поддерживает все эти режимы.
+ (См. описание GetVbeModesList и TotalVbeModes).
+
+<dd><br>
+ Кроме перечисленных обязательно поддерживаются еще 2 режима:
+
+<dd>
+  $03 - VGA текстовый режим;
+<br>  $13 - MCGA/VGA графический режим 320x200, 256-цветов.
+
+<dd><br>
+ Процедура SetGraphMode может быть использована для переключения из
+ графического режима в текстовый, и обратно.
+
+<dd><br>
+ При вызове процедуры SetGraphMode все графические установки сбрасываютс
+ в значения по умолчанию (текущий указатель, палитра, цвета, видима
+ область и т.д.).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetLineStyle"></a><br>
+ <h4>SetLineStyle (процедура)</h4>
+<dd>
+ Устанавливает толщину и стиль линии.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetLineStyle(LineStyle: Word;
+                        Pattern: Word;
+                        Thickness: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Данная установка оказывает влияние на все процедуры, рисующие линейные
+ графические примитивы (Line, Spline, LineTo, Rectangle, DrawPoly, и т.д.).
+
+<dd><br>
+ Линия может быть сплошной, пунктирной (точечной), штрих-пунктирной,
+ штриховой или произвольной, заданной пользователем. Если в параметре
+ LineStyle передано недопустимое значение, то в переменной GraphResult
+ будет возвращен код ошибки grError, а текущие установки для линии не
+ изменятся.
+
+<dd><br>
+ Значения констант для задания стиля линии описаны в файле INT/GRAPH.INT
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы стиля линии&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Вид линии&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;SolidLn  &nbsp;</td><td align="center"> 0 </td><td>&nbsp;Сплошная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;DottedLn &nbsp;</td><td align="center"> 1 </td><td>&nbsp;Пунктирная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;CenterLn &nbsp;</td><td align="center"> 2 </td><td>&nbsp;Штрих-пунктирная линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;DashedLn &nbsp;</td><td align="center"> 3 </td><td>&nbsp;Штриховая линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;UserBitLn&nbsp;</td><td align="center"> 4 </td><td>&nbsp;Стиль, определяемый пользователем&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константы толщины линии&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Вид линии&nbsp;</font></tr>
+<tr bgcolor=#ccccff><td>&nbsp;NormWidth &nbsp;</td><td align="center"> 1 </td><td>&nbsp;Тонкая линия</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;ThickWidth&nbsp;</td><td align="center"> 3 </td><td>&nbsp;Утолщенная линия</td></tr>
+</table>
+
+
+<dd><br>
+ Как видим, LineStyle может принимать значения от SolidLn до UserBitLn (0..4),
+ причем параметр Pattern инорируется для всех стилей, кроме UserBitLn.
+ Толщина линии может принимать значение NormWidth (нормальная) или
+ ThickWidth (утолщенная).
+<dd>
+ Если задан пользовательский стиль линии (UserBitLn), то при выводе
+ используется образец рисования линии, задаваемый в 16-битном параметре
+ Pattern.
+<br>Например, если Pattern = $AAAA, то битовый образец для вывода
+ линии будет иметь следующий вид:
+
+<dd><br>
+  1010101010101010         { Для нормальной толщины, NormWidth }
+
+<dd><br>
+ Если задана "Утолщенная" линия, то она будет выводится как три рядом
+ лежащих линии, и при этом образец тоже "утолщается" в три раза.
+
+<dd><br>
+  1010101010101010         { Для утолщенной линии, ThickWidth }
+<br>  1010101010101010
+<br>  1010101010101010
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetLogicalPage"></a><br>
+ <h4>SetLogicalPage (процедура)</h4>
+<dd>
+ Устанавливает размер логической страницы в пикселах.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetLogicalPage(SX,SY: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Праметры SX и SY задают размер страницы соответственно по горизонтали,
+ и по вертикали.
+
+<dd><br>
+ Многие SVGA видео-карты поддерживают логические страницы.
+ Размер логической страницы может превышать размер физического экрана.
+ Так, можно задать размер логической страницы 1280x480, в то время,
+ как физическое разрешение экрана составляет, например, 640x480.
+ В этом случае только половина логической страницы будет видна на экране.
+ Просмотреть всю логическую страницу в таком случае можно только с помощью
+ аппаратного сдвига (скроллинга) изображения.
+<dd>
+ Максимальный размер логической страницы зависит как от типа видео-карты,
+ так и от количества видео-памяти, установленной на карте.
+ Для определения текущего размера логической страницы можно воспользоватьс
+ функцией GetLogicalPage.
+<dd>
+ Поскольку от размера логической страницы зависит количество доступных
+ графических страниц, процедура SetLogicalPage оказывает влияние на
+ количество доступных графических страниц и устанавливает логическую
+ область видимости (ViewPort) соответствующей полному размеру логической
+ страницы.
+<dd>
+ Не забывайте, что задаваемые Вами габариты логической страницы (SX и SY)
+ не могут быть меньше, чем физический размер экрана для данного графического
+ режима.
+
+<dd><br>
+ Приведем пример использования логической страницы:
+<pre>
+ {Данный пример устанавливает размер логической
+  страницы в 1280x600 и осуществляет аппаратный
+  скроллинг изображения }
+
+ { Для работы примера требуется наличие VESA-совместимой
+   SVGA видео-карты с 1Mb видео-памяти }
+
+ uses Graph,Crt;
+
+ var ErrorCode,i: LongInt;
+     SX,SY: Word;
+ begin
+  { установка SVGA режима 640x480x256 }
+  SetSVGAMode(640,480,8,LfbOrBanked);
+  ClearDevice;
+  if GraphResult<>0 then begin
+   ErrorCode:=GraphResult;
+   CloseGraph;
+   Writeln(GraphErrorMsg(ErrorCode));
+  end;
+  { установка логической страницы 1280x600 }
+  SetLogicalPage(1280,600);
+  { проверка размера логической страницы }
+  GetLogicalPage(SX,SY);
+  if (SX=640) and (SY=480) then begin
+   CloseGraph;
+   Writeln(' Ваша видео-карта не поддерживает'+
+           '  логические страницы!');
+  end;
+  { рисование на логической странице }
+  SetLineStyle(SolidLn,0,ThickWidth);
+  SetColor(clRed);
+  Line(0,0,GetMaxX,GetMaxY);
+  Line(GetMaxX,0,0,GetMaxY);
+  SetColor(clWhite);
+  Rectangle(0,0,GetMaxX,GetMaxY);
+  { скроллинг экрана влево }
+  for i:=0 to (SX-640) div 4 do
+    SetScreenStart(i*4,0,True);
+  { скроллинг экрана вверх }
+  for i:=0 to (SY-480) div 4 do
+    SetScreenStart(SX-640,i*4,True);
+  { скроллинг экрана вправо }
+  for i:=(SX-640) div 4 downto 0 do
+    SetScreenStart(i*4,SY-480,True);
+  { скроллинг экрана вниз }
+  { scroll the screen down }
+  for i:=(SY-480) div 4 downto 0 do
+    SetScreenStart(0,i*4,True);
+  { ожидание нажатия любой клавиши }
+  ReadKey;
+  { закрытие графической системы
+    и восстановление старого видео-режима }
+  CloseGraph;
+ end.
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetNormalMode"></a><br>
+ <h4>SetNormalMode (процедура)</h4>
+<dd>
+ Прекращает действие процедуры SetVirtualMode и перенаправляет все графические
+ операции на активную графическую страницу.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetNormalMode
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура SetNormalMode не поддерживается в бесплатной версии компилятора
+ TMT Pascal.
+
+<dd><br>
+ См. также: SetVirtualMode, FlipToScreen и FlipToMemory.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetPalette"></a><br>
+ <h4>SetPalette (процедура)</h4>
+<dd>
+ Изменяет один из цветов в текущей палитре.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetPalette(ColorNum: Word; Color: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура заменяет старый цвет с номером ColorNum на новый цвет, указанный
+ в параметре Color. Например, следующий вызов:
+<pre>
+    SetPalette(0,clLightCyan);
+</pre>
+
+<dd>
+ заменит самый первый цвет в палитре на "light cyan".
+ Для 256-цветных (палитровых) графических режимов параметр ColorNum может
+ принимать значения от нуля до 255. При задании недопустимого цвета
+ в качестве параметра процедуры SetPalette, в переменной GraphResult будет
+ возвращено значение кода ошибки grError, и палитра не изменится.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetRGBPalette"></a><br>
+ <h4>SetRGBPalette (процедура)</h4>
+<dd>
+ Изменяет один из цветов в текущей палитре, заданный через RGB составляющие
+ для VGA, MCGA и 256-цветных SVGA режимов.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetRGBPalette(ColorNum,
+                         RedValue,
+                         GreenValue,
+                         BlueValue: Byte);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ ColorNum - номер изменяемого цвета в палитре.
+<br> RedValue, GreenValue, BlueValue - RGB составляющие нового цвета.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

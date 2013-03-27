@@ -1,0 +1,133 @@
+<html><head>
+<TITLE>QSort procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="ptr_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Ptr function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="random_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Random function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.64 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_proc_and_func.htm"><small>System Unit Procedures and Functions</small></a><dir><h2>QSort procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="system_unit.htm">System Unit</font></a>
+<br>
+<br>
+QSort procedure performs a quick sort.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> QSort(base: Pointer; num, width: Integer;
+                 <B>function</B> CompFunc <B>conv</B> arg_based
+                 (const elem1, elem2: Pointer): Boolean);</pre>
+<B>Remarks:</B>
+<br>
+The <I>QSort</I> procedure implements a quick-sort algorithm to sort an array
+of <I>num</I> elements, each of <I>width</I> bytes. The argument <I>base</I> is
+a pointer to the base of the array to be sorted. <I>QSort</I> replaces this
+array with the sorted elements. The argument <I>CompFunc</I> is a user-supplied
+function that compares two array elements and returns a value specifying their
+relationship. <I>QSort</I> calls the <I>CompFunc</I> function one or more times
+during the sort, passing pointers to two array elements on each call. The
+routine must compare the elements, then return one of the following values:
+<dir>
+<table border=1 cellpadding=4>
+<tr><th>Return Value</th><th>Description</th></tr>
+<tr><td align="center">&lt; 0</td><td><I>elem1</I> less than <I>elem2</I></td></tr>
+<tr><td align="center">0</td><td><I>elem1</I> equivalent to <I>elem2</I></td></tr>
+<tr><td align="center">&gt; 0</td><td><I>elem1</I> greater than <I>elem2</I></td></tr>
+</table>
+</dir>
+<B>Example:</B>
+<pre><font color = #000080>// This program uses qsort to sort
+// an array of Integers in ascending order.
+{$ifdef __GUI__}</font>
+  <B>uses</B> WinCRT;
+<font color = #000080>{$endif}</font>
+
+<B>function</B> CompFunc <B>conv</B> arg_based
+                   (const elem1, elem2: Pointer): Boolean;
+<B>begin</B>
+  Result := Integer(elem1^) &gt; Integer(elem2^);
+<B>end</B>;
+ 
+<B>procedure</B> PrintArray(hdr: String; arg: array(1) of Integer);
+<B>var</B>
+  i: Integer;
+
+<B>begin</B>
+  Write(hdr);
+  <B>for</B> i := 0 <B>to</B> high(arg)[0] <B>do</B> 
+    Write(arg[i], ' ');
+  Writeln;
+<B>end</B>;
+ 
+<B>var</B>
+  a: <B>array</B> [0..9] <B>of</B> Integer;
+  i: Integer;
+
+<B>begin</B>
+  <B>for</B> i := 0 <B>to</B> 9 <B>do</B>
+    a[i] := Random(100) - Random(100);
+  PrintArray('Initial: ', a);
+  QSort(@a, 10, SizeOf(Integer), CompFunc);
+  PrintArray(' Sorted: ', a);
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="ptr_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Ptr function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="random_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Random function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Ptr function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Random function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.64 -</B></CENTER>
+</BODY></HTML>

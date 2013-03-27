@@ -1,0 +1,124 @@
+<html><head>
+<TITLE>About Dynamic-Link Libraries (DLL's)
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Dynamic-Link Libraries (DLL's)"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="using_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Using DLL's"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dlls.htm"><small>Dynamic-Link Libraries (DLL's)</small></a><dir><h2>About Dynamic-Link Libraries (DLL's)
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: OS/2, Win32</B></center>
+<br>
+<br>
+In Microsoft<sup>&reg;</sup> Windows<sup>&reg;</sup> and IBM<sup>&copy;</sup>
+OS/2<sup>&copy;</sup> operating systems, dynamic-link libraries (DLL) are
+modules that contain functions and data. A DLL is loaded at runtime by its
+calling modules (.EXE or DLL). When a DLL is loaded, it is mapped into the
+address space of the calling process.
+<br>
+<br>
+Dynamic linking has the following advantages over static linking:
+<ul>
+<li>Processes that load a DLL at the same base address can use a single DLL
+simultaneously, sharing a single copy of the DLL code in physical memory.
+Doing this saves memory and reduces swapping.</li>
+<li>When the functions in a DLL change, the applications that use them do not
+need to be recompiled or relinked as long as the function arguments, calling
+conventions, and return values do not change. In contrast, statically linked
+object code requires that the application be relinked when the functions
+change.</li>
+<li>A DLL can provide after-market support. For example, a display driver DLL
+can be modified to support a display that was not available when the
+application was initially shipped.</li>
+<li>Programs written in different programming languages can call the same DLL
+function as long as the programs follow the same calling convention that the
+function uses. The calling convention (such as C, Pascal, or standard call)
+controls the order in whichthe calling function must push the arguments onto
+the stack, whether the function or the calling function is responsible for
+cleaning up the stack, and whether any arguments are passed in registers.
+For more information, see the documentation included with your compiler.</li>
+</ul>
+A potential disadvantage to using DLLs is that the application is not
+self-contained; it depends on the existence of a separate DLL module.
+The system terminates processes using load-time dynamic linking if they
+require a DLL that is not found at processstartup and gives an error message
+to the user. The system does not terminate a process using run-time dynamic
+linking in this situation, but functions exported by the DLL are not available
+to the program.
+<br>
+<br>
+DLLs can define two kinds of functions:
+exported and internal. The exported functions can be called by other modules.
+Internal functions can only be called from within the DLL where they are
+defined. Although DLLs can export data, its data is usually only used by
+its functions.
+<br>
+<br>
+DLLs provide a way to modularize applications so that functionality can be
+updated and reused more easilly. They also help reduce memory overhead when
+several applications use the same functionality at the same time, because
+although each application gets its own copy of the data, they can share the
+code.
+<br>
+<br>
+TMT Pascal Multi-target support DLLs for <a href="win32_term.htm">Win32</a>
+and OS/2 compilation targets. DLLs are not supported for MS-DOS protected
+mode target.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="dlls.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Dynamic-Link Libraries (DLL's)"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="using_dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Using DLL's"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Dynamic-Link Libraries (DLL's)</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Using DLL's</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.11.1 -</B></CENTER>
+</BODY></HTML>

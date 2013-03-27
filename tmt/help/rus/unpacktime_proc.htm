@@ -1,0 +1,108 @@
+<html><head>
+<TITLE>UnpackTime procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="swapvectors_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SwapVectors procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="doscall_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DOSCall Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.35 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_proc_and_func.htm"><small>Dos Unit Procedures and Functions</small></a><dir><h2>UnpackTime procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS only</B></center>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>, <a href="windos_unit.htm">WinDos Unit</a>
+<br>
+<br>
+Converts a Longint to a record.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> UnpackTime(Time: Longint; 
+                      <B>var</B> DateTime: TDateTime);</pre>
+<B>Remarks:</B>
+<br>
+<I>UnPackTime</I> can be used in conjunction with
+<a href="gettime_proc.htm">GetTime</a>,
+<a href="findfirst_proc.htm">FindFirst</a>, and
+<a href="findnext_proc.htm">FindNext</a>.
+<br>
+These routines return a file's four byte packed date and time stamp.
+To pack a <I>DateTime</I> record, use
+<a href="packtime_proc.htm">PackTime</a>.
+<br>
+<br>
+<B>Example:</B> 
+<pre><B>uses</B>
+  Dos;
+<B>var</B>
+  Fi  : Text;
+  Time: Longint;
+  DT  : DateTime;
+<B>begin</B>
+  Assign(Fi,'USER.DOC');
+  Reset(Fi);
+  GetFTime(Fi,Time);
+  UnPackTime(Time,DT);
+  WriteLn('Year:   ',DT.Year);
+  WriteLn('Month:  ',DT.Month);
+  WriteLn('Date:   ',DT.Day);
+  Close(Fi);
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="swapvectors_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SwapVectors procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="doscall_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DOSCall Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SwapVectors procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">DOSCall Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.35 -</B></CENTER>
+</BODY></HTML>

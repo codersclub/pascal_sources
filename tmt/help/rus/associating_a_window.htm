@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>Associating a Window Procedure with a Window Class
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="designing_a_window_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Designing a Window Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="win32_gui_example.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Example of Win32 GUI Application"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.4 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Associating a Window Procedure with a Window Class
+</h2></dir>
+<!-- Page content -->
+One associates a window procedure with a window class when registering the
+class.  You must fill a <b>TWndClass</b> structure (WIN32.HLP) with information
+about the class, and the lpfnWndProc member must specify the address of the
+window procedure.  To register the class, pass the address of <B>TWndClass</B>
+structure to the <b>RegisterClass</b> function (WIN32.HLP). Once the window
+class is registered, the window procedure is automatically associated with
+each new window created with that class. 
+<br>
+<br>
+The following example shows how to associate the window procedure in the
+previous example with a window class:
+<pre><B>var</B>
+  wc: TWndClass; 
+<B>begin</B>
+<font color = #000080>  // Register the main window class.</font>
+  <B>with</B> wc <B>do begin</B>
+    style := CS_HREDRAW or CS_VREDRAW; 
+    lpfnWndProc := @MainWndProc; 
+    cbClsExtra := 0; 
+    cbWndExtra := 0; 
+    hInstance := System.hInstance; 
+    hIcon := LoadIcon(THandle(NIL), IDI_APPLICATION);
+
+    hCursor := LoadCursor(THandle(NIL), IDC_ARROW); 
+    hbrBackground := GetStockObject(WHITE_BRUSH); 
+    lpszMenuName :=  'MainMenu'; 
+    lpszClassName := 'MainWindowClass'; 
+  <B>end</B>; 
+
+  <B>if</B> <B>not</B> RegisterClass(wc) <B>then</B> MyError; 
+
+  <font color = #000080>// Process other messages.</font>
+
+<B>end</B>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="designing_a_window_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Designing a Window Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="win32_gui_example.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Example of Win32 GUI Application"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Designing a Window Procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Example of Win32 GUI Application</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.4 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,164 @@
+<html><head>
+<TITLE>Example of Win32 GUI Application
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="associating_a_window.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Associating a Window Procedure with a Window Class"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="writing_win32_control_panel_app.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing Win32 Control Panel Applications"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Example of Win32 GUI Application
+</h2></dir>
+<!-- Page content -->
+<pre><B>program</B> HelloW;
+ 
+<font color = #000080>{$ifndef __WIN32__}
+  {$define INVALID_TARGET}
+{$endif}
+{$ifndef __GUI__}
+  {$define INVALID_TARGET}
+{$endif}
+{$ifdef INVALID_TARGET}
+  <B>This program must be compiled for Win32 GUI target only</B>
+{$endif}</font>
+
+<B>uses</B>
+  Windows, MMSystem, Messages;
+
+<B>function</B> MyWndProc <B>conv</B> arg_stdcall
+                           (Window: HWND;
+                            Mess: UINT;
+                            Wp: WParam;
+                            Lp: LParam): LRESULT;
+<B>begin</B>
+  <B>case</B> Mess <B>of</B>   
+ WM_PAINT:       <B>begin</B>
+
+                   <B>declare</B>
+
+                     <B>var</B>
+ 
+                       DC: hDC;
+                       ps: TPaintStruct;
+                     <B>begin</B>
+ 
+                       DC := BeginPaint(Window, ps);
+                       TextOut(DC, 0, 0, 'Hello World!', 12); 
+                       EndPaint(Window, ps);
+                       Result := 0;
+                     <B>end</B>;  
+                 <B>end</B>; 
+     WM_DESTROY: <B>begin</B>
+
+                   PostQuitMessage(0);
+                   Result := 0;
+                 <B>end</B>;
+
+ WM_LBUTTONDOWN: <B>begin</B>
+
+                   MessageBox(Window, 'This is my message!',
+                              'My message box', MB_OK);
+                   Result := 0;
+                 <B>end</B>;
+           <B>else</B>   
+             Result := DefWindowProc(Window, Mess, Wp, Lp);
+  <B>end;</B>
+<B>end;</B> 
+
+<B>var</B>
+  wc : TWndClass;
+  wnd: HWnd;
+  Msg: TMsg;
+<B>begin</B>
+  FillChar(wc, SizeOf(wc), 0);
+  <B>with</B> wc <B>do</B> <B>begin</B>
+
+    style:=CS_HREDRAW + CS_VREDRAW;
+    lpfnWndProc := @MyWndProc;
+    cbClsExtra := 0;
+    cbWndExtra := 0;
+    hInstance := System.hInstance;
+    hIcon := LoadIcon(THandle(NIL), IDI_APPLICATION);
+    hCursor := LoadCursor(THandle(NIL), IDC_ARROW);
+    hbrBackGround := COLOR_WINDOW+1;
+    lpszMenuName := nil;
+    lpszClassName := 'HelloWorld';
+  <B>end</B>;
+
+  <B>if</B> RegisterClass(wc) = 0 <B>then begin</B>
+    Exit;
+  <B>end</B>;
+
+  wnd := CreateWindow(wc.lpszClassName,
+                      'GUI Application Demo',
+                      WS_OVERLAPPEDWINDOW,
+                      CW_USEDEFAULT,
+                      0,
+                      CW_USEDEFAULT,
+                      0, 0, 0,
+                      HInstance,
+                      NIL);
+ 
+  ShowWindow(wnd, SW_RESTORE);
+  UpdateWindow(wnd);
+ 
+  <B>while</B> GetMessage(Msg,0,0,0) <B>do begin</B>
+
+    TranslateMessage(Msg);
+    DispatchMessage(Msg);
+  <B>end</B>;
+ 
+<B>end.</B>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="associating_a_window.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Associating a Window Procedure with a Window Class"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="writing_win32_control_panel_app.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Writing Win32 Control Panel Applications"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Associating a Window Procedure with a Window Class</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Writing Win32 Control Panel Applications</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.5 -</B></CENTER>
+</BODY></HTML>

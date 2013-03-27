@@ -1,0 +1,97 @@
+<html><head>
+<TITLE>Program Comments
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="op_n_deli.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operators and Delimiters"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="constants.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Constants"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.4 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>Program Comments
+</h2></dir>
+<!-- Page content -->
+A good programmer knows that comments within a source file can be very helpful.
+Comments are delimited by “{“ and “}” or “(*” and “*)”. All comments are
+ignored by TMT Pascal during compilation. Comments cannot contain nested
+comments that use the same delimiters. Below are examples of traditional
+Pascal comments:
+<pre><font color = #000080>{ This is a comment }
+(* Another comment *)
+(* This comment is { nested } *)
+{ Another (* nested *) comment }
+(* An invalid (* comment *)</font></pre>
+In addition to traditional comments, TMT Pascal supports C/C++ and Ada-style
+end-line comments. These begin with a double hyphen and span until the end
+of the line. For example:
+<pre><font color = #000080>/* This is C-style comment */</font>
+  Space := ' ';  <font color = #000080>-- initialize filler char</font></font>
+  FillChar(Ptr ($A0000), 64000, 0);  <font color = #000080>// clear VGA video memory</font>
+</pre>
+<B>Remarks:</B>
+<br>
+A comment that contains the dollar sign ($) immediately after opening {,
+(* or /* is a compiler directive. A mnemonic of the compiler command follows
+the $ character.
+<br>
+<br>
+<img border=0 src="images/attention.gif"> Starting from version 3.0,
+TMT Pascal is not support Ada-style comments by default.
+We thinking to completely remove support for Ada-style comments in future
+and recommend you to replace all Ada-style comments in your programs by
+traditional Pascal or C/C++ styled comments. Use {$AC+} compiler switch,
+if you want to compile old sources with TMT Pascal 3.0 and higher (see
+<a href="ada_style_comments_switch.htm">$AC: Ada-Style Comments Switch</a>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="op_n_deli.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operators and Delimiters"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="constants.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Constants"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Operators and Delimiters</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Constants</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.4 -</B></CENTER>
+</BODY></HTML>

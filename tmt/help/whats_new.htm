@@ -1,0 +1,181 @@
+<html><head>
+<TITLE>What's New in TMT Pascal
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="whats_new.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: No previous page."></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="language_def.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TMT Pascal Language Description"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 1 -</B></CENTER>
+<dir><h2>What's New in TMT Pascal
+</h2></dir>
+<!-- Page content -->
+<img border="0" src="images/whatsnew.jpg">
+<br>
+<B>Compiler changes</B>
+<ul>
+<li>The quality of the generated code has been improved.</li>
+<li>The default compilation target now is now set to &quot;win32:con&quot;
+<br>(Windows 32-bit console application).</li>
+<li>True floating-point calling conventions have been implemented.
+The Single, Double and Extended type arguments are passed to a
+function/procedure by value, but not by reference as in previous versions
+of the compiler. However it's still possible to use the old-style conventions
+by means of the <a href="calling_conventions.htm">arg_no_fp_on_stack</a>
+calling convention specifier.</li>
+<li>A new <a href="interface_type.htm">interface type</a> has been added.</li>
+<li>The reserved word <a href="structured_types_alignment.htm">packed</a>
+has been added.</li>
+<li>The reserved word <a href="variable_decl.htm">out</a> has been added.</li>
+<li>The new Delphi-style <a href="calling_conventions.htm">pascal</a>,
+<a href="calling_conventions.htm">stdcall</a>,
+and <a href="calling_conventions.htm">cdecl</a> keywords have been
+implemented.</li>
+<li>Import/export of the DLL routines without explicit name declaration
+(see <a href="using_dlls.htm">Using DLL's</a> for details).</li>
+<li>The &quot;-uses&quot; command-line compiler directive has been added.
+It allows inclusion of additional RTL units in the application.</li>
+<li>The <a href="minimum_enumeration_size.htm">$Z</a> compiler
+directive which controls the minimum storage size of enumerated types
+has been added.</li>
+<li>By default the procedural types now are 32-bit sized
+(see <a href="calling_conventions.htm">arg_proc_based</a> for details).</li>
+<li>New <a href="variant_type.htm">Variant</a>,
+<a href="bool_type.htm">ByteBool</a>,
+<a href="bool_type.htm">WordBool</a>,
+<a href="bool_type.htm">LongBool</a>,
+<a href="int_type.htm">Int64</a>, <a href="real_type.htm">Real48</a>
+and <a href="char_type.htm">WChar</a> types have been added.</li>
+<li>The <a href="int_type.htm">Integer</a> type has been changed to 32-bit.</li>
+<li>The <a href="real_type.htm">Real</a> type has been changed to 64-bit.</li>
+<li>Now the <a href="strings_unit.htm">Strings</a> unit supports both PChar
+and PWChar null-terminated string types.</li>
+<li>A possibility to define special writing and printing procedures for any
+custom type was added (see <a href="user_def_reader.htm">__reader</a> and
+<a href="user_def_writer.htm">__writer</a> for details).</li>
+</ul>
+<B>RTL changes</B>
+<ul>
+<li>All known bugs have been fixed</li>
+<li>Following procedures and functions have been added to the
+<a href="system_unit.htm">System</a> unit:
+<br><table border="0" cellpadding=0 cellspacing=4 width="50%">
+<tr><td width="50%"><a href="assert_proc.htm">Assert</a></td>
+<td>(all targets)</td></tr>
+<tr><td><a href="comparemem_func.htm">CompareMem</a></td>
+<td>(all targets)</td></tr>
+<tr><td><a href="getlocalestr_func.htm">GetLocaleStr</a></td>
+<td>(Win32 target)</td></tr>
+<tr><td><a href="qsort_proc.htm">QSort</a></td><td>(all targets)</td></tr>
+<tr><td><a href="round64_func.htm">Round64</a></td><td>(all targets)</td></tr>
+<tr><td><a href="swapargs_proc.htm">SwapArgs</a></td><td>(all targets)</td></tr>
+<tr><td><a href="trunc64_func.htm">Trunc64</a></td><td>(all targets)</td></tr>
+<tr><td><a href="win32buildnumber_func.htm">Win32BuildNumber</a></td>
+<td>(Win32 target)</td></tr>
+<tr><td><a href="win32majorversion_func.htm">Win32MajorVersion</a></td>
+<td>(Win32 target)</td></tr>
+<tr><td><a href="win32minorversion_func.htm">Win32MinorVersion</a></td>
+<td>(Win32 target)</td></tr>
+<tr><td><a href="win32platform_func.htm">Win32Platform</a></td>
+<td>(Win32 target)</td></tr>
+</table>
+<br></li>
+<li>The following units have been added:
+<br><table border="0" cellpadding=0 cellspacing=4 width="50%">
+<tr><td width="50%"><a href="activex_unit.htm">ActiveX</a></td>
+<td>(Win32 target)</td></tr>
+<tr><td><a href="compmath_unit.htm">CompMath</a></td><td>(all targets)</td></tr>
+<tr><td><a href="d3d_unit.htm">D3D</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3d8_unit.htm">D3D8</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dapp_unit.htm">D3DApp</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dfile_unit.htm">D3DFile</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dfont_unit.htm">D3DFont</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dres_unit.htm">D3DRes</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3drm_unit.htm">D3DRM</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dutil_unit.htm">D3DUtil</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="d3dx8_unit.htm">D3DX8</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="ddraw_unit.htm">DDraw</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dinput_unit.htm">DInput</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dmusic_unit.htm">DMusic</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dplay_unit.htm">DPlay</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dplay8_unit.htm">DPlay8</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dsetup_unit.htm">DSetup</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dshow_unit.htm">DShow</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dsound_unit.htm">DSound</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dx7todx8_unit.htm">DX7toDX8</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dxfile_unit.htm">DXFile</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="dxutil_unit.htm">DXUtil</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="lm_unit.htm">LM</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="opengl_unit.htm">OpenGL</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="shlobj_unit.htm">ShlObj</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="urlmon_unit.htm">URLMon</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="use16_unit.htm">Use16</a></td><td>(all targets)</td></tr>
+<tr><td><a href="windns_unit.htm">WinDNS</a></td><td>(Win32 target)</td></tr>
+<tr><td><a href="zmouse_unit.htm">ZMouse</a></td><td>(Win32 target)</td></tr>
+</table>
+</li>
+</ul>
+<B>IDE for Windows (IDEW32)</B>
+<ul>
+<li>Many improvements have been made.</li>
+<li>A high-level <a href="idew32_dbg_cmd.htm">Debugger</a> is now built into
+the IDE.</li>
+</ul>
+<b>On-line documentation</b>
+<ul>
+<li>The on-line help system for Windows has been extended.</li>
+<li>Windows OLE and OpenGL references have been added.</li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="whats_new.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: No previous page."></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="language_def.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: TMT Pascal Language Description"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">No previous page.</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">TMT Pascal Language Description</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 1 -</B></CENTER>
+</BODY></HTML>

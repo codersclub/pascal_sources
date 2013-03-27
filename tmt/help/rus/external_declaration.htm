@@ -1,0 +1,128 @@
+<html><head>
+<TITLE>External Declaration
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="forward_declaration.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Forward Declaration"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="interrupt_procedure.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Interrupt Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="procedures_and_functions.htm"><small>Procedures and Functions</small></a><dir><h2>External Declaration
+</h2></dir>
+<!-- Page content -->
+The <B>External</B> clause is used to define a procedure
+that is linked in from an assembly object.
+<br>
+<br>
+<B>Example:</B>
+<pre>;----------------- [vga.asm] ----------------
+IDEAL
+P386
+MODEL FLAT,PASCAL
+
+CODESEG
+
+GLOBAL  SETVIDEOMODE: PROC
+PROC    SETVIDEOMODE USES EAX, MODE: WORD
+        MOV     AX,  [MODE]
+        INT     10H
+        RET
+ENDP    SETVIDEOMODE
+
+GLOBAL  CLEARVGA: PROC
+PROC    CLEARVGA  USES ECX, COLOR: BYTE
+        MOV     EDI, 0A0000H
+        MOV     AL,  [COLOR]
+ MOV     AH,  AL
+        MOV     ECX, EAX
+        SHL     EAX, 16
+        MOV     AX, CX
+        MOV     ECX, 64000/4
+        CLD
+        REP     STOSD
+        RET
+ENDP    CLEARVGA
+
+END
+;--------------------------------------------
+
+<font color = #000080> ///////////////// [Test.pas] ////////////////</font>
+<B>program</B> Test;
+<font color = #000080>{$ifndef __DOS__}</font>
+  This program can not be compiled for OS/2 or Win32
+<font color = #000080>{$endif}</font>
+<B>uses</B>
+  CRT;
+><font color = #000080>{$l vga}</font>;  <font color = #000080>// include vga.obj file</font>
+
+<B>procedure</B> SetVideoMode(Mode: Word); <B>external</B>;
+<B>procedure</B> ClearVGA(Color: Byte); <B>external</B>;
+
+<B>begin</B>
+  SetVideoMode($13);  <font color = #000080>// setup VGA/MCGA mode 320x200</font>
+  ClearVGA(10);       <font color = #000080>// fill screen with green color</font>
+  ReadKey;            <font color = #000080>// wait for key hit</font>
+  ClearVGA(15);       <font color = #000080>// fill screen with white color</font>
+  ReadKey;            <font color = #000080>// wait for key hit</font>
+  ClearVGA(0);        <font color = #000080>// fill screen with black color</font>
+  ReadKey;            <font color = #000080>// wait for key hit</font>
+  SetVideoMode($03);  <font color = #000080>// setup VGA text mode 80x25</font>
+<B>end</B>.</pre>
+<B>See also:</B>
+<br>
+<a href="dlls.htm">Dynamic-Link Libraries (DLL’s)</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="forward_declaration.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Forward Declaration"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="interrupt_procedure.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Interrupt Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Forward Declaration</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Interrupt Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.3 -</B></CENTER>
+</BODY></HTML>

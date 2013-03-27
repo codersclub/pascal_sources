@@ -1,0 +1,164 @@
+<html><head>
+<TITLE>Procedural Value
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="interrupt_procedure.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Interrupt Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="using_statement_as_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Using Statement as Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="procedures_and_functions.htm"><small>Procedures and Functions</small></a><dir><h2>Procedural Value
+</h2></dir>
+<!-- Page content -->
+TMT Pascal has a notion of a procedural value. It gives an opportunity to use
+procedure or function in a program as a usual simple type object such as
+enumerate type or subrange type. One can declare an variable of the procedural
+type, make an assignment to it, and invoke the procedure body from.
+<br>
+<br>
+By default the procedural value implemented in the TMT Pascal occupies 4 bytes
+of memory.
+<br>
+<br>
+<center><img border=0 src="images/entry_point.gif"></center>
+<br>
+<br>
+It's also possible to declare the extended (&quot;old-style&quot;) procedural
+values by means of <a href="calling_conventions.htm">arg_proc_based</a>
+calling convention modifier. These procedural values which occupy 8 bytes
+of memory and consist of two parts: the entry point to the routine and the
+reference to the local environment of the routine (known as a routine base).
+A format of the extended procedural value is following:
+<br>
+<br>
+<center><img border=0 src="images/local_env.gif"></center>
+<br>
+<br>
+The first part is needed for calling of the routine. The second part is used
+to access the routine variables. Such format of the procedural value is
+incompatible with the Borland Pascal format which has only the entry point.
+<br>
+<br>
+Furthermore, the stack frame structure and parameter passing conventions
+differ from those in Borland Pascal.
+<br>
+<br>
+Thus the approach used in TVision and CLassLib for writing iterations cannot
+be used. However, we offer this correct and reliable (and more standard) way:
+<pre><B>type</B>
+  list = <B>object</B>
+    next: ^list;
+    <B>procedure</B> for_all(<B>procedure</B> body(var v));
+  <B>end</B>;
+
+<B>procedure</B> list.for_all;
+<B>var</B>
+  p: ^list;
+<B>begin</B>
+  p := @self;
+  <B>repeat</B>
+    body(p);
+    p := p^.next;
+  <B>end</B>;
+<B>end</B>;
+ ...
+
+<B>type</B>
+  int_list = <B>object</B> (list)
+    value: integer;
+    <B>function</B> first_positive: ^int_list;
+  <B>end</B>;
+
+<B>function</B> int_list.first_positive;
+<B>label</B> OK;
+<B>var</B>
+  res: ^int_list;
+  <B>procedure</B> do_item(<B>var</B> v);
+  <B>begin</B>
+    <B>if</B> int_list (v).value &gt; 0 <B>then</B>
+      <B>begin</B>
+        res := @v;
+        <B>goto</B> OK;
+     <B>end</B>
+   <B>end</B>;
+
+<B>begin</B>
+  res := nil;
+  for_all(do_item);
+OK:
+  first_positive := res;
+<B>end</B>;
+ ...</pre>
+The procedural value from a method of object can be obtained by selecting
+this method from some object value (not from a type). The parameters of this
+procedural value must match the parameters of the method. The invocation
+of such a procedural value is an invocation of the corresponding method of
+the object. The reference to the object is transferred through the base of
+the procedural value.
+<br>
+<br>
+You can use only global procedural values to initialize a type constant.
+<br>
+<br>
+Procedural values may be used only while the environment where they were
+formed is still in existence. Thus,
+<UL> 
+<li><B>for local procedures</B> -- until the exit from the block,
+in which they are described;</li>
+<li><B>for methods</B> -- while the underlying object still exists.</li>
+</UL>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="interrupt_procedure.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Interrupt Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="using_statement_as_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Using Statement as Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Interrupt Procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Using Statement as Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.12.5 -</B></CENTER>
+</BODY></HTML>

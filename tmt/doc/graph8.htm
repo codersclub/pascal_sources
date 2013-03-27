@@ -1,0 +1,737 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 8)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 8'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 8</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+
+
+<p><a name="Procedures"></a>
+<br>
+<h3>Процедуры и Функции</h3>
+</p>
+<p><a name="AnalizeRGB"></a>
+<br><dl>
+
+
+<dt><a name="SetScreenStart"></a><br>
+ <h4>SetScreenStart (процедура)</h4>
+<dd>
+ Задает стартовый адрес на логической странице,
+ начиная с которого изображение выводится на экран.
+ Sets the CRTC display starting address to the specified value.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetScreenStart (X,Y: DWord; WaitForRetrace: Boolean);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта процедура задает координаты пиксела (X,Y) на логической странице, который
+ будет выведен на экран в качестве левого верхнего пиксела.
+ Эту процедуру Вы можете использовать для выполнения аппаратного скроллинга
+ и панорамирования изображения, размеры которого превышают физические размеры
+ экрана.
+<dd>
+ Кроме того, ее можно использовать для быстрого переключения между двум
+ экранами для двойного буферирования анимационных эффектов.
+ (Более подробную информацию можно найти в VBE Core Standard).
+
+<dd><br>
+ Если параметр WaitForRetrace установлен в True, то перед переключением адреса
+ процедура будет ожидать обратного вертикального хода луча. В противном
+ случае синхронизация не производится. Такое поведение процедуры гарантировано
+ только при наличии VBE 2.0. Если установленная видео-карта поддерживает
+ только VBE 1.2, то нет никаких гарантий, что синхронизация будет выполнена.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetSVGAMode"></a><br>
+ <h4>SetSVGAMode (процедура)</h4>
+<dd>
+ Устанавливает SVGA видео режим с заданным разрешением и количеством цветов.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetSVGAMode (XRes, YRes, BPP, VMode: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Параметры XRes и YRes задают требуемое разрешение;
+<br> Параметр BPP определяет "глубину&nbsp;цвета", т.е. количество бит на 1 пиксел
+ и должен иметь значение [8,15,16,24,32].
+<br>
+ Параметр VMode может принимать следующие значения в дипазоне [1..3]:
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Константа&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Пояснение&nbsp;</font></td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LFBorBanked&nbsp;</td><td align="center"> 0 </td><td>&nbsp;Установить режим LFB или с переключением банков&nbsp;</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;BankedOnly &nbsp;</td><td align="center"> 1 </td><td>&nbsp;Установить режим только с переключением банков </td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;LFBOnly    &nbsp;</td><td align="center"> 2 </td><td>&nbsp;Установить только LFB режим                    </td></tr>
+</table>
+
+<dd><br>
+ Так, следующий пример:
+
+<pre>
+ SetSVGAMode(640,480,8,LfbOrBanked);
+</pre>
+
+<dd>
+ приведет к установке SVGA режима с разрешение 640x480, 8 бит на пиксел
+ (т.е. всего 256 цветов). Если режим LFB поддерживается, то он будет
+ установлен; если же нет - то будет установлен режим переключения банков.
+
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetTextJustify"></a><br>
+ <h4>SetTextJustify (процедура)</h4>
+<dd>
+ Устанавливает режим выравнивания текста для процедур OutText и OutTextXY.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetTextJustify(Horiz, Vert: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура SetTextJustify устанавливает параметры выравнивания текста
+ по горизонтали (параметр Horiz) и по вертикали (параметр Vert) относительно
+ текущего указателя или указанной точки.
+
+<dd><br>
+ Рассмотрим следующий пример:
+
+<pre>
+  SetTextJustify(CenterText, CenterText);
+  OutTextXY(100, 100, 'ABC');
+</pre>
+
+<dd>
+ В данном случае текстовая строка "ABC" будет центрирована по горизонтали и
+ вертикали относительно точки (100, 100), т.е. эта точка будет находитьс
+ точно в середине буквы "B".
+<dd>
+ По умолчанию выравнивание текста происходит в соответствии с вызовом
+<pre>
+ SetTextJustify(LeftText, TopText).
+</pre>
+<dd>
+ В случае задания недопустимых параметров выравнивания для SetTextJustify,
+ в переменной GraphResult будет возвращено значение кода ошибки grError,
+ и параметры выравнивания не изменятся.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetTextStyle"></a><br>
+ <h4>SetTextStyle (процедура)</h4>
+<dd>
+ Задает стиль вывода текста в графическом режиме.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetFontStyle(Font, Direction: DWord);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetTranspMode"></a><br>
+ <h4>SetTranspMode (процедура)</h4>
+<dd>
+ Устанавливает или сбрасывает режим прозрачности при выводе изображений.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetTranspMode(Mode: Boolean; Color: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Модуль TMT Graph поддерживает прозрачность при выводе изображений (BitMaps).
+ Если параметр Mode имеет значение True, то режими прозрачности используется.
+ При этом параметр Color определяет, какой именно цвет в изображении
+ является прозрачным. При выводе изображения на экран будут отображены
+ только те пикселы, цвет которых отличается от Color; все же остальные
+ пикселы, имеющие цвет Color, будут проигнорированы при выводе.
+<dd>
+ Такая технология вывода изображений очень удобна для программирования игр.
+ Работа с прозрачными изображениями поддерживается в любом графическом режиме
+ (MCGA/VGA, SVGA 256, 32K, 64K, 16M и 16M+Alpha цветов, как с LFB, так и с
+ переключением банков)!
+
+<dd><br>
+ Действие процедуры SetTranspMode оказывает влияние только на вывод
+ изображений с помощью следующих процедур: PutPixel, PutSprite и PutImage.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetViewPort"></a><br>
+ <h4>SetViewPort (процедура)</h4>
+<dd>
+ Устанавливает область видимости, или, другими словами, окно для вывода
+ графики.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetViewPort(x1, y1, x2, y2: LongInt; Clip: Boolean);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ (X1,Y1) задают левый верхний угол окна, а (X2, Y2) - нижний правый угол.
+ После задания окна, адресация точек в нем осуществляется с нуля, т.е.
+ левый верхний угол внутри окна имеет координаты (0, 0).
+
+<dd><br>
+ Логический параметр Clip определяет, будет ли использоваться в данном окне
+ отсечение выводимых изображений, если они выходят за границы данного окна.
+ Чтобы установить окно целиком на все изображение, следует выполнить
+<pre>
+   SetViewPort(0, 0, GetMaxX, GetMaxY, True);
+</pre>
+<dd>
+ Если координаты окна заданы неверно, т.е. (X1 >= X2) или (Y1 >= Y2), то
+ в переменной GraphResult будет возвращен код ошибки grError, и текущее
+ окно не будет изменено. Модуль TMT Garph позволяет назначать окно
+ (ViewPort) даже за пределами экрана!
+
+<dd><br>
+ Все графические команды (например, GetX, OutText, Rectangle, MoveTo, и т.д.)
+ осуществляют свой вывод именно в установленное окно (viewport).
+
+<dd><br>
+ Если параметр Clip установлен в True, то все, что выходит за границы окна,
+ будет отсечено. Однако, текущий указатель, естественно, никогда не
+ отсекается. Рассмотрим следующий пример:
+
+<pre>
+  SetViewPort(10, 10, 20, 20, ClipOn);
+  Line(0, 5, 15, 5);
+</pre>
+
+<dd>
+ Здесь выводимая линия не будет полностью отрисована, поскольку часть ее
+ выходит за пределы окна, и поэтому будет отсечена. Если бы режим
+ отсечения не был задан, то линия начиналась бы в точке с абсолютными
+ координатами (10,15) и заканчивалась в точке с абсолютными координатами
+ (25, 15). Но, поскольку отсечение включено, будет отрисована только часть
+ линии, а именно от точки с абсолютными координатами (10, 15) до точки
+ с абсолютными координатами (20, 15).
+
+<dd><br>
+ Обращение к процедурам SetSVGAMode, GraphDefaults, и SetGraphMode сбрасывает
+ окно до размеров полного графического экрана.
+ Параметры текущего окна можно получить посредством вызова процедуры
+ GetViewSettings, которая возвращает структуру типа ViewPortType.
+
+<dd><br>
+ После вызова SetViewPort текущий указатель сбрасывается в (0, 0).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetVirtualMode"></a><br>
+ <h4>SetVirtualMode (процедура)</h4>
+<dd>
+ Устанавливает виртуальный графический режим.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetVirtualMode (BuffAddr: Pointer)
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта процедура переадресует все графические операции непосредственно в
+ виртуальный видео буфер в памяти, на который ссылается указатель BuffAddr.
+ Прежде, чем выводить что-либо в виртуальный буфер, необходимо выделить
+ под него память с помощью процедуры GetMem. Для определения, какое
+ количество памяти потребуется для виртуального видео буфера, используйте
+ функцию GetPageSize.
+<dd>
+ Процедура SetVirtualMode не поддерживается в бесплатной версии компилятора
+ TMT Pascal.
+
+<dd><br>
+ См. также: SetNormalMode, FlipToScreen и FlipToMemory.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetVisualPage"></a><br>
+ <h4>SetVisualPage (процедура)</h4>
+<dd>
+ Делает указанную графическую страницу видимой.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetVisualPage(Page: DWord; WaitForRetrace: Boolean);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ После вызова процедуры становится видимой графическая страница с
+ указанным номером.
+
+<dd><br>
+ Несколько графических страниц могут поддерживаться только в SVGA графических
+ режимах. При использовании нескольких графических страниц программа имеет
+ возможность осуществлять прямой графический вывод на невидимую в данный
+ момент страницу, а затем быстро переключиться, сделав эту страницу видимой
+ с помощью процедуры SetVisualPage. Эта технология особенно полезна дл
+ анимации изображений.
+<dd><br>
+ Если параметр WaitForRetrace установлен в True, переключение будет
+ произведено только в момент вертикального обратного хода луча.
+ Флаг ожидания вертикального обратного хода луча входит в спецификацию
+ VBE начиная с версии 2.0, поэтому, если Ваша видео-карта поддерживает
+ только VBE 1.2, то нет никакой гарантии, что будет производитьс
+ такая синхронизация.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="SetWriteMode"></a><br>
+ <h4>SetWriteMode (процедура)</h4>
+<dd>
+ Устанавливает режим записи при рисовании линии.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure SetWriteMode(WriteMode: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Существует два режима записи при рисовании линии: простое копирование
+ без учета того, что было раньше изображено под линией (CopyPut), и вывод с
+ учетом изображения, перекрываемого линией (XORPut).
+<dd>
+ При использовании метода CopyPut для вывода пикселов используетс
+ ассемблерная инструкция MOV, просто перезаписывающая то, что было ранее
+ на экране. При использовании метода XORPut вывод пикселов осуществляетс
+ с помощью инструкции XOR, которая позволяет комбинировать точкт линии с
+ уже имеющимся изображением.
+<dd>
+ Заметим, что если дважды вывести линию в режиме XOR, то линия сотретс
+ и восстановится предыдущее изображение под линией.
+
+<dd><br>
+ Процедура SetWriteMode оказывает воздействие на результат вывода следующих
+ процедур: DrawPoly, Line, Spline, LineRel, LineTo, Rectangle, Circle,
+ Ellipse, Bar3D, Putpixel, PutSprite и PutImage.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Spline"></a><br>
+ <h4>Spline (процедура)</h4>
+<dd>
+ Рисует сплайн.
+
+<dd><br>
+ Объявление:
+<pre>
+ Spline(Nodes: Byte; Points: array of PointType);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура формирует плавную кривую, проходящую через заданную
+ последовательность точек. Параметр Nodes задает количество точек в массиве
+ Points. Каждая точка задается парой координат X и Y типа LongInt.
+
+<dd><br>
+ Для настройки плавности рисуемой сплайн-кривой используется процедура
+ SetSplineSteps.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Stretch"></a><br>
+ <h4>Stretch (процедура)</h4>
+<dd>
+ Растягивает содержимое экрана по вертикали в Param раз.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Stretch (Param: Byte);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="TextHeight"></a><br>
+ <h4>TextHeight (функция)</h4>
+<dd>
+ Возвращает высоту текста в пикселах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function TextHeight(TextString: string): DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Функция использует высоту текущего фонта для вычисления высоты текстовой
+ строки в пикселах. Эту возможность удобно использовать для настройки
+ расстояний между линиями, вычисления высоты окна, содержащего текст,
+ установления размера текстового заголовка при выводе его внутри
+ прямоугольника или определенной области, и т.д.
+
+<dd><br>
+ Например, если используется фонт 8x8 точек (устанавливается процедурой
+ SetTextStyle), то высота текстовой строки будет равна 8 пикселов.
+
+<dd><br>
+ Рекомендуем не вычислять высоту строки вручную, а использовать для этого
+ функцию TextHeight. В этом случае не потребуется изменять исходный код
+ программы при использовании различных фонтов.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="TextWidth"></a><br>
+ <h4>TextWidth (функция)</h4>
+<dd>
+ Возвращает длину строки текста в пикселах.
+
+<dd>
+ Объявление:
+<pre>
+ function TextWidth(TextString: string): DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Функция использует ширину текущего фонта и количество символов в строке дл
+ вычисления длины текстовой строки в пикселах. Эту возможность удобно
+ использовать для вычисления ширины окна, содержащего текст, установлени
+ размера текстового заголовка при выводе его внутри прямоугольника или
+ определенной области, и т.д.
+
+<dd><br>
+ Например, при использовании фонта 8x8 точек (установленного процедурой
+ SetTextStyle), длина строки, содержащей 3 символа "TMT", будет равна 24
+ пиксела.
+
+<dd><br>
+ Рекомендуем не вычислять длину строки вручную, а использовать для этого
+ функцию TextWidth. В этом случае не потребуется изменять исходный код
+ программы при использовании различных фонтов.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="TotalVbeMemory"></a><br>
+ <h4>TotalVbeMemory (функция)</h4>
+<dd>
+ Возвращает количество установленной видео-памяти в байтах.
+
+<dd><br>
+ Объявление:
+<pre>
+ function TotalVbeMemory: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если VESA VBE 1.1+ не поддерживается, то функция вернет ноль.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="TotalVbeModes"></a><br>
+ <h4>TotalVbeModes (функция)</h4>
+<dd>
+ Возвращает общее количество поддерживаемых VESA режимов.
+
+<dd><br>
+ Объявление:
+<pre>
+ function TotalVbeModes: Word;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Для получения списка всех поддерживаемых VESA режимов можно воспользоватьс
+ функцией GetVbeModesList.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Triangle"></a><br>
+ <h4>Triangle (процедура)</h4>
+<dd>
+ Рисует треугольник.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Triangle (X1,Y1,X2,Y2,X3,Y3: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ (X1,Y1), (X2,Y2), (X3,Y3) - координаты вершин треугольника.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

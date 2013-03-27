@@ -1,0 +1,107 @@
+<html><head>
+<TITLE>User Defined Operators
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="overload_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function Overloading"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="user_def_reader.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: User Defined Reader Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.16 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>User Defined Operators
+</h2></dir>
+<!-- Page content -->
+TMT Pascal allows redefining of the standard operators on predefined types
+and overloading of these operators for new types. For this, it uses the
+construction
+<pre>  <B>overload</B></pre>
+The syntax is:
+<pre>  <B>overload</B> op_sign = qualified procedure identifier;</pre>
+Where the <I>op_sign</I> is one of the standard operator symbols:
+<pre>  + - / * = &lt;&gt; &lt; &gt; &lt;= &gt;=
+  and or xor shl shr mod div in not
+  +:=   -:=   *:=   /:=</pre>
+When a re-defined operator is used, TMT Pascal uses the last definition
+that could be applied toward operands of given types.
+<br>
+For example, this fragment:
+<pre><B>function</B> add2_rr (a, b: Real): Real;
+  Result := (a + b) * 2;
+<B>function</B> add2_ii (a, b: Integer): Integer;
+  Result := (a + b) * 2;
+<B>overload</B> + = add_rr;
+<B>overload</B> + = add_ii;</pre>
+redefines the &quot;+&quot; operator. Notice that the order of overload's
+is important.
+<br>
+The reverse order
+<pre><B>overload</B> + = add_ii;
+<B>overload</B> + = add_rr;</pre>
+will cause <I>add_rr</I> to be used <U>always</U> since integers can always
+be cast into reals.
+<br>
+<br>
+In the SOURCES subdirectory you can find the source of the COMP module
+which realizes the complex numbers and defines the operators on them.
+<br>
+<br>
+<B>Remarks:</B>
+<ul><li>The operators +:=, -:=, *:= and /:= have the lowest precedence
+(lower, than the comparison operators) and are right-associative.</li>
+<li>The operators &quot;+:=&quot; and &quot;-:=&quot; are predefined
+for all integer and real types.</li>
+<li>The operators &quot;*:=&quot; and &quot;/:=&quot; are predefined
+for all real types, with the obvious meaning.</li></ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="overload_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function Overloading"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="user_def_reader.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: User Defined Reader Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function Overloading</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">User Defined Reader Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.16 -</B></CENTER>
+</BODY></HTML>

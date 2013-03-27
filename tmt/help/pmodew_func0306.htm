@@ -1,0 +1,113 @@
+<html><head>
+<TITLE>Function 0306 - Get Raw Mode Switch Addresses
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0305.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0305 - Get State Save/Restore Addresses"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0400.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0400 - Get Version"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.27 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0306 - Get Raw Mode Switch Addresses
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Returns addresses that can be called for low level mode switching.
+<pre><B>In:</B>
+   AX     = 0306h
+<B>Out:</B>
+   always successful:
+     carry flag clear
+     BX:CX  = segment:offset of real to protected mode
+              switch procedure
+     SI:EDI = selector:offset of protected to real mode
+              switch procedure</pre>
+<B>Notes:</B>
+<br>
+The real mode segment:offset returned by this function should be called only
+in real mode to switch to protected mode. The protected mode selector:offset
+returned by this function should be called only in protected mode to switch
+to real mode.
+<br>
+<br>
+The mode switch procedures are entered by a FAR JMP to the appropriate address
+with the following parameters:
+<pre>   AX    = new DS
+   CX    = new ES
+   DX    = new SS
+   (E)BX = new (E)SP
+   SI    = new CS
+   (E)DI = new (E)IP</pre>
+The processor is placed into the desired mode, and the DS, ES, SS, (E)SP, CS,
+and (E)IP registers are updated with the specific values. In other words,
+execution of the client continues in the requested mode at the address provided
+in registers SI:(E)DI. The values specified to be placed into the segment
+registers must be appropriate for the destination mode. That is, segment
+addresses for real mode, and selectors for protected mode.
+<br>
+<br>
+The values in EAX, EBX, ECX, EDX, ESI, and EDI after the mode switch are
+undefined. EBP will be preserved across the mode switch call so it can be used
+as a pointer. FS and GS will contain zero after the mode switch.
+<br>
+<br>
+If interrupts are disabled when the mode switch procedure is invoked, they
+will not be re-enabled by the host (even temporarily). It is up to the client
+to save and restore the state of the task when using this function to switch
+modes. This requires the state save/restore procedures whose addresses can be
+obtained with INT 31h function 0305h.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0305.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0305 - Get State Save/Restore Addresses"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0400.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0400 - Get Version"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0305 - Get State Save/Restore Addresses</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0400 - Get Version</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.27 -</B></CENTER>
+</BODY></HTML>

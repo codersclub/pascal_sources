@@ -1,0 +1,1306 @@
+<html>
+<head>
+<title>TMT Pascal Programmer's Reference</title>
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+<script language="JavaScript"><!--
+var plusImg = new Image();
+plusImg.src = "images/closed.gif"
+var minusImg = new Image();
+minusImg.src = "images/opened.gif"
+
+function hideLevel( _Id ) {
+//alert(_Id);
+ var thisLevel = document.getElementById( 'p'+_Id );
+ var thisImg = document.getElementById( 'i'+_Id );
+ thisLevel.style.display = "none";
+ if (_Id != "0") {
+   thisImg.src = plusImg.src;
+ }
+}
+	
+function hideAll() {
+ hideLevel("2");
+ hideLevel("2_2");
+ hideLevel("2_3");
+ hideLevel("2_3_5");
+ hideLevel("2_3_6");
+ hideLevel("2_3_7");
+ hideLevel("2_3_8");
+ hideLevel("2_3_9");
+ hideLevel("2_3_10");
+ hideLevel("2_3_11");
+ hideLevel("2_3_12");
+ hideLevel("2_3_13");
+ hideLevel("2_4");
+ hideLevel("3");
+ hideLevel("3_2");
+ hideLevel("4");
+ hideLevel("4_6");
+ hideLevel("4_8");
+ hideLevel("4_8_2");
+ hideLevel("4_8_3");
+ hideLevel("4_24");
+ hideLevel("4_24_1");
+ hideLevel("4_24_2");
+ hideLevel("4_28");
+ hideLevel("4_28_1");
+ hideLevel("4_28_2");
+ hideLevel("4_36");
+ hideLevel("4_36_1");
+ hideLevel("4_36_2");
+ hideLevel("4_40");
+ hideLevel("4_40_2");
+ hideLevel("4_44");
+ hideLevel("4_44_2");
+ hideLevel("4_46");
+ hideLevel("4_46_1");
+ hideLevel("4_46_2");
+ hideLevel("4_48");
+ hideLevel("4_48_1");
+ hideLevel("4_60");
+ hideLevel("4_60_2");
+ hideLevel("4_61");
+ hideLevel("4_61_1");
+ hideLevel("4_61_2");
+ hideLevel("4_66");
+ hideLevel("4_66_1");
+ hideLevel("4_66_2");
+ hideLevel("4_68");
+ hideLevel("4_68_1");
+ hideLevel("4_68_2");
+ hideLevel("4_74");
+ hideLevel("4_74_1");
+ hideLevel("5");
+ hideLevel("6");
+ hideLevel("6_6");
+ hideLevel("7");
+ hideLevel("7_2");
+}
+
+
+function showLevel( _Id ) {
+ var thisLevel = document.getElementById( 'p'+_Id );
+ var thisImg = document.getElementById( 'i'+_Id );
+ if ( thisLevel.style.display == "none") {
+  thisLevel.style.display = "block";
+  if (_Id != "0") {
+    thisImg.src = minusImg.src;
+  }
+ } else {
+  hideLevel( _Id );
+ }
+}
+// -->
+</script>
+</head>
+
+<!--body-->
+<body onLoad="hideAll();">
+<h1><img border="0" src="images/tmtlogo.gif" align="top">TMT Pascal Programmer's Reference</h1>
+<hr>
+<h2>Table of Contents</h2>
+<div id="p0">
+<img src="images/leaf.gif"><a href="whats_new.htm">1. What's New in TMT Pascal?</a><BR>
+
+<img id="i2" src="images/closed.gif" onDblClick="javascript:showLevel('2');"><a href="language_def.htm">2. TMT Pascal Language Description</a><BR>
+
+  <div id="p2" class=closed>
+    <img src="images/leaf.gif"><a href="win32_term.htm">2.1. Win32 Family Operating Systems</a><BR>
+
+    <img id="i2_2" src="images/closed.gif" onDblClick="javascript:showLevel('2_2');"><a href="implementation_issues.htm">2.2. Implementation Issues</a><BR>
+
+      <div id="p2_2" class=closed onLoad="hideLevel('2_2');">
+      <img src="images/leaf.gif"><a href="memory_organization.htm">2.2.1. Memory Organization</a><BR>
+      <img src="images/leaf.gif"><a href="calling_conventions.htm">2.2.2. Calling Conventions</a><BR>
+      <img src="images/leaf.gif"><a href="limitations.htm">2.2.3. Limitations</a><BR>
+      </div>
+
+    <img id="i2_3" src="images/closed.gif" onDblClick="javascript:showLevel('2_3');"><a href="lang_struct.htm">2.3. Pascal Language Structure</a><BR>
+      <div id="p2_3" class=closed>
+      <img src="images/leaf.gif"><a href="tokens.htm">2.3.1. Tokens and Identifiers</a><BR>
+      <img src="images/leaf.gif"><a href="reserved_w.htm">2.3.2. Reserved Words</a><BR>
+      <img src="images/leaf.gif"><a href="op_n_deli.htm">2.3.3. Operators and Delimiters</a><BR>
+      <img src="images/leaf.gif"><a href="prog_comm.htm">2.3.4. Program Comments</a><BR>
+      <img id="i2_3_5" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_5');"><a href="constants.htm">2.3.5. Constants</a><BR>
+        <div id="p2_3_5" class=closed>
+        <img src="images/leaf.gif"><a href="int_and_real.htm">2.3.5.1. Integer and Real Number Constants</a><BR>
+        <img src="images/leaf.gif"><a href="str_const.htm">2.3.5.2. String Constants</a><BR>
+        <img src="images/leaf.gif"><a href="const_decl.htm">2.3.5.3. Constant Declarations</a><BR>
+        </div>
+      <img id="i2_3_6" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_6');"><a href="types.htm">2.3.6. TYpes</a><BR>
+        <div id="p2_3_6" class=closed>
+        <img src="images/leaf.gif"><a href="bool_type.htm">2.3.6.1. Boolean Types</a><BR>
+        <img src="images/leaf.gif"><a href="char_type.htm">2.3.6.2. Character Types</a><BR>
+        <img src="images/leaf.gif"><a href="int_type.htm">2.3.6.3. Integer Types</a><BR>
+        <img src="images/leaf.gif"><a href="enum_type.htm">2.3.6.4. Enumeration Types</a><BR>
+        <img src="images/leaf.gif"><a href="subr_type.htm">2.3.6.5. Subrange Types</a><BR>
+        <img src="images/leaf.gif"><a href="real_type.htm">2.3.6.6. Real Types</a><BR>
+        <img src="images/leaf.gif"><a href="ptr_type.htm">2.3.6.7. Pointer Types</a><BR>
+        <img src="images/leaf.gif"><a href="ptr_deref.htm">2.3.6.8. Pointer Dereference</a><BR>
+        <img src="images/leaf.gif"><a href="arr_type.htm">2.3.6.9. Array Types</a><BR>
+        <img src="images/leaf.gif"><a href="str_type.htm">2.3.6.10. String Types</a><BR>
+        <img src="images/leaf.gif"><a href="variant_type.htm">2.3.6.11. Variant Types</a><BR>
+        <img src="images/leaf.gif"><a href="set_type.htm">2.3.6.12. Set Types</a><BR>
+        <img src="images/leaf.gif"><a href="rec_type.htm">2.3.6.13. Record Types</a><BR>
+        <img src="images/leaf.gif"><a href="file_type.htm">2.3.6.14. File Types</a><BR>
+        <img src="images/leaf.gif"><a href="proc_type.htm">2.3.6.15. Procedure Types</a><BR>
+        <img src="images/leaf.gif"><a href="obj_type.htm">2.3.6.16. Object Types</a><BR>
+        <img src="images/leaf.gif"><a href="structured_types_alignment.htm">2.3.6.17. Structured Types Alignment (packed modifier)</a><BR>
+        <img src="images/leaf.gif"><a href="type_cpb.htm">2.3.6.18. Type Compatibility</a><BR>
+        </div>
+
+      <img id="i2_3_7" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_7');"><a href="decl.htm">2.3.7. Declarations</a><BR>
+        <div id="p2_3_7" class=closed>
+        <img src="images/leaf.gif"><a href="type_decl.htm">2.3.7.1. Type Declarations</a><BR>
+        <img src="images/leaf.gif"><a href="label_decl.htm">2.3.7.2. Label Declarations</a><BR>
+        <img src="images/leaf.gif"><a href="const_decl.htm">2.3.7.3. Constant Declarations</a><BR>
+        <img src="images/leaf.gif"><a href="variable_decl.htm">2.3.7.4. Variable Declarations</a><BR>
+        <img src="images/leaf.gif"><a href="local_block_decl.htm">2.3.7.5. Local Block Declarations</a><BR>
+        </div>
+
+
+      <img id="i2_3_8" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_8');"><a href="expressions.htm">2.3.8. Expressions</a><BR>
+        <div id="p2_3_8" class=closed>
+        <img src="images/leaf.gif"><a href="arithmetic_oper.htm">2.3.8.1. Arithmetic Operators</a><BR>
+        <img src="images/leaf.gif"><a href="boolean_oper.htm">2.3.8.2. Boolean Operators</a><BR>
+        <img src="images/leaf.gif"><a href="set_oper.htm">2.3.8.3. Set Operators</a><BR>
+        <img src="images/leaf.gif"><a href="relational_oper.htm">2.3.8.4. Relational Operators</a><BR>
+        <img src="images/leaf.gif"><a href="typecasts.htm">2.3.8.5. Typecasts</a><BR>
+        <img src="images/leaf.gif"><a href="operator_precedence.htm">2.3.8.6. Operator Precedence</a><BR>
+        </div>
+
+      <img id="i2_3_9" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_9');"><a href="statements.htm">2.3.9. Statements</a><BR>
+        <div id="p2_3_9" class=closed>
+        <img src="images/leaf.gif"><a href="assignments.htm">2.3.9.1. Assigments</a><BR>
+        <img src="images/leaf.gif"><a href="compound_statements.htm">2.3.9.2. Compound Statement</a><BR>
+        <img src="images/leaf.gif"><a href="case_statement.htm">2.3.9.3. Case Statement</a><BR>
+        <img src="images/leaf.gif"><a href="for_statement.htm">2.3.9.4. For Statement</a><BR>
+        <img src="images/leaf.gif"><a href="goto_statement.htm">2.3.9.5. Goto Statement</a><BR>
+        <img src="images/leaf.gif"><a href="if_statement.htm">2.3.9.6. If Statement</a><BR>
+        <img src="images/leaf.gif"><a href="inline_statement.htm">2.3.9.7. InLine Statement</a><BR>
+        <img src="images/leaf.gif"><a href="mem_memw_meml_memd.htm">2.3.9.8. Mem, MemW, MemL, and MemD Statements</a><BR>
+        <img src="images/leaf.gif"><a href="port_portw_portd.htm">2.3.9.9. Port, PortW, and PortD Statements</a><BR>
+        <img src="images/leaf.gif"><a href="repeat_statement.htm">2.3.9.10. Repeat Statement</a><BR>
+        <img src="images/leaf.gif"><a href="while_statement.htm">2.3.9.11. While Statement</a><BR>
+        <img src="images/leaf.gif"><a href="with_statement.htm">2.3.9.12. With Statement</a><BR>
+        </div>
+
+      <img id="i2_3_10" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_10');"><a href="programs_and_units.htm">2.3.10. Programs and Units</a><BR>
+        <div id="p2_3_10" class=closed>
+        <img src="images/leaf.gif"><a href="units.htm">2.3.10.1. Units</a><BR>
+        <img src="images/leaf.gif"><a href="programs.htm">2.3.10.2. Programs</a><BR>
+        </div>
+
+      <img id="i2_3_11" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_11');"><a href="dlls.htm">2.3.11. Dynamic-Link Libraries (DLL's)</a><BR>
+        <div id="p2_3_11" class=closed>
+        <img src="images/leaf.gif"><a href="about_dlls.htm">2.3.11.1. About DLL's</a><BR>
+        <img src="images/leaf.gif"><a href="using_dlls.htm">2.3.11.2. Using DLL's</a><BR>
+        <img src="images/leaf.gif"><a href="writing_dlls.htm">2.3.11.3. Writing DLL's</a><BR>
+        <img src="images/leaf.gif"><a href="global_variables_in_dlls.htm">2.3.11.4. Global variables in DLL's</a><BR>
+        <img src="images/leaf.gif"><a href="import_units.htm">2.3.11.5. Import Units</a><BR>
+        </div>
+
+      <img id="i2_3_12" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_12');"><a href="procedures_and_functions.htm">2.3.12. Procedures and Functions</a><BR>
+        <div id="p2_3_12" class=closed>
+        <img src="images/leaf.gif"><a href="procedures_and_functions_declaration.htm">2.3.12.1. Declaration</a><BR>
+        <img src="images/leaf.gif"><a href="forward_declaration.htm">2.3.12.2. Forward Declaration</a><BR>
+        <img src="images/leaf.gif"><a href="external_declaration.htm">2.3.12.3. External Declaration</a><BR>
+        <img src="images/leaf.gif"><a href="interrupt_procedure.htm">2.3.12.4. Interrupt Procedure</a><BR>
+        <img src="images/leaf.gif"><a href="procedural_value.htm">2.3.12.5. Procedural Value</a><BR>
+        <img src="images/leaf.gif"><a href="using_statement_as_proc.htm">2.3.12.6. Using Statement as Procedure</a><BR>
+        </div>
+
+      <img id="i2_3_13" src="images/closed.gif" onDblClick="javascript:showLevel('2_3_13');"><a href="oop_extensions.htm">2.3.13. OOP Extensions</a><BR>
+        <div id="p2_3_13" class=closed>
+        <img src="images/leaf.gif"><a href="object.htm">2.3.13.1. Object</a><BR>
+        <img src="images/leaf.gif"><a href="inheritance.htm">2.3.13.2. Inheritance</a><BR>
+        <img src="images/leaf.gif"><a href="object_syntax.htm">2.3.13.3. Object Syntax</a><BR>
+        <img src="images/leaf.gif"><a href="restrictions_on_objects.htm">2.3.13.4. Restrictions On Object Description</a><BR>
+        <img src="images/leaf.gif"><a href="oop_scopes.htm">2.3.13.5. OOP Scopes</a><BR>
+        <img src="images/leaf.gif"><a href="public_and_private_declarations.htm">2.3.13.6. Public and Private declarations</a><BR>
+        <img src="images/leaf.gif"><a href="virtual_methods.htm">2.3.13.7. Virtual Methods</a><BR>
+        <img src="images/leaf.gif"><a href="constructors.htm">2.3.13.8. Constructors</a><BR>
+        <img src="images/leaf.gif"><a href="fail_proc.htm">2.3.13.9. Fail procedure</a><BR>
+        <img src="images/leaf.gif"><a href="using_new_proc_oop.htm">2.3.13.10. Using New Procedure (OOP)</a><BR>
+        <img src="images/leaf.gif"><a href="destructors.htm">2.3.13.11. Desctructors</a><BR>
+        <img src="images/leaf.gif"><a href="inherited_res_word.htm">2.3.13.12. Inherited reserved word</a><BR>
+        <img src="images/leaf.gif"><a href="self_arg.htm">2.3.13.13. Self argument</a><BR>
+        <img src="images/leaf.gif"><a href="interface_type.htm">2.3.13.14. Interface Type</a><BR>
+        </div>
+
+      <img src="images/leaf.gif"><a href="open_arrays.htm">2.3.14. Open Arrays</a><BR>
+      <img src="images/leaf.gif"><a href="user_def_operators.htm">2.3.15. User Defined Operators</a><BR>
+      <img src="images/leaf.gif"><a href="user_def_reader.htm">2.3.16. User Defined Reader Procedure</a><BR>
+      <img src="images/leaf.gif"><a href="user_def_writer.htm">2.3.17. User Defined Writer Procedure</a><BR>
+
+      </div>
+
+    <img id="i2_4" src="images/closed.gif" onDblClick="javascript:showLevel('2_4');"><a href="built-in_assembler.htm">2.4. Built-in Assembler</a><BR>
+      <div id="p2_4" class=closed>
+      <img src="images/leaf.gif"><a href="asm_statement.htm">2.4.1. Asm Statement</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_procedure.htm">2.4.2. Assembler Procedure</a><BR>
+      <img src="images/leaf.gif"><a href="code_procedure.htm">2.4.3. Code Procedure</a><BR>
+      <img src="images/leaf.gif"><a href="command_syntax.htm">2.4.4. Command Syntax</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_labels.htm">2.4.5. Labels</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_prefixes.htm">2.4.6. Prefixes</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_opcodes.htm">2.4.7. Opcodes</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_registers.htm">2.4.8. Registers</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_opcode_mnemonics.htm">2.4.9. Opcode Mnemonics</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_operand_expressions.htm">2.4.10. Operand Expressions</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_operands.htm">2.4.11. Operands</a><BR>
+      <img src="images/leaf.gif"><a href="assembler_operators.htm">2.4.12. Operators</a><BR>
+      <img src="images/leaf.gif"><a href="differ_16_and_32.htm">2.4.13. Differences between 16- and 32-bit code</a><BR>
+      </div>
+
+    <img src="images/leaf.gif"><a href="run_errors.htm">2.5. Run-time error codes</a><BR>
+
+  </div>
+
+<img id="i3" src="images/closed.gif" onDblClick="javascript:showLevel('3');"><a href="compiler_directives.htm">3. Compiler Directives</a><BR>
+  <div id="p3" class=closed>
+    <img src="images/leaf.gif"><a href="conditionals.htm">3.1. Conditional Directives</a><BR>
+    <img id="i3_2" src="images/closed.gif" onDblClick="javascript:showLevel('3_2');"><a href="switch_dirs.htm">3.2. Switch and Parameter Directives</a><BR>
+    <div id="p3_2" class=closed>
+      <img src="images/leaf.gif"><a href="data_align_switch.htm">3.2.1. $A: Data Align Switch</a><BR>
+      <img src="images/leaf.gif"><a href="ada_style_comments_switch.htm">3.2.2. $AC: Ada-Style Comments Switch</a><BR>
+      <img src="images/leaf.gif"><a href="amd_3dnow_switch.htm">3.2.3. $AMD: AMD 3DNow! Assembler Instructions Switch</a><BR>
+      <img src="images/leaf.gif"><a href="boolean_eval_switch.htm">3.2.4. $B: Boolean Evaluation Switch</a><BR>
+      <img src="images/leaf.gif"><a href="assert_directives_switch.htm">3.2.5. $C: Assert Directives Switch</a><BR>
+      <img src="images/leaf.gif"><a href="c_style_comments_switch.htm">3.2.6. $CC: C/C++ Style Comments Switch</a><BR>
+      <img src="images/leaf.gif"><a href="debug_info_switch.htm">3.2.7. $D: Debug Information Switch</a><BR>
+      <img src="images/leaf.gif"><a href="io_switch.htm">3.2.8. $I: I/O Checking Switch</a><BR>
+      <img src="images/leaf.gif"><a href="include_dir.htm">3.2.9. $I: Include File Directive</a><BR>
+      <img src="images/leaf.gif"><a href="link_obj_dir.htm">3.2.10. $L: Link Object File Directive</a><BR>
+      <img src="images/leaf.gif"><a href="local_symbols_switch.htm">3.2.11. $L: Local Symbol Information Switch</a><BR>
+      <img src="images/leaf.gif"><a href="map_file_generation_switch.htm">3.2.12. $MAP: Map File Generation Switch</a><BR>
+      <img src="images/leaf.gif"><a href="mmx_switch.htm">3.2.13. $MMX: Intel MMX Assembler Instructions Switch</a><BR>
+      <img src="images/leaf.gif"><a href="objects_and_structures_align.htm">3.2.14. $OA: Objects and Structures Align Switch</a><BR>
+      <img src="images/leaf.gif"><a href="opt_switch.htm">3.2.15. $OPT: Full Optimization Switch</a><BR>
+      <img src="images/leaf.gif"><a href="optfrm_switch.htm">3.2.16. $OPTFRM: Stack Frame Optimization Switch</a><BR>
+      <img src="images/leaf.gif"><a href="optreg_switch.htm">3.2.17. $OPTREG: Register Optimization Switch</a><BR>
+      <img src="images/leaf.gif"><a href="open_strings_switch.htm">3.2.18. $P: Open String Parameters Switch</a><BR>
+      <img src="images/leaf.gif"><a href="overflow_checking_switch.htm">3.2.19. $Q: Overflow Checking Switch</a><BR>
+      <img src="images/leaf.gif"><a href="range_checking_switch.htm">3.2.20. $R: Range-Checking Switch</a><BR>
+      <img src="images/leaf.gif"><a href="resource_file.htm">3.2.21. $R: Resource file</a><BR>
+      <img src="images/leaf.gif"><a href="stack_checking_switch.htm">3.2.22. $S: Stack-Overflow Checking Switch</a><BR>
+      <img src="images/leaf.gif"><a href="type_checked_pointers_switch.htm">3.2.23. $T: Type-Checked Pointers Switch</a><BR>
+      <img src="images/leaf.gif"><a href="typed_incdec_operations_switch.htm">3.2.24. $TPO: Typed Inc/Dec Operations Switch</a><BR>
+      <img src="images/leaf.gif"><a href="var-strict_checking_switch.htm">3.2.25. $V: Var-String Checking Switch</a><BR>
+      <img src="images/leaf.gif"><a href="warnings_generation_switch.htm">3.2.26. $W: Warnings Generation Switch</a><BR>
+      <img src="images/leaf.gif"><a href="extended_syntax_switch.htm">3.2.27. $X: Extended Syntax Switch</a><BR>
+      <img src="images/leaf.gif"><a href="extended_warnings_switch.htm">3.2.28. $XW: Extended Warnings</a><BR>
+      <img src="images/leaf.gif"><a href="minimum_enumeration_size.htm">3.2.29. $Z: Minimum enumeration size switch</a><BR>
+    </div>
+
+  <img id="i3_3" src="images/leaf.gif"><a href="predefined_symbols.htm">3.3. Predefined Symbols</a><BR>
+
+  </div>
+
+
+<img id="i4" src="images/closed.gif" onDblClick="javascript:showLevel('4');"><a href="std_units.htm">4. Standard Units</a><BR>
+  <div id="p4" class=closed>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.1. AccCtrl Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.2. AclAPI Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.3. ActiveX Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.4. CommCtrl Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.5. CommDlg Unit</a><BR>
+    <img id="i4_6" src="images/closed.gif" onDblClick="javascript:showLevel('4_6');"><a href="compmath_unit.htm">4.6. CompMath Unit</a><BR>
+      <div id="p4_6" class=closed>
+      <img src="images/leaf.gif"><a href="comp_types.htm">4.6.1. CompMath Unit Types</a><BR>
+      <img src="images/leaf.gif"><a href="comp_operators.htm">4.6.2. CompMath Unit Overloaded Operators</a><BR>
+      <img src="images/leaf.gif"><a href="comp_functions.htm">4.6.3. CompMath Unit Overloaded Fuctions</a><BR>
+      </div>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.7. Cpl Unit</a><BR>
+    <img id="i4_8" src="images/closed.gif" onDblClick="javascript:showLevel('4_8');"><a href="crt_unit.htm">4.8. Crt Unit</a><BR>
+      <div id="p4_8" class=closed>
+      <img src="images/leaf.gif"><a href="console_app.htm">4.8.1. Console Applications</a><BR>
+      <img id="i4_8_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_8_2');"><a href="crt_variables.htm">4.8.2. CRT Unit Variables</a><BR>
+        <div id="p4_8_2" class=closed>
+        <img src="images/leaf.gif"><a href="color_const.htm">4.8.2.1. Color Constants</a><BR>
+        <img src="images/leaf.gif"><a href="textmode_const.htm">4.8.2.2. TextMode Constants</a><BR>
+        <img src="images/leaf.gif"><a href="checkbreak_var.htm">4.8.2.3. CheckBreak</a><BR>
+        <img src="images/leaf.gif"><a href="checkeof_var.htm">4.8.2.4. CheckEOF</a><BR>
+        <img src="images/leaf.gif"><a href="directvideo_var.htm">4.8.2.5. DirectVideo</a><BR>
+        <img src="images/leaf.gif"><a href="checksnow_var.htm">4.8.2.6. CheckSnow</a><BR>
+        <img src="images/leaf.gif"><a href="lastmode_var.htm">4.8.2.7. LastMode</a><BR>
+        <img src="images/leaf.gif"><a href="textattr_var.htm">4.8.2.8. TextAttr</a><BR>
+        <img src="images/leaf.gif"><a href="windmax_var.htm">4.8.2.9. WindMax</a><BR>
+        <img src="images/leaf.gif"><a href="windmin_var.htm">4.8.2.10. WindMin</a><BR>
+        </div>
+
+      <img id="i4_8_3" src="images/closed.gif" onDblClick="javascript:showLevel('4_8_3');"><a href="crt_proc_and_func.htm">4.8.3. CRT Unit Procedures and Functions</a><BR>
+        <div id="p4_8_3" class=closed>
+        <img src="images/leaf.gif"><a href="assigncrt_proc.htm">4.8.3.1. AssignCrt procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clreol_proc.htm">4.8.3.2. ClrEOL procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clrscr_proc.htm">4.8.3.3. ClrScr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="delay_proc.htm">4.8.3.4. Delay procedure</a><BR>
+        <img src="images/leaf.gif"><a href="delline_proc.htm">4.8.3.5. DelLine procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getcharxy_func.htm">4.8.3.6. GetCharXY function</a><BR>
+        <img src="images/leaf.gif"><a href="gotoxy_proc.htm">4.8.3.7. GotoXY procedure</a><BR>
+        <img src="images/leaf.gif"><a href="hidecursor_proc.htm">4.8.3.8. HideCursor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="highvideo_proc.htm">4.8.3.9. HighVideo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="insline_proc.htm">4.8.3.10. InsLine procedure</a><BR>
+        <img src="images/leaf.gif"><a href="keypressed_func.htm">4.8.3.11. KeyPressed function</a><BR>
+        <img src="images/leaf.gif"><a href="lowvideo_proc.htm">4.8.3.12. LowVideo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="normvideo_proc.htm">4.8.3.13. NormVideo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="nosound_proc.htm">4.8.3.14. NoSound procedure</a><BR>
+        <img src="images/leaf.gif"><a href="readkey_func.htm">4.8.3.15. ReadKey function</a><BR>
+        <img src="images/leaf.gif"><a href="setscreensize_proc.htm">4.8.3.16. SetScreenSize procedure</a><BR>
+        <img src="images/leaf.gif"><a href="showcursor_proc.htm">4.8.3.17. ShowCursor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="sound_proc.htm">4.8.3.18. Sound procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textbackground_proc.htm">4.8.3.19. TextBackGround procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textcolor_proc.htm">4.8.3.10. TextColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textmode_proc.htm">4.8.3.11. TextMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="wherex_func.htm">4.8.3.12. WhereX function</a><BR>
+        <img src="images/leaf.gif"><a href="wherey_func.htm">4.8.3.13. WhereY function</a><BR>
+        <img src="images/leaf.gif"><a href="window_proc.htm">4.8.3.14. Window procedure</a><BR>
+        <img src="images/leaf.gif"><a href="writeattr_proc.htm">4.8.3.15. WriteAttr procedure</a><BR>
+        </div>
+
+      </div>
+
+
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.9. D3D Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.10. D3D8 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.11. D3DApp Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.12. D3DFile Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.13. D3DFont Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.14. D3DRes Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.15. D3DRM Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.16. D3DUtil Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.17. D3DX8 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.18. Ddeml Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.19. DDraw Unit</a><BR>
+    <img src="images/leaf.gif"><a href="debug_unit.htm">4.20. Debug Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.21. DInput Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.22. Dlgs Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.23. DMusic Unit</a><BR>
+    <img id="i4_24" src="images/closed.gif" onDblClick="javascript:showLevel('4_24');"><a href="dos_unit.htm">4.24. Dos Unit</a><BR>
+      <div id="p4_24" class=closed>
+      <img id="i4_24_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_24_1');"><a href="dos_const_and_var.htm">4.24.1. Dos Unit Constants and Variables</a><BR>
+        <div id="p4_24_1" class=closed>
+        <img src="images/leaf.gif"><a href="flag_const.htm">4.24.1.1. Flag constants</a><BR>
+        <img src="images/leaf.gif"><a href="file-mode_const.htm">4.24.1.2. File-mode constants</a><BR>
+        <img src="images/leaf.gif"><a href="file-attribute_const.htm">4.24.1.3. File-attribute constants</a><BR>
+        <img src="images/leaf.gif"><a href="datetime_type.htm">4.24.1.4. DateTime type</a><BR>
+        <img src="images/leaf.gif"><a href="doserror_var.htm">4.24.1.5. DosError variable</a><BR>
+        <img src="images/leaf.gif"><a href="registers_type.htm">4.24.1.6. Registers type</a><BR>
+        <img src="images/leaf.gif"><a href="searchrec_type.htm">4.24.1.7. SearchRec type</a><BR>
+        </div>
+      <img id="i4_24_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_24_2');"><a href="dos_proc_and_func.htm">4.24.2. Dos Unit Procedures and Functions</a><BR>
+        <div id="p4_24_2" class=closed>
+        <img src="images/leaf.gif"><a href="diskfree_func.htm">4.24.2.1. DiskFree function</a><BR>
+        <img src="images/leaf.gif"><a href="diskfreekb_func.htm">4.24.2.2. DiskFreeKB function</a><BR>
+        <img src="images/leaf.gif"><a href="disksize_func.htm">4.24.2.3. DiskSize function</a><BR>
+        <img src="images/leaf.gif"><a href="disksizekb_func.htm">4.24.2.4. DiskSizeKB function</a><BR>
+        <img src="images/leaf.gif"><a href="dosexitcode_func.htm">4.24.2.5. DosExitCode function</a><BR>
+        <img src="images/leaf.gif"><a href="dosversion_func.htm">4.24.2.6. DosVersion function</a><BR>
+        <img src="images/leaf.gif"><a href="envcount_func.htm">4.24.2.7. EnvCount function</a><BR>
+        <img src="images/leaf.gif"><a href="envstr_func.htm">4.24.2.8. EnvStr function</a><BR>
+        <img src="images/leaf.gif"><a href="exec_proc.htm">4.24.2.9. Exec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fexpand_func.htm">4.24.2.10. FExpand function</a><BR>
+        <img src="images/leaf.gif"><a href="findfirst_proc.htm">4.24.2.11. FindFirst procedure</a><BR>
+        <img src="images/leaf.gif"><a href="findnext_proc.htm">4.24.2.12. FindNext procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fsearch_func.htm">4.24.2.13. FSearch function</a><BR>
+        <img src="images/leaf.gif"><a href="fsplit_proc.htm">4.24.2.14. FSplit procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getcbreak_proc.htm">4.24.2.15. GetCBreak procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getdate_proc.htm">4.24.2.16. GetDate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getenv_func.htm">4.24.2.17. GetEnv function</a><BR>
+        <img src="images/leaf.gif"><a href="getfattr_proc.htm">4.24.2.18. GetFAttr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getftime_proc.htm">4.24.2.19. GetFTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getintvec_proc.htm">4.24.2.20. GetIntVec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="gettime_proc.htm">4.24.2.21. GetTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getverify_proc.htm">4.24.2.22. GetVerify procedure</a><BR>
+        <img src="images/leaf.gif"><a href="intr_proc.htm">4.24.2.23. Intr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="keep_proc.htm">4.24.2.24. Keep procedure</a><BR>
+        <img src="images/leaf.gif"><a href="msdos_proc.htm">4.24.2.25. MsDos procedure</a><BR>
+        <img src="images/leaf.gif"><a href="packtime_proc.htm">4.24.2.26. PackTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setcbreak_proc.htm">4.24.2.27. SetCBreak procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setdate_proc.htm">4.24.2.28. SetDate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setfattr_proc.htm">4.24.2.29. SetFAttr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setftime_proc.htm">4.24.2.30. SetFTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setintvec_proc.htm">4.24.2.31. SetIntVec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settime_proc.htm">4.24.2.32. SetTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setverify_proc.htm">4.24.2.33. SetVerify procedure</a><BR>
+        <img src="images/leaf.gif"><a href="swapvectors_proc.htm">4.24.2.34. SwapVectors procedure</a><BR>
+        <img src="images/leaf.gif"><a href="unpacktime_proc.htm">4.24.2.35. UnpackTime procedure</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="os2api.htm">4.25. DOSCall Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.26. DPlay Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.27. DPlay8 Unit</a><BR>
+    <img id="i4_28" src="images/closed.gif" onDblClick="javascript:showLevel('4_28');"><a href="dpmi_unit.htm">4.28. DPMI Unit</a><BR>
+      <div id="p4_28" class=closed>
+      <img id="i4_28_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_28_1');"><a href="dpmi_types.htm">4.28.1. DPMI Unit Types</a><BR>
+        <div id="p4_28_1" class=closed>
+        <img src="images/leaf.gif"><a href="trmregs_type.htm">4.28.1.1. TRmRegs type</a><BR>
+        <img src="images/leaf.gif"><a href="tdescriptor_type.htm">4.28.1.2. TDescriptor type</a><BR>
+        </div>
+      <img id="i4_28_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_28_2');"><a href="dpmi_proc_and_func.htm">4.28.2. DPMI Unit Procedures and Functions</a><BR>
+        <div id="p4_28_2" class=closed>
+        <img src="images/leaf.gif"><a href="allocatedescriptors_func.htm">4.28.2.1. AllocateDescriptors function</a><BR>
+        <img src="images/leaf.gif"><a href="allocdosmemoryblock_func.htm">4.28.2.2. AllocDosMemoryBlock function</a><BR>
+        <img src="images/leaf.gif"><a href="allocrealmodecallback_func.htm">4.28.2.3. AllocRealModeCallBack function</a><BR>
+        <img src="images/leaf.gif"><a href="allocatespecificdescriptor_func.htm">4.28.2.4. AllocateSpecificDescriptor function</a><BR>
+        <img src="images/leaf.gif"><a href="callrealmodefar_proc.htm">4.28.2.5. CallRealModeFar procedure</a><BR>
+        <img src="images/leaf.gif"><a href="callrealmodeiret_proc.htm">4.28.2.6. CallRealModeIRet procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clearrmregs_proc.htm">4.28.2.7. ClearRmRegs procedure</a><BR>
+        <img src="images/leaf.gif"><a href="createcodealias_func.htm">4.28.2.8. CreateCodeAlias function</a><BR>
+        <img src="images/leaf.gif"><a href="createcodedescriptor_func.htm">4.28.2.9. CreateCodeDescriptor function</a><BR>
+        <img src="images/leaf.gif"><a href="createdataalias_func.htm">4.28.2.10. CreateDataAlias function</a><BR>
+        <img src="images/leaf.gif"><a href="createdatadescriptor_func.htm">4.28.2.11. CreateDataDescriptor function</a><BR>
+        <img src="images/leaf.gif"><a href="dosmemoryalloc_func.htm">4.28.2.12. DosMemoryAlloc function</a><BR>
+        <img src="images/leaf.gif"><a href="dosmemoryfree_func.htm">4.28.2.13. DosMemoryFree function</a><BR>
+        <img src="images/leaf.gif"><a href="fargetbyte_func.htm">4.28.2.14. FarGetByte function</a><BR>
+        <img src="images/leaf.gif"><a href="fargetdword_func.htm">4.28.2.15. FarGetDWord function</a><BR>
+        <img src="images/leaf.gif"><a href="fargetword_func.htm">4.28.2.16. FarGetWord function</a><BR>
+        <img src="images/leaf.gif"><a href="farputbyte_proc.htm">4.28.2.17. FarPutByte procedure</a><BR>
+        <img src="images/leaf.gif"><a href="farputdword_proc.htm">4.28.2.18. FarPutDWord procedure</a><BR>
+        <img src="images/leaf.gif"><a href="farputword_proc.htm">4.28.2.19. FarPutWord procedure</a><BR>
+        <img src="images/leaf.gif"><a href="freedescriptor_func.htm">4.28.2.20. FreeDescriptor function</a><BR>
+        <img src="images/leaf.gif"><a href="freedosmemoryblock_func.htm">4.28.2.21. FreeDosMemoryBlock function</a><BR>
+        <img src="images/leaf.gif"><a href="freephysicalmap_func.htm">4.28.2.22. FreePhysicalMap function</a><BR>
+        <img src="images/leaf.gif"><a href="freerealmodecallback_func.htm">4.28.2.23. FreeRealModeCallBack function</a><BR>
+        <img src="images/leaf.gif"><a href="getcs_func.htm">4.28.2.24. GetCS function</a><BR>
+        <img src="images/leaf.gif"><a href="getdisableinterruptstate_func.htm">4.28.2.25. GetDisableInterruptState function</a><BR>
+        <img src="images/leaf.gif"><a href="getdpmiintvec_func.htm">4.28.2.26. GetDPMIIntVec function</a><BR>
+        <img src="images/leaf.gif"><a href="getdpmiver_func.htm">4.28.2.27. GetDPMIVer function</a><BR>
+        <img src="images/leaf.gif"><a href="getds_func.htm">4.28.2.28. GetDS function</a><BR>
+        <img src="images/leaf.gif"><a href="getenableinterruptstate_func.htm">4.28.2.29. GetEnableInterruptState function</a><BR>
+        <img src="images/leaf.gif"><a href="getexceptionhandler_func.htm">4.28.2.30. GetExceptionHandler function</a><BR>
+        <img src="images/leaf.gif"><a href="getfreememoryinfo_func.htm">4.28.2.31. GetFreeMemoryInfo function</a><BR>
+        <img src="images/leaf.gif"><a href="getinterruptstate_func.htm">4.28.2.32. GetInterruptState function</a><BR>
+        <img src="images/leaf.gif"><a href="getrealmodeintvec_func.htm">4.28.2.33. GetRealModeIntVec function</a><BR>
+        <img src="images/leaf.gif"><a href="getsegmentbaseaddress_func.htm">4.28.2.34. GetSegmentBaseAddress function</a><BR>
+        <img src="images/leaf.gif"><a href="getselectoraccessrights_func.htm">4.28.2.35. GetSelectorAccessRights function</a><BR>
+        <img src="images/leaf.gif"><a href="mapphysicaltolinear_func.htm">4.28.2.36. MapPhysicalToLinear function</a><BR>
+        <img src="images/leaf.gif"><a href="realmodeint_func.htm">4.28.2.37. RealModeInt function</a><BR>
+        <img src="images/leaf.gif"><a href="resizedosmemoryblock_func.htm">4.28.2.38. ResizeDosMemoryBlock function</a><BR>
+        <img src="images/leaf.gif"><a href="segmenttodescriptor_func.htm">4.28.2.39. SegmentToDescriptor function</a><BR>
+        <img src="images/leaf.gif"><a href="selectorinc_func.htm">4.28.2.40. SelectorInc function</a><BR>
+        <img src="images/leaf.gif"><a href="setdpmiintvec_func.htm">4.28.2.41. SetDPMIIntVec function</a><BR>
+        <img src="images/leaf.gif"><a href="setexceptionhandler_func.htm">4.28.2.42. SetExceptionHandler function</a><BR>
+        <img src="images/leaf.gif"><a href="setrealmodeintvec_func.htm">4.28.2.43. SetRealModeIntVec function</a><BR>
+        <img src="images/leaf.gif"><a href="setselectoraccessrights_func.htm">4.28.2.44. SetSelectorAccessRights function</a><BR>
+        <img src="images/leaf.gif"><a href="setselectorbaseaddress_func.htm">4.28.2.45. SetSelectorBaseAddress function</a><BR>
+        <img src="images/leaf.gif"><a href="setselectorlimit_func.htm">4.28.2.46. SetSelectorLimit function</a><BR>
+        </div>
+      </div>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.29. DSetup Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.30. DShow Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.31. DX7toDX8 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.32. DXFile Unit</a><BR>
+    <img src="images/leaf.gif"><a href="directxapi.htm">4.33. DXUtil Unit</a><BR>
+    <img src="images/leaf.gif"><a href="errcodes_unit.htm">4.34. ErrCodes Unit</a><BR>
+    <img src="images/leaf.gif"><a href="fdebug_unit.htm">4.35. FDebug Unit</a><BR>
+    <img id="i4_36" src="images/closed.gif" onDblClick="javascript:showLevel('4_36');"><a href="graph_unit.htm">4.36. Graph Unit</a><BR>
+      <div id="p4_36" class=closed>
+      <img id="i4_36_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_36_1');"><a href="graph_types_const_var.htm">4.36.1. Graph Unit Types, Constants and Variables</a><BR>
+        <div id="p4_36_1" class=closed>
+        <img src="images/leaf.gif"><a href="drawborder_var.htm">4.36.1.1. DrawBorder variable</a><BR>
+        <img src="images/leaf.gif"><a href="bar3d_const.htm">4.36.1.2. Bar3D constants</a><BR>
+        <img src="images/leaf.gif"><a href="bitblt_oper.htm">4.36.1.3. BitBlt operators</a><BR>
+        <img src="images/leaf.gif"><a href="clipping_const.htm">4.36.1.4. Clipping constants</a><BR>
+        <img src="images/leaf.gif"><a href="grcolor_const.htm">4.36.1.5. Color constants</a><BR>
+        <img src="images/leaf.gif"><a href="fillpattern_const.htm">4.36.1.6. Fill pattern constants</a><BR>
+        <img src="images/leaf.gif"><a href="fillsettingstype.htm">4.36.1.7. FillSettingsType</a><BR>
+        <img src="images/leaf.gif"><a href="graphmodetype.htm">4.36.1.8. GraphModeType</a><BR>
+        <img src="images/leaf.gif"><a href="graphwndproc.htm">4.36.1.9. GraphWndProc</a><BR>
+        <img src="images/leaf.gif"><a href="graph_result_const.htm">4.36.1.10. Graphic result constants</a><BR>
+        <img src="images/leaf.gif"><a href="ignorebreak_var.htm">4.36.1.11. IgnoreBreak variable</a><BR>
+        <img src="images/leaf.gif"><a href="ignoreclosemessage_var.htm">4.36.1.12. IgnoreCloseMessage variable</a><BR>
+        <img src="images/leaf.gif"><a href="justification_const.htm">4.36.1.13. Justification constants</a><BR>
+        <img src="images/leaf.gif"><a href="linesettings_type.htm">4.36.1.14. LineSettingsType</a><BR>
+        <img src="images/leaf.gif"><a href="text-style_const.htm">4.36.1.15. Text-Style constants</a><BR>
+        <img src="images/leaf.gif"><a href="palettetype.htm">4.36.1.16. PaletteType</a><BR>
+        <img src="images/leaf.gif"><a href="pointtype.htm">4.36.1.17. PointType</a><BR>
+        <img src="images/leaf.gif"><a href="rgbtype.htm">4.36.1.18. RGBType</a><BR>
+        <img src="images/leaf.gif"><a href="svga_mode_const.htm">4.36.1.19. SVGA mode constants</a><BR>
+        <img src="images/leaf.gif"><a href="textsettingstype.htm">4.36.1.20. TextSettingsType</a><BR>
+        <img src="images/leaf.gif"><a href="viewporttype.htm">4.36.1.21. ViewPortType</a><BR>
+        <img src="images/leaf.gif"><a href="vbeinfotype.htm">4.36.1.22. VbeInfoType</a><BR>
+        <img src="images/leaf.gif"><a href="vbemodeinfotype.htm">4.36.1.23. VbeModeInfoType</a><BR>
+        </div>
+      <img id="i4_36_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_36_2');"><a href="graph_proc_and_func.htm">4.36.2. Graph Unit Procedures and Functions</a><BR>
+        <div id="p4_36_2" class=closed>
+        <img src="images/leaf.gif"><a href="analizergbcolor_proc.htm">4.36.2.1. AnalizeRGBColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="arc_proc.htm">4.36.2.2. Arc procedure</a><BR>
+        <img src="images/leaf.gif"><a href="bar_proc.htm">4.36.2.3. Bar procedure</a><BR>
+        <img src="images/leaf.gif"><a href="bar3d_proc.htm">4.36.2.4. Bar3D procedure</a><BR>
+        <img src="images/leaf.gif"><a href="circle_proc.htm">4.36.2.5. Circle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="cleardevice_proc.htm">4.36.2.6. ClearDevice procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clearpage_proc.htm">4.36.2.7. ClearPage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clearviewport_proc.htm">4.36.2.8. ClearViewPort procedure</a><BR>
+        <img src="images/leaf.gif"><a href="cliretrace_proc.htm">4.36.2.9. CliRetrace procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clihretrace_proc.htm">4.36.2.10. CliHRetrace procedure</a><BR>
+        <img src="images/leaf.gif"><a href="closegraph_proc.htm">4.36.2.11. CloseGraph procedure</a><BR>
+        <img src="images/leaf.gif"><a href="detectsvgamode_proc.htm">4.36.2.12. DetectSVGAMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="drawellipse_proc.htm">4.36.2.13. DrawEllipse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="drawhline_proc.htm">4.36.2.14. DrawHLine procedure</a><BR>
+        <img src="images/leaf.gif"><a href="drawpoly_proc.htm">4.36.2.15. DrawPoly procedure</a><BR>
+        <img src="images/leaf.gif"><a href="ellipsee_proc.htm">4.36.2.16. Ellipse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="expandfill_proc.htm">4.36.2.17. ExpandFill procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fillcircle_proc.htm">4.36.2.18. FillCircle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fillellipse_proc.htm">4.36.2.19. FillEllipse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fillpoly_proc.htm">4.36.2.20. FillPoly procedure</a><BR>
+        <img src="images/leaf.gif"><a href="filltriangle_proc.htm">4.36.2.21. FillTriangle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="flipimageox_proc.htm">4.36.2.22. FlipImageOX procedure</a><BR>
+        <img src="images/leaf.gif"><a href="flipimageoy_proc.htm">4.36.2.23. FlipImageOY procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fliptomemory_proc.htm">4.36.2.24. FlipToMemory procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fliptoscreen_proc.htm">4.36.2.25. FlipToScreen procedure</a><BR>
+        <img src="images/leaf.gif"><a href="floodfill_proc.htm">4.36.2.26. FloodFill procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getactivepage_func.htm">4.36.2.27. GetActivePage function</a><BR>
+        <img src="images/leaf.gif"><a href="getaspectratio_proc.htm">4.36.2.28. GetAspectRatio procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getbytesperscanline_func.htm">4.36.2.29. GetBytesPerScanLine</a><BR>
+        <img src="images/leaf.gif"><a href="getcolor_func.htm">4.36.2.30. GetColor function</a><BR>
+        <img src="images/leaf.gif"><a href="getdefaultpalette_proc.htm">4.36.2.31. GetDefaultPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getfillcolor_func.htm">4.36.2.32. GetFillColor function</a><BR>
+        <img src="images/leaf.gif"><a href="getfillpattern_proc.htm">4.36.2.33. GetFillPattern procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getfillsettings_proc.htm">4.36.2.34. GetFillSettings procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getgraphbufsize_func.htm">4.36.2.35. GetGraphBufSize function</a><BR>
+        <img src="images/leaf.gif"><a href="getgraphmode_func.htm">4.36.2.36. GetGraphMode function</a><BR>
+        <img src="images/leaf.gif"><a href="gethtextel_proc.htm">4.36.2.37. GetHTextel procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getimage_proc.htm">4.36.2.38. GetImage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getlfbaddress_func.htm">4.36.2.39. GetLfbAddress function</a><BR>
+        <img src="images/leaf.gif"><a href="getlinesettings_proc.htm">4.36.2.40. GetLineSettings procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getlogicalpage_proc.htm">4.36.2.41. GetLogicalPage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getmaxcolor_func.htm">4.36.2.42. GetMaxColor function</a><BR>
+        <img src="images/leaf.gif"><a href="getmaxpage_func.htm">4.36.2.43. GetMaxPage function</a><BR>
+        <img src="images/leaf.gif"><a href="getmaxx_func.htm">4.36.2.44. GetMaxX function</a><BR>
+        <img src="images/leaf.gif"><a href="getmaxy_func.htm">4.36.2.45. GetMaxY function</a><BR>
+        <img src="images/leaf.gif"><a href="getoemproductname_func.htm">4.36.2.46. GetOemProductName function</a><BR>
+        <img src="images/leaf.gif"><a href="getoemproductrev_func.htm">4.36.2.47. GetOemProductRev function</a><BR>
+        <img src="images/leaf.gif"><a href="getoemstring_func.htm">4.36.2.48. GetOemString function</a><BR>
+        <img src="images/leaf.gif"><a href="getoemvendorname_func.htm">4.36.2.49. GetOemVendorName function</a><BR>
+        <img src="images/leaf.gif"><a href="getpagedc_func.htm">4.36.2.50. GetPageDC function</a><BR>
+        <img src="images/leaf.gif"><a href="getpagesize_func.htm">4.36.2.51. GetPageSize function</a><BR>
+        <img src="images/leaf.gif"><a href="getpalette_proc.htm">4.36.2.52. GetPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getpixel_func.htm">4.36.2.53. GetPixel function</a><BR>
+        <img src="images/leaf.gif"><a href="getrgbpalette_proc.htm">4.36.2.54. GetRGBPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getscreenheight_func.htm">4.36.2.55. GetScreenHeight function</a><BR>
+        <img src="images/leaf.gif"><a href="getscreenwidth_func.htm">4.36.2.56. GetScreenWidth function</a><BR>
+        <img src="images/leaf.gif"><a href="gettextsettings_proc.htm">4.36.2.57. GetTextSettings procedure</a><BR>
+        <img src="images/leaf.gif"><a href="gettranspsettings_proc.htm">4.36.2.58. GetTranspSettings procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getvbecapabilities_func.htm">4.36.2.59. GetVbeCapabilities function</a><BR>
+        <img src="images/leaf.gif"><a href="getvbeinfo_proc.htm">4.36.2.60. GetVbeInfo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getvbemodeinfo_proc.htm">4.36.2.61. GetVbeModeInfo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getvbemodeslist_proc.htm">4.36.2.62. GetVbeModesList procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getvbeversion_func.htm">4.36.2.63. GetVbeVersion function</a><BR>
+        <img src="images/leaf.gif"><a href="getviewsettings_proc.htm">4.36.2.64. GetViewSettings procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getvisualpage_func.htm">4.36.2.65. GetVisualPage function</a><BR>
+        <img src="images/leaf.gif"><a href="getwindowhandle_func.htm">4.36.2.66. GetWindowHandle function</a><BR>
+        <img src="images/leaf.gif"><a href="getwritemode_func.htm">4.36.2.67. GetWriteMode function</a><BR>
+        <img src="images/leaf.gif"><a href="getx_func.htm">4.36.2.68. GetX function</a><BR>
+        <img src="images/leaf.gif"><a href="gety_func.htm">4.36.2.69. GetY function</a><BR>
+        <img src="images/leaf.gif"><a href="graphdefaults_proc.htm">4.36.2.70. GraphDefaults procedure</a><BR>
+        <img src="images/leaf.gif"><a href="grapherrormsg_func.htm">4.36.2.71. GraphErrorMsg function</a><BR>
+        <img src="images/leaf.gif"><a href="graphresult_func.htm">4.36.2.72. GraphResult function</a><BR>
+        <img src="images/leaf.gif"><a href="hretrace_proc.htm">4.36.2.73. HRetrace procedure</a><BR>
+        <img src="images/leaf.gif"><a href="imagesize_func.htm">4.36.2.74. ImageSize function</a><BR>
+        <img src="images/leaf.gif"><a href="invertimage_proc.htm">4.36.2.75. InvertImage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="islfbused_func.htm">4.36.2.76. IsLfbUsed function</a><BR>
+        <img src="images/leaf.gif"><a href="line_proc.htm">4.36.2.77. Line procedure</a><BR>
+        <img src="images/leaf.gif"><a href="linerel_proc.htm">4.36.2.78. LineRel procedure</a><BR>
+        <img src="images/leaf.gif"><a href="lineto_proc.htm">4.36.2.79. LineTo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="moverel_proc.htm">4.36.2.80. MoveRel procedure</a><BR>
+        <img src="images/leaf.gif"><a href="moveto_proc.htm">4.36.2.81. MoveTo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="outcharxy_proc.htm">4.36.2.82. OutCharXY procedure</a><BR>
+        <img src="images/leaf.gif"><a href="outtext_proc.htm">4.36.2.83. OutText procedure</a><BR>
+        <img src="images/leaf.gif"><a href="outtextxy_proc.htm">4.36.2.84. OutTextXY procedure</a><BR>
+        <img src="images/leaf.gif"><a href="puthtextel_proc.htm">4.36.2.85. PutHTextel procedure</a><BR>
+        <img src="images/leaf.gif"><a href="putimage_proc.htm">4.36.2.86. PutImage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="putpixel_proc.htm">4.36.2.87. PutPixel procedure</a><BR>
+        <img src="images/leaf.gif"><a href="putsprite_proc.htm">4.36.2.88. PutSprite procedure</a><BR>
+        <img src="images/leaf.gif"><a href="rectangle_proc.htm">4.36.2.89. Rectangle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="releasepagedc_proc.htm">4.36.2.90. ReleasePageDC procedure</a><BR>
+        <img src="images/leaf.gif"><a href="restorecrtmode_proc.htm">4.36.2.91. RestoreCrtMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="retrace_proc.htm">4.36.2.92. Retrace procedure</a><BR>
+        <img src="images/leaf.gif"><a href="rgbcolor_proc.htm">4.36.2.93. RGBColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setactivepage_proc.htm">4.36.2.94. SetActivePage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setallpalette_proc.htm">4.36.2.95. SetAllPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setaspectratio_proc.htm">4.36.2.96. SetAspectRatio procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setbkcolor_proc.htm">4.36.2.97. SetBkColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setcolor_proc.htm">4.36.2.98. SetColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setcustomfont_proc.htm">4.36.2.99. SetCustomFont procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setfillcolor_proc.htm">4.36.2.100. SetFillColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setfillpattern_proc.htm">4.36.2.101. SetFillPattern procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setfillstyle_proc.htm">4.36.2.102. SetFillStyle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setgraphbufsize_proc.htm">4.36.2.103. SetGraphBufSize procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setgraphmode_proc.htm">4.36.2.104. SetGraphMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setlinestyle_proc.htm">4.36.2.105. SetLineStyle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setlogicalpage_proc.htm">4.36.2.106. SetLogicalPage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setnormalmode_proc.htm">4.36.2.107. SetNormalMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setpalette_proc.htm">4.36.2.108. SetPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setrgbpalette_proc.htm">4.36.2.109. SetRGBPalette procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setscreenstart_proc.htm">4.36.2.110. SetScreenStart procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setsvgamode_proc.htm">4.36.2.111. SetSVGAMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settextjustify_proc.htm">4.36.2.112. SetTextJustify procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settextstyle_proc.htm">4.36.2.113. SetTextStyle procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setsplinesteps_proc.htm">4.36.2.114. SetSplineLineSteps procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settranspmode_proc.htm">4.36.2.115. SetTranspMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setviewport_proc.htm">4.36.2.116. SetViewPort procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setvirtualmode_proc.htm">4.36.2.117. SetVirtualMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setvisualpage_proc.htm">4.36.2.118. SetVisualPage procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setwritemode_proc.htm">4.36.2.119. SetWriteMode procedure</a><BR>
+        <img src="images/leaf.gif"><a href="spline_proc.htm">4.36.2.120. Spline procedure</a><BR>
+        <img src="images/leaf.gif"><a href="stretch_proc.htm">4.36.2.121. Stretch procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textheight_func.htm">4.36.2.122. TextHeight function</a><BR>
+        <img src="images/leaf.gif"><a href="textwidth_func.htm">4.36.2.123. TextWidth function</a><BR>
+        <img src="images/leaf.gif"><a href="totalvbememory_func.htm">4.36.2.124. TotalVbeMemory function</a><BR>
+        <img src="images/leaf.gif"><a href="totalvbemodes_func.htm">4.36.2.125. TotalVbeModes function</a><BR>
+        <img src="images/leaf.gif"><a href="triangle_proc.htm">4.36.2.126. Triangle procedure</a><BR>
+        </div>
+
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.37. HtmlHlp Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.38. ImageHlp Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.39. Imm Unit</a><BR>
+    <img id="i4_40" src="images/closed.gif" onDblClick="javascript:showLevel('4_40');"><a href="keyboard_unit.htm">4.40. Keyboard Unit</a><BR>
+      <div id="p4_40" class=closed>
+      <img src="images/leaf.gif"><a href="keyboard_constants.htm">4.40.1. Keyboard Unit Constants</a><BR>
+      <img id="i4_40_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_40_2');"><a href="keyboard_proc_and_func.htm">4.40.2. Keyboard Unit Procedures and Functions</a><BR>
+        <div id="p4_40_2" class=closed>
+        <img src="images/leaf.gif"><a href="asciitoscan_func.htm">4.40.2.1. AsciiToScan function</a><BR>
+        <img src="images/leaf.gif"><a href="getkey_func.htm">4.40.2.2. GetKey function</a><BR>
+        <img src="images/leaf.gif"><a href="flushkeyboard_proc.htm">4.40.2.3. FlushKeyboard procedure</a><BR>
+        <img src="images/leaf.gif"><a href="multikeysdone_proc.htm">4.40.2.4. MultikeysDone procedure</a><BR>
+        <img src="images/leaf.gif"><a href="multikeysinit_proc.htm">4.40.2.5. MultikeysInit procedure</a><BR>
+        <img src="images/leaf.gif"><a href="scantoascii_func.htm">4.40.2.6. ScanToAscii function</a><BR>
+        <img src="images/leaf.gif"><a href="testalt_func.htm">4.40.2.7. TestAlt function</a><BR>
+        <img src="images/leaf.gif"><a href="testcapslock_func.htm">4.40.2.8. TestCapsLock function</a><BR>
+        <img src="images/leaf.gif"><a href="testctrl_func.htm">4.40.2.9. TestCtrl function</a><BR>
+        <img src="images/leaf.gif"><a href="testnumlock_func.htm">4.40.2.10. TestNumLock function</a><BR>
+        <img src="images/leaf.gif"><a href="testscrolllock_func.htm">4.40.2.11. TestScrollLock function</a><BR>
+        <img src="images/leaf.gif"><a href="testshift_func.htm">4.40.2.12. TestShift function</a><BR>
+        <img src="images/leaf.gif"><a href="testkey_func.htm">4.40.2.13. TestKey function</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.41. LM Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.42. LZExpand Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.43. MAPI Unit</a><BR>
+    <img id="i4_44" src="images/closed.gif" onDblClick="javascript:showLevel('4_44');"><a href="math_unit.htm">4.44. Math Unit</a><BR>
+      <div id="p4_44" class=closed>
+      <img src="images/leaf.gif"><a href="math_const.htm">4.44.1. Math Unit Constants</a><BR>
+      <img id="i4_44_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_44_2');"><a href="math_proc_and_func.htm">4.44.2. Math Unit Procedures and Functions</a><BR>
+        <div id="p4_44_2" class=closed>
+        <img src="images/leaf.gif"><a href="arccos_func.htm">4.44.2.1. ArcCos function</a><BR>
+        <img src="images/leaf.gif"><a href="arccosh_func.htm">4.44.2.2. ArcCosH function</a><BR>
+        <img src="images/leaf.gif"><a href="arccotan_func.htm">4.44.2.3. ArcCotan function</a><BR>
+        <img src="images/leaf.gif"><a href="arccotanh_func.htm">4.44.2.4. ArcCotanH function</a><BR>
+        <img src="images/leaf.gif"><a href="arccsc_func.htm">4.44.2.5. ArcCsc function</a><BR>
+        <img src="images/leaf.gif"><a href="arccsch_func.htm">4.44.2.6. ArcCscH function</a><BR>
+        <img src="images/leaf.gif"><a href="arcsec_func.htm">4.44.2.7. ArcSec function</a><BR>
+        <img src="images/leaf.gif"><a href="arcsech_func.htm">4.44.2.8. ArcSecH function</a><BR>
+        <img src="images/leaf.gif"><a href="arcsin_func.htm">4.44.2.9. ArcSin function</a><BR>
+        <img src="images/leaf.gif"><a href="arcsinh_func.htm">4.44.2.10. ArcSinH function</a><BR>
+        <img src="images/leaf.gif"><a href="arctan2_func.htm">4.44.2.11. ArcTan2 function</a><BR>
+        <img src="images/leaf.gif"><a href="arctanh_func.htm">4.44.2.12. ArcTanH function</a><BR>
+        <img src="images/leaf.gif"><a href="ceil_func.htm">4.44.2.13. Ceil function</a><BR>
+        <img src="images/leaf.gif"><a href="celstofahr_func.htm">4.44.2.14. CelsToFahr function</a><BR>
+        <img src="images/leaf.gif"><a href="chgsign_func.htm">4.44.2.15. ChgSign function</a><BR>
+        <img src="images/leaf.gif"><a href="cmtoinch_func.htm">4.44.2.16. CmToInch function</a><BR>
+        <img src="images/leaf.gif"><a href="copysign_func.htm">4.44.2.17. CopySign function</a><BR>
+        <img src="images/leaf.gif"><a href="cosh_func.htm">4.44.2.18. CosH function</a><BR>
+        <img src="images/leaf.gif"><a href="cotan_func.htm">4.44.2.19. Cotan function</a><BR>
+        <img src="images/leaf.gif"><a href="csc_func.htm">4.44.2.10. Csc function</a><BR>
+        <img src="images/leaf.gif"><a href="csch_func.htm">4.44.2.21. CscH function</a><BR>
+        <img src="images/leaf.gif"><a href="cterm_func.htm">4.44.2.22. Cterm function</a><BR>
+        <img src="images/leaf.gif"><a href="cycletorad_func.htm">4.44.2.23. CycleToRad function</a><BR>
+        <img src="images/leaf.gif"><a href="deltapercent_func.htm">4.44.2.24. DeltaPercent function</a><BR>
+        <img src="images/leaf.gif"><a href="degtorad_func.htm">4.44.2.25. DegToRad function</a><BR>
+        <img src="images/leaf.gif"><a href="evaluate_proc.htm">4.44.2.26. Evaluate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="fahrtocels_func.htm">4.44.2.27. FahrToCels function</a><BR>
+        <img src="images/leaf.gif"><a href="floor_func.htm">4.44.2.28. Floor function</a><BR>
+        <img src="images/leaf.gif"><a href="fmod_func.htm">4.44.2.29. FMod function</a><BR>
+        <img src="images/leaf.gif"><a href="fv_func.htm">4.44.2.20. Fv function</a><BR>
+        <img src="images/leaf.gif"><a href="galtoliters_func.htm">4.44.2.31. GalToLitre function</a><BR>
+        <img src="images/leaf.gif"><a href="gradtorad_func.htm">4.44.2.32. GradToRad function</a><BR>
+        <img src="images/leaf.gif"><a href="hypot_func.htm">4.44.2.33. Hypot function</a><BR>
+        <img src="images/leaf.gif"><a href="inchtocm_func.htm">4.44.2.34. InchToCm function</a><BR>
+        <img src="images/leaf.gif"><a href="kgtolb_func.htm">4.44.2.35. KgToLb function</a><BR>
+        <img src="images/leaf.gif"><a href="lbtokg_func.htm">4.44.2.36. LbToKg function</a><BR>
+        <img src="images/leaf.gif"><a href="literstogal_func.htm">4.44.2.37. LitreToGal function</a><BR>
+        <img src="images/leaf.gif"><a href="log10_func.htm">4.44.2.38. Log10 function</a><BR>
+        <img src="images/leaf.gif"><a href="log2_func.htm">4.44.2.39. Log2 function</a><BR>
+        <img src="images/leaf.gif"><a href="logn_func.htm">4.44.2.30. LogN function</a><BR>
+        <img src="images/leaf.gif"><a href="lrot_func.htm">4.44.2.41. LRotL function</a><BR>
+        <img src="images/leaf.gif"><a href="lrot_func.htm">4.44.2.42. LRotR function</a><BR>
+        <img src="images/leaf.gif"><a href="max_func.htm">4.44.2.43. Max function</a><BR>
+        <img src="images/leaf.gif"><a href="min_func.htm">4.44.2.44. Min function</a><BR>
+        <img src="images/leaf.gif"><a href="modf_func.htm">4.44.2.45. Modf function</a><BR>
+        <img src="images/leaf.gif"><a href="npv_func.htm">4.44.2.46. Npv function</a><BR>
+        <img src="images/leaf.gif"><a href="percent_func.htm">4.44.2.47. Percent function</a><BR>
+        <img src="images/leaf.gif"><a href="pmt_func.htm">4.44.2.48. Pmt function</a><BR>
+        <img src="images/leaf.gif"><a href="power_func.htm">4.44.2.49. Power function</a><BR>
+        <img src="images/leaf.gif"><a href="pv_func.htm">4.44.2.40. Pv function</a><BR>
+        <img src="images/leaf.gif"><a href="radtocycle_func.htm">4.44.2.51. RadToCycle function</a><BR>
+        <img src="images/leaf.gif"><a href="radtodeg_func.htm">4.44.2.52. RadToDeg function</a><BR>
+        <img src="images/leaf.gif"><a href="radtograd_func.htm">4.44.2.53. RadToGrad function</a><BR>
+        <img src="images/leaf.gif"><a href="rate_func.htm">4.44.2.54. Rate function</a><BR>
+        <img src="images/leaf.gif"><a href="sec_func.htm">4.44.2.55. Sec function</a><BR>
+        <img src="images/leaf.gif"><a href="sech_func.htm">4.44.2.56. SecH function</a><BR>
+        <img src="images/leaf.gif"><a href="sgn_func.htm">4.44.2.57. Sgn function</a><BR>
+        <img src="images/leaf.gif"><a href="sinh_func.htm">4.44.2.58. SinH function</a><BR>
+        <img src="images/leaf.gif"><a href="sln_func.htm">4.44.2.59. Sln function</a><BR>
+        <img src="images/leaf.gif"><a href="syd_func.htm">4.44.2.50. Syd function</a><BR>
+        <img src="images/leaf.gif"><a href="tan_func.htm">4.44.2.61. Tan function</a><BR>
+        <img src="images/leaf.gif"><a href="tanh_func.htm">4.44.2.62. TanH function</a><BR>
+        <img src="images/leaf.gif"><a href="term_func.htm">4.44.2.63. Term function</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.45. Messages Unit</a><BR>
+
+    <img id="i4_46" src="images/closed.gif" onDblClick="javascript:showLevel('4_46');"><a href="mmedia_unit.htm">4.46. MMedia Unit</a><BR>
+      <div id="p4_46" class=closed>
+      <img id="i4_46_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_46_1');"><a href="tmmedia_fields.htm">4.46.1. TMMedia Object Fields</a><BR>
+        <div id="p4_46_1" class=closed>
+        <img src="images/leaf.gif"><a href="mmedia_autorewind.htm">4.46.1.1. AutoRewind</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_mcierrorproc.htm">4.46.1.2. MCErrorProc</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_notify.htm">4.46.1.3. Notify</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_playfullscreen.htm">4.46.1.4. PlayFullScreen</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_playrepeat.htm">4.46.1.5. PlayRepeat</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_stopatclose.htm">4.46.1.6. StopAtClose</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_wait.htm">4.46.1.7. Wait</a><BR>
+        </div>
+      <img id="i4_46_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_46_2');"><a href="tmmedia_methods.htm">4.46.2. TMMedia Object Methods</a><BR>
+        <div id="p4_46_2" class=closed>
+        <img src="images/leaf.gif"><a href="mmedia_close.htm">4.46.2.2. Close</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_create.htm">4.46.2.3. Create</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_errorcode.htm">4.46.2.4. ErrorCode</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getdevice.htm">4.46.2.5. GetDevice</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getdevicecaps.htm">4.46.2.6. GetDeviceCaps</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getdeviceid.htm">4.46.2.7. GetDeviceID</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getfirstaudiotrack.htm">4.46.2.8. GetFirstAudioTrack</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getlength.htm">4.46.2.9. GetLength</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getpos.htm">4.46.2.10. GetPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_getstatus.htm">4.46.2.11. GetStatus</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gettimeformat.htm">4.46.2.12. GetTimeFormat</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gettrackformat.htm">4.46.2.13. GetTrackFormat</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gettracklength.htm">4.46.2.14. GetTrackLength</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gettrackscount.htm">4.46.2.15. GetTracksCount</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gettrackpos.htm">4.46.2.16. GetTrackPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_gotofirstaudiotrack.htm">4.46.2.17. GotoFirstAudioTrack</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_next.htm">4.46.2.18. Next</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_open.htm">4.46.2.19. Open</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_pause.htm">4.46.2.20. Pause</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_play.htm">4.46.2.21. Play</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_previous.htm">4.46.2.22. Previous</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_rec.htm">4.46.2.23. Rec</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_resetendpos.htm">4.46.2.24. ResetEndPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_resetstartpos.htm">4.46.2.25. ResetStartPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_resume.htm">4.46.2.26. Resume</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_save.htm">4.46.2.27. Save</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setdevice.htm">4.46.2.28. SetDevice</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setdisplayrect.htm">4.46.2.29. SetDisplayRect</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setdisplaywindow.htm">4.46.2.30. SetDisplayWindow</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setdoorclosed.htm">4.46.2.31. SetDoorClosed</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setdooropen.htm">4.46.2.32. SetDoorOpen</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setendpos.htm">4.46.2.33. SetEndPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setpos.htm">4.46.2.34. SetPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_setstartpos.htm">4.46.2.35. SetStartPos</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_settimeformat.htm">4.46.2.36. SetTimeFormat</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_step.htm">4.46.2.37. Step</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_stop.htm">4.46.2.38. Stop</a><BR>
+        <img src="images/leaf.gif"><a href="mmedia_rewind.htm">4.46.2.39. Rewind</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.47. MMSystem Unit</a><BR>
+
+    <img id="i4_48" src="images/closed.gif" onDblClick="javascript:showLevel('4_48');"><a href="mouse_unit.htm">4.48. Mouse Unit</a><BR>
+      <div id="p4_48" class=closed>
+      <img id="i4_48_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_48_1');"><a href="mouse_proc_and_func.htm">4.48.1. Mouse Unit Procedures and Functions</a><BR>
+        <div id="p4_48_1" class=closed>
+        <img src="images/leaf.gif"><a href="clearmousehandler_proc.htm">4.48.1.1. ClearMouseHandler procedure</a><BR>
+        <img src="images/leaf.gif"><a href="donemouse_proc.htm">4.48.1.2. DoneMouse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getbuttoncount_func.htm">4.48.1.3. GetButtonCount function</a><BR>
+        <img src="images/leaf.gif"><a href="getmouseinfo_proc.htm">4.48.1.4. GetMouseInfo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getmousex_func.htm">4.48.1.5. GetMouseX function</a><BR>
+        <img src="images/leaf.gif"><a href="getmousey_func.htm">4.48.1.6. GetMouseY function</a><BR>
+        <img src="images/leaf.gif"><a href="hidemouse_proc.htm">4.48.1.7. HideMouse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="initmouse_proc.htm">4.48.1.8. InitMouse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="leftbuttonpressed_func.htm">4.48.1.9. LeftButtonPressed function</a><BR>
+        <img src="images/leaf.gif"><a href="mickytotext_func.htm">4.48.1.10. MickyToText function</a><BR>
+        <img src="images/leaf.gif"><a href="middlebuttonpressed_func.htm">4.48.1.11. MiddleButtonPressed function</a><BR>
+        <img src="images/leaf.gif"><a href="rightbuttonpressed_func.htm">4.48.1.12. RightButtonPressed function</a><BR>
+        <img src="images/leaf.gif"><a href="setmousehandler_proc.htm">4.48.1.13. SetMouseHandler procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setmousepos_proc.htm">4.48.1.14. SetMousePos procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setmouserange_proc.htm">4.48.1.15. SetMouseRange procedure</a><BR>
+        <img src="images/leaf.gif"><a href="showmouse_proc.htm">4.48.1.16. ShowMouse procedure</a><BR>
+        <img src="images/leaf.gif"><a href="texttomicky_func.htm">4.48.1.17. TextToMicky function</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.49. Nb30 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.50. OpenGL Unit</a><BR>
+    <img src="images/leaf.gif"><a href="os2api.htm">4.51. OS2PMAPI Unit</a><BR>
+    <img src="images/leaf.gif"><a href="os2api.htm">4.52. OS2Ord Unit</a><BR>
+    <img src="images/leaf.gif"><a href="os2api.htm">4.53. OS2Types Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.54. PenWin UNit</a><BR>
+    <img src="images/leaf.gif"><a href="printer_unit.htm">4.55. Printer Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.56. Regstr Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.57. RichEdit Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.58. ShellAPI Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.59. ShlObj Unit</a><BR>
+    <img id="i4_60" src="images/closed.gif" onDblClick="javascript:showLevel('4_60');"><a href="strings_unit.htm">4.60. Strings Unit</a><BR>
+      <div id="p4_60" class=closed>
+      <img src="images/leaf.gif"><a href="strings_overloaded_operators.htm">4.60.1. Strings Unit Overloaded Operators</a><BR>
+      <img id="i4_60_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_60_2');"><a href="strings_proc_and_func.htm">4.60.2. Strings Unit Procedures and Functions</a><BR>
+        <div id="p4_60_2" class=closed>
+        <img src="images/leaf.gif"><a href="align_func.htm">4.60.2.1. Align function</a><BR>
+        <img src="images/leaf.gif"><a href="ansicomparestr_func.htm">4.60.2.2. AnsiCompareStr function</a><BR>
+        <img src="images/leaf.gif"><a href="ansilowercase_func.htm">4.60.2.3. AnsiLowerCase function</a><BR>
+        <img src="images/leaf.gif"><a href="ansicomparetext_func.htm">4.60.2.4. AnsiCompareText function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistrcomp_func.htm">4.60.2.5. AnsiStrComp function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistricomp_func.htm">4.60.2.6. AnsiStrIComp function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistrlcomp_func.htm">4.60.2.7. AnsiStrLComp function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistrlicomp_func.htm">4.60.2.8. AnsiStrLIComp function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistrlower_func.htm">4.60.2.9. AnsiStrLower function</a><BR>
+        <img src="images/leaf.gif"><a href="ansistrupper_func.htm">4.60.2.10. AnsiStrUpper function</a><BR>
+        <img src="images/leaf.gif"><a href="ansiuppercase_func.htm">4.60.2.11. AnsiUpperCase function</a><BR>
+        <img src="images/leaf.gif"><a href="appendpathdelimiter_func.htm">4.60.2.12. AppendPathDelimiter function</a><BR>
+        <img src="images/leaf.gif"><a href="bin_func.htm">4.60.2.13. Bin function</a><BR>
+        <img src="images/leaf.gif"><a href="dup_ci_func.htm">4.60.2.14. Dup_CI function</a><BR>
+        <img src="images/leaf.gif"><a href="dup_si_func.htm">4.60.2.15. Dup_SI function</a><BR>
+        <img src="images/leaf.gif"><a href="fix_func.htm">4.60.2.16. Fix function</a><BR>
+        <img src="images/leaf.gif"><a href="floattostr_func.htm">4.60.2.17. FloatToStr function</a><BR>
+        <img src="images/leaf.gif"><a href="fls_func.htm">4.60.2.18. Fls function</a><BR>
+        <img src="images/leaf.gif"><a href="flt_func.htm">4.60.2.19. Flt function</a><BR>
+        <img src="images/leaf.gif"><a href="hex_func.htm">4.60.2.20. Hex function</a><BR>
+        <img src="images/leaf.gif"><a href="hexval_func.htm">4.60.2.21. HexVal function</a><BR>
+        <img src="images/leaf.gif"><a href="inttobin_func.htm">4.60.2.22. IntToBin function</a><BR>
+        <img src="images/leaf.gif"><a href="inttohex_func.htm">4.60.2.23. IntToHex function</a><BR>
+        <img src="images/leaf.gif"><a href="inttostr_func.htm">4.60.2.24. IntToStr function</a><BR>
+        <img src="images/leaf.gif"><a href="isdelimiter_func.htm">4.60.2.25. IsDelimiter function</a><BR>
+        <img src="images/leaf.gif"><a href="ispathdelimiter_func.htm">4.60.2.26. IsPathDelimiter function</a><BR>
+        <img src="images/leaf.gif"><a href="isvalidident_func.htm">4.60.2.27. IsValidIdent function</a><BR>
+        <img src="images/leaf.gif"><a href="lastdelimiter_func.htm">4.60.2.28. LastDelimiter function</a><BR>
+        <img src="images/leaf.gif"><a href="lowercase_func.htm">4.60.2.29. LowerCase function</a><BR>
+        <img src="images/leaf.gif"><a href="quotedstr_func.htm">4.60.2.30. QuotedStr function</a><BR>
+        <img src="images/leaf.gif"><a href="strappend_proc.htm">4.60.2.31. StrAppend procedure</a><BR>
+        <img src="images/leaf.gif"><a href="strappendc_proc.htm">4.60.2.32. StrAppendC procedure</a><BR>
+        <img src="images/leaf.gif"><a href="strcat_func.htm">4.60.2.33. StrCat function</a><BR>
+        <img src="images/leaf.gif"><a href="strcomp_func.htm">4.60.2.34. StrComp function</a><BR>
+        <img src="images/leaf.gif"><a href="strcopy_func.htm">4.60.2.35. StrCopy function</a><BR>
+        <img src="images/leaf.gif"><a href="strdispose_proc.htm">4.60.2.36. StrDispose procedure</a><BR>
+        <img src="images/leaf.gif"><a href="strecopy_func.htm">4.60.2.37. StrECopy function</a><BR>
+        <img src="images/leaf.gif"><a href="strend_func.htm">4.60.2.38. StrEnd function</a><BR>
+        <img src="images/leaf.gif"><a href="strlcat_func.htm">4.60.2.39. StrLCat function</a><BR>
+        <img src="images/leaf.gif"><a href="stricomp_func.htm">4.60.2.40. StrIComp function</a><BR>
+        <img src="images/leaf.gif"><a href="strlcomp_func.htm">4.60.2.41. StrLComp function</a><BR>
+        <img src="images/leaf.gif"><a href="strlcopy_func.htm">4.60.2.42. StrLCopy function</a><BR>
+        <img src="images/leaf.gif"><a href="strlen_func.htm">4.60.2.43. StrLen function</a><BR>
+        <img src="images/leaf.gif"><a href="strlicomp_func.htm">4.60.2.44. StrLIComp function</a><BR>
+        <img src="images/leaf.gif"><a href="strlower_func.htm">4.60.2.45. StrLower function</a><BR>
+        <img src="images/leaf.gif"><a href="strmove_func.htm">4.60.2.46. StrMove function</a><BR>
+        <img src="images/leaf.gif"><a href="strnew_func.htm">4.60.2.47. StrNew function</a><BR>
+        <img src="images/leaf.gif"><a href="strpas_func.htm">4.60.2.48. StrPas function</a><BR>
+        <img src="images/leaf.gif"><a href="strpcopy_func.htm">4.60.2.49. StrPCopy function</a><BR>
+        <img src="images/leaf.gif"><a href="strpos_func.htm">4.60.2.50. StrPos function</a><BR>
+        <img src="images/leaf.gif"><a href="strrscan_func.htm">4.60.2.51. StrRScan function</a><BR>
+        <img src="images/leaf.gif"><a href="strscan_func.htm">4.60.2.52. StrScan function</a><BR>
+        <img src="images/leaf.gif"><a href="strtoint_func.htm">4.60.2.53. StrToInt function</a><BR>
+        <img src="images/leaf.gif"><a href="strtointdef_func.htm">4.60.2.54. StrToIntDef function</a><BR>
+        <img src="images/leaf.gif"><a href="strupper_func.htm">4.60.2.55. StrUpper function</a><BR>
+        <img src="images/leaf.gif"><a href="trim_func.htm">4.60.2.56. Trim function</a><BR>
+        <img src="images/leaf.gif"><a href="trimleft_func.htm">4.60.2.57. TrimLeft function</a><BR>
+        <img src="images/leaf.gif"><a href="trimright_func.htm">4.60.2.58. TrimRight function</a><BR>
+        <img src="images/leaf.gif"><a href="uns_func.htm">4.60.2.59. Uns function</a><BR>
+        <img src="images/leaf.gif"><a href="uppercase_func.htm">4.60.2.60. UpperCase function</a><BR>
+        <img src="images/leaf.gif"><a href="whl_func.htm">4.60.2.61. Whl function</a><BR>
+        </div>
+      </div>
+
+    <img id="i4_61" src="images/closed.gif" onDblClick="javascript:showLevel('4_61');"><a href="system_unit.htm">4.61. System Unit</a><BR>
+      <div id="p4_61" class=closed>
+      <img id="i4_61_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_61_1');"><a href="system_variables.htm">4.61.1. System Unit Variables</a><BR>
+        <div id="p4_61_1" class=closed>
+        <img src="images/leaf.gif"><a href="_environ_var.htm">4.61.1.1. _environ variable</a><BR>
+        <img src="images/leaf.gif"><a href="_psp_var.htm">4.61.1.2. _psp variable</a><BR>
+        <img src="images/leaf.gif"><a href="_zero_var.htm">4.61.1.3. _zero variable</a><BR>
+        <img src="images/leaf.gif"><a href="cmdline_var.htm">4.61.1.4. CmdLine variable</a><BR>
+        <img src="images/leaf.gif"><a href="cmdshow_var.htm">4.61.1.5. CmdShow variable</a><BR>
+        <img src="images/leaf.gif"><a href="erroraddr_var.htm">4.61.1.6. ErrorAddr variable</a><BR>
+        <img src="images/leaf.gif"><a href="exename_var.htm">4.61.1.7. ExeName variable</a><BR>
+        <img src="images/leaf.gif"><a href="exesize_var.htm">4.61.1.8. ExeSize variable</a><BR>
+        <img src="images/leaf.gif"><a href="exitcode_var.htm">4.61.1.9. ExitCode variable</a><BR>
+        <img src="images/leaf.gif"><a href="exitproc_var.htm">4.61.1.10. ExitProc variable</a><BR>
+        <img src="images/leaf.gif"><a href="farpointer_type.htm">4.61.1.11. FarPointer type</a><BR>
+        <img src="images/leaf.gif"><a href="filemode_var.htm">4.61.1.12. FileMode variable</a><BR>
+        <img src="images/leaf.gif"><a href="heaphandle_var.htm">4.61.1.13. HeapHandle variable</a><BR>
+        <img src="images/leaf.gif"><a href="hinstance_var.htm">4.61.1.14. hInstance variable</a><BR>
+        <img src="images/leaf.gif"><a href="inoutres_var.htm">4.61.1.15. InOutRes variable</a><BR>
+        <img src="images/leaf.gif"><a href="input_var.htm">4.61.1.16. Input variable</a><BR>
+        <img src="images/leaf.gif"><a href="isconsole_var.htm">4.61.1.17. IsConsole variable</a><BR>
+        <img src="images/leaf.gif"><a href="islibrary_var.htm">4.61.1.18. IsLibrary variable</a><BR>
+        <img src="images/leaf.gif"><a href="longrec_type.htm">4.61.1.19. LongRec type</a><BR>
+        <img src="images/leaf.gif"><a href="longlongrec_type.htm">4.61.1.20. LongLongRec type</a><BR>
+        <img src="images/leaf.gif"><a href="maxcardinal_const.htm">4.61.1.21. MaxCardinal constant</a><BR>
+        <img src="images/leaf.gif"><a href="maxdword_const.htm">4.61.1.22. MaxDWord constant</a><BR>
+        <img src="images/leaf.gif"><a href="maxint_const.htm">4.61.1.23. MaxInt constant</a><BR>
+        <img src="images/leaf.gif"><a href="maxlongint_const.htm">4.61.1.24. MaxLongint constant</a><BR>
+        <img src="images/leaf.gif"><a href="maxword_const.htm">4.61.1.25. MaxWord constant</a><BR>
+        <img src="images/leaf.gif"><a href="output_var.htm">4.61.1.26. Output variable</a><BR>
+        <img src="images/leaf.gif"><a href="randseed_var.htm">4.61.1.27. RandSeed variable</a><BR>
+        <img src="images/leaf.gif"><a href="stderrorhandle_var.htm">4.61.1.28. StdErrorHandle variable</a><BR>
+        <img src="images/leaf.gif"><a href="stdinputhandle_var.htm">4.61.1.29. StdInputHandle variable</a><BR>
+        <img src="images/leaf.gif"><a href="stdoutputhandle_var.htm">4.61.1.30. StdOutputHandle variable</a><BR>
+        <img src="images/leaf.gif"><a href="test8086_var.htm">4.61.1.31. Test8086 variable</a><BR>
+        <img src="images/leaf.gif"><a href="test8087_var.htm">4.61.1.32. Test8087 variable</a><BR>
+        </div>
+
+      <img id="i4_61_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_61_2');"><a href="system_proc_and_func.htm">4.61.2. System Unit Procedures and Functions</a><BR>
+        <div id="p4_61_2" class=closed>
+        <img src="images/leaf.gif"><a href="abs_func.htm">4.61.2.1. Abs function</a><BR>
+        <img src="images/leaf.gif"><a href="addr_func.htm">4.61.2.2. Addr function</a><BR>
+        <img src="images/leaf.gif"><a href="append_proc.htm">4.61.2.3. Append procedure</a><BR>
+        <img src="images/leaf.gif"><a href="arctan_func.htm">4.61.2.4. ArcTan function</a><BR>
+        <img src="images/leaf.gif"><a href="assert_proc.htm">4.61.2.5. Assert procedure</a><BR>
+        <img src="images/leaf.gif"><a href="assign_proc.htm">4.61.2.6. Assign procedure</a><BR>
+        <img src="images/leaf.gif"><a href="assigned_func.htm">4.61.2.7. Assigned function</a><BR>
+        <img src="images/leaf.gif"><a href="blockread_proc.htm">4.61.2.8. BlockRead procedure</a><BR>
+        <img src="images/leaf.gif"><a href="blockwrite_proc.htm">4.61.2.9. BlockWrite procedure</a><BR>
+        <img src="images/leaf.gif"><a href="break_proc.htm">4.61.2.10. Break procedure</a><BR>
+        <img src="images/leaf.gif"><a href="chdir_proc.htm">4.61.2.11. ChDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="chr_func.htm">4.61.2.12. Chr function</a><BR>
+        <img src="images/leaf.gif"><a href="close_proc.htm">4.61.2.13. Close procedure</a><BR>
+        <img src="images/leaf.gif"><a href="comparemem_func.htm">4.61.2.14. CompareMem function</a><BR>
+        <img src="images/leaf.gif"><a href="concat_func.htm">4.61.2.15. Concat function</a><BR>
+        <img src="images/leaf.gif"><a href="continue_proc.htm">4.61.2.16. Continue procedure</a><BR>
+        <img src="images/leaf.gif"><a href="copy_func.htm">4.61.2.17. Copy function</a><BR>
+        <img src="images/leaf.gif"><a href="cos_func.htm">4.61.2.18. Cos function</a><BR>
+        <img src="images/leaf.gif"><a href="dec_proc.htm">4.61.2.19. Dec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="delete_proc.htm">4.61.2.20. Delete procedure</a><BR>
+        <img src="images/leaf.gif"><a href="dispose_proc.htm">4.61.2.21. Dispose procedure</a><BR>
+        <img src="images/leaf.gif"><a href="eof_func.htm">4.61.2.22. Eof function</a><BR>
+        <img src="images/leaf.gif"><a href="eoln_func.htm">4.61.2.23. Eoln function</a><BR>
+        <img src="images/leaf.gif"><a href="erase_proc.htm">4.61.2.24. Erase procedure</a><BR>
+        <img src="images/leaf.gif"><a href="exit_proc.htm">4.61.2.25. Exit procedure</a><BR>
+        <img src="images/leaf.gif"><a href="exclude_proc.htm">4.61.2.26. Exclude procedure</a><BR>
+        <img src="images/leaf.gif"><a href="exp_func.htm">4.61.2.27. Exp function</a><BR>
+        <img src="images/leaf.gif"><a href="filepos_func.htm">4.61.2.28. FilePos function</a><BR>
+        <img src="images/leaf.gif"><a href="filesize_func.htm">4.61.2.29. FileSize function</a><BR>
+        <img src="images/leaf.gif"><a href="fillchar_proc.htm">4.61.2.30. FillChar procedure</a><BR>
+        <img src="images/leaf.gif"><a href="flush_proc.htm">4.61.2.31. Flush procedure</a><BR>
+        <img src="images/leaf.gif"><a href="frac_func.htm">4.61.2.32. Frac function</a><BR>
+        <img src="images/leaf.gif"><a href="freemem_proc.htm">4.61.2.33. FreeMem procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getdir_proc.htm">4.61.2.34. GetDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getlocalestr_func.htm">4.61.2.35. GetLocaleStr function</a><BR>
+        <img src="images/leaf.gif"><a href="getmem_proc.htm">4.61.2.36. GetMem procedure</a><BR>
+        <img src="images/leaf.gif"><a href="halt_proc.htm">4.61.2.37. Halt procedure</a><BR>
+        <img src="images/leaf.gif"><a href="hi_func.htm">4.61.2.38. Hi function</a><BR>
+        <img src="images/leaf.gif"><a href="high_func.htm">4.61.2.39. High function</a><BR>
+        <img src="images/leaf.gif"><a href="inc_proc.htm">4.61.2.40. Inc procedure</a><BR>
+        <img src="images/leaf.gif"><a href="include_proc.htm">4.61.2.41. Include procedure</a><BR>
+        <img src="images/leaf.gif"><a href="insert_proc.htm">4.61.2.42. Insert procedure</a><BR>
+        <img src="images/leaf.gif"><a href="int_func.htm">4.61.2.43. Int function</a><BR>
+        <img src="images/leaf.gif"><a href="ioresult_func.htm">4.61.2.44. IOResult function</a><BR>
+        <img src="images/leaf.gif"><a href="length_func.htm">4.61.2.45. Length function</a><BR>
+        <img src="images/leaf.gif"><a href="ln_func.htm">4.61.2.46. Ln function</a><BR>
+        <img src="images/leaf.gif"><a href="lo_func.htm">4.61.2.47. Lo function</a><BR>
+        <img src="images/leaf.gif"><a href="locase_func.htm">4.61.2.48. LoCase function</a><BR>
+        <img src="images/leaf.gif"><a href="low_func.htm">4.61.2.49. Low function</a><BR>
+        <img src="images/leaf.gif"><a href="maxavail_func.htm">4.61.2.50. MaxAvail function</a><BR>
+        <img src="images/leaf.gif"><a href="memavail_func.htm">4.61.2.51. MemAvail function</a><BR>
+        <img src="images/leaf.gif"><a href="mkdir_proc.htm">4.61.2.52. MkDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="move_proc.htm">4.61.2.53. Move procedure</a><BR>
+        <img src="images/leaf.gif"><a href="new_proc.htm">4.61.2.54. New procedure</a><BR>
+        <img src="images/leaf.gif"><a href="odd_func.htm">4.61.2.55. Odd function</a><BR>
+        <img src="images/leaf.gif"><a href="ofs_func.htm">4.61.2.56. Ofs function</a><BR>
+        <img src="images/leaf.gif"><a href="ord_func.htm">4.61.2.57. Ord function</a><BR>
+        <img src="images/leaf.gif"><a href="paramcount_func.htm">4.61.2.58. ParamCount function</a><BR>
+        <img src="images/leaf.gif"><a href="paramstr_func.htm">4.61.2.59. ParamStr function</a><BR>
+        <img src="images/leaf.gif"><a href="pi_func.htm">4.61.2.60. Pi function</a><BR>
+        <img src="images/leaf.gif"><a href="pos_func.htm">4.61.2.61. Pos function</a><BR>
+        <img src="images/leaf.gif"><a href="pred_func.htm">4.61.2.62. Pred function</a><BR>
+        <img src="images/leaf.gif"><a href="ptr_func.htm">4.61.2.63. Ptr function</a><BR>
+        <img src="images/leaf.gif"><a href="qsort_proc.htm">4.61.2.64. QSort procedure</a><BR>
+        <img src="images/leaf.gif"><a href="random_func.htm">4.61.2.65. Random function</a><BR>
+        <img src="images/leaf.gif"><a href="randomize_proc.htm">4.61.2.66. Randomize procedure</a><BR>
+        <img src="images/leaf.gif"><a href="read_proc.htm">4.61.2.67. Read procedure</a><BR>
+        <img src="images/leaf.gif"><a href="readln_proc.htm">4.61.2.68. ReadLn procedure</a><BR>
+        <img src="images/leaf.gif"><a href="rename_proc.htm">4.61.2.69. Rename procedure</a><BR>
+        <img src="images/leaf.gif"><a href="reset_proc.htm">4.61.2.70. Reset procedure</a><BR>
+        <img src="images/leaf.gif"><a href="rewrite_proc.htm">4.61.2.71. ReWrite procedure</a><BR>
+        <img src="images/leaf.gif"><a href="rmdir_proc.htm">4.61.2.72. RmDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="round_func.htm">4.61.2.73. Round function</a><BR>
+        <img src="images/leaf.gif"><a href="round64_func.htm">4.61.2.74. Round64 function</a><BR>
+        <img src="images/leaf.gif"><a href="runerror_proc.htm">4.61.2.75. RunError procedure</a><BR>
+        <img src="images/leaf.gif"><a href="seek_proc.htm">4.61.2.76. Seek procedure</a><BR>
+        <img src="images/leaf.gif"><a href="seekeof_proc.htm">4.61.2.77. SeekEof procedure</a><BR>
+        <img src="images/leaf.gif"><a href="seekeoln_proc.htm">4.61.2.78. SeekEoln procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setstring_proc.htm">4.61.2.79. SetString procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settextbuf_proc.htm">4.61.2.80. SetTextBuf procedure</a><BR>
+        <img src="images/leaf.gif"><a href="sin_func.htm">4.61.2.81. Sin function</a><BR>
+        <img src="images/leaf.gif"><a href="sizeof_func.htm">4.61.2.82. SizeOf function</a><BR>
+        <img src="images/leaf.gif"><a href="sqr_func.htm">4.61.2.83. Sqr function</a><BR>
+        <img src="images/leaf.gif"><a href="sqrt_func.htm">4.61.2.84. Sqrt function</a><BR>
+        <img src="images/leaf.gif"><a href="str_proc.htm">4.61.2.85. Str procedure</a><BR>
+        <img src="images/leaf.gif"><a href="succ_func.htm">4.61.2.86. Succ function</a><BR>
+        <img src="images/leaf.gif"><a href="swap_func.htm">4.61.2.87. Swap function</a><BR>
+        <img src="images/leaf.gif"><a href="swapargs_proc.htm">4.61.2.88. SwapArgs procedure</a><BR>
+        <img src="images/leaf.gif"><a href="trunc_func.htm">4.61.2.89. Trunc function</a><BR>
+        <img src="images/leaf.gif"><a href="trunc64_func.htm">4.61.2.90. Trunc64 function</a><BR>
+        <img src="images/leaf.gif"><a href="truncate_proc.htm">4.61.2.91. Truncate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="upcase_func.htm">4.61.2.92. UpCase function</a><BR>
+        <img src="images/leaf.gif"><a href="val_proc.htm">4.61.2.93. Val procedure</a><BR>
+        <img src="images/leaf.gif"><a href="win32buildnumber_func.htm">4.61.2.94. Win32BuildNumber function</a><BR>
+        <img src="images/leaf.gif"><a href="win32majorversion_func.htm">4.61.2.95. Win32MajorVersion function</a><BR>
+        <img src="images/leaf.gif"><a href="win32minorversion_func.htm">4.61.2.96. Win32MinorVersion function</a><BR>
+        <img src="images/leaf.gif"><a href="win32platform_func.htm">4.61.2.97. Win32Platform function</a><BR>
+        <img src="images/leaf.gif"><a href="write_proc.htm">4.61.2.98. Write procedure</a><BR>
+        <img src="images/leaf.gif"><a href="writeln_proc.htm">4.61.2.99. WriteLn procedure</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.62. TlHelp32 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.63. URLMon Unit</a><BR>
+    <img src="images/leaf.gif"><a href="use16_unit.htm">4.64. Use16 Unit</a><BR>
+    <img src="images/leaf.gif"><a href="use32_unit.htm">4.65. Use32 Unit</a><BR>
+    <img id="i4_66" src="images/closed.gif" onDblClick="javascript:showLevel('4_66');"><a href="wincrt_unit.htm">4.66. WinCRT</a><BR>
+      <div id="p4_66" class=closed>
+      <img id="i4_66_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_66_1');"><a href="wincrt_variables.htm">4.66.1. WinCRT Unit Variables</a><BR>
+        <div id="p4_66_1" class=closed>
+        <img src="images/leaf.gif"><a href="wincrtautotracking_var.htm">4.66.1.1. AutoTracking variable</a><BR>
+        <img src="images/leaf.gif"><a href="checkbreak_var.htm">4.66.1.2. CheckBreak variable</a><BR>
+        <img src="images/leaf.gif"><a href="checkeof_var.htm">4.66.1.3. CheckEOF variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtcloseonexit_var.htm">4.66.1.4. CloseOnExit variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtcolor_const.htm">4.66.1.5. Color Constants</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtcurorg_var.htm">4.66.1.6. CurOrg variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtcursor_var.htm">4.66.1.7. Cursor variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtinactivetitle_var.htm">4.66.1.8. InactiveTitle variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtscreensize_var.htm">4.66.1.9. ScreenSize variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtscrollcrtwindow_var.htm">4.66.1.10. ScrollCrtWindow variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtwindoworg_var.htm">4.66.1.11. WindowOrg variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtwindowsize_var.htm">4.66.1.12. WindowSize variable</a><BR>
+        <img src="images/leaf.gif"><a href="wincrtwindowtitle_var.htm">4.66.1.13. WindowTitle variable</a><BR>
+        </div>
+      <img id="i4_66_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_66_2');"><a href="wincrt_proc_and_func.htm">4.66.2. WinCRT Unit Procedures and Functions</a><BR>
+        <div id="p4_66_2" class=closed>
+        <img src="images/leaf.gif"><a href="assigncrt_proc.htm">4.66.2.1. AssignCrt procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clreol_proc.htm">4.66.2.2. ClrEOL procedure</a><BR>
+        <img src="images/leaf.gif"><a href="clrscr_proc.htm">4.66.2.3. ClrScr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="cursorto_proc.htm">4.66.2.4. CursorTo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="delay_proc.htm">4.66.2.5. Delay procedure</a><BR>
+        <img src="images/leaf.gif"><a href="donewincrt_proc.htm">4.66.2.6. DoneWinCRT procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getcharxy_func.htm">4.66.2.7. GetCharXY function</a><BR>
+        <img src="images/leaf.gif"><a href="gotoxy_proc.htm">4.66.2.8. GotoXY procedure</a><BR>
+        <img src="images/leaf.gif"><a href="hidecursor_proc.htm">4.66.2.9. HideCursor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="initwincrt_proc.htm">4.66.2.10. InitWinCRT procedure</a><BR>
+        <img src="images/leaf.gif"><a href="keypressed_func.htm">4.66.2.11. KeyPressed function</a><BR>
+        <img src="images/leaf.gif"><a href="nosound_proc.htm">4.66.2.12. NoSound procedure</a><BR>
+        <img src="images/leaf.gif"><a href="readbuf_proc.htm">4.66.2.13. ReadBuf procedure</a><BR>
+        <img src="images/leaf.gif"><a href="readkey_func.htm">4.66.2.14. ReadKey function</a><BR>
+        <img src="images/leaf.gif"><a href="scrollto_proc.htm">4.66.2.15. ScrollTo procedure</a><BR>
+        <img src="images/leaf.gif"><a href="showcursor_proc.htm">4.66.2.16. ShowCursor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="sound_proc.htm">4.66.2.17. Sound procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textbackground_proc.htm">4.66.2.18. TextBackGround procedure</a><BR>
+        <img src="images/leaf.gif"><a href="textcolor_proc.htm">4.66.2.19. TextColor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="trackcursor_proc.htm">4.66.2.20. TrackCursor procedure</a><BR>
+        <img src="images/leaf.gif"><a href="wherex_func.htm">4.66.2.21. WhereX function</a><BR>
+        <img src="images/leaf.gif"><a href="wherey_func.htm">4.66.2.22. WhereY function</a><BR>
+        <img src="images/leaf.gif"><a href="writebuf_proc.htm">4.66.2.23. WriteBuf procedure</a><BR>
+        <img src="images/leaf.gif"><a href="writechar_proc.htm">4.66.2.24. WriteChar procedure</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.67. WinDNS Unit</a><BR>
+    <img id="i4_68" src="images/closed.gif" onDblClick="javascript:showLevel('4_68');"><a href="windos_unit.htm">4.68. WinDos Unti</a><BR>
+      <div id="p4_68" class=closed>
+      <img id="i4_68_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_68_1');"><a href="windos_const_and_var.htm">4.68.1. WinDos Unit Constants and Variables</a><BR>
+        <div id="p4_68_1" class=closed>
+        <img src="images/leaf.gif"><a href="flag_const.htm">4.68.1.1. Flag constants</a><BR>
+        <img src="images/leaf.gif"><a href="file-mode_const.htm">4.68.1.2. File-mode constants</a><BR>
+        <img src="images/leaf.gif"><a href="file-attribute_const.htm">4.68.1.3. File-attribute constants</a><BR>
+        <img src="images/leaf.gif"><a href="tdatetime_type.htm">4.68.1.4. TDateTime type</a><BR>
+        <img src="images/leaf.gif"><a href="doserror_var.htm">4.68.1.5. DosError variable</a><BR>
+        <img src="images/leaf.gif"><a href="tregisters_type.htm">4.68.1.6. TRegisters type</a><BR>
+        <img src="images/leaf.gif"><a href="tsearchrec_type.htm">4.68.1.7. TSearchRec type</a><BR>
+        </div>
+
+      <img id="i4_68_2" src="images/closed.gif" onDblClick="javascript:showLevel('4_68_2');"><a href="windos_proc_and_func.htm">4.68.2. WinDos Unit Procedures and Functions</a><BR>
+        <div id="p4_68_2" class=closed>
+        <img src="images/leaf.gif"><a href="createdir_proc.htm">4.68.2.1. CreateDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="diskfree_func.htm">4.68.2.2. DiskFree function</a><BR>
+        <img src="images/leaf.gif"><a href="diskfreekb_func.htm">4.68.2.3. DiskFreeKB function</a><BR>
+        <img src="images/leaf.gif"><a href="disksize_func.htm">4.68.2.4. DiskSize function</a><BR>
+        <img src="images/leaf.gif"><a href="disksizekb_func.htm">4.68.2.5. DiskSizeKB function</a><BR>
+        <img src="images/leaf.gif"><a href="dosversion_func.htm">4.68.2.6. DosVersion function</a><BR>
+        <img src="images/leaf.gif"><a href="fileexpand_func.htm">4.68.2.7. FileExpand function</a><BR>
+        <img src="images/leaf.gif"><a href="findfirst_proc.htm">4.68.2.8. FindFirst procedure</a><BR>
+        <img src="images/leaf.gif"><a href="findnext_proc.htm">4.68.2.9. FindNext procedure</a><BR>
+        <img src="images/leaf.gif"><a href="filesearch_func.htm">4.68.2.10. FileSearch function</a><BR>
+        <img src="images/leaf.gif"><a href="filesplit_proc.htm">4.68.2.11. FileSplit procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getargcount_func.htm">4.68.2.12. GetArgCount function</a><BR>
+        <img src="images/leaf.gif"><a href="getargstr_func.htm">4.68.2.13. GetArgStr function</a><BR>
+        <img src="images/leaf.gif"><a href="getcbreak_proc.htm">4.68.2.14. GetCBreak procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getcurdir_func.htm">4.68.2.15. GetCurDir function</a><BR>
+        <img src="images/leaf.gif"><a href="getdate_proc.htm">4.68.2.16. GetDate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getenvvar_func.htm">4.68.2.17. GetEnvVar function</a><BR>
+        <img src="images/leaf.gif"><a href="getfattr_proc.htm">4.68.2.18. GetFAttr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getftime_proc.htm">4.68.2.19. GetFTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getintvec_proc.htm">4.68.2.20. GetIntVec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="gettime_proc.htm">4.68.2.21. GetTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="getverify_proc.htm">4.68.2.22. GetVerify procedure</a><BR>
+        <img src="images/leaf.gif"><a href="intr_proc.htm">4.68.2.23. Intr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="msdos_proc.htm">4.68.2.24. MsDos procedure</a><BR>
+        <img src="images/leaf.gif"><a href="packtime_proc.htm">4.68.2.25. PackTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="removedir_proc.htm">4.68.2.26. RemoveDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setcbreak_proc.htm">4.68.2.27. SetCBreak procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setcurdir_proc.htm">4.68.2.28. SetCurDir procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setdate_proc.htm">4.68.2.29. SetDate procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setfattr_proc.htm">4.68.2.30. SetFAttr procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setftime_proc.htm">4.68.2.31. SetFTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setintvec_proc.htm">4.68.2.32. SetIntVec procedure</a><BR>
+        <img src="images/leaf.gif"><a href="settime_proc.htm">4.68.2.33. SetTime procedure</a><BR>
+        <img src="images/leaf.gif"><a href="setverify_proc.htm">4.68.2.34. SetVerify procedure</a><BR>
+        <img src="images/leaf.gif"><a href="unpacktime_proc.htm">4.68.2.35. UnpackTime procedure</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.69. Windows Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.70. WinInet Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.71. WinSock Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.72. WinSpool Unit</a><BR>
+    <img src="images/leaf.gif"><a href="win32api.htm">4.73. WinSvc Unit</a><BR>
+    <img id="i4_74" src="images/closed.gif" onDblClick="javascript:showLevel('4_74');"><a href="zentimer_unit.htm">4.74. ZenTimer Unit</a><BR>
+      <div id="p4_74" class=closed>
+      <img id="i4_74_1" src="images/closed.gif" onDblClick="javascript:showLevel('4_74_1');"><a href="zentimer_proc_and_func.htm">4.74.1. ZenTimer Unit Procedures and Functions</a><BR>
+        <div id="p4_74_1" class=closed>
+        <img src="images/leaf.gif"><a href="cpu_getcpuidfeatures_func.htm">4.74.1.1. CPU_getCPUIdFeatures function</a><BR>
+        <img src="images/leaf.gif"><a href="cpu_getprocessorspeed_func.htm">4.74.1.2. CPU_getProcessorSpeed function</a><BR>
+        <img src="images/leaf.gif"><a href="cpu_getprocessortype_func.htm">4.74.1.3. CPU_getProcessorType function</a><BR>
+        <img src="images/leaf.gif"><a href="cpu_havemmx_func.htm">4.74.1.4. CPU_haveMMX function</a><BR>
+        <img src="images/leaf.gif"><a href="cpu_have3dnow_func.htm">4.74.1.5. CPU_have3DNow function</a><BR>
+        <img src="images/leaf.gif"><a href="lzdelay_proc.htm">4.74.1.6. LZDelay procedure</a><BR>
+        <img src="images/leaf.gif"><a href="lztimercount_func.htm">4.74.1.7. LZTimerCount function</a><BR>
+        <img src="images/leaf.gif"><a href="lztimerlap_func.htm">4.74.1.8. LZTimerLap function</a><BR>
+        <img src="images/leaf.gif"><a href="lztimeroff_proc.htm">4.74.1.9. LZTiemerOff procedure</a><BR>
+        <img src="images/leaf.gif"><a href="lztimeron_proc.htm">4.74.1.10. LZTiemerOn procedure</a><BR>
+        <img src="images/leaf.gif"><a href="lztimerresolution_func.htm">4.74.1.11. LZTimerResolution function</a><BR>
+        <img src="images/leaf.gif"><a href="ulzdelay_proc.htm">4.74.1.12. ULZDelay procedure</a><BR>
+        <img src="images/leaf.gif"><a href="ulzelapsedtime_func.htm">4.74.1.13. ULZElapsedTime function</a><BR>
+        <img src="images/leaf.gif"><a href="ulzreadtime_func.htm">4.74.1.14. ULZReadTime function</a><BR>
+        <img src="images/leaf.gif"><a href="ulztimercount_func.htm">4.74.1.15. ULZTimerCount function</a><BR>
+        <img src="images/leaf.gif"><a href="ulztimerlap_func.htm">4.74.1.16. ULZTimerLap function</a><BR>
+        <img src="images/leaf.gif"><a href="ulztimeroff_proc.htm">4.74.1.17. ULZTimerOff procedure</a><BR>
+        <img src="images/leaf.gif"><a href="ulztimeron_proc.htm">4.74.1.18. ULZTimerOn procedure</a><BR>
+        <img src="images/leaf.gif"><a href="ulztimerresolution_func.htm">4.74.1.19. ULZTimerResolution function</a><BR>
+        <img src="images/leaf.gif"><a href="ztimerinit_proc.htm">4.74.1.20. ZTimerInit procedure</a><BR>
+        </div>
+      </div>
+
+    <img src="images/leaf.gif"><a href="win32api.htm">4.75. ZMouse Unit</a><BR>
+  </div>
+
+
+<img id="i5" src="images/closed.gif" onDblClick="javascript:showLevel('5');"><a href="idew32.htm">5. IDE (Integrated Development Environment)</a><BR>
+  <div id="p5" class=closed>
+    <img src="images/leaf.gif"><a href="idew32_bookmarks.htm">5.1. Bookmarks</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_code_templ.htm">5.2. Code Templates</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_comp_opt.htm">5.3. Compiler Options</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_dirs.htm">5.4. Directories</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_dbg_search_dir.htm">5.5. Debug Search Directory</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_display.htm">5.6. Display</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_editor.htm">5.7. Editor</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_shortcuts.htm">5.8. Editor Shortcuts</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_dbg_shortcuts.htm">5.9. Compiler and Debugger Shortcuts</a><BR>
+    <img src="images/leaf.gif"><a href="idew32_dbg_cmd.htm">5.10. Debugger Commands</a><BR>
+  </div>
+
+<img id="i6" src="images/closed.gif" onDblClick="javascript:showLevel('6');"><a href="win32_programming.htm">6. Win32 Programming</a><BR>
+  <div id="p6" class=closed>
+    <img src="images/leaf.gif"><a href="writing_win32_gui_app.htm">6.1. Writing Win32 GUI Applications</a><BR>
+    <img src="images/leaf.gif"><a href="structure_of_window_proc.htm">6.2. Structure of Window Procedure</a><BR>
+    <img src="images/leaf.gif"><a href="designing_a_window_proc.htm">6.3. Designing a Window Procedure</a><BR>
+    <img src="images/leaf.gif"><a href="associating_a_window.htm">6.4. Associating a Window Procedure with a Window Class</a><BR>
+    <img src="images/leaf.gif"><a href="win32_gui_example.htm">6.5. Example of Win32 GUI Application</a><BR>
+    <img id="i6_6" src="images/closed.gif" onDblClick="javascript:showLevel('6_6');"><a href="writing_win32_control_panel_app.htm">6.6. Writing Win32 Control Panel Applications</a><BR>
+      <div id="p6_6" class=closed>
+      <img src="images/leaf.gif"><a href="control_panel_app.htm">6.6.1. Control Panel applications</a><BR>
+      </div>
+    <img src="images/leaf.gif"><a href="app_responsibilities.htm">6.7. Application Responsibilities and Operation</a><BR>
+    <img src="images/leaf.gif"><a href="app_entry-point_func.htm">6.8. Application Entry-Point Function</a><BR>
+    <img src="images/leaf.gif"><a href="writing_dlls.htm">6.9. Writing Dinamic-Link Libraries (DLLs)</a><BR>
+    <img src="images/leaf.gif"><a href="using_dlls.htm">6.10. Using Dinamic-Link Libraries (DLLs)</a><BR>
+    <img src="images/leaf.gif"><a href="mmedia_unit.htm">6.11. Multimedia Applications Development Using MMedia Unit</a><BR>
+  </div>
+
+<img id="i7" src="images/closed.gif" onDblClick="javascript:showLevel('7');"><a href="pmodew.htm">7. PMODE/W MSDOS Extender</a><BR>
+  <div id="p7" class=closed>
+  <img src="images/leaf.gif"><a href="pmodew_about.htm">7.1. About PMODE/W</a><BR>
+
+  <img id="i7_2" src="images/closed.gif" onDblClick="javascript:showLevel('7_2');">7.2. PMODE/W Supported DPMI INT 31h functions=PModeW_FUNC<br>
+    <div id="p7_2" class=closed>
+      <img src="images/leaf.gif"><a href="pmodew_func0000.htm">7.2.1. Function 0000 - Allocate Descriptors</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0001.htm">7.2.2. Function 0001 - Free Descriptor</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0002.htm">7.2.3. Function 0002 - Segment to Descriptor</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0003.htm">7.2.4. Function 0003 - Get Selector Increment Value</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0006.htm">7.2.5. Function 0006 - Get Segment Base Address</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0007.htm">7.2.6. Function 0007 - Set Segment Base Address</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0008.htm">7.2.7. Function 0008 - Set Segment Limit</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0009.htm">7.2.8. Function 0009 - Set Descriptor Access Rights</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func000a.htm">7.2.9. Function 000A - Create Alias Descriptor</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func000b.htm">7.2.10. Function 000B - Get Descriptor</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func000c.htm">7.2.11. Function 000C - Set Descriptor</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0100.htm">7.2.12. Function 0100 - Allocate DOS Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0101.htm">7.2.13. Function 0101 - Free DOS Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0102.htm">7.2.14. Function 0102 - Resize DOS Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0200.htm">7.2.15. Function 0200 - Get Real Mode Interrupt Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0201.htm">7.2.16. Function 0201 - Set Real Mode Interrupt Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0202.htm">7.2.17. Function 0202 - Get Processor Exception Handler Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0203.htm">7.2.18. Function 0203 - Set Processor Exception Handler Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0204.htm">7.2.19. Function 0204 - Get Protected Mode Interrupt Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0205.htm">7.2.20. Function 0205 - Set Protected Mode Interrupt Vector</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0300.htm">7.2.21. Function 0300 - Simulate Real Mode Interrupt</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0301.htm">7.2.22. Function 0301 - Call Real Mode Procedure With Far Return Frame</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0302.htm">7.2.23. Function 0302 - Call Real Mode Procedure With IRET Frame</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0303.htm">7.2.24. Function 0303 - Allocate Real Mode Callback Address</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0304.htm">7.2.25. Function 0304 - Free Real Mode Callback Address</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0305.htm">7.2.26. Function 0305 - Get State Save/Restore Addresses</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0306.htm">7.2.27. Function 0306 - Get Raw Mode Switch Addresses</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0400.htm">7.2.28. Function 0400 - Get Version</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0500.htm">7.2.29. Function 0500 - Get Free Memory Information</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0501.htm">7.2.30. Function 0501 - Allocate Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0502.htm">7.2.31. Function 0502 - Free Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0503.htm">7.2.32. Function 0503 - Resize Memory Block</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0800.htm">7.2.33. Function 0800 - Physical Address Mapping</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0801.htm">7.2.34. Function 0801 - Free Physical Address Mapping</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0900.htm">7.2.35. Function 0900 - Get and Disable Virtual Interrupt State</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0901.htm">7.2.36. Function 0901 - Get and Enable Virtual Interrupt State</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_func0902.htm">7.2.37. Function 0902 - Get Virtual Interrupt State</a><BR>
+      <img src="images/leaf.gif"><a href="pmodew_funceeff.htm">7.2.38. Function EEFF - Get DOS Extender Information</a><BR>
+    </div>
+
+  </div>
+
+<img src="images/leaf.gif"><a href="tmt_corp.htm">8. Contacting TMT Development Corporation</a><BR>
+
+</div>
+<br>
+<br>
+<hr>
+<font size=2>Copyright &copy;&nbsp;1998-2002 by <a href="http://www.tmt.com/">
+TMT Development Corporation</a>. All rights reserved.
+<br>Questions, comments, and suggestions to <a href="mailto:support@tmt.com">support@tmt.com</a>.</font>
+
+
+</body></html>

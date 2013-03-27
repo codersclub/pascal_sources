@@ -1,0 +1,110 @@
+<html><head>
+<TITLE>Lan Manager Interface Unit
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="lm_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: LM Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="mapi_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: MAPI Unit"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.43 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a><dir><h2>Lan Manager Interface Unit
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+This module provides the interface to the data decompression
+functions in LZEXPAND.DLL.
+<br>
+<br>
+<b>About the Data Decompression Library:</b>
+<br>
+The Microsoft<SUP>&reg;</SUP> Windows<SUP>&reg;</SUP> operating system includes
+a dynamic-link library (DLL) named LZEXPAND.DLL. Typically,
+an application calls functions in LZEXPAND.DLL to decompress
+data previously compressed by using the Microsoft
+File Compression Utility (COMPRESS.EXE). 
+<br>
+<br>
+<b>Data Decompression:</b>
+<br>
+Data compression is an operation that reduces the size of a file
+by minimizing redundant data. In a file that contains text,
+redundant data can be frequently occurring characters,
+such as the space character, or common vowels, such as the letters
+e and a; it can also be frequently occurring character strings.
+Data compression creates a compressed version of a file by minimizing
+this redundant data. 
+<br>
+<br>
+Each type of data-compression algorithm minimizes redundant data
+in a unique manner. For example, the Huffman encoding algorithm
+assigns a code to characters in a file based on how frequently
+those characters occur. Another compression algorithm, called
+run-length encoding, generates a two-part value for repeated
+characters: the first part specifies the number of times the
+character is repeated, and the second part identifies the character.
+Another compression algorithm, known as the Lempel-Ziv algorithm,
+converts variable-length strings into fixed-length codes that
+consume less space than the original strings.
+<br>
+<br>
+To compress large applications or data files, you can run COMPRESS.EXE
+from the command line. COMPRESS.EXE uses the Lempel-Ziv compression
+algorithm. 
+<br>
+<br>
+For more info look the "Data Decompression Library" in WIN32.HLP.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="lm_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: LM Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="mapi_unit.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: MAPI Unit"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">LM Unit</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">MAPI Unit</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.43 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,111 @@
+<html><head>
+<TITLE>OOP Scopes
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="restrictions_on_objects.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Restrictions On Object Description"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="public_and_private_declarations.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Public and Private declarations"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="oop_extensions.htm"><small>OOP Extensions</small></a><dir><h2>OOP Scopes
+</h2></dir>
+<!-- Page content -->
+Component identifiers are visible in all the methods throughout the domain
+of the object, including the procedures, functions, destructors and
+constructors that implement the methods of the object type and its descendants.
+However, the scopes of the fields and methods declared in the <B>private</B>
+section of the object type declaration are restricted to the unit that contains
+the definition of the object type. <I>private</I> fields and methods are
+inaccessible from other units. Private fields and methods can, however, be
+accessed from other object types declared in the same unit. Below are examples
+of several objects:
+<pre><B>type</B>
+  Point = <B>record</B>
+    X,Y: Longint;
+  <B>end</B>;
+
+<B>type</B>
+  Circle = <B>object</B>
+    Center: Point;
+    Radius: Longist;
+    <B>procedure</B> Show;
+    <B>procedure</B> Hide;
+  <B>end</B>;
+
+<B>type</B>
+  Ellipse = <B>object</B> (Circle)
+    Radius2: Longint;
+    Angle: Real;
+    <B>procedure</B> Show;
+    <B>procedure</B> Rotate(NewAngle: Real);
+  <B>end</B>;</pre>
+Here, the object type <I>Ellipse</I> inherits the <I>Center</I> and
+<I>Radius</I> fields from <I>Circle</I>. It also adds new <I>Radius2</I>
+and <I>Angle</I>. Furthermore, it uses the method <I>Hide</I> inherited from
+<I>Circle</I>; it overrides the method <I>Show</I> and adds a new method,
+<I>Rotate</I>. The declaration of an object file includes just the headers
+of the methods. The methods themselves should appear somewhere within the
+current scope. In this way, method declarations are similar to forwarded
+routines. When specified, methods names are qualified with object names.
+For example
+<pre><B>procedure</B> Circle.Draw;
+<B>begin</B>
+  Graph.Circle(X,Y,Radius);
+<B>end</B>;</pre>
+Note that within the method declaration, the fields of the object are visible
+to the compiler.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="restrictions_on_objects.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Restrictions On Object Description"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="public_and_private_declarations.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Public and Private declarations"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Restrictions On Object Description</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Public and Private declarations</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.5 -</B></CENTER>
+</BODY></HTML>

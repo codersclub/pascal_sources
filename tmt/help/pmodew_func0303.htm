@@ -1,0 +1,93 @@
+<html><head>
+<TITLE>Function 0303 - Allocate Real Mode Callback Address
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0302.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0302 - Call Real Mode Procedure With IRET Frame"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0304.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0304 - Free Real Mode Callback Address"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.24 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0303 - Allocate Real Mode Callback Address
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Returns a unique real mode segment:offset, known as a
+&quot;real mode callback&quot;, that will transfer control from real mode
+to a protected mode procedure. Callback addresses obtained with this function
+can be passed by a protected mode program to a real mode application, interrupt
+handler, device driver, TSR, etc... so that the real mode program can call
+procedures within the protected mode program.
+<pre><B>In:</B>
+   AX     = 0303h
+   DS:ESI = selector:offset of protected mode procedure
+            to call
+   ES:EDI = selector:offset of 32h byte buffer for real
+            mode register data structure to be used when
+            calling the callback routine.
+<B>Out:</B>
+   if successful:
+     carry flag clear
+     CX:DX  = segment:offset of real mode callback
+   if failed:
+     carry flag set</pre>
+<B>Notes:</B>
+<br>
+A descriptor may be allocated for each callback to hold the real mode SS
+descriptor. Real mode callbacks are a limited system resource. A client should
+release a callback that it is no longer using.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0302.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0302 - Call Real Mode Procedure With IRET Frame"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0304.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0304 - Free Real Mode Callback Address"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0302 - Call Real Mode Procedure With IRET Frame</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0304 - Free Real Mode Callback Address</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.24 -</B></CENTER>
+</BODY></HTML>

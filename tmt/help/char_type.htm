@@ -1,0 +1,105 @@
+<html><head>
+<TITLE>Character Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="bool_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Boolean Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="int_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Integer Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Character Types
+</h2></dir>
+<!-- Page content -->
+There are two base character types: Char and WChar. Char values are byte-sized
+(8-bit) characters ordered according to the extended ANSI character set.
+WideChar ones are word-sized (16-bit) characters ordered according to the
+Unicode character set. The first 256 Unicode characters correspond to the ANSI
+characters. Unicode character sets are widely used for Asian languages.
+<br>
+<br>
+TMT Pascal supports both single-byte and multi-byte character strings through
+the PChar, PWChar types which are defined as follows:
+<pre><B>type</B>
+  PChar = ^Char;
+  PWChar = ^WChar;</pre>
+The code fragment below shows various ways to initialize character type
+variables.
+<pre><B>var</B>
+  Bell, EofMarker: Char;
+  Number, Alpha: WChar;
+
+<B>begin</B>
+  Number    := '5';
+  Alpha     := 'a';
+  Bell      := ^G;
+  EofMarker := #27;
+<B>end</B>.</pre>
+A character is normally delimited by two single quotes.
+However there are two other methods of representing characters as seen in the
+example above: the caret symbol (<b>^</b>) and the number symbol (<b>#</b>).
+<br>
+<br>
+Use the caret to represent control codes -- characters between 0 and 31 on the
+ASCII table. ^G stands for character number 7 because G is the seventh letter
+of the alphabet. When ^G is used during output the computer's bell will sound.
+<br>
+<br>
+Use # to represent any ASCII character. As in the example above, the end of
+file character, which is defined as character number 27 on the ASCII table, is
+assigned to the variable <I>EofMarker</I>. Note that <b>#27</b> is the same as
+<b>^[</b>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="bool_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Boolean Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="int_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Integer Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Boolean Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Integer Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.2 -</B></CENTER>
+</BODY></HTML>

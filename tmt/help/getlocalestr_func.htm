@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>GetLocaleStr function
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="getdir_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GetDir procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="getmem_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: GetMem procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.35 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_proc_and_func.htm"><small>System Unit Procedures and Functions</small></a><dir><h2>GetLocaleStr function
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: Win32 only</B></center>
+<br>
+<br>
+<a href="system_unit.htm">System Unit</a>
+<br>
+<br>
+<I>GetLocaleStr</I> function returns the specified locale string.
+<br>
+<br>
+<B>Declaration:</B>
+<pre> <B>function</B> GetLocaleStr(Locale, LocaleType: Longint;
+                        DefaultString: string): string;</pre>
+<B>Where:</B>
+<br>
+<I>Locale</I> specifies the locale to retrieve information for. This parameter
+can be a locale identifier created by the MAKELCID macro, or one of the
+following predefined values:
+<dir>LOCALE_SYSTEM_DEFAULT   - Default system locale.
+<br>
+LOCALE_USER_DEFAULT - Default user locale.</dir>
+<I>LocaleType</I> specifies one of the LCTYPE constants to indicate the type of
+information to be retrieved. All LCTYPE values are mutually exclusive, with the
+exception of LOCALE_NOUSEROVERRIDE. An application may use the binary-OR
+operator to combine LOCALE_NOUSEROVERRIDE with any other LCTYPE value. If
+passed such an <I>LocaleType</I> value, the function bypasses user overrides,
+and returns the system default value for the requested LCID.
+<br>
+<br>
+<B>Remarks:</B>
+<br>
+If the function succeeds, the return value is the requested locale string.
+Otherwise, the return value is <I>DefaultString</I>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="getdir_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: GetDir procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="getmem_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: GetMem procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">GetDir procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">GetMem procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.35 -</B></CENTER>
+</BODY></HTML>

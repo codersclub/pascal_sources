@@ -1,0 +1,129 @@
+<html><head>
+<TITLE>Strings Unit Procedures and Functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="strings_overloaded_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Strings Unit Overloaded Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="align_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Align function"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.61.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="strings_unit.htm"><small>Strings Unit</small></a><dir><h2>Strings Unit Procedures and Functions
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<ul>
+<li><a href="align_func.htm">Align</a></li>
+<li><a href="ansicomparestr_func.htm">AnsiCompareStr</a></li>
+<li><a href="ansilowercase_func.htm">AnsiLowerCase</a></li>
+<li><a href="ansicomparetext_func.htm">AnsiCompareText</a></li>
+<li><a href="ansistrcomp_func.htm">AnsiStrComp</a></li>
+<li><a href="ansistricomp_func.htm">AnsiStrIComp</a></li>
+<li><a href="ansistrlcomp_func.htm">AnsiStrLComp</a></li>
+<li><a href="ansistrlicomp_func.htm">AnsiStrLIComp</a></li>
+<li><a href="ansistrlower_func.htm">AnsiStrLower</a></li>
+<li><a href="ansistrupper_func.htm">AnsiStrUpper</a></li>
+<li><a href="ansiuppercase_func.htm">AnsiUpperCase</a></li>
+<li><a href="appendpathdelimiter_func.htm">AppendPathDelimiter</a></li>
+<li><a href="bin_func.htm">Bin</a></li>
+<li><a href="dup_ci_func.htm">Dup_CI</a></li>
+<li><a href="dup_si_func.htm">Dup_SI</a></li>
+<li><a href="fix_func.htm">Fix</a></li>
+<li><a href="floattostr_func.htm">FloatToStr</a></li>
+<li><a href="fls_func.htm">Fls</a></li>
+<li><a href="flt_func.htm">Flt</a></li>
+<li><a href="hex_func.htm">Hex</a></li>
+<li><a href="hexval_func.htm">HexVal</a></li>
+<li><a href="inttobin_func.htm">IntToBin</a></li>
+<li><a href="inttohex_func.htm">IntToHex</a></li>
+<li><a href="inttostr_func.htm">IntToStr</a></li>
+<li><a href="isdelimiter_func.htm">IsDelimiter</a></li>
+<li><a href="ispathdelimiter_func.htm">IsPathDelimiter</a></li>
+<li><a href="isvalidident_func.htm">IsValidIdent</a></li>
+<li><a href="lastdelimiter_func.htm">LastDelimiter</a></li>
+<li><a href="lowercase_func.htm">LowerCase</a></li>
+<li><a href="quotedstr_func.htm">QuotedStr</a></li>
+<li><a href="strappend_proc.htm">StrAppend</a></li>
+<li><a href="strappendc_proc.htm">StrAppendC</a></li>
+<li><a href="strcat_func.htm">StrCat</a></li>
+<li><a href="strcomp_func.htm">StrComp</a></li>
+<li><a href="strcopy_func.htm">StrCopy</a></li>
+<li><a href="strdispose_proc.htm">StrDispose</a></li>
+<li><a href="strecopy_func.htm">StrECopy</a></li>
+<li><a href="strend_func.htm">StrEnd</a></li>
+<li><a href="strlcat_func.htm">StrLCat</a></li>
+<li><a href="stricomp_func.htm">StrIComp</a></li>
+<li><a href="strlcomp_func.htm">StrLComp</a></li>
+<li><a href="strlcopy_func.htm">StrLCopy</a></li>
+<li><a href="strlen_func.htm">StrLen</a></li>
+<li><a href="strlicomp_func.htm">StrLIComp</a></li>
+<li><a href="strlower_func.htm">StrLower</a></li>
+<li><a href="strmove_func.htm">StrMove</a></li>
+<li><a href="strnew_func.htm">StrNew</a></li>
+<li><a href="strpas_func.htm">StrPas</a></li>
+<li><a href="strpcopy_func.htm">StrPCopy</a></li>
+<li><a href="strpos_func.htm">StrPos</a></li>
+<li><a href="strrscan_func.htm">StrRScan</a></li>
+<li><a href="strscan_func.htm">StrScan</a></li>
+<li><a href="strtoint_func.htm">StrToInt</a></li>
+<li><a href="strtointdef_func.htm">StrToIntDef</a></li>
+<li><a href="strupper_func.htm">StrUpper</font></a></li>
+<li><a href="trim_func.htm">Trim</a></li>
+<li><a href="trimleft_func.htm">TrimLeft</a></li>
+<li><a href="trimright_func.htm">TrimRight</a></li>
+<li><a href="uns_func.htm">Uns</a></li>
+<li><a href="uppercase_func.htm">UpperCase</a></li>
+<li><a href="whl_func.htm">Whl</a></li>
+</ul>
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="strings_overloaded_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Strings Unit Overloaded Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="align_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Align function"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Strings Unit Overloaded Operators</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Align function</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.61.2 -</B></CENTER>
+</BODY></HTML>

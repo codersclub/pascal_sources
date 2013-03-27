@@ -1,0 +1,99 @@
+<html><head>
+<TITLE>File-attribute constants
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="file-mode_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: File-mode constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="datetime_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DateTime type"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.1.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_const_and_var.htm"><small>Dos Unit Constants and Variables</small></a><dir><h2>File-attribute constants
+</h2></dir>
+<!-- Page content -->
+<B>Targets: MS-DOS, OS/2, Win32</B>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>, <a href="windos_unit.htm">WinDos Unit</a>
+<br>
+<br>
+These constants test, set, and clear file-attribute bits in connection
+with the <a href="getfattr_proc.htm">GetFAttr</a>,
+<a href="setfattr_proc.htm">SetFAttr</a>,
+<a href="findfirst_proc.htm">FindFirst</a>, and
+<a href="findnext_proc.htm">FindNext</a> procedures.
+<br>
+<br>
+These constants are additive. The faAnyFile constant is the sum of all
+attributes.
+<dir><table border=1> 
+<tr><th>&nbsp;Constant&nbsp;</th><th>&nbsp;Value&nbsp;</th></tr>
+<tr><td>&nbsp;ReadOnly</td><td>&nbsp;$01</td></tr>
+<tr><td>&nbsp;Hidden</td><td>&nbsp;$02</td></tr>
+<tr><td>&nbsp;SysFile</td><td>&nbsp;$04</td></tr>
+<tr><td>&nbsp;VolumeID</td><td>&nbsp;$08</td></tr>
+<tr><td>&nbsp;Directory</td><td>&nbsp;$10</td></tr>
+<tr><td>&nbsp;Archive</td><td>&nbsp;$20</td></tr>
+<tr><td>&nbsp;AnyFile</td><td>&nbsp;$3F</td></tr>
+<tr><th>&nbsp;Win32 Constant&nbsp;</th><th>&nbsp;Value&nbsp;</th></tr>
+<tr><td>&nbsp;faReadOnly</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_READONLY&nbsp;</td></tr>
+<tr><td>&nbsp;faHidden</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_HIDDEN</td></tr>
+<tr><td>&nbsp;faSysFile</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_SYSTEM</td></tr>
+<tr><td>&nbsp;faVolumeID</td><td>&nbsp;$08</td></tr>
+<tr><td>&nbsp;faDirectory</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_DIRECTORY&nbsp;</td></tr>
+<tr><td>&nbsp;faArchive</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_ARCHIVE</td></tr>
+<tr><td>&nbsp;faAnyFile</td><td>&nbsp;WINDOWS.FILE_ATTRIBUTE_NORMAL</td></tr>
+</table></dir>
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="file-mode_const.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: File-mode constants"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="datetime_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: DateTime type"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">File-mode constants</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">DateTime type</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.1.3 -</B></CENTER>
+</BODY></HTML>

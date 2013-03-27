@@ -1,0 +1,107 @@
+<html><head>
+<TITLE>SetLineStyle procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="setgraphmode_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetGraphMode procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setlogicalpage_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetLogicalPage procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.105 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>SetLineStyle procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<a href="graph_unit.htm">Graph Unit</a>
+<br>
+<br>
+Sets the current line width and style.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> SetLineStyle(LineStyle: Word;
+                       Pattern: Word;
+                       Thickness: Word);</pre>
+<B>Remarks:</B>
+<br>
+Affects all lines drawn by <a href="line_proc.htm">Line</a>,
+<a href="lineto_proc.htm">LineTo</a>,
+<a href="linerel_proc.htm">LineRel</a>,
+<a href="rectangle_proc.htm">Rectangle</a>,
+<a href="drawpoly_proc.htm">DrawPoly</a>, and so on.
+<br>
+<br>
+Lines can be drawn solid, dotted, centerline, or dashed.
+If invalid input is passed to <I>SetLineStyle</I>,
+<a href="graphresult_func.htm">GraphResult</a> returns a value of grError,
+and the current line settings will be unchanged. See
+<a href="linesettings_type.htm">LineSettingsType</a> for a list of constants
+used to determine line styles.
+<br>
+<br>
+<I>LineStyle</I> is a value from SolidLn to UserBitLn(0..4),
+<I>Pattern</I> is ignored unless LineStyle equals
+UserBitLn, and <I>Thickness</I> is NormWidth or ThickWidth.
+When LineStyle equals UserBitLn, the line is output using the 16-bit pattern
+defined by the Pattern parameter. For example, if Pattern = $AAAA, then the
+16-bit pattern looks like this:
+<pre> 1010101010101010    <I><font color = #000080>{ NormWidth }</font></I>
+ 1010101010101010    <I><font color = #000080> { ThickWidth }</font></I> 
+ 1010101010101010
+ 1010101010101010</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="setgraphmode_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: SetGraphMode procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setlogicalpage_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetLogicalPage procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">SetGraphMode procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetLogicalPage procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.105 -</B></CENTER>
+</BODY></HTML>

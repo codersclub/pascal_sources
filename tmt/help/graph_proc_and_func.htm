@@ -1,0 +1,195 @@
+<html><head>
+<TITLE>Graph Unit Procedures and Functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="vbemodeinfotype.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: VbeModeInfoType"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="analizergbcolor_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: AnalizeRGBColor procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a><dir><h2>Graph Unit Procedures and Functions
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<ul>
+<li><a href="analizergbcolor_proc.htm">AnalizeRGBColor</a></li>
+<li><a href="arc_proc.htm">Arc</a></li>
+<li><a href="bar_proc.htm">Bar</a></li>
+<li><a href="bar3d_proc.htm">Bar3D</a></li>
+<li><a href="circle_proc.htm">Circle</a></li>
+<li><a href="cleardevice_proc.htm">ClearDevice</a></li>
+<li><a href="clearpage_proc.htm">ClearPage</a></li>
+<li><a href="clearviewport_proc.htm">ClearViewPort</a></li>
+<li><a href="cliretrace_proc.htm">CliRetrace</a></li>
+<li><a href="clihretrace_proc.htm">CliHRetrace</a></li>
+<li><a href="closegraph_proc.htm">CloseGraph</a></li>
+<li><a href="detectsvgamode_proc.htm">DetectSVGAMode</a></li>
+<li><a href="drawellipse_proc.htm">DrawEllipse</a></li>
+<li><a href="drawhline_proc.htm">DrawHLine</a></li>
+<li><a href="drawpoly_proc.htm">DrawPoly</a></li>
+<li><a href="ellipsee_proc.htm">Ellipse</a></li>
+<li><a href="expandfill_proc.htm">ExpandFill</a></li>
+<li><a href="fillcircle_proc.htm">FillCircle</a></li>
+<li><a href="fillellipse_proc.htm">FillEllipse</a></li>
+<li><a href="fillpoly_proc.htm">FillPoly</a></li>
+<li><a href="filltriangle_proc.htm">FillTriangle</a></li>
+<li><a href="flipimageox_proc.htm">FlipImageOX</a></li>
+<li><a href="flipimageoy_proc.htm">FlipImageOY</a></li>
+<li><a href="fliptomemory_proc.htm">FlipToMemory</a></li>
+<li><a href="fliptoscreen_proc.htm">FlipToScreen</a></li>
+<li><a href="floodfill_proc.htm">FloodFill</a></li>
+<li><a href="getactivepage_func.htm">GetActivePage</a></li>
+<li><a href="getaspectratio_proc.htm">GetAspectRatio</a></li>
+<li><a href="getbytesperscanline_func.htm">GetBytesPerScanLine</a></li>
+<li><a href="getcolor_func.htm">GetColor</a></li>
+<li><a href="getdefaultpalette_proc.htm">GetDefaultPalette</a></li>
+<li><a href="getfillcolor_func.htm">GetFillColor</a></li>
+<li><a href="getfillpattern_proc.htm">GetFillPattern</a></li>
+<li><a href="getfillsettings_proc.htm">GetFillSettings</a></li>
+<li><a href="getgraphbufsize_func.htm">GetGraphBufSize</a></li>
+<li><a href="getgraphmode_func.htm">GetGraphMode</a></li>
+<li><a href="gethtextel_proc.htm">GetHTextel</a></li>
+<li><a href="getimage_proc.htm">GetImage</a></li>
+<li><a href="getlfbaddress_func.htm">GetLfbAddress</a></li>
+<li><a href="getlinesettings_proc.htm">GetLineSettings</a></li>
+<li><a href="getlogicalpage_proc.htm">GetLogicalPage</a></li>
+<li><a href="getmaxcolor_func.htm">GetMaxColor</a></li>
+<li><a href="getmaxpage_func.htm">GetMaxPage</a></li>
+<li><a href="getmaxx_func.htm">GetMaxX</a></li>
+<li><a href="getmaxy_func.htm">GetMaxY</a></li>
+<li><a href="getoemproductname_func.htm">GetOemProductName</a></li>
+<li><a href="getoemproductrev_func.htm">GetOemProductRev</a></li>
+<li><a href="getoemstring_func.htm">GetOemString</a></li>
+<li><a href="getoemvendorname_func.htm">GetOemVendorName</a></li>
+<li><a href="getpagedc_func.htm">GetPageDC</a></li>
+<li><a href="getpagesize_func.htm">GetPageSize</a></li>
+<li><a href="getpalette_proc.htm">GetPalette</a></li>
+<li><a href="getpixel_func.htm">GetPixel</a></li>
+<li><a href="getrgbpalette_proc.htm">GetRGBPalette</a></li>
+<li><a href="getscreenheight_func.htm">GetScreenHeight</a></li>
+<li><a href="getscreenwidth_func.htm">GetScreenWidth</a></li>
+<li><a href="gettextsettings_proc.htm">GetTextSettings</a></li>
+<li><a href="gettranspsettings_proc.htm">GetTranspSettings</a></li>
+<li><a href="getvbecapabilities_func.htm">GetVbeCapabilities</a></li>
+<li><a href="getvbeinfo_proc.htm">GetVbeInfo</a></li>
+<li><a href="getvbemodeinfo_proc.htm">GetVbeModeInfo</a></li>
+<li><a href="getvbemodeslist_proc.htm">GetVbeModesList</a></li>
+<li><a href="getvbeversion_func.htm">GetVbeVersion</a></li>
+<li><a href="getviewsettings_proc.htm">GetViewSettings</a></li>
+<li><a href="getvisualpage_func.htm">GetVisualPage</a></li>
+<li><a href="getwindowhandle_func.htm">GetWindowHandle</a></li>
+<li><a href="getwritemode_func.htm">GetWriteMode</a></li>
+<li><a href="getx_func.htm">GetX</a></li>
+<li><a href="gety_func.htm">GetY</a></li>
+<li><a href="graphdefaults_proc.htm">GraphDefaults</a></li>
+<li><a href="grapherrormsg_func.htm">GraphErrorMsg</a></li>
+<li><a href="graphresult_func.htm">GraphResult</a></li>
+<li><a href="hretrace_proc.htm">HRetrace</a></li>
+<li><a href="imagesize_func.htm">ImageSize</a></li>
+<li><a href="invertimage_proc.htm">InvertImage</a></li>
+<li><a href="islfbused_func.htm">IsLfbUsed</a></li>
+<li><a href="line_proc.htm">Line</a></li>
+<li><a href="linerel_proc.htm">LineRel</a></li>
+<li><a href="lineto_proc.htm">LineTo</a></li>
+<li><a href="moverel_proc.htm">MoveRel</a></li>
+<li><a href="moveto_proc.htm">MoveTo</a></li>
+<li><a href="outcharxy_proc.htm">OutCharXY</a></li>
+<li><a href="outtext_proc.htm">OutText</a></li>
+<li><a href="outtextxy_proc.htm">OutTextXY</a></li>
+<li><a href="puthtextel_proc.htm">PutHTextel</a></li>
+<li><a href="putimage_proc.htm">PutImage</a></li>
+<li><a href="putpixel_proc.htm">PutPixel</a></li>
+<li><a href="putsprite_proc.htm">PutSprite</a></li>
+<li><a href="rectangle_proc.htm">Rectangle</a></li>
+<li><a href="releasepagedc_proc.htm">ReleasePageDC</a></li>
+<li><a href="restorecrtmode_proc.htm">RestoreCrtMode</a></li>
+<li><a href="retrace_proc.htm">Retrace</a></li>
+<li><a href="rgbcolor_proc.htm">RGBColor</a></li>
+<li><a href="setactivepage_proc.htm">SetActivePage</a></li>
+<li><a href="setallpalette_proc.htm">SetAllPalette</a></li>
+<li><a href="setaspectratio_proc.htm">SetAspectRatio</a></li>
+<li><a href="setbkcolor_proc.htm">SetBkColor</a></li>
+<li><a href="setcolor_proc.htm">SetColor</a></li>
+<li><a href="setcustomfont_proc.htm">SetCustomFont</a></li>
+<li><a href="setfillcolor_proc.htm">SetFillColor</a></li>
+<li><a href="setfillpattern_proc.htm">SetFillPattern</a></li>
+<li><a href="setfillstyle_proc.htm">SetFillStyle</a></li>
+<li><a href="setgraphbufsize_proc.htm">SetGraphBufSize</a></li>
+<li><a href="setgraphmode_proc.htm">SetGraphMode</a></li>
+<li><a href="setlinestyle_proc.htm">SetLineStyle</a></li>
+<li><a href="setlogicalpage_proc.htm">SetLogicalPage</a></li>
+<li><a href="setnormalmode_proc.htm">SetNormalMode</a></li>
+<li><a href="setpalette_proc.htm">SetPalette</a></li>
+<li><a href="setrgbpalette_proc.htm">SetRGBPalette</a></li>
+<li><a href="setscreenstart_proc.htm">SetScreenStart</a></li>
+<li><a href="setsvgamode_proc.htm">SetSVGAMode</a></li>
+<li><a href="settextjustify_proc.htm">SetTextJustify</a></li>
+<li><a href="settextstyle_proc.htm">SetTextStyle</a></li>
+<li><a href="setsplinesteps_proc.htm">SetSplineLineSteps</a></li>
+<li><a href="settranspmode_proc.htm">SetTranspMode</a></li>
+<li><a href="setviewport_proc.htm">SetViewPort</a></li>
+<li><a href="setvirtualmode_proc.htm">SetVirtualMode</a></li>
+<li><a href="setvisualpage_proc.htm">SetVisualPage</a></li>
+<li><a href="setwritemode_proc.htm">SetWriteMode</a></li>
+<li><a href="spline_proc.htm">Spline</a></li>
+<li><a href="stretch_proc.htm">Stretch</a></li>
+<li><a href="textheight_func.htm">TextHeight</a></li>
+<li><a href="textwidth_func.htm">TextWidth</a></li>
+<li><a href="totalvbememory_func.htm">TotalVbeMemory</a></li>
+<li><a href="totalvbemodes_func.htm">TotalVbeModes</a></li>
+<li><a href="triangle_proc.htm">Triangle</a></li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="vbemodeinfotype.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: VbeModeInfoType"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="analizergbcolor_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: AnalizeRGBColor procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">VbeModeInfoType</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">AnalizeRGBColor procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2 -</B></CENTER>
+</BODY></HTML>

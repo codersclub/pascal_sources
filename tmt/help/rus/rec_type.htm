@@ -1,0 +1,103 @@
+<html><head>
+<TITLE>Record Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="set_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Set Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="file_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: File Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.13 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Record Types
+</h2></dir>
+<!-- Page content -->
+Record types are structures that contain components of different types.
+Each component of a record is called a field. Variant sections are parts
+of records can have multiple definitions. Record type are defined as follows:
+<pre>  <B>record</B>
+    Fieldlist
+  <B>end</B></pre>
+where <I>Fieldlist</I> is defined as:
+<pre>  [[Fixedpart] | [Fixedpart;] [Variantpart]];</pre>
+where <I>Fixedpart</I> is:
+<pre>  Field [; Field];</pre>
+where <I>Field</I> is
+<pre>  identifier [,identifier] : Identifiertype;</pre>
+<I>Variantpart</I> is defined as follows:
+<pre><B>case</B> [identifier:] Typename <B>of</B>
+  Variant
+  [;Variant];</pre>
+where <I>Variant</I> is:
+<pre>  Caserange [,Caserange] : (Fieldlist);</pre>
+where <I>Caserange</I> is:
+<pre>  expression [..expression];</pre>
+With a proper understanding of TMT Pascal record types, very powerful types
+can be defined. The following are examples of record types:
+<pre><B>type</B>
+  Coordinate = <B>record</B>
+    x, y: Integer;
+  <B>end</B>;
+  Values = <B>record</B>
+        <B>case</B> Way: Boolean <B>of</B>
+        True:  (RValue : Extended);
+        False: (IValue : Longint);
+    <B>end</B>;</pre>
+To reference a field of a record specify the record variable followed by
+a period (.) followed by the field name. The following refers to the fields
+of Coordinate declared above:
+<pre>  Coordinate.x
+  Coordinate.y</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="set_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Set Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="file_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: File Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Set Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">File Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.13 -</B></CENTER>
+</BODY></HTML>

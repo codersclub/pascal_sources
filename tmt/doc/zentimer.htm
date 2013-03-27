@@ -1,0 +1,562 @@
+<html><head><title>Модуль Zen Timer Pro Версия 2.7 для TMT Pascal 3.50SP2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Описание на русском языке модуля Zen Timer Pro Версия 2.7 для TMT Pascal 3.50SP2'>
+<meta name="keywords" content="tmt pascal, pascal, zentimer, zen timer pro, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+	
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>Модуль Zen Timer Pro
+<br>Версия 2.7</h3>
+</p>
+<p>
+Автор: Вадим Бодров, TMT Development Corporation
+<br>Copyright (C) 1995-99 <a href="http://www.tmt.com/">TMT Development Corporation</a>
+<br>All rights reserved.
+</p><p>
+Original C/C++ Code by Kendall Bennett, SciTech Software
+<br>Portions Copyright (C) 1991-1997 SciTech Software, Inc.
+<br>All rights reserved.
+</p></center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление: &nbsp;<a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+<p>
+<strong>СОДЕРЖАНИЕ:</strong>
+<br>
+<br><a href="#1">Введение</a>
+<br><a href="#2">Свойства</a>
+<br><a href="#3">Системные требования</a>
+<br><a href="#4">Язык программирования</a>
+<br><a href="#5">Описание функций модуля ZenTimer</a>
+<b</a>
+<br>&nbsp;&nbsp;<a href="#5_1">procedure LZDelay (Value: DWord)</a>
+<br>&nbsp;&nbsp;<a href="#5_2">function LZTimerCount: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_3">procedure ZTimerInit</a>
+<br>&nbsp;&nbsp;<a href="#5_4">function LZTimerLap: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_5">procedure LZTimerOff</a>
+<br>&nbsp;&nbsp;<a href="#5_6">procedure LZTimerOn</a>
+<br>&nbsp;&nbsp;<a href="#5_7">function LZTimerResolution: Double</a>
+<br>&nbsp;&nbsp;<a href="#5_8">procedure ULZDelay (Value: DWord)</a>
+<br>&nbsp;&nbsp;<a href="#5_9">function ULZElapsedTime(start, finish: DWord): DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_10">function ULZReadTime: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_11">function ULZTimerCount: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_12">function ULZTimerLap: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_13">procedure ULZTimerOff</a>
+<br>&nbsp;&nbsp;<a href="#5_14">procedure ULZTimerOn</a>
+<br>&nbsp;&nbsp;<a href="#5_15">function ULZTimerResolution: Double</a>
+<br>&nbsp;&nbsp;<a href="#5_16">function CPU_getCPUIDFeatures: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_17">function CPU_getProcessorSpeed: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_18">function CPU_getProcessorType: DWord</a>
+<br>&nbsp;&nbsp;<a href="#5_19">function CPU_haveMMX: Boolean</a>
+</p>
+
+<hr size=1 width=80%>
+<p>
+<a name="1"></a>
+<strong>ВВЕДЕНИЕ</strong>
+<p><blockquote>
+<b>ZTimer.pas</b> - это полнофункциональный порт на TMT Pascal популярной библиотеки
+ZTimer для С/С++, разработанной компанией SciTech Software.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+<p>
+<a name="2"></a>
+<strong>СВОЙСТВА</strong>
+<ul>
+<li> <b>Таймер высокого разрешения</b>,
+   <br>в основу которого положен код из книги "Zen of Assembly Language" Volume 1, 
+   Knowledge by Michael Abrash.</li>
+<li><b>Таймер длинных интервалов</b>,
+   <br>использующий тики таймера BIOS для обработки
+   временных интервалов вплоть до 24 часов).</li>
+<li><b>Поддержка RDTSC</b>
+   <br>(использование инструкции Intel RDTSC для высокоточного
+   определения временных интервалов).</li>
+<li><b>Процедуры для получения информации о процессоре</b>.</li>
+<li><b>Объекты LZTimer и ULZTimer</b> для работы с таймерами.</li>
+</ul>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="3"></a>
+<strong>СИСТЕМНЫЕ ТРЕБОВАНИЯ</strong>
+<p>
+<blockquote>
+Для нормальной работы данного модуля требуется IBM PC совместимый компьютер
+с процессором Intel 80386 или выше.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+<p>
+<a name="4"></a>
+<strong>ЯЗЫК ПРОГРАММИРОВАНИЯ</strong>
+<p>
+<blockquote>
+ Модуль ZenTimer может быть скомпилирован с помощью компилятора TMT Pascal
+ (Pascal компилятор для 32-битного защищенного режима DOS).
+ При этом могут быть использованы следующие DOS-экстендеры:
+<ul>
+<li> DOS32 v3.3</li>
+<li> PMODE-based</li>
+<li> PMODE/W-based</li>
+<li> WDOSX-based</li>
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5"></a>
+<strong>ОПИСАНИЕ ФУНКЦИЙ МОДУЛЯ ZENTIMER</strong>
+<p>
+<blockquote>
+В качестве основы для настоящего описания использовано описание библиотеки
+MegaGraph Graphics Library (c) 1996 SciTech Software Inc.
+</blockquote>
+<p>
+<a name="5_1"></a>
+<b>procedure LZDelay (Value: DWord)</b>
+<blockquote>
+ Обеспечивает задержку на указанное количество микросекунд.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+<p>
+<a name="5_2"></a>
+<b>function LZTimerCount: DWord</b>
+<blockquote>
+Возвращает текущее состояние счетчика таймера длинных интервалов
+в микросекундах. Фактически вычисляет разность времени между моментом
+запуска таймера (вызов LZTimerOn) и моментом остановки таймера
+(вызов LZTimerOff).
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_3"></a>
+<b>procedure ZTimerInit</b>
+<blockquote>
+Инициализирует библиотеку Zen Timer.
+Инициализация необходимо провести до того, как будут использованы любые 
+другие функции библиотеки.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_4"></a>
+<b>function LZTimerLap: DWord</b>
+<blockquote>
+Возвращает текущее значение счетчика таймера длинных интервалов 
+в микросекундах, при этом таймер продолжает свою работу.
+Фактически вычисляет разность между текущим состоянием и значением
+LZTimerOn, когда таймер был запущен. Поскольку таймер при вызове функции
+не останавливается, данная функции можно вызывать подряд необходимое
+количество раз.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_5"></a>
+<b>procedure LZTimerOff</b>
+<blockquote>
+Останавливает работу таймера длинных периодов.
+После остановки таймера можно узнать с помощью функции LZTimerCount
+количество микросекунд, прошедшее с момента запуска таймера,
+до его остановки. Для получения ТОЧНЫХ ИНТЕРВАЛОВ времени необходимо
+использовать именно старт и остановку таймера, а не функцию
+чтения счетчика "на лету" LZTimerLap, которая не учитывает время
+на передачу управления.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_6"></a>
+<b>procedure LZTimerOn</b>
+<blockquote>
+Запуск таймера длинных периодов.
+Процедура запускает счетчик таймера длинных периодов. После запуска таймера
+Вы можете определить прошедшее с момента запуска время с помощью функции
+LZTimerLap или, после остановки таймера, с помощью LZTimerCount.
+
+<p>
+ Таймер длинных периодов использует ряд высокоточных механизмов измерения
+ времени для получения точности до 1 микросекунды (если только это возможно).
+ В зависимости от типа процессора и операционной среды используются следующие
+ приемы.
+ Если используется процессор типа Pentium, поддерживающий инструкцию RDRSC
+ (Read Time Stamp Counter), то библиотека Zen Timer будет использовать
+ эту возможность для получения максимально возможной точности измерения
+ временных интервалов.
+
+<p>
+ Если же инструкция RDTSC процессором не поддерживается, то в качестве
+ тактового источника используется микросхема таймера 8253.
+ Процедуры, работающие с таймером 8253 могут обеспечивать высокую точность
+ при работе в чистом DOS, однако, в DOS окне под Windows
+ или другой операционной системой этот метод не позволяет добиться точных
+ отсчетов времени.
+
+<p>
+<b>Примечание:</b>
+<p>Поскольку ZenTimer для хранения основного счетчика использует
+32-битное беззнаковое целое, Вы можете максимально накопить в нем не 
+более, чем 2^32 микросекунд, или примерно 1 час 20 минут.
+Специально для измерения более длинных интервалов в библиотеке
+Zen Timer предусмотрен таймер длинных периодов (LZTimer).
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_7"></a>
+<b>function LZTimerResolution: Double</b>
+<blockquote>
+Возвращает значение разрешения таймера длинных периодов.
+Разрешение измеряется в секундах за 1 такт и представлено в виде
+числа с плавающей точкой. Данная функция всегда возвращает значение
+1e-6, т.е. 1 микросекунда.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_8"></a>
+<b>procedure ULZDelay (Value: DWord)</b>
+<blockquote>
+Осуществляет задержку на 1 тик (0.054925 сек.)
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_9"></a>
+<b>function ULZElapsedTime(start, finish: DWord): DWord</b>
+<blockquote>
+Вычисляет длительность интервала времени между двумя измерениями времени.
+<p>
+<b>Параметры:</b>
+<br> start      - Начальное значение счетчика
+<br> finish     - конечное значение счетчика
+<p>
+<b>Возвращаемое значение:</b>
+<br> Интервал времени в единицах разрешения таймера длинных периодов (тики)
+<p>
+<b>Описание:</b>
+<br> Поскольку в таймере длинных периодов отсчет ведется "тиками"
+ (1/18-тая доля секунды или 0.054925 сек. под DOS),
+ данная функция возвращает результат именно в тиках.
+ Функция работает корректно даже тогда, когда внутрь измеряемого интервала
+ попадает граница суток.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_10"></a>
+<b>function ULZReadTime: DWord</b>
+<blockquote>
+Считывает и возвращает текущее значение счетчика таймера длинных периодов
+в тиках.
+Для определения периода времени между двумя считываниями можно воспользоваться
+функцией ULZElapsedTime.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_11"></a>
+<b>function ULZTimerCount: DWord</b>
+<blockquote>
+Возвращает длительность интервала времени в тиках, прошедшего с момента
+старта таймера длинных интервалов (вызов ULZTimerOn) до момента остановки 
+таймера (вызов ULZTimerOff).
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_12"></a>
+<b>function ULZTimerLap: DWord</b>
+<blockquote>
+Возвращает текущее значение счетчика таймера длинных периодов в тиках без
+остановки работы таймера. Отсчет ведется с момента последнего запуска
+ULZTimerOn.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_13"></a>
+<b>procedure ULZTimerOff</b>
+<blockquote>
+Останавливает работу таймера длинных периодов.
+После остановки таймера с помощью функции ULZTimerCount можно узнать,
+сколько времени прошло с момента запуска таймера.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_14"></a>
+<b>procedure ULZTimerOn</b>
+<blockquote>
+Запускает счетчик таймера длинных периодов.
+После запуска таймера с помощью функции ULZTimerLap можно выяснить,
+сколько времени прошло с момента запуска до текущего момента.
+<p>
+ Таймер длинных периодов библиотеки Zen Timer использует существующий в 
+ операционной системе механизм для точного отсчета времени с максимальной
+ точностью, обеспечиваемой самой операционной системой, что вполне
+ достаточно для задач, выполнемых данным таймером. Следует обратить внимание,
+ что разрешение одного тика не одинаково на различных платформах,
+ и поэтому рекомендуется пользоваться функцией ULZTimerResolution для
+ определения длительности одного тика времени, и потом использовать это
+ значение для перевода количества тиков в секунды.
+<p>
+ В 32-битном режиме DOS для отсчета времени используется системный таймер,
+ срабатывающий 18.2 раза в секунду. Учитывая то, что значение счетчика
+ возвращается как 32-разрядное беззнаковое целое число, мы можем отсчитывать
+ временные интервалы, не превышающие значение максимум 2^32 тиков, или
+ примерно 65550 часов или 2731 день!
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_15"></a>
+<b>function ULZTimerResolution: Double</b>
+<blockquote>
+Возвращает разрешение таймера длинных периодов в секундах
+в виде числа с плавающей точкой.
+Функция всегда возвращает значение 0.054925.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_16"></a>
+<b>function CPU_getCPUIDFeatures: DWord</b>
+<blockquote>
+Возвращает идентификатор процессора по команде CPUID 
+(семейство/модель/stepping/свойства).
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_17"></a>
+<b>function CPU_getProcessorSpeed: DWord</b>
+<blockquote>
+Возвращает частоту в Mhz, на которой работает процессор.
+Если частоту определить не удается, то функция вернет нулевое значение.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_18"></a>
+<b>function CPU_getProcessorType: DWord</b>
+<blockquote>
+Возвращает тип процессора.
+Если процессор оказывается безымянным процессором семейства Pentium,
+нумерацию которого определить невозможно, то возвращается значение,
+большее или равное константе CPU_UnkPentium (в зависимости от результата,
+полученного по команде CPUID).
+<p>
+ Имеются следующие предопределенные константы типа процессора:
+<pre><font size="+1">
+  CPU_unknown     = 0;  -- Неизвестный процессор
+  CPU_i386        = 1;  -- Intel 80386
+  CPU_i486        = 2;  -- Intel 80486
+  CPU_Pentium     = 3;  -- Intel Pentium(R)
+  CPU_PentiumPro  = 4;  -- Intel PentiumPro(R)
+  CPU_PentiumII   = 5;  -- Intel PentiumII(R)
+  CPU_UnkPentium  = 6;  -- Неизвестный процессор
+                           семейства Pentium
+</font></pre>
+<p>
+ Кроме констант определены следующие текстовые строки:
+<pre><font size="+1">
+  CpuTypes: array [0..6] of string =
+  (
+  'Unknown',
+  'Intel 80386',
+  'Intel 80486',
+  'Intel Pentium(R)',
+  'Intel PentiumPro(R)',
+  'Intel PentiumII(R)',
+  'Unknown Pentium'
+  );
+</font></pre>
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+<p>
+<a name="5_19"></a>
+<b>function CPU_haveMMX: Boolean</b>
+<blockquote>
+Определяет, поддерживает ли процессор подмножество инструкций Intel MMX.
+Если MMX поддерживается, то возвращается TRUE.
+Если процессор не поддерживает MMX, то возвращается FALSE.
+</blockquote>
+<div align="right"><a href="#top">к содержанию</a></div>
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"></td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<html><head>
+<TITLE>Differences between 16- and 32-bit code
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="run_errors.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Run-time error codes"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.13 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Differences between 16- and 32-bit code
+</h2></dir>
+<!-- Page content -->
+While this manual does not really teach 32-bit assembly programming,
+we will list here several considerations important in 32-bit assembler
+programming. These considerations may be helpful to a 16-bit programmer
+entering the 32-bit arena.
+<br>
+<br>
+<B>Avoid using 16-bit registers for indexation</B>
+<br>
+The built-in assembler will correctly assemble instructions like
+<pre>  MOV       BX,offset table
+  MOV       AX,table[BX]
+  JMP       table[BX]</pre>
+However, these instructions will not work correctly if the size
+of your program exceeds 64K and the 'table' variable is placed after
+the 64K limit. This is because 16-bit addresses span only the 64K
+of the segment. The last example above is the most dangerous;
+it is likely to crash the system.
+<br>
+<br>
+<B>Jump tables</B>
+<br>Jump tables should be build as tables of 32-bit addresses,
+not 16-bit addresses.
+<br>
+<br>
+<B>Longint (32-bit) Arithmetic</B>
+<br>
+Try to use the longint arithmetic as much as possible.
+16-bit instructions often take more space than corresponding
+32-bit instructions. In
+<pre>  XOR     AX,    AX
+  MOV     data1, AX
+  MOV     data2, AX</pre>
+it would be better to replace the first instruction with
+<pre>  XOR     EAX, EAX</pre>
+which is one byte shorter. Furthermore, if <I>data1</I> and <I>data2</I>
+can be changed into longints, you may save a lot more space (and time)
+both in the assembler and the Pascal sections of the program.
+<br>
+<br>
+<B>ECX vs CX</B>
+<br>
+Loop and repeat instructions in 32-bit mode use the ECX register
+rather than CX. The following program segment is likely to cause problems:
+<pre>  MOV    CX,  size
+  MOV    ESI, source
+  MOV    EDI, dest
+  REP    MOVSB</pre>
+Also notice that the source and destination registers are ESI and EDI,
+rather than SI and DI.
+<br>
+<br>
+<B>POPAD/PUSHAD</B>
+<br>
+Use POPAD and PUSHAD instead of POPA and PUSHA.
+The latter instructions generate only 16-bit pushes.
+<br>
+<br>
+<B>POPFD/PUSHFD</B>
+<br>
+Use POPFD and PUSHFD instead of POPF and PUSHF.
+The latter instructions generate only 16-bit pushes.
+<br>
+<br>
+<B>IRETD</B>
+<br>
+Use 'IRETD' instead of 'IRET'.
+The latter instruction pops 16-bit registers.
+<br>
+<br>
+<B>String instructions</B>
+<br>
+When doing string operations, it is later to use double word instructions
+instead of byte or word. Use MOVSD instead of MOVSW or MOVSB.
+<br>
+<br>
+<B>JECXZ vs JCXZ</B>
+<br>
+Distinguish between the JCXZ and JECXZ instructions.
+The former tests the CX register, while the latter tests ECX.
+Use of JCXZ instead of JECXZ may lead to hard-to-find bugs. Similarly,
+LOOP tests ECX, while LOOP16 tests CX.
+<br>
+<br>
+<B>Function results</B>
+<br>
+Remember to return 32-bit results in EAX, not DX:AX.
+<br>
+<br>
+<B>ES: preservations</B>
+<br>
+Do not change the ES register. TMT Pascal depends on ES = DS.
+<br>
+<br>
+<B>Immediate PUSH</B>
+<br>
+TMT Pascal assumes that an immediate push instruction like
+<pre>   PUSH    Small 0
+   PUSH    Small offset data</pre>
+Furthermore notice that like TASM and unlike the PharLap assembler,
+TMT Pascal will treat
+<pre>   PUSH    Word Ptr 0</pre>
+as if it were
+<pre>   PUSH    Word Ptr [0]</pre>
+<B>Var Parameters</B>
+<br>
+Similar to 16-bit mode, <B>Var</B> parameters are 32-bit pointers.
+However, in TMT Pascal, pointers are just 32-bit offsets
+within the data segment. Therefore, <B>Var</B> parameters
+are retrieved with a 'MOV' instruction, not with an LES or an LDS.
+<br>
+<br>
+<B>Local Symbols</B>
+<br>
+Local Symbols and Parameters are addressed via the EBP register.
+For example, in 
+<pre><B>var</B>
+  local: Longint;
+<B>asm</B>
+   MOV   EAX, local
+<B>end</B>;</pre>
+the last line assembles into
+<pre>   MOV   EAX, [EBP-4]</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_operators.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operators"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="run_errors.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Run-time error codes"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Operators</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Run-time error codes</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.13 -</B></CENTER>
+</BODY></HTML>

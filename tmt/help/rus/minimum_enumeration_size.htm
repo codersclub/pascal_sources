@@ -1,0 +1,83 @@
+<html><head>
+<TITLE>$Z: Minimum Enumeration Size Switch
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="extended_warnings_switch.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: $XW: Extended Warnings"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="predefined_symbols.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Predefined Symbols"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 3.2.29 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="compiler_directives.htm"><small>Compiler Directives</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="switch_dirs.htm"><small>Switch and Parameter Directives</small></a><dir><h2>$Z: Minimum Enumeration Size Switch
+</h2></dir>
+<!-- Page content -->
+<center><B>(Targets: MS-DOS, OS/2, Win32)</B></center>
+<br>
+<br>
+<b>$Z</b> <a href="compiler_directives.htm">Compiler directive</a>
+controls the minimum storage size of enumerated types.
+<br>
+<br>
+<B>Syntax:</B>
+<pre>  {$Z1} or {$Z2} or {$Z3}</pre>
+<B>Default:</B>
+<pre>  {$Z1}</pre>
+<B>Remarks:</B>
+An enumerated type is stored as an unsigned byte since the maximum limit for
+enumeration is 256 values. If the {$Z2} switch has been specified, it is stored
+as an unsigned word. If the {$Z4} switch has been specified, it is stored an
+unsigned double-word. This feature is very useful for compatibility with C and
+C++ DLL's, which usually represent enumerated types as words or double-words.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="extended_warnings_switch.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: $XW: Extended Warnings"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="predefined_symbols.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Predefined Symbols"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">$XW: Extended Warnings</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Predefined Symbols</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 3.2.29 -</B></CENTER>
+</BODY></HTML>

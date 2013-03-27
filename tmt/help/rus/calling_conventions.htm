@@ -1,0 +1,133 @@
+<html><head>
+<TITLE>Calling Conventions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="memory_organization.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Memory Organization"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="limitations.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Limitations"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.1.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="implementation_issues.htm"><small>Implementation Issues</small></a><dir><h2>Calling Conventions
+</h2></dir>
+<!-- Page content -->
+Calling conventions match those in Borland Pascal with the following
+differences:
+<ul><li>all parameters use 4 bytes on the stack, or a multiple of 4 (BP:2)</li>
+<li>all procedures must preserve the contents of registers ebx, ecx, edx, ds,
+and es!</li>
+<li>the direction bit should be cleared after the exit from a procedure, if it
+has been modified by the procedure.</li>
+</ul>
+To call external procedures written for different languages, TMT Pascal
+provides the <B>conv</B> operator. The <B>conv</B> operator should be used in
+the function (procedure) declaration to define a calling convention, which in
+turn will be used to call a declared function (procedure).
+<br>
+<br>
+<B>Syntax:</B>
+<pre>  [<B>function</B>] <B>conv</B> conv_method FunctionName [Arguments] : ReturnType;</pre>
+Where <I>conv_method</I> is a constant, which defines the calling conversion
+to be used. The System units contains the following constants to define
+conventional method:
+<pre><B>const</B>
+<font color=#000080>// Base calling conventions to construct any possible convention</font>
+  arg_reverse    = [0];
+  arg_proc_16    = [2];
+  arg_noregsave  = [3];
+  arg_no_drop_1  = [4];
+  arg_no_drop_2  = [5];
+  arg_no_drop_3  = arg_no_drop_1 + arg_no_drop_2;
+  arg_no_drop_4  = [6];
+  arg_no_drop_5  = arg_no_drop_1 + arg_no_drop_4;
+  arg_no_drop_6  = arg_no_drop_2 + arg_no_drop_4;
+  arg_no_drop_all= [4..6];
+  arg_IO_test    = [8];
+  arg_save_edi   = [9];
+  arg_save_esi   = [10];
+<font color=#000080>// Composite calling conventions</font>
+  arg_pascal     = arg_noregsave;
+  arg_stdcall    = arg_reverse + arg_noregsave + arg_save_edi +
+                   arg_save_esi;
+  arg_cdecl      = arg_reverse + arg_no_drop_all;
+  arg_os2        = arg_cdecl + arg_noregsave;
+  arg_os2_16     = arg_proc_16 + arg_no_drop_all + arg_noregsave;</pre>
+The <I>arg_pascal</I> convention passes parameters from left to right, that is
+the leftmost parameter is evaluated and passed first and the rightmost
+parameter is evaluated and passed last. The <I>arg_cdecl</I>,
+<I>arg_stdcall</I>, <I>arg_os2</I> and <I>arg_os2_16</I> conventions pass
+parameters from right to left. For all conventions except <I>arg_cdecl</I>,
+the procedure or function removes parameters from the stack upon returning.
+<br>
+<br>
+With the <I>arg_cdecl</I> convention, the caller must remove parameters from
+the stack when the call returns. The register convention uses up to three CPU
+registers to pass parameters, whereas the other conventions always pass all
+parameters on the stack.
+<br>
+<br>
+The calling conventions are summarized in the following table.
+<dir>
+<table border=1 cellpadding=4>
+<tr><th>&nbsp;Directive&nbsp;</th><th>&nbsp;Order&nbsp;</th><th>&nbsp;Cleanup&nbsp;</th><th>&nbsp;Registers&nbsp;</th></tr>
+<tr><td>arg_pascal</td><td>Left-to-right</td><td>Function</td><td>No</td></tr>
+<tr><td>arg_cdecl</td><td>Right-to-left</td><td>Caller</td><td>No</td></tr>
+<tr><td>arg_stdcall</td><td>Right-to-left</td><td>Function</td><td>No</td></tr>
+</table></dir>
+The <I>arg_pascal</I> and <I>arg_cdecl</I> conventions are mostly useful for
+calling routines in dynamic-link libraries written in C, C++, or other
+languages. The <I>arg_stdcall</I> convention is used for calling Windows API
+routines.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="memory_organization.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Memory Organization"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="limitations.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Limitations"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Memory Organization</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Limitations</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.1.2 -</B></CENTER>
+</BODY></HTML>

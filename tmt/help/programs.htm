@@ -1,0 +1,125 @@
+<html><head>
+<TITLE>Programs
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Dynamic-Link Libraries (DLL's)"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.10.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="programs_and_units.htm"><small>Programs and Units</small></a><dir><h2>Programs
+</h2></dir>
+<!-- Page content -->
+Programs require a different format from units. The general format
+takes the following form:
+<pre>[<B>program</B> identifier;]
+[<B>uses</B>
+  Unitname [, Unitname]]
+[Declaration]
+<B>begin</B>
+  statement [; statement]
+<B>end</B>.</pre>
+The identifier following the <I>program</I> statement declares the name
+of the program. Program files are terminated by the <I>end</I> statement
+followed by a period (.).
+<br>
+<br>
+The <I>uses</I> statement tells TMT Pascal which units it uses.
+<I>Unitnames</I> listed after the <I>uses</I> statement are loaded by TMT
+Pascal. Procedures and variables referenced by the program are linked into
+the executable generated. All types, constants, variables, and functions
+declared in the Interface section of units are accessible to the program.
+<br>
+<br>
+All text beyond the final <I>end</I> statement in either a unit or program
+is ignored by TMT Pascal.
+<br>
+<br>
+<img border=0 src="images/attention.gif"> In TMT Pascal the main program
+may contain <I>interface</I> and <I>implementation</I> parts as well.
+This allows access to the variables of the main program from other modules:
+<pre><font color = #000080>// Test Program</font>
+<B>program</B> Test;
+<B>interface</B>
+<B>var</B>
+  global: Integer;
+
+<B>implementation</B>
+<B>uses</B>
+  UnitTest;
+
+<B>begin</B>
+  UnitTest.Write;
+<B>end</B>.
+
+<font color = #000080>// Test Unit</font>
+<B>unit</B> UnitTest;
+<B>interface</B>
+  <B>procedure</B> Write_global;
+
+<B>implementation</B>
+  <B>uses</B>
+    Test;
+  <B>procedure</B> Write_global;
+  <B>begin</B>
+    Write(test.global);
+  <B>end</B>;
+<B>end</B>.</pre>
+<img border=0 src="images/attention.gif"> The name of the file that contains
+the text of the main program or unit must be identical with the name that
+follows the keyword <B>program</B>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="dlls.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Dynamic-Link Libraries (DLL's)"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Units</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Dynamic-Link Libraries (DLL's)</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.10.2 -</B></CENTER>
+</BODY></HTML>

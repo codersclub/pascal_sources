@@ -1,0 +1,110 @@
+<html><head>
+<TITLE>Function 0305 - Get State Save/Restore Addresses
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0304.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0304 - Free Real Mode Callback Address"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0306.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0306 - Get Raw Mode Switch Addresses"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.26 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0305 - Get State Save/Restore Addresses
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Returns the address of two procedures used to save and restore
+the state of the current task's registers in the mode (protected or real)
+which is not currently executing.
+<pre><B>In:</B>
+   AX     = 0305h
+<B>Out:</B>
+   always successful:
+     carry flag clear
+     AX     = size of buffer in bytes required to save state
+     BX:CX  = segment:offset of real mode routine used
+              to save/restore state
+     SI:EDI = selector:offset of protected mode routine
+              used to save/restore state</pre>
+<B>Notes:</B>
+<br>
+The real mode segment:offset returned by this function should be called only
+in real mode to save/restore the state of the protected mode register.
+The protected mode selector:offset returned by this function should be called
+only in protected mode to save/restore the state of the real mode registers.
+<br>
+<br>
+Both of the state save/restore procedures are entered by a FAR CALL with the
+following parameters:
+<pre>   AL       = 0 to save state
+            = 1 to restore state
+   ES:(E)DI = (selector or segment):offset of state buffer</pre>
+The state buffer must be at least as large as the value returned in AX
+by INT 31h function 0305h. The state save/restore procedures do not modify
+an registers. DI must be used for the buffer offset in real mode, EDI must
+be used in protected mode.
+<br>
+<br>
+Some DPMI hosts and VCPI/XMS/raw will not require the state to be saved,
+indicating this by returning a buffer size of zero in AX. In such cases,
+that addresses returned by this function can still be called, although the
+will simply return without performing any useful function.
+<br>
+<br>
+Clients do not need to call the state save/restore procedures before using
+INT 31h function 0300h, 0301h, or 0302h. The state save/restore procedures
+are provided for clients that use the raw mode switch services only.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0304.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0304 - Free Real Mode Callback Address"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0306.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0306 - Get Raw Mode Switch Addresses"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0304 - Free Real Mode Callback Address</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0306 - Get Raw Mode Switch Addresses</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.26 -</B></CENTER>
+</BODY></HTML>

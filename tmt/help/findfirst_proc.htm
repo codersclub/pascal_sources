@@ -1,0 +1,135 @@
+<html><head>
+<TITLE>FindFirst procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="fexpand_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FExpand function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="findnext_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FindNext procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.11 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_unit.htm"><small>Dos Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="dos_proc_and_func.htm"><small>Dos Unit Procedures and Functions</small></a><dir><h2>FindFirst procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="dos_unit.htm">Dos Unit</a>, <a href="windos_unit.htm">WinDos Unit</a>
+<br>
+<br>
+Searches the specified directory for the matching file.
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> FindFirst(Path: PChar; Attr: Word;
+                    <B>var</B> F: TSearchRec);</pre>
+<B>Remarks:</B>
+<br>
+<I>Path</I> is the drive and directory to search in and the file name
+to search for. Wildcards are allowed, for instance, 'MYFILE??.*'.
+<br>
+<br>
+<I>Attr</I> contains the file attributes to include in the search in addition
+to all normal files.
+<br>
+<br>
+<I>FindFirst</I> is used in conjunction with
+<a href="findnext_proc.htm">FindNext</a>. Use
+<a href="findnext_proc.htm">FindNext</a> to locate any addition files
+matching the search criteria. All errors are reported in <I>DosError</I>,
+which is a variable defined in the Dos unit.
+<br>
+<br>
+<B>See also:</B>
+<br>
+<a href="fsearch_func.htm">FSearch</a>
+<br>
+<br>
+<B>Example:</B>
+<pre><B>program</B> DirList;
+<B>uses</B>
+  Dos;
+<B>var</B>
+  TotalDirCnt: Longint;
+<B>procedure</B> List(Path : String);
+<B>var</B>
+  DirSearchRec: SearchRec;
+<B>begin</B>
+  <B>if</B> (Path[Length(Path)] &lt;&gt; '\') <B>then</B>
+    Path := Path + '\';
+  FindFirst(Path + '*.*', AnyFile, DirSearchRec);
+  <B>while</B> DosError = 0 <B>do<B>
+    <B>begin</B>
+      <B>if</B> (DirSearchRec.Name &lt;&gt; '.') <B>and</B>
+         (DirSearchRec.Name &lt;&gt; '..') <B>and</B>
+         ((DirSearchRec.Attr and Directory) &lt;&gt; 0)
+         <B>then</B>
+        <B>begin</B>
+          Inc(TotalDirCnt);
+          Writeln(Path + DirSearchRec.Name);
+          List(Path + DirSearchRec.Name);
+        <B>end</B>;
+      FindNext(DirSearchRec);
+    <B>end</B>;
+  <B>end</B>;
+ 
+<B>begin</B>
+  TotalDirCnt := 0;
+  List('C:\');
+  Writeln;
+  Writeln('Total number of directories = ', TotalDirCnt);
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="fexpand_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FExpand function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="findnext_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FindNext procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">FExpand function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">FindNext procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.24.2.11 -</B></CENTER>
+</BODY></HTML>

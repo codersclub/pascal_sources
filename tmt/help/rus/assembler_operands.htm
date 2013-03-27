@@ -1,0 +1,123 @@
+<html><head>
+<TITLE>Assembler Operands
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="assembler_operand_expressions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operand Expressions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assembler_operators.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operators"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.11 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Operands
+</h2></dir>
+<!-- Page content -->
+TMT Pascal allows the following operands: Numeric Constants, Strings,
+Registers, Pascal Symbols and Special Assembler Symbols.
+<br>
+<br>
+<B>Numeric Constants</B>
+<br>
+Numeric constants are 32-bit integers, e.g. integers in the range
+-2147483648..4294967295. Numeric constants can be entered as decimal
+numbers binary numbers (using the '<B>B</B>' suffix), octal numbers
+(using the '<B>O</B>' or '<B>Q</B>' suffix), hexadecimal numbers
+(using the '<B>H</B>' suffix or '<B>$</B>' prefix).
+Note that the hexadecimal numbers must start with a digit.
+<br>
+<br>
+<B>Strings</B>
+<br>
+Strings are enclosed in either single or double quotes.
+A repeated quote of the same type as the surrounding quotes
+is treated as one character. String constants of arbitrary length
+may occur only in the '<B>DB</B>' directive. In all other cases,
+the string must not exceed four characters and its value
+is converted into an integer number.
+<br>
+<br>
+<B>Registers</B>
+<br>
+The use of registers was described above.
+<br>
+<br>
+<B>Pascal Symbols</B>
+<br>
+With built-in assembler you can access the majority of Pascal symbols.
+These include labels, constants, variables, types, and procedures.
+<br>
+The values, classes and types of Pascal symbols are summarized
+in the table below:
+<dir>
+<table border=1 cellpadding=4>
+<tr><th>Symbol</th><th>Value</th><th>Class</th><th>Type</th></tr>
+<tr><td>label</td><td>its address</td><td>Memory</td><td>NEAR</td></tr>
+<tr><td>constant</td><td>its value</td><td>Immediate</td><td>0</td></tr>
+<tr><td>type</td><td>0</td><td>Memory</td><td>SizeOf(type)</td></tr>
+<tr><td>field</td><td>its offset</td><td>Memory</td><td>SizeOf(type)</td></tr>
+<tr><td>variable</td><td>its address</td><td>Memory</td><td>SizeOf(type)</td></tr>
+<tr><td>procedure</td><td>its address</td><td>Memory</td><td>NEAR</td></tr>
+<tr><td>function</td><td>its address</td><td>Memory</td><td>NEAR</td></tr>
+<tr><td>unit</td><td>its address</td><td>Immediate</td><td>0</td></tr>
+</table></dir>
+<B>Special Assembler Symbols</B>
+<br>
+Built-in assembler supports five special symbols:
+<B>@CODE</B>, <B>@DATA</B>, <B>@RESULT</B>, <B>@PARAMS</B> and <B>@LOCALS</B>.
+The @CODE and @DATA are not really useful in a flat model.
+They always return 0Ch and 14h, which are the standard segment selectors
+for the code and data segments. The @RESULT symbol points to the
+pseudo-variable that contains the function return, @PARAMS and @LOCALS
+return the size of the parameter and local areas on stack.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_operand_expressions.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Operand Expressions"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assembler_operators.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Operators"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Operand Expressions</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Operators</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.11 -</B></CENTER>
+</BODY></HTML>

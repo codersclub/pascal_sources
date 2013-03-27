@@ -1,0 +1,114 @@
+<html><head>
+<TITLE>ExitProc variable
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="exitcode_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: ExitCode variable"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="farpointer_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FarPointer type"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.1.10 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_variables.htm"><small>System Unit Variables</small></a><dir><h2>ExitProc variable
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<a href="system_unit.htm">System Unit</a>
+<br>
+<br>
+<I>ExitProc</I>, <I>ExitCode</I>, and <I>ErrorAddr</I> variables
+are used to implement exit procedures.
+<br>
+<br>
+The <I>ExitProc</I> pointer variable allows one to install
+an exit procedure. The exit procedure always gets called
+as part of a program's termination.
+<br>
+<br>
+An exit procedure takes no parameters and must be compiled
+with a far procedure directive to force it to use the far call model.
+<br>
+<br>
+When implemented properly, an exit procedure actually becomes part
+of a chain of exit procedures. The procedures on the exit chain
+get executed in reverse order of installation.
+<br>
+<br>
+To keep the exit chain intact, you must save the current contents
+of <I>ExitProc</I> before changing it to the address of your own
+exit procedure.
+<br>
+<br>
+The first statement in your exit procedure must reinstall the saved
+value of <I>ExitProc</I>.
+<br>
+<br>
+An exit procedure may learn the cause of termination by examining the
+<I>ExitCode</I> integer variable and the <I>ErrorAddr</I> pointer variable.
+<ul>
+<li>In case of normal termination, <I>ExitCode</I> is 0 and
+<I>ErrorAddr</I> is nil.</li>
+<li>In case of termination through a call to
+<a href="halt_proc.htm">Halt</a>, <I>ExitCode</I> contains the
+value passed to Halt and <I>ErrorAddr</I> is nil.</li>
+<li>In case of termination due to a run-time error,
+<I>ExitCode</I> contains the error code and <I>ErrorAddr</I>
+contains the address of the statement in error.</li>
+</ul> 
+The last exit procedure (the one installed by the run-time library)
+closes the Input and Output files. If <I>ErrorAddr</I> is not nil,
+it outputs a run-time error message.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="exitcode_var.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: ExitCode variable"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="farpointer_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: FarPointer type"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">ExitCode variable</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">FarPointer type</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.1.10 -</B></CENTER>
+</BODY></HTML>

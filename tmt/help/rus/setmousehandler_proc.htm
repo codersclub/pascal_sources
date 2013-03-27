@@ -1,0 +1,156 @@
+<html><head>
+<TITLE>SetMouseHandler procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="rightbuttonpressed_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: RightButtonPressed function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="setmousepos_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetMousePos procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.49.1.13 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="mouse_unit.htm"><small>Mouse Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="mouse_proc_and_func.htm"><small>Mouse Unit Procedures and Functions</small></a><dir><h2>SetMouseHandler procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32 console</B></center>
+<br>
+<br>
+<a href="mouse_unit.htm">Mouse Unit</a>
+<br>
+<br>
+Installs a Pascal interrupt-driven user's mouse handler
+(<I>Hnd</I>).
+<br>
+<br>
+<B>Declaration:</B>
+<pre><B>procedure</B> SetMouseHandler (Mask: DWord;
+                            Procedure Hnd (Mask,
+                            Buttons,
+                            X, Y,
+                            MovX, MovY: System.Word));</pre>
+<B>Remarks:</B>
+<br>
+The <I>Mask</I> parameter defines the classes of the events
+that call the handler; its format corresponds to the function
+0Ch (INT 33h). When <I>Hnd</I> is called the Mask parameter
+contains the mask with the event type that occurred;
+<I>Buttons</I> contain the mask of the currently pressed buttons;
+<I>X</I> and <I>Y</I> contain the cursor's absolute position,
+and <I>MovX</I> and <I>MovY</I> contain the relative (signed) change
+of the last cursor position [negative numbers mean left or down;
+positive mean right or up]. These values are given in mouse position units;
+to convert to symbols, they need to be divided by 8.
+<br>
+<br>
+Using <I>SetMouseHandler</I> you can install several handlers with
+different masks without having to clear previous handlers.
+<br>
+<br>
+<B>Event Mask</B> (events which you want sent to your handler)
+<pre> bit 0 = mouse movement           (Mask = $01)
+ bit 1 = left button pressed      (Mask = $02)
+ bit 2 = left button released     (Mask = $04)
+ bit 3 = right button pressed     (Mask = $08)
+ bit 4 = right button released    (Mask = $10)
+ bit 5 = center button pressed    (Mask = $20)
+ bit 6 = center button released   (Mask = $40)
+         all events:      Mask = 007fH
+         disable handler: Mask = 0000H</pre>
+<B>See also:</B>
+<br>
+<a href="clearmousehandler_proc.htm">ClearMouseHandler</a>
+<br>
+<br>
+<B>Example:</B>
+<pre><B>program</B> Test;
+<font color = #000080>{$ifndef __DOS__}
+  {$ifndef __WIN32__}
+    This program can be compiled for MS-DOS and Win32 console targets only
+  {$endif}
+{$endif}</font>
+<B>uses</B>
+  CRT, Mouse;
+<B>var</B>
+  isExit: Boolean := FALSE;
+  X, Y:   DWord;
+  star:   Word := $0F2A;
+  space:  Word := $0F00;
+ 
+<B>procedure</B> MyHnd(Mask, Buttons, X, Y, MovX, MovY: System.Word);
+<B>begin</B>
+  GotoXY(1, 2);
+  Writeln('XPos = ', MickyToText(X),', YPos = ', MickyToText(Y), '  ');
+<B>end</B>;
+ 
+<B>begin</B>
+  ClrScr;
+  Writeln('Press Esc to exit');
+  HideCursor;
+  InitMouse;
+  SetMouseHandler($FFFF, MyHnd);
+  <B>repeat</B>
+    X := MickyToText(GetMouseX) + 1;
+    Y := MickyToText(GetMouseY) + 1;
+    <B>if</B> (LeftButtonPressed) <B>and</B> (Y &gt; 2) <B>and</B>
+       (Y &lt; 25) <B>then</B>  WriteAttr (X, Y, Star, 1);
+    <B>if</B> (RightButtonPressed) <B>and</B> (Y &gt; 2) <B>and</B>
+       (Y &lt; 25) <B>then</B> WriteAttr (X, Y, Space, 1);
+   <B>if</B> Keypressed <B>then</B> 
+     isExit := ReadKey = #27;
+  <B>until</B> isExit;
+  ShowCursor;
+  DoneMouse;
+<B>end</B>.</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="rightbuttonpressed_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: RightButtonPressed function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="setmousepos_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: SetMousePos procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">RightButtonPressed function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">SetMousePos procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.49.1.13 -</B></CENTER>
+</BODY></HTML>

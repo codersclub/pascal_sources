@@ -1,0 +1,754 @@
+<html><head>
+<title>TMT Pascal по-Русски! - FAQ (ЧаВО)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="Author" content="Valery Votintsev and Vadim Bodrov">
+<meta name="Description" content="ЧАстые Вопросы и Ответы (FAQ) о TMT Pascal.">
+<meta name="keywords"
+content="custom software, custom development, custom projects, software development, Pascal, compiler, 32-bit, 32 bit, Turbo, DOS compiler, graphics library, DPMI, DOS extender, PMODE/W, WDOSX, DOS/4GW, TMT, MSDOS, MS-DOS, VESA, LFB, MMX, Win32, Windows, Windows'95, Windows'98, Windows NT, OS/2, Multi-target, AMD, 3DNow!">
+<link rel="stylesheet" type="text/css" href="tmt.css">
+</head>
+<body bgcolor="#FFFFFF">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18" align="top"><a
+        class=menu href="index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="news.htm">TMT Pascal 5.0</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="samples.htm">Примеры кода</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/sel.gif" width="18"><a
+        class=menu href="faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../index.htm"><img src="../img/pas.gif" height="31" width="88" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+
+
+</td>
+    <!-- end left top cell of outer table -->
+
+
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top"><blockquote>
+          <p align="left"><!-- begin upper right body table --></p>
+          <p align="center"><font size="3"><b>TMT Pascal &nbsp;ЧАВО</b><br>(<b>ЧА</b>стые <b>В</b>опросы и <b>О</b>тветы)</font></p>
+          <hr>
+        </blockquote>
+
+        <font size="2">
+        <blockquote>
+          <ul>
+            <li><a href="#L1">Как заказать компилятор TMT Pascal?</a><br><br></li>
+            
+            <li><a href="#L19">Я недавно скачал бесплатную версию
+              TMT Pascal, но не знаю, как мне его использовать после раззиповки архива.</a><br><br></li>
+
+            <li><a href="#L5">Можно ли создавать коммерческие программы с
+              помощью бесплатной версии TMTPL?</a><br><br></li>
+
+            <li><a href="#L16">Я пытаюсь перекомпилировать мои старые TP исходники
+              с помощью TMT Pascal, но получаю кучу сообщений об ошибках. Что здесь не так?</a><br><br></li>
+
+            <li><a href="#Lrus">Как настроить IDEW32 для работы с русской кодировкой
+              в DOS <nobr>(cp-866)?</nobr>
+              </a><br><br></li>
+
+            <li><a href="#Grus">Как выводить в графическом режиме символы в русской кодировке
+              <nobr>(cp-866)?</nobr>
+              </a><br><br></li>
+
+            <li><a href="#L2">Почему TMTPL не компилирует большие программы? Это баг?
+              </a><br><br></li>
+
+            <li><a href="#L15">Как создать Windows GUI приложение
+              с помощью TMT Pascal?</a><br><br></li>
+
+            <li><a href="#L14">Как создать и использовать DLL для защищенного режима в MS-DOS?
+              </a><br><br></li>
+
+            <li><a href="#L18">Как избавиться от вывода логотипа экстендера PMODE/W в моих MS-DOS
+              приложениях?</a><br><br></li>
+
+            <li><a href="#L22">Почему при запуске (RUN) моей программы
+              TMT Pascal не предупреждает меня об ошибках в коде программы?
+              </a><br><br></li>
+
+            <li><a href="#L24">Каким образом создавать и редактировать файлы
+              ресурсов (.res, .rc), используемые в диалогах Windows?</a><br><br></li>
+
+            <li><a href="#L6">Как получить прямой доступ к данным?</a><br><br></li>
+
+            <li><a href="#L10">Я пытаюсь написать TSR программу с помощью TMT
+              Pascal, но она не работает. Почему?</a><br><br></li>
+
+            <li><a href="#L11">Как написать обработчик прерывания на TMT
+              Pascal?</a><br><br></li>
+
+            <li><a href="#L13">Как выделить блок в первом мегабайте памяти?
+              </a><br><br></li>
+
+            <li><a href="#L7">Можно ли производить арифметические операции с
+              указателями?</a><br><br></li>
+
+            <li><a href="#L4">Почему не все функции модуля GRAPH работают с
+              экстендером PMode?</a><br><br></li>
+
+            <li><a href="#L17">Я создал Win32 GUI приложение, использующее
+              библиотеку Graph. Почему оно не работает?</a><br><br></li>
+
+            <li><a href="#L8">Почему не устанавливается LFB видео режим при использовании
+              модуля GRAPH?</a><br><br></li>
+
+            <li><a href="#L9">Почему в чистом MS DOS не устанавливается LFB SVGA режим,
+              хотя под Windows' 95 всё работает?</a><br><br></li>
+
+            <li><a href="#L12">Я использую ссылку OVERLOAD для описания оператора
+              '*' для переменных с плавающей точкой в модуле, но она не оказывает никакого эффекта. Почему?</a><br><br></li>
+
+            <li><a href="#L20">Мне нужно вызвать прерывание в реальном режиме (ну, скажем, INT
+              21h); и мне нужно записать в регистры DS:DX значение segment:offset некоторых моих переменных.
+              Как мне это сделать?</a><br><br></li>
+
+            <li><a href="#L23">В анонсе написано, что в
+              TMT Pascal встроен высоко-уровневый отладчик.
+              Однако, мне непонятно, что такое
+              &quot;высоко-уровневый отладчик&quot;?
+              Позволяет ли он, например, ставить точки останова
+              и осуществлять пошаговое выполнение с "проваливанием" (Step-through),
+              отлавливать ошибки времени выполнения, и т.д.?</a><br><br></li>
+
+            <li><a href="#L21">Почему выполнение команды
+              &quot;Single-Step&quot; во встроенном отладчике
+              очень медленное?</a><br><br></li>
+          </ul>
+        </blockquote>
+
+
+
+        <blockquote>
+
+          <hr>
+          <p><a name="L1"></a></p>
+          <p><b>Как заказать компилятор TMT Pascal?</b></p>
+          <p>Заказать можно по электронной почте: <a href="mailto:sales@tmt.com">sales@tmt.com</a>
+          по кредитной карточке (VISA, MasterCard, AMEX, Discover). Укажите номер карточки и срок ее действия.
+          Не забудьте указать ваш почтовый адрес!
+          Если вы не доверяете свой заказ электронной почте, то просто позвоните в
+          TMT Development Corp. по телефону: 1-631-689-3172. Поскольку линия защищенная, можно смело сообщать данные о своей кредитной карточке.
+          <br><b>Для Российских покупателей</b>: Заполните форму заказа, расположенную на страничке <a href="purchase.htm">Продажи</a>.
+          <br>Если Вас не устраивают все предыдущие варианты, то просто отправьте ваш заказ <a href="contact.htm">обычной почтой</a>.</p>
+
+          <hr>
+          <p><a name="L2"></a></p>
+          <p><b>Почему TMTPL не компилирует большие программы? Это баг?</b></p>
+          <p>Нет, это свойство :). Попытайтесь увеличить максимальный размер EXE файла (ключ -exemax в параметрах
+          командной строки) и максимальный размер OBJ файла (ключ -objmax в параметрах командной строки).</font></p>
+
+
+          <hr>
+          <p><a name="Lrus"></a></p>
+          <p><b>Как настроить IDEW32 для работы с русской кодировкой
+              в DOS (cp-866)?</b></p>
+          <p>Для этого нужно установить тип фонта "Терминал": 
+             <br>Options -> Environment -> Display -> Font Name = TERMINAL 
+          </p>
+
+
+
+
+          <hr>
+          <p><a name="Grus"></a></p>
+          <p><b>Как выводить в графическом режиме символы в русской кодировке
+              <nobr>(cp-866)?</nobr></b></p>
+          <p>Для этого достаточно загрузить любой русский фонт.
+             <br>Вот пара русских фонтов и пример работы с ними:
+             <br><a href="pub/rusfont.zip">rusfont.zip</a> (4k)
+          </p>
+
+
+
+
+
+
+          <hr>
+          <p><a name="L4"></a></p>
+          <p><b>Почему не все функции модуля GRAPH работают под экстендером PMode?</b></p>
+          <p>Дело в том, что для некоторых функций модуля GRAPH требуется специальный DPMI сервис (например,
+          функции 0100h, 0202h, 0203h и 0800h), которые просто-напросто не поддерживаются экстендером PMODE. Попробуйте использовать
+          другой экстендер.</p>
+
+          <hr>
+          <p><a name="L5"></a></p>
+          <p><b>Можно ли создавать коммерческие приложения с помощью бесплатной версии
+          TMTPL?</b></p>
+          <p>Нельзя. Бесплатная версия компилятора предназначена только для ознакомления.
+          Если Вы не заплатили за компилятор, Вы не имеете права продавать программы, созданные с помощью
+          TMTPL.</p>
+
+          <hr>
+          <p><a name="L6"></a></p>
+          <p><b>Как получить прямой доступ к моим данным?</b></p>
+          <p>TMT Pascal использует плоскую (flat) модель памяти. Это означает, что весь код,
+          статические и временные данные (размещенные с помощью процедуры <strong>GetMem</strong>),
+          хранятся в одном сегменте. Таким образом, Вы можете получить доступ к любым Вашим данным простым указанием линейного
+          смещения относительно начала объекта памяти. Приведенный ниже пример показывает, как получить прямой доступ
+          к блоку памяти, который был выделен с помощью <strong>GetMem</strong>.<dl>
+            <dt><font color="#0000FF" size="2" face="Courier"><strong>var</strong></font></dt>
+            <dt><font size="2" face="Courier">&nbsp; P: Pointer; Dummy: Byte;<br>
+              &nbsp; i: DWORD;</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">begin</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp; GetMem(P, 100000);</font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp; </font><strong><font color="#0000FF" size="2">for</font></strong><font
+              size="2"> i := 0 </font><strong><font color="#0000FF" size="2">to</font></strong><font
+              size="2"> 99999 </font><strong><font color="#0000FF" size="2">do</font></strong></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp; Byte((P + i)^) := Random(256);</font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp; </font><strong><font color="#0000FF" size="2">for</font></strong><font
+              size="2"> i := 0 </font><strong><font color="#0000FF" size="2">to</font></strong><font
+              size="2"> 99999 </font><strong><font color="#0000FF" size="2">do</font></strong></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp; Dummy := Byte((P + i)^);</font></dt>
+            <dt><font color="#0000FF" size="2" face="Courier"><strong>end</strong>.</font></dt>
+          </dl>
+          <p>Кроме того, Вы можете использовать встроенный ассемблер дл
+          ускорения прямого доступа к памяти.</font></p>
+          <p><font size="2" face="Courier"><i>Пример:</i></font><dl>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">asm</font></strong></dt>
+            <dt><font face="Courier"><font size="2">&nbsp; mov edi, [P] &nbsp;</font><font
+              color="#008000" size="2">&nbsp; // P - это указатель на блок данных в памяти</font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;mov ecx, [SIZE] </font><font
+              color="#008000" size="2">// SIZE - это размер блока данных</font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;mov al, &nbsp;0FFh </font><font
+              color="#008000" size="2">&nbsp; // Присвоим значение для байта-заполнителя </font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;rep stosb &nbsp;&nbsp;&nbsp;&nbsp;</font><font
+              color="#008000" size="2">&nbsp; // Заполним блок данных значением $FF</font><font
+              size="2"> </font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">end</font></strong><font
+              size="2">;</font></font></dt>
+          </dl>
+
+          <hr>
+          <p><a name="L7"></a></p>
+          <p><b>Можно ли производить арифметические операции с указателями?</b></font></p>
+          <p>Да, можно. Вы можете использовать процедуры <font
+          face="Courier New"><strong>Inc()</strong></font> и <strong><font
+          size="2" face="Courier New">Dec()</font></strong>.
+          Кроме этого, для увеличения и уменьшения значения указателя можно использовать операторы <strong> &quot;+&quot;</strong> и <strong>
+          &quot;-&quot;</strong>.</font></p>
+          <p><i>Например:</i><dl>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">var</font></strong></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;ScrAddr: Pointer; </font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">begin</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // ScrAddr указывает на первый байт
+              VGA памяти</font></dt>
+            <dt><font face="Courier"><font size="2"><font color="#008000">&nbsp; </font></font><font
+              color="#008000" size="2">// (левый верхний пиксель)</font><font size="2">&nbsp;&nbsp;</font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;ScrAddr := Pointer($A0000);</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Теперь ScrAddr указывает на последний
+              байт VGA памяти</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // (нижний правый пиксель) &nbsp;&nbsp;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;ScrAddr := ScrAddr + 63999;</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">end</font></strong><font
+              size="2">.</font></font></dt>
+          </dl>
+
+          <hr>
+          <p><a name="L8"></a></p>
+          <p><b>Почему не устанавливается LFB режим при использовании модуля GRAPH?
+          </b></p>
+          <p>Linear Flatframe Buffer (LFB) поддерживается только в том случае,
+          если Ваша видеокарта совместима со стандартом VESA VBE 2.0 или выше. Старые видеокарты, поддерживающие VESA VBE v.1.2
+          или ниже, не могут устанавливать LFB без специальных VESA VBE драйверов. Мы рекомендуем использовать для этой цели SciTech
+          Display Doctor 5.3 или выше, который позволяет получить доступ к LFB даже на старых видеокартах, не поддерживающих
+          VESA VBE 2.0. Драйвер SciTech Display Doctor можно взять на странице изготовителя: <a
+          href="http://www.scitechsoft.com/">http://www.scitechsoft.com</a></p>
+
+          <hr>
+          <p><a name="L9"></a></p>
+          <p><b>Почему не устанавливается LFB SVGA режим под голым DOS-ом,
+          хотя под Windows' 95 все работает нормально?</b> </font></p>
+          <p><font size="2" face="Arial">Вероятнее всего, Вы компилируете Вашу программу для экстендера
+          PMODE. Этот экстендер не поддерживает функцию 800h DPMI хоста под голым
+          DOS, в то время, как под Windows 95 Ваша программа работает благодаря тому, что Windows 95 имеет свой собственный DPMI хост.
+          Рекомендуем перекомпилировать Вашу программу для другого экстендера, например PMODE/W, WDOSX или DOS/4GW,
+          которые поддерживают функцию 800h DPMI хоста даже под голым DOS.</p>
+
+          <hr>
+          <p><a name="L10"></a></p>
+          <p><b>Я пытаюсь написать TSR программу с помощью TMT
+              Pascal, но она не работает. Почему?</b></p>
+          <p>TMT Pascal создает 32-битные программы для защищенного режима MS-DOS,
+          и не предназначен для разработки программ, работающих в реальном режиме времени, таких, как TSR.</p>
+
+          <hr>
+          <p><a name="L11"></a></p>
+          <p><b>Как написать обработчик прерывания на TMT Pascal?</b></p>
+          <p>Приведенный ниже пример демонстрирует простой метод работы с
+          обработчиками прерываний.<dl>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">program</font></strong><font
+              size="2"> IntDemo; </font></font></dt>
+            <dt><font face="Courier"><font color="#008000" size="2"><em>{$ifndef __DOS__}<br>
+              </em></font><font size="2" color="#000000">&nbsp; Неверно выбрана платформа! Выберите DOS !<br>
+              </font><em><font color="#008000" size="2">{$endif}</font><br>
+              </em><strong><font color="#0000FF" size="2">uses</font></strong><font size="2"> Dos, Crt; </font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">var</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp; Int1CSave: FarPointer; </font></dt>
+            <dt><font size="2" face="Courier">&nbsp; Time: LongInt; </font></dt>
+            <dt><font color="#008000" size="2" face="Courier">/////////////////////////////////////////////////////</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">procedure</font></strong><font
+              size="2"> TimerHandler; </font><strong><font color="#0000FF" size="2">interrupt</font></strong><font
+              size="2">; </font></font></dt>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">var</font></strong></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;StoreX, StoreY: Word; </font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">begin</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;Inc(time);</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;StoreX := WhereX;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;StoreY := WhereY; </font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;GotoXY(1, 1);</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;Write(time);</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;GotoXY(StoreX, StoreY); </font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">end</font></strong><font
+              size="2">; </font><font color="#008000" size="2">{TimerHandler}</font></font></dt>
+            <dt><font color="#008000" size="2" face="Courier">/////////////////////////////////////////////////////</font></dt>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">begin</font></strong></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;ClrScr; </font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;Time := 0;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;GetIntVec($1C, Int1CSave);</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;SetIntVec($1C, @TimerHandler);</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;Writeln;</font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;Writeln(</font><font color="#800000"
+              size="2">'Введите что-нибудь и нажмите &quot;ENTER&quot; для выхода'</font><font size="2">);</font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;Readln;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;SetIntVec($1C, Int1CSave);</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">end</font></strong><font
+              size="2">.</font></font></dt>
+          </dl></p>
+
+          <hr>
+          <p><a name="L12"></a></p>
+          <p><b>Я использую ссылку OVERLOAD для описания оператора
+              '*' для переменных с плавающей точкой в модуле, но она не оказывает никакого эффекта. Почему?
+          Привожу ниже часть моего модуля:</b><dl>
+            <dt><font color="#008000" size="2" face="Courier">{16.16 fixed-point math unit}</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">unit</font></strong><font
+              size="2"> Fix1616;</font></font></dt>
+            <dt>&nbsp;</dt>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">interface</font></strong></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">type</font></strong><font
+              size="2"> Fixed16 = LongInt; </font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">function</font></strong><font
+              size="2"> FixMulFix(F1, F2: Fixed16): Fixed16;</font></font></dt>
+            <dt>&nbsp;</dt>
+            <dt><strong><font color="#0000FF" size="2" face="Courier">implementation</font></strong></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">function</font></strong><font size="2"> FixMulFix(F1, F2: Fixed16): Fixed16; </font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">assembler</font></strong><font size="2">;</font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">asm</font></strong><font size="2"> </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;mov &nbsp;eax,F1 </font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;mov &nbsp;edx,F2</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;imul edx</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;sal &nbsp;eax,1</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;adc &nbsp;edx,0</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;&nbsp;shrd eax,edx,16 </font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">end</font></strong><font size="2">;</font></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">OVERLOAD</font></strong><font size="2"> * = FixMulFix; </font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">end</font></strong><font
+              size="2">.</font></font></dt>
+          </dl></p>
+          <p>Вам следует поместить декларацию <strong>OVERLOAD</strong>
+          внутри секции <strong>INTERFACE</strong> Вашего модуля. А функция <b>FixMulFix</b> должна выглядеть
+          следующим образом:<dl>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">function</font></strong><font
+              size="2"> FixMulFix(F1, F2: Fixed16): Fixed16; </font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">OVERLOAD</font></strong><font
+              size="2"> * = FixMulFix;</font></font></dt>
+            <dt><font size="2" face="Courier">...</font></dt>
+          </dl>
+
+          <hr>
+          <p><a name="L13"></a></p>
+          <p><b>Как выделить блок в первом мегабайте памяти?
+          </b></p>
+          <p>Для этого следует использовать функции <strong>DOSMemoryAlloc</strong> (дл
+          выделения блока памяти) и <strong>DOSMemoryFree</strong> (для освобождения блока памяти)
+          из модуля <strong>DPMI</strong>.</p>
+          <p><i>Пример:</i><dl>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">program</font></strong><font
+              size="2" color="#000000"> DpmiDemo;</font></font></dt>
+            <dt><font face="Courier"><font color="#008000" size="2"><em>{$ifndef __DOS__}<br>
+              </em></font><font size="2" color="#000000">&nbsp; Неверно выбрана платформа. Выберите DOS!<br>
+              </font><font color="#008000" size="2"><em>{$endif}</em></font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">uses</font></strong><font
+              size="2"> DPMI;</font></font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">var</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;rmSeg: Word;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;LinAddr: DWord;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;rmRegs: TRmRegs;</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;i: DWord;</font></dt>
+            <dt><font face="Courier"><strong><font color="#0000FF" size="2">begin</font></strong><font
+              size="2"> </font></font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Выделить 256 байт в нижней
+              памяти и сохранить адрес</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // real mode сегмента</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;rmSeg := DOSMemoryAlloc(256); </font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">if</font></strong><font size="2"> rmSeg = 0</font><font color="#0000FF" size="2">
+              <strong>then</strong></font></font></dt>
+            <dt><font color="#0000FF" size="2" face="Courier"><strong>&nbsp; begin</strong></font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;&nbsp;Writeln(</font><font
+              color="#800000" size="2">'Недостаточно нижней памяти!'</font><font size="2">); </font></font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;&nbsp;Halt(0);</font></dt>
+            <dt><font face="Courier"><strong><font size="2"><font color="#0000FF">&nbsp; </font></font><font
+              color="#0000FF" size="2">end</font></strong><font size="2">;</font></font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Получить в защищенном режиме
+              адрес real-mode сегмента</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;LinAddr := DWord(rmSeg) * 16;</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Очистить структуру rmRegs (заполнить ее
+              нулями)</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;ClearRmRegs(rmRegs); </font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Функция VBE 4F00h - GetVESAInfo</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;rmRegs.AX := $4F00; </font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Занести в Real mode регистр ES
+              значение сегмента<br>&nbsp;&nbsp;// выделенного блока памяти</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;rmRegs.ES := rmSeg; </font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Вызвать функцию VBE 4F00h, котора
+              заполнит выделенный блок </font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // информацией о VESA VBE</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;RealModeInt($10, rmRegs);</font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;Write(</font><font color="#800000"
+              size="2">'Идентификатор: '</font><font size="2">);</font></font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Прочитать первые 4 байта из блока
+              в нижней памяти и</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // вывести их на экран. Если
+              Ваша видеокарта поддерживает</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // VESA VBE, Вы увидите слово
+              'VESA'</font></dt>
+            <dt><font face="Courier"><font size="2">&nbsp;&nbsp;</font><strong><font color="#0000FF"
+              size="2">for</font></strong><font size="2"> i := LinAddr </font><strong><font
+              color="#0000FF" size="2">to</font></strong><font size="2"> LinAddr + 3 </font></font><font
+              color="#0000FF" size="2" face="Courier"><strong>do </strong></font><font size="2"
+              face="Courier">Write(char(Pointer(i)^));</font></dt>
+            <dt><font color="#008000" size="2" face="Courier">&nbsp; // Free allocated memory block</font></dt>
+            <dt><font size="2" face="Courier">&nbsp;&nbsp;DOSMemoryFree(rmSeg); </font></dt>
+            <dt><font color="#0000FF" size="2" face="Courier"><strong>end</strong>.</font></dt>
+          </dl>
+
+          <hr>
+          <p><a name="L14"></a></p>
+          <p><strong>Как создать и использовать DLL для защищенного режима в MS-DOS?
+          </strong></p>
+          <p>TMT Pascal напрямую не поддерживает генерацию и/или использование DLL
+          для защищенного режима MS-DOS (так же, как и
+          для OS/2 или Win32 приложений). Однако, Вы можете использовать альтернативный вариант. Мы рекомендуем использовать
+          <b>DLL Manager</b> от Virtual Research Group, который можно скачать с нашей страницы <a
+          href="contribs.htm">Contributions</a>.</p>
+
+          <hr>
+          <p><a name="L15"></a></p>
+          <p><strong>Как создать Windows GUI приложение
+           с помощью TMT Pascal?</strong></p>
+          <p>К сожалению, у нас нет возможности научить Вас,
+          как создавать Windows приложения. Мы советуем Вам купить какую-нибудь хорошую книгу о работе под Win32.
+          Кроме того, Вы можете найти множество полезной документации в Интернет.</p>
+
+          <hr>
+          <p><a name="L16"></a></p>
+          <p><strong>Я пытаюсь перекомпилировать мои старые TP исходники
+              с помощью TMT Pascal, но получаю кучу сообщений об ошибках. Что здесь не так?
+          </strong></p>
+          <p>Некоторые исходники, написанные
+          для Turbo Pascal, просто не могут быть перекомпилированы нашим компилятором, пока Вы не внесете в них некоторые изменения.
+          Например, нельзя перекомпилировать
+          исходники, содержащие вставки на 16-битном ассемблере или директивы <b>Inline</b>.</p>
+
+          <hr>
+          <p><a name="L17"></a></p>
+          <p><strong>Я создал Win32 GUI приложение, использующее
+          библиотеку Graph. Почему оно не работает?
+          </strong></p>
+          <p>Модулю GRAPH для работы с платформой Win32 необходим установленный Microsoft
+          DirectX версии 3 или выше. Последнюю версию дистрибутива DirectX можно скачать
+          со страницы <a href="http://www.microsoft.com/directx/download.asp">http://www.microsoft.com/directx/download.asp</a>.
+          </p>
+
+          <hr>
+          <p><a name="L18"></a></p>
+          <p><b>Как избавиться от вывода логотипа экстендера PMODE/W в моих MS-DOS
+          приложениях?
+          </b></p>
+          <p><font face="Arial" size="2">Логотип, выводимый экстендером PMODE/W, охраняется лицензией, и поэтому не
+          может быть удален. То же самое относится и к логотипу экстендера DOS4/GW (WSTUB.EXE). Однако, мы можем предложить
+          использовать другой  DOS экстендер, например PASSTUB.EXE, TMTSTUB.EXE, CWSTUB.EXE или TMT32.EXE. Для этих экстендеров
+          Вы можете запретить вывод логотипа с помощью директивы компилятора <strong>-$logo-</strong>.
+          </font></p>
+
+          <hr>
+          <p><a name="L19"></a></p>
+          <p><strong>Я недавно скачал бесплатную версию
+          TMT Pascal, но не знаю, как мне его использовать после раззиповки архива.
+          </strong></p>
+          <p>Прочитайте файлы <strong>readme.txt</strong> и <strong>manual.txt</strong>,
+          расположенные в каталоге, в который Вы развернули архив с компилятором.</p>
+
+          <hr>
+          <p><a name="L20"></a></p>
+          <p><strong>Мне нужно вызвать прерывание в реальном режиме (ну, скажем, INT
+          21h); и мне нужно записать в регистры DS:DX значение segment:offset некоторых моих переменных.
+          Как мне это сделать?
+          </strong></p>
+          <p>Существует возможность эмулировать прерывания реального режима с помощью специальной
+          DPMI функции, которая реализована в процедурах <strong>MsDos</strong> и <strong>Intr</strong>
+          (см. описание модуля DOS в онлайн-help). Однако имейте в виду,
+          что в этом случае Вы _обязаны_ выделять блок памяти в нижнем мегабайте (1-ый мегабайт ОЗУ) с помощью функций <strong>AllocDosMemoryBlock</strong>
+          или <strong>DosMemoryAlloc</strong> из модуля DPMI.</p>
+
+
+
+          <hr>
+          <p><a name="L21"></a></p>
+          <p><b>Почему выполнение команды
+          &quot;Single-Step&quot; во встроенном отладчике
+          очень медленное?</b></p>
+          <p>В &quot;пошаговом&quot; (Single-Step) режиме встроенный отладчик
+          приостанавливает и возобновляет выполнение программы
+          для каждой выполняемой команды процессора.
+          Мы настоятельно рекомендем по возможности не пользоваться
+          &quot;пошаговым&quot; режимом.
+          Лучше вместо этого использовать режим &quot;Run-To-Cursor&quot;,
+          который не дает замедления. 
+          </p>
+
+
+          <hr>
+          <p><a name="L22"></a></p>
+          <p><b>Почему при запуске (RUN) моей программы
+          TMT Pascal не предупреждает меня об ошибках в коде программы?</b>
+          Он просто заявляет:
+          <br>[Run Error]: моя_прога.EXE is not found.<BR>
+          И как мне победить эту проблему?</p>
+          <p>Похоже, что Вы используете версию <b>Lite</b> компилятора под
+          Windows NT (NT 3/4, 2000, или XP). Проблема в том, что
+          Win32-оболочка компилятора не может правильно работать
+          с MS-DOS версией компилятора в системах типа NT.
+          Для решения проблемы можно предложить два выхода:
+          либо используйте операционку Win'9x, либо покупайте
+          TMT Pascal Multi-target, который работает без проблем
+          на любой Win32 платформе, включая
+          Windows NT 3/4, Windows 2000, и Windows XP.</p>
+
+
+          <hr>
+          <p><a name="L23"></a></p>
+          <p><b>В анонсе написано, что в
+          TMT Pascal встроен высоко-уровневый отладчик.
+          Однако, мне непонятно, что такое
+          &quot;высоко-уровневый отладчик&quot;?
+          Позволяет ли он, например, ставить точки останова
+          и осуществлять пошаговое выполнение с "проваливанием" (Step-through),
+          отлавливать ошибки времени выполнения, и т.д.?
+          </b></p>
+          <p>Термин &quot;высоко-уровневый отладчик&quot; означает следующее:<BR>
+          1) Встроенный дебаггер НЕ позволяет отлаживать
+          программу на уровне ассемблерных инструкций.
+          Минимальной единицей отладки является <b>строка в Pascal программе</b>,
+          а не набор команд процессора, с помощью которых реализуется
+          данная строка.
+          <BR>
+          2) Встроенный отладчик позволяет устанавливать точки останова,
+          выполнять часть программы до текущего положения курсора
+          (run-to-cursor execution), и находить ошибки времени выполнения
+          (run-time errors)
+          <BR>
+          3) Команда <b>step-through</b> НЕ реализована,
+          но Вы можете воспользоваться медленным режимом
+          "пошаговой ассемблерной" (single-step) отладки.
+          Однако, мы рекомендуем вместо этого пользоваться
+          режимом <b>run-to-cursor</b>,
+          поскольку он не вносит чувствительного замедления.
+          <BR>
+          4) С помощью встроенного отладчика Вы можете отслеживать состояние
+          как Ваших локальных и глобальных переменных,
+          так и регистров процессора в любой точке останова или
+          после выполнения команды <b>run-to-cursor</b>.
+          </p>
+
+
+
+          <hr>
+          <p><a name="L24"></a></p>
+          <p><b>Каким образом создавать и редактировать файлы
+          ресурсов (.res, .rc), используемые в диалогах Windows?
+          </b></p>
+          <p>Для создания и редактирования диалогов мы рекомендуем использовать
+          программу <b>Microsoft Dialog Editor for Windows NT (dlgedit.exe)</b>,
+          которая включена в состав дистрибутива TMT Pascal.
+          Кроме того, Вы можете использовать <b>любой другой
+          редактор ресурсов</b>,
+          например утилиту <b>WEditRes</b>,
+          которая входит в состав бесплатного компилятора <b>LCC</b>
+          (<A href="http://www.cs.virginia.edu/~lcc-win32"
+          eudora="autourl">www.cs.virginia.edu/~lcc-win32</A>).
+          <BR></p>
+
+
+          <hr>
+
+
+
+        </blockquote>
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="news.htm" >[Новости]</a> &nbsp; <a href="products.htm" >[Продукты]</a> &nbsp; <a href="purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="download.htm" >[Скачать]</a> &nbsp; <a href="updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a><br>
+        <a href="faq.htm" >[FAQ]</a> &nbsp; <a href="contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="contact.htm" >[Связь с TMT]</a> &nbsp; <a href="index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

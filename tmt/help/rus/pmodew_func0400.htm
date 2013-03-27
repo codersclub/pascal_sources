@@ -1,0 +1,106 @@
+<html><head>
+<TITLE>Function 0400 - Get Version
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_func0306.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0306 - Get Raw Mode Switch Addresses"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0500.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0500 - Get Free Memory Information"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2.28 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew_func.htm"><small>PMODE/W Supported DPMI INT 31h functions</small></a><dir><h2>Function 0400 - Get Version
+</h2></dir>
+<!-- Page content -->
+<a href="pmodew.htm">PMODE/W API</a>
+<br>
+<br>
+This function Returns the version of the DPMI Specification implemented
+by the DPMI host. The client can use this information to determine what
+functions are available.
+<pre><B>In:</B>
+   AX     = 0400h
+<B>Out:</B>
+   always successful:
+     carry flag clear
+     AH   = DPMI major version as a binary number (VCPI/XMS/raw
+            returns 00h)
+     AL   = DPMI minor version as a binary number (VCPI/XMS/raw
+            returns 5ah)
+     BX   = flags:
+            <B>Bits</B> <B>Significance</B>
+            0    0 = host is 16bit (PMODE/W never runs
+                     under one of these)
+                 1 = host is 32bit
+            1    0 = CPU returned to V86 mode for reflected
+                     interrupts
+                 1 = CPU returned to real mode for reflected
+                     interrupts
+                 2    0 = virtual memory not supported
+                      1 = virtual memory supported
+                      3-15 reserved
+     CL   = processor type:
+            03h = 80386
+            04h = 80486
+            05h = 80586
+            06h-ffh = reserved
+     DH   = current value of master PIC base interrupt
+            (low 8 IRQs)
+     DL   = current value of slave PIC base interrupt
+            (high 8 IRQs)</pre>
+<B>Notes:</B>
+<br>
+The major and minor version numbers are binary, not BCD. So a DPMI 0.9
+implementation would return AH as 0 and AL as 5ah (90).
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0306.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Function 0306 - Get Raw Mode Switch Addresses"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0500.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0500 - Get Free Memory Information"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Function 0306 - Get Raw Mode Switch Addresses</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0500 - Get Free Memory Information</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2.28 -</B></CENTER>
+</BODY></HTML>

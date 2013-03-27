@@ -1,0 +1,129 @@
+<html><head>
+<TITLE>Assembler Procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="asm_statement.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Asm Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="code_procedure.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Code Procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.3.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="built-in_assembler.htm"><small>Built-in Assembler</small></a><dir><h2>Assembler Procedure
+</h2></dir>
+<!-- Page content -->
+The built-in assembler can also be used to write entire procedures
+in assembler language. Such procedures should have the <B>assembler</B>
+keyword appended after a procedure header.
+<pre><B>function</B> MultBy9(X: Longint):Longint; <B>assembler</B>;
+<B>asm</B>
+  MOV  EAX,[X]
+  LEA  EAX,[EAX*8+EAX]
+<B>end</B>;</pre>
+The function above used i80386 index scaling feature to implement
+very fast multiplication by 9.
+<br>
+<br>
+The <B>assembler</B> procedures differ from the standard Pascal procedures
+in the following ways:
+<br>
+<br>
+<B>No Return variable</B>
+<br>
+There is no return variable. You must return the function results
+in an appropriate register. More precisely,
+<ul>
+<li>Ordinal values are returned in AL (8-bit values),
+AX (16-bit values), or EAX (32-bit values).</li>
+<li>Real values are returned in DX:BX:AX.</li>
+<li>Floating point (8087) values are returned in ST(0).</li>
+<li>Pointers are returned in EAX.</li>
+<li>Strings are returned in a temporary location pointed
+by the <I>@Result</I> symbol.</li>
+</ul>
+<B>Structured variables</B>
+<br>
+Structured arguments (i.e. strings, objects, records) are not copied
+into the local variables. They should be treated as <B>var</B> parameters.
+<br>
+<br>
+<B>Stack Frame</B>
+<br>
+Assembler procedures have no stack frames if they have no arguments and no
+local symbols. Generally, the stack frame supplied by the built-in
+assembler is
+<pre> PUSH   EBP     <font color = #000080>// Appears if locals + params &gt;0</font>
+ MOV    EBP,ESP     <font color = #000080>// Appears if locals + params &gt;0</font>
+ SUB    ESP, locals <font color = #000080>// Appears if locals + params &gt;0</font>
+ ...
+ LEAVE              <font color = #000080>// Appears if locals + params &gt;0</font>
+ RETN   params      <font color = #000080>// Always appears</font></pre>
+Here <I>Locals</I> is the total size of local parameters,
+<I>Params</I> is the total size of procedure parameters.
+<br>
+<br>
+<B>Register Preservations</B>
+<br>
+Assembler code should preserve the following registers:
+DS, CS, SS, ES, EBP, and ESP. All other registers can be destroyed.
+Notice the inclusion of the ES register.
+TMT Pascal always assumes that ES is equal to DS.
+<br>
+<br>
+Furthermore, you should not change segment, page, and interrupt tables,
+as well as the control, debug and test registers, unless you are thoroughly
+familiar with 386 protected mode architecture. The privileged instructions
+like LGDT and LIDT are supported by built-in assembler. However, avoid using
+them unless you know exactly what you are doing.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="asm_statement.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Asm Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="code_procedure.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Code Procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Asm Statement</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Code Procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.3.2 -</B></CENTER>
+</BODY></HTML>

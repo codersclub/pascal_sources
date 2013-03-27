@@ -1,0 +1,174 @@
+<html><head>
+<TITLE>Graph Unit Introduction
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="fdebug_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FDebug Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="graph_types_const_var.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Graph Unit Types, Constants and Variables"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a><dir><h2>Graph Unit Introduction
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32</B></center>
+<br>
+<br>
+<img border=0 src="images/vesa.gif"> The Graph unit for TMT Pascal
+is as compatible with the Borland Graphics Library as possible.
+Since BGI is by now an obsolete interface, we added a number of
+enhancements. They are described in detail below. This graphics
+library for TMT Pascal allows easy porting of programs written
+for Borland Pascal (with minimal changes to the source).
+<br>
+<br>
+<B>Features:</B>
+<ul>
+<li>OS independent interface.
+You not need make any changes in the sources to compile them as MS-DOS or
+Win32 applications.</li>
+<li>Real 32-bit accelerated graphics;</li>
+<li>Mostly compatible with Borland's GRAPH;</li>
+<li>Supports the following graphic modes:
+<ul type="square"> 
+<li>256-colored VGA/MCGA (13h BIOS) mode;
+<li>all SVGA 256 color (PaletteColor) modes;
+<li>all SVGA 32k/64k color (HiColor) modes;
+<li>all SVGA 16M/16M+A color (TrueColor) modes;</li>
+</ul>
+</li> 
+<li>VESA VBE 1.2/2.0 features (32-bits PM interface, etc);</li>
+<li>Microsoft DirectDraw 5.0 features in Win32 applications.</li>
+<li>Banked and LFB (Linear Flat frame Buffer) SVGA modes;</li>
+<li>Logical pages and hardware scrolling (MS-DOS applications only);</li>
+<li>No 64K limit on sprite size;</li>
+<li>Does not use BGI drivers;</li>
+<li>Uses flat memory model for greater performance.</li>
+<li>Advanced sprite engine with transparent BLT;</li>
+<li>Virtual graphics mode for double- and triple-buffering is available.</li>
+</ul>
+<B>System Requirements</B>
+<ul>
+<li>VGA compatible video card required (VESA VBE 1.2 recommended,
+VESA VBE 2.0 is best) for MS-DOS and Microsoft DirectX 5.0 or higher
+for Windows'95/98/Me, Windows NT/2000 or Windows XP applications.</li>
+<li>CPU Intel 80386 or higher compatible;</li>
+<li>PMODE, PMODEW or WDOSX compatible DOS extender for MS-DOS
+32-bit protected mode applications.</li>
+</ul> 
+<B>Notices on Win32 target</B>
+<br>
+The Graph unit can be used to emulate MS-DOS SVGA graphics
+in Windows 32-bit GUI and console applications using the Microsoft
+DirectDraw 5.0 or later. Moreover the Graph unit for Win32 works
+in conjunction with CRT, Keyboard and Mouse units in a same way,
+as in MS-DOS applications. So you may recompile most of your old MS-DOS
+programs as Win32 GUI applications without any changes in your sources.
+<br>
+For example, you may compile any source from your TMTPL\SAMPLES\COMMON\GRAPH
+subdirectory for both Win32 GUI and MS-DOS targets.
+<br>
+<br>
+<B>Compatibility with the Graph unit from Borland Pascal</B>
+<br>
+TMT Graph unit will partly replicate the Graph unit from Borland Pascal.
+However there are some differences. Listed below are the names of all
+procedures and functions from the Graph unit from Borland Pascal 7
+and an indication of their status in TMT our Graph unit.
+<dir>
+<table border=1> 
+<tr><td>+Arc</td><td>+GetMaxX</td><td>*PutImage</td></tr>
+<tr><td>+Bar</td><td>+GetMaxY</td><td>+PutPixel</td></tr>
+<tr><td>+Bar3D</td><td>-GetModeName</td><td>*Rectangle</td></tr>
+<tr><td>+Circle</td><td>-GetModeRange</td><td>-RegisterBGIdriver</td></tr>
+<tr><td>*ClearDevice</td><td>+GetPalette</td><td>-RegisterBGIfont</td></tr>
+<tr><td>*ClearViewPort</td><td>+GetPaletteSize</td><td>*RestoreCrtMode</td></tr>
+<tr><td>*CloseGraph</td><td>+GetPixel</td><td>-Sector</td></tr>
+<tr><td>-DetectGraph</td><td>*GetTextSettings</td><td>+SetActivePage</td></tr>
+<tr><td>*Drawpoly</td><td>+GetViewSettings</td><td>+SetAllPalette</td></tr>
+<tr><td>+Ellipse</td><td>+GetX</td><td>*SetAspectRatio</td></tr>
+<tr><td>*FillEllipse</td><td>+GetY</td><td>*SetBkColor</td></tr>
+<tr><td>*FillPoly</td><td>*GraphDefaults</td><td>+SetColor</td></tr>
+<tr><td>*FloodFill</td><td>+GraphErrorMsg</td><td>*SetFillPattern</td></tr>
+<tr><td>-GetArcCoords</td><td>+GraphResult</td><td>*SetFillStyle</td></tr>
+<tr><td>*GetAspectRatio</td><td>+ImageSize</td><td>+SetGraphBufSize</td></tr>
+<tr><td>*GetBkColor</td><td>-InitGraph</td><td>*SetGraphMode</td></tr>
+<tr><td>+GetColor</td><td>-InstallUserDriver</td><td>+SetLineStyle</td></tr>
+<tr><td>+GetDefaultPalette</td><td>-InstallUserFont</td><td>+SetPalette</td></tr>
+<tr><td>-GetDriverName</td><td>+Line</td><td>+SetRGBPalette</td></tr>
+<tr><td>+GetFillPattern</td><td>+LineRel</td><td>+SetTextJustify</td></tr>
+<tr><td>-GetFillSettings</td><td>+LineTo</td><td>*SetTextStyle</td></tr>
+<tr><td>*GetGraphMode</td><td>+MoveRel</td><td>-SetUserCharSize</td></tr>
+<tr><td>+GetImage</td><td>+MoveTo</td><td>*SetViewPort</td></tr>
+<tr><td>+GetLineSettings</td><td>+OutText</td><td>+SetVisualPage</td></tr>
+<tr><td>+GetMaxColor</td><td>+OutTextXY</td><td>*SetWriteMode</td></tr>
+<tr><td>-GetMaxMode</td><td>-PieSlice</td><td>+TextHeight</td></tr>
+<tr><td>+TextWidth</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+</table></dir>
+<B>Definitions:</B>
+<br>
+ + procedure/function supported and functionally equivalent to Borland;
+<br>
+ * procedure/function supported, but somewhat different from Borland;
+<br>
+ - procedure/function not supported.
+<br>
+<br>
+Note that TMT Graph provides many procedures and functions,
+which are not supported by Borland's Graph unit.
+<ul>
+<li><a href="graph_types_const_var.htm">Graph Unit Types, Constants and Variables</a></li>
+<li><a href="graph_proc_and_func.htm">Graph Unit Procedures and Functions</a></li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="fdebug_unit.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: FDebug Unit"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="graph_types_const_var.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Graph Unit Types, Constants and Variables"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">FDebug Unit</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Graph Unit Types, Constants and Variables</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37 -</B></CENTER>
+</BODY></HTML>

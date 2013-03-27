@@ -1,0 +1,865 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 4)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 4'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 4</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+
+
+<p><a name="Procedures"></a>
+<br>
+<h3>Процедуры и Функции</h3>
+</p>
+<p><a name="AnalizeRGB"></a>
+<br><dl>
+<dt>
+ <h4>AnalizeRGB (процедура)</h4>
+<dd>
+ Возвращает RGB составляющие указанного цвета.
+<dd><br>
+ Объявление:<pre>
+ procedure AnalizeRGB (Color: Dword; var R,G,B: Byte);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Данная функция работает только с SVGA режимами HiColor и TrueColor.
+ Значения RGB составляющих, возвращаемые процедурой AnalizeRGB, зависят
+ от того, какой именно видео режим установлен (32K, 64K или 16M цветов).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Arc"></a>
+<br>
+ <h4>Arc (процедура)</h4>
+<dd>
+ Рисует дугу окружности.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Arc (X,Y; Integer; StAngle, EndAngle, Radius; Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Дуга начинается от радиального угла StAngle (стартовый угол) и закачиваетс
+ в точке с углом EndAngle; Radius - радиус окружности;
+ (x,y) - точка центра окружности.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Bar"></a>
+<br>
+ <h4>Bar (процедура)</h4>
+<dd>
+ Рисует прямоугольник, закрашенный текущим цветом заполнения.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Bar(x1, y1, x2, y2: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ С помощью данной процедуры можно рисовать закрашенные изнутри прямоугольники,
+ часто используемые, например, в столбиковых диаграммах. Для заполнени
+ используется цвет, задаваемый в SetFillColor.
+ Если требуется отрисовка внешнего контура прямоугольника,
+ то для этого следует использовать вызов Bar3D с указанием нулевой глубины.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Bar3D"></a>
+<br>
+ <h4>Bar3D (процедура)</h4>
+<dd>
+ Рисует 3-D прямоугольник (параллелепипед),
+ закрашенный текущим цветом заполнения.
+
+<dd><br>
+ Объявление:
+<pre>
+  procedure Bar3D(x1, y1, x2, y2: DWord; Depth: Word; Top: Boolean);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура Bar3D рисует трехмерный прямоугольник (параллелепипед),
+ заполненный изнутри цветом и образцом заполнения, задаваемыми процедурой
+ SetFillColor. 3-D обрамление прямоугольника рисуется линией текущего стил
+ и цвета, которые устанавливаются процедурами SetLineStylle и SetColor.
+ Параметр "Depth" задает глубину в пикселях внешней 3-D обводки.
+ Если значение Top = TopOn, то верхняя грань рисуется, если TopOff = False,
+ то, соответственно, нет. Таким образом, имеется возможность изображать
+ множество параллелепипедов, располагая их один над другим.
+
+<dd>
+ Типичное значение глубины обычно составляет 25% от ширины прямоугольника:
+<pre>
+    Bar3D(X1, Y1, X2, Y2, (X2 - X1 + 1) div 4, TopOn);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Circle"></a>
+<br>
+ <h4>Circle (процедура)</h4>
+<dd>
+ Рисует окружность с центром в точке (X,Y) текущим цветом, установленным
+ с помощью SetColor.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Circle(X,Y: LongInt; Radius: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ При рисовании учитывается коэффициент пропорциональности,
+ зависящий от установленного графического режима.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ClearDevice"></a>
+<br>
+ <h4>ClearDevice (процедура)</h4>
+<dd>
+ Очищает выбранное текущим устройство вывода и устанавливает указатель
+ в начальное положение.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure ClearDevice;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ ClearDevice перемещает текущий указатель в точку (0, 0),
+ и очищает всю доступную видео-память нулями.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ClearPage"></a>
+<br>
+ <h4>ClearPage (процедура)</h4>
+<dd>
+ Очищает текущую активную страницу цветом фона, установленным процедурой
+ SetBkColor, и перемещает текущий указатель в точку (0, 0).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure ClearPage;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Следует учитывать, что активная логическая страница, установленна
+ процедурой SetLogicalPage, может быть больше размеров физического экрана.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ClearViewPort"></a>
+<br>
+ <h4>ClearViewPort (процедура)</h4>
+<dd>
+ Очищает видимую часть изображения (view port) фоновым цветом,
+ установленным процедурой SetBkColor, и перемещает текущий указатель
+ в начальное положение (0, 0).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure ClearViewPort;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="CliRetrace"></a>
+<br>
+ <h4>CliRetrace (процедура)</h4>
+<dd>
+ Запрещает прерывания, ожидает обратного вертикального хода луча,
+ затем снова разрешает прерывания.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure CliRetrace;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="CliHRetrace"></a>
+<br>
+ <h4>CliHRetrace (процедура)</h4>
+<dd>
+ Запрещает прерывания, ожидает обратного горизонтального хода луча,
+ затем снова разрешает прерывания.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure CliHRetrace;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="CloseGraph"></a>
+<br>
+ <h4>CloseGraph (процедура)</h4>
+
+<dd>
+ Полностью закрывает графическую систему.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure CloseGraph;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура CloseGraph восстанавливает состояние экрана, которое было до
+ инициализации графической системы и освобождает память, выделенную
+ под графический буфер.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="DetectSVGAMode"></a>
+<br>
+ <h4>DetectSVGAMode (функция)</h4>
+<dd>
+ Врзвращает правильный номер VESA VBE режима для запрашиваемого видео-режима.
+ Если запрашиваемый видео-режим не поддерживается, то возвращается ноль.
+
+<dd><br>
+ Объявление:
+<pre>
+ function DetectSVGAMode (XRes,YRes,BPP,VMode: Word): Word;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта функция может быть использована совместно с процедурой SetGraphMode.
+ В следующем примере производится попытка установить SVGA режим 640x480
+ с максимальным количеством цветов:<pre>
+ uses Crt,Graph;
+
+ function SetSVGA640x480: String;
+ const Bps: array [0..4] of Word=(32,24,16,15,8);
+ var   Mode,i: Word;
+ begin
+  for i:=0 to 4 do begin
+   Mode:=DetectSVGAMode(640,480,bps[i],LfbOrBanked);
+   if Mode>0 then begin
+    SetGraphMode(Mode);
+    if GraphResult=grOk then begin
+     Str(bps[i],Result);
+     exit;
+    end;
+   end;
+  end;
+  RestoreCrtMode;
+  Result:='';
+ end;
+
+ var S: String;
+ begin
+  S:=SetSVGA640x480;
+  if S<>'' then begin
+   SetTextJustify(CenterText,CenterText);
+   OutTextXY(320,240,'Установлен SVGA режим 640x480 '+S+' bps');
+   OutTextXY(320,260,'Нажмите любую клавишу...');
+   ReadKey;
+   RestoreCrtMode;
+  end else
+   Writeln(' Режим SVGA 640x480 не поддерживается...');
+ end.
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="DrawEllipse"></a>
+<br>
+ <h4>DrawEllipse (процедура)</h4>
+<dd>
+ Рисует эллипс с центром в точке (X,Y). Параметры "A" и "B" задают
+ габариты эллипса соответственно по горизонтали и по вертикали.
+
+<dd>
+ Объявление:<pre>
+ procedure DrawEllipse(X, Y, A, B: LongInt)
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="DrawHLine"></a><br>
+ <h4>DrawHLine (процедура)</h4>
+<dd>
+ Рисует ГОРИЗОНТАЛЬНУЮ линию установленным цветом заполнения (fill color).
+
+<dd><br>
+ Объявление:<pre>
+ procedure DrawHLine (X1,X2,Y: LongInt);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="DrawPoly"></a><br>
+ <h4>DrawPoly (процедура)</h4>
+<dd>
+ Рисует выпуклый многоугольник текущим цветом и стилем линии.
+
+<dd><br>
+ Объявление:<pre>
+ procedure DrawPoly(NumVert: DWord; var Vert);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Параметр Numvert задает количество вершин в многоугольнике.
+ Каждая вершина описывается парой координат (X,Y) типа LongInt в массиве Vert.
+
+<dd>
+ Эта процедура отличается от аналогичной процедуры из модуля Borland GRAPH.
+ Внутренние углы в многоугольнике НЕ ДОЛЖНЫ превышать 180 градусов,
+ т.е. многоугольник должен быть выпуклым.
+<pre>
+                                    /\
+            /\                      \ \
+            \ \                     /  \
+             \ \                    \/\ \
+              \/                       \/
+        1. Правильный       2. Неправильный
+           многоугольник       многоугольник
+</pre>
+
+<dd>
+ Если Вам требуется нарисовать неправильный многоугольник (2),
+ то Вы должны предварительно разделить его на 2 правильных:
+<pre>
+                     /\               /\
+                     \ \              \ \
+         /\     +     \ \      =      /  \
+         \/            \ \            \/\ \
+                        \/               \/
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Ellipse"></a><br>
+ <h4>Ellipse (процедура)</h4>
+<dd>
+ Рисует ЧАСТЬ эллипса.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Ellipse(X,Y: LongInt;
+                   StAngle, EndAngle,
+                   XRadius, YRadius: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура Ellipse рисует дугу эллипса начиная с угла StAngle до угла
+ EndAngle, с радиусами XRadius и YRadius, и точкой центра (X,Y).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ExpandFill"></a><br>
+ <h4>ExpandFill (процедура)</h4>
+<dd>
+ Закрашивает ограниченную область текущим цветом.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure ExpandFill(X, Y: Integer);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура заливает текущим цветом, установленным с помощью SetFillColor,
+ закрытую область растрового изображения. Заливка начинается в точке (X, Y).
+ Если эта точка находится внутри зоны одного цвета, то зона будет закрашена
+ изнутри. Если же точка находится снаружи - то будет залито все за пределами
+ данной зоны.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FillEllipse"></a><br>
+ <h4>FillEllipse (процедура)</h4>
+<dd>
+ Рисует закрашенный эллипс
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FillEllipse(X, Y, A, B: LongInt)
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ (X,Y) - точка центра;
+<br> A и B - габариты по горизонтали и вертикали.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FillPoly"></a><br>
+ <h4>FillPoly (процедура)</h4>
+<dd>
+ Рисует закрашенный многоугольник.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FillPoly(NumVert: DWord; var Vert);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Vert - содержит пары координат (X,Y:LongInt) для всех вершин многоугольника.
+<br> NumVert - количество вершин в многоугольнике.
+
+<dd><br>
+ Процедура FillPoly сначала рассчитывает все точки пересечения ребер
+ многоугольника, и затем закрашивает его цветом, установленным процедурой
+ SetFillColor.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FillTriangle"></a><br>
+ <h4>FillTriangle (процедура)</h4>
+<dd>
+ Рисует закрашенный треугольник.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FillTriangle (X1,Y1,X2,Y2,X3,Y3: LongInt);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FlipImageOY"></a><br>
+ <h4>FlipImageOY (процедура)</h4>
+<dd>
+ Переворачивает растровое изображение (BitMap) по вертикали
+ (зеркальный поворот относительно оси OX).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FlipImageOY (var BitMap);
+</pre>
+
+<dd>
+ Пример:
+<pre>
+ uses Graph, CRT;
+
+ var P: Pointer;
+     i,j,dx,dy: DWord;
+
+ begin
+  { Set SVGA mode 640x480x256. You can set ANY supported mode }
+  SetSVGAMode(640,480,8,LfbOrBanked);
+  if GraphResult<>grOk then begin
+   ClrScr;
+   Writeln(GraphErrorMsg(GraphResult));
+   exit;
+  end;
+  dx:=(GetMaxX+1) div 2;
+  dy:=(GetMaxY+1) div 2;
+  for i:=0 to dx do
+   for j:=0 to dy do
+    PutPixel(i,j,i*j div dx);
+  SetTextJustify(CenterText,BottomText);
+  OutTextXY(dx,dy+dy div 2,'Press any key...');
+  ReadKey;
+  GetMem(P,ImageSize(0,0,dx-1,dy-1));
+  GetImage(0,0,dx-1,dy-1,P^);
+  FlipImageOX(P^);
+  PutImage(dx,0,P^);
+  FlipImageOY(P^);
+  PutImage(dx,dy,P^);
+  FlipImageOX(P^);
+  PutImage(0,dy,P^);
+  ReadKey;
+  FreeMem(P,ImageSize(0,0,dx-1,dy-1));
+  RestoreCrtMode;
+ end.
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FlipImageOX"></a><br>
+ <h4>FlipImageOX (процедура)</h4>
+<dd>
+ Переворачивает растровое изображение (BitMap) по горизонтали
+ (зеркальный поворот относительно оси OY).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FlipImageOX (var BitMap);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ См. пример для FlipImageOY.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FlipToMemory"></a><br>
+ <h4>FlipToMemory (процедура)</h4>
+<dd>
+ Копирует содержимое нулевой графической страницы в буфер, на который
+ указывает указатель Addr.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FlipToMemory (Addr: Pointer)
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта процедура весьма удобна для копирования содержимого текущей графической
+ страницы в виртуальный буфер для последующей обработки.
+<dd>
+ FlipToMemory НЕ ПОДДЕРЖИВАЕТСЯ в бесплатной версии TMT Pascal.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FlipToScreen"></a><br>
+ <h4>FlipToScreen (процедура)</h4>
+<dd>
+ Копирует содержимое из буфера памяти, адресуемого указателем Addr,
+ в нулевую графическую страницу.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FlipToScreen (Addr: Pointer)
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта процедура очень удобна для переноса уже обработанного изображени
+ из виртуальной страницы на графическую страницу.
+<dd>
+ FlipToScreen НЕ ПОДДЕРЖИВАЕТСЯ в бесплатной версии TMT Pascal.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="FloodFill"></a><br>
+ <h4>FloodFill (процедура)</h4>
+<dd>
+ Производит заливку области до границы указанного цвета.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure FloodFill(X, Y: Integer; Border: Word);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Используется для заливки области, ограниченной цветом,
+ задаваемым в параметре Border. Заливка производится текущим цветом заливки,
+ установленным процедурой SetFillColor. (X, Y) - стартовая точка заливки.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

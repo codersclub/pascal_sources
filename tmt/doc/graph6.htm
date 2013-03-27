@@ -1,0 +1,882 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 6)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 6'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 6</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+</p>
+
+
+
+<p><a name="Procedures"></a>
+<br>
+<h3>Процедуры и Функции</h3>
+</p>
+<p><a name="AnalizeRGB"></a>
+<br><dl>
+
+<dt><a name="GetVbeCapabilities"></a><br>
+ <h4>GetVbeCapabilities (функция)</h4>
+<dd>
+ Возвращает информацию об аппаратных возможностях VESA VBE.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetVbeCapabilities: DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Функция возвращает 4 байта, в которых побитно записана информаци
+ о возможностях VBE.
+<dd>
+ Поле "Capabilities" размером 4 байта содержит битовые индикаторы,
+ описывающие возможности поддержки конкретных возможностей
+ графической видео-карты.
+<br> Приведем их назначение без перевода:
+
+<dd><table border=0 cellspacing=2>
+<tr bgcolor=#000080><td><font color="white">&nbsp;Бит&nbsp;</font></td><td><font color="white">&nbsp;Значение&nbsp;</font></td><td><font color="white">&nbsp;Назначение&nbsp;</font></tr>
+<tr bgcolor=#ccccff><td>&nbsp;D0&nbsp;</td><td align="center">0<br>1</td><td>DAC is fixed width, with 6 bits per primary color<br>DAC width is switchable to 8 bits per primary color</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;D1&nbsp;</td><td align="center">0<br>1</td><td>Controller is VGA compatible<br>Controller is not VGA compatible</td></tr>
+<tr bgcolor=#ccccff><td>&nbsp;D2&nbsp;</td><td align="center">0<br>1</td><td>Normal RAMDAC operation<br>When programming large blocks of information to the RAMDAC, use the blank bit in Function 09h</td></tr>
+<tr bgcolor=#ccccff><td nowrap>&nbsp;D3-31&nbsp;</td><td align="center"></td><td>резерв</td></tr>
+</table>
+
+<dd><br>
+ Более подробную информацию можно получить непосредственно в описании
+ стандарта "VESA BIOS EXTENSION (VBE) Core Functions Standard".
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+
+<dt><a name="GetVbeInfo"></a><br>
+ <h4>GetVbeInfo (процедура)</h4>
+<dd>
+ Возвращает блок информации о VESA VBE.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetVbeInfo (var VI: VbeInfoType);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Переменная VI должна быть типа VbeInfoType. Обратите внимание, что Вам
+ не требуется выделять блок памяти реального режима для информационной
+ таблицы VBE (VBE Information Table). Модуль TMT Graph просто транслирует
+ эту таблицу в переменную VI, так, что Вы имеете возможность прямого
+ доступа к этой таблице непосредственно из своего Pascal кода.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetVbeModeInfo"></a><br>
+ <h4>GetVbeModeInfo (процедура)</h4>
+<dd>
+ Возвращает информацию о видео режиме для указанного внутренноего номера
+ VBE-режима.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetVbeModeInfo (ModeNo: Word; var VMI: VbeModeInfoType);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Переменная VMI должна иметь тип VbeModeInfoType. Обратите внимание, что Вам
+ не требуется выделять блок памяти реального режима для информационной
+ таблицы VBE (VBE Information Table). Модуль TMT Graph просто транслирует
+ эту таблицу в переменную VMI, так, что Вы имеете возможность прямого
+ доступа к этой таблице непосредственно из своего Pascal кода.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetVbeModesList"></a><br>
+ <h4>GetVbeModesList (процедура)</h4>
+<dd>
+ Возвращает список поддерживаемых видео-картой VESA VBE режимов.
+ Для этого функция проверяет ModesList для получения информации о всех
+ поддерживаемых режимах.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetVbeModesList (var ModesList: array of GraphModeType);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetVbeVersion"></a><br>
+ <h4>GetVbeVersion (функция)</h4>
+<dd>
+ Возвращает версию VESA BIOS.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetVbeVersion: Word
+</pre>
+
+<dd><br>
+ Пояснения:
+<dd>
+ Версия VBE возвращается в виде двухбайтного значения в кодировке BCD,
+ в котором указывается, какая именно версия VBE поддерживается арппаратурой
+ и драйверами. Старший байт содержит номер основной версии, а младший -
+ номер подверсии. Например, для VBE 2.0 будет возвращено значение 0200h,
+ а для верисии VBE 1.2 - соответственно 0102h. Кстати, некоторые программы
+ интерпретирует последнее значение (0102h) как 1.02, а это неправильно.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetViewSettings"></a><br>
+ <h4>GetViewSettings (процедура)</h4>
+<dd>
+ Возвращает параметры текущей видимой области изображения (viewport),
+ в том числе параметры отсечения.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GetViewSettings(var ViewPort: ViewPortType);
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetVisualPage"></a><br>
+ <h4>GetVisualPage (функция)</h4>
+<dd>
+ Возвращает номер текущей видео-страницы.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetVisualPage: DWord;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetWriteMode"></a><br>
+ <h4>GetWriteMode (функция)</h4>
+<dd>
+ Возвращает текущий режим записи графики на экран (write mode).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetWriteMode: DWord;
+</pre>
+
+<dd><br>
+ Пояснения:
+<dd>
+ Более подробная информация о режиме записи приведена в описании процедуры
+ SetWriteMode.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetX"></a><br>
+ <h4>GetX (функция)</h4>
+<dd>
+ Возвращает X-координату текущего указателя (current pointer, CP).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetX: LongInt;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GetY"></a><br>
+ <h4>GetY (функция)</h4>
+<dd>
+ Возвращает Y-координату текущего указателя (current pointer, CP).
+
+<dd><br>
+ Объявление:
+<pre>
+ function GetY: LongInt;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GraphDefaults"></a><br>
+ <h4>GraphDefaults (процедура)</h4>
+<dd>
+ Устанавливает текущий указатель в начальное положение и сбрасывает
+ графическую систему в режим, соответствующий установкам по умолчанию.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure GraphDefaults;
+</pre>
+
+<dd><br>
+ Пояснения:
+<dd>
+ При сбросе графической системы устанавливаются значения по умолчанию
+ для следующих параметров:
+ <ul>
+ <li> Видимая область (viewport)
+ <li> Палитра (palette)
+ <li> Цвет рисования и цвет фона (draw and background colors)
+ <li> Тип линии и образец заполнения (line style and line pattern)
+ <li> Цвет заполнения (fill color)
+ <li> Текущий фонт, стиль текста, метод выравнивания,
+    пользовательский размер символа.
+ </ul>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="GraphResult"></a><br>
+ <h4>GraphResult (функция)</h4>
+<dd>
+ Возвращает код ошибки для последней графической операции.
+
+<dd><br>
+ Объявление:
+<pre>
+ function GraphResult: Integer;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="HRetrace"></a><br>
+ <h4>HRetrace (процедура)</h4>
+<dd>
+ Ожидает горизонтального обратного хода луча.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure HRetrace;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="ImageSize"></a><br>
+ <h4>ImageSize (функция)</h4>
+<dd>
+ Возвращает количество байт, необходимых для сохранения прямоугольной
+ области экрана.
+
+<dd><br>
+ Объявление:
+<pre>
+ function ImageSize(x1, y1, x2, y2: LongInt): DWord;
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ X1, Y1, X2, и Y2 - координаты диагонально противоположных вершин
+ прямоугольной области экрана. Функция ImageSize вычисляет размер самой
+ области изображения и добавляет 2 слова, в которых будет хранитьс
+ ширина и высота заданной области.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="InvertImage"></a><br>
+ <h4>InvertImage (процедура)</h4>
+<dd>
+ Инвертирует изображение в буфере.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure InvertImage (var BitMap);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Эта процедура выполняет логическую операцию NOT для каждого байта
+ изображения в буфере.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="IsLFBUsed"></a><br>
+ <h4>IsLFBUsed (функция)</h4>
+<dd>
+ Определяет, установлен ли режим LFB (Linear Flat frame Buffer) дл
+ текущего графического режима.
+
+<dd><br>
+ Объявление:
+<pre>
+ function IsLFBUsed: Boolean;
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="Line"></a><br>
+ <h4>Line (процедура)</h4>
+<dd>
+ Рисует линию от точки (x1, y1) до точки (x2, y2).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure Line(x1, y1, x2, y2: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ При рисовании используется стиль линии, установленный процедурой SetLineStyle,
+ и цвет, установленный процедурой SetColor. Для задания режима вывода
+ (простое копирование Copy или смещивание XOR) используется процедура
+ SetWriteMode.
+
+<dd><br>
+ Обратите внимание, что две следующие операции
+<pre>
+  MoveTo(100, 100);
+  LineTo(200, 200);
+</pre>
+
+<dd>
+ эквивалентны другим двум:
+<pre>
+  Line(100, 100, 200, 200);
+  MoveTo(200, 200);
+</pre>
+
+<dd>
+ Процедуру Line удобно использовать, когда положение текущего указател
+ никак не зависит от рисуемой линии.
+ Процедуру LineTo удобно использовать, когда текущий указатель уже
+ установлен в одну из двух граничных точек линии.
+ Если же Вы хотите, чтобы положение указателя автоматически изменилось
+ при отрисовке линии, то удобнее использовать процедуру LineRel,
+ рисующую линии определенной длины относительно текущего указателя.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="LineRel"></a><br>
+ <h4>LineRel (процедура)</h4>
+<dd>
+ Рисует линию от точки, в которую установлен текущий указатель, до точки
+ отстоящей от текущей на DX по горизонтали и DY по вертикали.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure LineRel(Dx, Dy: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Линия рисуется от текущей точки с координатами (x0, y0) до точки (x1, y1),
+ координаты которой вычисляются следующим образом:
+<pre>
+   x1 = x0 + Dx
+   y1 = y0 + Dy
+</pre>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="LineTo"></a><br>
+ <h4>LineTo (процедура)</h4>
+<dd>
+ Рисует линию от текущего указателя до точки с координатами (X,Y).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure LineTo(X, Y: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ При рисовании используется стиль линии, установленный процедурой SetLineStyle,
+ и цвет, установленный процедурой SetColor. Для задания режима вывода
+ (простое копирование Copy или смещивание XOR) используется процедура
+ SetWriteMode.
+
+<dd><br>
+ Обратите внимание, что две следующие операции
+<pre>
+  MoveTo(100, 100);
+  LineTo(200, 200);
+</pre>
+
+<dd>
+ эквивалентны одной операции:
+<pre>
+  Line(100, 100, 200, 200);
+</pre>
+
+<dd>
+ Второй метод быстрее и задействует меньше программного кода.
+ Процедуру LineTo следует использовать только тогда, когда текущий
+ указатедь уже установлен в одну из конечных точек линии.
+ Для рисования линии с относительным смещением от текущего указател
+ используйте процедуру LineRel.
+<dd>
+ Не забывайте, что второй метод (процедура Line) не изменяет текущего
+ положения указателя, в то время, как процедура LineTo перемещает указатель
+ в точку (X, Y).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="MoveRel"></a><br>
+ <h4>MoveRel (процедура)</h4>
+<dd>
+ Перемещает текущий указатель на некоторое расстояние (Dx,Dy)
+ относительно текущего положения.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure MoveRel(Dx, Dy: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если до выполнения процедуры указатель находился в точке (X1,Y1),
+ то после выполнения MoveRel он переместится в точку ((X1 + Dx),(Y1 + Dy)).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="MoveTo"></a><br>
+ <h4>MoveTo (процедура)</h4>
+<dd>
+ Перемещает указатель в точку с координатами (X,Y).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure MoveTo(X, Y: LongInt);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Текущий графический указатель по своему назначению очень похож на
+ мигающий курсор в текстовом режиме за исключением того, что графический
+ курсор не только не мигает, но и вообще не виден.
+ Следующие графические операции изменяют положение текущего указателя:
+ <ul>
+ <li>ClearDevice
+ <li>ClearViewPort
+ <li>GraphDefaults
+ <li>SetGraphMode
+ <li>SetSVGAMode
+ <li>LineRel
+ <li>LineTo
+ <li>MoveRel
+ <li>MoveTo
+ <li>OutText
+ <li>SetViewPort
+ </ul>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="OutCharXY"></a><br>
+ <h4>OutCharXY (процедура)</h4>
+<dd>
+ Выводит символ в точке (X,Y) указанным цветом.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure OutCharXY(X,Y: LongInt; C: Char; Color: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Процедура не изменяет положение текущего указателя.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="OutText"></a><br>
+ <h4>OutText (процедура)</h4>
+<dd>
+ Выводит строку текста с позиции текущего указателя.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure OutText(TextString: string);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если строка выходит за границы видимой области, то невидимая часть отсекается.
+ Для достижения совместимости кода при выводе текста различными фонтами
+ используйте функции TextWidth и TextHeight для вычисления длины и высоты
+ выводимой строки.
+
+<dd>
+ При выводе строки положение текущего указателя изменяется только в том случае,
+ если строка расположена горизонтально и задано выравнивание по левому краю.
+ Стиль и направление вывода текста (горизонтальное или вертикальное) задаетс
+ процедурой SetTextStyle;
+<dd>
+ Метод выравнивания текста при выводе задается процедурой SetTextJustify:
+<br> По горизонтали:<ul>
+ <li>Указатель слева от строки;
+ <li>строка центрирована относительно указателя;
+ <li>указатель справа от строки;
+ </ul>
+<dd>
+ По вертикали:<ul>
+ <li> Строка над указателем;
+ <li> Строка под указателем;
+ <li> Строка центрирована по вертикали относительно указателя.
+ </ul>
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="OutTextXY"></a><br>
+ <h4>OutTextXY (процедура)</h4>
+<dd>
+ Выводит текстовую строку начиная с точки (X,Y).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure OutTextXY(X,Y: LongInt; TextString: string);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Если строка выходит за границы видимой области, то невидимая часть отсекается.
+ Если OutText выводит текст относительно положения текущего указателя, то
+ OutTextXY осуществляет вывод строки в любой точке экрана, при этом положение
+ текущего указателя не изменяется.
+
+<dd>
+ Для достижения совместимости кода при выводе текста различными фонтами
+ используйте функции TextWidth и TextHeight для вычисления длины и высоты
+ выводимой строки.
+ Стиль и направление вывода текста (горизонтальное или вертикальное) задаетс
+ процедурой SetTextStyle;
+ Метод выравнивания текста при выводе задается процедурой SetTextJustify:
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="PutImage"></a><br>
+ <h4>PutImage (процедура)</h4>
+<dd>
+ Выводит изображение из буфера на экран.
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure PutImage(X, Y: LongInt; var BitMap);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ (X, Y) - верхняя левая точка прямоугольной области экрана, в которую
+ выводится изображение.
+<br>
+ BitMap - буферная переменная, в которой записаны габариты изображени
+ и собственно само изображение (см. описание процедуры GetImage).
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<dt><a name="PutPixel"></a><br>
+ <h4>PutPixel (процедура)</h4>
+<dd>
+ Рисует точку указанного цвета в координатах (X,Y).
+
+<dd><br>
+ Объявление:
+<pre>
+ procedure PutPixel(X, Y: LongInt; Pixel: DWord);
+</pre>
+
+<dd>
+ Пояснения:
+<dd>
+ Pixel - цвет выводимой точки.
+
+<dd><br>
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

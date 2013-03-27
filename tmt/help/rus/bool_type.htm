@@ -1,0 +1,100 @@
+<html><head>
+<TITLE>Boolean Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="types.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="char_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Character Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Boolean Types
+</h2></dir>
+<!-- Page content -->
+The TMT Pascal compiler has four predefined Boolean types which are
+<I>Boolean</I> (preferred), <I>ByteBool</I>, <I>WordBool</I>, and
+<I>LongBool</I>.
+<br>
+<br>
+The <I>Boolean</I> and <I>ByteBool</I> variables occupy one byte of memory,
+a <I>WordBool</I> variable occupies two bytes, and a <I>LongBool</I> variable
+occupies four bytes. Each Boolean type is an ordinal and can hold one of two
+values: True or False. Expressions that evaluate to a logical &quot;yes&quot;
+or &quot;no&quot; are of Boolean type. <B>if</B>, <B>while</B>, <B>repeat</B>
+and other control statements work with Boolean expressions. The following code
+fragment,
+<pre><B>while not</B> KeyPressed <B>do</B> ;</pre>
+causes program execution to pause until a key is pressed on the keyboard.
+<a href="keypressed_func.htm">KeyPressed</a> is a procedure declared in the
+<a href="crt_unit.htm">CRT</a> unit. The expression <B>not KeyPressed</B>
+results in a Boolean value that determines whether the <B>while</B> loop is
+executed.
+<br>
+<br>
+<B>not</B> performs a logical NOT on the Boolean returned by
+<a href="keypressed_func.htm">KeyPressed</a>.
+<br>
+<br>
+The constants True and False are
+declared in the System unit as Boolean.
+<br>
+<br>
+The evaluation model is controlled through the
+<a href="boolean_eval_switch.htm">$B</a> compiler directive.
+The default state is <b>{$B-}</b>, so the compiler generates
+short-circuit evaluation code. In the <b>{$B+}</b> state,
+the compiler generates a complete evaluation.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="types.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="char_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Character Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Character Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.1 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,143 @@
+<html><head>
+<TITLE>Units
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="programs_and_units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Programs and Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="programs.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Programs"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.10.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="programs_and_units.htm"><small>Programs and Units</small></a><dir><h2>Units
+</h2></dir>
+<!-- Page content -->
+Units can be compiled separately and take the following form:
+<pre><B>unit</B> Unitname;
+<B>interface</B>
+  [Declaration]
+<B>implementation</B>
+  [Declaration]
+[
+<B>begin</B>
+  [statement [; statement]]
+]
+
+[
+ <B>end</B>  <font color = #000080>// required to close the initialization section</font>
+
+<B>postlude</B>
+<B>begin</B>
+  [statement [; statement]]
+]
+<B>end</B>.</pre>
+<I>Unitname</I> is the name of the unit. This is the same name that you will
+use in programs to reference the unit. There are three sections within each
+unit.
+<br>
+<br>
+<B>Interface Section</B>
+<br>
+The <I>interface</I> section contains declarations of types, constants,
+variables, procedures, and functions that are public and accessible to
+other programs and units. When declaring procedures and functions in the
+Interface section, only the procedure header is required.
+<br>
+<br>
+These declarations are similar to using the <B>forward</B> clause that
+tells TMT Pascal that the complete declaration is further ahead in the
+program. The entire procedure declaration is done in the <I>implementation</I>
+section. Local variables and procedures that need not be accessible outside
+of the unit may be declared in the <B>implementation</B> section.
+<br>
+<br>
+<B>Implementation Section</B>
+<br>
+The <I>implementation</I> section contains local types, constants,
+variables, labels, procedures and functions.
+<br>
+<br>
+Procedures and functions are local to the unit unless their header is also
+declared in the <I>interface</I> section. The <I>implementation</I> section
+contains complete procedure and function declarations.
+<br>
+<br>
+<B>Initialization Section</B>
+<br>
+The initialization section starts immediately after the <I>begin</I> statement.
+This code block is executed by the main program that uses the unit. It is
+executed prior to the main code block.
+<br>
+<br>
+<B>Postlude Section</B>
+<br>
+The postlude section is optional, and it begins with the reserved word
+<B>postlude</B> and continues until the end of the unit. It contains
+statements that are executed when the main program terminates.
+You should use the finalization section to free resources that were
+allocated in the initialization section.
+<br>
+<br>
+Each unit is terminated by the <I>end</I> statement followed by a dot.
+The reserved words <I>interface</I> and <I>implementation</I> must be
+specified in a unit. The <I>initialization</I> and <I>postlude</I>
+sections are optional.
+<br>
+<br>
+In Borland Pascal, private procedures are compiled as near while public
+procedures are far. Therefore private procedures are more efficient.
+In TMT Pascal both private and public procedures are near and equally
+efficient.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="programs_and_units.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Programs and Units"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="programs.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Programs"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Programs and Units</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Programs</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.10.1 -</B></CENTER>
+</BODY></HTML>

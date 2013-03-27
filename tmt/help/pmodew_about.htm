@@ -1,0 +1,284 @@
+<html><head>
+<TITLE>PMODE/W MSDOS Extender Overview
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: PMODE/W MSDOS Extender"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: PMODE/W Supported DPMI INT 31h functions"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a><dir><h2>PMODE/W MSDOS Extender Overview
+</h2></dir>
+<!-- Page content -->
+<b>Overview</b>
+<br>
+<br>
+PMODE/W allows DOS programs to run in full 32 bit protected mode, with
+access to all memory available in the system. PMODE/W basically extends the
+DOS environment to protected mode and provides a simple interface to the
+real mode DOS system services for your code. PMODE/W takes care of all
+aspects of running the system in protected mode and maintaining
+compatibility with the underlying real mode software. PMODE/W deals with
+low level necessities such as descriptor tables, memory management, IRQ and
+interrupt redirection, real/protected mode translation functions, exception
+handling, and other miscellaneous aspects of running in protected mode.
+Your code does not need to deal with specific aspects of different systems,
+such as XMS/EMS/VCPI/DPMI availability. PMODE/W will run on top of almost
+any system and provide common protected mode services to your program
+through the DPMI interface specification, as well as most standard DOS
+functions extended for protected mode use.
+<br>
+<br>
+PMODE/W is the stub and extender in one. The generated executable contains
+the PMODE/W extender within it as the stub. When run, PMODE/W will take
+care of setting up the system and executing the protected mode portion of
+the program. Several years have gone into the development of PMODE/W. It is
+now a fairly mature DOS extender, and has gone through its fair share of
+bugs and incompatibilities. It is at this point, a very stable protected
+mode system. Great pains have gone into the optimization and testing of
+PMODE/W. Our major goals have been speed, size, and stability. We now feel
+that we have achieved a good deal of those things. But don't take our word
+for it, try it yourself, as you can do that very easily before you actually
+decide to buy PMODE/W. Just plug PMODE/W into any popular program out there
+which uses DOS/4GW.
+<br>
+<br>
+To sum it up, if you are looking for a good solid, stable, and fast
+extender, PMODE/W may be just what you need.
+<br>
+<br>
+Here are the advantages of PMODE/W:
+<br>
+No external extender required (everything needed to execute is in the EXE).
+Small size (less than 12k for the entire extender program). Compression of
+protected mode executables. Low extended memory overhead. Does not require
+ANY extended memory to load OR execute. Fast execution.
+<br>
+<br>
+Our major concerns in developing PMODE/W were speed, size, and stability.
+PMODE/W itself was written entirely in assembly. When running under
+PMODE/W, your code will be running at a privilege level of zero, the
+highest and fastest. PMODE/W does not virtualize what it does not need to,
+and does not invoke any protected mode mechanism that is slow. For example,
+if the system is running clean or under XMS, PMODE/W does not turn on
+paging. Under a memory manager which provides both VCPI and DPMI services,
+PMODE/W will opt for VCPI protected mode which is significantly faster than
+DPMI. When PMODE/W makes calls to real mode, it switches the system into
+actual real mode rather than the slower V86 mode (when it can, under VCPI
+this is not possible, control must be passed back to the VCPI server). In
+terms of speed, when your code is running under PMODE/W, it is running as
+fast as the system will allow. In terms of size on disk, we need say no
+more than for you to look at the size of the PMODE/W executable and compare
+it to other extenders. In terms of memory size, you may do tests yourself
+to confirm that PMODE/W does indeed suck up a lot less memory at run-time
+than the competition. In fact, PMODE/W will run even if there is absolutely
+no extended memory in the system (assuming of course there is enough low
+memory for the program). To be fair, we must say that we squished the
+PMODE/W executable with our own compression program written expressly for
+the purpose. This demonstrates the extent we took most of our optimizations
+to.
+<br>
+<br>
+When run under a clean system, XMS, or VCPI, PMODE/W has control of
+protected mode. In this case, it can set up the system to run as fast as
+possible under the various conditions. Under DPMI, the DPMI host of the
+system will have full protected mode control and PMODE/W will install its
+DOS extensions on top of that. If the system provides both VCPI and DPMI
+services, PMODE/W will use the VCPI services for faster execution, unless
+instructed not to by the setup program. When PMODE/W does have protected
+mode control under clean/XMS/VCPI, it runs all code at a privilege level of
+zero. In addition, under a clean or XMS system, paging will not be enabled.
+This is only a minor speed increase, but there is no real need to manage
+paging.
+<br>
+<br>
+PMODE/W provides a subset of DPMI 0.9 function calls and general
+functionality when a DPMI host is not present. PMODE/W will pass any
+software interrupts from protected mode to their default real mode
+handlers, provided no protected mode handlers have been installed for them,
+just as DPMI will. The general registers will be passed on to the real mode
+handler, but the segment registers can not be as they have different
+meanings in real mode and protected mode. The flags will be passed back
+from the real mode handler. This provides a simple interface to all real
+mode interrupt routines which do not take parameters in the segment
+registers, for example, INT 16h function 00h.
+<br>
+<br>
+Any IRQs that occur in protected mode and have not been hooked by a
+protected mode handler will be sent on to their real mode handlers. If an
+IRQ occurs in real mode, and a protected mode handler has hooked that IRQ,
+it will be sent to the protected mode handler first. The protected mode
+handler may chain to the real mode handler for that IRQ by calling the
+previous protected mode handler for that IRQ. This behavior is in
+accordance with the DPMI standard. If you hook a protected mode IRQ (INT
+31h function 0205h), then hook the same IRQ in real mode (INT 31h function
+0201h), the protected mode handler will be called if the IRQ occurs in
+protected mode, and the real mode handler will handle the IRQs if they
+occur in real mode. Setting up two handlers like this assures minimal
+latency. This means a handler will get control when the IRQ occurs as soon
+as physically possible. PMODE/W does have to intervene in the IRQ process,
+however, when the low 8 IRQs are mapped to INTs 08h-15h to differentiate
+IRQs from CPU exceptions.
+<br>
+<br>
+In accordance with DPMI specifications, PMODE/W will pass up software
+interrupts 1ch (BIOS timer tick), 23h (DOS CTRL+C), and 24h (DOS critical
+error) from real mode to protected mode. This means that those interrupts
+can be hooked directly in protected mode without having to set up a
+callback mechanism yourself. PMODE/W will also pass interrupt 1bh (BIOS
+CTRL+BREAK) from real mode up to protected mode. This is not a DPMI
+requirement, but it is necessary for the sake of compatibility with
+DOS/4GW. Another departure by PMODE/W from official DPMI specifications is
+in extended memory allocation. DPMI documentation states that the block of
+extended memory allocated through function 0501h is guaranteed at least
+paragraph alignment. The PMODE/W DPMI implementation will enforce only
+DWORD alignment.
+<br>
+<br>
+When a PMODE/W executable is run, PMODE/W will attempt to switch the system
+into protected mode and load the protected mode portion of the same
+executable. If there is some error, not enough memory, or a system
+incompatibility, PMODE/W will exit with an error message. If loading was
+successful, PMODE/W will pass execution control on to the program. PMODE/W
+will load any 16 bit code and data into low memory, but 32 bit code and
+data may be loaded into low or extended memory depending on availability.
+<br>
+<br>
+There are a number of modifiable parameters in the PMODE/W extender
+executable that affect protected mode execution. For the most part, these
+parameters deal with memory. PMODE/W allocates one large block of extended
+memory for its pool from which it provides memory to its client program.
+There is a maximum value for the extended memory to be allocated. By
+default, the maximum is all of the extended memory in the system. The
+maximum value reflects the size of the block you want PMODE/W to take from
+the system, not necessarily the size of the largest block available to the
+default GetMem procedures. You may set the maximum to zero to indicate you
+do not want PMODE/W to allocate ANY extended memory. The amount of memory
+that you allow PMODE/W to allocate from the system determines how much
+extended memory will be left to other if you shell out of your PMODE/W
+program.
+<br>
+<br>
+Another variable specifies the amount of low memory for PMODE/W to TRY to
+keep free. If PMODE/W can, it will accommodate this value by loading 32 bit
+code and data into extended memory. If there is not enough extended memory
+available for this, 32 bit code and data will be loaded into low memory
+anyway. If PMODE/W can not keep this much low memory free, it will not exit
+with an error message. Setting this parameter to a high value will, in
+effect, duplicate the DOS/4GW behavior of loading all 32 bit code and data
+into extended memory. If you do not necessarily need any extra low memory
+free during the execution of your program, you may set this value to zero.
+<br>
+<br>
+There is a group of parameters that specify the number and size of nested
+mode switch stacks. Whenever you make a call to real mode, or a callback or
+IRQ is passed from real mode to its routine in protected mode, a nested
+stack is used. These parameters have meaning only if the program is not run
+under a DPMI system. If a DPMI host is in place when the program is run, it
+provides its own nested stacks for mode switches. The number of nested
+stacks directly affects the number of nested mode switches your program can
+make using the various mode switch methods. The size of both the real mode
+and protected mode nested stacks can also be specified. By default, these
+values are high enough for normal operation. However, if you intend to use
+a lot of stack variables in a protected mode IRQ handler, or a lot of
+recursive calls, you may need to increase the size of the protected mode
+nested stacks. The more nested stacks you specify, and the larger they are,
+the more low memory is needed by PMODE/W during execution.
+<br>
+<br>
+Another group of variables that has meaning only under clean/XMS/VCPI
+execution specify the number of selectors and DPMI callbacks you want
+PMODE/W to make available. The more selectors and callbacks you ask for,
+the more low memory is used by PMODE/W, though the amount of low memory
+used for each is quite low so that large numbers of each can be specified.
+There will usually be a little less than the number of selectors and
+callbacks you request available to your program due to the protected mode
+system and Pascal code using some of them. For this reason you should
+request 20h-40h more selectors and 2-4 more callbacks than you will need in
+your program.
+<br>
+<br>
+There are four other miscellaneous parameters that can be set. There is a
+maximum number of page tables to use under a VCPI system. Each page table
+allocated requires 4k of low memory to be used by PMODE/W and maps 4M of
+memory. This directly affects the maximum amount of extended memory
+available under a VCPI system. This parameter is only the maximum number of
+page tables to allow. At run-time, only as many page tables will be
+allocated as are needed. Under a clean/XMS system, no page tables are
+required, so this parameter has no meaning. But under VCPI, you may want to
+restrict the number of page tables to save low memory if you do not need
+more than a certain amount of extended memory. This puts a maximum ceiling
+on extended memory under VCPI which may be lower than the maximum actually
+specified in the other variable. The second parameter specifies the order
+of DPMI and VCPI detection. By default, VCPI will be checked before DPMI,
+but you may set DPMI to be checked before VCPI so that under a system which
+supports both VCPI and DPMI, DPMI will be used. The third variable
+specifies how many pages to reserve for physical address mapping calls (INT
+31h function 0800h) under VCPI. Under XMS or a clean system, paging is not
+enabled, and PMODE/W does not need pages for physical address mapping. Each
+page will allow you to map up to 4M of address space and takes up 4k of
+extended memory. So for example, if you intend to map a 2M frame buffer of
+a video card, you will need only one page. You may set this parameter to
+zero if you do not intend to map any physical addresses. The fourth
+parameter specifies whether PMODE/W displays its banner at startup. This
+may be desirable to indicate that the program is indeed running, and has
+not crashed, as allocating memory from certain VCPI servers can be a slow
+process.
+<br>
+<br>
+<b>See also:</b>
+<br>
+<a href="pmodew_func.htm">PMODE/W Supported DPMI INT 31h functions</a>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: PMODE/W MSDOS Extender"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: PMODE/W Supported DPMI INT 31h functions"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">PMODE/W MSDOS Extender</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">PMODE/W Supported DPMI INT 31h functions</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.1 -</B></CENTER>
+</BODY></HTML>

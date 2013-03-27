@@ -1,0 +1,101 @@
+<html><head>
+<TITLE>Designing a Window Procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="structure_of_window_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Structure of Window Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="associating_a_window.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Associating a Window Procedure with a Window Class"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 6.3 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="win32_programming.htm"><small>Win32 Programming</small></a><dir><h2>Designing a Window Procedure
+</h2></dir>
+<!-- Page content -->
+The following example shows the structure of a typical window procedure.
+The window procedure uses the message argument in a <B>Case</B> statement
+to process. For messages that it does not process, the window procedure calls
+the <b>DefWindowProc</b> function in WIN32.HLP.
+<pre><B>function</B> MainWndProc <B>conv</B> arg_stdcall (
+     _hwnd: HWND,        <font color = #000080>// handle of window</font>
+     _uMsg: UINT,        <font color = #000080>// message identifier</font>
+     _wParam: WPARAM,    <font color = #000080>// first message parameter</font>
+     _lParam: LPARAM     <font color = #000080>// second message parameter</font>
+     ): LRESULT;
+<B>begin</B>
+  <B>case</B> _uMsg <B>of</B>
+     WM_CREATE:
+       <B>begin</B>  <font color = #000080>// Initialize the window.</font>
+         Result := 0;
+       <B>end</B>; 
+ 
+     WM_PAINT: 
+       <B>begin</B>  <font color = #000080>// Paint the window's client area.</font>
+         Result := 0;
+       <B>end</B>; 
+ 
+     WM_SIZE:
+       <B>begin</B>  <font color = #000080>// Set the size and position of the window.</font>
+         Result := 0;
+       <B>end</B>;
+ 
+     WM_DESTROY:
+       <B>begin</B>  <font color = #000080>// Clean up window-specific data objects.</font>
+         Result := 0;
+       <B>end</B>;
+     <font color = #000080>// Process other messages.</font>
+     <B>else</B>   
+       Result := DefWindowProc(_hwnd, _uMsg, _wParam, _lParam);
+     <B>end</B>;
+<B>end</B>;</pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="structure_of_window_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Structure of Window Procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="associating_a_window.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Associating a Window Procedure with a Window Class"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Structure of Window Procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Associating a Window Procedure with a Window Class</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 6.3 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,105 @@
+<html><head>
+<TITLE>Type Compatibility
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="structured_types_alignment.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Structured Types Alignment (packed modifier)"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Declarations"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.18 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Type Compatibility
+</h2></dir>
+<!-- Page content -->
+There are three levels of type compatibility. Each level along with its
+restrictions is listed below in order, from the most restrictive to the
+least restrictive.
+<br>
+<br>
+<B>Equivalent Types.</B>
+<br>
+Two types are equivalent only if they are both defined from the same type
+declaration. That declaration must be one if the following:
+<ul>
+<li>A named type declared by a type declaration.</li>
+<li>A predeclared type.</li>
+<li>An unnamed type used in a declaration.</li>
+</ul>
+<B>Compatible Types</B>
+<br>
+Two types are compatible if one of the following apply:
+<ul>
+<li>Both are equivalent.</li>
+<li>One type is a subrange of another.</li>
+<li>Both are subranges of the same type.</li>
+<li>Both types are integers.</li>
+<li>Both types are reals.</li>
+<li>Both types are strings.</li>
+<li>One is a char or array of char and the other is a string.</li>
+<li>Both are set types and their base types are compatible.</li>
+<li>Both are arrays of char with the same length.</li>
+</ul>
+<B>Assignable Types</B>
+<br>
+A type is assignable to another type if one of the following apply:
+<ul>
+<li>Both types are compatible.</li>
+<li>Assignment of an integer type to a real type.</li>
+<li>Assignment of a char type to a string type.</li>
+<li>An array of characters less than 256 characters to a string.</li>
+<li>Both procedure types have the same parameters.</li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="structured_types_alignment.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Structured Types Alignment (packed modifier)"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Declarations"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Structured Types Alignment (packed modifier)</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Declarations</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.18 -</B></CENTER>
+</BODY></HTML>

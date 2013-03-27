@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>SetTextStyle procedure</TITLE>
+<META content="text/html; charset=windows-1251" http-equiv=Content-Type>
+<KEYWORDS="">
+<META content="Valery Votintsev" name=Author>
+<STYLE type=text/css>
+BODY	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+A	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {COLOR: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+TD	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+TH	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small}
+PRE	{FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small}
+CODE	{FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small}
+H2	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium}
+H1	{FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large}
+DIV.closed {DISPLAY: none; MARGIN-LEFT: 20px}
+</STYLE>
+</HEAD>
+<BODY>
+<!-- Top Navigation -->
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TR>
+    <TD align=left vAlign=top width="35%"><A 
+      href="settextjustify_proc.htm"><IMG 
+      alt="Previous: SetTextJustify procedure" border=0 
+      src="images/prev.gif"></A></TD>
+    <TD align=middle vAlign=top><A 
+      href="index.htm"><IMG 
+      alt="To the Table of Content" border=0 
+      src="images/index.gif"></A></TD>
+    <TD align=right vAlign=top width="35%"><A 
+      href="setsplinesteps_proc.htm"><IMG 
+      alt="Next: SetSplineLineSteps procedure" border=0 
+      src="images/next.gif"></A></TD></TR></TABLE><!-- End of Top Navigation -->
+<HR>
+
+<CENTER><B>- 4.37.2.113 -</B></CENTER><IMG border=0 height=12 
+src="images/corner.gif" width=12><A 
+href="std_units.htm"><SMALL>Standard 
+Units</SMALL></A> <BR><IMG border=0 height=12 
+src="images/1.gif" width=12><IMG border=0 height=12 
+src="images/corner.gif" width=12><A 
+href="graph_unit.htm"><SMALL>Graph 
+Unit</SMALL></A> <BR><IMG border=0 height=12 
+src="images/1.gif" width=12><IMG border=0 height=12 
+src="images/1.gif" width=12><IMG border=0 height=12 
+src="images/corner.gif" width=12><A 
+href="graph_proc_and_func.htm"><SMALL>Graph 
+Unit Procedures and Functions</SMALL></A>
+<DIR>
+<H2>SetTextStyle procedure </H2></DIR>
+<!-- Page content -->
+<CENTER><B>Targets: MS-DOS, Win32</B></CENTER>
+<BR><BR>Sets style for text output in graphics mode. <BR><BR>
+<B>Declaration:</B>
+<dir>
+<PRE><B>procedure</B> SetTextStyle(Font, Direction: DWORD);
+</pre></dir>
+<b>Return Value:</b>
+<dir>
+None 
+</dir>
+<b>Typical Usage:</b>
+<dir>
+<pre>SetTextStyle(SmallFont, Vertical);
+SetTextStyle(1,0);
+</dir>
+<b>Remarks:</b> 
+<dir>
+Sets the current text font, and character magnification factor.
+</dir>
+<b>Sample Code:</b> 
+<dir><pre>
+<b><font color="#0000FF">Program</font></b> SetTheTextStyle;
+<i><font color="#008000">{ Linquistic High School # 20    }</font></i>
+<i><font color="#008000">{ SetTextStyle Sample program    }</font></i>
+<b><font color="#0000FF">uses</font></b>
+  Crt,Graph;
+<b><font color="#0000FF">const</font></b>
+  FontStyleNames : <b><font color="#0000FF">array</font></b>[0..2] <b><font color="#0000FF">of</font></b> <b><font color="#0000FF">string</font></b> =
+               (<font color="#FF0000">'SmallFont - 8x8 bit mapped font'</font>,
+                <font color="#FF0000">'MediumFont - 8x14 bit mapped fonr'</font>,
+                <font color="#FF0000">'LargeFont - 8x16 bit mapped font'</font>);
+  DirectionStyleNames : <b><font color="#0000FF">array</font></b>[0..1] <b><font color="#0000FF">of</font></b> <b><font color="#0000FF">string</font></b> =
+                        (<font color="#FF0000">'Horizontal direction'</font>,
+                         <font color="#FF0000">'Vertical direction'</font>);
+<b><font color="#0000FF">var</font></b>
+  <i><font color="#008000">{A loop variable}</font></i>
+  i:Integer;
+  <i><font color="#008000">{Y coordinate}</font></i>
+  y:Integer;
+  <i><font color="#008000">{X coordinate}</font></i>
+  x:Integer;
+<b><font color="#0000FF">begin</font></b>
+  <i><font color="#008000">{ Set graphics mode at 256 colours}</font></i>
+  SetSVGAMode(640,480,8,LfbOrBanked);
+  <i><font color="#008000">{ Sets Center and Center Text justification }</font></i>
+  SetTextJustify(CenterText,CenterText);
+  <i><font color="#008000">{ Sets Y coordinate at first}</font></i>
+  y:=50;
+  <b><font color="#0000FF">for</font></b> i:=0 <b><font color="#0000FF">to</font></b> 2 <b><font color="#0000FF">do</font></b>
+    <b><font color="#0000FF">begin</font></b>
+      SetTextStyle(i,HorizDir);
+      <i><font color="#008000">{ Shows various font styles }</font></i>
+      OutTextXY(GetMaxX <b><font color="#0000FF">div</font></b> 2,y,FontStyleNames[i]);
+      <i><font color="#008000">{ Increment the Y coordinates }</font></i>
+      Inc(y,50);
+    <b><font color="#0000FF">end</font></b>;
+  <i><font color="#008000">{ Sets X coordinate at first}</font></i>
+  x:=GetMaxX <b><font color="#0000FF">div</font></b> 3;
+  <b><font color="#0000FF">for</font></b> i:=0 <b><font color="#0000FF">to</font></b> 1 <b><font color="#0000FF">do</font></b>
+    <b><font color="#0000FF">begin</font></b>
+      SetTextStyle(LargeFont,i);
+      <i><font color="#008000">{ Shows various direction styles }</font></i>
+      OutTextXY(x,GetMaxY <b><font color="#0000FF">div</font></b> 2,DirectionStyleNames[i]);
+      <i><font color="#008000">{ Increment the X coordinates }</font></i>
+      Inc(x,150);
+    <b><font color="#0000FF">end</font></b>;
+  <i><font color="#008000">{ Get the key pressed }</font></i>
+  ReadKey;
+  <i><font color="#008000">{ Return to the text mode }</font></i>
+  CloseGraph;
+<b><font color="#0000FF">end</font></b>.</font>
+</pre></dir>
+<!-- End of Page content --> 
+<BR>
+<!-- Bottom Navigation -->
+<HR>
+
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TR>
+    <TD align=left vAlign=top width="35%"><A 
+      href="settextjustify_proc.htm"><IMG 
+      alt="Previous: SetTextJustify procedure" border=0 
+      src="images/prev.gif"></A></TD>
+    <TD align=middle vAlign=top><A 
+      href="index.htm"><IMG 
+      alt="To the Table of Content" border=0 
+      src="images/index.gif"></A></TD>
+    <TD align=right vAlign=top width="35%"><A 
+      href="setsplinesteps_proc.htm"><IMG 
+      alt="Next: SetSplineLineSteps procedure" border=0 
+      src="images/next.gif"></A></TD></TR>
+  <TR>
+    <TD align=left vAlign=top width="35%">SetTextJustify procedure</TD>
+    <TD align=middle vAlign=top>Table of Content</TD>
+    <TD align=right vAlign=top width="35%">SetSplineLineSteps 
+  procedure</TD></TR></TABLE>
+<HR>
+<CENTER><B>- 4.37.2.113 -</B></CENTER>
+<!-- End of Bottom Navigation -->
+</BODY></HTML>

@@ -1,0 +1,247 @@
+<html><head>
+<title>TMT Pascal по-Русски! Документация</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="Author" content="Valery Votintsev">
+<meta name="Description" content="Документация TMT Pascal на русском языке.">
+<meta name="keywords"
+content="tmt, pascal, documentation, docs, russian, документация, тмт, паскаль, русском, русская">
+<link rel="stylesheet" type="text/css" href="tmt.css">
+</head>
+<body bgcolor="#FFFFFF">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18" align="top"><a
+        class=menu href="index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="news.htm">TMT Pascal 5.0</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="samples.htm">Примеры кода</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/sel.gif" width="18"><a
+        class=menu href="docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../index.htm"><img src="../img/pas.gif" height="31" width="88" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+
+
+</td>
+    <!-- end left top cell of outer table -->
+
+<td valign="top"><!-- begin upper right body table --> 
+
+    <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top"><blockquote>
+          <hr>
+          <p align="left"><!-- begin upper right body table --></p>
+          <p><font size="4" face="Arial"><strong>Документация к TMT Pascal на русском языке</strong></font>
+          <div align="right">Неофициальный перевод: Валерий Вотинцев</div></p>
+
+          <center><table border="0" cellspacing=8 width="90%">
+            <tr bgcolor="#000098">
+              <td><font color=#ffffff><strong>&nbsp;File:</strong></font></td>
+              <td><font color=#ffffff><strong>&nbsp;Size:</strong></td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <a href="doc/graph.htm">МОДУЛЬ GRAPH.
+               Графическая Библиотека для TMT Pascal 3.50
+              </a></td>
+              <td>8 x 20k</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <a href="doc/tmtpack.htm">TMTPACK - упаковщик исполняемых файлов  для TMT Pascal
+              </a></td>
+              <td>9 k</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <a href="doc/tmtstub.htm">TMTSTUB - DOS экстендер для TMT Pascal 3.50
+              </a></td>
+              <td nowrap>2 x 30k</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <a href="doc/zentimer.htm">Модуль Zen Timer Pro Версия 2.7 для TMT Pascal 3.50
+              </a></td>
+              <td>21 k</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <a href="help/index.htm">Online HTML Help</a> (eng) for TMT Pascal 4.0
+              <br>(prepared by Valery Votintsev)</td>
+              <td>971 pages</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <!--a href="doc/dpmi.htm"-->DPMI - Модуль поддержки DPMI для TMT Pascal 3.50
+              <!--/a--></td>
+              <td>? k</td>
+            </tr>
+            <tr bgcolor="#eeeeff">
+              <td>
+              <!--a href="doc/pmodew.htm"-->PMODE For Watcom C/C++ - v1.33
+               
+              <!--/a--></td>
+              <td>? k</td>
+            </tr>
+          </table>
+          </center>
+          </p>
+          </blockquote>
+          <!-- end upper right body table -->
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"></td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+
+
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="news.htm" >[Новости]</a> &nbsp; <a href="products.htm" >[Продукты]</a> &nbsp; <a href="purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="download.htm" >[Скачать]</a> &nbsp; <a href="updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a><br>
+        <a href="faq.htm" >[FAQ]</a> &nbsp; <a href="contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="contact.htm" >[Связь с TMT]</a> &nbsp; <a href="index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

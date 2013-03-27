@@ -1,0 +1,120 @@
+<html><head>
+<TITLE>Assert procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="arctan_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: ArcTan function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="assign_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Assign procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.5 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_unit.htm"><small>System Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="system_proc_and_func.htm"><small>System Unit Procedures and Functions</small></a><dir><h2>Assert procedure
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, OS/2, Win32</B></center>
+<br>
+<br>
+<a href="system_unit.htm">System Unit</a>
+<br>
+<br>
+Procedure <I>Assert</I> tests whether a Boolean expression is true.
+<br>
+<br>
+<B>Declaration:</B>
+<pre>  <B>procedure</B> Assert(expr: Boolean);</pre>
+<B>Remarks:</B>
+<br>
+<I>Assert</font></I> takes a Boolean expression (<I>expr</I>) as parameter.
+If the Boolean test fails, Assert raises an Assertion Failed run-time error.
+<br>
+<br>
+The <I>Assert</I> procedure is typically used to identify logic errors during
+program development, by implementing the <I>expr</I> argument to evaluate to
+FALSE only when the program is operating incorrectly. After debugging is
+complete, assertion checking can be turned off without modifying the source
+file by defining the <a href="assert_directives_switch.htm">$C</a>
+compiler directive.
+<br>
+<br>
+<I>Assert</I> prints a diagnostic message when <I>expr</I> evaluates to FALSE
+and terminates program execution. No action is taken if <I>expr</I> is TRUE.
+The diagnostic message includes the name of the source file and line number
+where the assertion failed.
+<br>
+<br>
+<B>Example:</B>
+<pre><B>uses</B> Strings; <font color = #000080> (* Tests a string to see if it is nil, *)
+                (* empty, or longer than 2 characters  *)</font>
+<B>procedure</B> AnalyzeString (s: PChar);
+<B>begin</B>
+  Assert(s &lt;&gt; <B>nil</B>);       <font color = #000080>// Cannot be nil</font>
+  Assert(s[0] &lt;&gt; #0);    <font color = #000080>// Cannot be empty</font>
+  Assert(StrLen(s) &gt; 2);  <font color = #000080>// Length must exceed 2</font>
+<B>end</B>;
+ 
+<B>var</B>
+  test1: PChar := 'abc';
+  test2: PChar := nil;
+  test3: PChar := '';
+<B>begin</B>
+  Writeln('Analyzing string ', test1);
+  AnalyzeString(test1);
+  Writeln('Analyzing string ', test2);
+  AnalyzeString(test2);
+  Writeln('Analyzing string ', test3);
+  AnalyzeString(test3);
+<B>end.</B></pre>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="arctan_func.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: ArcTan function"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="assign_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Assign procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">ArcTan function</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Assign procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.62.2.5 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,112 @@
+<html><head>
+<TITLE>Declarations
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="type_cpb.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Type Compatibility"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="type_decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Type Declarations"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.7 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a><dir><h2>Declarations
+</h2></dir>
+<!-- Page content -->
+The name of each identifier must be declared in your source code.
+By declaring an identifier to be of a particular type, such as a variable,
+or constant, you define its size and attributes.
+<br>
+<br>
+Pascal is a block structured language. Each program, unit, procedure and
+function defines a block. Blocks can be nested creating blocks within blocks.
+The block structure effects the interpretation of identifiers such as
+constants, variables, types, and so on. Identifiers can havedifferent
+meanings depending upon which block is referenced.
+<br>
+<br>
+When an identifier is declared it is defined from the point of its declaration
+to the end of the inner most block that contains the declaration. This is
+the scope of the identifier. Redefinitionof an identifier is not allowed
+within the same block in which it was declared. Only in nested blocks may
+an identifier be redefined. However the new identifier does not refer to
+the old identifier. In fact the old identifier is hidden until the end of
+the nested block.
+<br>
+<br>
+In addition to the traditional Pascal syntax, TMT Pascal also allows local
+block declarations. These are described below in the manual.
+<br>
+<br>
+An identifier may not be referenced prior to its declaration with one exception.
+A type name can be used as the base type of a pointer if the name is then
+declared in the type declaration that contains the reference. For instance:
+<pre><B>type</B>
+  CoordPtr   = ^Coordinate;
+  Coordinate = <B>record</B>;
+    x, y     : Integer;
+  <B>end</B>;</pre>
+As you can see <I>Coordinate</I> is referenced prior to its declaration.
+The above declaration is valid due to the fact that <I>Coordinate</I> is
+declared in the same type declaration as <I>CoordPtr</I>.
+<br>
+<br>
+There are several declarations possible under TMT Pascal. They include:
+<ul>
+<li><a href="type_decl.htm">Type Declarations</a></li>
+<li><a href="label_decl.htm">Label Declarations</a></li>
+<li><a href="const_decl2.htm">Constant Declarations</a></li>
+<li><a href="variable_decl.htm">Variable Declarations</a></li>
+<li><a href="local_block_decl.htm">Local Block Declarations</a></li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="type_cpb.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Type Compatibility"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="type_decl.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Type Declarations"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Type Compatibility</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Type Declarations</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.7 -</B></CENTER>
+</BODY></HTML>

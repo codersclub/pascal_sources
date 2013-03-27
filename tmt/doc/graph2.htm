@@ -1,0 +1,362 @@
+<html><head><title>GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2 (часть 2)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль GRAPH - Графическая Библиотека для TMT Pascal v3.50SP2. Описание на русском языке. Часть 2'>
+<meta name="keywords" content="tmt pascal, pascal, v3.50sp2, graph, graphics, module, library, russian, documentation">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../tmt.css"></head><BODY><center>
+<table border="0" cellpadding="0" cellspacing="0">
+<!-- begin top left cell of outer table -->
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER-->
+</td></tr>
+
+  <tr>
+    <td valign="top" bgcolor="#000080"><p align="center"><!-- begin upper left button table --></p>
+    <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="../img/gearth.gif" alt="Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18" align="top"><a
+        class=menu href="../index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../news.htm">Новости</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/sel.gif" width="18"><a
+        class=menu href="../docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="../img/empty.gif" width="18"><a
+        class=menu href="../contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../../index.htm"><img src="../img/pasrus.gif" height="24" width="120" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"></a>
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+
+</div>
+</td>
+    <!-- end left top cell of outer table -->
+
+    <td valign="top"><!-- begin upper right body table --> <table border="0" cellpadding="3" cellspacing="10" width="100%">
+      <tr>
+        <td valign="top"><blockquote><img src="../img/logo.gif" alt="TMT Logo" width="410" height="78"></td></tr>
+      <tr>
+        <td valign="top">
+
+
+<center>
+<hr size=1>
+<p><a name="top"></a>
+<h3>МОДУЛЬ GRAPH
+<br>Графическая Библиотека для TMT Pascal v3.50SP2
+<br>Часть 2</h3>
+</p>
+<p>
+Copyright (c) 1997,98  TMT Development Corp.
+<br>
+All Rights Reserved
+</p>
+</center>
+<p align="right">
+Если вы заметили в документе
+<br>опечатки или неточности перевода,
+<br> просьба сообщить о них!
+<br>Перевод на русский язык и оформление:
+<br><a href="mailto:rswag@sources.ru">Валерий Вотинцев</a>
+</p>
+
+<p>
+<a href="graph.htm#top">К Содержанию</a>
+<a name="Intro"></a>
+<p>
+<h3>Введение</h3>
+</p>
+
+<p>
+   Некоторое время назад компилятор TMT Pascal не имел в своем составе
+графической библиотеки. Однако, теперь это упущение ликвидировано.
+Мы разработали графическую библиотеку для TMT Pascal, которая совместима,
+насколько это возможно, с одноименной графической библиотекой фирмы Borland,
+поставлявшейся с компилятором Turbo/Borland Pascal.
+</p>
+<p>
+   Но, поскольку BGI (Borland Graphics Interface) совершенно устарел,
+нам пришлось существенно расширить функциональные возможности нашей
+графической библиотеки. Именно эти расширения мы опишем более детально ниже.
+</p>
+<p>
+
+   Данная графическая библиотека позволяет легко переносить программы,
+написанные на Borland Pascal (с минимальными изменениями в исходном коде),
+на TMT Pascal.
+</p>
+<p>
+
+Ваши отзывы, замечания и пожелания мы просим отправлять в нашу службу
+технической поддержки по электронной почте:
+<a href="mailto:support@tmt.com">support@tmt.com</a>.
+</p>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+<p><a name="Features"></a>
+<h3>Свойства</h3>
+</p>
+
+<ul>
+<li>Полностью 32-битная быстрая графика;
+<li>Максимальная совместимость с модулем Borland GRAPH;
+<li>Поддержка большого количества графических режимов:<dl>
+   <dd>- любые режимы VGA/MCGA (функция 13h BIOS);
+   <br>- все 256-цветные SVGA режимы с использованием палетты;
+   <br>- все SVGA режимы с 32k/64k цветов (HiColor);
+   <br>- все SVGA режимы с 16M/16M+Alpha цветов (TrueColor);</dl>
+<li>Поддержка функций VESA VBE 1.2/2.0
+   (32-битный защищеннй режим, и т.д.);
+<li>Поддержка SVGA режимов с переключением банков;
+<li>Поддержка логических страниц и аппаратного панорамирования (скроллинг);
+<li>Поддержка спрайтов размером более 64K;
+<li>Нет необходимости использовать BGI драйвера;
+<li>Использование плоской модели памяти для повышения производительности;
+<li>Расширенная технология работы со спрайтами, использующими прозрачность BLT;
+<li>Богатейший набор функций и процедур (121).
+</ul>
+
+ <b>Особенности зарегистрированной версии:</b><ul>
+
+<li>Режим виртуально графики с ДВОЙНЫМ и ТРОЙНЫМ буферированием.
+<li>Поддержка LFB SVGA режимов (Linear Flat frame Buffer).
+</ul>
+</p>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<p><a name="Requirements"></a>
+<h3>Системные Требования</h3>
+</p>
+<ul>
+
+<li>VGA-совместимая видео-карта (рекомендуется с поддержкой VESA VBE 1.2,
+   но лучшие результаты будут получены только при поддержке VESA VBE 2.0);
+<li>Процессор класса Intel 80386 или выше;
+<li>32-битный DOS экстендер, совместимый с PMODE или PMODEW
+   (экстендер DOS32.EXE не поддерживается!).
+</ul>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+<p><a name="BPCompatibility"></a>
+<h3>Совместимость с Модулем GRAPH от Borland Pascal</h3>
+</p>
+<p>
+
+   Модуль TMT GRAPH почти полностью заменяет модуль Graph от Borland Pascal.
+Однако, имеются и некоторые отличия. Ниже приведен полный список процедур
+и функций модуля Borland GRAPH и их совместимость с аналогичными из модул
+Graph для TMT Pascal.
+</p>
+<table borser=1 width=90% align="center">
+<tr><td>+Arc              </td><td>+GetMaxX          </td><td>      *PutImage         </td></tr>
+<tr><td>+Bar              </td><td>+GetMaxY          </td><td>      +PutPixel         </td></tr>
+<tr><td>+Bar3D            </td><td>-GetModeName      </td><td>      *Rectangle        </td></tr>
+<tr><td>+Circle           </td><td>-GetModeRange     </td><td>      -RegisterBGIdriver</td></tr>
+<tr><td>*ClearDevice      </td><td>+GetPalette       </td><td>      -RegisterBGIfont  </td></tr>
+<tr><td>*ClearViewPort    </td><td>+GetPaletteSize   </td><td>      *RestoreCrtMode   </td></tr>
+<tr><td>*CloseGraph       </td><td>+GetPixel         </td><td>      -Sector           </td></tr>
+<tr><td>-DetectGraph      </td><td>*GetTextSettings  </td><td>      +SetActivePage    </td></tr>
+<tr><td>*Drawpoly         </td><td>+GetViewSettings  </td><td>      +SetAllPalette    </td></tr>
+<tr><td>+Ellipse          </td><td>+GetX             </td><td>      *SetAspectRatio   </td></tr>
+<tr><td>*FillEllipse      </td><td>+GetY             </td><td>      *SetBkColor       </td></tr>
+<tr><td>*FillPoly         </td><td>*GraphDefaults    </td><td>      +SetColor         </td></tr>
+<tr><td>*FloodFill        </td><td>+GraphErrorMsg    </td><td>      -SetFillPattern   </td></tr>
+<tr><td>-GetArcCoords     </td><td>+GraphResult      </td><td>      -SetFillStyle     </td></tr>
+<tr><td>*GetAspectRatio   </td><td>+ImageSize        </td><td>      +SetGraphBufSize  </td></tr>
+<tr><td>*GetBkColor       </td><td>-InitGraph        </td><td>      *SetGraphMode     </td></tr>
+<tr><td>+GetColor         </td><td>-InstallUserDriver</td><td>      +SetLineStyle     </td></tr>
+<tr><td>+GetDefaultPalette</td><td>-InstallUserFont  </td><td>      +SetPalette       </td></tr>
+<tr><td>-GetDriverName    </td><td>+Line             </td><td>      +SetRGBPalette    </td></tr>
+<tr><td>-GetFillPattern   </td><td>+LineRel          </td><td>      +SetTextJustify   </td></tr>
+<tr><td>-GetFillSettings  </td><td>+LineTo           </td><td>      *SetTextStyle     </td></tr>
+<tr><td>*GetGraphMode     </td><td>+MoveRel          </td><td>      -SetUserCharSize  </td></tr>
+<tr><td>+GetImage         </td><td>+MoveTo           </td><td>      *SetViewPort      </td></tr>
+<tr><td>+GetLineSettings  </td><td>+OutText          </td><td>      +SetVisualPage    </td></tr>
+<tr><td>+GetMaxColor      </td><td>+OutTextXY        </td><td>      *SetWriteMode     </td></tr>
+<tr><td>-GetMaxMode       </td><td>-PieSlice         </td><td>      +TextHeight       </td></tr>
+<tr><td>                  </td><td>                  </td><td>      +TextWidth        </td></tr>
+</p></table>
+
+<p>
+<dl><dd><b>Условные обозначения:</b>
+<dd>  +  процедура/функция полностью эквивалентна аналогичной от Borland;
+<br>  *  процедура/функция поддерживается, но несколько отличается от Borland;
+<br>  -  процедура/функция не поддерживается в модуле TMT GRAPH.
+</dl>
+</p>
+<p>
+
+Обратите внимание, что модуль TMT Graph предоставляет программисту
+множество новых процедур и функций, отсутствующих в модуле Graph от
+Borland Pascal.
+</p>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+
+<p><a name="VideoCompatibility"></a>
+<h3>Совместимость с Видео-картами</h3>
+</p>
+
+<p>
+Модуль TMT GRAPH протестирован на следующих типах видео-карт:
+<ul>
+<li>Trident 9440, 1 Mb (с/без UniVBE 5.3);
+<li>S3 SuperVGA (Virge), 4 Mb (с/без UniVBE 5.3);
+<li>STB Velocity, 4 Mb (без UniVBE);
+<li>Cirrus Logic GD-54xx VGA (без UniVBE 5.3);
+<li>ATI Mach 64, 4 Mb (без UniVBE);
+</ul>
+</p>
+
+<table border=0 width=80%><tr>
+<td align="left"><a href="graph.htm#top">К&nbsp;Содержанию</a></td><td align="right"><a href="#top">Наверх</a></td>
+</tr></table>
+
+
+        </td>
+      </tr>
+<!-- end upper right body table -->
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="bottom"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+
+
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <hr size=1 width=80%>
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="../news.htm" >[Новости]</a> &nbsp; <a href="../products.htm" >[Продукты]</a> &nbsp; <a href="../purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="../download.htm" >[Скачать]</a> &nbsp; <a href="../updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a>
+        <br><a href="../docs.htm" >[Документация]</a> &nbsp; <a href="../faq.htm" >[FAQ]</a> &nbsp; <a href="../contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="../links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="../contact.htm" >[Связь с TMT]</a> &nbsp; <a href="../index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

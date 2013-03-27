@@ -1,0 +1,158 @@
+<html><head>
+<TITLE>Sample Program for TFileRec Structure 
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: x-small;}
+H1 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: large;}
+H2 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: medium;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+<SCRIPT language=JavaScript><!--
+if(navigator.appName.indexOf("Microsoft")!=-1) {
+ document.write("<STYLE type=text/css><!--PRE {FONT-SIZE: x-small;}--></STYLE>");
+} else {
+ document.write("<STYLE>PRE {FONT-SIZE: small;}</STYLE>");
+}
+//--></script>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="file_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: File Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="proc_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Procedure Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.14.1 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="file_type.htm"><small>File Types</small></a><dir><h2>Sample Program for TFileRec Structure 
+</h2></dir>
+<!-- Page content -->
+<center><B>Targets: MS-DOS, Win32 Console only</B></center>
+<br>
+<br>
+This sample explains the TFileRec structure internals. 
+<br>
+<br>
+For more info look the <a href="file_type.htm">File Types</a> section. 
+<dir><pre>
+<font color="#008000">{ Simple program that demonstrates the TFileRec structure }</font>
+<font color="#008000">{ Written by Valery Votintsev &lt;rswag@sources.ru&gt;          }</font>
+<B><font color="#000099">program</font></B> test;
+<B><font color="#000099">uses</font></B> dos,strings;
+
+<B><font color="#000099">Const</font></B>
+    <font color="#008000">{ File State Bit Values}</font>
+    file_readable  = 1;
+    file_writeable = 2;
+    file_opened    = 4;
+    file_assigned  = 8;
+    file_eof       = 16;
+    file_text      = 32;
+    file_file      = 64;
+    file_fileof    = 128;
+    file_tty       = 256;
+    file_special   = 512;
+    file_settextbuf= 1024;
+
+    <font color="#008000">{ File State Bit Names}</font>
+    StatusString: <B><font color="#000099">Array</font></B>[1..11] <B><font color="#000099">of</font></B> <B><font color="#000099">string</font></B> = (
+      <font color="#990000">'file_readable'</font>,
+      <font color="#990000">'file_writeable'</font>,
+      <font color="#990000">'file_opened'</font>,
+      <font color="#990000">'file_assigned'</font>,
+      <font color="#990000">'file_eof'</font>,
+      <font color="#990000">'file_text'</font>,
+      <font color="#990000">'file_file'</font>,
+      <font color="#990000">'file_fileof'</font>,
+      <font color="#990000">'file_tty'</font>,
+      <font color="#990000">'file_special'</font>,
+      <font color="#990000">'file_settextbuf'</font>
+    );
+
+<B><font color="#000099">var</font></B>
+ handle: integer;         <font color="#008000">{ File Handle        }</font>
+ F: <B><font color="#000099">file</font></B>;                 <font color="#008000">{ File Variable      }</font>
+ fname:<B><font color="#000099">string</font></B>;            <font color="#008000">{ File Name          }</font>
+ Ft: tFileRec <B><font color="#000099">absolute</font></B> F; <font color="#008000">{ TFileRec Structure }</font><BR>
+ <B><font color="#000099">procedure</font></B> WriteFileStatus;
+ <B><font color="#000099">var</font></B>
+   i,                     <font color="#008000">{ Counter            }</font>
+   bit: integer;          <font color="#008000">{ State Bit Value    }</font>
+   fstate:word;           <font color="#008000">{ File State Value   }</font>
+ <B><font color="#000099">begin</font></B>
+   fstate := word(Ft.state);                 <font color="#008000">{ Get the File State      }</font>
+   writeln(<font color="#990000">'  Ft.name:    '</font>,Ft.name);        <font color="#008000">{ Write the Filename      }</font>
+   writeln(<font color="#990000">'  Ft.handle:  '</font>,Ft.handle);      <font color="#008000">{ Write the Handler #     }</font>
+   writeln(<font color="#990000">'  Ft.rec_len: '</font>,Ft.rec_len);     <font color="#008000">{ Write the Record Length }</font>
+   writeln(<font color="#990000">'  Ft.state:   '</font>,hex(Fstate),<font color="#990000">':'</font>);<font color="#008000">{ Write the File State    }</font>
+   bit := 1;
+   <B><font color="#000099">for</font></B> i:=1 <B><font color="#000099">to</font></B> 11 <B><font color="#000099">do</font></B> <B><font color="#000099">begin</font></B>
+     <B><font color="#000099">if</font></B> (fstate <B><font color="#000099">and</font></B> bit) = bit <B><font color="#000099">then</font></B>          <font color="#008000">{ Write the Flag if setted }</font>
+       writeln(<font color="#990000">'    bit '</font>,i:2,<font color="#990000">' ('</font>,bit,<font color="#990000">') - '</font>,StatusString[i]);
+     bit := bit <B><font color="#000099">shl</font></B> 1;                       <font color="#008000">{ Next Bit Value }</font>
+   <B><font color="#000099">end</font></B>;
+   writeln;
+ <B><font color="#000099">end</font></B>;
+
+<B><font color="#000099">begin</font></B>
+  assign(F,<font color="#990000">'test.tst'</font>);
+  writeln(<font color="#990000">'Step 1. File &quot;test.tst&quot; assigned.'</font>);
+  writeFileStatus;                 <font color="#008000">{ Write the File Status }</font><BR>
+  write(<font color="#990000">'Press &lt;Enter&gt; for continue: '</font>);
+  readln;                          <font color="#008000">{ Wait for Enter }</font><BR>
+  rewrite(F);
+  writeln(<font color="#990000">'Step 2. File &quot;test.tst&quot; opened.'</font>);
+  writeFileStatus;                 <font color="#008000">{ Write the File Status }</font><BR>
+  write(<font color="#990000">'Press &lt;Enter&gt; for continue: '</font>);
+  readln;                          <font color="#008000">{ Wait for Enter }</font><BR>
+  close(F);
+  writeln(<font color="#990000">'Step 3. File &quot;test.tst&quot; closed.'</font>);
+  writeFileStatus;                 <font color="#008000">{ Write the File Status }</font><BR>
+  write(<font color="#990000">'Press &lt;Enter&gt; for quit: '</font>);
+  readln;                          <font color="#008000">{ Wait for Enter }</font><BR>
+<B><font color="#000099">end</font></B>.</font></pre></dir>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="file_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: File Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="proc_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Procedure Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">File Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Procedure Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.14.1 -</B></CENTER>
+</BODY></HTML>

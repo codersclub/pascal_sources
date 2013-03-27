@@ -1,0 +1,143 @@
+<html><head>
+<TITLE>File Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: x-small;}
+H1 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: large;}
+H2 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: medium;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+<SCRIPT language=JavaScript><!--
+if(navigator.appName.indexOf("Microsoft")!=-1) {
+ document.write("<STYLE type=text/css><!--PRE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: x-small;}--></STYLE>");
+} else {
+ document.write("<STYLE>PRE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: small;}</STYLE>");
+}
+//--></script>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="rec_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Record Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="tfilerec_sample.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Sample Program for TFileRec Structure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.14 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>File Types
+</h2></dir>
+<!-- Page content -->
+File types are structures that contain components of any type except another
+file type. File types are defined as follows:
+<pre>  File [<B>of</B> Componenttype];</pre>
+If <B>of</B> is not specified and component types are not indicated then the
+file is untyped.
+<br>
+<br>
+Untyped files are used to access files regardless of their structure. Text
+file types refer to a file of ASCII characters grouped in lines. Text is
+a predefined type.
+<br>
+<br>
+The record definitions used internally by TMT Pascal are also declared in
+the System unit.
+<br>
+<br>
+<I>TFileRec</I> is used for both typed and untyped files.
+<pre><B>type</B>
+  TFileRec = <B>object</B>
+    magic   : ^TFileRec;
+    name    : string;
+    handle  : Longint;
+    rec_len : Longint;
+    state   : flags;
+    rd_proc,
+    wr_proc : <B>function</B> (F: Longint; Buf: Pointer; Len: Longint;
+                        <B>var</B> Act: Longint): Longint;
+    <B>procedure</B> check_magic;
+    <B>procedure</B> check_opened;
+    <B>procedure</B> check_readable;
+    <B>procedure</B> check_writeable;
+    <B>procedure</B> io_error(code: Integer);
+  <B>end</B>;
+  PFileRec = ^TFileRec;</pre>
+<I>TTextRec</I> is the internal format of a variable of type text.
+<pre><B>type</B>
+  TTextRec = <B>object</B> (TFileRec)
+    buffer  : <B>array</B> [0..63] <B>of</B> Char;
+    index   : Longint;
+    len_buf : Longint;
+    max_buf : Longint;
+    buf_adr : Pointer;
+    <B>function</B> Eof: Boolean;
+    <B>procedure</B> init;
+    <B>procedure</B> fill_buf;
+    <B>procedure</B> fill_chr;
+    <B>procedure</B> skip_spaces;
+    <B>procedure</B> get_n_char(n: Integer);
+  <B>end</B>;
+  PTextRec = ^TTextRec;</pre>
+Internal Type <I>flags</I> is declared as:
+<pre><B>type</B>
+  flags = <B>set of</B> file_state;</pre>
+where <I>file_state</I> is:
+<pre><B>type</B>
+  file_state = (
+     file_readable,  <font color = #000080> //00h</font>
+     file_writeable, <font color = #000080> //01h</font>
+     file_opened,    <font color = #000080> //02h</font>
+     file_assigned,  <font color = #000080> //03h</font>
+     file_eof,       <font color = #000080> //04h</font>
+     file_text,      <font color = #000080> //05h</font>
+     file_file,      <font color = #000080> //06h</font>
+     file_fileof,    <font color = #000080> //07h</font>
+     file_tty,       <font color = #000080> //08h</font>
+     file_special,   <font color = #000080> //09h</font>
+     file_settextbuf <font color = #000080> //0Ah</font>
+  );</pre>
+<B>Sample:</B>
+<br>&nbsp;&nbsp;Look the <a href="tfilerec_sample.htm">TFileRec sample code</a>.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="rec_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Record Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="tfilerec_sample.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Sample Program for TFileRec Structure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Record Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Sample Program for TFileRec Structure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.14 -</B></CENTER>
+</BODY></HTML>

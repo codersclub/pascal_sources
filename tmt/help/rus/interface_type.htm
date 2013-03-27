@@ -1,0 +1,117 @@
+<html><head>
+<TITLE>Interface type
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="self_arg.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Self argument"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="open_arrays.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Open Arrays"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.14 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="oop_extensions.htm"><small>OOP Extensions</small></a><dir><h2>Interface type
+</h2></dir>
+<!-- Page content -->
+Interfaces are similar to objects, however they can be declared only in
+the outermost scope of a program or unit, and they do not implement their
+own methods. Thus the interface methods cannot be declared as virtual or
+override. An interface type declaration has the following format:
+<pre>
+<B>type</B> InterfaceName = <B>interface</B> (AncestorInterface) [<font color = #000080> '{GUID}'</font> ]
+    memberList
+<B>end</B>;</pre>
+where <I>AncestorInterface</I> and <I>['{GUID}'] </I> are optional. The
+<I>MemberList</I> can include only methods. Unlike objects, fields are not
+allowed in the interface declaration. All members of an interface are always
+public (viability modifiers are not allowed).
+<br>
+Also interfaces have no constructors or destructors.
+They cannot be instantiated, except through objects that implement their
+methods. If no ancestor is specified, the interface is a direct descendant
+of <I>IUnknown</I> , which is defined in the System unit as follows:
+<pre><B>type</B>
+  IUnknown = <B>interface</B>
+     <B>function</B> QueryInterface (<B>const</B> iid: TIID;
+                               <B>var</B> obj):LongInt; <B>stdcall</B>;
+     <B>function</B> AddRef: Longint; <B>stdcall</B>;
+     <B>function</B> Release: Longint; <B>stdcall</B>;
+ <B>end</B>;</pre>
+To be compatible with Delphi, an interface declaration can specify a globally
+unique identifier (GUID) which is represented by a string literal enclosed in
+brackets immediately preceding the member list.
+<br>
+<br>
+The GUID part of the declaration must have the following format:
+<dir>
+  ['<font color = #000080> {xxxxxxxx -xxxx -xxxx -xxxx -xxxxxxxxxxxx}</font>']
+</dir>
+The TGUID and PGUID types are declared in the System unit as follows:
+<pre>
+<B>type</B>
+  PGUID = ^TGUID;
+  TGUID = <B>packed</B> <B>record</B> 
+    D1: Longint;
+    D2: Word;
+    D3: Word;
+    D4: <B>array</B> [0..7] <B>of</B> Byte;
+  <B>end</B>;
+  TIID = TGUID;</pre>
+To declare a typed constant of type TGUID, one can use a string literal to
+specify its value. For example,
+<pre><B>const</B>
+  IID_IMYINTERFACE: TGUID = <font color = #000080>'{3C2A92C2-8AE5-43AC-BEB8-1957FA47C30F}'</font>;</pre>
+In function calls, either a GUID or an interface identifier can serve as a
+value or constant parameter of type TGUID.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="self_arg.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Self argument"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="open_arrays.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Open Arrays"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Self argument</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Open Arrays</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.14 -</B></CENTER>
+</BODY></HTML>

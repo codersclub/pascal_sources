@@ -1,0 +1,101 @@
+<html><head>
+<TITLE>For Statement
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="case_statement.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Case Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="goto_statement.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Goto Statement"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.9.4 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="statements.htm"><small>Statements</small></a><dir><h2>For Statement
+</h2></dir>
+<!-- Page content -->
+The <B>for</B> statement allows for repetitive execution of one or more
+statements. <B>for</B> executes a loop for a predetermined number of
+iterations. <B>for</B> statements take the following form:
+<pre><B>for</B> variable := expression <B>to</B> | <B>downto</B> expression <B>do</B> statement</pre>
+where variable must be of ordinal type. The first expression following variable
+is the initial value that is assigned to variable and the second expression
+is the limit on the range of values assigned to variable.
+Both expressions must be of compatible type.
+<br>
+<br>
+The <B>to</B> or <B>downto</B> clause specify specifies whether a
+variable is incremented or decremented after each iteration of the loop.
+If <B>to</B> is specified, the variable is incremented until it hits
+the limit of the second expression. <B>downto</B> decrements variable
+until it reaches the lower limit of the second expression.
+<br>
+<br>
+The following are examples of <B>for</B> loops:
+<pre><B>for</B> i := 1 <B>to</B> 100 <B>do</B>
+  <B>begin</B>
+    WriteLn(i);
+    Intarray[i] := i + 4;
+  <B>end</B>;
+
+<B>for</B> x := 5 <B>downto</B> 2 <B>do</B>
+  WriteLn(x);</pre>
+A <B>for</B> loop is not executed if the first expression is greater than
+or less then the second expression depending upon whether a <B>to</B>
+or <B>downto</B> was specified. For instance the following <B>for</B> loop
+is not executed:
+<pre><B>for</B> i := 5 <B>to</B> 4 <B>do</B>
+  WriteLn('Will never output this string!');</pre>
+For a loop, the index variable must either be global or local to the
+procedure to which it belongs.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="case_statement.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: Case Statement"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="goto_statement.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Goto Statement"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">Case Statement</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Goto Statement</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.9.4 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,106 @@
+<html><head>
+<TITLE>Public and Private declarations
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="oop_scopes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: OOP Scopes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="virtual_methods.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Virtual Methods"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.6 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="oop_extensions.htm"><small>OOP Extensions</small></a><dir><h2>Public and Private declarations
+</h2></dir>
+<!-- Page content -->
+<B>Public</B> and <B>private</B> are standard directives in the Object Pascal
+language. Treat them as if they were reserved words. For readability, it is
+best to organize an object declaration by visibility, placing all the
+<I>private</I> members together, followed by all the <B>protected</B>
+members, and so on. This way each visibility reserved word appears at most
+once and marks the beginning of a new section of the declaration. So a typical
+object declaration should look like this:
+<pre><B>type</B>
+  TObject = <B>object</B>
+    <B>private</B>
+      <font color = #000080>{ Private declarations}</font>
+    <B>public</B>
+      <font color = #000080>{ Public declarations }</font>
+    <B>end</B>;</pre>
+The scope of component identifiers declared in <I>private</I> component
+sections are restricted to the module that contains the object type
+declaration. Keep in mind that:
+<ul>
+<li>Inside the module, <I>private</I> component identifiers act like
+normal <I>public</I> component identifiers.</li>
+<li>Outside the module, <I>private</I> component identifiers are unknown
+and inaccessible.</li>
+</ul>
+Use the <B>public</B> part to
+<ul>
+<li>Declare data fields you want methods in objects in other units to access</li>
+<li>Declare methods you want objects in other units to access</li>
+</ul>
+Declarations in the <B>private</B> part are restricted in their access.
+If you declare fields or methods to be <B>private</B>, they are unknown
+and inaccessible outside the unit the object is defined in.
+<br>
+<br>
+Use the private part to
+<ul> 
+<li>Declare data fields you want only methods in the current unit to access</li>
+<li>Declare methods you want only objects defined in the current unit to
+access</li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="oop_scopes.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: OOP Scopes"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="virtual_methods.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Virtual Methods"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">OOP Scopes</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Virtual Methods</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.13.6 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,145 @@
+<html><head>
+<TITLE>PutPixel procedure
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: x-small;}
+H1 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: large;}
+H2 {FONT-FAMILY: Verdana, Arial, sans-serif; FONT-SIZE: medium;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+<SCRIPT language=JavaScript><!--
+if(navigator.appName.indexOf("Microsoft")!=-1) {
+ document.write("<STYLE type=text/css><!--PRE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: x-small;}--></STYLE>");
+} else {
+ document.write("<STYLE>PRE {FONT-FAMILY: Courier, monospace, serif; FONT-SIZE: small;}</STYLE>");
+}
+//--></script>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="putimage_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: PutImage procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="putsprite_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: PutSprite procedure"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.87 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="std_units.htm"><small>Standard Units</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_unit.htm"><small>Graph Unit</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="graph_proc_and_func.htm"><small>Graph Unit Procedures and Functions</small></a><dir><h2>PutPixel procedure
+</h2></dir>
+<!-- Page content -->
+<CENTER><B>Targets: MS-DOS, Win32</B></CENTER>
+<BR>
+<BR>
+This procedure plots a pixel at (<I>X,Y</I>).
+<BR>
+<BR>
+<B>Declaration:</B>
+<PRE>  <B>procedure</B> PutPixel(X, Y: Longint; Pixel: DWORD);
+  <B>procedure</B> PutPixel(X, Y: Longint);</PRE>
+<b>Return Value:</b> None
+<BR>
+<BR>
+<b>Typical Usage:</b>
+<PRE>  PutPixel(100, 200, 3);
+  PutPixel(myX, myY);</PRE>
+<B>Remarks:</B>
+<BR>
+Plots a point with the color defined by <I>Pixel</I> parameter
+at the point with (<I>X, Y</I>) coordinates.
+<BR>
+<BR>
+<b>Sample Code:</b>
+<dir><pre>
+<font color="#008000">{ PutPixel Sample program                                  }</font>
+<font color="#008000">{ Written by Alligator especially for TMT Development Corp.}</font>
+<B><font color="#000099">Program</font></B> Top_Art;
+<B><font color="#000099">Uses</font></B> Graph,Crt;
+<B><font color="#000099">Const</font></B>
+  NumberOfPixels=1000; <font color="#008000">{ Number of pixels to draw }</font>
+<B><font color="#000099">Type</font></B>
+  Pixels=<B><font color="#000099">record</font></B>        <font color="#008000">{ Coordinates and color for a pixel }</font>
+    x,y: Integer;
+    Colours:Integer;
+  <B><font color="#000099">end</font></B>;
+<B><font color="#000099">var</font></B>
+  <font color="#008000">{ Here we will store colors and coordinates for our pixels}</font>
+  SomePixels: <B><font color="#000099">array</font></B> [1..NumberOfPixels] <B><font color="#000099">of</font></B> Pixels;
+  <font color="#008000">{Pixel coordinates increments}</font>
+  dx,dy:Integer;
+  <font color="#008000">{A loop variable}</font>
+  i:Integer;
+<B><font color="#000099">begin</font></B>
+  <font color="#008000">{ Initialize the random numbers generator }</font>
+  Randomize;
+  <font color="#008000">{ Set Hicolor graphics mode }</font>
+  SetSVGAMode(320,200,16,LfbOrBanked);
+  <font color="#008000">{ Clears the current active page using the background color}</font>
+  ClearPage;
+  <font color="#008000">{Set random initial color and coordinates for each pixel }</font>
+  <B><font color="#000099">for</font></B> i:=1 <B><font color="#000099">to</font></B> NumberOfPixels <B><font color="#000099">do</font></B>
+    <B><font color="#000099">begin</font></B>
+      SomePixels[i].x:=Random(GetMaxX);           <font color="#008000">{Set the random X    }</font>
+      SomePixels[i].y:=Random(GetMaxY);           <font color="#008000">{Set the random Y    }</font>
+      SomePixels[i].Colours:=Random(GetMaxColor); <font color="#008000">{Set the random color}</font>
+    <B><font color="#000099">end</font></B>;
+  <B><font color="#000099">While</font></B> <B><font color="#000099">not</font></B> keypressed <B><font color="#000099">do</font></B>
+    <B><font color="#000099">begin</font></B>
+    <B><font color="#000099">for</font></B> i:=1 <B><font color="#000099">to</font></B> NumberOfPixels <B><font color="#000099">do</font></B>
+      <B><font color="#000099">begin</font></B>
+        <font color="#008000">{ Increment the pixel coordinates }</font>
+        dy:=Random(2)*2-1; <font color="#008000">{Either 1, or-1}</font>
+        dx:=Random(2)*2-1;
+        <font color="#008000">{ Change the pixel coordinates with dx, dy }</font>
+        SomePixels[i].x:=SomePixels[i].x+dx;
+        SomePixels[i].y:=SomePixels[i].y+dy;
+        <font color="#008000">{ Draw the pixel }</font>
+        PutPixel(SomePixels[i].x,SomePixels[i].y,SomePixels[i].Colours);
+      <B><font color="#000099">end</font></B>;
+    <B><font color="#000099">end</font></B>;
+  CloseGraph; <font color="#008000">{ Return to the text mode }</font>
+  ReadKey;    <font color="#008000">{ Get the key pressed     }</font>
+<B><font color="#000099">end</font></B>.</pre></dir>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="putimage_proc.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: PutImage procedure"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="putsprite_proc.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: PutSprite procedure"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">PutImage procedure</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">PutSprite procedure</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 4.37.2.87 -</B></CENTER>
+</BODY></HTML>

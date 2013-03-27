@@ -1,0 +1,118 @@
+<html><head>
+<TITLE>Supported DPMI INT 31h functions
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="pmodew_about.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: About PMODE/W"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="pmodew_func0000.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0000 - Allocate Descriptors"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 7.2 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="pmodew.htm"><small>PMODE/W MSDOS Extender</small></a><dir><h2>Supported DPMI INT 31h functions
+</h2></dir>
+<!-- Page content -->
+PMODE/W duplicates a subset of DPMI protected mode functions.
+These functions are available ONLY in protected through INT 31h.
+They provide descriptor services, extended memory services,
+interrupt services, translation services, and some other
+miscellaneous things. A function is called by setting AX
+to the function code, setting any other registers for the
+function, and executing INT 31h. Upon return, the carry flag
+will be clear if the function was successful. If the carry flag is set,
+the function failed. All other registers are preserved unless otherwise
+specified. In addition to the functions listed here,
+functions 0600h, 0601h, 0702h, and 0703h will return
+with the carry flag clear to stay compatible with code that uses those
+particular DPMI functions.
+<ul>
+<li><a href="pmodew_func0000.htm">Function 0000</a> - Allocate Descriptors</li>
+<li><a href="pmodew_func0001.htm">Function 0001</a> - Free Descriptor</li>
+<li><a href="pmodew_func0002.htm">Function 0002</a> - Segment to Descriptor</li>
+<li><a href="pmodew_func0003.htm">Function 0003</a> - Get Selector Increment Value</li>
+<li><a href="pmodew_func0006.htm">Function 0006</a> - Get Segment Base Address</li>
+<li><a href="pmodew_func0007.htm">Function 0007</a> - Set Segment Base Address</li>
+<li><a href="pmodew_func0008.htm">Function 0008</a> - Set Segment Limit</li>
+<li><a href="pmodew_func0009.htm">Function 0009</a> - Set Descriptor Access Rights</li>
+<li><a href="pmodew_func000a.htm">Function 000A</a> - Create Alias Descriptor</li>
+<li><a href="pmodew_func000b.htm">Function 000B</a> - Get Descriptor</li>
+<li><a href="pmodew_func000c.htm">Function 000C</a> - Set Descriptor</li>
+<li><a href="pmodew_func0100.htm">Function 0100</a> - Allocate DOS Memory Block</li>
+<li><a href="pmodew_func0101.htm">Function 0101</a> - Free DOS Memory Block</li>
+<li><a href="pmodew_func0102.htm">Function 0102</a> - Resize DOS Memory Block</li>
+<li><a href="pmodew_func0200.htm">Function 0200</a> - Get Real Mode Interrupt Vector</li>
+<li><a href="pmodew_func0201.htm">Function 0201</a> - Set Real Mode Interrupt Vector</li>
+<li><a href="pmodew_func0202.htm">Function 0202</a> - Get Processor Exception Handler Vector</li>
+<li><a href="pmodew_func0203.htm">Function 0203</a> - Set Processor Exception Handler Vector</li>
+<li><a href="pmodew_func0204.htm">Function 0204</a> - Get Protected Mode Interrupt Vector</li>
+<li><a href="pmodew_func0205.htm">Function 0205</a> - Set Protected Mode Interrupt Vector</li>
+<li><a href="pmodew_func0300.htm">Function 0300</a> - Simulate Real Mode Interrupt</li>
+<li><a href="pmodew_func0301.htm">Function 0301</a> - Call Real Mode Procedure With Far Return Frame</li>
+<li><a href="pmodew_func0302.htm">Function 0302</a> - Call Real Mode Procedure With IRET Frame</li>
+<li><a href="pmodew_func0303.htm">Function 0303</a> - Allocate Real Mode Callback Address</li>
+<li><a href="pmodew_func0304.htm">Function 0304</a> - Free Real Mode Callback Address</li>
+<li><a href="pmodew_func0305.htm">Function 0305</a> - Get State Save/Restore Addresses</li>
+<li><a href="pmodew_func0306.htm">Function 0306</a> - Get Raw Mode Switch Addresses</li>
+<li><a href="pmodew_func0400.htm">Function 0400</a> - Get Version</li>
+<li><a href="pmodew_func0500.htm">Function 0500</a> - Get Free Memory Information</li>
+<li><a href="pmodew_func0501.htm">Function 0501</a> - Allocate Memory Block</li>
+<li><a href="pmodew_func0502.htm">Function 0502</a> - Free Memory Block</li>
+<li><a href="pmodew_func0503.htm">Function 0503</a> - Resize Memory Block</li>
+<li><a href="pmodew_func0800.htm">Function 0800</a> - Physical Address Mapping</li>
+<li><a href="pmodew_func0801.htm">Function 0801</a> - Free Physical Address Mapping</li>
+<li><a href="pmodew_func0900.htm">Function 0900</a> - Get and Disable Virtual Interrupt State</li>
+<li><a href="pmodew_func0901.htm">Function 0901</a> - Get and Enable Virtual Interrupt State</li>
+<li><a href="pmodew_func0902.htm">Function 0902</a> - Get Virtual Interrupt State</li>
+<li><a href="pmodew_funceeff.htm">Function EEFF</a> - Get DOS Extender Information</li>
+</ul>
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_about.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: About PMODE/W"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="pmodew_func0000.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Function 0000 - Allocate Descriptors"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">About PMODE/W</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Function 0000 - Allocate Descriptors</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 7.2 -</B></CENTER>
+</BODY></HTML>

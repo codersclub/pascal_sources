@@ -1,0 +1,178 @@
+<html><head>
+<TITLE>Variant Types
+</TITLE>
+<keywords="">
+<META NAME="Author" CONTENT="Valery Votintsev">
+<STYLE type=text/css><!--
+BODY {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+A {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:link {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:visited {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+A:hover {color: red; FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+P {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TD {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+TH {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: x-small;}
+PRE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+CODE {FONT-FAMILY: courier, monospace, serif; FONT-SIZE: x-small;}
+H2 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: medium;}
+H1 {FONT-FAMILY: verdana, arial, sans-serif; FONT-SIZE: large;}
+DIV.closed {margin-left: 20; display: none;}
+--></STYLE>
+</head>
+<body>
+<!-- Top Navigation -->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A
+HREF="str_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: String Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP">
+<A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">
+<A HREF="set_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Set Types"></A></TD>
+</TR></TABLE>
+<!-- End of Top Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.11 -</B></CENTER>
+<img border=0 src="images/corner.gif" width=12 height=12><a href="language_def.htm"><small>TMT Pascal Language Description</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="lang_struct.htm"><small>Pascal Language Structure</small></a>
+<br><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/1.gif" width=12 height=12><img border=0 src="images/corner.gif" width=12 height=12><a href="types.htm"><small>Types</small></a><dir><h2>Variant Types
+</h2></dir>
+<!-- Page content -->
+TMT Pascal implements two COM-compatible variant types: Variant and OleVariant
+which are absolutely identical. These types represent values that can change
+their type at runtime. Variants offer greater usability but occupy more memory
+than regular variables, and operations on them are slower than on statically
+bound types. Furthermore, illegal operations on variants often result in
+runtime errors.
+<br> 
+<br> 
+A variant occupies 16 bytes of memory and consists of a type code and a value,
+or pointer to a value, of the type specified by the code.
+<br> 
+<br> 
+Variants can hold values of following types:
+<ul>
+<li><a href="int_type.htm">Integer</a></li>
+<li><a href="bool_type.htm">Boolean</a></li>
+<li><a href="real_type.htm">Real</a></li>
+<li><a href="char_type.htm">PWChar</a></li>
+</ul> 
+Variants can mix with other variants and with integer, real, null-terminated
+wide string (PWChar), and Boolean values in expressions and assignments;
+the compiler automatically performs type conversions.
+<br>
+<br> 
+The following code demonstrates some of the automatic conversions performed
+when variants are mixed with other types.
+<pre><font color = #000080>{$ifdef __GUI__}</font>
+  <B>uses</B> WinCRT;
+<font color = #000080>{$endif}</font>
+
+<B>var</B>
+  V1, V2, V3, V4: Variant;
+  D: Double;
+
+<B>begin</B>
+  V1 := 2001;
+  Writeln(V1); <font color = #000080> // integer value</font>
+
+  V2 := pi;
+  Writeln(V2); <font color = #000080> // real value</font>
+  V3 := <font color = #800000> '1234.5678'</font>;
+  Writeln(V3); <font color = #000080> // null-terminated wide string value</font>
+  V4 := V1 &gt; V2;
+  Writeln(V4); <font color = #000080> // Boolean value</font>
+
+  D := V1 + V2 + V3;
+  Writeln(D);  <font color = #000080> // real value 3.23870939265359E+0003</font>
+
+<B>end</B>.</pre>
+<img border=0 src="images/attention.gif"> Special conversion rules apply to the PWChar
+type. When a PWChar is converted to any other type, it is first converted to a
+Double, then converted to a destination type. On other hand, an integer, real,
+or Boolean <I>could not be converted</I> into a PWChar value.
+<br> 
+<br> 
+<img border=0 src="images/attention.gif"> Use a special tagVARIANT type to specify
+variant data that cannot be passed by reference. tagVARIANT is declared in the
+ActiveX.PAS unit as shown below:
+<pre><B>type</B>
+  PVariantArg = ^TVariantArg;
+  tagVARIANT  = <B>record</B>
+    vt: TVarType;
+    wReserved1: Word;
+    wReserved2: Word;
+    wReserved3: Word;
+    <B>case</B> Integer <B>of</B>
+                     VT_UI1: (bVal: Byte);
+                      VT_I2: (iVal: Smallint);
+                      VT_I4: (lVal: Longint);
+                      VT_R4: (fltVal: Single);
+                      VT_R8: (dblVal: Double);
+                    VT_BOOL: (vbool: TOleBool);
+                   VT_ERROR: (scode: HResult);
+                      VT_CY: (cyVal: Currency);
+                    VT_DATE: (date: TOleDate);
+                    VT_BSTR: (bstrVal: TBStr);
+                 VT_UNKNOWN: (unkVal: Pointer);
+                VT_DISPATCH: (dispVal: Pointer);
+                   VT_ARRAY: (parray: PSafeArray);
+         VT_BYREF or VT_UI1: (pbVal: ^Byte);
+          VT_BYREF or VT_I2: (piVal: ^Smallint);
+          VT_BYREF or VT_I4: (plVal: ^Longint);
+          VT_BYREF or VT_R4: (pfltVal: ^Single);
+          VT_BYREF or VT_R8: (pdblVal: ^Double);
+        VT_BYREF or VT_BOOL: (pbool: ^TOleBool);
+       VT_BYREF or VT_ERROR: (pscode: ^HResult);
+          VT_BYREF or VT_CY: (pcyVal: ^Currency);
+        VT_BYREF or VT_DATE: (pdate: ^TOleDate);
+        VT_BYREF or VT_BSTR: (pbstrVal: ^TBStr);
+     VT_BYREF or VT_UNKNOWN: (punkVal: ^IUnknown);
+    VT_BYREF or VT_DISPATCH: (pdispVal: ^IDispatch);
+       VT_BYREF or VT_ARRAY: (pparray: ^PSafeArray);
+     VT_BYREF or VT_VARIANT: (pvarVal: PVariant);
+                   VT_BYREF: (byRef: Pointer);
+                      VT_I1: (cVal: Char);
+                     VT_UI2: (uiVal: Word);
+                     VT_UI4: (ulVal: LongWord);
+                     VT_INT: (intVal: Integer);
+                    VT_UINT: (uintVal: LongWord);
+     VT_BYREF or VT_DECIMAL: (pdecVal: PDecimal);
+          VT_BYREF or VT_I1: (pcVal: PChar);
+         VT_BYREF or VT_UI2: (puiVal: PWord);
+         VT_BYREF or VT_UI4: (pulVal: PInteger);
+         VT_BYREF or VT_INT: (pintVal: PInteger);
+        VT_BYREF or VT_UINT: (puintVal: PLongWord);
+    <B>end</B>;
+  TVariantArg = tagVARIANT;</pre>
+The first field contains the argument's type, and the fifth contains its value.
+To pass a long integer, for example, the <I>vt</I> and <I>iVal</I> fields of
+the <I>tagVARIANT</I> structure would be filled with VT_I4 (long integer) and
+the actual value of the long integer.
+
+<!-- End of Page content -->
+<br>
+<br>
+<!-- Bottom Navigation -->
+<HR>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" width="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%"><A HREF="str_type.htm"><IMG
+BORDER="0" SRC="images/prev.gif" ALT="Previous: String Types"></A></TD>
+<TD ALIGN="CENTER" VALIGN="TOP"><A HREF="index.htm"><IMG
+BORDER="0" SRC="images/index.gif" ALT="To the Table of Content"</A></TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%"><A HREF="set_type.htm"><IMG
+BORDER="0" SRC="images/next.gif" ALT="Next: Set Types"></A></TD>
+</TR>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="35%">String Types</TD>
+<TD ALIGN="CENTER" VALIGN="TOP">Table of Content</TD>
+<TD ALIGN="RIGHT" VALIGN="TOP" WIDTH="35%">Set Types</TD>
+</TR></TABLE>
+<!-- End of Bottom Navigation -->
+<HR>
+<CENTER><B>- 2.2.6.11 -</B></CENTER>
+</BODY></HTML>

@@ -1,0 +1,293 @@
+<html><head>
+<meta name="Description" content="Особенности компилятора TMT Pascal.">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Особенности компилятора TMT Pascal</title>
+<meta name="Author" content="Valery Votintsev">
+<meta name="keywords" content="tmt, custom software, custom development, custom projects, software development, TMT Pascal, v3.90, v4.0, v4.01, v5.0, compiler, 32-bit, 32 bit, Turbo, DOS compiler, graphics library, DPMI, DOS extender, PMODE/W, WDOSX, DOS/4GW, TMT, MSDOS, MS-DOS, VESA, LFB, MMX, Win32, Windows, Windows'95, Windows'98, Windows NT, Windows XP, OS/2, Multi-target, AMD, 3DNow!">
+<link rel="stylesheet" type="text/css" href="tmt.css">
+</head>
+<body bgcolor="#FFFFFF">
+
+<table border="0" cellpadding="0" cellspacing="0">
+
+<tr><td height=1 colspan=2><!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=89876;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=89876"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--></script><!--/COUNTER--></td></tr>
+
+  <tr>
+  <!-- begin top left cell of outer table -->
+
+    <td valign="top" bgcolor="#000080">
+    <!-- begin upper left button table -->
+
+      <div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" bgcolor="#000080"><a
+        href="http://www.tmt.com"><img
+        src="img/gearth.gif" alt="Официальный Сайт TMT Development Corp." vspace="8" width="89" height="73" hspace="26" border=0></a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/sel.gif" width="18"><a
+        class=menu href="index.htm">Главная</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="news.htm">TMT Pascal 5.0</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="products.htm">Продукты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="net.htm">.NET Компилер</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="download.htm">Скачать</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="updates.htm">Апдейты</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="samples.htm">Примеры кода</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contribs.htm">Contributions</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="faq.htm">TMT FAQ</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="docs.htm">Документация</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="purchase.htm">Продажи</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="services.htm">Сервис</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="links.htm">Ссылки</a></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#000080"><img src="img/empty.gif" width="18"><a
+        class=menu href="contact.htm">Связь с TMT</a></td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#000080"><a href="../index.htm"><img src="../img/pas.gif" height="31" width="88" border="0"
+         alt="Back to Pascal.Sources.Ru"></a></td>
+      </tr>
+      <!-- end upper left button table -->
+    </table>
+    </center></div>
+
+<div align="center"><br><br>
+<!--Rating@Mail.ru LOGO--><a target=_top
+href="http://top.mail.ru/jump?from=89876"><img
+src="http://top.list.ru/counter?id=89876;t=132;l=1"
+border=0 height=40 width=88
+alt="Рейтинг@Mail.ru"><!--img
+src="http://top.list.ru/counter?id=89876;t=49"
+border=0 height=31 width=88
+alt="Рейтинг@Mail.ru"--></a><!--/LOGO-->
+      <br>
+      <!-- SpyLOG f:0211 -->
+      <script language="javascript"><!--
+      Mu="u1624.10.spylog.com";Md=document;Mnv=navigator;Mp=1;
+      Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+      Mt=(new Date()).getTimezoneOffset();
+      Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+      My="";
+      My+="<a href='http://"+Mu+"/cnt?cid=162410&f=3&p="+Mp+"&rn="+Mrn+"' target='_blank'>";
+      My+="<img src='http://"+Mu+"/cnt?cid=162410&"+Mz+"&r="+escape(Md.referrer)+"&pg="+escape(window.location.href)+"' border=0  width=88 height=31  alt='SpyLOG'>";
+      My+="</a>";Md.write(My);//--></script><noscript>
+      <a href="http://u1624.10.spylog.com/cnt?cid=162410&f=3&p=1" target="_blank">
+      <img src="http://u1624.10.spylog.com/cnt?cid=162410&p=1" alt='SpyLOG' border='0' width=88 height=31 ></a></noscript>
+      <!-- SpyLOG  -->
+</div>
+
+
+</td>
+    <!-- end left top cell of outer table -->
+
+
+
+    <td valign="top"><p align="center">
+
+    <!-- begin upper right body table -->
+
+
+      <blockquote>
+
+      <img src="img/logo.gif" alt="TMT Logo" width="410" height="78">
+      <br>
+         <hr>
+      <br>
+
+      <p align="center"><font size="3" face="Arial"><strong>
+          TMT Pascal - 32-битный компилятор языка Pascal<br>
+          для DOS32, Win32, OS/2, Linux</strong></font>
+          </p>
+
+          <p align="left"><img src="img/tmtlang.jpg" alt="TMT Logo" align="right" hspace="20" vspace="5"
+          width="108" height="125"><font size="2" face="Arial">
+
+          С помощью компилятора TMT Pascal Вы можете легко построить свои
+          32-битные приложения.
+          Он поможет Вам вдохнуть новую жизнь в Ваши старые <strong>MS-DOS</strong>
+          приложения и покажет Вам самый простой путь к созданию программ для <strong>Microsoft Windows'
+          95/98/Me/NT/2000/XP</strong> и <strong>IBM OS/2</strong>. Возьмите свои старые
+          исходники на Turbo Pascal и без каких-либо модификаций просто перекомпилируйте их с помощью TMT Pascal Multi-Target Edition
+          для получения 32-битных консольных Windows или OS/2 приложений. Забудьте о
+          &quot;Runtime Error 200&quot; - ошибке, связанной с модулем CRT в Turbo Pascal, и появляющейся на современных
+          процессорах типа Pentium, Celeron, Pentium II и Pentium III. Наш модуль CRT работает стабильно на любых процессорах и может использоваться для всех
+          поддерживаемых компилятором платформ (MS-DOS, OS/2 и Microsoft Windows' 95/98/Me/NT/2000/XP).<br> <a
+          href="download.htm" >Вы можете испытать DOS-версию компилятора бесплатно!</a><br clear="all">
+          </font></p>
+          <hr>
+
+
+          <p align="left"><img src="img/dx.gif" alt="DirectX 8 Libraries" align="right" hspace="5"
+          vspace="5"><img src="img/opengl.gif" alt="OpenGL" align="right" hspace="0"
+          vspace="20" width="84" height="44"><font size="2" face="Arial">
+          В состав TMT Pascal входят мощные библиотеки для поддержки
+          технологий <b>Silicon Graphic OpenGL</b> и <b>Microsoft
+          DirectX 8.0</b>. Эти программные интерфейсы
+          (API) сециально предназначены для разработки игр и других
+          высокопроизводительных мультимедийных приложений.
+          Они включают поддержку двумерной (2D) и трех-мерной (3D) графики,
+          музыки, звуковых эффектов, устройств ввода и т.д.</font></p>
+          <hr>
+
+
+          <p align="left"><img src="img/mgl.gif" alt="SciTech MGL" align="right" hspace="5"
+          vspace="5" width="180" height="36"><font face="Arial" size="2">
+          Широко известная графическая библиотека
+          <br>SciTech Multi-platform Graphics Library (<b>MGL</b>)
+          полностью портирована в TMT Pascal.
+          <br>Используя библиотеку <b>SciTech MGL</b>, вы сможете без значительных затрат
+          времени создавать свои собственные интерактивные графические
+          приложения, нисколько не уступающие таким монстрам, как
+          <B>WinQuake</B>, <B>Hexen II</B> и многим другим, построенным
+          с помощью именно этой библиотеки.
+          <br>Подробнее о самой библиотеке вы сможете прочитать на
+          <a href="http://www.scitechsoft.com/dp_mgl.html">
+          www.scitechsoft.com/dp_mgl.html</a> (engl).
+          </font></p>
+          <hr>
+
+          <p><a href="http://www.microsoft.com/rus/net/"><img src="img/net.gif" alt="Подробнее о Microsoft .NET" align="right" hspace="20" vspace="5"
+          width="117" height="60" border=0><font size="2" face="Arial"></a>TMT Development Corporation
+          является партнером компании Microsoft по разработке и поддержке корпоративной платформы для Интернета нового поколения <b>Microsoft .NET</b>
+          начиная с самого начала ее развития. <a href="net.htm" >Подробнее об
+          участии TMT в проекте.NET</a> (engl).<br>
+          </font></p>
+          <hr>
+
+          <p><a href="graph.htm" ><img src="img/graph.gif" alt="Подробнее о модуле TMT Graph" align="right" hspace="10" vspace="10" width="147"
+          height="96" border=0><font size="2" face="Arial"></a>В состав компилятора TMT Pascal входит
+          мощная <a href="graph.htm" >графическая библиотека</a>, использующая спецификацию VESA/VBE 2.0
+          (включая поддержку LFB) для MS-DOS, и технологию Microsoft DirectDraw
+          для Windows приложений. Эта библиотека позволит Вам создавать очень быстрые графические
+          32-битные приложения как для для MS-DOS (в защищенном режимe), так и для Windows. Библиотека
+          максимально приближена к модулю Graph из Borland Pascal. Хотя в это верится с трудом, но
+          теперь Вы сможете перекомпилировать Ваши старые Pascal исходники, превратив их в современные 32-битные MS-DOS или Win32 GUI
+          приложения! В большинстве случаев Вам даже не потребуется вносить никаких изменений в исходники, чтобы
+          создать из них настоящие Win32 DirectX задачи. Графические приложения, написанные на Pascal, еще
+          никогда не были такими быстрыми и мощными!.</font></p>
+          <hr>
+
+          <p align="left"><a href="http://developer.intel.com/design/intarch/mmx/docs_mmx.htm"><img src="img/mmx.gif" alt="Подробнее о технологии MMX" align="right" hspace="5"
+          vspace="5" width="134" height="84" border=0></a><font size="2" face="Arial">Assembler, встроенный в TMT Pascal,
+          прекрасно управляется с новейшей технологией <strong>Intel(tm) MMX</strong> (MultiMedia eXtensions),
+          которая поддерживается современными процессорами Pentium, Pentium II и Pentium III. Эта
+          технология предназначена для ускорения работы графических и мультимедийных приложений. Попробуйте наш компилятор
+          для создания Ваших собственных приложений, оптимизированных под MMX. <a href="http://developer.intel.com/design/intarch/mmx/docs_mmx.htm">Подробнее о технологии
+          MMX</a> (engl).<br>
+          </font></p>
+
+          <hr>
+          <p><font size="2" face="Arial"><img src="img/3dnow.gif" alt="3DNow! technology support"
+          align="right" hspace="5" width="180" height="36">Начиная с версии 3.20, встроенный в TMT Pascal
+          ассемблер поддерживает технологию <strong>AMD(tm) 3DNow!</strong>, котора
+          является первой технологической инновацией для процессоров семейства x86, позволяющей значительно повысить
+          производительность работы с числами с плавающей точкой,
+          3D графикой и мультимедиа-задачами для современных персональных компьютеров, оснащенных Microsoft
+          Windows. Преимуществами технологии 3DNow! являются высочайшая 3D производительность, более реалистичное и жизненное отображение 3D изображений, полноэкранное Видео и Звук,
+          высокая эффективность работы с Internet. <a
+          href="http://www.amd.com/K6/k6docs/pdf/21928.pdf">См. описание технологии 3DNow!</a>
+           (engl).<br>
+          </p>
+        </blockquote>
+<!-- end upper right body table -->
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" bgcolor="#FFFFFF"><!-- begin bottom left copyright info table --> <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="130">
+        <p align="center">
+        <!-- copyright statement -->
+        <font size="1">Автор русского проекта:
+        <br><a href="mailto:rswag@sources.ru">Valery Votintsev</a>
+        <br><br>при поддержке
+        <br><a href="http://www.tmt.com">TMT Development Corporation</a>.
+        <br>All rights reserved.</font>
+        </td>
+      </tr>
+    </table>
+    <p><!-- end bottom left copyright info table --> </td>
+    <td valign="bottom"><p align="center"><font size="2" face="Arial"><br clear="all">
+    </font></p>
+
+    <!-- begin bottom right navigational table -->
+
+    <br>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
+    <td valign="bottom"><!-- begin bottom right navigational table -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center">
+        <!-- begin navigational bar -->
+        <font size="1" face="Arial,Helvetica,sans-serif"><a href="news.htm" >[Новости]</a> &nbsp; <a href="products.htm" >[Продукты]</a> &nbsp; <a href="purchase.htm" >[Продажи]</a>
+        &nbsp; <a href="download.htm" >[Скачать]</a> &nbsp; <a href="updates.htm" >[Апдейты]</a>
+        &nbsp; <a href="mailto:support@tmt.com">[Поддержка]</a><br>
+        <a href="faq.htm" >[FAQ]</a> &nbsp; <a href="contribs.htm" >[Contributions]</a> &nbsp; <a
+        href="links.htm" >[Ссылки]</a> &nbsp; 
+        <a href="contact.htm" >[Связь с TMT]</a> &nbsp; <a href="index.htm" >[Главная]</font>
+        <!-- end navigational bar --></a> </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
