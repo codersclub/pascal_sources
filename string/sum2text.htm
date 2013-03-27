@@ -1,0 +1,96 @@
+<html><head><title>Сумма прописью</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Cумма прописью. Претендент на лаконичность'>
+<meta name="keywords" content="pascal, sources, source code, sum2text, string, Строковые Функции ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Строковые Функции</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sum2text
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сумма прописью</TD>
+<TD nowrap class=black>&nbsp;Алексей Громак</TD>
+<TD class=black align='right'>21.09.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Cумма прописью. Претендент на лаконичность</TD><TD class=black colspan=2 align='right'><br><A HREF="sum2text.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: alex@alex.mhti.msk.su (Alex!)
+Subj: "Cумма прописью". Претендент на лаконичность.
+
+Если кому интересно - предлагаю самую короткую процедуру для выполнения
+операции "сумма прописью", называется Sum2text, сумма - типа comp в копейках.
+
+(Мож в сырце и не очень короткая, но вот то, что получается - весьма и весьма!
+  Будет время - перепишу на ASM. Мне это, правда, не нужно, но по приколу...)
+
+Потом эту сумму удобно расколоть на строки вызовом типа:
+
+  var s:string;
+...
+  s:=Sum2text(99999999999);
+  while s&lt;&gt;'' do
+    writeln(lSplit(s));
+
+Я прогнал по ней вот этот тест.
+
+uses Common;
+
+var a:comp;
+    s:string;
+    f:text;
+    i:word;
+begin
+  a:=0;
+  assign(f,'test');
+  rewrite(f);
+  for i:=1 to 1000 do begin
+    writeln(f,a:19:0,'  ',sum2text(a));
+    write(#13,a:19:0);
+    a:=a+100100100100100.;
+  end;
+  close(f);
+end.
+
+Кстати, тест этот отлетел за 2 секунды (с мелочью) на 486DX-50
+
+---
+Звиняйте, если не сказал ничего умного.
+
+P.S.
+     Тут вот вопросы из зала поступили:
+
+  Ruslan Nurislamow пишет:
+
+&gt;   &gt;   Если кому интересно
+&gt;   Даже очень интересно !
+
+О! Хоть кому-то интересно!
+
+&gt;   но вот чего я не понял - вызываются несколько процедур, которых нет в
+&gt;   примере. LowCaseR (или что-то вроде того) - это я понял, а вот еще одна...
+             ^^^^^^^^
+Точнее UpCaseR - чтоб первую букву строки заглавной сделать.
+
+&gt;   убейте, не помню как ее зовут... нет ее и я не понял кто она такая
+&gt;   если не трудно - скажи-а ?
+
+TRIM() - пролезла, зараза! Убью нафиг! Это из TPRO - обрезает пробелы в начале
+и в конце строки. Нужна для проверки, не пустая ли это строка. Но можно и без
+нее обойтись. Доберусь до текста - перепишу нафиг!
+
+---
+ А вообще-то мне спать пора. А если че надо, так мылом.
+
+Алексей А. Громак =&gt;&gt; alex@alex.mhti.msk.su, 2:5020/18.28
+Звонить бесполезно когда я не дома.
+ А вообще-то мне спать пора. А если че надо, так мылом.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

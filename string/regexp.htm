@@ -1,0 +1,92 @@
+<html><head><title>REGEXP- Regular Expresion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Переведенный на Паскаль модуль обработки регулярных выражений REGEXP, Written by Henry Spencer 1986, University of Toronto'>
+<meta name="keywords" content="pascal, sources, source code, regexp, string, Строковые Функции ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Строковые Функции</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;regexp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;REGEXP- Regular Expresion</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5030/317.23">Anton Krenitskiy</a></TD>
+<TD class=black align='right'>31.12.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Переведенный на Паскаль модуль обработки регулярных выражений
+REGEXP, Written by Henry Spencer 1986, University of Toronto</TD><TD class=black colspan=2 align='right'><br><A HREF="regexp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/2.30) ------------------- SU.PASCAL.MODULA.ADA -
+ Msg  : 711 of 2621 -628 +830 *712
+ From : Anton Krenitskiy                    2:5030/317.23   31 Dec 97  05:42:58
+ To   : Alex Denisenko                                      31 Dec 97  15:32:57
+ Subj : Regular expresion
+-------------------------------------------------------------------------------
+Приветствую Вас, Alex!
+
+19 Дек 1997 (Пт) 22:54, Dima Orlov писал к Alex Denisenko:
+
+ &gt;&gt; regexp - Copyright (c) 1986 by University of Toronto. Written by
+ &gt;&gt; Henry Spencer.
+
+ &gt;&gt; никто не пеpеводил на Паскаль? А то соpцы GREP на C++ , а такой
+ &gt;&gt; облом их на паскаль пеpеводить....
+
+ DO&gt; Сорцы на С, а не на ++, и я пробовал не переписывать, а линковать к
+ DO&gt; программе на TP
+
+    Я переводил и малость дополнил.
+
+
+---
+ * Origin: CraftsMan (FidoNet 2:5030/317.23)
+
+- SU.PASCAL.MODULA.ADA (2:5021/2.30) ------------------- SU.PASCAL.MODULA.ADA -
+ Msg  : 805 of 2596 -628
+ From : Dima Orlov                          2:461/27.1      08 Jan 98  15:58:00
+ To   : Anton Krenitskiy                                    09 Jan 98  23:48:02
+ Subj : Regular expresion [1/3]
+-------------------------------------------------------------------------------
+Hello, Anton Krenitskiy !
+
+ &gt;&gt;&gt; regexp - Copyright (c) 1986 by University of Toronto. Written by
+ &gt;&gt;&gt; Henry Spencer.
+
+ &gt;&gt;&gt; никто не пеpеводил на Паскаль? А то соpцы гpипа на C++ , а такой
+ &gt;&gt;&gt; оболм на паскаль пеpеводить....
+
+ &gt;  DO&gt; Сорцы на С, а не на ++, и я пробовал не переписывать, а линковать к
+ &gt;  DO&gt; программе на TP
+
+ &gt;     Я переводил и малость дополнил.
+
+
+Дошли наконец руки посмотреть. Работа проведена большая, снимаю шляпу :).
+Правда одно замечание есть -
+
+#define MAGIC 0234
+
+переводится на паскаль как
+
+const MAGIC = 156; :)
+
+о самое главное не это, а то, что сишный вариант, собранный BC3.1 и
+подлинкованный к паскалю, работает в среднем в 5 раз быстрее...
+
+
+С уважением Дима Орлов
+
+--- Electric BBS (0572)-477177
+ * Origin: Electric BBS (0572) 477177 (2:461/27.1)
+
+
+{&gt; Cut here. FileName= REGULAR.RUS }
+
+     Регулярн

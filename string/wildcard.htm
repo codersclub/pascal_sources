@@ -1,0 +1,64 @@
+<html><head><title>Сравнение строк с шаблоном</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Как выбрать из массива строк те строки, которые совпадают с заданным шаблоном'>
+<meta name="keywords" content="pascal, sources, source code, wildcard, string, Строковые Функции ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Строковые Функции</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;wildcard
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сравнение строк с шаблоном</TD>
+<TD nowrap class=black>&nbsp;Глеб Чепаченко</TD>
+<TD class=black align='right'>24.06.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Как выбрать из массива строк те строки,
+которые совпадают с заданным шаблоном</TD><TD class=black colspan=2 align='right'><br><A HREF="wildcard.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: "Gleb G. Chepachenco" &lt;root@agropc.msk.su&gt;
+Organization: Agroecological problems Center
+
+Andrey Prokhorov wrote:
+&gt;     Возникла задача, выбрать из массива строк те строки, которые совпадают с
+&gt;шабоном по типу Парадокса.
+&gt;
+&gt;В шаблоне могут встречаться метасимволы '..' - любое число любых символов
+&gt;                                        '@'  - любой один символ
+&gt;
+&gt;     Может кто-нибудь с этим встречался?
+
+Встречался, а как же. Только любое число любых символов у меня обозначается
+* а один символ ?  как в DOS, но в отличие от нее ситуация типа
+*A*B* обрабатывается корректно (если это та версия)
+
+Обратите внимание, что сия процедура не использует ни CRT, ни DOS ни TPSTRING,
+чего и вам желаю для маленьких примочек, которые неизвестно куда линковать.
+
+Vitus Wagner.
+Origin:SoftWeyr
+
+From: andy@citadm.nov.su (Andrey V. Prokhorov)
+----------------------------------------------
+Эта программа вводе при следующих входных данных выдавала такие ответы:
+
+WildCars   String       Ответ
+*23?       12345         TRUE     { После '3' должен идти только один символ,
+                                    т.е. ответ FALSE}
+*23        12345         TRUE     {FALSE}
+
+В результате примитивного тестирования оказалось, что неправильно
+обрабатывается конец строк (шаблона и проверяемой строки).
+
+Поэтому вопрос остается открытым. Хотя за основу взять можно...
+
+                С уважением Прохоров Андрей.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

@@ -1,0 +1,101 @@
+<html><head><title>Сравнение строк по шаблону</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Ассемблерная процедура сравнения строк с шаблоном'>
+<meta name="keywords" content="pascal, sources, source code, match, string, Строковые Функции ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Строковые Функции</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;match
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сравнение строк по шаблону</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/200.25">Александр Петросян</a></TD>
+<TD class=black align='right'>04.07.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Ассемблерная процедура сравнения строк с шаблоном</TD><TD class=black colspan=2 align='right'><br><A HREF="match.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: paf@fbit.msk.su (Alexander Petrosyan)
+Organization: Firm F-Bit. Moskow. Russia.
+
+&gt;&gt; Возникла задача, выбрать из массива строк, те строки которые
+&gt;&gt; совпадают с шабоном по типу Парадокса. В шаблоне могут встречаться
+&gt;&gt; метасимволы '..' - любое число любых символов
+&gt;&gt; '@'  - любой один символ     Может кто-нибудь с этим встречался?
+
+Лень пеpеводить на Pascal (sorry), но вот (надеюсь поймёте):
+
+Alexander (AKA PAF).
+
+--- GOLDED 2.41+
+ * Origin: Wherever you go... (paf@fbit.msk.su) (2:5020/200.25)
+
+
+{&gt; Cut here. FileName= MATCH.ASM }
+        .TITLE MATCH
+;+
+; MASK -&gt; .ASCIZ / '*' - Matches null or more chars; '%' matches one char/
+;  STR -&gt; .ASCIZ
+;
+; R1 = MASK
+; R2 = STR
+;
+; Examples :
+; MASK = "A*B%"
+;  STR = "ABX", "AOROROBM"; MATCH(MASK,STR) = 1
+;  STR = "AAB", "ORPOROBM"; MATCH(MASK,STR) = 0
+;
+; Петpосян Александp
+;-
+
+MATCH::
+        MOV R1,-(SP)
+        MOV R2,-(SP)
+
+1$:     MOVB (R1),R0
+        BISB (R2),R0
+        BEQ YES
+
+        MOVB (R1)+,R0
+        CMPB R0,#'*
+        BEQ 3$
+        CMPB R0,#'%
+        BEQ 4$
+
+2$:     TSTB (R2)
+        BEQ NO
+        CMPB R0,(R2)+
+        BNE NO
+        BR 1$
+
+3$:     TSTB (R1)
+        BEQ YES
+        CALL MATCH
+        BCC RET
+        TSTB (R2)+
+        BNE 3$
+        BR NO
+
+4$:     TSTB (R2)+
+        BEQ NO
+        BR 1$
+
+NO:     SEC
+        BR RET
+
+YES:    CLC
+
+RET:    MOV (SP)+,R2
+        MOV (SP)+,R1
+        RETURN
+
+        .END</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

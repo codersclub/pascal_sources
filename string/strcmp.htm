@@ -1,0 +1,110 @@
+<html><head><title>Сравнение строк по шаблону</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Функция сравнивает строки по шаблону'>
+<meta name="keywords" content="pascal, sources, source code, strcmp, string, Строковые Функции ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Строковые Функции</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;strcmp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Сравнение строк по шаблону</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:hornet@civt.kazan.su">Ruslan Nurislamov</a></TD>
+<TD class=black align='right'>29.06.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Функция сравнивает строки по шаблону</TD><TD class=black colspan=2 align='right'><br><A HREF="strcmp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">From: Ruslan R. Nurislamov &lt;hornet@civt.kazan.su&gt;
+Organization: Computer Center of the Kazan State University
+
+Решение наверняка неоптимальное, но вроде работает.
+
+-$-
+ With наилучшими wishes
+
+               = HORNET =
+
+---
+ * Origin: Gated from Relcom by Palantiri NewsGate (2:5030/27.0)
+
+{&gt; Cut here. FileName= STRCMP.PAS }
+{ Сравнение строк по шаблону   }
+{ written by Ruslan Nurislamov }
+Var W,S : String;
+
+Function StringCmp(S,Mask:String):Boolean;
+Var I,J     : Integer;
+    Ok      : Boolean;
+    St,Msk  : String;
+Begin
+ I:=1;
+ { Begin optimize mask ('?*','*?','**' secuences must be converted to '*') }
+ While True Do
+  Begin
+   J:=Length(Mask);
+   While I&lt;Length(Mask) Do
+    Begin
+     If (Mask[I]='?') And (Mask[I+1]='*') Then
+      Delete(Mask,I,1);
+     If (Mask[I]='*') And (Mask[I+1]='?') And (I&lt;Length(Mask)) Then
+      Delete(Mask,I+1,1);
+     If (Mask[I]='*') And (Mask[I+1]='*') And (I&lt;Length(Mask)) Then
+      Delete(Mask,I,1);
+     Inc(I);
+    End;
+   If J=Length(Mask) Then Break;
+   I:=1;
+  End;
+ { End of optimize mask convertion }
+ Ok:=True;
+ I:=1;
+ J:=1;
+ While TRUE Do
+  Begin
+   Case Mask[I] Of
+    { Begin compareing string with current mask sign }
+     { Star sign     : any match any simbols }
+    '*':
+      Begin
+       Msk:=Copy(Mask,I+1,Length(Mask)-I+1);
+       St:=Copy(S,J,Length(S)-J+1);
+       While (St&lt;&gt;'') And (NOT StringCmp(St,Msk)) Do Delete(St,1,1);
+       If St='' Then Ok:=False Else J:=Pos(St,S);
+      End;
+     { Question sign : one match any simbol  }
+    '?':
+     Begin
+      If (I=Length(Mask)) And (J&lt;Length(S)) Then Ok:=False;
+      If J&gt;Length(S) Then Ok:=False;
+      Inc(J);
+     End;
+     { Compare simbols }
+    Else If Mask[I]&lt;&gt;S[J] Then Ok:=False Else Inc(J);
+    { End compareing string with current mask sign }
+    End;
+   { Result of compareing }
+   If J-1&gt;Length(S) Then Ok:=False;
+   If Not Ok Then Break;
+   Inc(I);
+   If I&gt;Length(Mask) Then Break;
+  End;
+ StringCmp:=Ok;
+End;
+
+Begin
+  Write('Mask :');
+  ReadLn(W);
+  Write('String :');
+  ReadLn(S);
+  WriteLn('Result :',StringCmp(S,W));
+End.</PRE>
+
+<!--#include virtual="/t_footer.htm"-->
