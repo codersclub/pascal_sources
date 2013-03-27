@@ -1,0 +1,78 @@
+<html><head><title>HSC OPL2 Player by Spanish Lords</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Проигрыватель HSC файлов с примерами и конвертерами.  <b>Note from RSWAG:</b> To compile with BP7 do the next:  - compile PascaLib.Asm with TASM  - remove "newCRT" from USES in PRUOPL2.PAS  - replace "KeyPress" with "KeyPressed" in PRUOPL2.PAS.'>
+<meta name="keywords" content="pascal, sources, source code, hsc_src, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;hsc_src
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;HSC OPL2 Player by Spanish Lords</TD>
+<TD nowrap class=black>&nbsp;rom / Spanish Lords</TD>
+<TD class=black align='right'>25.05.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Проигрыватель HSC файлов с примерами и конвертерами. <br>
+<b>Note from RSWAG:</b>
+To compile with BP7 do the next: <br>
+- compile PascaLib.Asm with TASM <br>
+- remove "newCRT" from USES in PRUOPL2.PAS <br>
+- replace "KeyPress" with "KeyPressed" in PRUOPL2.PAS.</TD><TD class=black colspan=2 align='right'><br><A HREF="hsc_src.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>47k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+  H S C     p l a y e r .
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+
+This package contents:
+
+     PLAYER.INC       Main PROCs. ASM source code.
+     OPL2PROC.INC     PROCs used by the player. ASM source
+     OPL2DATA.INC     DATA used by the player.
+     PRUOPL.ASM       Example. ASM source code.
+     PRUOPL.EXE	      Play CROM1.INC until keypress ;)
+
+     CROM1.INC        HSC Song. DB format
+
+     HSC2INC.EXE      Converts HSC format in DB format ;)
+     SBI2INS.PAS      Converts a SBI to INS format. work?
+     PASCALIB.ASM     Creates an OBJ file, for OPLLIB.
+     OPLLIB.PAS       Pascal library for use HSC player.
+     PRUOPL2.PAS      Example.
+     PRUOPL2.EXE      &gt;ф-)
+
+
+  N O T E S :
+  We need an OPL2 player, and we are not mUSIC ROUTINEs maker,
+really this is the first try for making something like a
+player, in our demo productions we use DEMOVT by JCAB /
+Vangelis Team - Iguana, and we are very happy with it. But
+there are NOT nothing like this for coding a INTRO :( Then I
+saw a OPL2 player "HSCTracker" by Chicken & Zwerg Zwack, they
+said in their DOC:
+
+
+     "Once, we looked for an fm-editor able to do a bit more
+than this ugly CMF shit. But there was nothing, really
+nothing! So Chicken took the next adlib-player and
+disassembled it. (bad luck for Neo Software, that it was
+theirs, sorry) After playing around and doing some major
+speed-ups, he persuaded Zwerg Zwack to do an editor for it
+(it's useful to have some code slaves harhar).
+
+     Ladies and Gentlemen, here it is: The HSC-Tracker
+Package. It comes completly with an editor, a tsr-player and
+last but not least, an object/driver to include in your own
+codes!"
+
+
+
+     Then I thinked: Ok i don't like to use BIN neither OBJ in
+my productions, I like to 

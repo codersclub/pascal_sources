@@ -1,0 +1,74 @@
+<html><head><title>Background Music Player for PC Speaker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль позволяет в фоне выводить музыку на спикер в стиле Бейсика. Модуль прост в использовании и состоит всего из трех функций и одной процедуры.  This unit gives you PC Speaker music capabilities with a BASIC syntax. The music will be played in the background, so your program can continue with other things. The music can also be played in the foreground. This unit is very easy to use. There are only three procedures and one function interfaced outwards. All the rest is automatic (installing, uninstalling, interpreting the music, etc.)!'>
+<meta name="keywords" content="pascal, sources, source code, tpmusic, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tpmusic
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Background Music Player for PC Speaker</TD>
+<TD nowrap class=black>&nbsp;J.C. Kessels</TD>
+<TD class=black align='right'>07.10.1990</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль позволяет в фоне выводить музыку на спикер в стиле Бейсика.
+Модуль прост в использовании и состоит всего из трех функций
+и одной процедуры. <br><font color=#666666>
+This unit gives you PC Speaker music capabilities with a BASIC syntax.
+The music will be played in the background, so your program can continue
+with other things. The music can also be played in the foreground.
+This unit is very easy to use. There are only three procedures
+and one function interfaced outwards. All the rest is automatic
+(installing, uninstalling, interpreting the music, etc.)!</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tpmusic.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>5k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">unit music version 1.0
+
+Play music in the background.
+
+1990 J.C. Kessels
+
+
+This unit gives you music capabilities with a BASIC syntax. The music
+will be played in the background, so your program can continue with
+other things. The music can also be played in the foreground.
+
+This unit is very easy to use. There are only three procedures and one
+function interfaced outwards. All the rest is automatic (installing,
+uninstalling, interpreting the music, etc.)!
+
+
+PlayMusic(string);
+          Start playing a string of music in the background. The string
+          is a normal character string containing music 'commands' as
+          described below. If there is already music playing, then it is
+          first shut off. All settings are reset to their default.
+
+PlayMusicForeground(string);
+          Start playing a string of music, and wait for it to finish. If
+          there is already music playing, then it is first shut off. All
+          settings are reset to their default.
+          This procedure simply calls the "PlayMusic" procedure, and then
+          loops until MusicBusy (described later) is true.
+
+MusicOff;
+          Turn music off.
+
+if MusicBusy then ...
+          Return TRUE if there is currently music playing.
+
+See at the end of this unit for a small demonstration program.
+
+
+The music-commands syntax is (BASIC compatible):
+
+[&gt;,&lt;]A..G[#,+,-](n)[.]
+          Play not

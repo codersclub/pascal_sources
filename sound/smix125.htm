@@ -1,0 +1,63 @@
+<html><head><title>SMIX 1.25 - Sound Library with a Mixer for Real Mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Библиотека для Sound Blaster с поддержкой микширования. Может одновременно выводить до 8 различных звуков. Предназначена для Реального режима, но может быть переделана и для Защищенного режима.  (v1.25) SMIX - Sound Library (Turbo Pascal). Digital sound engine that plays multiple sounds simultaneously, mixing them in real time. Supports XMS, resource files, 16-bit output and auto-initialized DMA. Uses small fraction of CPU time. For Turbo Pascal real mode.'>
+<meta name="keywords" content="pascal, sources, source code, smix125, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;smix125
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SMIX 1.25 - Sound Library with a Mixer for Real Mode</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ebrodsky@pobox.com">Ethan Brodsky</a></TD>
+<TD class=black align='right'>14.01.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Библиотека для Sound Blaster с поддержкой микширования.
+Может одновременно выводить до 8 различных звуков.
+Предназначена для Реального режима, но может быть
+переделана и для Защищенного режима. <br><font color=#666666>
+(v1.25) SMIX - Sound Library (Turbo Pascal).
+Digital sound engine that plays multiple sounds simultaneously,
+mixing them in real time. Supports XMS, resource files,
+16-bit output and auto-initialized DMA.
+Uses small fraction of CPU time. For Turbo Pascal real mode.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="smix125.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>152k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                _____      __    __     ____     __   __
+               /  _  \    |  \  /  |   |    |   |  \ /  |
+              |  / \__|   |   \/   |    |  |     \  ~  /
+              |  \___     |        |    |  |      |   |
+               \___  \    |  /\/\  |    |  |      |   |
+               __  \  |   |  |  |  |    |  |      |   |
+              |  \_/  |   |  |  |  |    |  |     /  ^  \
+               \_____/    |__|  |__|   |____|   |__/ \__|
+
+                       for Turbo Pascal real mode
+
+                              Version 1.25
+                   Written by Ethan Brodsky (12/25/95)
+         Copyright 1995 by Ethan Brodsky.  All rights reserved.
+
+This library is distributed AS IS.  The author specifically disclaims
+responsibility for any loss of profit or any consequential, incidental,
+or other damages.  SMIX is freeware and is distributed with full source
+code, which is copyright by Ethan Brodsky.  You are free to incorporate
+the code in full or part into your own programs as long as credit is
+given to Ethan Brodsky.  The source code may be distributed in its
+original form only, including this documentation and the copyright
+notices.
+
+------------------------------------------------------------------------
+
+You may have used my SBVOX and SBDSP units.  They both played one VOC
+file at a time.  The whole VOC file had to be loaded into conventional
+memory, taking valuable memory from a real mode program.
+
+SMIX will p

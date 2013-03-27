@@ -1,0 +1,81 @@
+<html><head><title>Mixer for Sound Blaster Pro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль миксера для SB Pro под BP 7.0. Тестировался с SB16 Creative, SBPro Creative, Sound Galaxy Pro 16 Extra.'>
+<meta name="keywords" content="pascal, sources, source code, sbpmixer, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sbpmixer
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Mixer for Sound Blaster Pro</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5053/11.25">Dmitry Eliseev</a></TD>
+<TD class=black align='right'>23.04.1997</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль миксера для SB Pro под BP 7.0.
+Тестировался с SB16 Creative,
+SBPro Creative, Sound Galaxy Pro 16 Extra.</TD><TD class=black colspan=2 align='right'><br><A HREF="sbpmixer.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/22) --------------------- SU.PASCAL.MODULA.ADA -
+ From : Dmitry Eliseev                      2:5053/11.25    23 Apr 97  16:10:20
+ To   : Armen Ambartsumian                                  23 Apr 97  07:41:03
+ Subj : SOUND
+-------------------------------------------------------------------------------
+Hello Armen.
+
+Суббота 19. Апрель 1997 18:35, Armen Ambartsumian wrote to Dmitry Eliseev:
+
+&gt; ----- [ здесь был дигер ] -----
+
+ AA&gt;           Hужен миксер!
+ AA&gt;       Hикак не могу понять!
+
+    Вот ловите модуль миксера для SB Pro.
+Кидаю сюда потому что много запросов, а размер небольшой 2кило.
+Тестировано BP 7.0; SB16 Creative, SBPro Creative, Sound Galaxy Pro 16 Extra
+
+{ Две базовые функции для работы с чипами бластера }
+Procedure SetIndexDataPort(PortN : Word; Index,Data : Byte);
+Function GetIndexDataPort(PortN : Word; Index : Byte): Byte;
+
+{ Набор функций по управлению миксером }
+{ порт миксера 000h - Reset : Сбрасывает миксер в начальное положение }
+{ только запись, значение 0000000x  }
+{ зарезервировано --------++++++++- Reset Status (0 - Stop reset) }
+Procedure MixerReset;
+{ порт миксера 001h - Status : только чтение. Возвращает байт статуса SB }
+Function MixerStatus : Byte;
+
+{ порт миксера 004h - DACLevel : чтение/запись. Регулирует DAC (ЦАП) SB }
+{		 значение 00010001  }
+{ левый канал ЦАП --------+++|++++- 1 - SBPro, 0 - SB16 }
+{			     |	+-- правый канал ЦАП }
+{			     +----- 1 - SBPro, 0 - SB16 }
+Procedure MixerSetDACLevel(Left,Right : Byte);
+Function MixerGetDACLevel : Byte;
+
+{ порт миксера 00Ah - MicrophoneLevel : чтение/запись. Регулирует DAC (ЦАП) SB }
+{		 значение 00000000  }
+{ зарезервировано --------+++++||+- 0 - SBPro, 1 - SB16 }
+{			       ++-- Microphone Level (SBPro) }
+Procedure MixerSetMicrophoneLevel(Level : Byte);
+Function MixerGetMicrophoneLevel : Byte;
+
+{ порт миксера 022h - Master volume : чтение/запись. }
+{		 значение 00010001  }
+{ левый канал Master -----+++|++++- 1 - SBPro, 0 - SB16 }
+{			     |	+-- правый канал Master }
+{			     +----- 1 - SBPro, 0 - SB16 }
+Procedure MixerSetMasterLevel(Left,Right : Byte);
+Function MixerGetMasterLevel : Byte;
+
+{ порт миксера 026h - FM volume : чтение/запись. }
+{		 значение 00010001 

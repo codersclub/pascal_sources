@@ -1,0 +1,66 @@
+<html><head><title>Воспроизведение PCM звуков через PC-Speaker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для воспроизведения звука, записанного в импульсно-кодовой модуляции (PCM), через встроенный динамик.'>
+<meta name="keywords" content="pascal, sources, source code, pcm_pcsp, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;pcm_pcsp
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Воспроизведение PCM звуков через PC-Speaker</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:wozza@yandex.ru">Eugene Zagidullin</a></TD>
+<TD class=black align='right'>23.06.2000</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для воспроизведения звука, записанного
+в импульсно-кодовой модуляции (PCM), через встроенный динамик.</TD><TD class=black colspan=2 align='right'><br><A HREF="pcm_pcsp.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>197k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">             Воспроизведение PCM звуков через PC-Speaker.
+             --------------------------------------------
+
+     На PC-Speaker может подаваться только прямоугольный сигнал - либо
+ток есть,  либо его нет,  но некоторые ухищрения позволяют воспроизво-
+лить через него звук,  записанный в импульсно-кодовой модуляции (PCM).
+Если подать на динамик прямоугольный сигнал с частотой  заведомо  выше
+максимальной частоты,  которую он может воспроизвести, то из-за инерт-
+ности мембраны и электрических цепей мембрана колебаться не  будет,  а
+отклониться  на определенное расстояние.  Далее,  если мы будем менять
+скважность сигнала произойдет изменение отклонения мембраны. Меняя та-
+ким способом отклонение мембраны с частотой выборки, мы сможем воспро-
+извести звук.
+     В данной программе применена несколько упрощенная схема - на про-
+тяжении времени,  соответствующего одной выборки,  часть этого времени
+сигнал есть,  а остальную часть - нет.  Это достигается использованием
+особого режима микросхемы таймера:  после загрузки числа в регистр де-
+лителя на выходе микросхемы появляется сигнал, а по истечении времени,
+соответствующего этому числу - пропадает. Числа загружаются в делитель
+по прерыванию таймера, который запрограммирован на частоту выборок.
+
+      Сигнал
+     +--+      +------+  +-------+ +-----+   +---+     +-+       |
+     |  |      |      |  |       | |     |   |   |     | |       |
+     +--+------+------+--+-------+-+-----+---+---+-----+-+-------+
+     |         |         |         |         |         |         |
+     |    1    |    2    |    3    |    4    |    5    |    6    |
+      Выборки
+
+     Во время воспроизведения другие прерывания, кроме таймера, замас-
+кированы, хотя этого можно и не делать.
+
+                          Содержимое архива:
+
+PLAY     PAS - Тестовая программа, воспроизводящая произвольные RAW файлы.
+PLAYRAW  PAS - Модуль для воспроизведения RAW файлов (uses PlaSnd).
+PLAYSND  PAS - Собственно модуль для извлечения звуков из PC-Speaker'а.
+SNDEMO   PAS - Тестовая программа,  воспроизводящая RAW файлы из этого ка-
+               талога (uses PlayRaw).
+WAV2RAW  PAS - Программа преобразования WAV файла в RAW.
+WAVINFO  PAS - Получен

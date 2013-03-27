@@ -1,0 +1,78 @@
+<html><head><title>HSC Player Unit V1.0 for HSC-Tracker V1.5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Объектно-ориентированный модуль для проигрывания HSC-файлов. Приведена документация на английском и примеры использования.  Player sources for HSC files, turbo pascal implementation, uses object technology. Link fast and smart adlib music into your own programs. Version 1.0, with full docs and examples.'>
+<meta name="keywords" content="pascal, sources, source code, hsctrack, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;hsctrack
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;HSC Player Unit V1.0 for HSC-Tracker V1.5</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:2445/321.49">Christian Bartsch</a></TD>
+<TD class=black align='right'>24.05.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Объектно-ориентированный модуль для проигрывания HSC-файлов.
+Приведена документация на английском и примеры использования. <br><font color=#666666>
+Player sources for HSC files, turbo pascal implementation,
+uses object technology. Link fast and smart adlib music
+into your own programs. Version 1.0, with full docs and examples.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="hsctrack.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>61k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                           HSC Player Unit V1.0
+                           --------------------
+
+  Written in 1994 by GLAMOROUS RAY^RADiCAL RHYTHMS
+  Original code and .OBJ by CHiCKEN and ZWERG ZWACK^ELECTRONiC RATS
+
+  This code is FREE WARE. This means that you can copy and distribute it
+  as you like, but you may not charge any money for its distribution. If
+  you intend to use this code in a commercial product than you have to
+  get written permission from NEO Software Produktions GmbH Austria.
+
+
+  Introduction:
+  -------------
+
+  What is PLAYHSC? This unit is intended for use with the HSC tracker
+  written by Zwerg Zwack and Chicken on low level support from NEO
+  Software &lt;g&gt;.
+
+  This unit supports an easy and fast to use way to play sound, so
+  not all general functions of the player are included. It is not
+  possible to do the polling - this is done by the player automatically,
+  it links into the timer interrupt.
+
+
+  General overview:
+  -----------------
+
+  Below follows a description how to play sound files from your program,
+  calling this unit. There are two ways:
+
+  1st: Play a sound file, loading from disk
+  2nd: Play a sound file, directly from included data.
+
+  The first method is very easy and simple, the second one more
+  cool ;).
+
+  The player is build up as an object, so it is initialized on your heap
+  when starting and deinstalled when finishing. Please note that the
+  player does _no_ check for memory. So it's up to you to check if there's
+  enough memory (heap) free to load the music - the player won't just do
+  anything in that case.
+
+  To get the object to work, you have to declare it as a variable. This
+  is normally done this way:
+
+  VAR
+    Music : HSC_obj;
+
+  Now the object is declared and has to be used an

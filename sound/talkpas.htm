@@ -1,0 +1,106 @@
+<html><head><title>TALK - Program Speacher for PC Speaker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа для воспроизведения человеческой речи через спикер c использованием фонем английского языка.  TALK is a speech program which uses phonemes to speak numbers through the PC's speaker port. This program was derived from a program found in the IBMPRO forum library of Compuserve called TPSPCH.ARC. Authors: David Neal Dubois, Michael Day.'>
+<meta name="keywords" content="pascal, sources, source code, talkpas, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;talkpas
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;TALK - Program Speacher for PC Speaker</TD>
+<TD nowrap class=black>&nbsp;David Neal Dubois</TD>
+<TD class=black align='right'>31.12.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа для воспроизведения человеческой речи
+через спикер c использованием фонем английского языка. <br><font color=#666666>
+TALK is a speech program which uses phonemes to speak numbers
+through the PC's speaker port.
+This program was derived from a program found in the IBMPRO forum
+library of Compuserve called TPSPCH.ARC.
+Authors: David Neal Dubois, Michael Day.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="talkpas.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>108k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Mike,
+
+I think we did it. The work you did debugging really helped a lot.
+
+Here's what I learned:
+
+The most important part of the code is what you labeled DoSpk.
+Essentially it takes an address where the data begins, and the
+address where the data ends, and one-by-one sends each bit to the
+speaker port, 61h. If the bit is 1, it sends 32h. If the bit is 0
+then it sends 30h. I traced it's progress as it spoke each
+phoneme to learn their addresses.
+
+Each phoneme is exactly 023Fh bytes long, and they are arranged
+in sequence in the data table, in no particular order starting at
+offset $012C. "I" is a special case which is always translated
+into the pair "AH-EE". There is also a mystery "blank" phoneme.
+
+So I wrote my own code for doing about the same thing as DoSpk.
+This is in Talk.ASM. It requires TASM to assemble. It is passed
+the address in memory where you want to start moving data to the
+speaker, and the number of bytes you want processed. If you say
+you want zero bytes, it processes 65536. It uses the value of a
+global variable SpeedDelay to determine how much to slow down.
+Altogether, it seems to be somewhat faster than the code used in
+the original, so perhaps even a 4.77 MHz machine could use a
+small delay. It is called ** FAR **.
+
+Then I copied the data part of Speech.BIN to a file called
+TalkData, and converted that to an object file with BINOBJ.
+You'll have to run "BinObj TalkData.BIN TalkData.OBJ TalkDataLink".
+
+I wrote routines in Pascal for parsing a string of phonemes, and
+determining what values Talk needs.
+
+TalkPhoneme takes just one phoneme and looks up it's address in
+the table. The Turbo Pascal Seg and Ofs functions are used to
+find the data table, and the constant data length, $023F, is hard
+coded.
+
+procedure Speech parses a string for phonemes. I've allowed any
+non-alphabetic character to be used as a seperator.
+
+This is great.
+
+Why don't you try it on your machine with different SpeedDelays
+and see what happens.
+
+For fun, run Talk on any part of memory, your program, the
+operating system, whatever.
+
+I don't think it can be made fast enough to run in the
+background, as I had hoped. It would be alright on a 386 perhaps,
+but not at 4.77 MHz. Hmmm ....
+
+It may be possible to compress the data somewhat. It seems that
+there are often a lot of high bits in a row, followed by a lot of
+low bits in a row. I might examine the possibility of storing
+counts of high and low bits instead.
+
+Have you noticed that NumSpeech's interpretation of "30" sounds a
+lot like "50"?
+
+We could make some improvements in the sounds themselves. For
+example, every time there is a "D" sound, it sounds like "Da".
+Perhaps the Count for this phoneme could be shorter. Replacing
+the samples, though, would require some sampling device of which
+I have none.
+
+Are we a team or what?
+
+
+
+-David-
+
+<!--#include virtual="/t_footer.htm"-->

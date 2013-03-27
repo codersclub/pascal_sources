@@ -1,0 +1,48 @@
+<html><head><title>Проигрыватель для Scream Tracker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Scream Tracker Player'>
+<meta name="keywords" content="pascal, sources, source code, player, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;player
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Проигрыватель для Scream Tracker</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:461/113">Алексей Радзишевский</a></TD>
+<TD class=black align='right'>12.07.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Scream Tracker Player</TD><TD class=black colspan=2 align='right'><br><A HREF="player.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">Subj: Scream Tracker Player
+---------------------------------------------------------------------------
+
+  Прислал добрый 333.14.
+  ~~~~~~~~~~~~~~~~~~~~~
+Модуль не мой. Приехал ко мне в откомпилированном виде с несколькими
+примечаниями. Пояснения, до которых доехал сам:
+
+ Процедура SetSpeed(gMHz,gDin);
+                    ^^^^  ^^
+^^^^ - скорость, может быть такой (const в модуле):
+       sp8MHz, sp10MHz или sp12MHz.
+Но. Оказалось, что сначала надо обязательно установить SP12MHZ,
+а то будут хрипы из спикера (по крайней мере у меня).
+
+^^ - выход, бывает:
+       odPC (спикер), odCOVOX1, odCOVOX2 (...)
+
+Нижеследующий проигрыватель писал не я. Поэтому он такой кривой.
+ Вообще для норм. проигрывания достаточно процедур:
+ LoadMusic(&lt;NAME.STM&gt;) --&gt; SetSpeed(speed,out) --&gt;
+ --&gt; StartMusic --&gt; StopMusic --&gt; Unload</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

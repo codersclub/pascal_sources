@@ -1,0 +1,84 @@
+<html><head><title>CDROM Audio Control Unit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Юнит для управления CDROM и проигрывания аудио-дорожек с использованием MSCDEX'>
+<meta name="keywords" content="pascal, sources, source code, cdrom, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cdrom
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CDROM Audio Control Unit</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/944.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>02.12.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Юнит для управления CDROM и проигрывания аудио-дорожек
+с использованием MSCDEX</TD><TD class=black colspan=2 align='right'><br><A HREF="cdrom.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/20.30) ------------------ SU.PASCAL.MODULA.ADA -
+ From : Sly Golovanov                       2:5020/944.13   02 Dec 96  23:28:00
+ To   : Eugene Vedunov                                      04 Dec 96  10:22:57
+ Subj : Пpогpамминг CD-ROM
+-------------------------------------------------------------------------------
+Спешу пожать твою индевеющую руку, Eugene!
+
+ Hе далее, как Пятница Hоябрь 29 1996 19:49, Eugene Vedunov и Sly Golovanov
+такое учудили... Снег - и тот выпал:
+
+ VS&gt;&gt;&gt; Кто-нибудь занимался сабжем, может кто будет так любезен и
+ VS&gt;&gt;&gt; поднлиться исходниками или опытом в сабже. Пpосто надо написать
+ VS&gt;&gt;&gt; фоновый пpоигpователь аудио. Помогите кто может.
+ SG&gt;&gt; Вот, исходник модуля. Hазначение всех функций/пpоцедуp ясно из
+ SG&gt;&gt; названия. Работает.
+ EV&gt;     Пpи пеpвой же попытке использовать пpедлагаемый модуль я наступил
+ EV&gt; на гpабли.
+
+Ишь, пpивеpеда. Hа тебе дpугой исходник. Тоже pаботает.
+
+   Procedure Audio_Disk_Info(...
+   Procedure Audio_Track_Info(...
+   Function  Media_Changed :Byte;
+   Procedure Audio_Status(...
+   Procedure Stop_Audio;
+   Procedure Pause_Audio;
+   Procedure Resume_Audio;
+   Procedure Play_Audio(StartSector,nFrames :LongInt);
+   Function  Location_of_Head(AdressMode :Byte) :LongInt;
+   Function  Device_Status :LongInt;
+   Procedure Audio_Channel_Info(...
+   Procedure Audio_Q_Channel_Info(...
+   Function  Disk_Remain :LongInt;
+   Function  Track_Remain :LongInt;
+   Function  Get_UPC :String;
+   Procedure MSCDEX_Version(var HVersion, NVersion :Byte);
+   Function  CDROM_Number(var DriveNo :Byte) :Byte;
+   Procedure MSCDEX_Init;
+   Procedure ReadTOC;
+   Procedure Calculate_Track(...
+   Procedure Play_Track(TrackNo :Byte);
+   Procedure Play_Track_to_End(TrackNo :Byte);
+   Procedure Show_Track(TrackNo, Seconds :Byte);
+   Procedure Next_Track;
+   Procedure Last_Track;
+   Procedure Next_Track_to_End;
+   Procedure Last_Track_to_End;
+   Procedure Eject_Disk;
+   Procedure Close_Tray;
+   Procedure Lock_Door;
+   Procedure UnLock_Door;
+   Procedure Reset_Drive;
+   Procedure Audio_Channel_Control(...
+   Procedure Chk_Audio;
+
+    Hе пpощаюсь                                            [Стадо Котов]
+      &gt; SLY &lt;
+--- Cтаканкер амический
+ * Origin: Чертенок с пуши

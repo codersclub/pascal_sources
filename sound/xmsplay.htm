@@ -1,0 +1,77 @@
+<html><head><title>Object File for Playing XMS Sound Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Объектный файл для проигрывания звуковых XMS файлов в бакграунде, т.е. на фоне выполнения других операций. Приводится пример подключения модуля на паскале и несколько тестовых музыкальных файлов.  With this Little Object File which was compiled with the Turbo Assembler 3.0. You can include the XMS-Songs in your Own Programs. So now it will be easy for you to create a small Intro or Demo with a nice Tune in the Background.'>
+<meta name="keywords" content="pascal, sources, source code, xmsplay, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;xmsplay
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Object File for Playing XMS Sound Files</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:madokan@berlin.snafu.de">MaDoKaN</a></TD>
+<TD class=black align='right'>24.04.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Объектный файл для проигрывания звуковых XMS файлов
+в бакграунде, т.е. на фоне выполнения других операций.
+Приводится пример подключения модуля на паскале
+и несколько тестовых музыкальных файлов. <br><font color=#666666>
+With this Little Object File which was compiled with the
+Turbo Assembler 3.0. You can include the XMS-Songs in your Own
+Programs. So now it will be easy for you to create a small Intro
+or Demo with a nice Tune in the Background.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="xmsplay.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>26k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                           -=&gt; XMS-Object File &lt;=-
+                                 by MaDoKaN
+
+                                 April 1996
+
+
+A Little Introduction to my XMS-Object File !
+
+With this Little Object File which was compiled with the
+Turbo Assembler 3.0. You can include the XMS-Songs in your Own
+Programs. So now it will be easy for you to create a small Intro
+or Demo with a nice Tune in the Background.
+
+Pros:
+- Less Memory Required
+- Less Use of the System Resources
+- Less Lenght of the Song-Files
+
+You just need the following Three Procedures to get all these
+Pros in your Programs.
+
+Number 1.: _XMSFMPlayer
+
+You need this Procedure to activate the Internal elements of your
+Soundcard (Nearly all Cards with a modern SoundChipSet will work
+with this Procedure). I tested it on SB 16, SB 16 Pro and GUS
+compatible Soundcards.
+
+Number 2.: _InitXMSFM
+
+Here we are, with this fine Procedure your Song will be Initiated.
+So the Player will play the Song in the best Quality, but less use
+of your System Resources. So you will have enough space for your
+Program.
+
+Number 3.: _StopXMSFM
+
+With this Procedure you have the possibility to Stop the Player. But
+you should not forget that the Song is still in the Buffer (Memory).
+So if you want to kick all the Song Dates out of the Buffer you have
+to see my Testplay.pas ! (Don't be shocked it is very easy !)
+
+
+First Sorry for my really Funny English :) Sound like a child. But
+I tried to tell you the facts in a very easy way so it won't be
+a problem for you to use my XM

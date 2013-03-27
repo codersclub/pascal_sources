@@ -1,0 +1,68 @@
+<html><head><title>WinPlay - Melody Player for PC Speaker / Windows</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Программа для BP7, компилируемая для платформы Windows. Проигрывает одноголосую мелодию через PC Speaker. В качестве примера приведен менуэт Баха &quot;Cello Suite in G Major&quot;. <br><font color=#666666> This program plays melodies like the Play statement in GW-BASIC. Compile target - BP7/windows.</font>">
+<meta name="keywords" content="pascal, sources, source code, winplay, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;winplay
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;WinPlay - Melody Player for PC Speaker / Windows</TD>
+<TD nowrap class=black>&nbsp;Don P.Gibson</TD>
+<TD class=black align='right'>17.12.91</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Программа для BP7, компилируемая для платформы Windows.
+Проигрывает одноголосую мелодию через PC Speaker.
+В качестве примера приведен менуэт Баха "Cello Suite in G Major". <br><font color=#666666>
+This program plays melodies like the Play statement in GW-BASIC.
+Compile target - BP7/windows.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="winplay.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">I'll make a confession that may shame me in front of my fellow
+TurboPascal programmers: I used to enjoy using the Play statement
+in GW-BASIC.  It provided a pretty sensible way to get a musical
+phrase out of a program.  Certainly it was easier to use than
+TP's Sound command, and much easier to use than the TPW Windows
+API calls that deal with musical notes.
+
+Here, then, is WinPlay, a TPW unit that emulates that BASIC
+command.  It makes it a snap to drop a musical phrase into a TPW
+program.
+
+The syntax is simple: just give Play() a string consisting of
+note names.  Optionally you can specify things like octaves,
+tempo, note types (like quarter, sixteenth, etc.), "music" type
+(like legato, staccato, and normal), and a few other goodies.
+
+In that Play string:
+
+ A..G  : are the note names, as if on a keyboard.
+ P     : means pause, or rest.
+ #,+   : mean sharp the immediately previous note.
+ -     : means flat the immediately previous note.
+ .     : means dot the immediately previous note.
+
+ Tnnn  : tempo, sets the number of quarter notes in one
+         minute.  Default is T120.
+ On    : octave, sets the current octave, 0 through 6, that the
+         note names refer to.  Default is O4, where C is an
+         octave above middle C.  Pitches in an octave begin at
+         C and work upwards to B.
+ Lnn   : length, sets the duration of notes that follow. 'n'
+         usually is a common note type like 8 for eighths, 4
+         for quarters, 1 for whole notes, etc.  It may be any
+         number.  Musician friends will giggle at you if you
+         program in 15th or 57th notes.  3, 6, and 12 might
+         commonly be used for triplets, though.  Default is L4.
+ nn    : a number following a note name or a pause means 'for
+         this specific instance only, set a temporary length.'
+ MS
+ MN
+ ML    : "music" types of staccato, normal, or legato.
+         In staccato mode, the pitc

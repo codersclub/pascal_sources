@@ -1,0 +1,60 @@
+<html><head><title>VOC File Player for Sound Blaster</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа позволяет проигрывать VOC файлы через саундбластер. Включает в себя процедуры для работы с саундбластером как напрямую, так и через DMA с двойным буферированием.  SB_Unit Version 1.0. Includes procedures for controlling a Sound Blaster or compatible card in direct or DMA mode.  Program Play_Voc demonstrates the use of SB_Unit by playing a VOC file from disk using DMA double-buffering. Options to this program are given if it is used without parameters. Only .VOC files with a single block of data are supported; others may also work, but any block information will be output as voice data. Also, samples at rates > 22.05kHz seem to use a header format I don't have information about. The program flags these and displays an error.'>
+<meta name="keywords" content="pascal, sources, source code, play_voc, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;play_voc
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;VOC File Player for Sound Blaster</TD>
+<TD nowrap class=black>&nbsp;Unknown</TD>
+<TD class=black align='right'>25.01.1993</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа позволяет проигрывать VOC файлы через саундбластер.
+Включает в себя процедуры для работы с саундбластером
+как напрямую, так и через DMA с двойным буферированием. <br><font color=#666666>
+SB_Unit Version 1.0.
+Includes procedures for controlling a Sound Blaster or compatible card
+in direct or DMA mode. <br>
+Program Play_Voc demonstrates the use of SB_Unit by playing a VOC file
+from disk using DMA double-buffering.
+Options to this program are given if it is used without parameters.
+Only .VOC files with a single block of data are supported;
+others may also work, but any block information will be output as voice data.
+Also, samples at rates > 22.05kHz seem to use a header format
+I don't have information about.
+The program flags these and displays an error.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="play_voc.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>14k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                        About SB_PAS v1.0
+        
+        This archive contains utilities for programming Sound Blaster
+and compatible cards in Turbo Pascal. They were compiled with TP 7.0, but
+should work with almost anything less. In writing SB_UNIT, I was able to
+use only Pascal functions without inline assembly; not so lucky with
+PLAY_VOC. 
+        
+        The routines are all fully commented with descriptions of the
+steps required to perform each task. It should be *very* easy to port this
+to other languages (like C &lt;blech&gt; ;-) ). 
+
+
+Files contained in this package:
+        SB_UNIT.PAS,TPU : Master unit for all functions - includes routines
+                          for base address detection, direct port control,
+                          and DMA transfers.
+
+        PLAY_VOC,EXE : An example program to use SB_UNIT which demonstrates
+                       the use of the unit as well as double-buffering
+                       techniques.
+
+        VOC-INFO.TXT : Some information about the .VOC fi

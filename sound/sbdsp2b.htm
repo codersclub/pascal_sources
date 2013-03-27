@@ -1,0 +1,68 @@
+<html><head><title>SBDSP v2b - Sound Player for SoundBlaster</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Звуковой модуль для саундбластера. Работает с форматом RPD. В комплект входят три конвертора файлов: VOC to RPD, WAV to RPD, RPD to WAV. Компилируется BP7 в real mode.  SBDSP is a Pascal Unit that allows one to utilize the FULL power of the Sound Blaster's Digital channel. Freeware.'>
+<meta name="keywords" content="pascal, sources, source code, sbdsp2b, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sbdsp2b
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SBDSP v2b - Sound Player for SoundBlaster</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:hbcsc294@huey.csun.edu">Romesh Prakashpalan</a></TD>
+<TD class=black align='right'>11.02.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Звуковой модуль для саундбластера.
+Работает с форматом RPD. В комплект входят
+три конвертора файлов: VOC to RPD, WAV to RPD,
+RPD to WAV. Компилируется BP7 в real mode. <br><font color=#666666>
+SBDSP is a Pascal Unit that allows one
+to utilize the FULL power of the Sound
+Blaster's Digital channel. Freeware.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sbdsp2b.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>70k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">*****************************************************************
+*                     SBDSP Read Me file                        *
+*                     ==================                        *
+*                                                               *
+*  SBDSP is Copyright (C) 1994, 1995 by Romesh Prakashpalan,    *
+*                   all rights reserved                         *
+*****************************************************************
+
+Table Of Contents:
+==================
+
+   1) Introduction to SBDSP
+   2) Features and System Requirements
+   3) Getting Started
+   4) Modifications necessary to work with Turbo Pascal 6.0
+   5) Implementing REAL TIME FX
+   6) Structure of the RPD file format
+   7) Notes on the future + Contacting the author
+
+******************************************************************
+*                         Introduction to SBDSP                  *
+******************************************************************
+
+  SBDSP is a Pascal Unit that allows one to utilize the FULL
+power of the Sound Blaster's Digital channel. At one stage in my
+game programming projects I realized that I was going to need
+digital sound and music in my games!
+
+After all, the PC Speaker was just NOT going to be good enough
+for a production level game (BTW, I still haven't released
+anything as of this writing), but to my dismay, all of the books
+and literature seemed to use the darn libraries that Creative
+ships with "genuine" (albeit noisy) Sound Blasters.  This meant
+that people without the drivers would not be able to run my
+programs! So, I contacted Creative, and found out that their
+developer's kit costs 100 U.S Dollars! I then hunted on the
+Internet, and found a few docs here and there, and I eventually
+managed to create the SBDSP and SBFM libraries. Anyways,

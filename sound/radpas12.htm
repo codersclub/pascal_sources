@@ -1,0 +1,71 @@
+<html><head><title>RADPAS 1.2 - Reality Adlib Tracker for Turbo Pascal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для проигрывания музыкальных файлов от Reality Adlib Tracker.  RADPAS v1.2 allows you to incorporate Reality ADlib Tracker v1.x music into Turbo Pascal 7 programs with extreme ease. Full source code. Freeware.'>
+<meta name="keywords" content="pascal, sources, source code, radpas12, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;radpas12
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;RADPAS 1.2 - Reality Adlib Tracker for Turbo Pascal</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:msalomon@ccnet.com">Evan Salomon</a></TD>
+<TD class=black align='right'>08.11.1995</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для проигрывания музыкальных файлов
+от Reality Adlib Tracker. <br><font color=#666666>
+RADPAS v1.2 allows you to incorporate Reality ADlib Tracker v1.x music
+into Turbo Pascal 7 programs with extreme ease.
+Full source code. Freeware.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="radpas12.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>11k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{****************************************************************************
+ RADPAS v1.2 (C) 1995 Evan Salomon.  This code is FREEWARE.  Released 11/7/95
+
+  DESCRIPTION:
+    RADPAS is an EXTREMELY easy was to incorporate Reality Adlib Tracker
+    v1.x music into your Turbo Pascal 7.0 programs.  All playing code was
+    written in ASM by Reality and ported to TP7 by Evan Salomon.  Dedicated
+    to Reality for their awsome RAD editor, the best and easiest to use Adlib
+    editor ever created!
+
+  LICENSE AGREEMENT / DISCLAIMER:
+    You may use/modify this code as much as you want.  The author is not
+    responible for any damages caused use or misuse of this code.  Use at
+    your own risk.  Use of RAD music in commercial programs requires
+    permission from Reality.
+
+  REVISIONS:
+    v1.2 - Added adlib detection code to skip playing but keep timer if no
+           adlib detected
+         - Added master volume control and fading (no SB, just adlib)
+         - Got rid of small burst of sound when resetting adlib, by setting
+           registers $43..$55 to $3F instead of 0 (to set lowest volume)
+         - Added pause feature
+    v1.1 - Fixed one huge bug that made the playing work randomly on only a
+           select few RADs.
+         - Fixed bug that was fixed in RAD v1.1a
+           (effects starting one beat too late)
+         - *EXTREMELY* simplified interface and directions
+         - Automatically frees buffer on StopRad call when using PlayRadFile
+         - Added error codes so you know what went wrong
+    v1.0 - Initial release
+
+  LIMITATIONS / BUGS: (probably due to adlib limitations)
+    - Fading in doesn't work
+    - Some instruments don't fade corrently
+
+  POSSIBLE ADDITIONS:
+    - real SB volume control since adlib is crappy
+    - stereo sound (dual OPL2 or OPL3) - each channel can be left/right/both
+
+  CONTACTS:
+    If you have any questions, suggestions, or comments...
+    The author 

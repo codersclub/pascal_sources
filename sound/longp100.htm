@@ -1,0 +1,64 @@
+<html><head><title>LongPlay V1.0 - Sample Editor/Player (Speaker & DAC)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Редактор и проигрыватель звуковых образцов (сэмплов) для спикера и ковокса. Поддерживает сэмплы размером более 640k. Умеет читать WAV и AU файлы и добавлять эффекты: реверс, эхо, уровень громкости и т.д. Поддерживает мышку. Написан на встроенном ассемблере. <br>LongPlay is a sample editor and player with some extra features. (Mainly an AU player with some editing features.) Supports only internal speaker and DAC on LPT1[LPT2]. Capability of handling and playing samples larger then 640KB. Direct reading and playing of AU and WAV files. FAST, all sample handling routines (reverse,echo,volume etc.) are written in BASM. Mouse support. Support of 640X480,800X600 and 1024X768 SVGA modes.'>
+<meta name="keywords" content="pascal, sources, source code, longp100, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;longp100
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;LongPlay V1.0 - Sample Editor/Player (Speaker & DAC)</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:e62255@vm.cc.metu.edu.tr">Huseyin Nakturk</a></TD>
+<TD class=black align='right'>14.08.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Редактор и проигрыватель звуковых образцов (сэмплов)
+для спикера и ковокса. Поддерживает сэмплы размером более
+640k. Умеет читать WAV и AU файлы и добавлять эффекты:
+реверс, эхо, уровень громкости и т.д. Поддерживает мышку.
+Написан на встроенном ассемблере. <br><font color=#666666>
+LongPlay is a sample editor and player with some extra features.
+(Mainly an AU player with some editing features.) <br>
+. Supports only internal speaker and DAC on LPT1[LPT2]. <br>
+. Capability of handling and playing samples larger then 640KB. <br>
+. Direct reading and playing of AU and WAV files. <br>
+. FAST, all sample handling routines (reverse,echo,volume etc.)
+  are written in BASM. <br>
+. Mouse support. <br>
+. Support of 640X480,800X600 and 1024X768 SVGA modes.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="longp100.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>553k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                 __---====== LongPlay V1.00 ======---__
+                   Copyright (c) 1994 Huseyin Nakturk
+                 __---============================---__
+
+ WHAT IS LongPlay ?
+--------------------
+
+    . LongPlay is a sample editor and player with some extra features.
+      (Mainly an AU player with some editing features.)
+
+ WHAT ARE THESE EXTRA FEATURES ?
+---------------------------------
+
+    . Capability of handling and playing samples larger then 640KB.
+
+    . Direct reading and playing of AU files.
+      (And also WAV files)
+      [May or may not work correctly for WAV case.I haven't test with lots of
+       them.]
+
+    . FAST,all sample handling routines (reverse,echo,volume etc.) are written
+      in BASM.I don't say that this one is the fastest but it is really
+      fast.
+
+    . Support of 640X480,800X600 and 1024X768 SVGA modes.
+      [ if this can be considered as a feature :) ]
+      [ Its theoreticall

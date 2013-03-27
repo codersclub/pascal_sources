@@ -1,0 +1,603 @@
+<HTML><HEAD>
+<TITLE>В обе стороны - Pascal.Sources.Ru</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="keywords" content="pascal, sources, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="/sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sb16fd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70%>&nbsp;
+В обе стороны (SB16 Full Duplex)
+</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;
+Сергей Андрианов
+</TD>
+<TD class=black align='right'>01.11.1998</TD></TR>
+<TR vALign=top><TD class=black><p style="margin-left:20px">
+Статья о программировании звуковых плат Sound Blaster 16 в режиме full duplex.
+Приведены примеры на Паскале.
+</TD><TD class=black colspan=2 align='right'>
+<a href="sb16fd.zip"><img border=0 align=middle src="../img/more.gif"></a>
+<br>18k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3>
+
+
+
+
+
+
+<H1>В обе стороны</H1>
+<ADDRESS>С. А. Андрианов</ADDRESS>
+<H4>О программировании звуковых плат Sound Blaster 16 в режиме full duplex.</H4>
+<P>Первые вычислительные машины были совершенно непохожи на нынешние. Обычно они оснащались лишь набором тумблеров и рядами лампочек и не имели ни клавиатуры, ни дисплея, не говоря уж об аудиоустройствах. Однако уже тогда программисты пытались заставить этих монстров издавать различные звуки, причем иногда даже воспроизводить какое-нибудь музыкальное произведение. Например, они добились того, что магнитные сердечники, используемые в качестве запоминающих устройств, исполняли полонез Огинского. </P>
+<P>Но естественно, ЭВМ постоянно совершенствовались, и потому к моменту появления ПК клавиатура и дисплей воспринимались всеми как  вполне стандартные устройства ввода-вывода. Не был забыт и звук. В дисплейный блок или клавиатуру, подключаемую к главной ЭВМ, как правило, встраивался маленький динамик, издававший всякие гудки, щелчки, а порой и что-то более сложное. Терминалом большой ЭВМ и руководствовались при создании ПК. </P>
+<P>С самого начала IBM PC не повезло со звуком. К сожалению, фирма-разработчик решила, что ее детище будет предназначено исключительно для делового применения. Поэтому при достаточно высокой производительности (16-разрядный процессор) и широких графических возможностях (цветной графический дисплей) этот ПК не только не превосходил, но зачастую и уступал по звучанию своим 8-разрядным собратьям. Его одноразрядный звук использовался в основном лишь для сигнализации о неисправностях аппаратуры или об ошибках оператора.</P>
+<P>Однако IBM PC имел открытую архитектуру, и как только звук понадобился (сначала для игр), сразу была создана отдельная аудиоплата, вставляемая в разъем расширения. Такие устройства (Game Blaster фирмы Adlib) умели синтезировать несложный музыкальный звук, но с появлением Sound Blaster стало возможным записывать на IBM-совместимом компьютере и воспроизводить монофонический звук, хотя лишь 8-разрядный. Позднее появились платы, обеспечивающие стереофоническое звучание, а затем и использующиеся для оцифровки 16 разрядов. Правда, если первые звуковые платы старались сделать совместимыми сначала с Creative Sound Blaster, а затем с Creative Sound Blaster Pro (8-разрядные моно- и стереоплаты соответственно), то после перехода на 16-разрядный звук каждый разработчик пошел своим путем.</P>
+<P>Что-то похожее происходило позже и с видеоадаптерами. Пока законодателем мод в области ПК  считалась IBM, существовали и стандарты де-факто на видеоадаптеры: сначала был CGA, потом EGA, на смену которому пришел VGA... Однако когда IBM уступила лидерство, на рынке ПК появилась масса видеоплат, объединяемых общим названием SuperVGA (SVGA), но совершенно несовместимых друг с другом. </P>
+<P>Обратимся снова к аудиоплатам. К тому времени как наметился переход с 8- на 16-разрядный звук, фирма Creative Labs, пионер в области разработки аудиоплат, перестала играть на рынке доминирующую роль. Да и старания производителей защититься от конкурентов путем патентования всех новшеств явно не способствовали формированию нового стандарта де-факто. Но если в области видеоадаптеров благодаря усилиям ассоциации VESA удалось навести хоть какой-то порядок, то с аудиоплатами подобная идея была обречена на провал. Звуковые платы, в отличие от видеоадаптеров, не имеют ПЗУ с драйверами, позволяющими нивелировать особенности аппаратуры и создавать более или менее унифицированный интерфейс с прикладными программами. Да и сама поддержка звука на уровне BIOS не была предусмотрена конструкторами IBM. Все это привело к тому, что до сих пор не появился стандарт на 16-разрядный звук, и послужило, пожалуй, одной из главных причин отказа от DOS в качестве основной платформы для компьютерных игр и перехода на Windows+DirectX. </P>
+<P>Однако если в офисе и дома Windows практически вытеснила другие ОС, в некоторых областях профессиональной сферы, например там, где нужны работающие в реальном времени программы, DOS еще не сдала своих позиций.  Тем более что отдельные возможности, имеющиеся в DOS, попросту нереализуемы в Windows. </P>
+<table border="1" cellspacing="0" cellpadding="1" align="center"><caption align="LEFT"><h3>Таблица 1. Регистры микшера</h3></caption>
+
+<tr align="center"><td><font size="-1">индекс</font></td>	<td><font size="-1">D7</font></td>	<td><font size="-1">D6</font></td>	<td><font size="-1">D5</font></td>	<td><font size="-1">D4</font></td>	<td><font size="-1">D3</font></td>	<td><font size="-1">D2</font></td>	<td><font size="-1">D1</font></td>	<td><font size="-1">D0</font></td></tr>
+
+<tr align="center"><td><font size="-1">00h</font></td>	<td colspan="8"><font size="-1">Сброс микшера</font></td></tr>
+
+<tr align="center"><td><font size="-1">04h</font></td>	<td colspan="4"><font size="-1">Громкость FM-синтезатора ЛК</font></td>	<td colspan="4"><font size="-1">Громкость FM-синтезатора ПК</font></td></tr>
+
+<tr align="center"><td><font size="-1">0Ah</font></td>			<td colspan="5">—</td>			<td colspan="3"><font size="-1">Громкость микрофона</font></td></tr>
+
+<tr align="center"><td><font size="-1">22h</font></td>	<td colspan="4"><font size="-1">Общий регулятор громкости ЛК</font></td>	<td colspan="4"><font size="-1">Общий регулятор громкости ПК</font></td></tr>
+
+<tr align="center"><td><font size="-1">26h</font></td>	<td colspan="4"><font size="-1">Громкость MIDI ЛК</font></td>			<td colspan="4"><font size="-1">Громкость MIDI ПК</font></td></tr>
+
+<tr align="center"><td><font size="-1">28h</font></td>	<td colspan="4"><font size="-1">Громкость CD ЛК</font></td>			<td colspan="4"><font size="-1">Громкость CD ПК</font></td></tr>
+
+<tr align="center"><td><font size="-1">2Eh</font></td>	<td colspan="4"><font size="-1">Громкость линейного входа ЛК</font></td>	<td colspan="4"><font size="-1">Громкость линейного входа ПК</font></td></tr>
+
+<tr align="center"><td><font size="-1">30h</font></td>	<td colspan="5"><font size="-1">Общий регулятор громкости ЛК</font></td><td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">31h</font></td>	<td colspan="5"><font size="-1">Общий регулятор громкости ПК</font></td>			<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">32h</font></td>	<td colspan="5"><font size="-1">Громкость FM-синтезатора ЛК</font></td>			<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">33h</font></td>	<td colspan="5"><font size="-1">Громкость FM-синтезатора ПК</font></td>			<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">34h</font></td>	<td colspan="5"><font size="-1">Громкость MIDI ЛК</font></td>					<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">35h</font></td>	<td colspan="5"><font size="-1">Громкость MIDI ПК</font></td>					<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">36h</font></td>	<td colspan="5"><font size="-1">Громкость CD ЛК</font></td>					<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">37h</font></td>	<td colspan="5"><font size="-1">Громкость CD ПК</font></td>					<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">38h</font></td>	<td colspan="5"><font size="-1">Громкость линейного входа ЛК</font></td>			<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">39h</font></td>	<td colspan="5"><font size="-1">Громкость линейного входа ПК</font></td>			<td colspan="3">—</td></tr>
+
+<tr align="center"><td><font size="-1">3Ah</font></td>	<td colspan="8"><font size="-1">Громкость микрофона&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>—</td>	</tr>			
+	
+<tr align="center"><td><font size="-1">3Bh</font></td>	<td><font size="-1">Громкость динамика&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>—</td>	</tr>			
+	
+<tr align="center"><td><font size="-1">3Ch</font></td>	<td>—</td>	<td>—</td>	<td>—</td>	<td><font size="-1">Лин. ЛК (1)</font></td>	<td><font size="-1">Лин. ПК	(1)</font></td> <td><font size="-1">CD ЛК (1)</font></td>	<td><font size="-1">CD ПК	(1)</font></td>	<td><font size="-1">Микр. (1)</font></td></tr> 
+				 	 	
+<tr align="center"><td><font size="-1">3Dh</font></td>	<td>—</td>	<td><font size="-1">MIDI ЛК (2)</font></td>	<td><font size="-1">MIDI ПК (2)</font></td>	<td><font size="-1">Лин. ЛК (2)</font></td> 	<td><font size="-1">Лин. ПК (2)</font></td>	<td><font size="-1">CD ЛК (2)</font></td> 	<td><font size="-1">CD ПК (2)</font></td>	<td><font size="-1">Микр.(2)</font></td>  </tr>
+			 
+<tr align="center"><td><font size="-1">3Eh</font></td><td>	—</td>	<td><font size="-1">MIDI ЛК (3)</font></td>	<td><font size="-1">MIDI ПК	(3)</font></td> <td><font size="-1">Лин. ЛК (3)</font></td>	<td><font size="-1">Лин. ПК	(3)</font></td>	<td><font size="-1">CD ЛК (3)</font></td>	<td><font size="-1">CD ПК	(3)</font></td>	<td><font size="-1">Микр.(3)</font></td>  </tr>
+		 		
+<tr align="center"><td><font size="-1">3Fh</font></td>	<td><font size="-1">Входной аттенюатор ЛК </font></td><td colspan="7">—</td></tr>
+
+<tr align="center"><td><font size="-1">40h</font></td>	<td><font size="-1">Входной аттенюатор ПК</font></td><td colspan="7">—</td></tr>
+
+<tr align="center"><td><font size="-1">41h</font></td>	<td><font size="-1">Выходной аттенюатор	ЛК</font></td><td colspan="7">—</td></tr>
+	
+<tr align="center"><td><font size="-1">42h</font></td>	<td><font size="-1">Выходной аттенюатор	ПК</font></td><td colspan="7">—</td></tr>
+
+<tr align="center"><td><font size="-1">43h</font></td><td colspan="7">—</td><td><font size="-1">АРУ</font></td></tr>
+
+<tr align="center"><td><font size="-1">44h</font></td>	<td colspan="4"><font size="-1">Тембр высоких частот ЛК</font></td><td colspan="4">—</td></tr>
+
+<tr align="center"><td><font size="-1">45h</font></td>	<td colspan="4"><font size="-1">Тембр высоких частот ПК</font></td><td colspan="4">—</td></tr>
+
+<tr align="center"><td><font size="-1">46h</font></td>	<td colspan="4"><font size="-1">Тембр низких частот ЛК</font></td><td colspan="4">—</td></tr>
+<tr align="center"><td><font size="-1">47h</font></td>	<td colspan="4"><font size="-1">Тембр низких частот ПК</font></td><td colspan="4">—</td></tr>
+<tr><td colspan="9"><font size="-1">Сокращения:<BR> 
+ЛК — левый канал,   ПК — правый канал,  (1) — выходные выключатели микшера,  (2) — входные выключатели левого канала микшера,<BR>
+(3) — входные выключатели правого канала микшера,  АРУ — включение автоматической регулировки уровня сигнала микрофона.</font></td></tr></table>
+
+<table width="350" border="1" cellspacing="0" cellpadding="1" align="LEFT"><caption align="LEFT"><h3>Таблица 2. Регистры 0Bh и D6h контроллера DMA</h3></caption>
+
+<tr><td><font size="-1"><b>Номер бита</b></font></td>	<td><font size="-1"><b>Назначение</b></font></td>	<td><font size="-1"><b>Значение</b></font></td></tr>
+
+<tr><td><font size="-1">D0-D1</font></td>	<td><font size="-1">Номер канала DMA</font></td>	<td><font size="-1">0—3 (для 4—7 — два младших бита)</font></td></tr>
+
+<tr><td><font size="-1">D2-D3</font></td>	<td><font size="-1">Режим работы</font></td>	<td><font size="-1">00 — проверка;<BR>
+		01 — запись в память;<BR>
+		10 — чтение из памяти;<BR>
+		11 — недопустимая <BR>
+		комбинация </font></td></tr>
+<tr><td><font size="-1">D4</font></td>	<td><font size="-1">Автоинициализация</font></td>	<td><font size="-1">0 — нет;<BR>
+		1 — есть</font></td></tr>
+		
+<tr><td><font size="-1">D5</font></td>	<td><font size="-1">Направление изменения адреса</font></td> <td><font size="-1">	0 — увеличение;<BR>
+		1 — уменьшение</font></td></tr>
+		
+<td><font size="-1">D6-D7</font></td>	<td><font size="-1">Тип передачи</font></td>	<td><font size="-1">00 — по требованию;<BR>
+		01 — одиночная передача;<BR>
+		10 — блочная передача;<BR>
+		11 — каскадный режим <BR></font></td></table>
+
+<P>Когда фирма Creative Labs разрабатывала свою первую 16-разрядную плату Sound Blaster 16, она, видимо, и не предполагала, что эту аудиоплату можно будет использовать одновременно и для записи, и для воспроизведения звука (работа в так называемом режиме full duplex). Наверное, именно поэтому данный режим не поддерживается и в драйверах для Windows. Однако его можно запрограммировать в DOS. Правда, передача в таком случае получается несколько несимметричной: в одном направлении звук будет 16-, а в другом — 8-разрядным. Впрочем, вряд ли это серьезно ограничивает реальные применения подобной технологии. При использовании ПК для общения «как по телефону» 8-разрядного звука вполне достаточно, а при записи и сведении фонограммы одновременно с 16-разрядным режимом записи можно обойтись контрольным прослушиванием всего в 8 разрядов. Когда же ПК играет роль измерительного прибора, а звуковая плата — дешевых ЦАП/АЦП, разрядности получаемого сигнала обычно бывает достаточно, по крайней мере в одну сторону. В противном случае следует заменить звуковую плату специализированным прибором. Правда, такая несимметричность затрудняет использование ПК в качестве гитарного процессора, ревербератора или эквалайзера, но вообще-то для концертной деятельности компьютер не слишком подходит. </P>
+
+<h3 align="center">*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*</h3>
+<P>Программа, иллюстрирующая, каким образом  можно применять звуковую плату Creative Labs Sound Blaster 16 или совместимые с ней, например AWE32, приведена в листинге 1. Она  реализует простейшее эхо: записанный через микрофон звук спустя некоторое время воспроизводится через громкоговорители, подключенные к выходу аудиоплаты. </P>
+
+<H3>Листинг 1. Простейшее цифровое эхо</H3>
+<PRE>program echo;
+uses dsp_dma,getsbinf;
+{Ввод звука - 16 бит со знаком, вывод - 8 бит со знаком.}
+
+const
+   BufSize   = 2*1024;              { размер буфера DMA }
+   TimeConst = 156;             { 156 - примерно 10 кГц }
+   HalfBufToFill  : integer = 0; 
+                 { которая половина буфера DMA свободна }
+   BothBuf        : byte    = 0;
+                   { индикатор заполнения обоих буферов }
+type
+   RecBufType  = array[0..BufSize-1]of integer;
+                                { для буфера DMA записи }
+   PlayBufType = array[0..BufSize-1]of shortint;
+                       { для буфера DMA воспроизведения }
+var
+   RecBuf  : ^RecBufType;         { буфер DMA для записи}
+   PlayBuf : ^PlayBufType;{буфер DMA для воспроизведения}
+   inpage,   outpage   : word; {страницы для буферов DMA}
+   inoffset, outoffset : word; {смещения для буферов DMA}
+
+{$F+}
+procedure SBint;interrupt;
+                {обработчик прерывания от звуковой платы}
+var
+   intstat : integer;
+   i : integer;
+begin
+   Port[base + $04] := $82;
+          {проверяем, по какому каналу пришло прерывание}
+   intstat := Port[base + $05] and 3;
+   BothBuf := BothBuf or intstat;
+   if (intstat and 2 &lt;&gt; 0) then begin  {16-битовый канал}
+      i := Port[base + $0F];
+   end;
+   if (intstat and 1 &lt;&gt; 0) then begin {8-битовый канал}
+      i := Port[base + $0E];
+   end;
+   if BothBuf = 3 then begin
+                {если прошли прерывания от обоих каналов}
+      for i := 0 to BufSize div 2 - 1 do
+         PlayBuf^[HalfBufToFill*BufSize div 2 + i] :=
+            hi(RecBuf^[HalfBufToFill*BufSize div 2 + i]);
+      write(HalfBufToFill,#8);
+                {выводим на экран номер половинки буфера}
+      HalfBufToFill := HalfBufToFill xor 1;
+      BothBuf := 0;
+   end;
+   if (irq &gt; 8) then  
+  {для  IRQ 10, посылаем сигнал EOI во второй контроллер}
+      Port[$A0] := $20;
+   Port[$20] := $20;  { посылаем EOI в первый контроллер}
+end;
+{$F-}
+
+var
+   SkipLength : longint;
+           {размер памяти до границы 64-Кбайт страницы}
+   SkipBlock  : pointer;
+begin
+   writeln(‘               Эхо - Sound Blaster 16 в ‘,
+                                   ‘режиме full duplex’);
+   writeln(‘                   для завершения работы ‘,
+                                        ‘нажмите Enter’);
+
+   GetBlasterInfo;     {определяем характеристики карты}
+   if (cardtype &lt;&gt; 6) then begin
+            {Проверка, что на плате возможен full duplex}
+      writeln(cardtype);
+      writeln(
+     ‘Для работы программы необходим Sound Blaster 16.’);
+      halt;
+   end;
+   if (dma8 = dma16) then begin
+      writeln(‘Ошибка: совпадение 8-битового и ‘,
+                              ‘16-битового каналов DMA.’);
+      halt;
+   end;
+
+   SetMixer; {сброс DMAC и установки микшера}
+
+   getmem(SkipBlock,16);
+       {проверка, чтобы буферы не пересекали границу 64К}
+   SkipLength := $10000 - (seg(SkipBlock^) shl 4) 
+                                       - ofs(SkipBlock^);
+   freemem(SkipBlock,16);
+   if SkipLength &gt; 3*BufSize then 
+      getmem(SkipBlock,SkipLength);
+
+   getmem(RecBuf,2*BufSize);
+                     {выделение памяти для буфера записи}
+   inpage   := ((longint(seg(RecBuf^)) * 16) 
+                              + ofs(RecBuf^)) div $10000;
+   inoffset := ((longint(seg(RecBuf^)) * 16) 
+                               + ofs(RecBuf^)) and $FFFF;
+
+   getmem(PlayBuf,BufSize);
+            {выделение памяти для буфера воспроизведения}
+   outpage   := ((longint(seg(PlayBuf^)) * 16) 
+                             + ofs(PlayBuf^)) div $10000;
+   outoffset := ((longint(seg(PlayBuf^)) * 16) 
+                              + ofs(PlayBuf^)) and $FFFF;
+
+   fillchar(PlayBuf^,BufSize,0);
+                         {очистка буфера воспроизведения}
+
+   EnableInterrupt( @SBint);
+   SetupDMA(dma16,inpage,inoffset,BufSize, $54);
+                                            {DMA на ввод}
+   SetupDSP($BE,$10,BufSize div 2,TimeConst);
+                             {16 бит со знаком FIFO моно}
+   SetupDMA(dma8,outpage,outoffset,BufSize, $58);
+                                           {DMA на вывод}
+   SetupDSP($C6,$10,BufSize div 2,TimeConst);
+                              {8 бит со знаком FIFO моно}
+
+   readln;
+
+   dspout($D5); {приостанавливаем 16-битовый ввод-вывод}
+   dspout($D0); {приостанавливаем 8-битовый ввод-вывод}
+   DisableInterrupt;
+
+   freemem(PlayBuf,BufSize);
+   freemem(RecBuf,2*BufSize);
+   if SkipLength &lt; 3*BufSize then 
+      freemem(SkipBlock,SkipLength);
+end.
+</PRE>
+
+<P>Сначала необходимо убедиться, что звуковая плата способна работать в режиме full duplex. Проще (и безопаснее) всего это сделать с помощью переменной окружения ‘BLASTER’. Подобным способом следует определить и базовый адрес порта ввода-вывода, а также номера используемых IRQ и канала DMA. Программа, выполняющая разбор переменной окружения, приведена в листинге 2. Плата должна быть 6-го типа, а номера 8- и 16-разрядного каналов DMA — различаться. </P>
+
+<H3>Листинг 2. Извлечение данных из переменной окружения</H3>
+<PRE>
+
+unit GetSBInf; 
+interface
+
+var
+   base          :integer;  { базовый адрес ввода-вывода}
+   irq           :integer;  { номер IRQ                 }
+   dma8          :integer;  { 8-битный канал DMA        }
+   dma16         :integer;  { 16-битный канал DMA       }
+   midi          :integer;  { порт MIDI                 }
+   cardtype      :integer;  { номер типа платы          }
+
+procedure GetBlasterInfo; {извлечение информации о плате}
+
+implementation
+uses dos;
+
+var
+   s : string; {переменная окружения ‘BLASTER’}
+   e : byte;   {позиция в этой строке}
+
+function str2hex:word;
+        {преобразует последовательность hex-цифр в число}
+var
+   val : word;
+begin
+   val := 0;
+   inc(e);
+   while (s[e] &lt;&gt; ‘ ‘) and (s[e] &lt;&gt; char(0)) and 
+                                (e &lt;= length(s)) do begin
+      case UpCase(s[e]) of
+         ‘0’..’9’ : val := val * 16
+                              + (byte(s[e]) - byte(‘0’));
+         ‘A’..’F’ : val := val * 16 
+                        + (byte(s[e]) - byte(‘A’)  + 10);
+         else begin
+            writeln(
+    ‘Ошибка в цифровых параметрах переменной окружения’);
+            halt;
+         end;
+      end;
+      inc(e);
+   end;
+   str2hex := val;
+end;
+
+procedure GetBlasterInfo; {информация о плате}
+begin
+   s := getenv(‘BLASTER’);
+   e := 1;
+   if (length(s)&gt;0) then begin
+      while (e &lt; length(s)) do begin
+         case UpCase(s[e]) of
+            ‘A’:base     := str2hex;
+            ‘I’:irq      := str2hex;
+            ‘D’:dma8     := str2hex;
+            ‘H’:dma16    := str2hex;
+            ‘P’:midi     := str2hex;
+            ‘T’:cardtype := str2hex;
+         end; {case}
+         inc(e);
+      end; {while}
+   end else begin
+      writeln(
+             ‘Отсутствует переменная окружения BLASTER’);
+      halt;
+   end; {if}
+end;
+
+end.</PRE>
+
+<P>Затем следует проинициализировать DSP (Digital Signal Processor — цифровой процессор сигналов) и установить режим микшера, для управления которым имеются два адреса портов: базовый+4 (для задания номера регистра) и базовый+5 (для записи/чтения нужной величины). Назначение регистров микшера приведено в табл. 1.</P>
+<P>Несколько пояснений к табл. 1. Регистры до 2Еh включительно служат для совместимости с предыдущими моделями Sound Blaster, однако, поскольку глубина регулировки уровня в последних моделях возросла, необходимо ввести новые регистры. Старые дублируют старшие биты новых регистров того же назначения. Шаг регулировки громкости у старых регистров — 4 дБ, а у новых — 2 дБ. Появление регистра 3Сh позволяет отключить источники сигнала без изменения положения регуляторов уровня, а добавление регистров 3Dh—3Eh — подключать входные сигналы в любом порядке. Например, можно подсоединить правый канал CD к левому звуковой платы, а правый канал линейного входа смешать с микрофоном и снова послать в правый канал. Кроме того, появились входные и выходные аттенюаторы с шагом 6 дБ и регуляторы тембра с шагом 2 дБ, а также стала возможной автоматическая регулировка уровня микрофонного входа. В случае монофонического сигнала все регулировки осуществляются по левому каналу. </P>
+<table width="350" border="0" align="RIGHT"><tr><td><table width="350" border="1" cellspacing="0" cellpadding="1" align="RIGHT"><caption align="LEFT"><h3>Таблица 3. Формат первого байта команды DSP Bx/Cx </h3></caption>
+
+<tr><td><font size="-1"><b>Номер бита</b></font></td>	<td><font size="-1"><b>Назначение</b></font></td>	<td><font size="-1"><b>Значение</b></font></td></tr>
+
+<tr><td><font size="-1">D0</font></td>	<td><font size="-1">Зарезервирован</font></td>	<td><font size="-1">0</font></td></tr>
+
+<tr><td><font size="-1">D1</font></td>	<td><font size="-1">FIFO</font></td>	<td><font size="-1">0 — выключен;<BR>
+		1 — включен</font></td></tr>
+		
+<tr><td><font size="-1">D2</font></td>	<td><font size="-1">Автоинициализация</font></td>	<td><font size="-1">0 — режим одного цикла;<BR>
+		1 — режим с автоинициализацией</font></td></tr>
+		
+<tr><td><font size="-1">D3</font></td>	<td><font size="-1">Вид преобразования</font></td>	<td><font size="-1">0 — цифроаналоговое 
+(воспроизведение);<BR>
+		1 — аналого-цифровое 
+		(запись)</font></td></tr>
+		
+<tr><td><font size="-1">D4-D7</font></td>	<td><font size="-1">Разрядность</font></td>	<td><font size="-1">1011 (Bh) — 16 разрядов;<BR>
+		1100 (Сh) — 8 разрядов <BR></font></td></tr>
+		<tr><td colspan="2"><font size="-1"><b>Примечание:</b> другие комбинации соответствуют остальным командам</font></td> </tr></table></p></td></tr>
+<tr><td><table width="350" cellspacing="0" cellpadding="1" align="LEFT" border="1"><caption align="LEFT"><h3>Таблица 4. Формат второго байта команды DSP Bx/Cx</h3></caption>
+
+<tr><td><font size="-1"><b>Номер бита</b></font></td>	<td><font size="-1"><b>Назначение</b></font></td>	<td><font size="-1"><b>Значение</b></font></td></tr>
+
+<tr><td><font size="-1">D0-D3</font></td>	<td><font size="-1">Зарезервированы</font></td>	<td><font size="-1">0000</font></td></tr>
+
+<tr><td><font size="-1">D4</font></td>	<td><font size="-1">Представление отсчетов</font></td>	<td><font size="-1">0 — беззнаковое;<BR>
+		1 — знаковое</font></td></tr>
+		
+<tr><td><font size="-1">D5</font></td>	<td><font size="-1">Число каналов (-1)</font></td>	<td><font size="-1">0 — моно; <BR>
+		1 — стерео</font></td></tr>
+		
+<tr><td><font size="-1">D6-D7</font></td>	<td><font size="-1">Зарезервированы</font></td>	<td><font size="-1">00</font></td></tr></table></td></tr>
+
+<tr><td><table width="350" border="1" cellspacing="0" cellpadding="1" align="LEFT"><caption align="LEFT"><h3>Таблица 5. Регистр статуса прерываний</h3></caption>
+ 
+<tr><td><font size="-1"><b>Номер бита</b></font></td>	<td><font size="-1"><b>Источник прерывания</b></font></td></tr>
+<tr><td><font size="-1">D0</font></td>	<td><font size="-1">8-разрядный ввод-вывод</font></td></tr>
+<tr><td><font size="-1">D1</font></td>	<td><font size="-1">16-разрядный ввод-вывод</font></td></tr>
+<tr><td><font size="-1">D2</font></td>	<td><font size="-1">Внешний MIDI-интерфейс (MPU-401)</font></td></tr>
+<tr><td><font size="-1">D3-D7</font></td>	<td><font size="-1">Зарезервированы</font></td></tr></table></td></tr>
+
+</table>
+<P>После сброса DSP и установки режима работы микшера следует создать в оперативной памяти два буфера: для записываемого звука и для воспроизводимого. Поскольку и запись и воспроизведение будут осуществляться через DMAC (Direct Memory Access Controller — контроллер прямого доступа к памяти), к расположению буферов предъявляются некоторые дополнительные требования. Во-первых, они должны находиться в нижнем мегабайте адресного пространства. В реальном режиме работы процессора это выполняется всегда, а о том, как сделать такое в защищенном, рассказано в статье «Программирование Sound Blaster в защищенном режиме процессора» (см. «Мир ПК», № 3/98, с. 48). Во-вторых, буфер не должен пересекать границы 64-Кбайт страниц, поэтому при выделении памяти под него сначала следует проверить, хватит ли места для размещения буферов записи и воспроизведения до конца текущей страницы. Если его окажется недостаточно, то нужно запросить всю память до конца данной страницы, чтобы начало свободной памяти (кучи) совпало с началом следующей, где будут размещены буферы.</P>
+
+<P>Для каждого из буферов определяются номер 64-Кбайт страницы и смещение в ней, которые надо затем сообщить контроллеру прямого доступа к памяти (DMAC). Процедуры работы с DMAC и цифровым сигнальным процессором (DSP) приведены в листинге 3. При инициализации режим работы контроллера необходимо записать в регистр 0Bh для 8-разрядного режима или в регистр D6h — для 16-разрядного. Значения отдельных битов этих регистров приведены в табл. 2.</P>
+<P>Запись и воспроизведение звука — процессы непрерывные и требующие одновременной работы как пары DMAC—звуковая плата, так и процессора для подготовки данных или их использования. Поэтому возникает вопрос, каким образом организовать работу, чтобы процессор и DMAC не мешали друг другу, используя одну и ту же область памяти. Выход был найден. Звуковой буфер стали делить на две части, причем в DMAC передается полная длина буфера, а в DSP звуковой платы — только половина ее. Тогда аппаратные прерывания будут генерироваться в начале и в середине периода воспроизведения всего буфера. А в случае, когда DMAC работает с первой половиной буфера, процессор может обрабатывать вторую, и наоборот. </P>
+
+<H3>Листинг  3. Работа с DSP и DMA</H3>
+<PRE>
+unit DSP_DMA;
+interface
+
+procedure DspOut(val:byte);         {выводит байт на DSP} 
+procedure SetupDMA(dmach,page,ofs,DMAcount,dmacmd:word);
+                                   {установка режима DMA}
+procedure SetupDSP(dspcmd, mode, DSPcount, tc:word);
+                                   {установка режима DSP}
+procedure SetMixer;       
+                  {сброс платы и выбор источника сигнала}
+procedure EnableInterrupt(newvect:pointer);
+                          {установка векторов прерываний}
+procedure DisableInterrupt;
+                     {восстановление векторов прерываний}
+
+implementation
+uses getsbinf,crt,dos;
+
+var
+   intvecsave      :pointer;  { старый вектор прерывания}
+   intrnum         :integer;  { номер прерывания        }
+   intrmask        :integer;  { маска прерывания        }
+
+{ структура, содержащая данные контроллера DMA }
+type
+   DmaPortRec = record
+      addr,count,page : byte;
+   end;
+const
+   DmaPorts : array[0..7]of DmaPortRec = (
+    (addr:$00; count:$01; page:$87),  {0}
+    (addr:$02; count:$03; page:$83),  {1}
+    (addr:$04; count:$05; page:$81),  {2 не используется}
+    (addr:$06; count:$07; page:$82),  {3}
+    (addr:$00; count:$00; page:$00),  {4 не используется}
+    (addr:$C4; count:$C6; page:$8B),  {5}
+    (addr:$C8; count:$CA; page:$89),  {6}
+    (addr:$CC; count:$CE; page:$8A)); {7}
+
+procedure DspOut(val:byte);{выводит байт в DSP}
+begin
+   while (Port[base + $0C] and $80) &lt;&gt; 0 do;
+   Port[base + $0C] := val;
+end;
+
+function DspIn:byte;{читает байт из DSP}
+begin
+   while (Port[base + $0E] and $80) = 0 do;
+   dspin := Port[base + $0A];
+end;
+
+procedure SetupDMA(dmach,page,ofs,DMAcount,dmacmd:word);
+                          { Программирует контроллер DMA}
+                       { для 8- или 16-разрядного канала}
+var
+   mask,mode,ff : byte;
+begin
+   if (dmach &lt; 4) then begin
+      mask := $0A;
+      mode := $0B;
+      ff   := $0C;
+   end else begin
+      mask := $D4;
+      mode := $D6;
+      ff   := $D8;
+      ofs := (ofs shr 1) + ((page and 1) shl 15);
+   end;
+   Port[mask]  := 4 or dmach;  { маскируем DMA}
+   Port[FF]    := 0;        { сбрасываем триггер-защелку}
+   Port[mode]  := dmacmd or (dmach and 3);
+                                        { уст.режима DMA}
+   Port[dmaports[dmach].addr]  := lo(ofs);
+                                   { младший байт адреса}
+   Port[dmaports[dmach].addr]  := hi(ofs);{ старший байт}
+   Port[dmaports[dmach].page]  := page; { номер страницы}
+   Port[dmaports[dmach].count] := lo(DMAcount-1);
+                                 { младший байт счетчика}
+   Port[dmaports[dmach].count] := hi(DMAcount-1);
+                                          { старший байт}
+   Port[mask]  := (dmach and 3);   { сброс бита маски}
+end;
+
+procedure SetupDSP(dspcmd, mode, DSPcount, tc:word);
+                      { Программирует DSP звуковой платы}
+begin
+   DspOut($40);             {установка константы времени}
+      DspOut(tc);
+   DspOut(dspcmd);                        {команда Bx/Cx}
+      DspOut(mode);
+      DspOut(lo(DSPcount-1));
+      DspOut(hi(DSPcount-1));
+end;
+
+procedure SetMixer;{сброс платы и выбор источника сигнала}
+var
+   val:byte;
+begin
+   Port[base + $06] := 1; {сброс DSP}
+   delay(1);
+   Port[base + $06] := 0;
+   if (dspin &lt;&gt; $AA) then {проверка готовности}
+         writeln(‘Sound Blaster не готов.’);
+   Port[base + $04] := $3D;
+   Port[base + $05] := 1;
+               { левый канал:источник сигнала — микрофон}
+{   Port[base + $04] := $3E;  {для моно — не обязательно}
+{   Port[base + $05] := 1; }
+              { правый канал:источник сигнала — микрофон}
+   Port[base + $04] := $3C;
+   Port[base + $05] := 0;
+                    { на выходе отключаем все, что можно}
+end;
+
+procedure EnableInterrupt(newvect:pointer);        
+                   {установка векторов прерываний}
+var intrmask1:word;
+begin
+   if (irq &lt; 8) then {вычисляем номера прерывания}
+      intrnum := irq + 8  { для IRQ 0-7 прерывания 8-15.}
+   else
+      intrnum := irq - 8 + $70;
+                      { для IRQ 8-15 прерывания 70H-78H.}
+   intrmask := 1 shl irq; {маска}
+   GetIntVec(intrnum,intvecsave);
+                               { сохраняем старый вектор}
+   SetIntVec(intrnum, newvect);
+                            { устанавливаем новый вектор}
+   intrmask1 := intrmask;          
+{разрешаем прерывания}
+   Port[$21] := Port[$21] and not intrmask1;
+   intrmask1 := intrmask1 shr 8;
+   Port[$A1] := Port[$A1] and not intrmask1;
+end;
+
+procedure DisableInterrupt;
+                     {восстановление векторов прерываний}
+var  intrmask1:word;
+begin
+   intrmask1 := intrmask; {запрещаем прерывания}
+   Port[$21] := Port[$21] or intrmask1;
+   intrmask1 := intrmask1 shr 8;
+   Port[$A1] := Port[$A1] or intrmask1;
+   SetIntVec(intrnum,intvecsave);{восстанавливаем вектор}
+end;
+
+end.</PRE>
+
+<P>После программирования DMAC то же самое проделывается и с DSP звуковой платы. Сначала надо установить частоту дискретизации, сообщив ему константу времени </P>
+<p>t = 256 — 1 000 000 / f,<BR>
+где f — частота дискретизации. </p>
+
+<P>Затем следует задать команду на запись/воспроизведение звука. Для Sound Blaster 16 проще всего выбрать команды Bx/Cx, состоящие из четырех байтов: Command, Mode, LenLo, LenHi.</P>
+<P>Формат первого байта Command приведен в табл. 3, а второго байта Mode — в табл. 4.</P>
+<P>Байты LenLo и LenHi — младший и старший в соответствии с длиной передаваемого блока, уменьшенной на единицу. </P>
+<P>Команды Bx/Cx позволяют задавать как знаковый, так и беззнаковый вид представления отсчетов. При знаковом отсчет представляет собой целое число со знаком, принимающее значение 0 при отсутствии входного сигнала, при беззнаковом — целое число без знака, равное 80h для 8-разрядного режима и 8000h для 16-разрядного при отсутствии входного сигнала. </P>
+<P>Стандартом де-факто является представление 8-разрядных отсчетов в беззнаковой форме, а 16-разрядных — в знаковой, однако для упрощения процедуры преобразования в приводимой программе обе величины выбраны знаковыми. </P>
+<table width="450" border="1" cellspacing="0" cellpadding="1" align="LEFT"><caption align="LEFT"><h3>Таблица 6. Команды DSP</h3></caption>
+
+<tr><td><font size="-1"><b>Команда</b></font></td>	<td><font size="-1"><b>Описание</b></font></td></tr>
+<tr><td><font size="-1">14h</font></td> 	<td><font size="-1">8-разрядное воспроизведение через DMA без автоинициализации. Команда состоит из 3 байт, за ее кодом следует длина передаваемых данных, уменьшенная на 1</font></td></tr>
+
+<tr><td><font size="-1">1Ch</font></td> 	<td><font size="-1">8-разрядное воспроизведение с автоинициализацией. Команда состоит из 1 байта, длина воспроизводимого блока задается командой 48h </font></td></tr>
+
+<tr><td><font size="-1">24h</font></td> 	<td><font size="-1">8-разрядная запись, аналогичная команде 14h </font></td></tr>
+
+<tr><td><font size="-1">2Ch</font></td>	<td><font size="-1">8-разрядная запись с автоинициализацией, аналогичная 1Ch </font></td></tr>
+
+<tr><td><font size="-1">40h</font></td> 	<td><font size="-1">Задание константы времени, 2 байта: после кода команды — константа</font></td></tr>
+
+<tr><td><font size="-1">41h</font></td>	<td><font size="-1">Задание частоты дискретизации вывода, 3 байта: после команды 2 байта частоты дискретизации в диапазоне 5000—45 000 Гц</font></td> </tr>
+
+<tr><td><font size="-1">42h</font></td>	<td><font size="-1">Задание частоты дискретизации ввода, аналогичное 41h </font></td></tr>
+
+<tr><td><font size="-1">48h</font></td> 	<td><font size="-1">Задание длины передаваемых данных, 3 байта, включая 2 байта данных. Определяет, по истечении какого объема переданных данных должно поступить прерывание от звуковой платы </font></td></tr>
+
+<tr><td><font size="-1">Bxh</font></td>	<td><font size="-1">16-разрядный ввод-вывод</font></td> </tr>
+<tr><td><font size="-1">Cxh</font></td>	<td><font size="-1">8-разрядный ввод-вывод </font></td></tr>
+<tr><td><font size="-1">D0h</font></td>	<td><font size="-1">Пауза 8-разрядного ввода-вывода</font></td></tr>
+<tr><td><font size="-1">D1h</font></td>	<td><font size="-1">Выключение динамика</font></td></tr>
+<tr><td><font size="-1">D3h</font></td>	<td><font size="-1">Включение динамика</font></td></tr>
+<tr><td><font size="-1">D4h</font></td>	<td><font size="-1">Продолжение 8-разрядного ввода-вывода, приостановленного командой D0h</font></td></tr>
+<tr><td><font size="-1">D5h</font></td><td><font size="-1">Пауза 16-разрядного ввода-вывода</font></td></tr>
+<tr><td><font size="-1">D6h</font></td>	<td><font size="-1">Продолжение 16-разрядного ввода-вывода, приостановленного командой D5h</font></td></tr>
+<tr><td><font size="-1">D8h</font></td>	<td><font size="-1">После этой команды чтение из DSP возвращает статус динамика: 0 — выключен; FFh — включен </font></td></tr>
+<tr><td><font size="-1">D9h</font></td>	<td><font size="-1">Выход из 16-разрядного ввода-вывода с автоинициализацией </font></td></tr>
+<tr><td><font size="-1">DAh</font></td>	<td><font size="-1">Выход из 8-разрядного ввода-вывода с автоинициализацией </font></td></tr>
+<tr><td><font size="-1">E1h</font></td>	<td><font size="-1">После этой команды чтение 2 байт из DSP приведет к получению номера версии DSP, причем 1-й байт — старший, а 2-й — младший</font></td></tr></table>
+<P>После программирования микшера следует установить свои процедуры обработки прерываний от звуковой платы и только потом можно будет задавать режимы DMA и DSP. Затем процессор свободен для выполнения любой другой работы, например с экраном, как это практикуется в компьютерных играх. В данной же программе просто происходит ожидание ввода с клавиатуры. Однако время от времени работу процессора будут приостанавливать прерывания, поступающие со звуковой платы по окончании пересылки очередной порции данных. В задачу обработчика прерываний входит определение номера канала, по которому пришло прерывание. Дело в том, что и 8-разрядный, и 16-разрядный ввод-вывод, и даже внешний MIDI-интерфейс (MPU-401) генерируют одно и то же аппаратное прерывание. Для того чтобы различать их между собой, в адресном пространстве регистров микшера имеется порт номер 82h (регистр статуса прерываний), определяющий источник прерывания (табл. 5).</P>
+<P>Обработчик прерывания должен сообщить звуковой плате, что ее прерывание принято и обработано, для чего необходимо осуществить чтение из порта 0Eh или 0Fh для 8- либо 16-разрядного режимов соответственно. </P>
+
+<P>После прихода прерываний от канала записи и от канала воспроизведения можно считать, что соответствующие половины буферов записи и воспроизведения уже обработаны звуковой платой и пора копировать данные из одного буфера в другой. Так как в обоих случаях была выбрана одинаковая (знаковая) форма представления данных, то их преобразование сводится лишь к переписыванию старших байтов значений двухбайтовых звуковых отсчетов из входного буфера в выходной. </P>
+<P>По завершении отработки прерывания следует осведомить об этом контроллер прерываний (с учетом каскадирования). </P>
+<P>После нажатия на <Enter> программа приостанавливает и 8-,  и 16-разрядные операции ввода-вывода и восстанавливает векторы прерываний. </P>
+<P>Выше приведен выборочный список команд DSP, которые применяются при записи и воспроизведении звука (табл. 6). Здесь не рассматриваются непосредственный ввод-вывод, не использующий DMAC, ввод-вывод с компрессией и MIDI-команды.  </P>
+
+<h3>ОБ АВТОРЕ</h3>
+<address>Андрианов Сергей Андреевич — канд. техн. наук; e-mail: <A HREF="mailto:pcworld@pcworld.ru"><I>pcworld@pcworld.ru</I></A> или fidonet: 2:5017/11.40.</address>
+
+<CENTER>
+<HR>
+<!--#include virtual="/t_footer.htm"-->

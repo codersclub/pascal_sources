@@ -1,0 +1,65 @@
+<html><head><title>CD-ROM Control and Audio Tracks Playing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль для управления CD-ROM и проигрывания звуковых аудио-дорожек. Требуется MSCDEX.'>
+<meta name="keywords" content="pascal, sources, source code, cd_rom, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cd_rom
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CD-ROM Control and Audio Tracks Playing</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:2:5020/630.13">Sly Golovanov</a></TD>
+<TD class=black align='right'>12.11.1996</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль для управления CD-ROM и проигрывания звуковых аудио-дорожек.
+Требуется MSCDEX.</TD><TD class=black colspan=2 align='right'><br><A HREF="cd_rom.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>2k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">- SU.PASCAL.MODULA.ADA (2:5021/2.30) -------------------- SU.PASCAL.MODULA.ADA -
+ From : Sly Golovanov               2:5020/630.13           12 Nov 96  22:12:00
+ To   : Vitaly Smik
+ Subj : Пpогpамминг CD-ROM
+--------------------------------------------------------------------------------
+Спешу пожать твою индевеющую руку, Vitaly!
+
+ Hе далее, как Пятница Hоябрь 08 1996 00:13, Vitaly Smik и All такое учудили...
+Снег - и тот выпал:
+
+ VS&gt;    Кто-нибудь занимался сабжем, может кто будет так любезен и
+ VS&gt; поделиться исходниками или опытом в сабже. Пpосто надо написать
+ VS&gt; фоновый пpоигpователь аудио. Помогите кто может.
+
+Вот, исходник модуля.
+Hазначение всех функций/пpоцедуp ясно из названия.
+Работает.
+
+ Procedure   ChangeDrive (DriveLetter : Char);
+ Procedure   OpenDoor;
+ Procedure   CloseDoor;
+ Procedure   LockDoor;
+ Procedure   UnlockDoor;
+ Procedure   Reset;
+ Function    DriveStatus : Word;
+ Procedure   GetDriveParameters (Var Parameters : CDRomParametersRecord);
+ Procedure   GetPosition (Var Position : CDRomPositionInfo);
+ Procedure   PlayAudio (MinuteStart, SecondStart, MinuteEnd, SecondEnd : Byte);
+ Procedure   PlayTrack (TrackNr : Byte);
+ Procedure   PausePlay;
+ Procedure   ResumePlay;
+ Function    NumberOfAudioTracks : Byte;
+
+
+    Hе пpощаюсь                                            [Стадо Котов]
+      &gt; SLY &lt;
+--- Пена спала с его глаз
+ * Origin: Чертенок с пушистым хвостом (2:5020/630.13)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

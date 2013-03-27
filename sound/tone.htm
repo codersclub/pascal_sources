@@ -1,0 +1,119 @@
+<html><head><title>Tone - Sound Module for PC Speaker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Простой модуль для генерации тонов на спикере. Написан на встроенном АСМе, предназначен для замены стандартных процедур Sound, NoSound, Delay.<br><font color=#666666> Simple tone playing module for PC Speaker. Replaces standard sound/nosound procedures. Written in BASM.</font>">
+<meta name="keywords" content="pascal, sources, source code, tone, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;tone
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Tone - Sound Module for PC Speaker</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:70274.103@compuserv.com">Richard R. Sands</a></TD>
+<TD class=black align='right'>29.05.91</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Простой модуль для генерации тонов на спикере.
+Написан на встроенном АСМе, предназначен для замены
+стандартных процедур Sound, NoSound, Delay.<br><font color=#666666>
+Simple tone playing module for PC Speaker.
+Replaces standard sound/nosound procedures.
+Written in BASM.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="tone.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>1k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">{&gt; Cut here. FileName= TONETEST.PAS }
+Program ToneTest;
+USES Tone;
+begin
+   ErrorBeep;
+   Delay(500);
+   AttentionBeep;
+   Delay(500);
+   BoundsBeep;
+   Delay(500);
+   Beep(440, 250);
+end.
+
+{&gt; Cut here. FileName= TONE.PAS }
+UNIT Tone;  {$S-,R-,D-,L-}
+
+(* TONE.PAS - Sound Module for Turbo Pascal 6.0 - Turbo Vision
+ * Written by Richard R. Sands
+ * Compuserve ID 70274,103
+ * January 1991
+ *
+ * NOTE: Do Not Overlay
+ *)
+
+INTERFACE
+
+   Procedure Sound(Hz:Word);
+   Procedure NoSound;
+   Procedure Delay(MS : Word);
+
+   Procedure Beep(Hz, MS:Word);
+     { Same as
+               Sound(Hz);
+               Delay(MS);
+               NoSound;       ...but with more efficient code. }
+
+   Procedure BoundsBeep;
+     { Used for signalling a boundry or invalid command }
+
+   Procedure ErrorBeep;
+     { Used for signalling an error condition }
+
+   Procedure AttentionBeep;
+     { Used for signalling the user }
+
+IMPLEMENTATION
+
+  VAR
+    OneMS : Word;
+
+{ ------------------------------------------------------------- }
+Procedure Beep(Hz, MS:Word); assembler;
+     { Make the Sound at Frequency Hz for MS milliseconds }
+  ASM
+    MOV  BX,Hz
+    MOV  AX,34DDH
+    MOV  DX,0012H
+    CMP  DX,BX
+    JNC  @Stop
+    DIV  BX
+    MOV  BX,AX
+    IN	  AL,61H
+    TEST AL,3
+    JNZ  @99
+    OR	  AL,3
+    OUT  61H,AL
+    MOV  AL,0B6H
+    OUT  43H,AL
+ @99:
+    MOV  AL,BL
+    OUT  42H,AL
+    MOV  AL,BH
+    OUT  42H,AL
+ @Stop:
+ {$IFOPT G+}
+    PUSH MS
+ {$ELSE }
+    MOV  AX, MS   { push delay time }
+    PUSH AX
+  {$ENDIF }
+    CALL Delay    { and wait... }
+
+    IN   AL, $61  { Now turn off the speaker }
+    AND  AL, $FC
+    OUT  $61, AL
+  end;
+
+{ ------------------------------------------------------------- }
+Procedure BoundsBeep; assembler;
+  asm
+  {$IFOPT G+ }
+     PUSH 1234      { Pa

@@ -1,0 +1,57 @@
+<html><head><title>SB16Snd - Samples for SB16 Input / Output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Две программы для работы с 16-битным саунд-бластером, демонстрирующие возможность оцифровки и записи звука, и дальнейшего его воспроизведения. <br><font color=#666666> This code records and plays 16-bit sound on a Sound Blaster 16 using auto-initialized DMA. It uses XMS to buffer the data to avoid re-entrancy problems with disk writes inside of an interrupt handler. Both Turbo Pascal real mode and Borland C real mode source code is included.</font>">
+<meta name="keywords" content="pascal, sources, source code, sb16snd, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sb16snd
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SB16Snd - Samples for SB16 Input / Output</TD>
+<TD nowrap class=black>&nbsp;Ethan Brodsky</TD>
+<TD class=black align='right'>18.02.95</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Две программы для работы с 16-битным саунд-бластером,
+демонстрирующие возможность оцифровки и записи звука,
+и дальнейшего его воспроизведения. <br><font color=#666666>
+This code records and plays 16-bit sound on a Sound Blaster 16
+using auto-initialized DMA. It uses XMS to buffer the data to
+avoid re-entrancy problems with disk writes inside of an interrupt
+handler. Both Turbo Pascal real mode and Borland C real mode
+source code is included.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sb16snd.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>46k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                     S B 1 6   S o u n d
+
+                   Written by Ethan Brodsky
+     Copyright 1995 by Ethan Brodsky.  All rights reserved.
+
+
+This library is distributed AS IS.  The author specifically
+disclaims responsibility for any loss of profit or any
+consequential, incidental, or other damages.  This code is
+freeware and is distributed with full source code, which is
+copyright by Ethan Brodsky.  You are free to incorporate the
+code in full or part into your own programs as long as credit
+is given to Ethan Brodsky.  The source code may be distributed
+in its original form only, including this documentation file.
+
+I write this code a while ago and am making it available now so
+people can get it without contacting me.  This code records and
+plays 16-bit sound on a Sound Blaster 16 using auto-initialized
+DMA.  I used XMS to buffer the data to avoid re-entrancy problems
+with disk writes inside of an interrupt handler.  Both Turbo
+Pascal real mode and Borland C real mode source code is included.
+Sound data is stored in files containing raw 16-bit signed
+samples suitable for processing or analysis.  Sampling rate and
+other data are not included.
+
+    Ethan Brodsky (2/18/95)</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

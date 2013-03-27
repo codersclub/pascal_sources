@@ -1,0 +1,60 @@
+<html><head><title>SoundLib 1.2 - SoundBlaster and Mixer Unit fot TP6-7</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Звуковая библиотека для работы с 16-битным саундбластером. Автоматически инициализирует звуковую карту, работает через DMA. Позволяет не только воспроизводить, но и записывать звук, имеет встроенный микшер. Компилируется под BP7 в защищенном режиме.  SOUNDLIB Version 1.2 - SoundBlaster unit. The unit uses DMA-Autoinit, so there's no nasty clicking while playing or recording. This unit was programmed that way, that it could be easily used to play MODs without changing anything. So it's also possible to add an own recordpart or a scope.  Features:   Downsampling on old SBs (e.g. play a 16 bit soundfile on a SB 2.0)   Support for Protected Mode   TP 6 support   Works now with SB Live! SB16 Emulator   Far better Stereo to Mono downsampling   Support for 48 Khz playback and recording (Sb Live!)'>
+<meta name="keywords" content="pascal, sources, source code, soundlib, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;soundlib
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SoundLib 1.2 - SoundBlaster and Mixer Unit fot TP6-7</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:stefan.goehler@gmx.de">Stefan Goehler</a></TD>
+<TD class=black align='right'>09.11.1998</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Звуковая библиотека для работы с 16-битным саундбластером.
+Автоматически инициализирует звуковую карту, работает через DMA.
+Позволяет не только воспроизводить, но и записывать звук,
+имеет встроенный микшер.
+Компилируется под BP7 в защищенном режиме. <br><font color=#666666>
+SOUNDLIB Version 1.2 - SoundBlaster unit.
+The unit uses DMA-Autoinit, so there's no nasty clicking while playing
+or recording. This unit was programmed that way,
+that it could be easily used to play MODs without changing anything.
+So it's also possible to add an own recordpart or a scope. <br>
+Features: <br>
+ Downsampling on old SBs (e.g. play a 16 bit soundfile on a SB 2.0) <br>
+ Support for Protected Mode <br>
+ TP 6 support <br>
+ Works now with SB Live! SB16 Emulator <br>
+ Far better Stereo to Mono downsampling <br>
+ Support for 48 Khz playback and recording (Sb Live!)</font></TD><TD class=black colspan=2 align='right'><br><A HREF="soundlib.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>74k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">my emailadress   : stefan.goehler@gmx.de
+my homepage      : sourcenet.home.pages.de
+
+SOUNDLIB.TXT
+Readme file for soundlib.pas
+Made on August 31th 1997
+Last changes made on 9th November 1998
+
+some shortcuts and other things:
+i.e. = in example
+sb16 means sb16 and higher
+
+A short description of the proggys you get with this unit:
+SOUNDEMO.PAS : A short, simple example how to play a soundfile
+               -give the file to play as parameter 1 (VOC or WAV)
+SOUNDEM2.PAS : A more complex program to show how to use the features
+               of the soundlib
+               -give the file to play as parameter 1 (VOC or WAV)
+SOUNDEM3.PAS : A simple recorder. It records to the file TEST.WAV with
+               CD-Quality until y

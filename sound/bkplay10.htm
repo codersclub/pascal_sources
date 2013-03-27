@@ -1,0 +1,66 @@
+<html><head><title>BackPlay - Background Music for PC Speaker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль для проигрывания одноголосой музыки на спикере на фоне выполнения программы.<br><font color=#666666> This unit allows you to play music in the background of your Turbo Pascal 5.0 programs. In the background means that once you start the music playing, you can continue on with the rest of your program and the music keeps playing without any additional effort on your part until the song is finished.</font>">
+<meta name="keywords" content="pascal, sources, source code, bkplay10, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bkplay10
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;BackPlay - Background Music for PC Speaker</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:72247.2671@compuserv.com">Scott Bussinger</a></TD>
+<TD class=black align='right'>27.09.88</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль для проигрывания одноголосой музыки на спикере
+на фоне выполнения программы.<br><font color=#666666>
+This unit allows you to play music in the background of your
+Turbo Pascal 5.0 programs. In the background means that once you
+start the music playing, you can continue on with the rest of
+your program and the music keeps playing without any additional
+effort on your part until the song is finished.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="bkplay10.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">  BackPlay  --  A unit for playing music in the background.
+
+  Version 1.00 --  9/24/1988 -- First version
+
+  Copyright 1988 Scott Bussinger
+  All rights reserved.
+
+  Scott Bussinger
+  Professional Practice Systems
+  110 South 131st Street
+  Tacoma, WA  98444
+  (206)531-8944
+  Compuserve [72247,2671]
+
+  This unit allows you to play music in the background of your
+Turbo Pascal 5.0 programs. In the background means that once you
+start the music playing, you can continue on with the rest of
+your program and the music keeps playing without any additional
+effort on your part until the song is finished. You can use this
+to provide special sound effects in your programs or just to add
+a cute indication that your program is still working on
+something.
+
+  The unit accepts music files from Neil Rubenking's PianoMan
+program version 4.0 and the code in this file is based on
+information gained from his sample music playing routines.  You
+can either play the .MUZ files off of your disks, or imbed the
+the MUZ data directly into your program so the the file need not
+be available at run time.  Neil's PianoMan is an excellent
+shareware product and is available from many bulletin boards on
+in the IBM Software forum on Compuserve. It allows you to play
+your computer's keyboard like a piano keyboard and record and
+edit music entered in real time or from sheet music.  There are
+also many files of songs already entered that you can use. One
+sample archive for instance contains over 50 sample songs.
+
+     function PlayingInBackground: boolean;
+          This returns true if there is still

@@ -1,0 +1,74 @@
+<html><head><title>SBVoice 1.10 - Sound Blaster Unit with CT-VOICE.DRV</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Звуковая библиотека для работы с SoundBlaster. Требует наличия драйвера CT-VOICE.DRV.  Unit SBVoice (v1.10) for Turbo Pascal 6.0. For interfacing with the SoundBlaster's digitized voice channel.'>
+<meta name="keywords" content="pascal, sources, source code, sbv110, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sbv110
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SBVoice 1.10 - Sound Blaster Unit with CT-VOICE.DRV</TD>
+<TD nowrap class=black>&nbsp;Amit K. Mathur</TD>
+<TD class=black align='right'>27.03.1991</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Звуковая библиотека для работы с SoundBlaster.
+Требует наличия драйвера CT-VOICE.DRV. <br><font color=#666666>
+Unit SBVoice (v1.10) for Turbo Pascal 6.0.
+For interfacing with the SoundBlaster's digitized voice channel.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sbv110.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>7k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                   Unit SBVoice (v1.10) for Turbo Pascal 6.0
+       For interfacing with the SoundBlaster's digitized voice channel.
+           Copyright (c) 1991, Amit K. Mathur, Windsor, Ontario.
+
+                        By: Amit K. Mathur
+                            3215 St. Patrick's Drive
+                            Windsor, Ontario
+                            N9E 3H2 CANADA
+                        Ph: (519) 966-6924
+
+ Networks:  RIME(tm) R/O -&gt;WINDSOR, ILink (Shareware), NA-Net (Gaming),
+            WWIVNet (#198@5950), or direct on NorthSTAR (519)735-1504.
+
+ These routines are released to the public domain.  However I will gladly
+ accept contributions towards further development of this and other products.
+ Please send any changes or improvements my way.  And I'm interested in
+ other SoundBlaster utilities and programming tools.  Thanks in advance.
+
+Revision History of SBVoice
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+v1.10 - Added new boolean variable, SBFound, which contains whether
+        the Init sequence of SBVoice went well or not.
+      - Init of SBVoice no longer aborts the program completely.
+        This makes it possible for user programs to continue on even
+        if no SoundBlaster is detected.
+      - Modified the DEMO.PAS program to account for these changes.
+      - Added the ability to $DEFINE NoSBVoiceArray so that user programs
+        can use their own method of storing the sound data, such as
+        dynamic variables.
+      - Added a different CT-VOICE Driver which I believe makes it compatable
+        with the newer (v1.5) SoundBlasters.
+
+v1.00 - First public distribution.
+      - Includes all the features of the CT-VOICE.DRV as well as
+        a few of my own, such as LoadVoice and LoadDriver.
+        These are documented within the .PAS file itself.
+
+Donations towards further development of this and many other
+projects are gladly accepted by
+        Amit K. Mathur
+        3215 St. Patrick's Drive
+        Windsor, Ontario
+        N9E 3H2 CANADA
+        ph: (519) 966-6924
+
+Feel free to send comments and suggestions to

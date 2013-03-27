@@ -1,0 +1,55 @@
+<html><head><title>SBDSP v1.03 - Direct Sound Blaster Programming</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Модуль и программа для проигрывания VOC файлов на саунд-бластере. Это полный функциональный аналог модуля <a href="sbvox.htm">SBVox</a>, но вместо использования драйвера CT-VOICE.DRV используется непосредственное прямое программирование бластера.<br><font color=#666666> SBDSP performs the same functions as the SBVox unit but WITHOUT using the CT-VOICE driver.  It has only been tested on a SB16 and PAS16, but it should work on all Sound Blaster compatible sound cards.  By using DMA transfers, it plays sound without using the CPU, saving processor cycles for your program.</font>">
+<meta name="keywords" content="pascal, sources, source code, sbdsp103, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+<!--#include virtual="/t_hmenu.htm"-->
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;sbdsp103
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;SBDSP v1.03 - Direct Sound Blaster Programming</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:ericbrodsky@psl.wisc.edu">Ethan Brodsky</a></TD>
+<TD class=black align='right'>23.09.94</TD></TR>
+<TR vALign=top><TD class=black><br>
+<p style="margin-left:20px">Модуль и программа для проигрывания VOC файлов на саунд-бластере.
+Это полный функциональный аналог модуля <a href="sbvox.htm">SBVox</a>,
+но вместо использования драйвера CT-VOICE.DRV используется
+непосредственное прямое программирование бластера.<br><font color=#666666>
+SBDSP performs the same functions as the SBVox unit but WITHOUT
+using the CT-VOICE driver.  It has only been tested on a SB16 and
+PAS16, but it should work on all Sound Blaster compatible sound
+cards.  By using DMA transfers, it plays sound without using the
+CPU, saving processor cycles for your program.</font></TD><TD class=black colspan=2 align='right'><br><A HREF="sbdsp103.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>25k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">      _____    ______       ______      _____     ______
+     /  _  \  |   __ \     |   __ \    /  _  \   |   __ \
+    |  / \__|  | |  \ |     | |  \ |  |  / \__|   | |  | |
+    |  \___    | |__/ |     | |  | |  |  \___     | |__| |
+     \___  \   |  __ &lt;      | |  | |   \___  \    |  ___/
+     __  \  |  | |  \ |     | |  | |   __  \  |   |  |
+    |  \_/  |  | |__/ |     | |__/ |  |  \ /  |   |  |
+     \_____/  |______/     |______/    \_____/   |____|
+                    Version 1.03 (9/23/94)
+                   Written by Ethan Brodsky
+    Copyright 1994 by Ethan Brodsky.  All rights reserved.
+
+    This library is distributed AS IS.  The author specifically
+disclaims any responsibility for any loss of profit or any
+consequential, incidental, or other damages.  SBDSP is freeware
+and is distributed with full Turbo Pascal source code.  You are
+free to incorporate parts of the code into your own programs as
+long as you give credit to Ethan Brodsky.  This source code may
+only be distributed in it's original form, including this
+documentation file.
+
+---------------------------------------------------------------
+
+    You may have used my SBVox and SBVoice units.  They played
+VOC files on a Sound Blaster using Creative Labs' CT-V

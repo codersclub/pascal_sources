@@ -1,0 +1,55 @@
+<html><head><title>CasCodec - Sound Files Compression Algorithm</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Программа сжатия/распаковки звуковых (WAV/PCM) файлов. По степени сжатия, скорости и по качеству этот алгоритм занимает промежуточное положение между ADPCM и MP3. Имеет смысл использовать его для хранения ресурсов в ваших программах.'>
+<meta name="keywords" content="pascal, sources, source code, cascodec, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;cascodec
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;CasCodec - Sound Files Compression Algorithm</TD>
+<TD nowrap class=black>&nbsp;<img border=0 align=bottom src="../img/mail.gif">&nbsp;<a href="mailto:cooler@tut.by">Ivan Polyacov</a></TD>
+<TD class=black align='right'>09.06.2001</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Программа сжатия/распаковки звуковых (WAV/PCM) файлов.
+По степени сжатия, скорости и по качеству этот алгоритм занимает
+промежуточное положение между ADPCM и MP3.
+Имеет смысл использовать его для хранения ресурсов в ваших программах.</TD><TD class=black colspan=2 align='right'><br><A HREF="cascodec.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>4k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">CAS - это алгоритм сжатия звуковых данных. Он очень прост и благодаря
+этому очень быстр. Данная утилита позволяет производить сжатие и распаковку
+файлов. По степени сжатия, скорости и по качеству этот метод занимает
+промежуточное положение между ADPCM и MP3. Имеет смысл использовать его
+для хранения ресурсов в ваших программах, особенно если:
+- критична скорость распаковки;
+- не хочется связываться с библиотеками, поддерживающими MP3;
+- вы хотите иметь все в собственном формате.
+
+Данная версия уже устарела, более новая версия входит в состав CoolSoft
+Data Manager - менеджера ресурсов, объединяющего различные файлы в один
+файл ресурсов. Полезная утилита, ищите ее на www.coolsoftteam.narod.ru
+Основные изменения: линейная интерполяция заменена на кубическую, изменен
+алгоритм подбора коэффициентов. В будущем планируется применить более
+гибкий алгоритм сжатия.
+
+По поводу качества и степени сжатия ЭТОЙ ВЕРСИИ: вы можете получить сжатие
+в 4-9 раз с приемлемым качеством, но оно очень сильно зависит от источника.
+Одни файлы сжимаются хорошо, другие плохо. Определить это автоматически
+очень сложно, поэтому единственный способ - на слух: запакуйте и сразу же
+распакуйте файл. Если качество не устраивает, укажите другой коэффициент.
+Общие рекомендации таковы: хорошо сжимаются файлы, оцифрованные на 44 KHz,
+плохо - на 16 KHz и менее, а также файлы, содержащие громкое шипение и
+свисты, богатые высокочастотные составляющие.
+
+ Ivan Polyacov &lt;cooler@tut.by&gt;</PRE>
+
+<!--#include virtual="/t_footer.htm"-->

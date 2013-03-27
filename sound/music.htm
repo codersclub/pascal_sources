@@ -1,0 +1,78 @@
+<html><head><title>Фоновая Музыка в Паскаль-Программах</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Пакет подпрограмм для работы с фоновой музыкой на PC Speaker  Background music PC Speaker routines '>
+<meta name="keywords" content="pascal, sources, source code, music, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;music
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Фоновая Музыка в Паскаль-Программах</TD>
+<TD nowrap class=black>&nbsp;Ярослав Мигач</TD>
+<TD class=black align='right'>19.03.1992</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Пакет подпрограмм для работы с
+фоновой музыкой на PC Speaker <br><font color=#666666>
+Background music PC Speaker routines </font></TD><TD class=black colspan=2 align='right'><br><A HREF="music.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>6k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">                         MUSIC  V 1.0
+
+                Пакет подпрограмм для работы с
+                      фоновой музыкой
+
+                    (c) 1990, Мигач Ярослав
+
+                   РУКОВОДСТВО ПО ЭКСПЛУАТАЦИИ
+
+
+        Пакет Music предназначен для осущетвления проигрывания
+  мелодий на фоне выполнения любой написанной Вами программы на
+  языке Turbo Pascal V 5.5. Сам пакет реализован при помощи  языков
+  Turbo Pascal V 5.5 и Assembler. Пакет требует для своей работы
+  такие системные модули как Dos и Crt. Для подключения Music
+  воспользуйтесь следующим обьявлением:
+
+         USES Dos, Crt, Music;
+
+        Одновременно в пакете может быть использованно до 20 различных
+ мелодий. В одной мелодии не может содержатся более чем 999 тактов.
+ Каждый такт представляет собой частоту в герцах и длительность
+ звучания динамика на этой частоте. Длительность задается в
+ миллисекундах, однако всегда будет приводится к числу, кратному 55 мс.
+ Частота звучания &lt; 55, указывает на то, что динамик необходимо
+ отключить. При этом осуществляется переход к началу проигрывания
+ текущей мелодии. Таким образом возможно осуществление циклического
+ проигрывания мелодии. Если будет произведено обращение к мелодии
+ которая не была инициализирована, то исполнение музыки автоматически
+ прекращается. Невозможно выполнить процедуры обработки мелодии,
+ исполняемой в текущий момент времени.
+
+        Перейдем к расмотрению процедур пакета. Прежде всего необходимо
+ создать хотя бы одну мелодию. Инициализирует мелодию процедура:
+
+         n_music ( ms : INTEGER; sz : INTEGER );
+
+ где ms номер инициализируемой мелодии, а sz ее предполагаемый размер
+ в тактах ( не более 999 ). Если Вы допустите ошибку при задании
+ параметров, то процедура инициализации выполнена не будет. После
+ выполнения инициализации можно приступить к занесению нот. Это
+ действие выполняется при помощи процедуры :
+
+        note ( h_sound, t_sound : INTEGER );
+
+ где первый параметр - частота текущего такта, а второй - длительность.
+
+ Если Вы попытаетесь задать больше тактов,чем указано в процедуре
+ инициализации, то такты сверх максимально заданного номера будут
+ проигнорированы. При h_sound = 0 динамик отключается на t_sound
+ микросекунд. При t_sound &lt; 55 происходит переключение на первый такт
+ мелодии. Следует 

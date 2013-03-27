@@ -1,0 +1,65 @@
+<html><head><title>Проигрыватель WAV файлов под DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content='Модуль BSound предназначен для проигрывания звуковых файлов .WAV в программах на Turbo Pascal 6.0/7.0. Звуки проигрываются в фоновом режиме из любого потока Turbo Vision (обычная (только TP 7.0) и EMS память, файловые потоки)  WAV player for DOS'>
+<meta name="keywords" content="pascal, sources, source code, bsound, sound, Звуки и Музыка ">
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../sources.css"></head><BODY><center>
+
+<!--#include virtual="/t_hmenu.htm"-->
+
+
+<div align='left'>&nbsp;&nbsp;&nbsp;<a class='title' href="index.htm">Звуки и Музыка</a>&nbsp&nbsp;&nbsp;&nbsp;<small>&gt;&gt;</small>&nbsp;&nbsp;&nbsp;&nbsp;bsound
+<br>&nbsp;&nbsp;&nbsp;<img border=0 height=4 width=50% align='top' src="../img/b.gif" alt="">
+<br>&nbsp;
+</div>
+
+
+<TABLE cellSpacing=0 cellpadding=0 width=97% border=0>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD class=subheader width=70% nowrap>&nbsp;Проигрыватель WAV файлов под DOS</TD>
+<TD nowrap class=black>&nbsp;Александр Песляк</TD>
+<TD class=black align='right'>03.04.1994</TD></TR>
+<TR vALign=top><TD class=black>&#10;<p style="margin-left:20px">Модуль BSound предназначен для проигрывания звуковых файлов .WAV
+в программах на Turbo Pascal 6.0/7.0.
+Звуки проигрываются в фоновом режиме из любого потока Turbo Vision
+(обычная (только TP 7.0) и EMS память, файловые потоки) <br><font color=#666666>
+WAV player for DOS</font></TD><TD class=black colspan=2 align='right'><br><A HREF="bsound.zip"><img border=0 align=middle src="../img/dsk.gif"></A><br>12k&nbsp;</TD></TR><TR><TD>&nbsp;</TD></TR>
+
+<TR class=subheader><TD colSpan=3><IMG height=2 src="../img/1x1.gif" width=1></td></tr>
+<TR><TD colspan=3><PRE><p style="margin-left:50px">   Модуль BSound предназначен для проигрывания звуковых файлов, используемых
+в Microsoft Windows 3.1 (.WAV), в программах на Turbo Pascal 6.0/7.0.
+Звуки проигрываются в фоновом режиме из любого потока Turbo Vision
+(обычная (только TP 7.0) и EMS память, файловые потоки). При использовании
+файловых потоков требуется установить переменную SoundCheckDos:=True. Для
+стандартных потоков TDosStream и TBufStream это делается автоматически.
+Возможна подгрузка с диска во время проигрывания. Размер буфера подгрузки
+задается в переменной SoundBufSize, которую можно изменять только при
+остановленной музыке. Размер буфера может быть от 1 до 65520 байт, по
+умолчанию - 1024 байта. При слишком маленьком буфере даже при подгрузке
+из потока в памяти может появиться неприятное гудение.
+
+   Этот модуль поддерживает вывод на PC-Speaker, Sound Blaster, Covox на
+LPT1 или LPT2. Куда выводится звук задает переменная SoundDevice, которая
+может быть изменена в любой момент, даже во время проигрывания.
+
+   При вызове InitSound все переменные автоматически настраиваются на заданную
+в заголовке звука частоту. Частоту можно установить и принудительно вызвав
+SetRate после InitSound. Для разных частот требуется разное минимальное
+быстродействие компьютера:
+
+        Частота (кГц)           Быстродействие (относительно XT по SysInfo)
+
+        5.5                     7
+        11.0                    13
+        22.0                    25
+
+   Указаны только стандартные частоты файлов .WAV, однако могут быть
+проиграны и файлы других частот. Указаны минимальные требуемые быстродействия.
+Для нормальной работы в фоновом режиме быстродействие должно быть немного
+больше. В случае нехватке быстродействия звук замедляется, а остальная
+программа почти полностью останавливается. К этому модулю прилагается пример
+звука THANKYOU.WAV на 11 кГц. Значит, его можно надежно прослушать только при
+быстродействии компьютера не менее 13 относительно XT.
+
+   К этому модулю прилагается утилита для преобразования инструментов
+Scream Tracker или
